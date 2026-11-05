@@ -8,7 +8,7 @@ export const COPY = {
   spending: { heading: "Money out each month", nameLabel: "Name of spending item", add: "Add a spending item", fallback: "Spending item" },
   amount: { suffix: "per month", placeholder: "0" },
   remove: "Remove",
-  removeHint: "Remove takes out one line. A Put it back button shows right after.",
+  removeHint: "Remove takes out one line. Put it back brings it back.",
   undo: "Put it back",
   undoHelp: "You took out an item. This puts it back.",
   full: "This list is full. Remove an item to add another.",

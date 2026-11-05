@@ -206,7 +206,7 @@ describe("Loan Offer Compare first-time help", () => {
   it("explains Remove, then lets the person put the third offer back", async () => {
     render(<Page />);
     await userEvent.click(screen.getByRole("button", { name: "Add a third offer" }));
-    expect(screen.getByText("Remove takes out one line. A Put it back button shows right after.")).toBeInTheDocument();
+    expect(screen.getByText("Remove takes out one line. Put it back brings it back.")).toBeInTheDocument();
     await fill("Offer 3: Amount borrowed", "7777");
     await userEvent.click(screen.getByRole("button", { name: "Remove the third offer" }));
     expect(screen.queryByRole("group", { name: "Offer 3" })).toBeNull();

@@ -113,7 +113,7 @@ test("a desktop screenshot", async ({ page }) => {
 
 test("remove can be undone and Start over asks first", async ({ page }) => {
   await fillTwo(page);
-  await expect(page.getByText("Remove takes out one line. A Put it back button shows right after.")).toBeVisible();
+  await expect(page.getByText("Remove takes out one line. Put it back brings it back.")).toBeVisible();
   await page.getByRole("button", { name: "Remove the last debt" }).click();
   await expect(page.getByLabel("Debt 2 balance")).toHaveCount(0);
   await page.getByRole("button", { name: "Put it back" }).click();

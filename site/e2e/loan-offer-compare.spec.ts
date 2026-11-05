@@ -61,7 +61,7 @@ test("a third offer can be added, and a tie names every offer", async ({ page })
   await fillOffer(page, 3, { amount: "5000", rate: "3", term: "24", fees: "50" });
   await expect(page.getByLabel("Offer 3, monthly payment")).toBeVisible();
   await expect(page.locator("details", { hasText: "More about the offers" })).toContainText("Lowest monthly payment: Offer 3");
-  await expect(page.getByText("Remove takes out one line. A Put it back button shows right after.")).toBeVisible();
+  await expect(page.getByText("Remove takes out one line. Put it back brings it back.")).toBeVisible();
   await page.getByRole("button", { name: "Remove the third offer" }).click();
   await expect(page.getByLabel("Offer 3: Amount borrowed")).toHaveCount(0);
   await page.getByRole("button", { name: "Put it back" }).click();

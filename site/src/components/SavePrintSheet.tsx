@@ -71,7 +71,7 @@ export function SavePrintSheet({
       </div>
       {asking ? (
         <div className="nt-sheet-ask" role="group" aria-label="Before you save">
-          <p>This saves a file on this phone or computer. The file will hold:</p>
+          <p>Saves a file on this phone. Nothing leaves it. You can delete the file any time. It will hold:</p>
           <div className="nt-sheet-ask-preview">{children}</div>
           <div className="nt-sheet-actions">
             <button
@@ -91,7 +91,7 @@ export function SavePrintSheet({
           </div>
         </div>
       ) : null}
-      <p className="nt-sheet-note">Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.</p>
+      <p className="nt-sheet-note">Save a copy shows you the file first, then keeps it on this phone only. Print shows a preview first. The numbers on this page stay.</p>
       <p role="status" className="nt-sheet-status">
         {saved ? "Saved" : ""}
       </p>

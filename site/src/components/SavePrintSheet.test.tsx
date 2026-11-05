@@ -46,7 +46,7 @@ describe("SavePrintSheet", () => {
     expect(screen.getByRole("status")).toHaveTextContent("");
     await userEvent.click(screen.getByRole("button", { name: "Save a copy" }));
     expect(onSave).not.toHaveBeenCalled();
-    expect(screen.getByText(/This saves a file on this phone or computer/)).toBeInTheDocument();
+    expect(screen.getByText(/Saves a file on this phone\. Nothing leaves it/)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Save the file" }));
     expect(onSave).toHaveBeenCalledWith(blob);
     expect(screen.getByRole("status")).toHaveTextContent("Saved");

@@ -44,7 +44,6 @@ export function ToolPage({ id }: { id: string }) {
       <Suspense fallback={<p role="status" className="nt-muted">{c.loading}</p>}>
         <Page />
       </Suspense>
-      <p><a href={href("/")}>{c.back}</a></p>
     </>
   );
 }

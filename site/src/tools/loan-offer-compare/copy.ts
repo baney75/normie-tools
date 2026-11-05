@@ -5,7 +5,7 @@ export const COPY = {
   title: "Loan Offer Compare",
   intro: "Type the numbers from two loan offers. Your answer shows below.",
   waiting: "Your answer shows here",
-  removeHint: "Remove takes out one line. A Put it back button shows right after.",
+  removeHint: "Remove takes out one line. Put it back brings it back.",
   removedDone: "The third offer is removed.",
   putBack: "Put it back",
   offerName: "Offer",
