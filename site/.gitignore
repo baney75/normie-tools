@@ -1,0 +1,5 @@
+dist/
+screenshots/
+test-results/
+playwright-report/
+.nt-base-*/

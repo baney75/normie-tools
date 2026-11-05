@@ -1,0 +1,12 @@
+{
+  "claims": [
+    { "id": "money-compared-in-cents", "text": "Typed money is compared as whole cents, so 2810.5 and $2,810.50 are the same amount and 12.3 is not 12.34." },
+    { "id": "text-ignores-spacing-and-case", "text": "Typed words match the sheet even with extra spaces or different capital letters." },
+    { "id": "mismatch-in-plain-words", "text": "A different answer is named in plain words, with what was typed and what the sheet says." },
+    { "id": "missing-answer-named", "text": "An answer that was not typed yet is named, and the sheet value is shown." },
+    { "id": "all-match-reported", "text": "The summary says all answers match only when every answer matches." },
+    { "id": "practice-data-is-made-up", "text": "The practice sheet holds made-up answers only: no Social Security number, no bank number, and only example.com emails." },
+    { "id": "stops-at-review-page", "text": "The page has no Submit button and no form that submits. It tells the person to press Submit on the free filing site you pick on IRS.gov." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never throws and never gives NaN, and a bad sheet gets a plain-words problem." }
+  ]
+}

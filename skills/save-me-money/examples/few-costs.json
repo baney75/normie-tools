@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "name": "Phone", "amount": "$42.50", "every": "month" },
+    { "name": "Magazine", "amount": "30", "every": "year" },
+    { "name": "Coffee club", "amount": "", "every": "week" }
+  ]
+}

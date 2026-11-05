@@ -1,0 +1,35 @@
+Screen: morning-briefing, typed state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+[heading 1] Morning Briefing
+Make a one page list for your morning. Pick the parts you want. Type your own things. Then save or print it.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+Step 2 of 3: Type your own things
+Today is Thursday, November 5, 2026.
+[heading 2] My day
+Type a time and a name for each thing. Up to 5.
+Remove takes out a line. Put it back shows right after you remove one.
+[label] Time of thing 1
+[box] Time of thing 1 = "8:30 am"
+[label] Name of thing 1
+[box] Name of thing 1 = "Call Sample Person"
+[plain button, outline only] Remove thing 1
+[plain button, outline only] Add a thing to my day
+[heading 2] My reminders
+Type what you want to remember. Up to 5.
+Remove takes out a line. Put it back shows right after you remove one.
+[label] Reminder 1
+[box] Reminder 1 = "Water the plants"
+[plain button, outline only] Remove reminder 1
+[label] Reminder 2
+[box] Reminder 2 = "Mail the letter"
+[plain button, outline only] Remove reminder 2
+[plain button, outline only] Add a reminder
+[plain button, outline only] Back to step 1
+[MAIN BUTTON, filled dark orange] Next
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Back to home
+[link, plain] Back to home

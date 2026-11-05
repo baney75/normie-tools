@@ -1,0 +1,98 @@
+Screen: save-me-money, typed state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+[heading 1] Save Me Money
+Type the costs you pay again and again. See what each one adds up to in a year.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+[heading 2] Your costs
+[label] Name of cost 1
+[box] Name of cost 1 = "Phone"
+[label] Phone, amount
+[box] Phone, amount = "45"
+[label] Phone, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Phone
+Remove takes out one cost. A Put it back button shows right after.
+[label] Name of cost 2
+[box] Name of cost 2 = "Internet"
+[label] Internet, amount
+[box] Internet, amount = "60"
+[label] Internet, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Internet
+Remove takes out one cost. A Put it back button shows right after.
+[label] Name of cost 3
+[box] Name of cost 3 = "Streaming"
+[label] Streaming, amount
+[box] Streaming, amount = ""
+[label] Streaming, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Streaming
+Remove takes out one cost. A Put it back button shows right after.
+[label] Name of cost 4
+[box] Name of cost 4 = "Insurance"
+[label] Insurance, amount
+[box] Insurance, amount = "480"
+[label] Insurance, how often
+[menu] Every week Every month Every year = "Every year"
+[plain button, outline only] Remove Insurance
+Remove takes out one cost. A Put it back button shows right after.
+[label] Name of cost 5
+[box] Name of cost 5 = "Gym"
+[label] Gym, amount
+[box] Gym, amount = ""
+[label] Gym, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Gym
+Remove takes out one cost. A Put it back button shows right after.
+[label] Name of cost 6
+[box] Name of cost 6 = "Other"
+[label] Other, amount
+[box] Other, amount = ""
+[label] Other, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Other
+Remove takes out one cost. A Put it back button shows right after.
+[plain button, outline only] Add a cost
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+[heading 2] Your list
+Total for a year
+$1,740.00
+Total for a month
+$145.00
+Costs in your list
+3
+Costs with no amount are left out.
+That is your list. You can stop here, or keep a copy below.
+[heading 2] Your costs, biggest first
+Tap a cost to see questions to ask before you call.
+Internet: $720.00 a year, $60.00 a month
+[label] Internet: $720.00 a year, $60.00 a month
+[tick box] Internet: $720.00 a year, $60.00 a month (not chosen)
+Phone: $540.00 a year, $45.00 a month
+[label] Phone: $540.00 a year, $45.00 a month
+[tick box] Phone: $540.00 a year, $45.00 a month (not chosen)
+Insurance: $480.00 a year, $40.00 a month
+[label] Insurance: $480.00 a year, $40.00 a month
+[tick box] Insurance: $480.00 a year, $40.00 a month (not chosen)
+[heading 2] Questions to ask before you call
+Questions appear here
+[closed section, tap to open] What comes next
+
+[closed section, tap to open] Show more
+
+[heading 2] Keep your list if you want
+[heading 2] Save or print my list
+Your list above, saved on this phone or computer or printed.
+[plain button, outline only] Print
+[MAIN BUTTON, filled dark orange] Save a copy
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+This adds up the numbers you typed. It does not tell you what to do.
+This page never calls, cancels or pays anything. You do that yourself.
+Source: only the numbers you type. A week cost uses 52 weeks in a year. That is an estimate.
+Back to home
+[link, plain] Back to home

@@ -10,5 +10,5 @@
     "MD060": false
   },
   "globs": ["**/*.md"],
-  "ignores": ["node_modules/**", "**/node_modules/**"]
+  "ignores": ["node_modules/**", "**/node_modules/**", "site/test-results/**", "site/playwright-report/**"]
 }

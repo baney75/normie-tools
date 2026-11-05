@@ -1,0 +1,5 @@
+{ "offers": [
+  { "amount": "20,000", "rate": "7.25", "term": "5", "termUnit": "years", "fees": "500" },
+  { "amount": "20,000", "rate": "6.5", "term": "60", "termUnit": "months", "fees": "900" },
+  { "amount": "20,000", "rate": "8", "term": "4", "termUnit": "years", "fees": "" }
+] }

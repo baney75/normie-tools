@@ -1,0 +1,569 @@
+{
+  "tool": "morning-briefing",
+  "screen": ", ,  at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
+  "firstTimeUser": {
+    "model": "sonnet",
+    "score": 3,
+    "runs": [
+      4,
+      3,
+      4,
+      3,
+      3
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to look over my finished morning list and then save or print it.\n\n2. I would tap **Save a copy**. It's the orange one, so it seems like the main thing.\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"Step 3 of 3\" (I don't know what the other steps were, but I guess I already did them)\n- \"how this page is made\" (a link, and I don't know what it would tell me)\n- \"Source\" (what source?)\n- \"Back to step 2\"\n- \"Save a copy\" (a copy of what, and where does it go?)\n- \"the file\" (what file?)\n- \"Print opens a preview first\"\n- \"on this phone or computer\" (it said this three times, and I'm not sure what it means for me)\n- \"Your numbers on this page stay as they are\" (what numbers? My list has times and reminders, not numbers.)\n- \"Start over asks first, and you can undo it right after\"\n- \"This lists what you typed. It does not tell you what to do.\" (a strange line, and I don't know what it's about)\n- \"Live weather and news\" (why isn't it here yet?)\n\n4. What worried me:\n- \"Save a copy\" makes a file, and I don't know where it ends up or whether I can find it again.\n- \"Start over\" might wipe out what I typed. It says I can undo, but I'd be nervous.\n- \"Print\" might actually start printing. It says there's a preview first, which helps a little.\n- The page says \"Nothing is sent,\" which is calming, but it's also a bit odd to say so, and I wonder why it has to.\n- The example weather and news are made up. I might mistake them for real, even though the page says they aren't.\n- I don't know if saving will cost anything. It doesn't say, but nothing mentions money.\n\n5. I would skip:\n- The \"Source: how this page is made\" line and its link.\n- \"Back to home\" at the bottom, unless I got lost.\n- The line \"This lists what you typed. It does not tell you what to do.\"\n- The repeated \"Your briefing is made on this phone or computer\" line.\n- The made-up weather and news. They don't help me, since they're fake.\n\n6. Score: 3. I can see the orange button, but I'm not sure what \"Save a copy\" does or where the file goes.\n\nRESULT: {\"next_tap\": \"Save a copy\", \"confusing_terms\": [\"Step 3 of 3\", \"how this page is made\", \"Source\", \"Back to step 2\", \"Save a copy\", \"the file\", \"Print opens a preview first\", \"on this phone or computer\", \"Your numbers on this page stay as they are\", \"Start over asks first, and you can undo it right after\", \"This lists what you typed. It does not tell you what to do.\", \"Live weather and news\"], \"worries\": [\"Save a copy makes a file and I don't know where it goes\", \"Start over might erase what I typed\", \"Print might start printing\", \"Example weather and news might be mistaken for real\", \"Unsure if anything costs money\"], \"skippable\": [\"Source: how this page is made link\", \"Back to home\", \"This lists what you typed. It does not tell you what to do.\", \"Your briefing is made on this phone or computer\", \"Example weather and news\"], \"score\": 3}"
+  },
+  "designRubric": [
+    {
+      "model": "haiku",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    }
+  ],
+  "otherScreens": [
+    {
+      "screen": "pick",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          3,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to choose which parts I'd like on my morning list, then move to the next step.\n\n2. I would tap \"Next\".\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Source: how this page is made\" (I don't know why a source matters or what it means here)\n- \"Example only\" (I'm not sure if it means these are samples or if they'll really work)\n- \"Pick state\" and \"Step 1 of 3\" are fine, but \"state\" isn't something I'd see on a real screen\n- \"Live weather and news are not on this page yet\" (a bit odd, so does it work or not?)\n- \"Numbers stay on this phone or computer\" (which numbers? I haven't typed any yet)\n- \"tick box\" (I'd say \"check box\" or \"little square\")\n\n4. Worries:\n- \"Nothing is sent\" is reassuring, but the mention of \"numbers\" made me wonder whether it wants phone numbers or personal numbers.\n- The \"how this page is made\" link might take me somewhere I can't get back from.\n- I'm not sure \"Next\" won't lose my choices, though the line \"You can come back and change these\" calmed me a bit.\n- Weather and news being \"made-up\" makes me wonder if I'd be printing something false.\n- \"Save or print it\" makes me wonder if saving costs anything or needs an account.\n\n5. I would skip the \"Source: how this page is made\" line and its link, and the \"Back to home\" link, since neither helps me make my list.\n\n6. Score: 4. The orange \"Next\" button is clear, but the made-up Example lines and the talk about \"numbers\" left me a little unsure.\n\nRESULT: {\"next_tap\": \"Next\", \"confusing_terms\": [\"Source: how this page is made\", \"Example only\", \"Pick state\", \"Live weather and news are not on this page yet\", \"Numbers stay on this phone or computer\", \"tick box\"], \"worries\": [\"'numbers' unclear, might mean phone or personal numbers\", \"how this page is made link might lead away\", \"unsure if choices are kept after Next\", \"made-up weather and news might print false info\", \"unsure whether save or print costs anything\"], \"skippable\": [\"Source: how this page is made\", \"how this page is made link\", \"Back to home\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "Every rule passes. This screen has one main button, uses short plain text, and shows \"Step 1 of 3\". It is calm, sends nothing, has no upload, and marks its Example lines as examples.\n\n1. **One main action:** PASS. \"Next\" is the only filled button. \"Back to home\" is a plain link.\n2. **No clutter:** PASS. The sentences are short and every element helps the task.\n3. **Plain language:** PASS. I found no tech terms.\n4. **Place in the task:** PASS. The screen says \"Step 1 of 3: Pick what to include\".\n5. **Calm:** PASS. There are no timers and no pressure words.\n6. **Safe:** PASS. The screen says \"Nothing is sent.\" \"Next only moves on. You can come back and change these.\" This screen changes nothing, so no preview is needed.\n7. **Upload errors:** PASS. The screen shows no upload problem, so this rule doesn't apply.\n8. **Honest:** PASS. The Example lines are labeled, the page says live weather and news are not there yet, and it links to a source.\n\nRESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    },
+    {
+      "screen": "typed",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type my day's times and my reminders, then move on to the next step.\n\n2. I would tap **Next**.\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Step 2 of 3\" (I don't know what the three steps are, though \"Back to step 1\" helps a little)\n- \"Source: how this page is made\" and the link \"how this page is made\"\n- \"Remove takes out a line\" (what is a \"line\"?)\n- \"Put it back shows right after you remove one\" (it isn't clear where it shows, and I don't see a \"Put it back\" button now)\n- \"Numbers stay on this phone or computer\" (I typed words, not just numbers)\n- \"Start over asks first, and you can undo it right after\" (undo what, exactly?)\n- \"Add a thing to my day\" (an odd phrase)\n- \"Time of thing 1\" and \"Name of thing 1\"\n- \"box\"\n\n4. What worried me:\n- \"Remove thing 1\" and \"Remove reminder\" sit right next to the things I typed. I might wipe out my work by accident.\n- \"Start over\" sounds like it could erase everything. They say it asks first, which helps, but I still wouldn't want to touch it.\n- I don't know what \"Next\" leads to. It might send or print something, though the top says \"Nothing is sent,\" which is a relief.\n- I'm not sure my typing is saved if I tap \"Back to step 1\".\n- I don't know why \"Call Sample Person\" is there. It looks like it was already filled in, and I'm not sure whether that's mine.\n\n5. What I would skip:\n- The \"Source: how this page is made\" line and its link.\n- The \"Remove takes out a line. Put it back shows right after you remove one.\" sentence, which is repeated twice.\n- \"Back to home\" at the bottom.\n- The date line, though it's harmless.\n\n6. Score: 4. The orange \"Next\" button stands out and I mostly know what to do, but I'm a little unsure what happens after I tap it.\n\nRESULT: {\"next_tap\": \"Next\", \"confusing_terms\": [\"Step 2 of 3\", \"Source: how this page is made\", \"Remove takes out a line\", \"Put it back shows right after you remove one\", \"Numbers stay on this phone or computer\", \"Start over asks first, and you can undo it right after\", \"Add a thing to my day\", \"Time of thing 1\", \"box\"], \"worries\": [\"Remove buttons next to my typing could delete my work\", \"Start over might erase everything\", \"Unsure what Next leads to\", \"Unsure if my typing is kept if I tap Back to step 1\", \"Sample Person text I did not write\"], \"skippable\": [\"Source: how this page is made\", \"repeated Remove/Put it back sentence\", \"Back to home\", \"date line\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 7,
+          "fails": [
+            "rule6: no preview is shown before any change; the screen only describes undo (\"Start over asks first, and you can undo it right after.\")",
+            "Rule 6: no preview of the list is shown on this screen before it is saved or printed; only undo is described (\"Put it back shows right after you remove one\")."
+          ],
+          "runs": [
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"FAIL\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule6: no preview is shown before any change; the screen only describes undo (\\\"Start over asks first, and you can undo it right after.\\\")\"], \"score\": 7}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
+}

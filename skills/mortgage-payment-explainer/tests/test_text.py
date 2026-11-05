@@ -1,0 +1,102 @@
+import json
+import os
+import subprocess
+import sys
+import unittest
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
+import calc  # noqa: E402
+
+SCRIPT = os.path.join(HERE, "..", "scripts", "calc.py")
+END = "This is an estimate from the numbers you typed. The paper from your bank or lender has the final word."
+with open(os.path.join(HERE, "golden.json"), encoding="utf-8") as f:
+    GOLDEN = json.load(f)
+
+
+def run_text(data):
+    out = subprocess.run([sys.executable, SCRIPT, json.dumps(data), "--text"], capture_output=True, text=True)
+    return out.returncode, out.stdout.splitlines()
+
+
+def run_json(data):
+    out = subprocess.run([sys.executable, SCRIPT, json.dumps(data)], capture_output=True, text=True)
+    return out.returncode, out.stdout
+
+
+class Text(unittest.TestCase):
+    def test_basic_key_lines(self):
+        case = next(c for c in GOLDEN["mortgages"] if c["id"] == "basic-30y")
+        code, lines = run_text(case["input"])
+        self.assertEqual(code, 0)
+        for want in (
+            "Your monthly payment is $1,888.92.",
+            "Principal and interest is $1,438.92 each month.",
+            "Property tax is $300.00 each month.",
+            "Home insurance is $100.00 each month.",
+            "HOA is $50.00 each month.",
+            "Mortgage insurance is $0.00 each month.",
+            "The loan amount is $240,000.00.",
+            "Interest over the whole loan is $278,012.58.",
+            "Your first payment pays $1,200.00 of interest and lowers what you owe by $238.92.",
+        ):
+            self.assertIn(want, lines)
+        self.assertEqual(lines[0], "Your monthly payment is $1,888.92.")
+        self.assertEqual(lines[-1], END)
+
+    def test_mortgage_insurance_and_odd_rate(self):
+        case = next(c for c in GOLDEN["mortgages"] if c["id"] == "with-mortgage-insurance")
+        _code, lines = run_text(case["input"])
+        self.assertIn("The loan amount is $237,500.00.", lines)
+        self.assertIn("Mortgage insurance is $95.10 each month.", lines)
+        self.assertIn("Your monthly payment is $2,737.38.", lines)
+
+    def test_zero_rate_and_one_year(self):
+        case = next(c for c in GOLDEN["mortgages"] if c["id"] == "zero-rate-20y")
+        r = calc.explain_mortgage(case["input"])
+        _code, lines = run_text(case["input"])
+        self.assertIn("Interest over the whole loan is $0.00.", lines)
+        self.assertIn("Your monthly payment is " + calc.money_text(r["totalMonthlyCents"]) + ".", lines)
+        case = next(c for c in GOLDEN["mortgages"] if c["id"] == "one-year")
+        _code, lines = run_text(case["input"])
+        self.assertEqual(len(lines), 10)
+
+    def test_problem_text(self):
+        code, lines = run_text({"price": "300,000", "down": "60,000", "rate": "6.555", "term": "30"})
+        self.assertEqual(code, 1)
+        self.assertEqual(lines, ["Fix this first: Interest rate: use a percent from 0 to 100, like 6.5. Use two decimals at most."])
+
+    def test_money_words(self):
+        self.assertEqual(calc.money_text(23750000), "$237,500.00")
+        self.assertEqual(calc.money_text(216805), "$2,168.05")
+
+    def test_json_without_flag_is_unchanged(self):
+        for data in [c["input"] for c in GOLDEN["mortgages"]]:
+            _code, raw = run_json(data)
+            self.assertEqual(raw, json.dumps(calc.explain_mortgage(data), indent=1) + "\n")
+
+    def test_every_error_case_starts_with_fix_this_first(self):
+        for e in GOLDEN["errors"]:
+            code, lines = run_text(e["input"])
+            self.assertEqual(code, 1, e["id"])
+            self.assertEqual(len(lines), len(calc.explain_mortgage(e["input"])["problems"]), e["id"])
+            for line in lines:
+                self.assertTrue(line.startswith("Fix this first: "), (e["id"], line))
+
+    def test_unreadable_json_is_plain_words(self):
+        out = subprocess.run([sys.executable, SCRIPT, "not json", "--text"], capture_output=True, text=True)
+        self.assertEqual(out.returncode, 1)
+        self.assertTrue(out.stdout.startswith("Fix this first: "))
+
+    def test_no_dashes_or_cent_fields_in_text(self):
+        for data in [c["input"] for c in GOLDEN["mortgages"]]:
+            _code, lines = run_text(data)
+            blob = "\n".join(lines)
+            self.assertNotIn("\u2014", blob)
+            self.assertNotIn("\u2013", blob)
+            self.assertNotIn("Cents", blob)
+            self.assertNotIn("{", blob)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,380 @@
+{
+  "tool": "loan-offer-compare",
+  "screen": ",  at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
+  "firstTimeUser": {
+    "model": "sonnet",
+    "score": 4,
+    "runs": [
+      4,
+      4,
+      4,
+      3,
+      4
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to look at the answer it worked out (Offer 2 is cheapest) and then either finish or change a number.\n\n2. I would tap **Done. Back to home.**\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Cost of borrowing\"\n- \"Total interest\"\n- \"Upfront fees\"\n- \"Term\" and \"number of payments\"\n- \"Yearly interest rate\"\n- \"Save a copy\" and \"saved as a file\" (where does the file go?)\n- \"Print opens a preview\" and \"Close the print box\"\n- \"Start over asks first, and you can undo it right after\"\n- \"Estimate\" and \"lender statement\"\n- \"More about the offers\" and \"What the words mean\" (I don't know what's inside)\n- \"Add a third offer. Remove the third offer to go back.\"\n- \"Your numbers stay.\"\n\n4. Worries:\n- \"There is no Send button on this page\" made me wonder whether something is being sent somewhere. It's a little reassuring, but it also made me think about it.\n- \"Save a copy\" puts a file on my phone, and I don't know where it goes.\n- \"Start over\" might erase my numbers, even though it says I can undo.\n- \"Done. Back to home.\" might lose my answer. It says \"You can stop here,\" but I'm not sure my answer is kept.\n- Offer 2 is \"cheapest,\" but its monthly payment is $243.76, about double Offer 1's $116.28. I worry I'd pick the wrong one for my budget.\n- The two loans aren't the same amount or length. That made me unsure the comparison is fair.\n- It says it's only an estimate, so I'm not sure I can rely on it.\n\n5. What I'd skip:\n- \"Add a third offer\"\n- \"Print\"\n- \"Save a copy\"\n- \"Start over\"\n- The two closed sections, \"More about the offers\" and \"What the words mean\" (although I might open \"What the words mean\" if I were confused)\n- The \"Months/Years\" choices, because they are already filled in.\n\n6. Score: 4. I know the answer is Offer 2, and the orange button is clear. I'm a bit unsure whether I should pick it, given the bigger monthly payment.\n\nRESULT: {\"next_tap\":\"Done. Back to home.\",\"confusing_terms\":[\"Cost of borrowing\",\"Total interest\",\"Upfront fees\",\"Term / number of payments\",\"Yearly interest rate\",\"Save a copy / saved as a file\",\"Print opens a preview\",\"Start over asks first, and you can undo it\",\"Estimate / lender statement\",\"More about the offers\",\"What the words mean\",\"Add a third offer / Remove the third offer\",\"Your numbers stay\"],\"worries\":[\"No Send button made me wonder if something is sent\",\"Save a copy puts a file somewhere unknown\",\"Start over might erase my numbers\",\"Done. Back to home might lose my answer\",\"Cheapest offer has a much higher monthly payment\",\"Offers differ in amount and length, so the comparison may not be fair\",\"Only an estimate, so I'm unsure I can rely on it\"],\"skippable\":[\"Add a third offer\",\"Print\",\"Save a copy\",\"Start over\",\"More about the offers\",\"What the words mean\",\"Months/Years choice\"],\"score\":4}"
+  },
+  "designRubric": [
+    {
+      "model": "haiku",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    }
+  ],
+  "otherScreens": [
+    {
+      "screen": "empty",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type in the numbers from two loan offers and then tap a button to see which one costs less.\n\n2. \"Show my answer\" is the one I'd tap eventually. But first I'd tap the first box, \"Offer 1: Amount borrowed\", and start typing.\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Yearly interest rate\". I sort of know it, but not exactly.\n- \"Upfront fees\"\n- \"Term\" and \"number of payments\"\n- \"Lowest cost of borrowing\". It isn't clear whether that's a dollar figure or something else.\n- \"Add a third offer. Remove the third offer to go back.\" I couldn't tell what \"remove\" meant, because I don't see a remove button.\n- \"Save a copy\" and \"what goes in the file\". I don't know what file or where it goes.\n- \"Print opens a preview\" and \"Close the print box\"\n- \"Estimate\"\n- \"Disabled\". It isn't written on the screen, but the buttons looked grayed out and I wondered why.\n- \"Months / Years\" with a \"(selected)\" label. I wasn't sure whether to tap one.\n\n4. What worried me:\n- I'm putting in loan numbers, and I'm not sure whether they are saved or sent anywhere. \"There is no Send button\" helped a little, but I still wondered.\n- \"Save a copy\" makes a file with my loan details on my phone. I worried someone else could see it.\n- I worried about typing the wrong number, such as the interest rate with or without a percent sign.\n- I worried that \"Lowest cost of borrowing\" might make me pick a loan based on a guess. The page says it's \"an estimate.\"\n- I worried about whether I'm reading the right numbers off my loan paper.\n- \"Months\" and \"Years\" are both shown, and I might leave the wrong one selected.\n\n5. What I'd skip:\n- \"Add a third offer\", because I only have two.\n- The \"Keep your answer if you want\" section with \"Print\" and \"Save a copy\", because I can't use it yet.\n- \"What the words mean\", although I might open it if I got stuck.\n- The \"Lowest cost of borrowing / Your answer shows here\" box, because it's empty until I tap the button.\n\n6. Score: 4. I know to start in the first box and that the orange button is at the end. I'm unsure about the Months and Years choice and about the amount of text on the page.\n\nRESULT: {\"next_tap\": \"Offer 1: Amount borrowed\", \"confusing_terms\": [\"Yearly interest rate\", \"Upfront fees\", \"Term / number of payments\", \"Lowest cost of borrowing\", \"Remove the third offer\", \"Save a copy / the file\", \"Print preview / print box\", \"Estimate\", \"Months/Years (selected)\"], \"worries\": [\"Is my loan information saved or sent anywhere\", \"A saved file with my loan details on my phone\", \"Typing a wrong number or the interest rate in the wrong form\", \"Choosing a loan based on an estimate\", \"Leaving Months or Years wrongly selected\"], \"skippable\": [\"Add a third offer\", \"Keep your answer if you want / Print / Save a copy\", \"What the words mean\", \"Lowest cost of borrowing answer box\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+Screen: morning-briefing, briefing state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+[heading 1] Morning Briefing
+Make a one page list for your morning. Pick the parts you want. Type your own things. Then save or print it.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+Step 3 of 3: Your briefing
+This is your finished page. Use Back to step 2 to change it.
+[plain button, outline only] Back to step 2
+[heading 2] Save or print my briefing
+[heading 3] Morning briefing
+Thursday, November 5, 2026
+[heading 4] Example weather (not real)
+Example town: 58 degrees, clear.
+Example. Not today's weather.
+[heading 4] Example news (not real)
+Example headline: The town pool opens for the summer.
+Example headline: A bake sale is on Saturday.
+Example headline: The library has a new sign.
+Example. Not today's news.
+[heading 4] My day
+8:30 am: Call Sample Person
+[heading 4] My reminders
+Water the plants
+Mail the letter
+Live weather and news are not on this page yet.
+Everything marked Example is made up. It is not real news or weather.
+Your briefing is made on this phone or computer.
+[plain button, outline only] Print
+[MAIN BUTTON, filled dark orange] Save a copy
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+This lists what you typed. It does not tell you what to do.
+Back to home
+[link, plain] Back to home

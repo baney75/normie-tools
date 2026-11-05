@@ -1,0 +1,52 @@
+{
+  "skill": "form-filler",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 12,
+      "total": 12,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "l1-guided",
+      "level": 1,
+      "task": "What free way can I use to file my taxes this year?",
+      "reply": "You can use Guided Free File to file your taxes this year. It asks simple questions one at a time. The software does the math. Last year, it was free for people with income of $95,000 or less. Check IRS.gov for this year's limit. Each company also sets its own rules, such as age or state. Some companies do your state return for free, some charge. Free File was closed when we checked on November 4, 2026. The IRS says it opens in January 2027. Check IRS.gov. Free help from a VITA volunteer: 800-906-9887. Always start at IRS.gov/freefile: https://www.irs.gov/freefile. You type your Social Security number yourself on the free filing site you pick on IRS.gov. Your answers so far. First name: Ana. Last name: Rivera. Street address: 12 Example Street. City: Springfield. State: IL. ZIP code: 62701. Birth date: 02/29/1960. Phone number: 555-010-1234. Papers ticked: 3 of 9. Note: This is a list of answers, not a tax return. You make your account, sign, and press Submit yourself.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    },
+    {
+      "id": "l1-fillable",
+      "level": 1,
+      "task": "My income was over the limit and I do not want to do it all myself. What free choice do I have?",
+      "reply": "You have two free options for filing your taxes this year: Free File Fillable Forms and Free File Electronic Filing. Free File Fillable Forms is available for any income and allows you to type into online copies of the IRS forms. Only some of the math is done for you. Free File Electronic Filing is available for any income and allows you to type into online copies of the IRS forms. Only some of the math is done for you. State taxes are not included. If you would rather not do the work yourself, a VITA volunteer can help for free. Free help from a VITA volunteer: 800-906-9887. Always start at IRS.gov/freefile: https://www.irs.gov/freefile. You type your Social Security number yourself on the free filing site you pick on IRS.gov. Your answers so far. First name: Sam. Last name: O'Neil. Street address: not filled in. City: not filled in. State: TX. ZIP code: 73301-0001. Birth date: not filled in. Phone number: 555-010-9876. Papers ticked: 3 of 9. Note: This is a list of answers, not a tax return. You make your account, sign, and press Submit yourself.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    }
+  ]
+}

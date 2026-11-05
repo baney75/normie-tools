@@ -1,0 +1,51 @@
+{
+  "skill": "morning-briefing",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 11,
+      "total": 11,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "l1-full",
+      "level": 1,
+      "task": "Make my morning briefing. Today is November 5, 2026. Lunch with Pat at 1pm, take pills at 7:30 am, call Sam later. Remind me to water the plants and call the pharmacy. Include weather and news.",
+      "reply": "Morning briefing\nThursday, November 5, 2026\nExample weather (not real)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\nExample news (not real)\n- Example headline: The town pool opens for the summer.\n- Example headline: A bake sale is on Saturday.\n- Example headline: The library has a new sign.\nExample. Not today's news.\nMy day\n7:30 am: Take pills\n1:00 pm: Lunch with Pat\nTime not clear\n- later: Call Sam\nMy reminders\n- Water the plants\n- Call the pharmacy\nLive weather and news are not on this page yet.\nNote: Weather and news lines are made-up examples. Real ones come only from your AI helper's own tools, and only if you ask.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    },
+    {
+      "id": "l1-own",
+      "level": 1,
+      "task": "Just my day and reminders please. It is January 1, 2026. Noon: bring the mail in. Remind me to check the stove is off.",
+      "reply": "Morning briefing\nThursday, January 1, 2026\nMy day\n12:00 pm: Bring the mail in\nMy reminders\n- Check the stove is off\nNote: This lists only what you typed. Nothing was sent.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    }
+  ]
+}

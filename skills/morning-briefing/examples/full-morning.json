@@ -1,0 +1,10 @@
+{
+  "include": { "weather": true, "news": true, "day": true, "reminders": true },
+  "date": "2026-11-05",
+  "day": [
+    { "time": "1pm", "title": "Lunch with Pat" },
+    { "time": "7:30 am", "title": "Take pills" },
+    { "time": "later", "title": "Call Sam" }
+  ],
+  "reminders": ["Water the plants", "Call the pharmacy"]
+}

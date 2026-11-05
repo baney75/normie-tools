@@ -1,0 +1,566 @@
+{
+  "tool": "photo-duplicate-finder",
+  "screen": ", ,  at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
+  "firstTimeUser": {
+    "model": "sonnet",
+    "score": 3,
+    "runs": [
+      4,
+      3,
+      3,
+      4,
+      3
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to look over a short list of file names and then save that list, so I know which extra photo to remove myself later.\n\n2. I would tap \"Save my list of extras\".\n\n3. Words that felt like tech talk:\n- \"file names\"\n- \"Files app\" (I know Photos, but not sure what this one is)\n- \"Source: how this page is made\"\n- \"list file\" (is that a new file on my phone?)\n- \"groups\" in \"Back to the groups\"\n- \"Extra copies\" (extra of what, exactly?)\n- \"Start over asks first, and you can undo it right after\" (undo what?)\n- \".png\"\n\n4. Worries:\n- \"Save\" makes me wonder where the list goes on my phone and whether it takes up space or costs anything.\n- \"This saves a list... on this phone or computer\" makes me wonder if I'm putting something new on my phone that I can't find.\n- \"To undo, delete the list file\" sounds like work, and I'm not sure how to do it.\n- It says it never deletes anything, but then I have to delete the photo myself, and I'm afraid of removing the wrong one.\n- Only one file shows, and I don't know whether that's the extra or the original. I might delete the one I want to keep.\n- \"Start over\" sits close to the main button, and I'm not sure what it would erase.\n\n5. I would skip:\n- \"Source: how this page is made\" and its link\n- \"Show more about how this works\"\n- \"Back to home\" (unless I got lost)\n- The \"Step 3 of 3\" line, though it does tell me I'm near the end\n\n6. Score: 3. I know the orange button is the main one, but I'm unsure what saving does for me afterward or how I'd find the list.\n\nRESULT: {\"next_tap\": \"Save my list of extras\", \"confusing_terms\": [\"file names\", \"Files app\", \"Source: how this page is made\", \"list file\", \"Back to the groups\", \"Extra copies\", \"Start over asks first, and you can undo it right after\", \".png\"], \"worries\": [\"Where the saved list goes and whether it takes space or costs anything\", \"Having to delete the list file myself to undo\", \"Deleting the wrong photo myself\", \"Unsure whether beach-2.png is the extra or the one to keep\", \"Start over might erase my work\"], \"skippable\": [\"Source: how this page is made\", \"Show more about how this works\", \"Back to home\", \"Step 3 of 3\"], \"score\": 3}"
+  },
+  "designRubric": [
+    {
+      "model": "haiku",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    }
+  ],
+  "otherScreens": [
+    {
+      "screen": "start",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 3,
+        "runs": [
+          4,
+          3,
+          3,
+          4,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to pick photos from my phone so it can look for ones that are the same.\n\n2. I would tap \"Choose photos\".\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Duplicate\"\n- \"Drop a file here\". I don't know what \"drop\" means on a phone.\n- \"Source: how this page is made\". It sounds like programmer talk.\n- \"Show more about how this works\"\n- \"Step 1 of 3\". I'm not sure what steps 2 and 3 are.\n- \"Pick photos\" appears three times: as a label, a box and a heading. I wasn't sure which one to use.\n- \"Box\" with a cursor. I don't know what to type, since I'm picking photos, not typing.\n\n4. Worries:\n- It asks for my photos. I'm nervous even though it says \"Nothing is sent.\"\n- I'm not sure I can trust that claim.\n- I'm not sure what \"Photos stay on this phone\" means for photos in the cloud.\n- I'm worried I'll tap something that deletes my photos. It says it never deletes, which helps, but I'd still be a little afraid.\n- It says \"Pick up to 300 photos\" and I don't know how to pick that many.\n- I don't know if I need to pick them one at a time.\n\n5. I would skip:\n- \"Or drop a file here.\"\n- The link \"how this page is made\".\n- \"Show more about how this works\", unless I got stuck.\n- \"Back to home\", unless I wanted to leave.\n\n6. Score: 3. The big orange button is clear, but the empty box with \"Pick photos\" makes me unsure whether to tap it or the button.\n\nRESULT: {\"next_tap\": \"Choose photos\", \"confusing_terms\": [\"Duplicate\", \"Or drop a file here\", \"Source: how this page is made\", \"Show more about how this works\", \"Step 1 of 3\", \"Pick photos (label, box, and heading repeated)\", \"box with cursor\"], \"worries\": [\"Giving access to my photos\", \"Unsure if 'Nothing is sent' is true\", \"Cloud photos vs. phone photos\", \"Fear of accidentally deleting photos\", \"How to pick up to 300 photos\"], \"skippable\": [\"Or drop a file here.\", \"how this page is made\", \"Show more about how this works\", \"Back to home\"], \"score\": 3}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule6: The screen does not say how to undo and shows no preview. It only says \\\"This tool never deletes, moves or sends a photo.\\\"\"],\"score\":7}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    },
+    {
+      "screen": "picked",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to look for matching photos among the three I picked, by tapping the big orange button.\n\n2. I would tap \"Look for copies\".\n\n3. Words that felt like tech talk or unclear:\n- \"drop a file here\" (I don't drag things on a phone)\n- \"Source: how this page is made\" (I don't know what that means)\n- \"Step 1 of 3\" (I don't know what steps 2 and 3 are)\n- \"Show more about how this works\" (a little vague)\n- \"Photos picked\" with the number 3 (fine, but it repeats the list above)\n- \"Pick photos\" appears as both a label and a box, which was odd, and the box looks empty\n\n4. Worries:\n- I'm told it never deletes, moves or sends photos, which helps, but I'm still a bit unsure whether to trust that.\n- \"Start over asks first, and you can undo it right after\" makes me wonder whether Start over could lose something.\n- I'm not sure what \"Look for copies\" will do. Will it make copies? I think it means find duplicates, but the wording could be read the other way.\n- The picked files are named .png, and I'm not sure my phone photos will work.\n\n5. I would skip:\n- \"Or drop a file here.\"\n- \"Source: how this page is made\" and its link\n- \"Back to home\"\n- \"Pick up to 300 photos at once,\" since I only have 3\n- The \"Photos picked 3\" line, since the list already shows it\n\n6. Score: 4. The orange button stands out and I've already picked photos, but \"Look for copies\" could be misread.\n\nRESULT: {\"next_tap\": \"Look for copies\", \"confusing_terms\": [\"drop a file here\", \"Source: how this page is made\", \"Step 1 of 3\", \"Show more about how this works\", \"Look for copies (could mean make copies)\", \"Pick photos box looks empty\", \".png\"], \"worries\": [\"Not sure I can trust that nothing is deleted or sent\", \"Start over might lose something\", \"Look for copies might make copies\", \"Unsure my phone photos will work\"], \"skippable\": [\"Or drop a file here\", \"Source: how this page is made\", \"Back to home\", \"Pick up to 300 photos at once\", \"Photos picked 3\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
+}

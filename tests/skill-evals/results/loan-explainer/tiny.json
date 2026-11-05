@@ -1,0 +1,52 @@
+{
+  "skill": "loan-explainer",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 12,
+      "total": 12,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "l1-car",
+      "level": 1,
+      "task": "I want to borrow $10,000 at 6% for 36 months. Explain this loan.",
+      "reply": "Your monthly payment is $304.22, every month for the whole loan.\nThe total you pay is $10,951.88.\nThe total interest is $951.88.\nThe cost of borrowing is $951.88. That is interest plus upfront fees.\nThis does not work out the APR. The paper from your lender shows the APR.\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    },
+    {
+      "id": "l1-home",
+      "level": 1,
+      "task": "I want $20,000 at 7.25% for 5 years. Fees are $500 up front and I would add $100 a month. Explain this loan.",
+      "reply": "Your monthly payment is $398.39, every month for the whole loan.\nThe total you pay is $23,903.20.\nThe total interest is $3,903.20.\nThe upfront fees are $500.00, and they are not in the total you pay.\nThe cost of borrowing is $4,403.20. That is interest plus upfront fees.\nWith your extra $100.00 each month, your monthly payment is $498.39.\nYou pay it off after 47 months, which is 13 months sooner.\nYour total interest with the extra is $2,974.16, so you save $929.04 in interest.\nThis does not work out the APR. The paper from your lender shows the APR.\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    }
+  ]
+}

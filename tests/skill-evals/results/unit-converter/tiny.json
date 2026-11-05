@@ -1,0 +1,46 @@
+{
+  "skill": "unit-converter",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 6,
+      "total": 6,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "inches-to-millimeters",
+      "level": 1,
+      "task": "How many millimeters is 12 inches?",
+      "reply": "12 inches is 304.8 millimeters. The answer is shown to 6 digits. Conversions use exact standard factors.",
+      "met": [
+        true,
+        true,
+        true
+      ],
+      "passed": 3,
+      "total": 3
+    },
+    {
+      "id": "body-temperature",
+      "level": 1,
+      "task": "What is 98.6 degrees Fahrenheit in Celsius?",
+      "reply": "98.6 degrees Fahrenheit is 37 degrees Celsius. The answer is shown to 6 digits. Conversions use exact standard factors.",
+      "met": [
+        true,
+        true,
+        true
+      ],
+      "passed": 3,
+      "total": 3
+    }
+  ]
+}

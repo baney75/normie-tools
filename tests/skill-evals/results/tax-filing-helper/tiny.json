@@ -1,0 +1,51 @@
+{
+  "skill": "tax-filing-helper",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 7,
+      "total": 9,
+      "cases": 2,
+      "score": 0.7777777777777778
+    }
+  },
+  "verdict": {
+    "ok": false,
+    "fails": [
+      "level 1: 77.8% < 90%"
+    ]
+  },
+  "results": [
+    {
+      "id": "l1-all-match",
+      "level": 1,
+      "task": "How many of my practice answers match the sheet?",
+      "reply": "All 8 answers match. They are: First name, Last name, Email, Employer name, Pay for the year, Tax already taken out of your pay, Bank name, Interest from your bank. Note: This is a practice match check with made-up answers. Nothing is filed or sent. You press Submit yourself, on the free filing site you pick on IRS.gov.",
+      "met": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 4,
+      "total": 4
+    },
+    {
+      "id": "l1-some-different",
+      "level": 1,
+      "task": "How many of my practice answers match the sheet, and what is different?",
+      "reply": "The practice answers match 5 out of 8 questions on the sheet. Here are the differences:\n- First name: \"Sampel\" vs. \"Sample\"\n- Interest from your bank: $12.30 vs. $12.34\n- The rest of the answers match perfectly.",
+      "met": [
+        false,
+        true,
+        false,
+        true,
+        true
+      ],
+      "passed": 3,
+      "total": 5
+    }
+  ]
+}

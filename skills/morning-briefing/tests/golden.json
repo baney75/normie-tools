@@ -1,0 +1,113 @@
+{
+  "note": "Worked out by hand, apart from calc.mjs. Minutes = hour * 60 + minute. 12 am is hour 0, 12 pm is hour 12. Weekday: 2026-01-01 is a Thursday, so 2026-11-05 is day 309 and (309-1) mod 7 = 0 days later, a Thursday. 2024-01-01 is a Monday, 2024-02-29 is day 60, 59 mod 7 = 3, a Thursday.",
+  "times": [
+    { "text": "7:30 am", "minutes": 450, "note": "7*60+30" },
+    { "text": "7:30am", "minutes": 450, "note": "no space" },
+    { "text": "7am", "minutes": 420, "note": "7*60" },
+    { "text": "7 a.m.", "minutes": 420, "note": "dots ignored" },
+    { "text": "13:05", "minutes": 785, "note": "13*60+5" },
+    { "text": "07:30", "minutes": 450, "note": "leading zero means 24 hour" },
+    { "text": "00:30", "minutes": 30, "note": "0*60+30" },
+    { "text": "noon", "minutes": 720, "note": "12*60" },
+    { "text": "midnight", "minutes": 0, "note": "0" },
+    { "text": "12 pm", "minutes": 720, "note": "12 pm is hour 12" },
+    { "text": "12 am", "minutes": 0, "note": "12 am is hour 0" },
+    { "text": "  8:05PM ", "minutes": 1205, "note": "(8+12)*60+5, spaces and capitals ignored" },
+    { "text": "at 6 pm", "minutes": 1080, "note": "(6+12)*60" },
+    { "text": "11:59 pm", "minutes": 1439, "note": "(11+12)*60+59" },
+    { "text": "7:30", "minutes": null, "note": "am or pm is not known" },
+    { "text": "10:00", "minutes": null, "note": "am or pm is not known" },
+    { "text": "13", "minutes": null, "note": "no colon, no am or pm" },
+    { "text": "later", "minutes": null, "note": "words" },
+    { "text": "25:00", "minutes": null, "note": "no hour 25" },
+    { "text": "7:75 am", "minutes": null, "note": "no minute 75" },
+    { "text": "0 am", "minutes": null, "note": "hour 0 with am is not a clock time" },
+    { "text": "13 pm", "minutes": null, "note": "13 with pm" },
+    { "text": "", "minutes": null, "note": "blank" }
+  ],
+  "clockWords": [
+    { "minutes": 0, "text": "12:00 am" },
+    { "minutes": 450, "text": "7:30 am" },
+    { "minutes": 720, "text": "12:00 pm" },
+    { "minutes": 785, "text": "1:05 pm" },
+    { "minutes": 1439, "text": "11:59 pm" }
+  ],
+  "dates": [
+    { "input": "2026-11-05", "text": "Thursday, November 5, 2026" },
+    { "input": "2026-01-01", "text": "Thursday, January 1, 2026" },
+    { "input": "2024-02-29", "text": "Thursday, February 29, 2024" },
+    { "input": "2026-02-29", "text": "" },
+    { "input": "2026-13-01", "text": "" },
+    { "input": "soon", "text": "" }
+  ],
+  "briefings": [
+    {
+      "id": "full",
+      "input": {
+        "include": { "weather": true, "news": true, "day": true, "reminders": true },
+        "date": "2026-11-05",
+        "day": [
+          { "time": "1pm", "title": "Lunch" },
+          { "time": "7:30 am", "title": "Pills" },
+          { "time": "later", "title": "Call Sam" },
+          { "time": "", "title": "Mail" }
+        ],
+        "reminders": ["Water plants", { "text": "Call the pharmacy" }]
+      },
+      "text": "Morning briefing\nThursday, November 5, 2026\n\nExample weather (not real)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\n\nExample news (not real)\n- Example headline: The town pool opens for the summer.\n- Example headline: A bake sale is on Saturday.\n- Example headline: The library has a new sign.\nExample. Not today's news.\n\nMy day\n7:30 am: Pills\n1:00 pm: Lunch\nTime not clear\n- later: Call Sam\n- Mail\n\nMy reminders\n- Water plants\n- Call the pharmacy\n\nLive weather and news are not on this page yet.\n",
+      "dayOrder": ["Pills", "Lunch"],
+      "unclear": ["later: Call Sam", "Mail"]
+    },
+    {
+      "id": "reminders-only",
+      "input": { "include": { "reminders": true }, "reminders": ["Call Sam", "  ", ""] },
+      "text": "Morning briefing\n\nMy reminders\n- Call Sam\n"
+    },
+    {
+      "id": "empty-day",
+      "input": { "include": { "day": true }, "date": "2026-01-01", "day": [{ "time": "", "title": "" }] },
+      "text": "Morning briefing\nThursday, January 1, 2026\n\nMy day\nNothing on your day.\n"
+    },
+    {
+      "id": "empty-reminders",
+      "input": { "include": { "reminders": true }, "reminders": [] },
+      "text": "Morning briefing\n\nMy reminders\nNo reminders.\n"
+    },
+    {
+      "id": "weather-only",
+      "input": { "include": { "weather": true } },
+      "text": "Morning briefing\n\nExample weather (not real)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\n\nLive weather and news are not on this page yet.\n"
+    },
+    {
+      "id": "ties-and-midnight",
+      "input": {
+        "include": { "day": true },
+        "day": [
+          { "time": "9:00 am", "title": "First" },
+          { "time": "9 am", "title": "Second" },
+          { "time": "12 am", "title": "Night" },
+          { "time": "noon", "title": "Lunch" },
+          { "time": "07:00", "title": "Early" }
+        ]
+      },
+      "text": "Morning briefing\n\nMy day\n12:00 am: Night\n7:00 am: Early\n9:00 am: First\n9:00 am: Second\n12:00 pm: Lunch\n"
+    },
+    {
+      "id": "cap-at-five",
+      "input": { "include": { "reminders": true }, "reminders": ["A", "B", "C", "D", "E", "F", "G"] },
+      "text": "Morning briefing\n\nMy reminders\n- A\n- B\n- C\n- D\n- E\n\nOnly the first 5 reminders are used. 2 left out.\n"
+    },
+    {
+      "id": "no-title",
+      "input": { "include": { "day": true }, "day": [{ "time": "8:00 am", "title": "" }] },
+      "text": "Morning briefing\n\nMy day\n8:00 am: No title\n"
+    }
+  ],
+  "errors": [
+    { "id": "none-picked", "input": { "include": {}, "date": "2026-11-05" }, "fields": ["include"] },
+    { "id": "all-false", "input": { "include": { "weather": false, "news": false, "day": false, "reminders": false } }, "fields": ["include"] },
+    { "id": "bad-date", "input": { "include": { "day": true }, "date": "2026-02-29" }, "fields": ["date"] },
+    { "id": "bad-date-and-none", "input": { "include": {}, "date": "soon" }, "fields": ["include", "date"] },
+    { "id": "not-an-object", "input": "hello", "fields": ["include"] }
+  ]
+}

@@ -1,0 +1,80 @@
+.nt-upload {
+  container-type: inline-size;
+  font-family: var(--nt-font-text);
+  color: var(--nt-text);
+  max-width: var(--nt-measure);
+}
+.nt-upload-zone {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--nt-space-2);
+  padding: var(--nt-space-4);
+  border: 2px dashed var(--nt-line);
+  border-radius: var(--nt-radius);
+  background: var(--nt-paper);
+}
+.nt-upload-label {
+  font-family: var(--nt-font-display);
+  color: var(--nt-ink);
+  font-size: 1.25rem;
+}
+.nt-upload-input {
+  min-height: var(--nt-tap);
+  max-width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+}
+.nt-upload-hint {
+  margin: 0;
+  color: var(--nt-muted);
+}
+.nt-upload-message {
+  margin-top: var(--nt-space-3);
+  padding: var(--nt-space-3);
+  border: 1px solid var(--nt-line);
+  border-radius: var(--nt-radius);
+  background: var(--nt-white);
+}
+.nt-upload-message p {
+  margin: 0 0 var(--nt-space-2);
+}
+.nt-upload-gave {
+  font-weight: 700;
+  color: var(--nt-ink);
+}
+.nt-upload-password {
+  display: grid;
+  gap: var(--nt-space-2);
+  margin-bottom: var(--nt-space-2);
+}
+.nt-upload-password input {
+  min-height: var(--nt-tap);
+  box-sizing: border-box;
+  padding: var(--nt-space-2);
+  border: 2px solid var(--nt-line);
+  border-radius: var(--nt-radius);
+  font: inherit;
+}
+.nt-upload button {
+  min-height: var(--nt-tap);
+  padding: var(--nt-space-2) var(--nt-space-4);
+  border: 2px solid var(--nt-tdeep);
+  border-radius: var(--nt-radius);
+  background: var(--nt-tdeep);
+  color: var(--nt-white);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.nt-upload a {
+  display: inline-block;
+  min-height: var(--nt-tap);
+  line-height: var(--nt-tap);
+  color: var(--nt-ink);
+}
+.nt-upload button:focus-visible,
+.nt-upload a:focus-visible,
+.nt-upload input:focus-visible {
+  outline: 3px solid var(--nt-tomato);
+  outline-offset: 2px;
+}

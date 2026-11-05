@@ -1,0 +1,9 @@
+.nt-calm { container-type: inline-size; display: flex; gap: var(--nt-space-3); padding: var(--nt-space-4); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); color: var(--nt-text); font-family: var(--nt-font-text); max-width: var(--nt-measure); }
+.nt-calm-done { border-color: var(--nt-mint); }
+.nt-calm-icon { flex: none; width: 1.5rem; height: 1.5rem; }
+.nt-calm-title { margin: 0; font-weight: 700; color: var(--nt-ink); }
+.nt-calm-problem .nt-calm-title { color: var(--nt-tdeep); }
+.nt-calm-body { margin-top: var(--nt-space-2); }
+.nt-calm-actions { display: flex; flex-wrap: wrap; gap: var(--nt-space-3); margin-top: var(--nt-space-3); }
+.nt-calm button { min-height: var(--nt-tap); padding: 0 var(--nt-space-4); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-paper); color: var(--nt-ink); font: inherit; cursor: pointer; }
+.nt-calm button:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }

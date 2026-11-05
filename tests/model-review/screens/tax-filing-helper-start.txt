@@ -1,0 +1,24 @@
+Screen: tax-filing-helper, start state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
+
+[heading 1] Tax Filing Helper
+Practice only. Use the made-up answers shown. Nothing is filed.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+Step 1 of 4: Pick your way
+Practice copying answers into a free tax site.
+[label] Guided Free File Easier. Simple questions, one at a time. Free if you made $95,000 or less last season.
+[choice] Guided Free File Easier. Simple questions, one at a time. Free if you made $95,000 or less last season. (not chosen)
+[label] Free File Fillable Forms More work. You type into online copies of IRS forms. Free at any income.
+[choice] Free File Fillable Forms More work. You type into online copies of IRS forms. Free at any income. (not chosen)
+Free File opens again in January 2027. This practice works now.
+Always start at IRS.gov/freefile, not a company's own site.
+Source: IRS Free File page
+[link, plain] Source: IRS Free File page
+[closed section, tap to open] Who does what
+
+[MAIN BUTTON, filled dark orange] Next
+This is a practice with made-up answers. It is not tax advice.
+Back to home
+[link, plain] Back to home

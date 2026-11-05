@@ -1,0 +1,13 @@
+{
+  "claims": [
+    { "id": "months-to-goal-exact", "text": "The number of months to reach the goal matches a month-by-month count, exact to the cent." },
+    { "id": "landing-month-exact", "text": "The month and year the goal lands follow from the start month you typed." },
+    { "id": "monthly-needed-exact", "text": "The monthly amount needed for a chosen month is the smallest whole-cent amount that reaches the goal by then." },
+    { "id": "interest-half-up-exact", "text": "Yearly interest is added monthly and rounded half up to the cent each month." },
+    { "id": "already-reached-and-zero-savings", "text": "A goal already reached, and a plan that saves nothing, each get a plain true answer." },
+    { "id": "cap-1200-months", "text": "A goal that takes more than 1,200 months says so instead of guessing." },
+    { "id": "year-table-adds-up", "text": "The by-year table adds up: deposits plus interest plus what you had saved equals the balance." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the field." }
+  ]
+}

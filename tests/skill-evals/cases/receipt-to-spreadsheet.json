@@ -1,0 +1,6 @@
+{
+  "skill": "receipt-to-spreadsheet",
+  "task": "I have a pile of receipts from January. Can you put them in a spreadsheet and tell me the total?",
+  "files": ["examples/sample-receipts.csv"],
+  "expect": ["total is 15.83", "asks before saving", "flags line 6 as check this"]
+}

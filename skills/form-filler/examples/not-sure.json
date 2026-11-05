@@ -1,0 +1,7 @@
+{
+  "format": "nt-form-filler",
+  "version": 1,
+  "answers": { "filing": "yes", "income": "unsure", "fillable": "", "open": "unsure" },
+  "info": { "firstName": "Lee" },
+  "papers": []
+}

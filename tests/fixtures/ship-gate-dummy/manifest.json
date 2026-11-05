@@ -1,0 +1,15 @@
+{
+  "schema": "nt-tools/1",
+  "version": "0.0.0",
+  "tools": [
+    {
+      "id": "ship-gate-dummy",
+      "name": "Ship Gate Dummy",
+      "status": "shipped",
+      "takesFiles": true,
+      "dir": "tests/fixtures/ship-gate-dummy",
+      "routes": ["/tools/ship-gate-dummy"],
+      "claimsPath": "tests/fixtures/ship-gate-dummy/page-claims.json"
+    }
+  ]
+}

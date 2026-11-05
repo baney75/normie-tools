@@ -1,0 +1,52 @@
+// Every person-facing word on the Monthly Budget page. Plain words, grade 6.
+// It counts what you type. It never gives advice. Page.test.tsx checks this file.
+export const COPY = {
+  title: "Monthly Budget",
+  intro: "Type what you get and what you spend each month. Your answer shows below.",
+  waiting: "Your answer shows here",
+  income: { heading: "Money in each month", nameLabel: "Name of income item", add: "Add an income item", fallback: "Income item" },
+  spending: { heading: "Money out each month", nameLabel: "Name of spending item", add: "Add a spending item", fallback: "Spending item" },
+  amount: { suffix: "per month" },
+  remove: "Remove",
+  removeHint: "Remove asks first and shows which line goes. Put it back undoes it.",
+  undo: "Put it back",
+  undoHelp: "You took out an item. This puts it back.",
+  full: "This list is full. Remove an item to add another.",
+  fixFirst: "Fix the notes above to see your totals.",
+  resume: {
+    title: "Use your last numbers?",
+    body: "You typed numbers here before. They were saved on your phone or computer.",
+    yes: "Use them",
+    no: "Start fresh",
+  },
+  result: {
+    leftLabel: "Left over",
+    leftPlus: "This is money in that is not spent.",
+    leftZero: "All the money in is spent.",
+    leftMinus: "More goes out than comes in. The gap is",
+    totalIncome: "Total income",
+    totalSpending: "Total spending",
+  },
+  where: {
+    heading: "Where it goes",
+    ofIncome: "of income",
+    ofSpending: "of spending",
+    noIncome: "Add income to see percents of income. These show each line as part of your spending.",
+  },
+  more: {
+    summary: "Show the numbers in a table",
+    tableHeading: "Each spending item",
+    line: "Item",
+    amount: "Amount",
+    ofIncome: "Percent of income",
+    ofSpending: "Percent of spending",
+    spentPercent: "Percent of income spent",
+  },
+  save: {
+    title: "Keep your answer if you want",
+    fileTitle: "Your monthly budget",
+    fileName: "monthly-budget.txt",
+    preview: "Your answer above, on paper or saved on this phone or computer.",
+  },
+  back: "Back to home",
+} as const;

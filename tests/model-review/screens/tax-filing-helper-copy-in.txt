@@ -1,0 +1,31 @@
+Screen: tax-filing-helper, copy-in state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+[heading 1] Tax Filing Helper
+Practice only. Use the made-up answers shown. Nothing is filed.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+Step 3 of 4: Copy the answers in
+[heading 2] Practice screen 1 of 3: About you
+The boxes start empty. Type the sample answers shown. They are made up.
+Type this
+Sample
+[label] First name
+[box] First name = "Sample"
+Type this
+Person
+[label] Last name
+[box] Last name = "Person"
+Type this
+sample.person@example.com
+[label] Email
+[box] Email = "sample.person@example.com"
+Back goes to the screen before. Your typing stays.
+[plain button, outline only] Back
+[MAIN BUTTON, filled dark orange] Next screen
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+This is a practice with made-up answers. It is not tax advice.
+Back to home
+[link, plain] Back to home

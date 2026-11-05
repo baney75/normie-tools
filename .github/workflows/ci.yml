@@ -142,28 +142,111 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm run test:unit
 
+  tool-tests:
+    name: tool accuracy and reliability tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run test:tools
+
+  site-unit:
+    name: site unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run test:site
+
+  site-build:
+    name: site build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+  e2e:
+    name: e2e (Chromium, WebKit, Firefox)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Install browsers and their system libraries
+        run: npx playwright install --with-deps chromium webkit firefox
+        working-directory: site
+      - run: npm run test:e2e
+
+  ship-gate:
+    name: ship gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:ship-gate
+      - run: node --test scripts/tests/ship-gate.test.mjs
+      - run: npm run check:evidence
+      - run: node --test scripts/tests/evidence.test.mjs
+
+  skills:
+    name: skills tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm run test:skills
+
+  # The two jobs below were placeholders. They now run real commands.
+  accessibility:
+    name: accessibility (axe, reduced motion, progress, autosave)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+        working-directory: site
+      - run: npm run test:a11y -- --project=chromium
+
+  upload-error-contract:
+    name: upload-error message contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+        working-directory: site
+      - run: npm run test:upload-contract -- --project=chromium
+
   # ---------------------------------------------------------------------------
   # Placeholder jobs. They activate when code exists: remove `if: false`, replace
   # the echo step with the real command, and add the job to branch protection.
   # ---------------------------------------------------------------------------
-
-  placeholder-accessibility:
-    name: placeholder accessibility
-    # Activates when the site or app exists. Will run axe at phone size, check
-    # reduced motion, no layout shift, a progress indicator, and autosave and resume.
-    if: false
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "SKIP placeholder-accessibility (no site or app code yet)"
-
-  placeholder-upload-error-contract:
-    name: placeholder upload-error message contract
-    # Activates when the first tool accepts files. Will check that a wrong file
-    # type message names the type given, the type needed, and how to get it.
-    if: false
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "SKIP placeholder-upload-error-contract (no tool code yet)"
 
   placeholder-golden-accuracy:
     name: placeholder golden accuracy

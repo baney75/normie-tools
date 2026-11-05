@@ -1,0 +1,13 @@
+{
+  "claims": [
+    { "id": "times-read-plainly", "text": "Times like 7:30 am, 7am, 13:05 and noon are read correctly, with 12 am as midnight and 12 pm as noon." },
+    { "id": "day-in-time-order", "text": "The things on a person's day are listed in time order, and items with the same time stay in the order typed." },
+    { "id": "unclear-time-listed", "text": "An item whose time is not clear is never guessed. It is listed under Time not clear." },
+    { "id": "counts-capped", "text": "At most 5 things on the day and 5 reminders are used, and the page says when some are left out." },
+    { "id": "example-always-labelled", "text": "Weather and news content is made up, always marked Example, and never claims to be today's weather or news." },
+    { "id": "plain-text-exact", "text": "The saved plain text holds only the parts the person ticked, in a fixed order, with the date in plain words." },
+    { "id": "offline-statement", "text": "When weather or news is ticked, the briefing says live weather and news are not on this page yet." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never crashes, never shows NaN or undefined, and bad entries get plain words." },
+    { "id": "plain-error-words", "text": "A bad date or no parts picked gets a calm message in plain words." }
+  ]
+}

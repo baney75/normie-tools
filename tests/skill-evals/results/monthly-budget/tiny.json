@@ -1,0 +1,50 @@
+{
+  "skill": "monthly-budget",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 10,
+      "total": 10,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "l1-starter",
+      "level": 1,
+      "task": "I make $3,000 a month. I pay $1,200 rent, $450 food, $300 bills, $250 transport and $100 other. Where does it go?",
+      "reply": "Total income: $3,000.00\nTotal spending: $2,300.00\nLeft over: $700.00. This is money in that is not spent.\nPercent of income spent: 77%\nIncome, Pay: $3,000.00\nSpending, Rent or mortgage: $1,200.00, 40% of income, 52% of spending\nSpending, Food: $450.00, 15% of income, 20% of spending\nSpending, Bills: $300.00, 10% of income, 13% of spending\nSpending, Transport: $250.00, 9% of income, 11% of spending\nSpending, Other: $100.00, 3% of income, 4% of spending\nPercents are whole numbers. They are rounded and split so the percents of spending add up to 100.\nThis adds up the numbers you typed. It does not tell you what to do.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    },
+    {
+      "id": "l1-short",
+      "level": 1,
+      "task": "I bring in $1,000 pay and $250.50 from a side job. Rent is $1,100 and food is $400.25. How does my month look?",
+      "reply": "Your month looks like this:\n\n- Total income: $1,250.50\n- Total spending: $1,500.25\n- More goes out than comes in. The gap is $249.75.\n- Percent of income spent: 120%\n\nIncome, Pay: $1,000.00\nIncome, Side job: $250.50\nSpending, Rent: $1,100.00, 88% of income, 73% of spending\nSpending, Food: $400.25, 32% of income, 27% of spending\nPercents are whole numbers. They are rounded and split so the percents of spending add up to 100.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    }
+  ]
+}

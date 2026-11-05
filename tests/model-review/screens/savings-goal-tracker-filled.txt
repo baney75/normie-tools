@@ -1,0 +1,54 @@
+Screen: savings-goal-tracker, filled state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+[heading 1] Savings Goal Tracker
+Type your goal and what you have saved. Your answer shows below.
+There is no Send button on this page.
+[label] How long will it take?
+[choice] How long will it take? (selected)
+[label] How much to save each month?
+[choice] How much to save each month? 
+How long: you give the monthly amount. You get the time.
+How much: you give the goal month. You get the monthly amount.
+[label] Goal amount
+The amount you want to have saved. For example: 5000.
+[box] Goal amount = "5000"
+[label] Already saved (optional)
+What you have now. Leave it empty if none. For example: 500.
+[box] Already saved (optional) = ""
+[label] Amount you save each month
+What you add every month. For example: 250.
+[box] Amount you save each month = "240"
+[label] Yearly interest rate (optional)
+Find it on your bank statement. Type just the number, like 4.5. Leave it empty if none or if you do not know.
+[box] Yearly interest rate (optional) = ""
+[label] Start month (optional)
+Add it to see the month you reach your goal. Like 2026-12. Year, a dash, then month.
+[box] Start month (optional) = ""
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Months to your goal
+21 months
+Add a start month to see the month and year.
+Interest is $0.00 because the yearly rate is empty or 0.
+That is
+1 year 9 months
+Total you add
+$5,040.00
+Interest earned
+$0.00
+Saved at the end
+$5,040.00
+That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
+[MAIN LINK, filled dark orange] Done. Back to home.
+[plain button, outline only] Change a number
+[closed section, tap to open] Show year by year
+
+[heading 2] Keep your answer if you want
+Your answer above, on paper or saved on this phone or computer.
+[plain button, outline only] Print
+[plain button, outline only] Save a copy
+Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
+
+Your bank statement is the final word. This page helps you understand the numbers you typed.

@@ -1,0 +1,1159 @@
+{
+ "note": "Hashes from Python hashlib; difference hashes and distances from a separate Python script (bit = left pixel brighter than right, row by row, top left first, 16 hex letters). Groups worked out by hand: members sorted by size (big first), then name by letter code, then id; group id is g- plus the first listed member.",
+ "sha256": [
+  {
+   "text": "abc",
+   "hex": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+  },
+  {
+   "text": "",
+   "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "text": "made-up photo A bytes",
+   "hex": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+  },
+  {
+   "text": "made-up photo B bytes",
+   "hex": "97e9d57157e35c0c3890d4cc75c15cbcb23af7a5cbc0196ee4ea0bff35a1a560"
+  }
+ ],
+ "sha256Bytes": [
+  {
+   "bytes": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "hex": "054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8"
+  }
+ ],
+ "gray": [
+  {
+   "name": "down",
+   "pixels": [
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31
+   ],
+   "hash": "ffffffffffffffff"
+  },
+  {
+   "name": "up",
+   "pixels": [
+    0,
+    28,
+    56,
+    84,
+    112,
+    140,
+    168,
+    196,
+    224,
+    0,
+    28,
+    56,
+    84,
+    112,
+    140,
+    168,
+    196,
+    224,
+    0,
+    28,
+    56,
+    84,
+    112,
+    140,
+    168,
+    196,
+    224,
+    0,
+    28,
+    56,
+    84,
+    112,
+    140,
+    168,
+    196,
+    224,
+    0,
+    28,
+    56,
+    84,
+    112,
+    140,
+    168,
+    196,
+    224,
+    0,
+    28,
+    56,
+    84,
+    112,
+    140,
+    168,
+    196,
+    224,
+    0,
+    28,
+    56,
+    84,
+    112,
+    140,
+    168,
+    196,
+    224,
+    0,
+    28,
+    56,
+    84,
+    112,
+    140,
+    168,
+    196,
+    224
+   ],
+   "hash": "0000000000000000"
+  },
+  {
+   "name": "flat",
+   "pixels": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+   ],
+   "hash": "0000000000000000"
+  },
+  {
+   "name": "alt",
+   "pixels": [
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200,
+    50,
+    200
+   ],
+   "hash": "aaaaaaaaaaaaaaaa"
+  },
+  {
+   "name": "near",
+   "pixels": [
+    227,
+    255,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31
+   ],
+   "hash": "7fffffffffffffff"
+  },
+  {
+   "name": "far",
+   "pixels": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    255,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    255,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    255,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    255,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31,
+    255,
+    227,
+    199,
+    171,
+    143,
+    115,
+    87,
+    59,
+    31
+   ],
+   "hash": "00000000ffffffff"
+  }
+ ],
+ "hamming": [
+  {
+   "a": "ffffffffffffffff",
+   "b": "0000000000000000",
+   "distance": 64,
+   "why": "down and up"
+  },
+  {
+   "a": "ffffffffffffffff",
+   "b": "0000000000000000",
+   "distance": 64,
+   "why": "down and flat"
+  },
+  {
+   "a": "ffffffffffffffff",
+   "b": "7fffffffffffffff",
+   "distance": 1,
+   "why": "down and near"
+  },
+  {
+   "a": "ffffffffffffffff",
+   "b": "00000000ffffffff",
+   "distance": 32,
+   "why": "down and far"
+  },
+  {
+   "a": "0000000000000000",
+   "b": "0000000000000000",
+   "distance": 0,
+   "why": "flat and up"
+  },
+  {
+   "a": "0000000000000000",
+   "b": "7fffffffffffffff",
+   "distance": 63,
+   "why": "flat and near"
+  },
+  {
+   "a": "aaaaaaaaaaaaaaaa",
+   "b": "ffffffffffffffff",
+   "distance": 32,
+   "why": "alt and down"
+  },
+  {
+   "a": "aaaaaaaaaaaaaaaa",
+   "b": "0000000000000000",
+   "distance": 32,
+   "why": "alt and up"
+  },
+  {
+   "a": "aaaaaaaaaaaaaaaa",
+   "b": "0000000000000000",
+   "distance": 32,
+   "why": "alt and flat"
+  },
+  {
+   "a": "aaaaaaaaaaaaaaaa",
+   "b": "7fffffffffffffff",
+   "distance": 33,
+   "why": "alt and near"
+  },
+  {
+   "a": "aaaaaaaaaaaaaaaa",
+   "b": "00000000ffffffff",
+   "distance": 32,
+   "why": "alt and far"
+  },
+  {
+   "a": "7fffffffffffffff",
+   "b": "0000000000000000",
+   "distance": 63,
+   "why": "near and up"
+  },
+  {
+   "a": "00000000ffffffff",
+   "b": "0000000000000000",
+   "distance": 32,
+   "why": "far and up"
+  },
+  {
+   "a": "00000000ffffffff",
+   "b": "0000000000000000",
+   "distance": 32,
+   "why": "far and flat"
+  },
+  {
+   "a": "00000000ffffffff",
+   "b": "7fffffffffffffff",
+   "distance": 31,
+   "why": "far and near"
+  },
+  {
+   "a": "0000000000000000",
+   "b": "000000000000001f",
+   "distance": 5,
+   "why": "5 bits set: 0x1f"
+  },
+  {
+   "a": "0000000000000000",
+   "b": "000000000000003f",
+   "distance": 6,
+   "why": "6 bits set: 0x3f"
+  },
+  {
+   "a": "ffffffffffffffff",
+   "b": "0000000000000000",
+   "distance": 64,
+   "why": "all bits differ"
+  }
+ ],
+ "formatBytes": [
+  [
+   0,
+   "0 bytes"
+  ],
+  [
+   1,
+   "1 byte"
+  ],
+  [
+   999,
+   "999 bytes"
+  ],
+  [
+   1000,
+   "1.0 KB"
+  ],
+  [
+   1250,
+   "1.3 KB"
+  ],
+  [
+   999999,
+   "1.0 MB"
+  ],
+  [
+   1500000,
+   "1.5 MB"
+  ],
+  [
+   25000000,
+   "25.0 MB"
+  ],
+  [
+   2100000000,
+   "2.1 GB"
+  ]
+ ],
+ "exactCases": [
+  {
+   "id": "exact-and-unique-and-empty",
+   "items": [
+    {
+     "id": "a1",
+     "name": "IMG_1.jpg",
+     "size": 3000,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+    },
+    {
+     "id": "a2",
+     "name": "IMG_1 copy.jpg",
+     "size": 3000,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+    },
+    {
+     "id": "b1",
+     "name": "b.png",
+     "size": 5000,
+     "sha256": "97e9d57157e35c0c3890d4cc75c15cbcb23af7a5cbc0196ee4ea0bff35a1a560"
+    },
+    {
+     "id": "c1",
+     "name": "c.png",
+     "size": 100,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "c2",
+     "name": "a.png",
+     "size": 100,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "d1",
+     "name": "d.jpg",
+     "size": 10,
+     "sha256": "054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8"
+    },
+    {
+     "id": "z1",
+     "name": "empty.jpg",
+     "size": 0,
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+     "id": "z2",
+     "name": "empty2.jpg",
+     "size": 0,
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+   ],
+   "expect": {
+    "groups": [
+     {
+      "id": "g-a1",
+      "kind": "exact",
+      "members": [
+       "a2",
+       "a1"
+      ],
+      "keepId": "a2"
+     },
+     {
+      "id": "g-c1",
+      "kind": "exact",
+      "members": [
+       "c2",
+       "c1"
+      ],
+      "keepId": "c2"
+     }
+    ],
+    "ignored": [
+     {
+      "id": "z1",
+      "reason": "empty"
+     },
+     {
+      "id": "z2",
+      "reason": "empty"
+     }
+    ],
+    "counts": {
+     "photos": 6,
+     "exactGroups": 2,
+     "lookAlikeGroups": 0,
+     "extras": 2
+    }
+   },
+   "note": "a1 and a2 share bytes; names tie on size so 'IMG_1 copy.jpg' (space sorts before dot) comes first. c1 and c2 tie on size, 'a.png' first. b1 and d1 stand alone. The two zero-size files are left out, not grouped."
+  },
+  {
+   "id": "biggest-kept",
+   "items": [
+    {
+     "id": "x1",
+     "name": "small.jpg",
+     "size": 2000,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "x2",
+     "name": "large.jpg",
+     "size": 9000,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "x3",
+     "name": "mid.jpg",
+     "size": 5000,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    }
+   ],
+   "expect": {
+    "groups": [
+     {
+      "id": "g-x1",
+      "kind": "exact",
+      "members": [
+       "x2",
+       "x3",
+       "x1"
+      ],
+      "keepId": "x2"
+     }
+    ],
+    "ignored": [],
+    "counts": {
+     "photos": 3,
+     "exactGroups": 1,
+     "lookAlikeGroups": 0,
+     "extras": 2
+    }
+   },
+   "note": "One exact group. Biggest size listed first and kept. (Sizes differ here on purpose, a messy case.)"
+  },
+  {
+   "id": "none",
+   "items": [
+    {
+     "id": "n1",
+     "name": "one.jpg",
+     "size": 10,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "n2",
+     "name": "two.jpg",
+     "size": 20,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+    }
+   ],
+   "expect": {
+    "groups": [],
+    "ignored": [],
+    "counts": {
+     "photos": 2,
+     "exactGroups": 0,
+     "lookAlikeGroups": 0,
+     "extras": 0
+    }
+   },
+   "note": "Different bytes: no group."
+  },
+  {
+   "id": "no-photos",
+   "items": [],
+   "expect": {
+    "groups": [],
+    "ignored": [],
+    "counts": {
+     "photos": 0,
+     "exactGroups": 0,
+     "lookAlikeGroups": 0,
+     "extras": 0
+    }
+   },
+   "note": "Nothing picked."
+  }
+ ],
+ "lookCases": [
+  {
+   "id": "near-joins-exact-pair",
+   "items": [
+    {
+     "id": "p1",
+     "name": "a.jpg",
+     "size": 3000,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6",
+     "dhash": "ffffffffffffffff"
+    },
+    {
+     "id": "p2",
+     "name": "b.jpg",
+     "size": 5000,
+     "sha256": "97e9d57157e35c0c3890d4cc75c15cbcb23af7a5cbc0196ee4ea0bff35a1a560",
+     "dhash": "7fffffffffffffff"
+    },
+    {
+     "id": "p3",
+     "name": "c.jpg",
+     "size": 100,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+     "dhash": "00000000ffffffff"
+    },
+    {
+     "id": "p4",
+     "name": "d.jpg",
+     "size": 10,
+     "sha256": "054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+     "dhash": "aaaaaaaaaaaaaaaa"
+    },
+    {
+     "id": "p5",
+     "name": "a copy.jpg",
+     "size": 3000,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6",
+     "dhash": "ffffffffffffffff"
+    }
+   ],
+   "expect": {
+    "groups": [
+     {
+      "id": "g-p1",
+      "kind": "lookalike",
+      "members": [
+       "p2",
+       "p5",
+       "p1"
+      ],
+      "keepId": "p2"
+     }
+    ],
+    "ignored": [],
+    "counts": {
+     "photos": 5,
+     "exactGroups": 0,
+     "lookAlikeGroups": 1,
+     "extras": 2
+    }
+   },
+   "note": "p1 and p5 are exact; p2 differs from them by 1 bit, so all three are one look-alike group. far and alt are 31 or more bits away from every other photo."
+  },
+  {
+   "id": "two-exact-with-hashes",
+   "items": [
+    {
+     "id": "q1",
+     "name": "q1.jpg",
+     "size": 100,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+     "dhash": "ffffffffffffffff"
+    },
+    {
+     "id": "q2",
+     "name": "q2.jpg",
+     "size": 100,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+     "dhash": "ffffffffffffffff"
+    },
+    {
+     "id": "q3",
+     "name": "q3.jpg",
+     "size": 70,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6",
+     "dhash": "aaaaaaaaaaaaaaaa"
+    }
+   ],
+   "expect": {
+    "groups": [
+     {
+      "id": "g-q1",
+      "kind": "exact",
+      "members": [
+       "q1",
+       "q2"
+      ],
+      "keepId": "q1"
+     }
+    ],
+    "ignored": [],
+    "counts": {
+     "photos": 3,
+     "exactGroups": 1,
+     "lookAlikeGroups": 0,
+     "extras": 1
+    }
+   },
+   "note": "Same bytes stay an exact group even when the hashes agree."
+  },
+  {
+   "id": "distance-5-joins",
+   "items": [
+    {
+     "id": "r1",
+     "name": "r1.jpg",
+     "size": 10,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+     "dhash": "0000000000000000"
+    },
+    {
+     "id": "r2",
+     "name": "r2.jpg",
+     "size": 10,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6",
+     "dhash": "000000000000001f"
+    }
+   ],
+   "expect": {
+    "groups": [
+     {
+      "id": "g-r1",
+      "kind": "lookalike",
+      "members": [
+       "r1",
+       "r2"
+      ],
+      "keepId": "r1"
+     }
+    ],
+    "ignored": [],
+    "counts": {
+     "photos": 2,
+     "exactGroups": 0,
+     "lookAlikeGroups": 1,
+     "extras": 1
+    }
+   },
+   "note": "Distance exactly 5 is inside the limit."
+  },
+  {
+   "id": "distance-6-stays-apart",
+   "items": [
+    {
+     "id": "s1",
+     "name": "s1.jpg",
+     "size": 10,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+     "dhash": "0000000000000000"
+    },
+    {
+     "id": "s2",
+     "name": "s2.jpg",
+     "size": 10,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6",
+     "dhash": "000000000000003f"
+    }
+   ],
+   "expect": {
+    "groups": [],
+    "ignored": [],
+    "counts": {
+     "photos": 2,
+     "exactGroups": 0,
+     "lookAlikeGroups": 0,
+     "extras": 0
+    }
+   },
+   "note": "Distance 6 is outside the limit."
+  }
+ ],
+ "planCases": [
+  {
+   "id": "default-keep",
+   "groups": [
+    {
+     "id": "g-a1",
+     "kind": "exact",
+     "members": [
+      "a2",
+      "a1"
+     ],
+     "keepId": "a2"
+    },
+    {
+     "id": "g-c1",
+     "kind": "lookalike",
+     "members": [
+      "c2",
+      "c1",
+      "c3"
+     ],
+     "keepId": "c2"
+    }
+   ],
+   "photos": [
+    {
+     "id": "a1",
+     "name": "IMG_1.jpg",
+     "size": 3000,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+    },
+    {
+     "id": "a2",
+     "name": "IMG_1 copy.jpg",
+     "size": 3000,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+    },
+    {
+     "id": "c1",
+     "name": "c1.png",
+     "size": 1000,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "c2",
+     "name": "c2.png",
+     "size": 4000,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "c3",
+     "name": "c3.png",
+     "size": 500,
+     "sha256": "97e9d57157e35c0c3890d4cc75c15cbcb23af7a5cbc0196ee4ea0bff35a1a560"
+    }
+   ],
+   "choices": {},
+   "expect": {
+    "names": [
+     "IMG_1.jpg",
+     "c1.png",
+     "c3.png"
+    ],
+    "count": 3,
+    "totalBytes": 4500
+   },
+   "note": "3000 + 1000 + 500 = 4500"
+  },
+  {
+   "id": "keep-changed-and-put-back",
+   "groups": [
+    {
+     "id": "g-a1",
+     "kind": "exact",
+     "members": [
+      "a2",
+      "a1"
+     ],
+     "keepId": "a2"
+    },
+    {
+     "id": "g-c1",
+     "kind": "lookalike",
+     "members": [
+      "c2",
+      "c1",
+      "c3"
+     ],
+     "keepId": "c2"
+    }
+   ],
+   "photos": [
+    {
+     "id": "a1",
+     "name": "IMG_1.jpg",
+     "size": 3000,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+    },
+    {
+     "id": "a2",
+     "name": "IMG_1 copy.jpg",
+     "size": 3000,
+     "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+    },
+    {
+     "id": "c1",
+     "name": "c1.png",
+     "size": 1000,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "c2",
+     "name": "c2.png",
+     "size": 4000,
+     "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+     "id": "c3",
+     "name": "c3.png",
+     "size": 500,
+     "sha256": "97e9d57157e35c0c3890d4cc75c15cbcb23af7a5cbc0196ee4ea0bff35a1a560"
+    }
+   ],
+   "choices": {
+    "keep": {
+     "g-c1": "c3"
+    },
+    "putBack": [
+     "g-a1"
+    ]
+   },
+   "expect": {
+    "names": [
+     "c2.png",
+     "c1.png"
+    ],
+    "count": 2,
+    "totalBytes": 5000
+   },
+   "note": "Group a is put back so it marks nothing. In group c the person keeps c3, so c2 (4000) and c1 (1000) are marked: 5000."
+  }
+ ],
+ "caps": {
+  "maxPhotos": 300,
+  "maxBytes": 25000000
+ }
+}

@@ -1,0 +1,380 @@
+{
+  "tool": "savings-goal-tracker",
+  "screen": ",  at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
+  "firstTimeUser": {
+    "model": "sonnet",
+    "score": 4,
+    "runs": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to read my answer (21 months to reach my goal) and then tap the orange button to finish and go home.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Interest earned\" and \"Yearly interest rate\" (I only half know what these mean here)\n- \"Start month\" and the \"2026-12\" format\n- \"Show year by year\"\n- \"Saved at the end\" (the end of what?)\n- \"Save a copy\" (where does it go?)\n- \"the file\" (what file?)\n- \"Start over asks first, and you can undo it right after\" (undo what?)\n- \"There is no Send button on this page.\" (odd to say, because I wasn't looking for one)\n- \"How long: you give the monthly amount. You get the time. / How much: you give the goal month…\" (confusing; \"goal month\" isn't a thing I see)\n- \"Print opens a preview\" and \"Close the print box\"\n- \"Total you add\"\n- \"MAIN LINK\"\n\n4. What made me worry:\n- \"Save a copy\" might put a file on my phone that I can't find or can't remove.\n- \"Start over\" might wipe my numbers. It does say it asks first.\n- \"Done. Back to home.\" might throw away my answer. Then again, \"Your numbers stay\" helps.\n- The note about my bank statement being the final word makes me wonder if this answer is wrong.\n- The interest box says to find the rate on my bank statement. I don't want to type bank details, though it only asks for a number.\n- Nothing mentions money being charged, but I'm not sure that's true.\n- The \"Send\" line makes me wonder whether something gets sent somewhere.\n\n5. What I would skip:\n- The two lines under the two choices (\"How long: you give… How much: you give…\"), because they confuse me.\n- \"Show year by year\"\n- The whole \"Keep your answer if you want\" section (Print and Save a copy), unless I want paper.\n- The \"Interest is $0.00 because…\" line, since I left the rate empty.\n- \"There is no Send button on this page.\"\n\n6. Score: 4. I'm fairly sure the orange button finishes things. I'm a little unsure whether \"Done. Back to home.\" will lose my answer.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Interest earned\", \"Yearly interest rate\", \"Start month / 2026-12 format\", \"Show year by year\", \"Saved at the end\", \"Save a copy\", \"the file\", \"Start over ... undo\", \"There is no Send button\", \"goal month\", \"Print opens a preview\", \"Total you add\", \"MAIN LINK\"], \"worries\": [\"Save a copy may leave a file I can't find or delete\", \"Start over may erase my numbers\", \"Done. Back to home may lose my answer\", \"Bank statement is the final word, so is the answer wrong\", \"Typing bank information\", \"Unclear whether anything costs money or gets sent\"], \"skippable\": [\"The explanation lines under the two choices\", \"Show year by year\", \"Keep your answer if you want (Print, Save a copy)\", \"Interest is $0.00 because... line\", \"There is no Send button on this page\"], \"score\": 4}"
+  },
+  "designRubric": [
+    {
+      "model": "haiku",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    }
+  ],
+  "otherScreens": [
+    {
+      "screen": "empty",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 3,
+        "runs": [
+          4,
+          3,
+          3,
+          3,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to pick what I'm working out, type in my savings numbers, and then press a button to see how many months it will take.\n\n2. \"Show my answer\". The first box already has the cursor, so I'd probably type my goal amount first. If I didn't want to type, that button is the only one that stands out.\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n- \"Months to your goal / Your answer shows here\". I'm not sure if that's a box I type in or a spot for the result.\n- \"How long will it take?\" and \"How much to save each month?\" appear as labels and as choices. I can't tell whether they're buttons, tabs, or a question.\n- \"(selected)\". I don't know what that means or how to change it.\n- \"Yearly interest rate\". I'm not sure whether that's my bank's rate or something I should look up.\n- \"Start month … Like 2026-12. Year, a dash, then month.\" That feels like computer formatting.\n- \"Save a copy … what goes in the file\". I don't know what file, or where it goes.\n- \"Print opens a preview. Close the print box\". \"Print box\" and \"preview\" are unclear.\n- \"There is no Send button on this page.\" That's odd. I didn't think there would be one, so now I wonder if something is missing.\n- \"How much: you give the goal month. You get the monthly amount.\" I don't know what \"goal month\" means, and the wording is confusing.\n\n4. Worries:\n- The \"Save a copy\" file might put something on my phone. It says I can delete it, but I wouldn't know where to find it.\n- The bank statement and interest rate make me wonder whether I'm supposed to enter private bank details. It doesn't say it's kept private or not sent anywhere.\n- \"There is no Send button\" is a little reassuring, but it also made me wonder what would be sent.\n- I'm not sure I picked the right choice at the top. If I chose wrong, would the answer be wrong?\n- The \"Amount you save each month\" box is there even though the second choice is about working that out. I'd worry about filling in the wrong boxes.\n\n5. I would skip:\n- \"There is no Send button on this page.\"\n- The two \"How long / How much\" explanation lines, until I'd tried it.\n- \"Keep your answer if you want\", with Print and Save a copy, since both are greyed out.\n- \"Start month\" and \"Yearly interest rate\", since they're optional.\n\n6. Score: 3. The orange button and the cursor in the first box make the start fairly clear. The top choices and the \"Amount you save each month\" box leave me unsure.\n\nRESULT: {\"next_tap\": \"Show my answer\", \"confusing_terms\": [\"(selected)\", \"How long / How much choices\", \"Months to your goal / Your answer shows here\", \"Yearly interest rate\", \"Start month 2026-12 format\", \"Save a copy / file\", \"print box / preview\", \"There is no Send button\", \"goal month\"], \"worries\": [\"Save a copy puts a file on my phone and I wouldn't know where\", \"unclear if bank or private details are kept or sent anywhere\", \"might have picked the wrong choice at the top\", \"might fill in the wrong boxes\", \"unclear what a Send button would send\"], \"skippable\": [\"There is no Send button on this page\", \"How long / How much explanation lines\", \"Keep your answer if you want, Print, Save a copy\", \"Start month\", \"Yearly interest rate\"], \"score\": 3}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
+}

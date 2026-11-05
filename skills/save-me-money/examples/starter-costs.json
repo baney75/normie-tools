@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "name": "Phone", "amount": "65", "every": "month" },
+    { "name": "Internet", "amount": "80", "every": "month" },
+    { "name": "Streaming", "amount": "15.99", "every": "month" },
+    { "name": "Insurance", "amount": "1,200", "every": "year" },
+    { "name": "Gym", "amount": "10", "every": "week" },
+    { "name": "Other", "amount": "25", "every": "month" }
+  ]
+}

@@ -1,0 +1,915 @@
+{
+ "note": "Computed with Python Fraction and integer half up division from the plain definitions, independent of calc.mjs. Money is cents. Weekly yearly = cents*52; monthly yearly = cents*12; yearly lines are as typed. Monthly figure of every line = yearly/12 rounded half up. Totals are sums of the line figures. Sort: biggest yearly first, ties keep typed order. Blank and zero lines are left out.",
+ "money": [
+  {
+   "text": "1,000",
+   "cents": 100000
+  },
+  {
+   "text": "$1,000.50",
+   "cents": 100050
+  },
+  {
+   "text": " 12 ",
+   "cents": 1200
+  },
+  {
+   "text": "1e3",
+   "cents": null
+  },
+  {
+   "text": "-5",
+   "cents": -500
+  },
+  {
+   "text": "0",
+   "cents": 0
+  },
+  {
+   "text": "",
+   "cents": null
+  },
+  {
+   "text": "abc",
+   "cents": null
+  },
+  {
+   "text": "😀",
+   "cents": null
+  },
+  {
+   "text": "NaN",
+   "cents": null
+  },
+  {
+   "text": "1000000000000000",
+   "cents": null
+  },
+  {
+   "text": "1.005",
+   "cents": null
+  },
+  {
+   "text": "1.50",
+   "cents": 150
+  },
+  {
+   "text": ".5",
+   "cents": 50
+  },
+  {
+   "text": "12.",
+   "cents": 1200
+  },
+  {
+   "text": "1,00",
+   "cents": null
+  },
+  {
+   "text": "$ 7",
+   "cents": 700
+  },
+  {
+   "text": "1.100",
+   "cents": 110
+  },
+  {
+   "text": "--5",
+   "cents": null
+  },
+  {
+   "text": "5-",
+   "cents": null
+  }
+ ],
+ "plans": [
+  {
+   "id": "plain",
+   "title": "Six usual costs.",
+   "note": "Phone 6500*12=78000 ; Internet 8000*12=96000 ; Streaming 1599*12=19188 ; Insurance 120000 yearly, 120000/12=10000 ; Gym 1000*52=52000, /12=4333.33 -> 4333 ; Other 2500*12=30000.",
+   "input": {
+    "items": [
+     {
+      "name": "Phone",
+      "amount": "65",
+      "every": "month"
+     },
+     {
+      "name": "Internet",
+      "amount": "80",
+      "every": "month"
+     },
+     {
+      "name": "Streaming",
+      "amount": "15.99",
+      "every": "month"
+     },
+     {
+      "name": "Insurance",
+      "amount": "1,200",
+      "every": "year"
+     },
+     {
+      "name": "Gym",
+      "amount": "10",
+      "every": "week"
+     },
+     {
+      "name": "Other",
+      "amount": "25",
+      "every": "month"
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": true,
+    "count": 6,
+    "yearlyCents": 395188,
+    "monthlyCents": 32932,
+    "rows": [
+     {
+      "index": 3,
+      "name": "Insurance",
+      "amountCents": 120000,
+      "every": "year",
+      "yearlyCents": 120000,
+      "monthlyCents": 10000
+     },
+     {
+      "index": 1,
+      "name": "Internet",
+      "amountCents": 8000,
+      "every": "month",
+      "yearlyCents": 96000,
+      "monthlyCents": 8000
+     },
+     {
+      "index": 0,
+      "name": "Phone",
+      "amountCents": 6500,
+      "every": "month",
+      "yearlyCents": 78000,
+      "monthlyCents": 6500
+     },
+     {
+      "index": 4,
+      "name": "Gym",
+      "amountCents": 1000,
+      "every": "week",
+      "yearlyCents": 52000,
+      "monthlyCents": 4333
+     },
+     {
+      "index": 5,
+      "name": "Other",
+      "amountCents": 2500,
+      "every": "month",
+      "yearlyCents": 30000,
+      "monthlyCents": 2500
+     },
+     {
+      "index": 2,
+      "name": "Streaming",
+      "amountCents": 1599,
+      "every": "month",
+      "yearlyCents": 19188,
+      "monthlyCents": 1599
+     }
+    ]
+   }
+  },
+  {
+   "id": "weekly-half-up",
+   "title": "Weekly lines use 52 weeks, monthly rounds half up.",
+   "note": "A 7*52=364, 364/12=30.33 -> 30 ; B 150*52=7800, /12=650 ; C 52, 52/12=4.33 -> 4.",
+   "input": {
+    "items": [
+     {
+      "name": "A",
+      "amount": "0.07",
+      "every": "week"
+     },
+     {
+      "name": "B",
+      "amount": "1.50",
+      "every": "week"
+     },
+     {
+      "name": "C",
+      "amount": "0.01",
+      "every": "week"
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": true,
+    "count": 3,
+    "yearlyCents": 8216,
+    "monthlyCents": 684,
+    "rows": [
+     {
+      "index": 1,
+      "name": "B",
+      "amountCents": 150,
+      "every": "week",
+      "yearlyCents": 7800,
+      "monthlyCents": 650
+     },
+     {
+      "index": 0,
+      "name": "A",
+      "amountCents": 7,
+      "every": "week",
+      "yearlyCents": 364,
+      "monthlyCents": 30
+     },
+     {
+      "index": 2,
+      "name": "C",
+      "amountCents": 1,
+      "every": "week",
+      "yearlyCents": 52,
+      "monthlyCents": 4
+     }
+    ]
+   }
+  },
+  {
+   "id": "yearly-half-up",
+   "title": "Yearly lines divide by 12 and round half up.",
+   "note": "A 6/12=0.5 -> 1 ; B 17/12=1.4167 -> 1 ; C 150/12=12.5 -> 13 ; D 5/12=0.4167 -> 0.",
+   "input": {
+    "items": [
+     {
+      "name": "A",
+      "amount": "0.06",
+      "every": "year"
+     },
+     {
+      "name": "B",
+      "amount": "0.17",
+      "every": "year"
+     },
+     {
+      "name": "C",
+      "amount": "1.50",
+      "every": "year"
+     },
+     {
+      "name": "D",
+      "amount": "0.05",
+      "every": "year"
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": true,
+    "count": 4,
+    "yearlyCents": 178,
+    "monthlyCents": 15,
+    "rows": [
+     {
+      "index": 2,
+      "name": "C",
+      "amountCents": 150,
+      "every": "year",
+      "yearlyCents": 150,
+      "monthlyCents": 13
+     },
+     {
+      "index": 1,
+      "name": "B",
+      "amountCents": 17,
+      "every": "year",
+      "yearlyCents": 17,
+      "monthlyCents": 1
+     },
+     {
+      "index": 0,
+      "name": "A",
+      "amountCents": 6,
+      "every": "year",
+      "yearlyCents": 6,
+      "monthlyCents": 1
+     },
+     {
+      "index": 3,
+      "name": "D",
+      "amountCents": 5,
+      "every": "year",
+      "yearlyCents": 5,
+      "monthlyCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "ties-keep-order",
+   "title": "Equal yearly cost keeps the typed order.",
+   "note": "First 1000*12=12000 ; Second 12000 ; Third 12000 ; Big 50000. Big first, then First, Second, Third in typed order.",
+   "input": {
+    "items": [
+     {
+      "name": "First",
+      "amount": "10",
+      "every": "month"
+     },
+     {
+      "name": "Second",
+      "amount": "120",
+      "every": "year"
+     },
+     {
+      "name": "Third",
+      "amount": "120",
+      "every": "year"
+     },
+     {
+      "name": "Big",
+      "amount": "500",
+      "every": "year"
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": true,
+    "count": 4,
+    "yearlyCents": 86000,
+    "monthlyCents": 7167,
+    "rows": [
+     {
+      "index": 3,
+      "name": "Big",
+      "amountCents": 50000,
+      "every": "year",
+      "yearlyCents": 50000,
+      "monthlyCents": 4167
+     },
+     {
+      "index": 0,
+      "name": "First",
+      "amountCents": 1000,
+      "every": "month",
+      "yearlyCents": 12000,
+      "monthlyCents": 1000
+     },
+     {
+      "index": 1,
+      "name": "Second",
+      "amountCents": 12000,
+      "every": "year",
+      "yearlyCents": 12000,
+      "monthlyCents": 1000
+     },
+     {
+      "index": 2,
+      "name": "Third",
+      "amountCents": 12000,
+      "every": "year",
+      "yearlyCents": 12000,
+      "monthlyCents": 1000
+     }
+    ]
+   }
+  },
+  {
+   "id": "sum-of-lines",
+   "title": "The month total adds the month figures of the lines.",
+   "note": "Each: 100/12=8.33 -> 8. Month total is 8+8+8=24 (not 300/12=25). Year total is 300.",
+   "input": {
+    "items": [
+     {
+      "name": "A",
+      "amount": "1",
+      "every": "year"
+     },
+     {
+      "name": "B",
+      "amount": "1",
+      "every": "year"
+     },
+     {
+      "name": "C",
+      "amount": "1",
+      "every": "year"
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": true,
+    "count": 3,
+    "yearlyCents": 300,
+    "monthlyCents": 24,
+    "rows": [
+     {
+      "index": 0,
+      "name": "A",
+      "amountCents": 100,
+      "every": "year",
+      "yearlyCents": 100,
+      "monthlyCents": 8
+     },
+     {
+      "index": 1,
+      "name": "B",
+      "amountCents": 100,
+      "every": "year",
+      "yearlyCents": 100,
+      "monthlyCents": 8
+     },
+     {
+      "index": 2,
+      "name": "C",
+      "amountCents": 100,
+      "every": "year",
+      "yearlyCents": 100,
+      "monthlyCents": 8
+     }
+    ]
+   }
+  },
+  {
+   "id": "blank-and-zero",
+   "title": "Blank and zero lines are left out.",
+   "note": "Only Water counts: 2050*12=24600, monthly 2050. Gym is zero and Phone is blank, both left out.",
+   "input": {
+    "items": [
+     {
+      "name": "Phone",
+      "amount": "",
+      "every": "month"
+     },
+     {
+      "name": "Gym",
+      "amount": "0",
+      "every": "week"
+     },
+     {
+      "name": "Water",
+      "amount": " 20.50 ",
+      "every": "month"
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": true,
+    "count": 1,
+    "yearlyCents": 24600,
+    "monthlyCents": 2050,
+    "rows": [
+     {
+      "index": 2,
+      "name": "Water",
+      "amountCents": 2050,
+      "every": "month",
+      "yearlyCents": 24600,
+      "monthlyCents": 2050
+     }
+    ]
+   }
+  },
+  {
+   "id": "messy-typing",
+   "title": "Spaces, dollar sign, commas, capital letters.",
+   "note": "Car cover 123450 yearly, /12=10287.5 -> 10288 ; second has no name so it is Cost 2: 4000*52=208000, /12=17333.33 -> 17333.",
+   "input": {
+    "items": [
+     {
+      "name": "  Car cover ",
+      "amount": "$1,234.50",
+      "every": "Year"
+     },
+     {
+      "name": "",
+      "amount": "40",
+      "every": " Week "
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": true,
+    "count": 2,
+    "yearlyCents": 331450,
+    "monthlyCents": 27621,
+    "rows": [
+     {
+      "index": 1,
+      "name": "Cost 2",
+      "amountCents": 4000,
+      "every": "week",
+      "yearlyCents": 208000,
+      "monthlyCents": 17333
+     },
+     {
+      "index": 0,
+      "name": "Car cover",
+      "amountCents": 123450,
+      "every": "year",
+      "yearlyCents": 123450,
+      "monthlyCents": 10288
+     }
+    ]
+   }
+  },
+  {
+   "id": "nothing-typed",
+   "title": "Nothing typed.",
+   "note": "No amounts, so no rows and zero totals.",
+   "input": {
+    "items": [
+     {
+      "name": "Phone",
+      "amount": "",
+      "every": "month"
+     },
+     {
+      "name": "Gym",
+      "amount": "",
+      "every": "week"
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": false,
+    "count": 0,
+    "yearlyCents": 0,
+    "monthlyCents": 0,
+    "rows": []
+   }
+  },
+  {
+   "id": "large",
+   "title": "Big numbers stay exact.",
+   "note": "Boat 1e11*52=5200000000000 yearly, /12=433333333333.33 -> 433333333333 ; Home 99999999999*12=1199999999988 yearly, monthly 99999999999.",
+   "input": {
+    "items": [
+     {
+      "name": "Boat",
+      "amount": "1,000,000,000",
+      "every": "week"
+     },
+     {
+      "name": "Home",
+      "amount": "999,999,999.99",
+      "every": "month"
+     }
+    ]
+   },
+   "expect": {
+    "hasAmounts": true,
+    "count": 2,
+    "yearlyCents": 6399999999988,
+    "monthlyCents": 533333333332,
+    "rows": [
+     {
+      "index": 0,
+      "name": "Boat",
+      "amountCents": 100000000000,
+      "every": "week",
+      "yearlyCents": 5200000000000,
+      "monthlyCents": 433333333333
+     },
+     {
+      "index": 1,
+      "name": "Home",
+      "amountCents": 99999999999,
+      "every": "month",
+      "yearlyCents": 1199999999988,
+      "monthlyCents": 99999999999
+     }
+    ]
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "bad-amount",
+   "input": {
+    "items": [
+     {
+      "name": "Phone",
+      "amount": "lots",
+      "every": "month"
+     },
+     {
+      "name": "",
+      "amount": "1e3",
+      "every": "week"
+     }
+    ]
+   },
+   "errors": [
+    [
+     "items.0",
+     "bad"
+    ],
+    [
+     "items.1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "negative",
+   "input": {
+    "items": [
+     {
+      "name": "Gym",
+      "amount": "-5",
+      "every": "month"
+     }
+    ]
+   },
+   "errors": [
+    [
+     "items.0",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "too-big",
+   "input": {
+    "items": [
+     {
+      "name": "Boat",
+      "amount": "1,000,000,000.01",
+      "every": "week"
+     }
+    ]
+   },
+   "errors": [
+    [
+     "items.0",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "no-how-often",
+   "input": {
+    "items": [
+     {
+      "name": "Gym",
+      "amount": "20"
+     },
+     {
+      "name": "Phone",
+      "amount": "20",
+      "every": "day"
+     }
+    ]
+   },
+   "errors": [
+    [
+     "items.0",
+     "bad"
+    ],
+    [
+     "items.1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "not-a-list",
+   "input": {
+    "items": "x"
+   },
+   "errors": [
+    [
+     "items",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "missing",
+   "input": {},
+   "errors": [
+    [
+     "items",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "too-many",
+   "input": {
+    "items": [
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     },
+     {
+      "name": "x",
+      "amount": "1",
+      "every": "month"
+     }
+    ]
+   },
+   "errors": [
+    [
+     "items",
+     "bad"
+    ]
+   ]
+  }
+ ]
+}

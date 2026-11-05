@@ -1,0 +1,112 @@
+/* Shared calculator pieces. Tokens only. 44px tap targets, 16px+ text, labels above fields. */
+.nt-field { display: block; margin: 0 0 var(--nt-space-4); font-family: var(--nt-font-text); }
+.nt-field-label { display: block; margin: 0 0 var(--nt-space-2); font-size: 1.125rem; font-weight: 700; color: var(--nt-ink); }
+.nt-field-optional { font-weight: 400; color: var(--nt-muted); }
+.nt-field-hint { display: block; margin: 0 0 var(--nt-space-2); font-size: 1rem; color: var(--nt-muted); }
+.nt-field-box { display: flex; align-items: center; gap: var(--nt-space-2); }
+.nt-field-mark { font-size: 1.125rem; color: var(--nt-ink); min-width: 1rem; }
+.nt-field-input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--nt-tap);
+  padding: var(--nt-space-2) var(--nt-space-3);
+  font: inherit;
+  font-size: 1.125rem; /* 16px or more stops the iPhone zoom */
+  color: var(--nt-text);
+  background: var(--nt-white);
+  border: 2px solid var(--nt-ink);
+  border-radius: var(--nt-radius);
+}
+.nt-field-input:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-field-input[aria-invalid="true"] { border-color: var(--nt-tdeep); }
+
+.nt-errnote {
+  display: block;
+  margin: var(--nt-space-2) 0 0;
+  padding: var(--nt-space-2) var(--nt-space-3);
+  border-left: 4px solid var(--nt-tdeep);
+  background: var(--nt-white);
+  color: var(--nt-text);
+  font-size: 1rem;
+  border-radius: 0 var(--nt-radius) var(--nt-radius) 0;
+}
+.nt-errnote-word { font-weight: 700; color: var(--nt-tdeep); }
+
+.nt-result {
+  margin: 0 0 var(--nt-space-4);
+  border-top: 8px solid var(--nt-tomato);
+  padding: var(--nt-space-4);
+  background: var(--nt-mint);
+  color: var(--nt-text);
+  border-right: 1px solid var(--nt-line);
+  border-bottom: 1px solid var(--nt-line);
+  border-left: 1px solid var(--nt-line);
+  border-radius: var(--nt-radius);
+  font-family: var(--nt-font-text);
+}
+.nt-result-label { margin: 0 0 var(--nt-space-1); font-size: 1.125rem; color: var(--nt-ink); }
+.nt-result-answer {
+  margin: 0 0 var(--nt-space-3);
+  font-family: var(--nt-font-display);
+  font-variation-settings: "SOFT" 100;
+  font-size: 2.75rem;
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--nt-ink);
+}
+.nt-result-body > :last-child { margin-bottom: 0; }
+
+.nt-startover { margin: var(--nt-space-4) 0; }
+.nt-startover-hint, .nt-startover-done { margin: var(--nt-space-2) 0 0; font-size: 1rem; color: var(--nt-text); }
+.nt-startover-btn {
+  min-height: 44px;
+  padding: 0 var(--nt-space-4);
+  font: inherit;
+  font-size: 1rem;
+  color: var(--nt-ink);
+  background: transparent;
+  border: 1px solid var(--nt-line);
+  border-radius: var(--nt-radius);
+  cursor: pointer;
+}
+.nt-startover-btn:hover:not(:disabled) { border-color: var(--nt-ink); }
+.nt-startover-btn:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-startover-btn:disabled { opacity: 0.6; cursor: default; }
+
+.nt-result-waiting-text { margin: 0; font-size: 1.25rem; color: var(--nt-text); }
+.nt-step { margin: 0 0 var(--nt-space-2); font-size: 1rem; font-weight: 700; color: var(--nt-tdeep); }
+.nt-privacy { margin: var(--nt-space-4) 0; font-size: 1rem; color: var(--nt-text); }
+.nt-startover-ask { margin: 0 0 var(--nt-space-2); font-size: 1rem; color: var(--nt-text); }
+.nt-startover-row { display: flex; flex-wrap: wrap; gap: var(--nt-space-2); }
+.nt-result-done { margin: var(--nt-space-3) 0 0; font-size: 1rem; font-weight: 700; color: var(--nt-ink); }
+.nt-result-again { margin-top: var(--nt-space-3); }
+.nt-result-row { display: flex; flex-wrap: wrap; gap: var(--nt-space-2); align-items: center; margin-top: var(--nt-space-3); }
+.nt-result-done-link {
+  display: inline-flex; align-items: center; justify-content: center; min-height: var(--nt-tap); padding: 0 var(--nt-space-4);
+  background: var(--nt-tdeep); color: var(--nt-white); border: 2px solid var(--nt-tdeep); border-radius: var(--nt-radius);
+  font-weight: 700; text-decoration: none; margin-top: 0;
+}
+.nt-result-done-link:hover { color: var(--nt-white); }
+.nt-result-change { min-height: var(--nt-tap); padding: 0 var(--nt-space-4); background: transparent; border: 2px solid var(--nt-ink); border-radius: var(--nt-radius); color: var(--nt-ink); font: inherit; cursor: pointer; }
+
+/* A number never breaks across lines. The label next to it wraps instead. */
+[class$="-lines"] > div { gap: var(--nt-space-3); }
+[class$="-lines"] dt,
+table th,
+table td:first-child { min-width: 0; overflow-wrap: anywhere; }
+main [class$="-lines"] dd,
+main .nt-result-answer,
+main table td:not(:first-child) {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: normal;
+  word-break: normal;
+  flex-shrink: 0;
+}
+/* Text answers (a number and a unit name) may wrap at spaces, never inside a word or number. */
+main .nt-result-answer.nt-result-answer-text { white-space: normal; overflow-wrap: normal; }
+/* Tables that hold sentences, not numbers, wrap as normal text. */
+main .nt-tfh-table td { white-space: normal; }
+@media (max-width: 480px) {
+  .nt-result-answer { font-size: 2rem; }
+}

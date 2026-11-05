@@ -1,0 +1,7 @@
+{
+  "format": "nt-form-filler",
+  "version": 1,
+  "answers": { "filing": "yes", "income": "no", "fillable": "no", "open": "yes" },
+  "info": { "firstName": "Sam", "lastName": "O'Neil", "state": "tx", "zip": "73301-0001", "phone": "1-555-010-9876" },
+  "papers": ["w2", "1099", "bank"]
+}

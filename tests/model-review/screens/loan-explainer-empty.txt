@@ -1,0 +1,32 @@
+Screen: loan-explainer, empty state, phone 390px wide. Order is top to bottom. Nothing is typed yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
+
+[heading 1] Loan Explainer
+Type the numbers from your loan. Your answer shows below.
+There is no Send button on this page.
+[label] Amount borrowed
+On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
+[box] Amount borrowed = "" (cursor is here)
+[label] Yearly interest rate
+On your loan paper. Look for the words 'interest rate'. It is a percent. Type 0 if there is none. For example: 6.5.
+[box] Yearly interest rate = ""
+[label] How long is the loan?
+On your loan paper. Look for 'term' or 'number of payments'. Use a whole number. For example: 36.
+[box] How long is the loan? = ""
+[label] Months
+[choice] Months (selected)
+[label] Years
+[choice] Years 
+[label] Upfront fees (optional)
+Fees you pay once, at the start, like a setup fee. Leave it empty if none.
+[box] Upfront fees (optional) = ""
+[label] Extra each month (optional)
+Extra money you choose to add to your payment each month. Leave it empty if none.
+[box] Extra each month (optional) = ""
+Monthly payment
+Your answer shows here
+[MAIN BUTTON, filled dark orange] Show my answer
+This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+[closed section, tap to open] What the words mean
+

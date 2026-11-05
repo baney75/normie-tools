@@ -1,0 +1,79 @@
+Screen: debt-payoff-planner, filled state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+[heading 1] Debt Payoff Planner
+Type the amount you owe on each debt. Your answer shows below. It compares two plans: pay the smallest debt first, or pay the highest interest first. Interest is the extra money the lender charges.
+There is no Send button on this page.
+[label] Debt 1 name (optional)
+Any name you like, so you know which debt it is.
+[box] Debt 1 name (optional) = ""
+[label] Debt 1 balance
+On your latest bill. Look for the words 'balance' or 'amount owed'. For example: 2500.
+[box] Debt 1 balance = "800"
+[label] Debt 1 yearly interest rate
+On your bill. Look for the words 'interest rate'. It is a percent. For example: 19.99.
+[box] Debt 1 yearly interest rate = "6.5"
+[label] Debt 1 minimum payment
+On your bill. Look for 'minimum payment' or 'payment due'. It is the least you must pay each month. For example: 60.
+[box] Debt 1 minimum payment = "40"
+[label] Debt 2 name (optional)
+Any name you like, so you know which debt it is.
+[box] Debt 2 name (optional) = ""
+[label] Debt 2 balance
+On your latest bill. Look for the words 'balance' or 'amount owed'. For example: 2500.
+[box] Debt 2 balance = "5000"
+[label] Debt 2 yearly interest rate
+On your bill. Look for the words 'interest rate'. It is a percent. For example: 19.99.
+[box] Debt 2 yearly interest rate = "22.99"
+[label] Debt 2 minimum payment
+On your bill. Look for 'minimum payment' or 'payment due'. It is the least you must pay each month. For example: 60.
+[box] Debt 2 minimum payment = "120"
+[plain button, outline only] Add another debt
+[plain button, outline only] Remove the last debt
+Remove asks first and shows which debt goes. Put it back undoes it.
+[label] Extra each month (optional)
+Extra money you can add each month on top of all the minimum payments. Leave it empty if none.
+[box] Extra each month (optional) = "100"
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+How the two payoff orders compare
+$125.14
+Highest interest first pays this much less interest than Smallest debt first.
+Highest interest first finishes sooner, by 1 month.
+That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
+[MAIN LINK, filled dark orange] Done. Back to home.
+[plain button, outline only] Change a number
+[heading 2] Smallest debt first
+Extra money goes to the smallest balance first.
+Months until all paid
+30 months
+Interest you pay
+$1,775.57
+All you pay
+$7,575.57
+[heading 3] Which debt goes first
+Debt 1: paid off in month 6
+Debt 2: paid off in month 30
+[heading 2] Highest interest first
+Extra money goes to the highest interest rate first.
+Months until all paid
+29 months
+Interest you pay
+$1,650.43
+All you pay
+$7,450.43
+[heading 3] Which debt goes first
+Debt 1: paid off in month 22
+Debt 2: paid off in month 29
+[closed section, tap to open] Show your debts and how each month works
+
+[heading 2] Keep your answer if you want
+Your answer above, on paper or saved as a file on this phone or computer.
+[plain button, outline only] Print
+[plain button, outline only] Save a copy
+Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
+
+This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+[closed section, tap to open] What the words mean
+

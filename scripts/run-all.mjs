@@ -13,12 +13,15 @@ const STEPS = [
   "check:sources",
   "check:licenses",
   "check:required-tests",
+  "check:ship-gate",
+  "check:evidence",
   "check:markdown",
   "check:jargon",
   "check:reading-level",
   "check:no-clutter",
   "check:links",
   "test:unit",
+  "test:tools",
 ];
 
 const results = [];

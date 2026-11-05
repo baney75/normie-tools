@@ -1,0 +1,733 @@
+{
+ "note": "Computed with Python Fractions (round half up) from the textbook formulas, independent of calc.mjs. Rates are basis points, money is cents. Money and rate text cases are shared with the Loan Explainer.",
+ "money": [
+  {
+   "text": "1,000",
+   "cents": 100000
+  },
+  {
+   "text": "$1,000.50",
+   "cents": 100050
+  },
+  {
+   "text": " 12 ",
+   "cents": 1200
+  },
+  {
+   "text": "1e3",
+   "cents": null
+  },
+  {
+   "text": "-5",
+   "cents": -500
+  },
+  {
+   "text": "0",
+   "cents": 0
+  },
+  {
+   "text": "",
+   "cents": null
+  },
+  {
+   "text": "abc",
+   "cents": null
+  },
+  {
+   "text": "😀",
+   "cents": null
+  },
+  {
+   "text": "NaN",
+   "cents": null
+  },
+  {
+   "text": "1000000000000000",
+   "cents": null
+  },
+  {
+   "text": "1.005",
+   "cents": null
+  },
+  {
+   "text": "1.50",
+   "cents": 150
+  },
+  {
+   "text": ".5",
+   "cents": 50
+  },
+  {
+   "text": "12.",
+   "cents": 1200
+  },
+  {
+   "text": "1,00",
+   "cents": null
+  },
+  {
+   "text": "$ 7",
+   "cents": 700
+  },
+  {
+   "text": "1.100",
+   "cents": 110
+  },
+  {
+   "text": "--5",
+   "cents": null
+  },
+  {
+   "text": "5-",
+   "cents": null
+  }
+ ],
+ "rate": [
+  {
+   "text": "6.5",
+   "bps": 650
+  },
+  {
+   "text": "6.5%",
+   "bps": 650
+  },
+  {
+   "text": "0",
+   "bps": 0
+  },
+  {
+   "text": " 12.25 ",
+   "bps": 1225
+  },
+  {
+   "text": "1e1",
+   "bps": null
+  },
+  {
+   "text": "-1",
+   "bps": -100
+  },
+  {
+   "text": "",
+   "bps": null
+  },
+  {
+   "text": "x",
+   "bps": null
+  },
+  {
+   "text": "6.555",
+   "bps": null
+  },
+  {
+   "text": "100",
+   "bps": 10000
+  },
+  {
+   "text": ".25",
+   "bps": 25
+  }
+ ],
+ "mortgages": [
+  {
+   "id": "basic-30y",
+   "input": {
+    "price": "300000",
+    "down": "60000",
+    "rate": "6",
+    "term": "30",
+    "tax": "3600",
+    "insurance": "1200",
+    "hoa": "50",
+    "pmi": ""
+   },
+   "note": "Loan 240000. Fraction payment P*i/(1-(1+i)^-n), i=0.06/12, n=360, rounded half up once. Tax 3600/12=300.00, insurance 1200/12=100.00. Interest each month = round half up(balance*i). First interest = 240000*0.005=1200.00.",
+   "expect": {
+    "loanCents": 24000000,
+    "piCents": 143892,
+    "taxMonthCents": 30000,
+    "insuranceMonthCents": 10000,
+    "hoaCents": 5000,
+    "pmiCents": 0,
+    "totalMonthlyCents": 188892,
+    "totalInterestCents": 27801258,
+    "firstInterestCents": 120000,
+    "firstPrincipalCents": 23892,
+    "priceCents": 30000000,
+    "downCents": 6000000,
+    "rateBps": 600,
+    "months": 360
+   }
+  },
+  {
+   "id": "with-mortgage-insurance",
+   "input": {
+    "price": "250000",
+    "down": "12,500",
+    "rate": "7.25",
+    "term": "15",
+    "tax": "2750.50",
+    "insurance": "1500.25",
+    "hoa": "120",
+    "pmi": "95.10"
+   },
+   "note": "Loan 237500. n=180, i=0.0725/12. Tax 2750.50/12=229.2083 rounds to 229.21. Insurance 1500.25/12=125.0208 rounds to 125.02. HOA 120 and mortgage insurance 95.10 are typed monthly amounts.",
+   "expect": {
+    "loanCents": 23750000,
+    "piCents": 216805,
+    "taxMonthCents": 22921,
+    "insuranceMonthCents": 12502,
+    "hoaCents": 12000,
+    "pmiCents": 9510,
+    "totalMonthlyCents": 273738,
+    "totalInterestCents": 15274881,
+    "firstInterestCents": 143490,
+    "firstPrincipalCents": 73315,
+    "priceCents": 25000000,
+    "downCents": 1250000,
+    "rateBps": 725,
+    "months": 180
+   }
+  },
+  {
+   "id": "zero-rate-20y",
+   "input": {
+    "price": "120000",
+    "down": "20000",
+    "rate": "0",
+    "term": "20",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "note": "Loan 100000, rate 0: payment 100000/240 = 416.666 rounds to 416.67. No interest each month, last payment trued up to 416.53. Total interest 0.",
+   "expect": {
+    "loanCents": 10000000,
+    "piCents": 41667,
+    "taxMonthCents": 0,
+    "insuranceMonthCents": 0,
+    "hoaCents": 0,
+    "pmiCents": 0,
+    "totalMonthlyCents": 41667,
+    "totalInterestCents": 0,
+    "firstInterestCents": 0,
+    "firstPrincipalCents": 41667,
+    "priceCents": 12000000,
+    "downCents": 2000000,
+    "rateBps": 0,
+    "months": 240
+   }
+  },
+  {
+   "id": "one-year",
+   "input": {
+    "price": "12000",
+    "down": "0",
+    "rate": "5",
+    "term": "1",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "note": "Loan 12000, n=12, i=0.05/12.",
+   "expect": {
+    "loanCents": 1200000,
+    "piCents": 102729,
+    "taxMonthCents": 0,
+    "insuranceMonthCents": 0,
+    "hoaCents": 0,
+    "pmiCents": 0,
+    "totalMonthlyCents": 102729,
+    "totalInterestCents": 32747,
+    "firstInterestCents": 5000,
+    "firstPrincipalCents": 97729,
+    "priceCents": 1200000,
+    "downCents": 0,
+    "rateBps": 500,
+    "months": 12
+   }
+  },
+  {
+   "id": "long-100y",
+   "input": {
+    "price": "500000",
+    "down": "100000",
+    "rate": "4.5",
+    "term": "100",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "note": "Loan 400000, n=1200, i=0.045/12.",
+   "expect": {
+    "loanCents": 40000000,
+    "piCents": 151699,
+    "taxMonthCents": 0,
+    "insuranceMonthCents": 0,
+    "hoaCents": 0,
+    "pmiCents": 0,
+    "totalMonthlyCents": 151699,
+    "totalInterestCents": 142049404,
+    "firstInterestCents": 150000,
+    "firstPrincipalCents": 1699,
+    "priceCents": 50000000,
+    "downCents": 10000000,
+    "rateBps": 450,
+    "months": 1200
+   }
+  },
+  {
+   "id": "tax-half-cent",
+   "input": {
+    "price": "200000",
+    "down": "40000",
+    "rate": "5.5",
+    "term": "30",
+    "tax": "100.02",
+    "insurance": "100.01",
+    "hoa": "0",
+    "pmi": "0"
+   },
+   "note": "Tax 100.02/12 = 8.335 exactly, rounds half up to 8.34. Insurance 100.01/12 = 8.3341666 rounds to 8.33.",
+   "expect": {
+    "loanCents": 16000000,
+    "piCents": 90846,
+    "taxMonthCents": 834,
+    "insuranceMonthCents": 833,
+    "hoaCents": 0,
+    "pmiCents": 0,
+    "totalMonthlyCents": 92513,
+    "totalInterestCents": 16704779,
+    "firstInterestCents": 73333,
+    "firstPrincipalCents": 17513,
+    "priceCents": 20000000,
+    "downCents": 4000000,
+    "rateBps": 550,
+    "months": 360
+   }
+  },
+  {
+   "id": "down-almost-all",
+   "input": {
+    "price": "100000",
+    "down": "99999.99",
+    "rate": "6",
+    "term": "15",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "note": "Loan is 1 cent. Payment never rounds below 1 cent.",
+   "expect": {
+    "loanCents": 1,
+    "piCents": 1,
+    "taxMonthCents": 0,
+    "insuranceMonthCents": 0,
+    "hoaCents": 0,
+    "pmiCents": 0,
+    "totalMonthlyCents": 1,
+    "totalInterestCents": 0,
+    "firstInterestCents": 0,
+    "firstPrincipalCents": 1,
+    "priceCents": 10000000,
+    "downCents": 9999999,
+    "rateBps": 600,
+    "months": 180
+   }
+  },
+  {
+   "id": "typed-17-years",
+   "input": {
+    "price": "350,000",
+    "down": "70,000",
+    "rate": "6.12",
+    "term": "17",
+    "tax": "4,200",
+    "insurance": "1,800",
+    "hoa": "35",
+    "pmi": "0"
+   },
+   "note": "Loan 280000, n=204, i=0.06125/12. Typed term of 17 years.",
+   "expect": {
+    "loanCents": 28000000,
+    "piCents": 221138,
+    "taxMonthCents": 35000,
+    "insuranceMonthCents": 15000,
+    "hoaCents": 3500,
+    "pmiCents": 0,
+    "totalMonthlyCents": 274638,
+    "totalInterestCents": 17112063,
+    "firstInterestCents": 142800,
+    "firstPrincipalCents": 78338,
+    "priceCents": 35000000,
+    "downCents": 7000000,
+    "rateBps": 612,
+    "months": 204
+   }
+  },
+  {
+   "id": "messy-typing",
+   "input": {
+    "price": " $300,000 ",
+    "down": "$60,000",
+    "rate": " 6% ",
+    "term": " 30 ",
+    "tax": "$3,600",
+    "insurance": " 1,200 ",
+    "hoa": "$50.00",
+    "pmi": "0"
+   },
+   "note": "Same loan as basic-30y typed with spaces, dollar signs, commas and a percent sign.",
+   "expect": {
+    "loanCents": 24000000,
+    "piCents": 143892,
+    "taxMonthCents": 30000,
+    "insuranceMonthCents": 10000,
+    "hoaCents": 5000,
+    "pmiCents": 0,
+    "totalMonthlyCents": 188892,
+    "totalInterestCents": 27801258,
+    "firstInterestCents": 120000,
+    "firstPrincipalCents": 23892,
+    "priceCents": 30000000,
+    "downCents": 6000000,
+    "rateBps": 600,
+    "months": 360
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "blank",
+   "input": {
+    "price": "",
+    "down": "",
+    "rate": "",
+    "term": "",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "price",
+     "missing"
+    ],
+    [
+     "down",
+     "missing"
+    ],
+    [
+     "rate",
+     "missing"
+    ],
+    [
+     "term",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "text-price",
+   "input": {
+    "price": "lots",
+    "down": "10",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "price",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "zero-price",
+   "input": {
+    "price": "0",
+    "down": "0",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "price",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "negative-down",
+   "input": {
+    "price": "100000",
+    "down": "-5",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "down",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "down-equals-price",
+   "input": {
+    "price": "100000",
+    "down": "100000",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "down",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "down-over-price",
+   "input": {
+    "price": "100000",
+    "down": "150000",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "down",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "rate-over-100",
+   "input": {
+    "price": "100000",
+    "down": "0",
+    "rate": "101",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "rate",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "term-zero",
+   "input": {
+    "price": "100000",
+    "down": "0",
+    "rate": "5",
+    "term": "0",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "term-101",
+   "input": {
+    "price": "100000",
+    "down": "0",
+    "rate": "5",
+    "term": "101",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "term-decimal",
+   "input": {
+    "price": "100000",
+    "down": "0",
+    "rate": "5",
+    "term": "2.5",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "tax-text",
+   "input": {
+    "price": "100000",
+    "down": "0",
+    "rate": "5",
+    "term": "30",
+    "tax": "abc",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "tax",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "insurance-negative",
+   "input": {
+    "price": "100000",
+    "down": "0",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "-1",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "insurance",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "hoa-exponent",
+   "input": {
+    "price": "100000",
+    "down": "0",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "1e3",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "hoa",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "pmi-emoji",
+   "input": {
+    "price": "100000",
+    "down": "0",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": "😀"
+   },
+   "errors": [
+    [
+     "pmi",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "huge-price",
+   "input": {
+    "price": "1e15",
+    "down": "0",
+    "rate": "5",
+    "term": "30",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "price",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "several",
+   "input": {
+    "price": "x",
+    "down": "y",
+    "rate": "z",
+    "term": "w",
+    "tax": "",
+    "insurance": "",
+    "hoa": "",
+    "pmi": ""
+   },
+   "errors": [
+    [
+     "price",
+     "bad"
+    ],
+    [
+     "down",
+     "bad"
+    ],
+    [
+     "rate",
+     "bad"
+    ],
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  }
+ ]
+}

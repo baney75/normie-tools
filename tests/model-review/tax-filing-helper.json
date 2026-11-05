@@ -1,0 +1,566 @@
+{
+  "tool": "tax-filing-helper",
+  "screen": ", ,  at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
+  "firstTimeUser": {
+    "model": "sonnet",
+    "score": 4,
+    "runs": [
+      4,
+      3,
+      4,
+      4,
+      4
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to check that my practice answers match, and then save a copy of that check.\n\n2. Save a copy\n\n3. Words or phrases I did not understand or that felt like tech talk:\n- \"Guided Free File\"\n- \"Free File\" (I'm not sure if it's a program or a company)\n- \"Answer sheet\" (I don't know where it came from)\n- \"Source: how this page is made\"\n- \"Submit\" (it says I press it myself, but I see no such button)\n- \"refund loans\" and \"audit protection\" (the short explanations help, but they're still odd)\n- \"state return\"\n- \"look-alike sites\"\n- \"Numbers stay on this phone or computer\" (what does \"stay\" mean?)\n- \"Save a copy shows you what goes in the file first\" (what file?)\n- \"Print opens a preview first\"\n\n4. What made me worry:\n- \"If any screen asks for a card number, stop.\" That made me nervous about whether something later will ask for money.\n- The \"Watch out\" list of fake sites, hidden fees, and people asking for money made me uneasy, even though it's meant to protect me.\n- I wasn't sure whether \"Save a copy\" puts something on my phone that I can't find or remove. It says I can delete it, which helps a little.\n- \"Start over\" might erase my work. It says it asks first and I can undo it, but I'd still be careful.\n- \"You stop here\" confused me. Is my tax return done, or not? It says nothing is filed, but I could still get that wrong.\n- Whether my email, even a made-up one, is being kept somewhere.\n\n5. What I would skip:\n- The \"Source: IRS Free File page\" link\n- \"how this page is made\" and its link\n- The whole \"Your answers next to what you typed\" table, because it all says \"Matches\" and I'd just trust that\n- The \"Watch out for these\" section\n- \"Back to home\"\n- The second \"All 8 answers match.\" message, since it repeats the first one\n\n6. Score: 4. The dark orange button is clear, but I'm not sure what happens after I tap it or what the \"file\" is.\n\nRESULT: {\"next_tap\": \"Save a copy\", \"confusing_terms\": [\"Guided Free File\", \"Free File\", \"Answer sheet\", \"Source: how this page is made\", \"Submit\", \"refund loans\", \"audit protection\", \"state return\", \"look-alike sites\", \"Numbers stay on this phone or computer\", \"the file\", \"preview\"], \"worries\": [\"If any screen asks for a card number, stop\", \"Fake sites, hidden fees, and people asking for money\", \"Saving a file to my phone that I can't find or remove\", \"Start over might erase my work\", \"Unsure whether anything is actually filed or whether I am done\", \"Whether my email is kept somewhere\"], \"skippable\": [\"Source: IRS Free File page link\", \"how this page is made link\", \"Your answers next to what you typed table\", \"Watch out for these section\", \"Back to home\", \"second 'All 8 answers match.' message\"], \"score\": 4}"
+  },
+  "designRubric": [
+    {
+      "model": "haiku",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    }
+  ],
+  "otherScreens": [
+    {
+      "screen": "start",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 3,
+        "runs": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. I think this screen wants me to pick one of two ways to practice filing taxes, and then go on to the next step.\n\n2. **Next**. I haven't picked either choice yet, though, so I'm not sure it will let me.\n\n3. Words that felt like tech talk or were unclear:\n- \"Guided Free File\"\n- \"Free File Fillable Forms\"\n- \"Fillable\"\n- \"online copies of IRS forms\"\n- \"Step 1 of 4\"\n- \"how this page is made\"\n- \"Source: IRS Free File page\"\n- \"Who does what\" (who is the \"who\"?)\n- \"Numbers stay on this phone or computer\"\n- \"Free at any income\" and \"last season\" (which season?)\n- \"Free File opens again in January 2027\" (is it closed right now?)\n- \"start state\" and \"boxes\". I was told there are boxes with my numbers, but I don't see any on this screen.\n\n4. What made me worry:\n- It's a tax screen, so I worry about giving out private numbers, even though it says \"Nothing is sent.\"\n- It says \"Practice only\" and \"made-up answers,\" but also that I typed \"my own numbers.\" That doesn't match, and I wonder if I did something wrong.\n- \"Free if you made $95,000 or less\" makes me wonder if I'll be charged if I'm over.\n- \"Free File opens again in January 2027\" makes me wonder if the real thing is closed now, and if I'd miss a deadline.\n- The warning about starting at IRS.gov/freefile and not a company's site makes me think scams are possible.\n- \"Not tax advice\" makes me wonder if I can trust any of this.\n\n5. I'd skip:\n- The \"Source: IRS Free File page\" link\n- The \"how this page is made\" link\n- The closed \"Who does what\" section\n- Probably \"Back to home\" too, unless I get lost\n\n6. Score: 3. I think I should choose one of the two options and tap Next, but I'm not sure, and the missing boxes confuse me.\n\nRESULT: {\"next_tap\":\"Next\",\"confusing_terms\":[\"Guided Free File\",\"Free File Fillable Forms\",\"Fillable\",\"online copies of IRS forms\",\"Step 1 of 4\",\"how this page is made\",\"Source: IRS Free File page\",\"Who does what\",\"Numbers stay on this phone or computer\",\"Free at any income\",\"last season\",\"Free File opens again in January 2027\",\"start state\",\"boxes (none visible)\"],\"worries\":[\"Typing private tax numbers\",\"Says made-up answers but also my own numbers\",\"Cost if income is over $95,000\",\"Free File closed until January 2027, possible missed deadline\",\"Scam warning about company sites\",\"Not tax advice, can I trust it\"],\"skippable\":[\"Source: IRS Free File page\",\"how this page is made\",\"Who does what\",\"Back to home\"],\"score\":3}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule6: The boxes hold the person's typed numbers, but the screen shows no preview and never says how to undo a change.\"],\"score\":7}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    },
+    {
+      "screen": "copy-in",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type the made-up sample answers (name and email) into the boxes, then go to the next screen.\n\n2. I would tap **Next screen**.\n\n3. Words that felt like tech talk or unclear:\n- \"Copy-in\" / \"Copy the answers in\" (copy how? do I copy and paste, or just type?)\n- \"Source: how this page is made\" (sounds like computer-maker stuff)\n- \"Practice screen 1 of 3\" next to \"Step 3 of 4\" (two different counts, so I'm not sure where I am)\n- \"Start over asks first, and you can undo it right after\" (undo what?)\n- \"Numbers stay on this phone or computer\" (I'm typing names, not numbers)\n- \"Type this / Sample\" (the \"Type this\" label is a bit odd sitting above the word)\n\n4. Worries:\n- The email box: even though it says made-up, I'd hesitate to type anything that looks like an email.\n- \"Nothing is filed. Nothing is sent.\" is reassuring, but I'd still wonder if it's really true.\n- \"Start over\" sounds like it could erase my work, though it says it asks first.\n- The word \"tax\" makes me nervous about doing something official by mistake.\n- Unsure if \"Back\" loses what I typed (it says it stays, so that helps a bit).\n\n5. I would skip:\n- The \"Source: how this page is made\" link.\n- The \"Back to home\" link at the bottom.\n- The \"This is a practice… not tax advice\" line.\n- The line about what Back does, probably.\n\n6. Score: 4. I'm fairly sure I tap the orange button, but the step counts and the \"copy\" wording leave a small doubt.\n\nRESULT: {\"next_tap\": \"Next screen\", \"confusing_terms\": [\"Copy-in / Copy the answers in\", \"Source: how this page is made\", \"Practice screen 1 of 3 vs Step 3 of 4\", \"Start over asks first, and you can undo it right after\", \"Numbers stay on this phone or computer\", \"Type this / Sample\"], \"worries\": [\"Typing an email address, even a made-up one\", \"Whether nothing is really filed or sent\", \"Start over might erase my work\", \"Tax topic might make something official happen\", \"Whether Back loses my typing\"], \"skippable\": [\"how this page is made link\", \"Back to home link\", \"not tax advice line\", \"Back button explanation line\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule6: no preview is shown before changes; the only pre-change text is \\\"Start over asks first\\\", which is a prompt, not a preview\"],\"score\":7}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
+}

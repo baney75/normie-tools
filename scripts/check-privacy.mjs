@@ -45,6 +45,8 @@ const RULES = [
 export function run(root) {
   const failures = [];
   for (const file of textFiles(root)) {
+    // A worktree's top-level .git is a pointer file holding a local path. Skip it.
+    if (rel(root, file) === ".git") continue;
     const lines = readText(file).split("\n");
     lines.forEach((line, i) => {
       for (const { rule, re, keep } of RULES) {

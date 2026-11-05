@@ -1,0 +1,49 @@
+{
+  "skill": "photo-duplicate-finder",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 9,
+      "total": 9,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "l1-beach-dog",
+      "level": 1,
+      "task": "Which of my photos are exact copies of each other?",
+      "reply": "I checked 5 photos.\nI found 2 groups of exact copies.\nGroup 1 of 2: beach copy.jpg (4.2 KB) is listed first. Same file: beach.jpg (4.2 KB).\nGroup 2 of 2: dog 2.png (17 bytes) is listed first. Same file: dog.png (17 bytes).\nThere are 2 extra copies in the 5 photos I checked. They take 4.2 KB.\nThis tool only lists exact copies. It never deletes, moves or sends photos.\nNote: this finds exact copies only. Photos that only look alike need the Photo Duplicate Finder website. Nothing was deleted or moved.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    },
+    {
+      "id": "l1-none",
+      "level": 1,
+      "task": "What did the scan of my holiday folder find?",
+      "reply": "The scan of your holiday folder found no exact copies. There are no extra copies in the 3 photos I checked. This tool only lists exact copies. It never deletes, moves or sends photos. Note: this finds exact copies only. Photos that only look alike need the Photo Duplicate Finder website. Nothing was deleted or moved.",
+      "met": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 4,
+      "total": 4
+    }
+  ]
+}

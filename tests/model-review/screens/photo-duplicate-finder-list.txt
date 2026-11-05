@@ -1,0 +1,24 @@
+Screen: photo-duplicate-finder, list state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+[heading 1] Photo Duplicate Finder
+Find photos that are the same. This tool never deletes, moves or sends a photo.
+Nothing is sent. Photos stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+Step 3 of 3: Check your list
+What this does: it makes a list of file names. You remove the extra copies yourself, in your Photos app or Files app.
+Extra copies to remove yourself
+1 file
+[heading 2] Files on your list
+This is your list. Look it over first.
+beach-2.png
+This saves a list of file names on this phone or computer. To undo, delete the list file.
+[MAIN BUTTON, filled dark orange] Save my list of extras
+[plain button, outline only] Back to the groups
+[closed section, tap to open] Show more about how this works
+
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Back to home
+[link, plain] Back to home

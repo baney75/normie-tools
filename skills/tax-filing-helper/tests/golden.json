@@ -1,0 +1,318 @@
+{
+ "note": "Expected statuses, counts and messages were worked out by hand from the sheet. Money cents: 32,450.00 = 3245000; 2,810.50 = 281050; 12.34 = 1234 (Decimal check in a throwaway script).",
+ "money": [
+  {
+   "text": "32,450.00",
+   "cents": 3245000
+  },
+  {
+   "text": "$2,810.50",
+   "cents": 281050
+  },
+  {
+   "text": "12.34",
+   "cents": 1234
+  },
+  {
+   "text": "2810.5",
+   "cents": 281050
+  },
+  {
+   "text": " 12 ",
+   "cents": 1200
+  },
+  {
+   "text": "1e3",
+   "cents": null
+  },
+  {
+   "text": "12.345",
+   "cents": null
+  },
+  {
+   "text": "lots",
+   "cents": null
+  }
+ ],
+ "cases": [
+  {
+   "id": "all-match",
+   "typed": {
+    "first-name": "Sample",
+    "last-name": "Person",
+    "email": "sample.person@example.com",
+    "employer": "Example Bakery",
+    "wages": "32,450.00",
+    "withheld": "2,810.50",
+    "bank-name": "Example Credit Union",
+    "interest": "12.34"
+   },
+   "expect": {
+    "total": 8,
+    "matched": 8,
+    "different": 0,
+    "missing": 0,
+    "allMatch": true,
+    "summary": "All 8 answers match.",
+    "statuses": {
+     "first-name": "match",
+     "last-name": "match",
+     "email": "match",
+     "employer": "match",
+     "wages": "match",
+     "withheld": "match",
+     "bank-name": "match",
+     "interest": "match"
+    }
+   }
+  },
+  {
+   "id": "spacing-case-and-dollar-signs",
+   "typed": {
+    "first-name": "  sample ",
+    "last-name": "PERSON",
+    "email": "Sample.Person@Example.com",
+    "employer": "example   bakery",
+    "wages": "$32,450",
+    "withheld": "2810.5",
+    "bank-name": "example credit union",
+    "interest": "$12.34"
+   },
+   "expect": {
+    "total": 8,
+    "matched": 8,
+    "different": 0,
+    "missing": 0,
+    "allMatch": true,
+    "summary": "All 8 answers match.",
+    "statuses": {
+     "first-name": "match",
+     "last-name": "match",
+     "email": "match",
+     "employer": "match",
+     "wages": "match",
+     "withheld": "match",
+     "bank-name": "match",
+     "interest": "match"
+    }
+   }
+  },
+  {
+   "id": "cents-differ",
+   "typed": {
+    "first-name": "Sample",
+    "last-name": "Person",
+    "email": "sample.person@example.com",
+    "employer": "Example Bakery",
+    "wages": "32,450.00",
+    "withheld": "2,810.50",
+    "bank-name": "Example Credit Union",
+    "interest": "12.3"
+   },
+   "expect": {
+    "total": 8,
+    "matched": 7,
+    "different": 1,
+    "missing": 0,
+    "allMatch": false,
+    "summary": "7 of 8 answers match. 1 need a look.",
+    "statuses": {
+     "first-name": "match",
+     "last-name": "match",
+     "email": "match",
+     "employer": "match",
+     "wages": "match",
+     "withheld": "match",
+     "bank-name": "match",
+     "interest": "different"
+    },
+    "messages": {
+     "interest": "Interest from your bank: you typed $12.30. The sheet says $12.34."
+    }
+   }
+  },
+  {
+   "id": "nothing-typed",
+   "typed": {},
+   "expect": {
+    "total": 8,
+    "matched": 0,
+    "different": 0,
+    "missing": 8,
+    "allMatch": false,
+    "summary": "0 of 8 answers match. 8 need a look.",
+    "statuses": {
+     "first-name": "missing",
+     "last-name": "missing",
+     "email": "missing",
+     "employer": "missing",
+     "wages": "missing",
+     "withheld": "missing",
+     "bank-name": "missing",
+     "interest": "missing"
+    },
+    "messages": {
+     "wages": "Pay for the year: nothing typed yet. The sheet says $32,450.00."
+    }
+   }
+  },
+  {
+   "id": "mixed",
+   "typed": {
+    "first-name": "Sampel",
+    "last-name": "",
+    "email": "sample.person@example.com",
+    "employer": "Example Bakery",
+    "wages": "32,450.00",
+    "withheld": "abc",
+    "bank-name": "Example Credit Union",
+    "interest": "12.34"
+   },
+   "expect": {
+    "total": 8,
+    "matched": 5,
+    "different": 2,
+    "missing": 1,
+    "allMatch": false,
+    "summary": "5 of 8 answers match. 3 need a look.",
+    "statuses": {
+     "first-name": "different",
+     "last-name": "missing",
+     "email": "match",
+     "employer": "match",
+     "wages": "match",
+     "withheld": "different",
+     "bank-name": "match",
+     "interest": "match"
+    },
+    "messages": {
+     "first-name": "First name: you typed \"Sampel\". The sheet says \"Sample\".",
+     "withheld": "Tax already taken out of your pay: \"abc\" is not a dollar amount. The sheet says $2,810.50.",
+     "last-name": "Last name: nothing typed yet. The sheet says Person."
+    }
+   }
+  },
+  {
+   "id": "negative-money-is-different",
+   "typed": {
+    "first-name": "Sample",
+    "last-name": "Person",
+    "email": "sample.person@example.com",
+    "employer": "Example Bakery",
+    "wages": "-32,450.00",
+    "withheld": "2,810.50",
+    "bank-name": "Example Credit Union",
+    "interest": "12.34"
+   },
+   "expect": {
+    "total": 8,
+    "matched": 7,
+    "different": 1,
+    "missing": 0,
+    "allMatch": false,
+    "summary": "7 of 8 answers match. 1 need a look.",
+    "statuses": {
+     "first-name": "match",
+     "last-name": "match",
+     "email": "match",
+     "employer": "match",
+     "wages": "different",
+     "withheld": "match",
+     "bank-name": "match",
+     "interest": "match"
+    },
+    "messages": {
+     "wages": "Pay for the year: you typed -$32,450.00. The sheet says $32,450.00."
+    }
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "empty-sheet",
+   "sheet": [],
+   "typed": {},
+   "errors": [
+    [
+     "sheet",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "not-a-list",
+   "sheet": "x",
+   "typed": {},
+   "errors": [
+    [
+     "sheet",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "bad-money-on-sheet",
+   "sheet": [
+    {
+     "id": "a",
+     "screen": "S",
+     "label": "Pay",
+     "kind": "money",
+     "value": "lots"
+    }
+   ],
+   "typed": {},
+   "errors": [
+    [
+     "a",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "duplicate-id",
+   "sheet": [
+    {
+     "id": "a",
+     "screen": "S",
+     "label": "One",
+     "kind": "text",
+     "value": "x"
+    },
+    {
+     "id": "a",
+     "screen": "S",
+     "label": "Two",
+     "kind": "text",
+     "value": "y"
+    }
+   ],
+   "typed": {},
+   "errors": [
+    [
+     "a",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "blank-text-on-sheet",
+   "sheet": [
+    {
+     "id": "a",
+     "screen": "S",
+     "label": "One",
+     "kind": "text",
+     "value": "  "
+    }
+   ],
+   "typed": {},
+   "errors": [
+    [
+     "a",
+     "bad"
+    ]
+   ]
+  }
+ ]
+}

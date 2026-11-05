@@ -1,0 +1,81 @@
+.nt-sheet {
+  container-type: inline-size;
+  font-family: var(--nt-font-text);
+  color: var(--nt-text);
+  max-width: var(--nt-measure);
+  border: 1px solid var(--nt-line);
+  border-radius: var(--nt-radius);
+  background: var(--nt-white);
+  padding: var(--nt-space-4);
+}
+.nt-sheet-title {
+  font-family: var(--nt-font-display);
+  color: var(--nt-ink);
+  margin: 0 0 var(--nt-space-3);
+}
+.nt-sheet-preview {
+  padding: var(--nt-space-3);
+  border: 1px dashed var(--nt-line);
+  border-radius: var(--nt-radius);
+  background: var(--nt-paper);
+}
+.nt-sheet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nt-space-2);
+  margin-top: var(--nt-space-3);
+}
+@container (min-width: 28rem) {
+  .nt-sheet-actions {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.nt-sheet button {
+  min-height: var(--nt-tap);
+  padding: var(--nt-space-2) var(--nt-space-4);
+  border-radius: var(--nt-radius);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.nt-sheet-primary {
+  border: 2px solid var(--nt-tdeep);
+  background: var(--nt-tdeep);
+  color: var(--nt-white);
+}
+.nt-sheet-secondary {
+  border: 2px solid var(--nt-ink);
+  background: var(--nt-white);
+  color: var(--nt-ink);
+}
+.nt-sheet-undo {
+  border: 0;
+  background: none;
+  color: var(--nt-ink);
+  text-decoration: underline;
+}
+.nt-sheet button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.nt-sheet button:focus-visible {
+  outline: 3px solid var(--nt-tomato);
+  outline-offset: 2px;
+}
+.nt-sheet-status {
+  min-height: 1.5em;
+  margin: var(--nt-space-2) 0 0;
+  color: var(--nt-ink);
+  font-weight: 700;
+}
+@media print {
+  .nt-sheet-actions,
+  .nt-sheet-status {
+    display: none;
+  }
+}
+.nt-sheet-note { margin: var(--nt-space-2) 0 0; font-size: 1rem; color: var(--nt-text); }
+.nt-sheet-ask { margin-top: var(--nt-space-3); padding: var(--nt-space-3); border: 1px dashed var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-paper); }
+.nt-sheet-ask p { margin: 0; }
+.nt-sheet-ask-preview { margin: var(--nt-space-2) 0; padding: var(--nt-space-2); background: var(--nt-white); border-radius: var(--nt-radius); }

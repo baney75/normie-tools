@@ -1,0 +1,6 @@
+{
+  "include": { "day": true, "reminders": true },
+  "date": "2026-01-01",
+  "day": [{ "time": "noon", "title": "Bring the mail in" }],
+  "reminders": ["Check the stove is off"]
+}

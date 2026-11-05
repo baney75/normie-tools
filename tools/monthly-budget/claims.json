@@ -1,0 +1,12 @@
+{
+  "claims": [
+    { "id": "total-income-exact", "text": "Total income is the exact sum of the income lines, to the cent." },
+    { "id": "total-spending-exact", "text": "Total spending is the exact sum of the spending lines, to the cent." },
+    { "id": "left-over-exact", "text": "Left over is income minus spending, and a negative amount is shown plainly with a minus sign." },
+    { "id": "percent-of-income-exact", "text": "Each spending line shows a whole-number percent of income, and the percents add up to the percent of income that is spent." },
+    { "id": "share-of-spending-sums-100", "text": "Each line's share of spending is a whole number, and the shares add up to exactly 100." },
+    { "id": "no-income-no-divide", "text": "With no income, the page shows totals and no percents, and never divides by zero." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the line." }
+  ]
+}

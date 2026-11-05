@@ -1,0 +1,33 @@
+.nt-mb { max-width: var(--nt-measure); }
+.nt-mb-intro { font-size: 1.125rem; margin: 0 0 var(--nt-space-4); }
+.nt-mb-status { margin: 0 0 var(--nt-space-4); }
+.nt-mb-help { margin: 0 0 var(--nt-space-3); font-size: 1rem; color: var(--nt-muted); }
+.nt-mb-pick { margin: 0 0 var(--nt-space-4); padding: 0; border: 0; }
+.nt-mb-pick legend { padding: 0; margin: 0 0 var(--nt-space-2); font-weight: 700; color: var(--nt-ink); }
+.nt-mb-check { display: flex; align-items: center; gap: var(--nt-space-3); min-height: var(--nt-tap); margin: 0 0 var(--nt-space-2); padding: 0 var(--nt-space-3); font-size: 1.125rem; border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); cursor: pointer; }
+.nt-mb-check input { width: 1.5rem; height: 1.5rem; flex: none; accent-color: var(--nt-tdeep); }
+.nt-mb-today { font-size: 1.125rem; font-weight: 700; color: var(--nt-ink); margin: 0 0 var(--nt-space-4); }
+.nt-mb-list { margin: 0 0 var(--nt-space-5); }
+.nt-mb-list h2 { font-size: 1.25rem; margin: 0 0 var(--nt-space-2); }
+.nt-mb-row { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
+.nt-mb-row .nt-field:last-of-type { margin-bottom: var(--nt-space-3); }
+.nt-mb-small {
+  min-height: var(--nt-tap);
+  padding: 0 var(--nt-space-3);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.nt-mb-nav { display: flex; flex-wrap: wrap; gap: var(--nt-space-2); margin: 0 0 var(--nt-space-4); }
+.nt-mb-nav button { min-height: var(--nt-tap); padding: 0 var(--nt-space-4); font-size: 1.125rem; font-weight: 700; }
+.nt-mb-paper { color: var(--nt-ink); }
+.nt-mb-paper h3 { font-family: var(--nt-font-display); font-size: 1.375rem; margin: 0 0 var(--nt-space-1); }
+.nt-mb-date { margin: 0 0 var(--nt-space-3); font-weight: 700; }
+.nt-mb-part { margin: 0 0 var(--nt-space-3); padding-top: var(--nt-space-2); border-top: 1px solid var(--nt-line); }
+.nt-mb-part h4 { margin: 0 0 var(--nt-space-1); font-size: 1.125rem; }
+.nt-mb-part ul { margin: 0 0 var(--nt-space-1); padding-left: var(--nt-space-4); }
+.nt-mb-part p { margin: 0 0 var(--nt-space-1); }
+.nt-mb-label { font-weight: 700; color: var(--nt-tdeep); }
+.nt-mb-note { font-size: 1rem; }
+@media print {
+  .nt-mb-nav, .nt-mb-intro { display: none; }
+}

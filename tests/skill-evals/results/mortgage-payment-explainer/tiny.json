@@ -1,0 +1,52 @@
+{
+  "skill": "mortgage-payment-explainer",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 12,
+      "total": 12,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "basic-home",
+      "level": 1,
+      "task": "I want to buy a $300,000 home with $60,000 down, a 6% yearly rate for 30 years, $3,600 yearly property tax, $1,200 yearly insurance and $50 a month HOA. Explain my monthly payment.",
+      "reply": "Your monthly payment is $1,888.92.\nPrincipal and interest is $1,438.92 each month.\nProperty tax is $300.00 each month.\nHome insurance is $100.00 each month.\nHOA is $50.00 each month.\nMortgage insurance is $0.00 each month.\nThe loan amount is $240,000.00.\nInterest over the whole loan is $278,012.58.\nYour first payment pays $1,200.00 of interest and lowers what you owe by $238.92.\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    },
+    {
+      "id": "with-mortgage-insurance",
+      "level": 1,
+      "task": "The home is $250,000 with $12,500 down at 7.25% for 15 years. Tax is $2,750.50 a year, insurance is $1,500.25 a year, HOA is $120 a month and mortgage insurance is $95.10 a month. Explain my monthly payment.",
+      "reply": "Your monthly payment is $2,737.38.\nPrincipal and interest is $2,168.05 each month.\nProperty tax is $229.21 each month.\nHome insurance is $125.02 each month.\nHOA is $120.00 each month.\nMortgage insurance is $95.10 each month.\nThe loan amount is $237,500.00.\nInterest over the whole loan is $152,748.81.\nYour first payment pays $1,434.90 of interest and lowers what you owe by $733.15.\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    }
+  ]
+}

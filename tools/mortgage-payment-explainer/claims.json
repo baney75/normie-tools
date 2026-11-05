@@ -1,0 +1,13 @@
+{
+  "claims": [
+    { "id": "loan-amount-exact", "text": "The loan amount is the home price minus the down payment, exact to the cent." },
+    { "id": "payment-exact", "text": "The principal-and-interest payment is the standard fixed-rate payment, exact to the cent." },
+    { "id": "monthly-extras-exact", "text": "Monthly tax and insurance are the yearly amounts you typed divided by 12 and rounded half up to the cent. HOA and mortgage insurance are used as typed." },
+    { "id": "total-monthly-exact", "text": "The total monthly payment is the sum of the five monthly parts, exact to the cent." },
+    { "id": "total-interest-exact", "text": "Total interest is the sum of each month's interest over the whole loan, rounded half up to the cent each month." },
+    { "id": "first-payment-split-exact", "text": "The first payment's interest and principal add up to the principal-and-interest payment." },
+    { "id": "zero-rate-and-edges", "text": "A rate of 0, a one-year loan and a 100-year loan all work out exactly." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the field." }
+  ]
+}

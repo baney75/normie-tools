@@ -21,3 +21,12 @@ desktop.ini
 *~
 .idea/
 .vscode/
+.nt-staging/
+
+# Python
+__pycache__/
+*.pyc
+
+# Full-size matrix screenshots are written here by the e2e run; the committed copies are the .webp files.
+shots/matrix/*.png
+site/.vitest/

@@ -1,0 +1,4 @@
+{
+  "income": [{ "name": "Pay", "amount": "1,000" }, { "name": "Side job", "amount": "250.50" }],
+  "expenses": [{ "name": "Rent", "amount": "1,100" }, { "name": "Food", "amount": "400.25" }]
+}

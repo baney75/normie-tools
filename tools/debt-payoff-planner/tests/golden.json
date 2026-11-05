@@ -1,0 +1,1351 @@
+{
+ "note": "Computed with Python Decimal dollars (ROUND_HALF_UP to 0.01 each month, each debt), written apart from calc.mjs. Rates are percents typed, shown in expect as basis points. Money in expect is cents.",
+ "plans": [
+  {
+   "id": "classic-four",
+   "note": "Four debts, extra $100. Decimal dollars, each month's interest = balance*rate/100/12 quantized to 0.01 ROUND_HALF_UP, minimums paid, then the rest of the month's money goes to the first open debt in line. Month 1 hand check, Card A: 500*0.18/12 = 7.50.",
+   "input": {
+    "debts": [
+     {
+      "name": "Card A",
+      "balance": "500",
+      "rate": "18",
+      "minimum": "25"
+     },
+     {
+      "name": "Card B",
+      "balance": "2,500",
+      "rate": "22.99",
+      "minimum": "60"
+     },
+     {
+      "name": "Loan",
+      "balance": "5000",
+      "rate": "6.5",
+      "minimum": "100"
+     },
+     {
+      "name": "Car",
+      "balance": "$9,000",
+      "rate": "4.9",
+      "minimum": "200"
+     }
+    ],
+    "extra": "100"
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Card A",
+      "balanceCents": 50000,
+      "rateBps": 1800,
+      "minimumCents": 2500
+     },
+     {
+      "name": "Card B",
+      "balanceCents": 250000,
+      "rateBps": 2299,
+      "minimumCents": 6000
+     },
+     {
+      "name": "Loan",
+      "balanceCents": 500000,
+      "rateBps": 650,
+      "minimumCents": 10000
+     },
+     {
+      "name": "Car",
+      "balanceCents": 900000,
+      "rateBps": 490,
+      "minimumCents": 20000
+     }
+    ],
+    "extraCents": 10000,
+    "totalBalanceCents": 1700000,
+    "monthlyMoneyCents": 48500,
+    "snowball": {
+     "months": 40,
+     "totalInterestCents": 209891,
+     "totalPaidCents": 1909891,
+     "order": [
+      {
+       "name": "Card A",
+       "month": 5
+      },
+      {
+       "name": "Card B",
+       "month": 20
+      },
+      {
+       "name": "Loan",
+       "month": 33
+      },
+      {
+       "name": "Car",
+       "month": 40
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 40,
+     "totalInterestCents": 207101,
+     "totalPaidCents": 1907101,
+     "order": [
+      {
+       "name": "Card B",
+       "month": 19
+      },
+      {
+       "name": "Card A",
+       "month": 20
+      },
+      {
+       "name": "Loan",
+       "month": 33
+      },
+      {
+       "name": "Car",
+       "month": 40
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 2790,
+     "lessInterest": "avalanche"
+    }
+   }
+  },
+  {
+   "id": "single-debt",
+   "note": "One debt $1,000 at 12%, minimum $100, no extra. Both plans are the same. Month 1 interest 1000*0.12/12 = 10.00, so the balance goes 1000 -> 910 -> ... Worked by the Decimal script.",
+   "input": {
+    "debts": [
+     {
+      "name": "Store card",
+      "balance": "1000",
+      "rate": "12",
+      "minimum": "100"
+     }
+    ],
+    "extra": ""
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Store card",
+      "balanceCents": 100000,
+      "rateBps": 1200,
+      "minimumCents": 10000
+     }
+    ],
+    "extraCents": 0,
+    "totalBalanceCents": 100000,
+    "monthlyMoneyCents": 10000,
+    "snowball": {
+     "months": 11,
+     "totalInterestCents": 5898,
+     "totalPaidCents": 105898,
+     "order": [
+      {
+       "name": "Store card",
+       "month": 11
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 11,
+     "totalInterestCents": 5898,
+     "totalPaidCents": 105898,
+     "order": [
+      {
+       "name": "Store card",
+       "month": 11
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 0,
+     "lessInterest": "same"
+    }
+   }
+  },
+  {
+   "id": "zero-rate-hand",
+   "note": "Two zero-rate debts, $1,000 (min $100) and $500 (min $50), no extra. Hand: each debt only gets its own smallest payment, nothing is left over to roll. 1000/100 = 10 months and 500/50 = 10 months, so both clear in month 10, 0 interest, $1,500 paid. Both reach zero together, so the order is the line order: snowball puts the smaller balance first, avalanche ties on rate and keeps the typed order.",
+   "input": {
+    "debts": [
+     {
+      "name": "Big",
+      "balance": "1000",
+      "rate": "0",
+      "minimum": "100"
+     },
+     {
+      "name": "Small",
+      "balance": "500",
+      "rate": "0",
+      "minimum": "50"
+     }
+    ],
+    "extra": ""
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Big",
+      "balanceCents": 100000,
+      "rateBps": 0,
+      "minimumCents": 10000
+     },
+     {
+      "name": "Small",
+      "balanceCents": 50000,
+      "rateBps": 0,
+      "minimumCents": 5000
+     }
+    ],
+    "extraCents": 0,
+    "totalBalanceCents": 150000,
+    "monthlyMoneyCents": 15000,
+    "snowball": {
+     "months": 10,
+     "totalInterestCents": 0,
+     "totalPaidCents": 150000,
+     "order": [
+      {
+       "name": "Small",
+       "month": 10
+      },
+      {
+       "name": "Big",
+       "month": 10
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 10,
+     "totalInterestCents": 0,
+     "totalPaidCents": 150000,
+     "order": [
+      {
+       "name": "Big",
+       "month": 10
+      },
+      {
+       "name": "Small",
+       "month": 10
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 0,
+     "lessInterest": "same"
+    }
+   }
+  },
+  {
+   "id": "rolling-by-hand",
+   "note": "Zero rates so the arithmetic is by hand. Big $1,000 (min $100), Small $100 (min $50). The month's money is 150. Months 1 and 2: Small takes 50 each month and is paid off in month 2, Big takes 100 each month (800 left). From month 3 all 150 goes to Big: 800 -> 650 -> 500 -> 350 -> 200 -> 50 (month 7) -> month 8 pays the last 50. So Small clears in month 2, Big in month 8, 8 months, $1,100 paid, $0 interest, in both plans.",
+   "input": {
+    "debts": [
+     {
+      "name": "Big",
+      "balance": "1000",
+      "rate": "0",
+      "minimum": "100"
+     },
+     {
+      "name": "Small",
+      "balance": "100",
+      "rate": "0",
+      "minimum": "50"
+     }
+    ],
+    "extra": ""
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Big",
+      "balanceCents": 100000,
+      "rateBps": 0,
+      "minimumCents": 10000
+     },
+     {
+      "name": "Small",
+      "balanceCents": 10000,
+      "rateBps": 0,
+      "minimumCents": 5000
+     }
+    ],
+    "extraCents": 0,
+    "totalBalanceCents": 110000,
+    "monthlyMoneyCents": 15000,
+    "snowball": {
+     "months": 8,
+     "totalInterestCents": 0,
+     "totalPaidCents": 110000,
+     "order": [
+      {
+       "name": "Small",
+       "month": 2
+      },
+      {
+       "name": "Big",
+       "month": 8
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 8,
+     "totalInterestCents": 0,
+     "totalPaidCents": 110000,
+     "order": [
+      {
+       "name": "Small",
+       "month": 2
+      },
+      {
+       "name": "Big",
+       "month": 8
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 0,
+     "lessInterest": "same"
+    }
+   }
+  },
+  {
+   "id": "half-cent-rounds-up",
+   "note": "A $12.00 debt at 0.5% a year, minimum $5.00. Month 1 interest = 1200*0.005/12 = 0.50 cents -> 1 cent (half up). Balance 12.01, pay 5.00 -> 7.01. Month 2 interest 0.0029 -> 0.00, pay 5.00 -> 2.01. Month 3 interest 0.00, pay 2.01 -> 0. So 3 months, 1 cent interest, $12.01 paid, by hand.",
+   "input": {
+    "debts": [
+     {
+      "name": "Tiny",
+      "balance": "12",
+      "rate": "0.5",
+      "minimum": "5"
+     }
+    ],
+    "extra": ""
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Tiny",
+      "balanceCents": 1200,
+      "rateBps": 50,
+      "minimumCents": 500
+     }
+    ],
+    "extraCents": 0,
+    "totalBalanceCents": 1200,
+    "monthlyMoneyCents": 500,
+    "snowball": {
+     "months": 3,
+     "totalInterestCents": 1,
+     "totalPaidCents": 1201,
+     "order": [
+      {
+       "name": "Tiny",
+       "month": 3
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 3,
+     "totalInterestCents": 1,
+     "totalPaidCents": 1201,
+     "order": [
+      {
+       "name": "Tiny",
+       "month": 3
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 0,
+     "lessInterest": "same"
+    }
+   }
+  },
+  {
+   "id": "messy-typing",
+   "note": "Same debts as classic-four but typed with spaces, a dollar sign, a percent sign and commas, no names, and a blank row in the middle. Names become Debt N by row position (rows 1, 3, 4, 5).",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "$ 500",
+      "rate": "18%",
+      "minimum": "25"
+     },
+     {
+      "name": "",
+      "balance": "",
+      "rate": "",
+      "minimum": ""
+     },
+     {
+      "name": "",
+      "balance": "2,500.00",
+      "rate": " 22.99 ",
+      "minimum": "$60"
+     },
+     {
+      "name": null,
+      "balance": "5000",
+      "rate": "6.5",
+      "minimum": "100"
+     },
+     {
+      "name": "",
+      "balance": "9,000",
+      "rate": "4.9",
+      "minimum": "200.00"
+     }
+    ],
+    "extra": "$100.00"
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Debt 1",
+      "balanceCents": 50000,
+      "rateBps": 1800,
+      "minimumCents": 2500
+     },
+     {
+      "name": "Debt 3",
+      "balanceCents": 250000,
+      "rateBps": 2299,
+      "minimumCents": 6000
+     },
+     {
+      "name": "Debt 4",
+      "balanceCents": 500000,
+      "rateBps": 650,
+      "minimumCents": 10000
+     },
+     {
+      "name": "Debt 5",
+      "balanceCents": 900000,
+      "rateBps": 490,
+      "minimumCents": 20000
+     }
+    ],
+    "extraCents": 10000,
+    "totalBalanceCents": 1700000,
+    "monthlyMoneyCents": 48500,
+    "snowball": {
+     "months": 40,
+     "totalInterestCents": 209891,
+     "totalPaidCents": 1909891,
+     "order": [
+      {
+       "name": "Debt 1",
+       "month": 5
+      },
+      {
+       "name": "Debt 3",
+       "month": 20
+      },
+      {
+       "name": "Debt 4",
+       "month": 33
+      },
+      {
+       "name": "Debt 5",
+       "month": 40
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 40,
+     "totalInterestCents": 207101,
+     "totalPaidCents": 1907101,
+     "order": [
+      {
+       "name": "Debt 3",
+       "month": 19
+      },
+      {
+       "name": "Debt 1",
+       "month": 20
+      },
+      {
+       "name": "Debt 4",
+       "month": 33
+      },
+      {
+       "name": "Debt 5",
+       "month": 40
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 2790,
+     "lessInterest": "avalanche"
+    }
+   }
+  },
+  {
+   "id": "six-debts-no-extra",
+   "note": "Six debts, no extra, so only rolled minimums speed things up. Worked by the Decimal script.",
+   "input": {
+    "debts": [
+     {
+      "name": "A",
+      "balance": "300",
+      "rate": "24.99",
+      "minimum": "25"
+     },
+     {
+      "name": "B",
+      "balance": "1,200",
+      "rate": "19.99",
+      "minimum": "40"
+     },
+     {
+      "name": "C",
+      "balance": "750",
+      "rate": "0",
+      "minimum": "30"
+     },
+     {
+      "name": "D",
+      "balance": "8,000",
+      "rate": "7.25",
+      "minimum": "160"
+     },
+     {
+      "name": "E",
+      "balance": "2,200",
+      "rate": "15.5",
+      "minimum": "60"
+     },
+     {
+      "name": "F",
+      "balance": "15,000",
+      "rate": "5.1",
+      "minimum": "250"
+     }
+    ],
+    "extra": ""
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "A",
+      "balanceCents": 30000,
+      "rateBps": 2499,
+      "minimumCents": 2500
+     },
+     {
+      "name": "B",
+      "balanceCents": 120000,
+      "rateBps": 1999,
+      "minimumCents": 4000
+     },
+     {
+      "name": "C",
+      "balanceCents": 75000,
+      "rateBps": 0,
+      "minimumCents": 3000
+     },
+     {
+      "name": "D",
+      "balanceCents": 800000,
+      "rateBps": 725,
+      "minimumCents": 16000
+     },
+     {
+      "name": "E",
+      "balanceCents": 220000,
+      "rateBps": 1550,
+      "minimumCents": 6000
+     },
+     {
+      "name": "F",
+      "balanceCents": 1500000,
+      "rateBps": 510,
+      "minimumCents": 25000
+     }
+    ],
+    "extraCents": 0,
+    "totalBalanceCents": 2745000,
+    "monthlyMoneyCents": 56500,
+    "snowball": {
+     "months": 58,
+     "totalInterestCents": 476013,
+     "totalPaidCents": 3221013,
+     "order": [
+      {
+       "name": "A",
+       "month": 14
+      },
+      {
+       "name": "C",
+       "month": 20
+      },
+      {
+       "name": "B",
+       "month": 29
+      },
+      {
+       "name": "E",
+       "month": 36
+      },
+      {
+       "name": "D",
+       "month": 48
+      },
+      {
+       "name": "F",
+       "month": 58
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 57,
+     "totalInterestCents": 474064,
+     "totalPaidCents": 3219064,
+     "order": [
+      {
+       "name": "A",
+       "month": 14
+      },
+      {
+       "name": "C",
+       "month": 25
+      },
+      {
+       "name": "B",
+       "month": 29
+      },
+      {
+       "name": "E",
+       "month": 36
+      },
+      {
+       "name": "D",
+       "month": 48
+      },
+      {
+       "name": "F",
+       "month": 57
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 1,
+     "fewerMonths": "avalanche",
+     "interestApartCents": 1949,
+     "lessInterest": "avalanche"
+    }
+   }
+  },
+  {
+   "id": "plans-differ-a-lot",
+   "note": "A small low-rate debt and a big high-rate debt, extra $200. Snowball goes to the small one first, avalanche to the big one. The two plans end at different months and different interest. Worked by the Decimal script.",
+   "input": {
+    "debts": [
+     {
+      "name": "Small",
+      "balance": "800",
+      "rate": "3",
+      "minimum": "30"
+     },
+     {
+      "name": "Big",
+      "balance": "12,000",
+      "rate": "27.99",
+      "minimum": "300"
+     }
+    ],
+    "extra": "200"
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Small",
+      "balanceCents": 80000,
+      "rateBps": 300,
+      "minimumCents": 3000
+     },
+     {
+      "name": "Big",
+      "balanceCents": 1200000,
+      "rateBps": 2799,
+      "minimumCents": 30000
+     }
+    ],
+    "extraCents": 20000,
+    "totalBalanceCents": 1280000,
+    "monthlyMoneyCents": 53000,
+    "snowball": {
+     "months": 36,
+     "totalInterestCents": 616219,
+     "totalPaidCents": 1896219,
+     "order": [
+      {
+       "name": "Small",
+       "month": 4
+      },
+      {
+       "name": "Big",
+       "month": 36
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 36,
+     "totalInterestCents": 580094,
+     "totalPaidCents": 1860094,
+     "order": [
+      {
+       "name": "Small",
+       "month": 28
+      },
+      {
+       "name": "Big",
+       "month": 36
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 36125,
+     "lessInterest": "avalanche"
+    }
+   }
+  },
+  {
+   "id": "extra-only-helps-with-rolling",
+   "note": "Minimum barely above the interest on both debts ($5,000 at 12% = $50 interest, min $51; $2,000 at 18% = $30 interest, min $31), extra $10. Worked by the Decimal script.",
+   "input": {
+    "debts": [
+     {
+      "name": "Loan",
+      "balance": "5000",
+      "rate": "12",
+      "minimum": "51"
+     },
+     {
+      "name": "Card",
+      "balance": "2000",
+      "rate": "18",
+      "minimum": "31"
+     }
+    ],
+    "extra": "10"
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Loan",
+      "balanceCents": 500000,
+      "rateBps": 1200,
+      "minimumCents": 5100
+     },
+     {
+      "name": "Card",
+      "balanceCents": 200000,
+      "rateBps": 1800,
+      "minimumCents": 3100
+     }
+    ],
+    "extraCents": 1000,
+    "totalBalanceCents": 700000,
+    "monthlyMoneyCents": 9200,
+    "snowball": {
+     "months": 164,
+     "totalInterestCents": 807475,
+     "totalPaidCents": 1507475,
+     "order": [
+      {
+       "name": "Card",
+       "month": 89
+      },
+      {
+       "name": "Loan",
+       "month": 164
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 164,
+     "totalInterestCents": 807475,
+     "totalPaidCents": 1507475,
+     "order": [
+      {
+       "name": "Card",
+       "month": 89
+      },
+      {
+       "name": "Loan",
+       "month": 164
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 0,
+     "lessInterest": "same"
+    }
+   }
+  },
+  {
+   "id": "long-but-under-cap",
+   "note": "$100,000 at 12% with a $1,001 minimum: interest is $1,000.00 in month 1, so the balance drops slowly. About 695 months by the formula n = -ln(1 - iP/pay)/ln(1+i); the Decimal script counts the exact month.",
+   "input": {
+    "debts": [
+     {
+      "name": "Big",
+      "balance": "100000",
+      "rate": "12",
+      "minimum": "1001"
+     }
+    ],
+    "extra": ""
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "Big",
+      "balanceCents": 10000000,
+      "rateBps": 1200,
+      "minimumCents": 100100
+     }
+    ],
+    "extraCents": 0,
+    "totalBalanceCents": 10000000,
+    "monthlyMoneyCents": 100100,
+    "snowball": {
+     "months": 695,
+     "totalInterestCents": 59503765,
+     "totalPaidCents": 69503765,
+     "order": [
+      {
+       "name": "Big",
+       "month": 695
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 695,
+     "totalInterestCents": 59503765,
+     "totalPaidCents": 69503765,
+     "order": [
+      {
+       "name": "Big",
+       "month": 695
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 0,
+     "lessInterest": "same"
+    }
+   }
+  },
+  {
+   "id": "rate-tie-and-balance-tie",
+   "note": "Two debts with the same balance and the same rate: the tie goes to the debt typed first in both plans.",
+   "input": {
+    "debts": [
+     {
+      "name": "First",
+      "balance": "1000",
+      "rate": "10",
+      "minimum": "50"
+     },
+     {
+      "name": "Second",
+      "balance": "1000",
+      "rate": "10",
+      "minimum": "50"
+     }
+    ],
+    "extra": "25"
+   },
+   "expect": {
+    "debts": [
+     {
+      "name": "First",
+      "balanceCents": 100000,
+      "rateBps": 1000,
+      "minimumCents": 5000
+     },
+     {
+      "name": "Second",
+      "balanceCents": 100000,
+      "rateBps": 1000,
+      "minimumCents": 5000
+     }
+    ],
+    "extraCents": 2500,
+    "totalBalanceCents": 200000,
+    "monthlyMoneyCents": 12500,
+    "snowball": {
+     "months": 18,
+     "totalInterestCents": 15554,
+     "totalPaidCents": 215554,
+     "order": [
+      {
+       "name": "First",
+       "month": 15
+      },
+      {
+       "name": "Second",
+       "month": 18
+      }
+     ]
+    },
+    "avalanche": {
+     "months": 18,
+     "totalInterestCents": 15554,
+     "totalPaidCents": 215554,
+     "order": [
+      {
+       "name": "First",
+       "month": 15
+      },
+      {
+       "name": "Second",
+       "month": 18
+      }
+     ]
+    },
+    "difference": {
+     "monthsApart": 0,
+     "fewerMonths": "same",
+     "interestApartCents": 0,
+     "lessInterest": "same"
+    }
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "nothing-typed",
+   "note": "No debts typed at all.",
+   "input": {
+    "debts": [],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "debts",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "blank-rows-only",
+   "note": "Rows that are all blank are skipped, so this is the same as nothing typed.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "",
+      "rate": "",
+      "minimum": ""
+     },
+     {
+      "name": "",
+      "balance": "",
+      "rate": "",
+      "minimum": ""
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "debts",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "balance-only",
+   "note": "A row with only a balance still needs a rate and a smallest payment.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "500",
+      "rate": "",
+      "minimum": ""
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "rate1",
+     "missing"
+    ],
+    [
+     "minimum1",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "name-only",
+   "note": "A row with only a name needs all three numbers.",
+   "input": {
+    "debts": [
+     {
+      "name": "Card",
+      "balance": "",
+      "rate": "",
+      "minimum": ""
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "balance1",
+     "missing"
+    ],
+    [
+     "rate1",
+     "missing"
+    ],
+    [
+     "minimum1",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "words-in-fields",
+   "note": "Words in every number field of row 2; row 1 is fine.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "500",
+      "rate": "18",
+      "minimum": "25"
+     },
+     {
+      "name": "",
+      "balance": "lots",
+      "rate": "high",
+      "minimum": "some"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "balance2",
+     "bad"
+    ],
+    [
+     "rate2",
+     "bad"
+    ],
+    [
+     "minimum2",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "zero-and-negative",
+   "note": "Zero balance, negative rate, zero smallest payment.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "0",
+      "rate": "-1",
+      "minimum": "0"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "balance1",
+     "bad"
+    ],
+    [
+     "rate1",
+     "bad"
+    ],
+    [
+     "minimum1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "rate-over-100",
+   "note": "101 percent is over the limit.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "500",
+      "rate": "101",
+      "minimum": "25"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "rate1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "too-many-decimals",
+   "note": "Three decimals in the rate and the balance.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "500.005",
+      "rate": "6.555",
+      "minimum": "25"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "balance1",
+     "bad"
+    ],
+    [
+     "rate1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "huge-balance",
+   "note": "$1e15 is over the $1,000,000,000 limit (typed as digits).",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "1000000000000000",
+      "rate": "5",
+      "minimum": "25"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "balance1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "exponent-and-emoji",
+   "note": "Exponent and emoji are not numbers.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "1e3",
+      "rate": "😀",
+      "minimum": "NaN"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "balance1",
+     "bad"
+    ],
+    [
+     "rate1",
+     "bad"
+    ],
+    [
+     "minimum1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "seven-debts",
+   "note": "Seven filled rows is over the limit of 6.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "100",
+      "rate": "5",
+      "minimum": "10"
+     },
+     {
+      "name": "",
+      "balance": "100",
+      "rate": "5",
+      "minimum": "10"
+     },
+     {
+      "name": "",
+      "balance": "100",
+      "rate": "5",
+      "minimum": "10"
+     },
+     {
+      "name": "",
+      "balance": "100",
+      "rate": "5",
+      "minimum": "10"
+     },
+     {
+      "name": "",
+      "balance": "100",
+      "rate": "5",
+      "minimum": "10"
+     },
+     {
+      "name": "",
+      "balance": "100",
+      "rate": "5",
+      "minimum": "10"
+     },
+     {
+      "name": "",
+      "balance": "100",
+      "rate": "5",
+      "minimum": "10"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "debts",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "bad-extra",
+   "note": "Extra each month is not a dollar amount.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "500",
+      "rate": "18",
+      "minimum": "25"
+     }
+    ],
+    "extra": "-5"
+   },
+   "errors": [
+    [
+     "extra",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "minimum-equals-interest",
+   "note": "$10,000 at 24%: month 1 interest = 10000*0.24/12 = 200.00. A $200 smallest payment only covers the interest, so it never lowers the debt.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "10000",
+      "rate": "24",
+      "minimum": "200"
+     }
+    ],
+    "extra": "50"
+   },
+   "errors": [
+    [
+     "minimum1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "minimum-below-interest",
+   "note": "$5,000 at 30% = $125.00 interest in month 1 against a $100 smallest payment. Row 2 is fine.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "5000",
+      "rate": "30",
+      "minimum": "100"
+     },
+     {
+      "name": "",
+      "balance": "500",
+      "rate": "10",
+      "minimum": "25"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "minimum1",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "passes-1200-months",
+   "note": "$1,000,000 at 12%: month 1 interest is $10,000.00 and the smallest payment is $10,000.01. The balance falls about a cent at first. By the formula n = -ln(1 - iP/pay)/ln(1+i) it takes about 1,388 months, over the 1,200 cap.",
+   "input": {
+    "debts": [
+     {
+      "name": "",
+      "balance": "1000000",
+      "rate": "12",
+      "minimum": "10000.01"
+     }
+    ],
+    "extra": ""
+   },
+   "errors": [
+    [
+     "debts",
+     "bad"
+    ]
+   ]
+  }
+ ]
+}

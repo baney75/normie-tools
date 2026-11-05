@@ -1,0 +1,577 @@
+{
+  "tool": "form-filler",
+  "screen": ", ,  at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
+  "firstTimeUser": {
+    "model": "sonnet",
+    "score": 4,
+    "runs": [
+      4,
+      4,
+      3,
+      4,
+      3
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to check my answers and then save a sheet of them that I can read from when I fill out my taxes on the IRS website.\n\n2. I would tap \"Save my answer sheet\".\n\n3. Words I did not understand or that felt like tech talk:\n- \"Guided Free File\" (I get the gist, but it sounds like a product name)\n- \"Free File\" in general\n- \"form-filler\"\n- \"Review state\" / \"Step 4 of 4: Review\"\n- \"answer sheet\" (is it a paper, or a file?)\n- \"text file\"\n- \"Source: how this page is made\"\n- \"Submit\"\n- \"Papers you have: 3 of 9\" (what are the nine papers?)\n- \"Free File account\"\n- \"Sign with the income number from last year's return, or a 5-digit code you pick\" (confusing)\n- \"software\"\n- \"delete the file\" (where would I find it?)\n- \"Start over asks first, and you can undo it right after\"\n\n4. What made me worry:\n- It says \"Nothing is sent,\" which is comforting, but I still wonder where the saved file goes on my phone and who could see it.\n- My birth date, address, and phone number are listed, and I wonder if saving them is safe.\n- \"Press Submit, the button that sends your tax return\" made me nervous about pressing the wrong thing, though it says this tool never does that.\n- \"If you owe tax, you pay it yourself\" made me think about money, though it says nothing here costs.\n- \"Free File open yet? No. The IRS says it opens in January 2027.\" That confused me. I can't do anything yet, so why save now?\n- \"picks an extra that costs money\" made me wonder if extras exist that could trick me.\n- Having to sign with last year's income number or make up a code felt like a place to make a mistake.\n- Three outline buttons (Stop now, Back, Start over) look close together, and I might tap Start over by accident.\n\n5. What I would skip:\n- The \"Source: ...\" lines and the links \"how this page is made\" and \"IRS Free File page.\"\n- The \"What you do yourself\" list, because it is long and I would not read it all.\n- \"See the answer sheet\" (closed section), probably, since I'm unsure what it shows.\n- The \"Edit\" links for answers that look right.\n\n6. Score: 4. I know the big orange button is the main thing, but I'm unsure what happens after, and why I'm saving now if the site isn't open yet.\n\nRESULT: {\"next_tap\": \"Save my answer sheet\", \"confusing_terms\": [\"Guided Free File\", \"Free File\", \"form-filler\", \"Review state\", \"answer sheet\", \"text file\", \"Source: how this page is made\", \"Submit\", \"Papers you have 3 of 9\", \"Free File account\", \"Sign with the income number from last year's return, or a 5-digit code you pick\", \"software\", \"delete the file\", \"Start over asks first, and you can undo it right after\"], \"worries\": [\"where the saved file goes and who could see it\", \"personal info like birth date and address being saved\", \"pressing Submit by mistake\", \"possible costs or tricky extras\", \"Free File not open until January 2027, so why save now\", \"signing with last year's income number or a code\", \"tapping Start over by accident\"], \"skippable\": [\"Source lines and links\", \"What you do yourself list\", \"See the answer sheet closed section\", \"Edit links for correct answers\"], \"score\": 4}"
+  },
+  "designRubric": [
+    {
+      "model": "haiku",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "FAIL"
+      ],
+      "passes": 7,
+      "fails": [
+        "Rule 8: \"The IRS says it opens in January 2027.\" has no linked source on the page",
+        "Rule 8: \"No. The IRS says it opens in January 2027.\" attributes a claim to the IRS with no source link on the page."
+      ],
+      "runs": [
+        {
+          "passes": 6,
+          "rules": [
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 6,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 6,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"FAIL\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"FAIL\", \"fails\": [\"Rule 2: long sentence \\\"This tool never presses Submit, signs for you, pays anything, or picks an extra that costs money.\\\"\", \"Rule 2: long sentence \\\"Your answer sheet is a list to read from when you type your answers in at IRS.gov/freefile.\\\"\", \"Rule 8: \\\"The IRS says it opens in January 2027.\\\" has no linked source on the page\"], \"score\": 6}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    }
+  ],
+  "otherScreens": [
+    {
+      "screen": "start",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 3,
+        "runs": [
+          3,
+          3,
+          3,
+          4,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "**1.** This screen wants me to answer whether I'm doing this year's taxes, then tap Next, so it can get my answers ready for the IRS's free tax filing.\n\n**2.** I would tap **Yes**. Then I'd tap **Next**.\n\n**3. Words I didn't understand or that felt like tech talk:**\n- \"IRS Free File\". I'm not sure if it's a program, a website, or an app.\n- \"form-filler\" and \"Step 1 of 4\". I don't know what the four steps are.\n- \"Source: how this page is made\". That sounds like computer-builder talk.\n- \"Numbers stay on this phone or computer\". I don't know what that means for my information.\n- \"Submit\". I think it means sending my taxes, but I'm not sure where.\n- \"Have saved answers?\". I don't remember saving anything, and I don't know where it was saved.\n- \"Free File can't do past years\" and \"this year's taxes\". It's November 2026, and it says Free File opens in January 2027. I don't know whether \"this year\" means 2026 or the one coming up.\n\n**4. Worries:**\n- \"Free\" makes me wonder if there's a catch or a charge later.\n- \"You make the account\". I don't know what account, or what I'd have to give them.\n- It says the page never files for me. That's reassuring, but I'm still nervous about pressing the wrong thing.\n- The line \"The person has just typed their own numbers in the boxes\" mentions numbers, but I don't see any boxes. I worry I missed something or that the page isn't working right.\n- I don't want to pick the wrong answer. Next says I can go Back, which helps a little.\n- I'm not sure whether this is the real IRS or a copycat. The page says it's a helper, but it isn't clear who made it.\n\n**5. Skippable:**\n- Both \"Source: IRS Free File page\" lines with their links.\n- The \"how this page is made\" link.\n- \"Back to home\".\n\n**6. Score: 3.** I know to pick an answer and tap Next. But the January 2027 date and \"this year's taxes\" leave me unsure whether Yes is right.\n\nRESULT: {\"next_tap\": \"Yes (then Next)\", \"confusing_terms\": [\"IRS Free File\", \"form-filler\", \"Step 1 of 4\", \"Source: how this page is made\", \"Numbers stay on this phone or computer\", \"Submit\", \"Have saved answers?\", \"this year's taxes vs. January 2027\", \"boxes mentioned but not visible\"], \"worries\": [\"'Free' might have a catch or later cost\", \"'You make the account' - unclear what account or info is needed\", \"Fear of pressing the wrong thing or picking the wrong answer\", \"Unsure whether this is the real IRS or a copycat\", \"Mention of numbers in boxes that I can't see\"], \"skippable\": [\"Source: IRS Free File page lines and links\", \"how this page is made link\", \"Back to home\"], \"score\": 3}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 7,
+          "fails": [
+            "rule6: \"Next saves your answer.\" The screen saves the answer with no preview shown before the change. It does say how to undo (\"You can go Back and change it.\")",
+            "Rule 6: \"Next saves your answer.\" is shown with no preview before the change. The page gives an undo (\"You can go Back and change it\"), but no preview."
+          ],
+          "runs": [
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule6: \\\"Next saves your answer.\\\" The screen saves the answer with no preview shown before the change. It does say how to undo (\\\"You can go Back and change it.\\\")\"],\"score\":7}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    },
+    {
+      "screen": "papers",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 3,
+        "runs": [
+          3,
+          4,
+          3,
+          4,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to check off the papers I have gathered for my taxes, then move on.\n\n2. I would tap **Next**.\n\n3. Words I did not understand or that felt like tech talk:\n- \"ITIN\" (they explain it, but it is still a strange word)\n- \"Form Filler\" (not sure what it fills or for whom)\n- \"W-2\" and \"1099 forms\" (I have heard of them, but I'm not sure which I have)\n- \"1095-A\" and \"Marketplace\"\n- \"IP code\" (I don't know what IP means here)\n- \"routing number\"\n- \"Credits\" and \"Form 1098-T\"\n- \"Source: how this page is made\" (why would I care?)\n- \"IRS online account\" and \"Tax Records\"\n- \"the 5-digit code you picked last year\"\n- \"More forms\" (a closed section, and I'm not sure what's in it)\n\n4. What made me worry:\n- Bank account details and Social Security numbers are very private. \"Nothing is sent. Numbers stay on this phone or computer\" helps, but I would still wonder if it is true.\n- The line saying the person \"just typed their own numbers in the boxes\" makes me wonder whether my numbers are being kept somewhere.\n- Being asked about signing in to an IRS account makes me worry about scams, even though it says IRS.\n- I'm not sure whether I will lose what I ticked if I tap Back or Back to home.\n- I don't know if I must have everything ticked before tapping Next, or if leaving boxes empty is fine.\n- \"Step 2 of 4\" makes me wonder what the other steps will ask for.\n\n5. What I would skip:\n- The \"Source: how this page is made\" line and its link.\n- The \"Source: IRS Free File page\" line and its link.\n- The empty link under \"More forms,\" which has no words.\n- \"Back to home,\" since I'm not trying to leave.\n\n6. Score: 3. I think I tick what I have and tap Next, but I'm unsure whether the boxes and numbers I typed matter, and I worry a little about the private details.\n\nRESULT: {\"next_tap\": \"Next\", \"confusing_terms\": [\"ITIN\", \"Form Filler\", \"W-2\", \"1099 forms\", \"1095-A\", \"Marketplace\", \"IP code\", \"routing number\", \"credits\", \"Form 1098-T\", \"IRS online account\", \"Tax Records\", \"5-digit code you picked last year\", \"More forms\", \"how this page is made\"], \"worries\": [\"Social Security number and bank details are private\", \"unsure if numbers I typed are really kept only on my device\", \"signing in to IRS account could be a scam\", \"unsure if ticks are lost if I go Back\", \"unsure if I must tick everything before Next\", \"unsure what the other steps ask\"], \"skippable\": [\"Source: how this page is made\", \"Source: IRS Free File page\", \"empty link under More forms\", \"Back to home\"], \"score\": 3}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "FAIL",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 6,
+          "fails": [
+            "rule2: an empty plain link ([link, plain] with no text) appears between the 'More forms' section and the 1095-A item, which is clutter with no purpose",
+            "Rule 2: an unlabeled empty link ('[link, plain]') and a duplicate 'Back to home' link add clutter. The 'Papers for credits' item runs one long line of several clauses.",
+            "rule3: 'IP code the IRS sent you' uses an unexplained technical-sounding term ('IP') with no definition on the page",
+            "Rule 3: 'IP code the IRS sent you' and 'Form 1098-T' are used without explanation."
+          ],
+          "runs": [
+            {
+              "passes": 6,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 6,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 6,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 6,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "FAIL"
+              ]
+            },
+            {
+              "passes": 6,
+              "rules": [
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"FAIL\", \"rule3\": \"FAIL\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule2: an empty plain link ([link, plain] with no text) appears between the 'More forms' section and the 1095-A item, which is clutter with no purpose\", \"rule3: 'IP code the IRS sent you' uses an unexplained technical-sounding term ('IP') with no definition on the page\"], \"score\": 6}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
+}

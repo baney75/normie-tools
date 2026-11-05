@@ -54,14 +54,17 @@ Jargon exceptions:
 
 ## Placeholder jobs
 
-`.github/workflows/ci.yml` has jobs named `placeholder-*`. They are set to `if: false` and only print SKIP. They stand for checks that need code:
+`.github/workflows/ci.yml` still has two jobs named `placeholder-*`. They are set to `if: false` and only print SKIP. They stand for checks that need code:
 
-- `placeholder-accessibility`: axe at phone size, reduced motion, no layout shift, progress indicator, autosave and resume
-- `placeholder-upload-error-contract`: wrong-file-type message names the type given and the type needed
 - `placeholder-golden-accuracy`: Free File tax cases and File Converter document pairs
 - `placeholder-tool-search-eval`: finding the right tool
 
 To activate one: remove `if: false`, replace the echo step with the real command, and add the job to branch protection.
+
+These two are live now (they were placeholders):
+
+- `accessibility`: axe at phone size, reduced motion, progress indicator, autosave and resume (`npm run test:a11y`)
+- `upload-error-contract`: wrong-file-type message names the type given and the type needed (`npm run test:upload-contract`)
 
 ## Branch names
 
