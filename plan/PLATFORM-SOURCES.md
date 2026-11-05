@@ -114,3 +114,24 @@
 - OCRmyPDF, https://github.com/ocrmypdf/OCRmyPDF : MPL-2.0 (pypi 17.13.0); requires Ghostscript and Tesseract installed. Ghostscript (ArtifexSoftware/ghostpdl) is AGPL or commercial per Artifex (GitHub shows NOASSERTION, so the exact terms are to confirm).
 - Tesseract, https://github.com/tesseract-ocr/tesseract : Apache-2.0. Tesseract.js 7.0.0 (npm), https://github.com/naptha/tesseract.js : Apache-2.0, runs in browsers and Node via a WebAssembly port; "does not support PDF files". Scribe.js (an alternative that reads PDFs) is AGPL-3.0.
 - qpdf (Apache-2.0) and pdf.js (Apache-2.0), per GitHub license metadata.
+
+## Claude.ai skills sandbox (checked 2026-11-05, ET)
+
+For skills/ and docs/skills-guide.md. Sources:
+- https://claude.com/docs/skills/how-to
+- https://claude.com/docs/skills/overview
+- https://support.claude.com/en/articles/12512198-how-to-create-custom-skills
+- https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+- https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
+- https://platform.claude.com/docs/en/build-with-claude/skills-guide
+
+Findings:
+- Upload: a ZIP whose top level is the skill directory holding SKILL.md. The directory name must match the YAML `name`.
+- Plans: the overview lists Pro, Max, Ultra, Team, and Enterprise; the help center also lists Free. All need Code execution and file creation turned on (Settings > Capabilities). NT supports Free when those are on, and says so in the docs.
+- Scripts live in `scripts/` next to SKILL.md. Use relative paths for claude.ai. `${CLAUDE_SKILL_DIR}` is documented for Claude Code and Cowork.
+- Sandbox languages: Python and bash in the code execution environment.
+- Preinstalled in the API code execution environment (NT uses this as a cautious baseline for scripts that need no network): Python 3.11; pandas, numpy, scipy, scikit-learn, statsmodels, matplotlib, seaborn, openpyxl, xlsxwriter, xlrd, pillow, python-pptx, python-docx, pypdf, pdfplumber, pypdfium2, pdf2image, reportlab, sympy, python-dateutil, pytz, and others. The API cannot install packages at run time. On claude.ai, network access varies by the user's setting, so NT scripts assume no network.
+- Size: an API custom skill is limited to 30 MB uncompressed. NT uses the same number as the budget for each zip in `dist/skills`.
+- No secrets inside skills. Skills do not sync between claude.ai, the API, and Claude Code.
+- NT rule: standard library first; only packages verified as preinstalled; no dependency on the Node `nt` command inside sandbox scripts; use a second path when `nt` exists.
+
