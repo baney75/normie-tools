@@ -66,8 +66,8 @@ export const COPY = {
     fileName: "loan-numbers.txt",
   },
   notes: {
-    estimate: "This is an estimate from the numbers you typed. Your lender's paper wins.",
-    apr: "APR is the yearly cost of the loan, counting some fees. Your lender's paper shows it. This tool does not work it out.",
+    estimate: "This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.",
+    apr: "APR is the yearly cost of the loan, counting some fees. Your lender statement shows it. This tool does not work it out.",
   },
   back: "Back to home",
 } as const;

@@ -30,8 +30,10 @@ export const COPY = {
   facts: {
     lowestCost: "Lowest cost of borrowing",
     lowestPayment: "Lowest monthly payment",
-    tie: "These offers have the same number.",
-    one: "This offer has the smallest number.",
+    tieCost: "These offers tie on cost of borrowing.",
+    tiePayment: "These offers tie on monthly payment.",
+    oneCost: "This offer has the lowest cost of borrowing.",
+    onePayment: "This offer has the lowest monthly payment.",
     differ: "These offers differ in amount or length. Their totals are for different loans.",
   },
   result: {
@@ -47,7 +49,7 @@ export const COPY = {
   more: {
     summary: "Show more",
     tableHeading: "All offers in one table",
-    row: "Number",
+    row: "What we compare",
   },
   key: {
     summary: "What the words mean",
@@ -63,9 +65,9 @@ export const COPY = {
     fileName: "loan-offers.txt",
   },
   notes: {
-    estimate: "This is an estimate from the numbers you typed. Your lender's paper wins.",
-    apr: "APR is the yearly cost of the loan, counting some fees. Your lender's paper shows it. This tool does not work it out.",
-    facts: "Lowest means the smallest number. It is a fact about the numbers, not advice.",
+    estimate: "This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.",
+    apr: "APR is the yearly cost of the loan, counting some fees. Your lender statement shows it. This tool does not work it out.",
+    facts: "Lowest is a fact about the numbers on the page, not advice.",
   },
   back: "Back to home",
 } as const;

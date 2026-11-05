@@ -116,7 +116,7 @@ describe("Savings Goal Tracker page", () => {
 
   it("says it is an estimate and explains the words", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate from the numbers you typed. Your bank's paper wins.")).toBeInTheDocument();
+    expect(screen.getByText("This is an estimate from the numbers you typed. Your bank statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 

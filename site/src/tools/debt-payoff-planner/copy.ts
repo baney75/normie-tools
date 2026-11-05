@@ -78,7 +78,7 @@ export const COPY = {
     fileName: "debt-payoff-numbers.txt",
   },
   notes: {
-    estimate: "This is an estimate from the numbers you typed. Your lenders' statements win.",
+    estimate: "This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.",
     facts: "These are facts about two plans. This page does not tell you which one to use.",
   },
   back: "Back to home",

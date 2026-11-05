@@ -75,7 +75,7 @@ export const COPY = {
     fileName: "home-payment-numbers.txt",
   },
   notes: {
-    estimate: "This is an estimate from the numbers you typed. Your lender's paper wins.",
+    estimate: "This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.",
     changes: "Tax and insurance can change. This tool uses only what you typed.",
   },
   back: "Back to home",

@@ -88,7 +88,7 @@ describe("Loan Offer Compare page", () => {
     await fillOffer(1, { amount: "5000", rate: "4", term: "24", fees: "50" });
     await fillOffer(2, { amount: "5,000", rate: "4.00", term: "24", fees: "50" });
     expect(screen.getByLabelText("Lowest cost of borrowing")).toHaveTextContent("Offer 1 and Offer 2");
-    expect(screen.getByLabelText("Lowest cost of borrowing")).toHaveTextContent(COPY.facts.tie);
+    expect(screen.getByLabelText("Lowest cost of borrowing")).toHaveTextContent(COPY.facts.tieCost);
     expect(screen.getByLabelText("Lowest monthly payment")).toHaveTextContent("Offer 1 and Offer 2");
     expect(screen.queryByText(COPY.facts.differ)).toBeNull();
   });
@@ -124,7 +124,7 @@ describe("Loan Offer Compare page", () => {
 
   it("says it is an estimate, says the lender shows the APR, and explains the words", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate from the numbers you typed. Your lender's paper wins.")).toBeInTheDocument();
+    expect(screen.getByText("This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
     expect(screen.getByText(/APR is the yearly cost of the loan/)).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });

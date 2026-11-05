@@ -81,7 +81,7 @@ export const COPY = {
     fileName: "savings-numbers.txt",
   },
   notes: {
-    estimate: "This is an estimate from the numbers you typed. Your bank's paper wins.",
+    estimate: "This is an estimate from the numbers you typed. Your bank statement is the final word. This page helps you understand the numbers.",
     rule: "Each month, interest is added first. Then your monthly amount is added.",
   },
   monthNames: [

@@ -121,7 +121,7 @@ describe("Mortgage Payment Explainer page", () => {
 
   it("says it is an estimate and explains every word", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate from the numbers you typed. Your lender's paper wins.")).toBeInTheDocument();
+    expect(screen.getByText("This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 

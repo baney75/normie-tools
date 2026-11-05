@@ -67,8 +67,8 @@ export const COPY = {
     fileName: "student-loan-numbers.txt",
   },
   notes: {
-    estimate: "This is an estimate from the numbers you typed. The paper from the company that collects your payments wins.",
-    noAdvice: "This page explains numbers. It does not tell you what to do.",
+    estimate: "Your loan statement is the final word. This page helps you understand it.",
+    noAdvice: "These are facts about the numbers, not advice.",
   },
   back: "Back to home",
 } as const;

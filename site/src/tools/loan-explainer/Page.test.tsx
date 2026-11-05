@@ -87,7 +87,7 @@ describe("Loan Explainer page", () => {
 
   it("says it is an estimate, says the lender shows the APR, and explains the words", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate from the numbers you typed. Your lender's paper wins.")).toBeInTheDocument();
+    expect(screen.getByText("This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
     expect(screen.getByText(/APR is the yearly cost of the loan/)).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });

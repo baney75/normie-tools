@@ -191,10 +191,10 @@ function Answer({ result }: { result: Good }) {
   return (
     <div className="nt-offers-results">
       <ResultCard label={f.lowestCost} answer={costNames}>
-        <p className="nt-offers-help">{result.lowestCost.tie ? f.tie : f.one}</p>
+        <p className="nt-offers-help">{result.lowestCost.tie ? f.tieCost : f.oneCost}</p>
       </ResultCard>
       <ResultCard label={f.lowestPayment} answer={payNames}>
-        <p className="nt-offers-help">{result.lowestPayment.tie ? f.tie : f.one}</p>
+        <p className="nt-offers-help">{result.lowestPayment.tie ? f.tiePayment : f.onePayment}</p>
       </ResultCard>
       {!result.sameAmountAndLength ? <p className="nt-offers-status">{f.differ}</p> : null}
 

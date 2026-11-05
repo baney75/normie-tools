@@ -115,9 +115,9 @@ describe("Student Loan Growth and Payoff page", () => {
     expect(screen.getByText(/too small to pay off the loan in 100 years/)).toBeInTheDocument();
   });
 
-  it("says it is an estimate and that the paper from the company that collects your payments wins", () => {
+  it("says the loan statement is the final word", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate from the numbers you typed. The paper from the company that collects your payments wins.")).toBeInTheDocument();
+    expect(screen.getByText("Your loan statement is the final word. This page helps you understand it.")).toBeInTheDocument();
   });
 
   it("offers to use saved numbers and brings them back", async () => {
