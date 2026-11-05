@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TOOLS, isUsable } from "../data/tools";
+import { Footer } from "../components/Footer";
 import { Agents } from "./Agents";
 import { Home } from "./Home";
 import { Install } from "./Install";
@@ -62,5 +63,17 @@ describe("other pages", () => {
   it("renders a calm not found page", () => {
     render(<NotFound />);
     expect(screen.getByRole("link")).toHaveAttribute("href", "#/");
+  });
+});
+
+describe("Footer", () => {
+  it("links to the code and the skills", () => {
+    render(<Footer />);
+    const code = screen.getByRole("link", { name: "See the code" });
+    expect(code).toHaveAttribute("href", "https://github.com/baney75/normie-tools");
+    expect(code).toHaveAttribute("rel", "noopener noreferrer");
+    const skills = screen.getByRole("link", { name: "Ready-made helpers" });
+    expect(skills).toHaveAttribute("href", "https://github.com/baney75/normie-tools/tree/main/skills");
+    expect(skills).toHaveAttribute("rel", "noopener noreferrer");
   });
 });
