@@ -2,6 +2,8 @@ import { defineConfig, devices } from "@playwright/test";
 
 // Serves the built site. Run `npm run build` first (the root test:e2e script does).
 const PORT = 4173;
+// The site is served under /nt/, as on https://dbaney.com/nt/. Tests use paths with no leading slash.
+const BASE = `http://127.0.0.1:${PORT}/nt/`;
 
 // On a host that cannot run a browser, skip it by name: NT_E2E_SKIP=webkit,firefox.
 // CI never sets this, so CI runs all three.
@@ -15,12 +17,12 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [["list"], ["github"]] : "list",
   use: {
-    baseURL: `http://127.0.0.1:${PORT}`,
+    baseURL: BASE,
     trace: "retain-on-failure",
   },
   webServer: {
     command: `npm run preview -- --host 127.0.0.1 --port ${PORT} --strictPort`,
-    url: `http://127.0.0.1:${PORT}`,
+    url: BASE,
     reuseExistingServer: !process.env.CI,
   },
   projects: [

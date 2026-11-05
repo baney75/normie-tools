@@ -22,7 +22,7 @@ async function fillPlain(page: import("@playwright/test").Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/save-me-money");
+  await page.goto("#/tools/save-me-money");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByLabel("Phone, amount")).toBeVisible();
@@ -106,7 +106,7 @@ test("costs come back after leaving", async ({ page }) => {
   await page.getByLabel("Phone, amount").fill("65");
   await expect(page.getByLabel("Total for a year", { exact: true })).toContainText("$780.00");
   await page.goto("about:blank");
-  await page.goto("/#/tools/save-me-money");
+  await page.goto("#/tools/save-me-money");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Phone, amount")).toHaveValue("65");
   await expect(page.getByLabel("Total for a year", { exact: true })).toContainText("$780.00");

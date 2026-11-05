@@ -4,7 +4,7 @@ import { PHONE } from "./viewports";
 test.use({ viewport: { width: PHONE.width, height: PHONE.height }, reducedMotion: "reduce" });
 
 test("no animation or transition runs when the device asks for less motion", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("./");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   expect(await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches)).toBe(true);
   const moving = await page.evaluate(() => {

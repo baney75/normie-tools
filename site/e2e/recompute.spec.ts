@@ -5,7 +5,7 @@ import { expect, test, type Page } from "@playwright/test";
 test.use({ viewport: { width: 390, height: 844 } });
 
 async function open(page: Page, id: string) {
-  await page.goto(`/#/tools/${id}`);
+  await page.goto(`#/tools/${id}`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
 }

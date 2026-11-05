@@ -29,7 +29,7 @@ for (const d of DEVICES) {
 }
 
 const tag = (s) =>
-  `    <link rel="apple-touch-startup-image" href="./splash/${s.file}" media="(device-width: ${s.w}px) and (device-height: ${s.h}px) and (-webkit-device-pixel-ratio: ${s.r}) and (orientation: ${s.orientation})" />`;
+  `    <link rel="apple-touch-startup-image" href="/splash/${s.file}" media="(device-width: ${s.w}px) and (device-height: ${s.h}px) and (-webkit-device-pixel-ratio: ${s.r}) and (orientation: ${s.orientation})" />`;
 
 if (!process.argv.includes("--print")) {
   fs.mkdirSync(out, { recursive: true });

@@ -19,7 +19,7 @@ async function fillWhen(page: import("@playwright/test").Page, v: { goal: string
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/savings-goal-tracker");
+  await page.goto("#/tools/savings-goal-tracker");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByLabel("Goal amount")).toBeVisible();
@@ -102,7 +102,7 @@ test("numbers come back after leaving", async ({ page }) => {
   await fillWhen(page, { goal: "1200", saved: "0", monthly: "100" });
   await expect(page.getByLabel("Months to your goal")).toContainText("12 months");
   await page.goto("about:blank");
-  await page.goto("/#/tools/savings-goal-tracker");
+  await page.goto("#/tools/savings-goal-tracker");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Goal amount")).toHaveValue("1200");
   await expect(page.getByLabel("Months to your goal")).toContainText("12 months");

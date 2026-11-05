@@ -9,7 +9,7 @@ const shipped = tools.filter((t) => t.status === "shipped");
 test.use({ viewport: { width: PHONE.width, height: PHONE.height } });
 
 test("a Coming soon tile is not a link and cannot be clicked into a tool", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("./");
   const tile = page.locator(".nt-card-off").first();
   await expect(tile).toBeVisible();
   await expect(tile).toHaveAttribute("aria-disabled", "true");
@@ -21,6 +21,6 @@ test("a Coming soon tile is not a link and cannot be clicked into a tool", async
   await expect(page.locator(".nt-card-off")).toHaveCount(tools.length - shipped.length);
 
   await tile.click();
-  await expect(page).toHaveURL(/\/$|\/#\/?$/);
+  await expect(page).toHaveURL(/\/nt\/$|\/nt\/#\/?$/);
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 });

@@ -15,7 +15,7 @@ async function fillBasic(page: import("@playwright/test").Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/mortgage-payment-explainer");
+  await page.goto("#/tools/mortgage-payment-explainer");
   await page.getByLabel("Home price").waitFor();
   await page.evaluate(() => localStorage.clear());
   await page.reload();
@@ -104,7 +104,7 @@ test("numbers come back after leaving", async ({ page }) => {
   await page.getByLabel("Years to pay it back").fill("10");
   await expect(page.getByLabel("Total monthly payment")).toContainText("$1,000.00");
   await page.goto("about:blank");
-  await page.goto("/#/tools/mortgage-payment-explainer");
+  await page.goto("#/tools/mortgage-payment-explainer");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Home price")).toHaveValue("130000");
   await expect(page.getByLabel("Total monthly payment")).toContainText("$1,000.00");

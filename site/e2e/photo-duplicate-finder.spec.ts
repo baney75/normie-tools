@@ -63,7 +63,7 @@ async function pick(page: Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/photo-duplicate-finder");
+  await page.goto("#/tools/photo-duplicate-finder");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByLabel("Pick photos")).toBeVisible();

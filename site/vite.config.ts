@@ -2,9 +2,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Relative base so the built site works from any static host or sub-folder.
+// The site lives at https://dbaney.com/nt/, so the base is absolute.
 export default defineConfig({
-  base: "./",
+  base: "/nt/",
   plugins: [react()],
   // The service worker reads this list to save every file, including the lazy tool pages, for offline use.
   build: { manifest: "asset-manifest.json" },

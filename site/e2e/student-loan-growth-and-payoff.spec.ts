@@ -14,7 +14,7 @@ async function fillGolden(page: import("@playwright/test").Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/student-loan-growth-and-payoff");
+  await page.goto("#/tools/student-loan-growth-and-payoff");
   await page.getByLabel("Loan balance").waitFor();
   await page.evaluate(() => localStorage.clear());
   await page.reload();
@@ -89,7 +89,7 @@ test("numbers come back after leaving", async ({ page }) => {
   await page.getByLabel("Yearly interest rate").fill("0");
   await expect(page.getByRole("region", { name: "Balance when payments start", exact: true })).toContainText("$1,200.00");
   await page.goto("about:blank");
-  await page.goto("/#/tools/student-loan-growth-and-payoff");
+  await page.goto("#/tools/student-loan-growth-and-payoff");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Loan balance")).toHaveValue("1200");
   await expect(page.getByRole("region", { name: "Balance when payments start", exact: true })).toContainText("$1,200.00");

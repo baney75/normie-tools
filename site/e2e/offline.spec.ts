@@ -11,7 +11,7 @@ test("home and every shipped tool load and work offline after one online visit",
   test.skip(browserName !== "chromium", "offline shell is checked in Chromium");
   test.setTimeout(120_000);
 
-  await page.goto("/");
+  await page.goto("./");
   await page.evaluate(async () => {
     const reg = await navigator.serviceWorker.ready;
     if (!navigator.serviceWorker.controller) {
@@ -36,7 +36,7 @@ test("home and every shipped tool load and work offline after one online visit",
   await expect(page.getByLabel("What do you want to get done?")).toBeVisible();
 
   for (const hash of ["#/agents", "#/install"]) {
-    await page.goto(`/${hash}`);
+    await page.goto(`${hash}`);
     await page.reload();
     await expect(page.getByRole("heading", { level: 1 }), `${hash} offline`).toBeVisible();
   }
@@ -45,7 +45,7 @@ test("home and every shipped tool load and work offline after one online visit",
   expect(tools.length).toBeGreaterThan(0);
   for (const t of tools) {
     // goto + reload makes a real offline page load, not just a hash change.
-    await page.goto(`/${t.hash}`);
+    await page.goto(`${t.hash}`);
     await page.reload();
     await expect(page.getByRole("heading", { level: 1 }), `${t.id} heading offline`).toBeVisible();
     const field = page.locator(FIELD).filter({ visible: true }).first();

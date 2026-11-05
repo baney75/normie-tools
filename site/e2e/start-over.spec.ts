@@ -13,7 +13,7 @@ const TOOLS = [
 
 for (const id of TOOLS) {
   test(`${id}: Start over clears the boxes and Put it back restores them`, async ({ page }) => {
-    await page.goto(`/#/tools/${id}`);
+    await page.goto(`#/tools/${id}`);
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     // The budget page starts with a name box (Pay), so use its first amount box.

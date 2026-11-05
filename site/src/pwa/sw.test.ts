@@ -17,8 +17,8 @@ describe("manifest", () => {
       name: "NT",
       short_name: "NT",
       description: "Small tools for everyday things.",
-      start_url: "./",
-      scope: "./",
+      start_url: "/nt/",
+      scope: "/nt/",
       display: "standalone",
       background_color: "#F7F2E8",
       theme_color: "#134E3A",
@@ -76,10 +76,21 @@ describe("sw.js", () => {
     const html = fs.readFileSync(path.resolve(__dirname, "../../index.html"), "utf8");
     const hrefs = [...html.matchAll(/rel="apple-touch-startup-image" href="([^"]+)"/g)].map((m) => m[1]);
     expect(hrefs.length).toBeGreaterThanOrEqual(7);
-    for (const h of hrefs) expect(sw).toContain(`"${h}"`);
+    for (const h of hrefs) expect(sw).toContain(`".${h}"`); // index.html uses root paths, Vite adds /nt/; the worker uses paths relative to itself
   });
   it("answers any page request offline with the saved shell", () => {
     expect(sw).toContain('req.mode === "navigate"');
     expect(sw).toContain('caches.match("./index.html"');
+  });
+});
+
+describe("served under /nt/", () => {
+  it("registers the worker with the /nt/ scope", () => {
+    const main = fs.readFileSync(path.resolve(__dirname, "../main.tsx"), "utf8");
+    expect(main).toContain("import.meta.env.BASE_URL}sw.js");
+    expect(main).toContain("scope: import.meta.env.BASE_URL");
+  });
+  it("keeps worker file paths relative to sw.js, which sits in /nt/", () => {
+    expect(sw).not.toMatch(/"\/[a-z]/);
   });
 });

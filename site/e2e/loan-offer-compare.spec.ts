@@ -14,7 +14,7 @@ async function fillOffer(page: Page, n: number, v: { amount: string; rate: strin
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/loan-offer-compare");
+  await page.goto("#/tools/loan-offer-compare");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByLabel("Offer 1: Amount borrowed")).toBeVisible();
@@ -100,7 +100,7 @@ test("numbers come back after leaving", async ({ page }) => {
   await fillOffer(page, 2, { amount: "1200", rate: "0", term: "24" });
   await expect(page.getByLabel("Offer 1, monthly payment")).toContainText("$100.00");
   await page.goto("about:blank");
-  await page.goto("/#/tools/loan-offer-compare");
+  await page.goto("#/tools/loan-offer-compare");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Offer 1: Amount borrowed")).toHaveValue("1200");
   await expect(page.getByLabel("Offer 2, monthly payment")).toContainText("$50.00");

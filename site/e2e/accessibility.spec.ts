@@ -13,7 +13,7 @@ const PAGES = [
 
 for (const p of PAGES) {
   test(`axe finds nothing on ${p.name} at phone size`, async ({ page }) => {
-    await page.goto(`/${p.hash}`);
+    await page.goto(`${p.hash}`);
     await expect(page.getByRole("heading", { level: 1 }).or(page.getByRole("heading", { level: 2 })).first()).toBeVisible();
     const result = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])

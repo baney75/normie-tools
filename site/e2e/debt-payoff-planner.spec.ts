@@ -21,7 +21,7 @@ async function fillTwo(page: import("@playwright/test").Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/debt-payoff-planner");
+  await page.goto("#/tools/debt-payoff-planner");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByLabel("Debt 1 balance")).toBeVisible();
@@ -104,7 +104,7 @@ test("numbers come back after leaving", async ({ page }) => {
   await page.getByLabel("Debt 1 minimum payment").fill("100");
   await expect(page.getByRole("region", { name: "Both plans" })).toContainText("12 months");
   await page.goto("about:blank");
-  await page.goto("/#/tools/debt-payoff-planner");
+  await page.goto("#/tools/debt-payoff-planner");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Debt 1 balance")).toHaveValue("1200");
   await expect(page.getByRole("region", { name: "Both plans" })).toContainText("12 months");

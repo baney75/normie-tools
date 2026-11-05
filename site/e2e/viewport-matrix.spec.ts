@@ -67,7 +67,7 @@ for (const vp of VIEWPORTS) {
 
     for (const r of ROUTES) {
       test(`${r.id} fits the screen`, async ({ page }, info) => {
-        await page.goto(`/${r.hash}`);
+        await page.goto(`${r.hash}`);
         await expect(page.getByRole("heading").first(), "first heading").toBeVisible();
         await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible();
         if (r.tool) {
@@ -98,7 +98,7 @@ test.describe("home loads", () => {
   test.use({ viewport: { width: PHONE.width, height: PHONE.height } });
 
   test("home shows one prompt box and a grid of tools", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("./");
     await expect(page.getByRole("search")).toBeVisible();
     await expect(page.getByLabel("What do you want to get done?")).toBeVisible();
     await expect(page.getByText("Coming soon").first()).toBeVisible();
@@ -110,7 +110,7 @@ test.describe("evidence shots", () => {
     test.skip(info.project.name !== "chromium", "one browser makes the committed shots");
     fs.mkdirSync(SHOTS_DIR, { recursive: true });
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/");
+    await page.goto("./");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await page.screenshot({ path: path.join(SHOTS_DIR, "home-390.png"), fullPage: true });
     await page.setViewportSize({ width: 1280, height: 800 });

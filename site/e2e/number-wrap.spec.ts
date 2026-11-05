@@ -4,7 +4,7 @@ import { expect, test, type Page } from "@playwright/test";
 test.use({ viewport: { width: 375, height: 667 } });
 
 async function fill(page: Page, id: string, boxes: [string, string][]) {
-  await page.goto(`/#/tools/${id}`);
+  await page.goto(`#/tools/${id}`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   for (const [label, value] of boxes) await page.getByLabel(label).fill(value);

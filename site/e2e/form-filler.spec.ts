@@ -39,7 +39,7 @@ test.beforeEach(async ({ page }) => {
     // Make sure saving uses the plain download path in this test browser.
     Object.defineProperty(navigator, "share", { value: undefined, configurable: true });
   });
-  await page.goto("/#/tools/form-filler");
+  await page.goto("#/tools/form-filler");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
 });
@@ -143,7 +143,7 @@ test("the screen and answers stay when the phone turns, and come back after leav
   await page.setViewportSize({ width: 390, height: 844 });
   await next(page);
   await page.goto("about:blank");
-  await page.goto("/#/tools/form-filler");
+  await page.goto("#/tools/form-filler");
   await expect(page.getByText(/You were on Step 3 of 4: My info\./)).toBeVisible();
   await page.getByRole("button", { name: "Pick up" }).click();
   await expect(page.getByText("Step 3 of 4: My info")).toBeVisible();

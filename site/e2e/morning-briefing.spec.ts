@@ -24,7 +24,7 @@ async function typeDay(page: import("@playwright/test").Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/morning-briefing");
+  await page.goto("#/tools/morning-briefing");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByText("Step 1 of 3: Pick what to include")).toBeVisible();
@@ -91,7 +91,7 @@ test("choices come back after leaving", async ({ page }) => {
   await page.getByRole("button", { name: "Next" }).click();
   await page.getByLabel("Reminder 1", { exact: true }).fill("Call Sam");
   await page.goto("about:blank");
-  await page.goto("/#/tools/morning-briefing");
+  await page.goto("#/tools/morning-briefing");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Reminder 1", { exact: true })).toHaveValue("Call Sam");
 });

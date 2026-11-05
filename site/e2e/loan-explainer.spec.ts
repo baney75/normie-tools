@@ -11,7 +11,7 @@ async function fillLoan(page: import("@playwright/test").Page, v: { amount: stri
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/loan-explainer");
+  await page.goto("#/tools/loan-explainer");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
 });
@@ -95,7 +95,7 @@ test("numbers come back after leaving", async ({ page }) => {
   await fillLoan(page, { amount: "1200", rate: "0", term: "12" });
   await expect(page.getByLabel("Monthly payment")).toContainText("$100.00");
   await page.goto("about:blank");
-  await page.goto("/#/tools/loan-explainer");
+  await page.goto("#/tools/loan-explainer");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Amount borrowed")).toHaveValue("1200");
   await expect(page.getByLabel("Monthly payment")).toContainText("$100.00");

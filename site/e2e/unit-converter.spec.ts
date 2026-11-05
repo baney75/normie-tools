@@ -5,7 +5,7 @@ import { shotPath } from "./paths";
 test.use({ viewport: { width: 390, height: 844 } });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/unit-converter");
+  await page.goto("#/tools/unit-converter");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByLabel("What are you measuring?")).toBeVisible();
@@ -77,7 +77,7 @@ test("numbers come back after leaving", async ({ page }) => {
   await page.getByLabel("Number").fill("12");
   await expect(page.getByLabel("Your answer", { exact: true })).toContainText("304.8 millimeters");
   await page.goto("about:blank");
-  await page.goto("/#/tools/unit-converter");
+  await page.goto("#/tools/unit-converter");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Number")).toHaveValue("12");
   await expect(page.getByLabel("Your answer", { exact: true })).toContainText("304.8 millimeters");

@@ -29,7 +29,7 @@ const noSideScroll = async (page: Page) =>
   expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/tax-filing-helper");
+  await page.goto("#/tools/tax-filing-helper");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByText("Step 1 of 4: Pick your way")).toBeVisible();
@@ -97,7 +97,7 @@ test("typing comes back after leaving", async ({ page }) => {
   await page.getByRole("button", { name: "Next", exact: true }).click();
   await page.getByLabel("First name", { exact: true }).fill("Sample");
   await page.goto("about:blank");
-  await page.goto("/#/tools/tax-filing-helper");
+  await page.goto("#/tools/tax-filing-helper");
   await page.getByRole("button", { name: "Pick up" }).click();
   await expect(page.getByText("Step 3 of 4: Copy the answers in")).toBeVisible();
   await expect(page.getByLabel("First name", { exact: true })).toHaveValue("Sample");

@@ -14,7 +14,7 @@ async function fillPlain(page: import("@playwright/test").Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#/tools/monthly-budget");
+  await page.goto("#/tools/monthly-budget");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByLabel("Pay, per month")).toBeVisible();
@@ -91,7 +91,7 @@ test("numbers come back after leaving", async ({ page }) => {
   await page.getByLabel("Food, per month").fill("200");
   await expect(page.getByLabel("Left over", { exact: true })).toContainText("$1,000.00");
   await page.goto("about:blank");
-  await page.goto("/#/tools/monthly-budget");
+  await page.goto("#/tools/monthly-budget");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Pay, per month")).toHaveValue("1200");
   await expect(page.getByLabel("Left over", { exact: true })).toContainText("$1,000.00");

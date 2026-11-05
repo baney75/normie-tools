@@ -4,7 +4,7 @@ import { PHONE } from "./viewports";
 test.use({ viewport: { width: PHONE.width, height: PHONE.height } });
 
 test("the demo flow shows where you are and moves one step at a time", async ({ page }) => {
-  await page.goto("/#/harness");
+  await page.goto("#/harness");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await expect(page.getByRole("heading", { name: "Step 1 of 3" })).toBeVisible();
