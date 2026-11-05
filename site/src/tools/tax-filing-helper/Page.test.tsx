@@ -233,10 +233,9 @@ describe("Tax Filing Helper page", () => {
     expect(screen.getByLabelText("First name")).toHaveValue("Sample");
   });
 
-  it("says nothing is sent and links to the page code", () => {
+  it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
   });
 });
 

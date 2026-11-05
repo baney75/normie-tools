@@ -22,10 +22,10 @@ describe("Unit Converter page", () => {
     expect(screen.getByText(COPY.intro)).toBeInTheDocument();
     expect(screen.getByLabelText("Your answer")).toHaveTextContent("Your answer shows here");
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
-    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/Nothing is sent/);
+    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/stay on this phone/);
     expect(screen.getByRole("button", { name: "Swap 'from' and 'to'" })).toBeInTheDocument();
     expect(screen.getByLabelText("Number", { exact: false })).toHaveFocus();
-    expect(screen.getByText(/Nothing is sent/)).toBeInTheDocument();
+    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
     expect(screen.getByText(COPY.more.sources)).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });

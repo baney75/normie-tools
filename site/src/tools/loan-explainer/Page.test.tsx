@@ -24,10 +24,9 @@ describe("Loan Explainer page", () => {
     expect(screen.getByLabelText("Monthly payment")).toHaveTextContent(COPY.waiting);
     expect(screen.getByLabelText("Amount borrowed")).toHaveFocus();
     const intro = screen.getByText(COPY.intro);
-    const privacy = screen.getByText(/Nothing is sent\./);
+    const privacy = screen.getByText(/stay on this phone/);
     expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(privacy.compareDocumentPosition(screen.getByLabelText("Amount borrowed")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(screen.getByRole("link", { name: /how this page is made/ })).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 

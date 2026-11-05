@@ -24,8 +24,8 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Debt Payoff Planner" })).toBeVisible();
   await expect(page.getByText("Type the amount you owe on each debt")).toBeVisible();
-  await expect(page.getByText("Nothing is sent.")).toBeVisible();
-  await expect(page.getByText("Nothing is sent.")).toBeVisible();
+  await expect(page.getByText(/stay on this phone/)).toBeVisible();
+  await expect(page.getByText(/stay on this phone/)).toBeVisible();
   await expect(page.getByLabel("Debt 1 name")).toBeFocused();
   await expect(page.getByLabel("How the two payoff orders compare")).toContainText("Your answer shows here");
 });

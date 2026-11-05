@@ -20,7 +20,7 @@ test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Loan Explainer" })).toBeVisible();
   await expect(page.getByText("Type the numbers from your loan")).toBeVisible();
   await expect(page.getByText("Your answer shows below.")).toBeVisible();
-  await expect(page.getByText("Nothing is sent.")).toBeVisible();
+  await expect(page.getByText(/stay on this phone/)).toBeVisible();
   await expect(page.getByLabel("Amount borrowed")).toBeFocused();
   await expect(page.getByLabel("Monthly payment")).toContainText("Your answer shows here");
 });

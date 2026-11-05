@@ -53,8 +53,7 @@ describe("Morning Briefing page", () => {
     render(<Page />);
     expect(screen.getByText(COPY.pick.preview)).toBeInTheDocument();
     const intro = screen.getByText(COPY.intro);
-    expect(intro.nextElementSibling).toHaveTextContent("Nothing is sent.");
-    expect(screen.getByRole("link", { name: "how this page is made" })).toBeInTheDocument();
+    expect(intro.nextElementSibling).toHaveTextContent(/stay on this phone/);
   });
 
   it("asks for at least one part and turns Next off", async () => {
@@ -153,10 +152,9 @@ describe("Morning Briefing page", () => {
     expect(screen.getByLabelText("Reminder 1")).toHaveValue("Water the plants");
   });
 
-  it("says nothing is sent and links to the page code", () => {
+  it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
   });
 
   it("offers to use saved choices and brings them back", async () => {

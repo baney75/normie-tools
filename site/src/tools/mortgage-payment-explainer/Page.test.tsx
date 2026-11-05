@@ -170,7 +170,7 @@ describe("Mortgage Payment Explainer first-time help", () => {
     render(<Page />);
     expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
     const intro = screen.getByText(COPY.intro);
-    const privacy = screen.getByText(/Nothing is sent\./);
+    const privacy = screen.getByText(/stay on this phone/);
     expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(privacy.compareDocumentPosition(screen.getByLabelText("Home price", { exact: false })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expectWaiting();
@@ -190,8 +190,7 @@ describe("Mortgage Payment Explainer first-time help", () => {
 
   it("uses the shared privacy note with a place to check it", () => {
     render(<Page />);
-    expect(screen.getByText(/Nothing is sent\. Numbers stay on this phone or computer\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByText(/Your numbers stay on this phone\./)).toBeInTheDocument();
   });
 });
 

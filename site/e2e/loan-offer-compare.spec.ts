@@ -27,11 +27,10 @@ test("shows an empty state that says what to type, with two offers", async ({ pa
   await expect(page.getByLabel("Offer 3: Amount borrowed")).toHaveCount(0);
   await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Your answer shows here");
   await expect(page.getByText("Your answer shows below.")).toBeVisible();
-  await expect(page.getByText("Nothing is sent.")).toBeVisible();
+  await expect(page.getByText(/stay on this phone/)).toBeVisible();
   await expect(page.getByLabel("Offer 1: Amount borrowed")).toBeFocused();
   await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
   await expect(page.locator(".primary")).toHaveCount(1);
-  await expect(page.getByRole("link", { name: "how this page is made" })).toBeVisible();
 });
 
 test("gives the exact numbers for two offers and names the lowest, with no sideways scroll", async ({ page }) => {

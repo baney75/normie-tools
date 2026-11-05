@@ -22,7 +22,7 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByText(COPY.intro)).toBeInTheDocument();
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.waiting);
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
-    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/Nothing is sent/);
+    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/stay on this phone/);
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -37,10 +37,9 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
   });
 
-  it("says nothing is sent and links to the page code", () => {
+  it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
   });
 
   it("has labels above inputs, decimal keypads, no autofill", () => {

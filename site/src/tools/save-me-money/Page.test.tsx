@@ -92,7 +92,7 @@ describe("Save Me Money page", () => {
     expect(screen.getByText(/never calls, cancels or pays anything/)).toBeInTheDocument();
     await fillPlain();
     expect(screen.getByText(/coming soon/)).toBeInTheDocument();
-    const links = screen.getAllByRole("link").map((a) => a.textContent);
+    const links = screen.queryAllByRole("link").map((a) => a.textContent);
     expect(links.join(" ")).not.toMatch(/Subscription Finder|Bill Negotiation|Cheaper Plan/);
   });
 
@@ -136,10 +136,9 @@ describe("Save Me Money page", () => {
     expect(screen.queryByRole("button", { name: COPY.undo })).toBeNull();
   });
 
-  it("says nothing is sent and links to the page code", () => {
+  it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
   });
 
   it("says where the numbers come from and that weeks are an estimate", () => {

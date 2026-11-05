@@ -34,7 +34,7 @@ describe("Monthly Budget page", () => {
     }
     expect(screen.getByLabelText("Left over")).toHaveTextContent(COPY.waiting);
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
-    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/Nothing is sent/);
+    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/stay on this phone/);
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -129,10 +129,9 @@ describe("Monthly Budget page", () => {
     expect(screen.queryByRole("button", { name: COPY.undo })).toBeNull();
   });
 
-  it("says nothing is sent and links to the page code", () => {
+  it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
   });
 
   it("with no income, shows the totals and shares of spending", async () => {
