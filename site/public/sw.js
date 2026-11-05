@@ -1,4 +1,6 @@
 // NT offline shell. Same-origin GET requests only. No timers.
+// Cache Storage is shared by the whole origin, so the worker only ever touches names with this prefix.
+const CACHE_PREFIX = "nt-shell-";
 const CACHE = "nt-shell-v1";
 const PRECACHE = [
   "./", "./index.html", "./manifest.webmanifest", "./tools.json", "./llms.txt",
@@ -44,7 +46,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith(CACHE_PREFIX) && k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   );
 });

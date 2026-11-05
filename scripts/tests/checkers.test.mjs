@@ -215,3 +215,23 @@ test("links: finds missing files and anchors, skips external links", () => {
   assert.ok(out.some((l) => l.includes("missing file")));
   assert.equal(links.stats.external, 1);
 });
+
+test("tool accuracy and reliability suites run in npm test and in CI, and a failing one fails the run", async () => {
+  const fs = await import("node:fs");
+  const os = await import("node:os");
+  const path = await import("node:path");
+  const { spawnSync } = await import("node:child_process");
+  const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..", "..");
+  const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
+  assert.match(pkg.scripts["test:tools"], /tools\/\*\/tests\/\*\.test\.mjs/);
+  assert.match(fs.readFileSync(path.join(root, "scripts", "run-all.mjs"), "utf8"), /"test:tools"/);
+  assert.match(fs.readFileSync(path.join(root, ".github", "workflows", "ci.yml"), "utf8"), /npm run test:tools/);
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "nt-tools-red-"));
+  fs.mkdirSync(path.join(dir, "tools", "x", "tests"), { recursive: true });
+  fs.writeFileSync(path.join(dir, "tools", "x", "tests", "accuracy.test.mjs"),
+    'import test from "node:test"; import assert from "node:assert/strict"; test("wrong", () => assert.equal(1, 2));');
+  const env = { ...process.env };
+  delete env.NODE_TEST_CONTEXT; // a child run inside node --test would otherwise report to this parent and exit 0
+  const r = spawnSync(pkg.scripts["test:tools"], { cwd: dir, shell: true, encoding: "utf8", env });
+  assert.notEqual(r.status, 0);
+});

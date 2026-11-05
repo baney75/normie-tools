@@ -21,6 +21,7 @@ const STEPS = [
   "check:no-clutter",
   "check:links",
   "test:unit",
+  "test:tools",
 ];
 
 const results = [];

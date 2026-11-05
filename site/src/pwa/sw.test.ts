@@ -53,6 +53,14 @@ describe("sw.js", () => {
     expect(sw).toContain("clients.claim");
     expect(sw).toContain("caches.delete");
   });
+  it("deletes only old NT caches, never another app's on the same origin", () => {
+    expect(sw).not.toMatch(/filter\(\(k\) => k !== CACHE\)/);
+    const m = /keys\.filter\(\(k\) => (.*?)\)\.map/.exec(sw);
+    expect(m).toBeTruthy();
+    const stale = new Function("k", "CACHE_PREFIX", "CACHE", `return ${m![1]};`) as (k: string, p: string, c: string) => boolean;
+    const keys = ["nt-shell-v1", "nt-shell-v2", "dbaney-app-v3", "workbox-precache", "nt-other", "other-nt-shell-v1"];
+    expect(keys.filter((k) => stale(k, "nt-shell-", "nt-shell-v2"))).toEqual(["nt-shell-v1"]);
+  });
   it("saves the lazy tool pages through the build asset list", () => {
     expect(sw).toContain("./asset-manifest.json");
     expect(sw).toContain("e.css");

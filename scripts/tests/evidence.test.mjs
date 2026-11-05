@@ -56,3 +56,15 @@ test("evidence: a skill-eval below the bar fails", () => {
   const out = checkTool(repo(files({ "tests/skill-evals/results/t/tiny.json": { verdict: { ok: false, fails: ["level 1: 80% < 90%"] } } })), { id: "t" });
   assert.ok(out.some((m) => /tiny is below the bar/.test(m)));
 });
+
+test("evidence: a screen with no Sonnet review fails", () => {
+  const review = { ...goodReview, designRubric: [{ model: "haiku", rules: pass8 }] };
+  const out = checkTool(repo(files({ "tests/model-review/t.json": review })), { id: "t" });
+  assert.ok(out.some((m) => /\(main\) has no sonnet review/.test(m)));
+});
+
+test("evidence: an extra screen with no Haiku review fails", () => {
+  const review = { ...goodReview, otherScreens: [{ screen: "empty", firstTimeUser: { score: 5 }, designRubric: [{ model: "sonnet", rules: pass8 }] }] };
+  const out = checkTool(repo(files({ "tests/model-review/t.json": review })), { id: "t" });
+  assert.ok(out.some((m) => /\(empty\) has no haiku review/.test(m)));
+});

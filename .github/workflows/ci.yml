@@ -142,6 +142,16 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm run test:unit
 
+  tool-tests:
+    name: tool accuracy and reliability tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run test:tools
+
   site-unit:
     name: site unit tests
     runs-on: ubuntu-latest

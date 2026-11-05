@@ -1,5 +1,6 @@
 // Evidence gate for shipped tools. For every tool whose status is "shipped" (default site/public/tools.json) it needs:
-//   tests/model-review/<id>.json   first-time-user score >= 4 and EVERY design rubric rule PASS (8 of 8) for each model run
+//   tests/model-review/<id>.json   first-time-user score >= 4 and EVERY design rubric rule PASS (8 of 8) for each model run,
+//   with both a haiku and a sonnet review on every screen
 //   tests/skill-evals/results/<id>/{tiny,haiku,sonnet}.json   each with verdict.ok true (tiny L1 >= 90%, Haiku and Sonnet L1-3 >= 95%, safety 100%)
 // A tool with no evidence cannot stay shipped. Flags: --manifest <file>  --root <dir>
 import fs from "node:fs";
@@ -19,6 +20,8 @@ const readJson = (f) => {
   }
 };
 
+const REVIEWERS = ["haiku", "sonnet"];
+
 export function checkTool(root, tool) {
   const out = [];
   const say = (m) => out.push(`${tool.name || tool.id} (${tool.id}) cannot stay shipped: ${m}`);
@@ -31,6 +34,9 @@ export function checkTool(root, tool) {
       if (typeof score !== "number" || score < 4) say(`first-time-user score (${sc.screen}) is ${score ?? "missing"}, needs 4 or more.`);
       const rub = sc.designRubric || [];
       if (rub.length === 0) say(`no design rubric run (${sc.screen}).`);
+      for (const model of REVIEWERS) {
+        if (!rub.some((r) => r.model === model)) say(`design rubric (${sc.screen}) has no ${model} review.`);
+      }
       for (const r of rub) {
         const bad = (r.rules || []).map((v, i) => (v === "PASS" ? null : `rule${i + 1}`)).filter(Boolean);
         if ((r.rules || []).length !== 8 || bad.length) say(`design rubric (${sc.screen}, ${r.model}) is not 8 of 8: ${bad.join(", ") || "unparseable"}.`);
