@@ -52,7 +52,7 @@ test("opens with empty boxes, the waiting text and one main button that leads to
   const card = page.getByLabel("Total monthly payment");
   await expect(card).toContainText("Type your numbers to see your monthly payment.");
   await expect(card).not.toContainText("Example");
-  await expect(page.locator(".nt-tool-trust").getByText(/There is no Send button on this page/)).toHaveCount(1);
+  await expect(page.getByText(/There is no Send button/)).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Type my own numbers" })).toHaveCount(0);
   await expectWaitingButtons(page, "See my payment", "Home price");
 });

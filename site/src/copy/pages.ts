@@ -106,7 +106,7 @@ export const PAGES = {
     back: "Back to home",
   },
   tool: {
-    trust: "There is no Send button on this page.",
+    trust: "Your numbers stay on this phone or computer.",
     how: "How we know",
     notFound: "We could not find that tool.",
     notReady: "This tool is not ready yet.",

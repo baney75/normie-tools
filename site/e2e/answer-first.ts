@@ -5,7 +5,7 @@ import { expect, type Page } from "@playwright/test";
 /** The line under the h1 and the link to the page that backs it up. */
 export async function expectTrustLine(page: Page) {
   const line = page.locator(".nt-tool-trust");
-  await expect(line).toContainText("There is no Send button on this page.");
+  await expect(line).toContainText("Your numbers stay on this phone or computer.");
   const how = line.getByRole("link", { name: "How we know" });
   await expect(how).toBeVisible();
   await expect(how).toHaveAttribute("href", "#/private");
@@ -26,7 +26,7 @@ export async function expectWaitingButtons(page: Page, see: string, firstBox: st
   const button = page.getByRole("button", { name: see, exact: true });
   await expect(button).toBeVisible();
   await expect(button).toHaveClass(/primary/);
-  await expect(page.getByRole("link", { name: "Done. Back to home.", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "I'm done", exact: true })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Print or save" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Start over" })).toHaveCount(0);
   await expect(page.getByLabel(firstBox)).not.toBeFocused();
@@ -35,17 +35,17 @@ export async function expectWaitingButtons(page: Page, see: string, firstBox: st
 }
 
 /**
- * An answer is showing: the See button is gone, the line "That is your answer, worked out..." sits under the card,
+ * An answer is showing: the See button is gone, the line "That is your estimate." ("answer" for exact tools) sits under the card,
  * the Done link to the home page is the one filled element, and Print or save is an outline button
  * that opens a sheet with Print and Save a copy.
  */
-export async function expectAnsweredButtons(page: Page, see: string) {
+export async function expectAnsweredButtons(page: Page, see: string, word: "estimate" | "answer" = "estimate") {
   await expect(page.getByRole("button", { name: see, exact: true })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Save or print" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Go up to my answer" })).toHaveCount(0);
-  await expect(page.locator(".nt-finish-line")).toHaveText("That is your answer. You can stop here, or change a number to try again. Your numbers stay.");
+  await expect(page.locator(".nt-finish-line")).toHaveText(`That is your ${word}. You can stop here, or change a number to try again.`);
   await expect(page.locator(".primary")).toHaveCount(1);
-  const done = page.getByRole("link", { name: "Done. Back to home.", exact: true });
+  const done = page.getByRole("link", { name: "I'm done", exact: true });
   await expect(done).toBeVisible();
   await expect(done).toHaveClass(/primary/);
   await expect(done).toHaveClass(/nt-finish-done/);

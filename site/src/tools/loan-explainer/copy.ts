@@ -12,7 +12,7 @@ export const COPY = {
     other: "Other",
     years: (n: number) => `${n} years`,
     otherLabel: "Length of the loan",
-    unitLegend: "Count in",
+    unitLegend: "Months or years?",
     months: "Months",
     yearsWord: "Years",
   },

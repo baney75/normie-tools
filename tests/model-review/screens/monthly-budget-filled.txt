@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Monthly Budget
 [heading 1] Where does my money go each month?
-There is no Send button on this page. How we know
+Your numbers stay on this phone or computer. How we know
 [link, plain] How we know
 Left over each month
 $700.00
@@ -13,8 +13,8 @@ Total income
 $3,000.00
 Total spending
 $2,300.00
-That is your answer. You can stop here, or change a number to try again. Your numbers stay.
-[MAIN LINK, filled dark orange] Done. Back to home.
+That is your answer. You can stop here, or change a number to try again.
+[MAIN LINK, filled dark orange] I'm done
 [plain button, outline only] Print or save
 [heading 2] Money in each month
 [box] Name of income item 1 = "Pay"

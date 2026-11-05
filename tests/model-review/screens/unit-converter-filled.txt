@@ -4,13 +4,13 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Unit Converter
 [heading 1] Change cups, inches, pounds and more
-There is no Send button on this page. How we know
+Your numbers stay on this phone or computer. How we know
 [link, plain] How we know
 Your answer
 127,000 millimeters
 A long answer is rounded to 6 digits.
-That is your answer. You can stop here, or change a number to try again. Your numbers stay.
-[MAIN LINK, filled dark orange] Done. Back to home.
+That is your answer. You can stop here, or change a number to try again.
+[MAIN LINK, filled dark orange] I'm done
 [plain button, outline only] Print or save
 [question] What are you measuring?
 [choice] Length (selected)

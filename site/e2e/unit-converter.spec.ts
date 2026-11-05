@@ -36,7 +36,7 @@ test("opens with Length picked, an empty number, the waiting text and one main b
 test("with an answer, Done is the one filled button, See my answer is gone, and Print or save opens the sheet", async ({ page }) => {
   await page.getByLabel("Number").fill("12");
   await expect(card(page)).toContainText("304.8 millimeters");
-  await expectAnsweredButtons(page, "See my answer");
+  await expectAnsweredButtons(page, "See my answer", "answer");
   await expectSeeHiddenWhenWide(page, "See my answer");
 });
 

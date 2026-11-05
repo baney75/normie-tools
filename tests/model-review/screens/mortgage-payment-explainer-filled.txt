@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Mortgage Payment Explainer
 [heading 1] What will my house payment be?
-There is no Send button on this page. How we know
+Your numbers stay on this phone or computer. How we know
 [link, plain] How we know
 Total monthly payment
 $1,516.96
@@ -13,8 +13,8 @@ Loan amount
 $240,000.00
 Loan length
 30 years
-That is your answer. You can stop here, or change a number to try again. Your numbers stay.
-[MAIN LINK, filled dark orange] Done. Back to home.
+That is your estimate. You can stop here, or change a number to try again.
+[MAIN LINK, filled dark orange] I'm done
 [plain button, outline only] Print or save
 [label] Home price
 What the home costs.

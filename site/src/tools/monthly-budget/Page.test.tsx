@@ -54,7 +54,7 @@ describe("Monthly Budget page", () => {
 
   it("says it is free and sends nothing, and links the code", () => {
     render(<Page />);
-    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
   });
 
@@ -105,7 +105,7 @@ describe("Monthly Budget page", () => {
     await fill("Pay, per month", "lots");
     await userEvent.click(see);
     expect(screen.getByLabelText("Rent or mortgage, per month")).toHaveFocus();
-    expect(screen.queryByRole("link", { name: "Done. Back to home." })).toBeNull();
+    expect(screen.queryByRole("link", { name: "I'm done" })).toBeNull();
   });
 
   it("with an answer, Done is the one filled link, Print or save is an outline that opens the sheet, and the See button is gone", async () => {
@@ -113,7 +113,7 @@ describe("Monthly Budget page", () => {
     await fill("Pay, per month", "3000");
     await fill("Food, per month", "450");
     expect(container.querySelectorAll(".primary")).toHaveLength(1);
-    const done = screen.getByRole("link", { name: "Done. Back to home." });
+    const done = screen.getByRole("link", { name: "I'm done" });
     expect(done).toHaveClass("primary");
     expect(done).toHaveAttribute("href", "#/");
     const main = screen.getByRole("button", { name: "Print or save" });
@@ -239,7 +239,8 @@ describe("Monthly Budget page", () => {
 
   it("no longer shows the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/There is no Send button on this page/).closest(".nt-tool-trust")).not.toBeNull();
+    expect(screen.getByText(/Your numbers stay on this phone or computer\./).closest(".nt-tool-trust")).not.toBeNull();
+    expect(screen.queryByText(/There is no Send button/)).toBeNull();
   });
 
   it("with no income, shows the totals and shares of spending", async () => {

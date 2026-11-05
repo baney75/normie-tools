@@ -4,17 +4,21 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Loan Offer Compare
 [heading 1] Which loan offer is cheaper?
-There is no Send button on this page. How we know
+Your numbers stay on this phone or computer. How we know
 [link, plain] How we know
-Costs less in all
+Cheaper overall
 Offer 1
-Offer 1 costs $281.26 less to borrow than Offer 2. Offer 2 has the lower monthly payment.
+Offer 1 costs $281.26 less in all. Offer 2 costs $3.29 less each month.
+Offer 1, interest and fees
+$1,437.91
+Offer 2, interest and fees
+$1,719.17
 Offer 1, each month
 $373.27
 Offer 2, each month
 $369.98
-That is your answer. You can stop here, or change a number to try again. Your numbers stay.
-[MAIN LINK, filled dark orange] Done. Back to home.
+That is your estimate. You can stop here, or change a number to try again.
+[MAIN LINK, filled dark orange] I'm done
 [plain button, outline only] Print or save
 [question] Offer 1
 [label] Offer 1: Amount borrowed
@@ -23,7 +27,7 @@ That is your answer. You can stop here, or change a number to try again. Your nu
 [box] Offer 1: Yearly interest rate = "7.5"
 [label] Offer 1: How long is the loan?
 [box] Offer 1: How long is the loan? = "36"
-[question] Count in
+[question] Months or years?
 [choice] Months (selected)
 [choice] Years 
 [label] Offer 1: Upfront fees (optional)
@@ -35,7 +39,7 @@ That is your answer. You can stop here, or change a number to try again. Your nu
 [box] Offer 2: Yearly interest rate = "6.9"
 [label] Offer 2: How long is the loan?
 [box] Offer 2: How long is the loan? = "36"
-[question] Count in
+[question] Months or years?
 [choice] Months (selected)
 [choice] Years 
 [label] Offer 2: Upfront fees (optional)

@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Student Loan Growth and Payoff
 [heading 1] When will my student loan be paid off?
-There is no Send button on this page. How we know
+Your numbers stay on this phone or computer. How we know
 [link, plain] How we know
 Type your numbers to see your answer.
 [label] Loan balance

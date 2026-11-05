@@ -45,7 +45,7 @@ test("opens with empty boxes, the waiting text and one main button that leads to
   const card = page.getByLabel("Monthly payment");
   await expect(card).toContainText("Type your numbers to see your monthly payment.");
   await expect(card).not.toContainText("Example");
-  await expect(page.locator(".nt-tool-trust").getByText(/There is no Send button on this page/)).toHaveCount(1);
+  await expect(page.getByText(/There is no Send button/)).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Type my own numbers" })).toHaveCount(0);
   await expectWaitingButtons(page, "See my payment", "Amount borrowed");
 });
@@ -73,7 +73,7 @@ test("gives the exact monthly payment, total paid and interest, with no sideways
   await expect(card).toContainText("$304.22");
   // The one filled element is Done. Print or save opens Print and Save a copy in place.
   await expect(page.locator(".primary")).toHaveCount(1);
-  await expect(page.getByRole("link", { name: "Done. Back to home.", exact: true })).toHaveClass(/primary/);
+  await expect(page.getByRole("link", { name: "I'm done", exact: true })).toHaveClass(/primary/);
   await page.getByRole("button", { name: "Print or save", exact: true }).click();
   await expect(page.getByRole("button", { name: "Print", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Save a copy" })).toBeVisible();

@@ -229,7 +229,7 @@ function Save({ result }: { result: Good }) {
     }
   }
   return (
-    <Finish onSave={save}>
+    <Finish onSave={save} exact>
       <p>{COPY.save.preview}</p>
     </Finish>
   );

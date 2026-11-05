@@ -145,16 +145,22 @@ const ROWS: [string, (o: OfferResult) => string][] = [
   [COPY.result.cost, (o) => formatMoney(o.costOfBorrowingCents)],
 ];
 
-/** How much less the lowest-cost offer costs than the next one. Only when one offer is lowest. */
+/** The facts in plain money: how much less the cheaper offer costs in all, and, when another offer is lower each month, by how much. */
 function savedLine(result: Good): string {
   const f = COPY.facts;
   if (result.lowestCost.tie) return f.tieCost;
   const best = result.lowestCost.offers[0];
   const others = result.offers.map((o, i) => ({ i, cost: o.costOfBorrowingCents })).filter((x) => x.i !== best);
   const next = others.reduce((a, b) => (b.cost < a.cost ? b : a));
-  const gap = next.cost - result.offers[best].costOfBorrowingCents;
-  const than = result.offers.length === 2 ? name(next.i) : f.nextLowest;
-  return `${name(best)} ${f.lessThan} ${formatMoney(gap)} ${f.lessTail} ${than}.`;
+  const gap = formatMoney(next.cost - result.offers[best].costOfBorrowingCents);
+  const inAll =
+    result.offers.length === 2
+      ? `${name(best)} ${f.lessThan} ${gap} ${f.lessInAll}`
+      : `${name(best)} ${f.lessThan} ${gap} ${f.lessInAllThan} ${f.nextLowest}.`;
+  const cheapMonth = result.lowestPayment.offers[0];
+  if (result.lowestPayment.tie || result.lowestPayment.offers.includes(best)) return inAll;
+  const monthGap = formatMoney(result.offers[best].monthlyPaymentCents - result.offers[cheapMonth].monthlyPaymentCents);
+  return `${inAll} ${name(cheapMonth)} ${f.lessThan} ${monthGap} ${f.lessEachMonth}`;
 }
 
 function Answer({ result }: { result: Good | null }) {
@@ -163,16 +169,17 @@ function Answer({ result }: { result: Good | null }) {
     <ResultCard label={f.lowestCost} answer={result ? nameList(result.lowestCost.offers) : undefined} waiting={COPY.waiting}>
       {result ? (
         <>
-          <p>
-            {savedLine(result)}
-            {!result.lowestPayment.tie && nameList(result.lowestPayment.offers) !== nameList(result.lowestCost.offers)
-              ? ` ${nameList(result.lowestPayment.offers)} ${f.lowerMonthly}`
-              : ""}
-          </p>
+          <p>{savedLine(result)}</p>
           {!result.sameAmountAndLength ? <p>{f.differ}</p> : null}
           <dl>
             {result.offers.map((o, i) => (
-              <div key={i}>
+              <div key={`all-${i}`}>
+                <dt>{name(i)}, {f.inAll}</dt>
+                <dd>{formatMoney(o.costOfBorrowingCents)}</dd>
+              </div>
+            ))}
+            {result.offers.map((o, i) => (
+              <div key={`month-${i}`}>
                 <dt>{name(i)}, {f.eachMonth}</dt>
                 <dd>{formatMoney(o.monthlyPaymentCents)}</dd>
               </div>

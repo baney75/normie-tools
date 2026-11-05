@@ -8,16 +8,20 @@
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 3,
+    "score": 4,
     "runs": [
+      4,
       4,
       3,
       3,
       3,
-      3
+      4,
+      4,
+      3,
+      4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to look at my answer (127,000 millimeters) and then either stop or change a number to try again.\n\n2. I would tap **Done. Back to home.**\n\n3. Words I didn't understand or that felt like tech talk:\n- \"How we know\" (know what? It's next to \"There is no Send button on this page,\" which is an odd thing to say)\n- \"rounded to 6 digits\"\n- \"Swap\"\n- \"More options\"\n- \"Show the facts used\"\n- \"Print or save\" (save where?)\n- \"Your numbers stay\" (stay where?)\n- \"Change from\" / \"Change to\" (I'd say \"convert\")\n- The \"(in)\", \"(mm)\" and \"(ft)\" short forms\n- \"MAIN LINK\"\n\n4. Worries:\n- \"There is no Send button on this page\" made me wonder if something was being sent somewhere, and why they brought it up.\n- \"Your numbers stay\" made me wonder if they are saving what I typed.\n- \"Print or save\" made me wonder if saving costs something or puts my numbers somewhere.\n- \"Done. Back to home.\" might wipe my answer. I haven't written it down.\n- I'm not sure \"More options\" isn't a paid extra.\n- I don't know if I picked the right units, so I can't tell if 127,000 is right. I typed 5000, and I'm not sure inches was what I meant.\n\n5. I would skip:\n- \"There is no Send button on this page. How we know\"\n- \"A long answer is rounded to 6 digits.\"\n- \"More options\"\n- \"Show the facts used\"\n\n6. Score: 3. The answer is plain to see, but the orange \"Done\" button might lose it, and the line about the Send button threw me.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"How we know\", \"rounded to 6 digits\", \"Swap\", \"More options\", \"Show the facts used\", \"Print or save\", \"Your numbers stay\", \"Change from / Change to\", \"(in) (mm) abbreviations\", \"MAIN LINK\"], \"worries\": [\"No Send button line made me wonder if data is sent\", \"Your numbers stay - are they saved somewhere\", \"Print or save - cost or where it goes\", \"Done may lose my answer\", \"More options may cost money\", \"unsure the units I picked are right\"], \"skippable\": [\"There is no Send button on this page. How we know\", \"A long answer is rounded to 6 digits.\", \"More options\", \"Show the facts used\"], \"score\": 3}"
+    "output": "1. It wants me to look at my answer, 127,000 millimeters, and then tap \"I'm done\" or change a number to try again.\n\n2. \"I'm done\"\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n- \"How we know\". I don't know what it's explaining.\n- \"rounded to 6 digits\". I don't know what that means.\n- \"More options\". I don't know what's inside.\n- \"Show the facts used\". I don't know which facts, or why they matter.\n- \"Swap\". I could guess it flips the two units, but I'm not sure.\n- \"Print or save\". I don't know where it would save.\n- \"MAIN LINK\" and \"menu\". These are the layout notes' words. I'd only see a button and a list.\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" made me wonder who else might see them, though it mostly reassured me.\n- \"I'm done\" sounds like it might close something or lose my answer. I don't know if the answer disappears.\n- \"Print or save\" might cost something or send my answer somewhere.\n- I'm not sure \"Swap\" won't erase what I typed.\n- The answer is 127,000 mm from 5000 inches. I can't tell if that's right, and it looks huge. I'd worry I picked the wrong unit.\n\n5. What I'd skip:\n- \"How we know\" (it appears as text and as a link).\n- \"More options\".\n- \"Show the facts used\".\n- \"A long answer is rounded to 6 digits.\"\n\n6. Score: 4. The orange \"I'm done\" is clear. I'm a little unsure whether I need to tap it at all, since the screen says I can stop here.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"How we know\", \"rounded to 6 digits\", \"More options\", \"Show the facts used\", \"Swap\", \"Print or save\"], \"worries\": [\"Not sure if 'I'm done' erases or closes my answer\", \"Unsure who can see my numbers despite the privacy line\", \"Print or save might cost money or send my answer somewhere\", \"Swap might erase what I typed\", \"Unsure I picked the right units because 127,000 looks huge\"], \"skippable\": [\"How we know\", \"More options\", \"Show the facts used\", \"A long answer is rounded to 6 digits\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -37,14 +41,14 @@
       "fails": [],
       "runs": [
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "PASS",
+            "FAIL",
             "PASS",
             "PASS"
           ]
@@ -63,7 +67,7 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
@@ -72,7 +76,7 @@
             "PASS",
             "PASS",
             "PASS",
-            "PASS"
+            "FAIL"
           ]
         },
         {
@@ -102,7 +106,7 @@
           ]
         }
       ],
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule6: The \\\"Swap\\\" button changes the units, but the screen shows no preview and does not say how to undo it.\"],\"score\":7}"
     },
     {
       "model": "sonnet",
@@ -194,16 +198,20 @@
       "screen": "empty",
       "firstTimeUser": {
         "model": "sonnet",
-        "score": 3,
+        "score": 4,
         "runs": [
-          3,
-          3,
           4,
           4,
-          3
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to pick what I'm measuring, type a number, and get a converted answer.\n\n2. I would tap \"See my answer\". (First I'd have to type in the Number box, but that button is the one that stands out.)\n\n3. Words I didn't understand or that felt like tech talk:\n- \"How we know\". It's a link, and I can't tell what it leads to.\n- \"There is no Send button on this page\". I didn't know why it was telling me that.\n- \"Show the facts used\". I don't know which facts, or what they're used for.\n- \"Swap\". I'd guess it flips the two units, but I'm not sure.\n- \"Change from\" and \"Change to\". They're a bit odd. \"Convert\" would be more familiar.\n- \"[menu]\". I don't know that the units are a list I have to tap to pick from.\n- \"Millimeters (mm)\". I don't know what that is, and it's already filled in for me.\n\n4. What made me worry:\n- \"There is no Send button on this page\" makes me wonder what would be sent, and to whom. It makes me think about privacy.\n- \"How we know\" and \"Show the facts used\" make me wonder whether I'm being tracked or whether it's a trick.\n- I'm not sure whether tapping \"See my answer\" costs anything or signs me up for something.\n- Millimeters is already chosen, and I didn't choose it. I might get an answer I didn't want.\n\n5. What I would skip:\n- \"There is no Send button on this page. How we know\".\n- \"Show the facts used\".\n- The \"Swap\" button, until I need it.\n\n6. Score: 3. I can see the main button, but I'm not sure I should tap it before typing a number. The line \"Type a number to see your answer\" helps.\n\nRESULT: {\"next_tap\": \"See my answer\", \"confusing_terms\": [\"How we know\", \"There is no Send button on this page\", \"Show the facts used\", \"Swap\", \"Change from\", \"Change to\", \"menu\", \"Millimeters (mm)\"], \"worries\": [\"what 'no Send button' means for privacy\", \"being tracked or tricked by 'How we know' and 'Show the facts used'\", \"unsure if tapping See my answer costs anything\", \"Millimeters already chosen for me\"], \"skippable\": [\"There is no Send button on this page. How we know\", \"Show the facts used\", \"Swap\"], \"score\": 3}"
+        "output": "1. It wants me to pick what I'm measuring, type a number, and get it changed into another unit.\n\n2. I would tap the box labeled \"Number\" first, then later \"See my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"Swap\". I'm not sure what it swaps. I guess it flips the two units.\n- \"Show the facts used\". I don't know which facts it means.\n- \"How we know\". I don't know what it's explaining.\n- \"Change from\" and \"Change to\". They're a bit odd. I'd say \"convert.\"\n- The menu with \"(in)\", \"(ft)\", \"(mm)\". I get the short letters, but they look like code.\n- \"stay on this phone or computer\". I mostly get it, but I don't know how it works.\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" made me wonder why privacy came up. Was something being collected?\n- \"How we know\" looks like a link, and I'm wary of tapping it in case it takes me away from the page.\n- I'm not sure whether \"See my answer\" costs anything or signs me up for something. Nothing says it's free.\n- I worry that if I tap \"Swap\" I'll mess up my choices.\n\n5. Skippable:\n- \"Show the facts used\". It's closed and I don't need it.\n- \"How we know\".\n- The sentence \"Type a number to see your answer.\" It repeats what the box already tells me, though it's harmless.\n\n6. Score: 4. The orange button is clear and the steps run top to bottom. I'm unsure whether I should tap a choice like \"Length\" first, or whether it's already picked.\n\nRESULT: {\"next_tap\": \"Number\", \"confusing_terms\": [\"Swap\", \"Show the facts used\", \"How we know\", \"Change from\", \"Change to\", \"(in) (ft) (mm) abbreviations\", \"stay on this phone or computer\"], \"worries\": [\"Why privacy is mentioned and whether anything is collected\", \"How we know link might take me away from the page\", \"Unclear whether See my answer is free or signs me up\", \"Swap might mess up my choices\"], \"skippable\": [\"Show the facts used\", \"How we know\", \"Type a number to see your answer.\"], \"score\": 4}"
       },
       "designRubric": [
         {
@@ -222,6 +230,45 @@
           "passes": 8,
           "fails": [],
           "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
             {
               "passes": 7,
               "rules": [
@@ -247,48 +294,9 @@
                 "PASS",
                 "PASS"
               ]
-            },
-            {
-              "passes": 7,
-              "rules": [
-                "PASS",
-                "FAIL",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
-            },
-            {
-              "passes": 8,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
-            },
-            {
-              "passes": 8,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
             }
           ],
-          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"FAIL\", \"fails\": [\"rule8: The heading says \\\"Change cups, inches, pounds and more\\\", but the visible Length menus list only length units. Cups and pounds do not appear anywhere on the page, so the claim has no source here.\"], \"score\": 7}"
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
         },
         {
           "model": "sonnet",

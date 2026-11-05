@@ -42,7 +42,7 @@ describe("Unit Converter page", () => {
 
   it("says it is free and sends nothing, and links the code", () => {
     render(<Page />);
-    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
   });
 
@@ -52,7 +52,8 @@ describe("Unit Converter page", () => {
     expect(screen.getByRole("button", { name: COPY.swap })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Swap 'from' and 'to'" })).toBeNull();
     expect(screen.queryByText(/swap back/i)).toBeNull();
-    expect(screen.getByText(/There is no Send button on this page/).closest(".nt-tool-trust")).not.toBeNull();
+    expect(screen.getByText(/Your numbers stay on this phone or computer\./).closest(".nt-tool-trust")).not.toBeNull();
+    expect(screen.queryByText(/There is no Send button/)).toBeNull();
   });
 
   it("shows the waiting words again when the number is cleared", async () => {
@@ -170,7 +171,7 @@ describe("Unit Converter page", () => {
     const { container } = render(<Page />);
     await fill("Number", "2");
     expect(container.querySelectorAll(".primary")).toHaveLength(1);
-    const done = screen.getByRole("link", { name: "Done. Back to home." });
+    const done = screen.getByRole("link", { name: "I'm done" });
     expect(done).toHaveClass("primary");
     expect(done).toHaveAttribute("href", "#/");
     const main = screen.getByRole("button", { name: "Print or save" });

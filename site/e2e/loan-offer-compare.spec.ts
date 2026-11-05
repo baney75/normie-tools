@@ -24,7 +24,7 @@ async function openAll(page: Page) {
   return page.locator("details").filter({ has: page.getByText("See all the numbers", { exact: true }) });
 }
 
-const cardName = "Costs less in all";
+const cardName = "Cheaper overall";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("#/tools/loan-offer-compare");
@@ -46,7 +46,7 @@ test("opens with empty offers, the waiting text and one main button that leads t
   const card = page.getByLabel(cardName);
   await expect(card).toContainText("Type both offers to see which costs less.");
   await expect(card).not.toContainText("Example");
-  await expect(page.locator(".nt-tool-trust").getByText(/There is no Send button on this page/)).toHaveCount(1);
+  await expect(page.getByText(/There is no Send button/)).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Type my own numbers" })).toHaveCount(0);
   await expectWaitingButtons(page, "See which costs less", "Offer 1: Amount borrowed");
 });
@@ -116,12 +116,12 @@ test("messy typing shows a calm error that names the offer and field", async ({ 
   await fillOffer(page, 1, { amount: "1000", rate: "5", term: "12" });
   await fillOffer(page, 2, { amount: "lots of money", rate: "5", term: "12" });
   await expect(page.getByText("Offer 2: Amount borrowed: use a number above zero")).toBeVisible();
-  await expect(page.getByLabel("Costs less in all")).toContainText("Type both offers to see which costs less.");
+  await expect(page.getByLabel("Cheaper overall")).toContainText("Type both offers to see which costs less.");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Offer 2: Amount borrowed").fill("1e3");
   await expect(page.getByText("Offer 2: Amount borrowed: use a number above zero")).toBeVisible();
   await page.getByLabel("Offer 2: Amount borrowed").fill(" 1,000.50 ");
-  await expect(page.getByLabel("Costs less in all")).toBeVisible();
+  await expect(page.getByLabel("Cheaper overall")).toBeVisible();
 });
 
 test("tap targets are 44px or more and text is 16px or more", async ({ page }) => {

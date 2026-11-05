@@ -58,9 +58,9 @@ describe("Student Loan Growth and Payoff page", () => {
 
   it("says it is free and sends nothing, and links to the code", () => {
     render(<Page />);
-    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
-    expect(document.body.textContent?.match(/There is no Send button on this page/g)).toHaveLength(1);
+    expect(document.body.textContent).not.toMatch(/There is no Send button/);
   });
 
   it("puts the answer first, with no autofocus and no old buttons", () => {
@@ -89,8 +89,8 @@ describe("Student Loan Growth and Payoff page", () => {
     await fill("Loan balance", "5000");
     await fill("Yearly interest rate", "4");
     expect(document.querySelectorAll(".primary")).toHaveLength(1);
-    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
-    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveAttribute("href", "#/");
+    expect(screen.getByRole("link", { name: "I'm done" })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "I'm done" })).toHaveAttribute("href", "#/");
     expect(screen.getByRole("button", { name: "Print or save" })).not.toHaveClass("primary");
     expect(screen.getByRole("button", { name: "Print or save" }).closest("details")).toBeNull();
     expect(screen.queryByRole("button", { name: COPY.see })).toBeNull();
@@ -340,8 +340,8 @@ describe("Student Loan Growth and Payoff page", () => {
     expect(paidOff()).toHaveTextContent("4 years");
     expect(more()).toHaveTextContent("Months to pay off48");
     expect(document.querySelectorAll(".primary")).toHaveLength(1);
-    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
-    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveAttribute("href", "#/");
+    expect(screen.getByRole("link", { name: "I'm done" })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "I'm done" })).toHaveAttribute("href", "#/");
     expect(screen.getByRole("button", { name: "Print or save" })).not.toHaveClass("primary");
     expect(screen.queryByRole("button", { name: "Print" })).toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Print or save" }));

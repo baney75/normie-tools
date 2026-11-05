@@ -4,15 +4,15 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Student Loan Growth and Payoff
 [heading 1] When will my student loan be paid off?
-There is no Send button on this page. How we know
+Your numbers stay on this phone or computer. How we know
 [link, plain] How we know
 Paid off in
 6 years, 7 months
 Paying $300.00 a month.
 Total interest
 $3,479.30
-That is your answer. You can stop here, or change a number to try again. Your numbers stay.
-[MAIN LINK, filled dark orange] Done. Back to home.
+That is your estimate. You can stop here, or change a number to try again.
+[MAIN LINK, filled dark orange] I'm done
 [plain button, outline only] Print or save
 [label] Loan balance
 What you owe now. It is on your loan statement.

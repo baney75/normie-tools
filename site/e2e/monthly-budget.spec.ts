@@ -48,7 +48,7 @@ test("with an answer, Done is the one filled button, See what is left over is go
   await page.getByLabel("Rent or mortgage, per month").fill("1,200");
   await expect(card(page)).toContainText("$2,000.00");
   await expect(page.getByRole("region", { name: "Where it goes" })).toBeVisible();
-  await expectAnsweredButtons(page, "See what is left over");
+  await expectAnsweredButtons(page, "See what is left over", "answer");
   await expectSeeHiddenWhenWide(page, "See what is left over");
 });
 

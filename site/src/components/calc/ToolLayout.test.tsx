@@ -24,14 +24,14 @@ describe("ToolLayout", () => {
 
   it("says nothing is sent under the h1, with a How we know link to the privacy page", () => {
     render(<Demo />);
-    const trust = screen.getByText(/There is no Send button on this page\./);
+    const trust = screen.getByText(/Your numbers stay on this phone or computer\./);
     const h1 = screen.getByRole("heading", { level: 1 });
     expect(h1.compareDocumentPosition(trust) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(trust.compareDocumentPosition(screen.getByText("The answer")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const link = screen.getByRole("link", { name: "How we know" });
     expect(link).toHaveAttribute("href", "#/private");
     expect(trust).toContainElement(link);
-    expect(trust).toHaveTextContent("There is no Send button on this page. How we know");
+    expect(trust).toHaveTextContent("Your numbers stay on this phone or computer. How we know");
   });
 
   it("puts the answer before the boxes, and the extra detail last", () => {

@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { Finish } from "./Finish";
 
-const LINE = "That is your answer. You can stop here, or change a number to try again. Your numbers stay.";
+const LINE = "That is your estimate. You can stop here, or change a number to try again.";
 
 describe("Finish", () => {
   it("says the person is done, in plain words", () => {
@@ -13,7 +13,7 @@ describe("Finish", () => {
 
   it("makes Done the one main button, a link to the home page", () => {
     const { container } = render(<Finish onSave={() => {}}><p>The answer</p></Finish>);
-    const done = screen.getByRole("link", { name: "Done. Back to home." });
+    const done = screen.getByRole("link", { name: "I'm done" });
     expect(done).toHaveClass("primary");
     expect(done).toHaveClass("nt-finish-done");
     expect(done).toHaveAttribute("href", "#/");
@@ -41,7 +41,7 @@ describe("Finish", () => {
     expect(screen.getByRole("button", { name: "Save a copy" })).toBeInTheDocument();
     expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent("The answer");
     expect(container.querySelectorAll(".primary")).toHaveLength(1);
-    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "I'm done" })).toHaveClass("primary");
     await userEvent.click(save);
     expect(save).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByRole("button", { name: "Save a copy" })).toBeNull();

@@ -31,6 +31,6 @@ node tests/model-review/review.mjs monthly-budget --url http://127.0.0.1:4180
 
 - Calculators are read twice: empty, and with the person's numbers typed. A tool with steps has a scene file in `scenes/<tool>.mjs` that walks the screens and captures each one.
 - The screen text lists every visible heading, label, hint, box with its value, and button, and says whether a button is filled in the main-button colour. Hints in plain spans are included.
-- The first-time-user prompt runs three times on each screen. The middle score is kept and all three are on record.
-- The design rubric runs three times for Haiku and three for Sonnet. A rule passes when it passes in most runs.
+- The first-time-user prompt runs on each screen as many times as `--ftu-runs` says (3 by default). The evidence records use 9 (owner decision, 2026-11-05). The middle score is kept and every run is on record.
+- The design rubric runs `--rubric-runs` times (3 by default; the evidence records use 5) for Haiku and for Sonnet. A rule passes when it passes in most runs.
 - `node scripts/check-evidence.mjs` is the gate: every screen needs a reader score of 4 or more and every rule passing for both graders, and the skill-eval results must meet their bars. No record means the tool cannot stay shipped.

@@ -126,7 +126,7 @@ function Save({ result, typed }: { result: Good; typed: string }) {
     }
   }
   return (
-    <Finish onSave={save}>
+    <Finish onSave={save} exact>
       <p>{COPY.save.preview}</p>
     </Finish>
   );
