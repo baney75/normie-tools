@@ -67,8 +67,15 @@ Same as `/agents` on the site:
 
 A skill whose tool is `coming_soon` in `tools.json` is scaffolded but not packaged for people. It joins `dist/skills` only after the tool passes the ship gate (`docs/decisions.md`).
 
+## Example and tools
+
+`skills/receipt-to-spreadsheet/` is the scaffold. It has Level 1, 2, and 3 files, an Environments block, `scripts/env_check.py`, and a totals script that uses whole cents.
+
+- `scripts/refs.py` searches a folder of notes. `python3 cli/nt.py refs search "<words>"` (or `npm run nt -- refs search "<words>"`) searches `research/`. The build copies `refs.py` into each zip so a skill can search its own `references/`.
+- `npm run build:skills` writes `dist/skills/<tool>.zip` for shipped tools. Add `--include-coming-soon` to build scaffolds. The build checks the header name, the description, and the 30 MB limit.
+
 ## Tests
 
-- Sandbox mimic: run the scripts with the network blocked and only the documented packages.
-- Skill evals: `tests/skill-evals/` runs the same tasks and checks the answers.
+- Sandbox mimic: `scripts/tests/skills.test.mjs` runs the scripts with the network blocked (`tests/sandbox/sitecustomize.py`, and `unshare -rn` where allowed) and standard library only.
+- Skill evals: `tests/skill-evals/` holds the task files. The runner is a stub that checks their shape; model runs come later.
 - Zip check: top level is the skill folder, `name` matches the folder, and the size is under the limit.

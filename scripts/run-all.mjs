@@ -13,6 +13,7 @@ const STEPS = [
   "check:sources",
   "check:licenses",
   "check:required-tests",
+  "check:ship-gate",
   "check:markdown",
   "check:jargon",
   "check:reading-level",

@@ -22,3 +22,7 @@ desktop.ini
 .idea/
 .vscode/
 .nt-staging/
+
+# Python
+__pycache__/
+*.pyc

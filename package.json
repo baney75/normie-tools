@@ -15,6 +15,7 @@
     "check:sources": "node scripts/check-sources.mjs",
     "check:licenses": "node scripts/check-licenses.mjs",
     "check:required-tests": "node scripts/check-required-tests.mjs",
+    "check:ship-gate": "node scripts/ship-gate.mjs",
     "check:markdown": "markdownlint-cli2",
     "check:jargon": "node scripts/check-banned-jargon.mjs",
     "check:reading-level": "node scripts/check-reading-level.mjs",
@@ -22,7 +23,10 @@
     "check:links": "node scripts/check-links.mjs",
     "test:unit": "node --test \"scripts/tests/*.test.mjs\"",
     "build": "npm run build --workspace @nt/site",
-    "test:site": "npm test --workspace @nt/site"
+    "test:site": "npm test --workspace @nt/site",
+    "build:skills": "python3 scripts/build_skills.py",
+    "test:skills": "python3 -m unittest discover -s skills/receipt-to-spreadsheet/tests -p \"test_*.py\"",
+    "nt": "python3 cli/nt.py"
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.24.0"
