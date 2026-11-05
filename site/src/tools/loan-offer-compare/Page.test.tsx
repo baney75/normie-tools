@@ -135,7 +135,7 @@ describe("Loan Offer Compare page", () => {
     await fillOffer(1, { amount: "$10,000", rate: "6", term: "36" });
     await fillOffer(2, { amount: "10000", rate: "5", term: "48", fees: "$200" });
     expect(card()).toHaveTextContent("Offer 1");
-    expect(card()).toHaveTextContent("Offer 1 costs $302.23 less in all. Offer 2 costs $73.93 less each month.");
+    expect(card()).toHaveTextContent("Offer 1 costs $302.23 less in interest and fees. Offer 2 costs $73.93 less each month.");
     expect(card()).toHaveTextContent("Offer 1, interest and fees$951.88");
     expect(card()).toHaveTextContent("Offer 2, interest and fees$1,254.11");
     expect(card()).toHaveTextContent("Offer 1, each month$304.22");

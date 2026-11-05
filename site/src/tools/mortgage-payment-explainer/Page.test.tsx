@@ -152,6 +152,13 @@ describe("Mortgage Payment Explainer page", () => {
     expect(screen.getByLabelText("Mortgage insurance each month", { exact: false })).toBeInTheDocument();
   });
 
+  it("says the payment is the loan only when no tax, insurance or fees are typed", async () => {
+    render(<Page />);
+    await fillCore();
+    expect(card()).toHaveTextContent(COPY.result.loanOnly);
+    expect(card()).not.toHaveTextContent(COPY.result.totalLine);
+  });
+
   it("shows the exact answer as the person types", async () => {
     render(<Page />);
     await fillBasic();

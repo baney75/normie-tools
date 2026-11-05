@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { checkTool, checkToolDetailed } from "../check-evidence.mjs";
+import { checkTool, checkToolDetailed, waiverProblem } from "../check-evidence.mjs";
 
 function repo(files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "nt-evidence-"));
@@ -69,7 +69,8 @@ test("evidence: an extra screen with no Haiku review fails", () => {
   assert.ok(out.some((m) => /\(empty\) has no haiku review/.test(m)));
 });
 
-const waiver = (checks, extra = {}) => ({ waivers: [{ tool: "t", checks, by: "owner", date: "2026-11-05", said: "Ship it all", ...extra }] });
+const entry = (checks, extra = {}) => ({ tool: "t", checks, minScore: 3, by: "owner", date: "2026-11-05", expires: "2999-01-01", said: "Ship it all", ...extra });
+const waiver = (checks, extra = {}) => ({ waivers: [entry(checks, extra)] });
 
 test("evidence: an owner waiver excuses only the named check for the named tool", () => {
   const review = { ...goodReview, firstTimeUser: { score: 3 } };
@@ -101,4 +102,28 @@ test("evidence: a waiver never excuses a missing score or a skill eval", () => {
   const out = checkTool(root, { id: "t" });
   assert.ok(out.some((m) => /is missing/.test(m)));
   assert.ok(out.some((m) => /tiny is below the bar/.test(m)));
+});
+
+test("evidence: a waiver may name only first-time-user and rule8, and a bad entry fails the gate", () => {
+  assert.match(waiverProblem(entry(["rule2"]), "2026-11-05"), /cannot waive rule2/);
+  const root = repo(files({ "tests/model-review/waivers.json": waiver(["rule2"]) }));
+  assert.ok(checkTool(root, { id: "t" }).some((m) => /waiver .* is not valid: cannot waive rule2/.test(m)));
+});
+
+test("evidence: a reader score below the waiver floor still fails", () => {
+  const review = { ...goodReview, firstTimeUser: { score: 2 } };
+  const root = repo(files({ "tests/model-review/t.json": review, "tests/model-review/waivers.json": waiver(["first-time-user"]) }));
+  assert.ok(checkTool(root, { id: "t" }).some((m) => /\(main\) is 2, needs 4/.test(m)));
+});
+
+test("evidence: a waiver limited to some screens does not excuse another screen", () => {
+  const review = { ...goodReview, otherScreens: [{ screen: "empty", firstTimeUser: { score: 3 }, designRubric: goodReview.designRubric }] };
+  const root = repo(files({ "tests/model-review/t.json": review, "tests/model-review/waivers.json": waiver(["first-time-user"], { screens: ["main"] }) }));
+  assert.ok(checkTool(root, { id: "t" }).some((m) => /\(empty\) is 3/.test(m)));
+});
+
+test("evidence: an expired waiver, or one with a bad date, fails the gate", () => {
+  assert.match(waiverProblem(entry(["rule8"], { expires: "2020-01-01" }), "2026-11-05"), /expired/);
+  assert.match(waiverProblem(entry(["rule8"], { date: "today" }), "2026-11-05"), /date must be/);
+  assert.match(waiverProblem(entry(["first-time-user"], { minScore: 0 }), "2026-11-05"), /minScore/);
 });

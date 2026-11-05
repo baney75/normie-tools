@@ -37,4 +37,4 @@ node tests/model-review/review.mjs monthly-budget --url http://127.0.0.1:4180
 
 ## Owner waivers
 
-`waivers.json` lets the owner excuse a named check for a named tool, for example `first-time-user` or `rule8`. Each entry needs `tool`, `checks`, `by`, `date` and `said` (the owner's words). `check:evidence` prints every excused problem as `WAIVED` and still fails on anything not named. Remove an entry once the tool passes without it.
+`waivers.json` lets the owner excuse a check for a named tool. Only `first-time-user` and `rule8` can be waived. Each entry needs `tool`, `checks`, `by`, `date`, `expires` (both YYYY-MM-DD) and `said` (the owner's words). A `first-time-user` waiver also needs `minScore` (1 to 3): a lower score still fails. `screens` limits a waiver to the named screens. An invalid or expired entry fails `check:evidence`. Every excused problem prints as `WAIVED`. Remove an entry once the tool passes without it.

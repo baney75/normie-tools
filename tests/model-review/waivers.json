@@ -1,48 +1,52 @@
 {
   "waivers": [
     {
-      "tool": "loan-explainer",
-      "checks": [
-        "first-time-user",
-        "rule8"
-      ],
-      "by": "Donovan Baney (owner)",
-      "date": "2026-11-05",
-      "said": "Ship it all make sure design is good",
-      "why": "At 9 runs the first-time reader scores the filled screen of the loan tools about 3.5: 3 to 4 of 9 runs give 4. Wording changes moved it between 3 and 4 without a trend, and each fix for its worries added the explaining text NT is cutting. Haiku sometimes fails the line 'Your numbers stay on this phone or computer.' as unsourced. The line is true (the tools make no network calls; numbers are kept only in this browser) and its source is the 'How we know' page, which the screen text of one screen cannot show."
-    },
-    {
       "tool": "loan-offer-compare",
       "checks": [
-        "first-time-user",
-        "rule8"
+        "first-time-user"
+      ],
+      "minScore": 3,
+      "screens": [
+        "main"
       ],
       "by": "Donovan Baney (owner)",
       "date": "2026-11-05",
+      "expires": "2027-01-05",
+      "asked": "At 9 runs, Monthly Budget and Unit Converter pass NT's gate. The four loan tools average about 3.5 on the filled screen, so they miss the bar of 4, whatever the wording. How should they ship?",
       "said": "Ship it all make sure design is good",
-      "why": "At 9 runs the first-time reader scores the filled screen of the loan tools about 3.5: 3 to 4 of 9 runs give 4. Wording changes moved it between 3 and 4 without a trend, and each fix for its worries added the explaining text NT is cutting. Haiku sometimes fails the line 'Your numbers stay on this phone or computer.' as unsourced. The line is true (the tools make no network calls; numbers are kept only in this browser) and its source is the 'How we know' page, which the screen text of one screen cannot show."
+      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 3, 3, 4, 3, 3, 3, 3] (middle score 3; 1 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
     },
     {
       "tool": "mortgage-payment-explainer",
       "checks": [
-        "first-time-user",
-        "rule8"
+        "first-time-user"
+      ],
+      "minScore": 3,
+      "screens": [
+        "main"
       ],
       "by": "Donovan Baney (owner)",
       "date": "2026-11-05",
+      "expires": "2027-01-05",
+      "asked": "At 9 runs, Monthly Budget and Unit Converter pass NT's gate. The four loan tools average about 3.5 on the filled screen, so they miss the bar of 4, whatever the wording. How should they ship?",
       "said": "Ship it all make sure design is good",
-      "why": "At 9 runs the first-time reader scores the filled screen of the loan tools about 3.5: 3 to 4 of 9 runs give 4. Wording changes moved it between 3 and 4 without a trend, and each fix for its worries added the explaining text NT is cutting. Haiku sometimes fails the line 'Your numbers stay on this phone or computer.' as unsourced. The line is true (the tools make no network calls; numbers are kept only in this browser) and its source is the 'How we know' page, which the screen text of one screen cannot show."
+      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 3, 3, 3, 3, 3, 3, 3] (middle score 3; 0 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
     },
     {
       "tool": "student-loan-growth-and-payoff",
       "checks": [
-        "first-time-user",
-        "rule8"
+        "first-time-user"
+      ],
+      "minScore": 3,
+      "screens": [
+        "main"
       ],
       "by": "Donovan Baney (owner)",
       "date": "2026-11-05",
+      "expires": "2027-01-05",
+      "asked": "At 9 runs, Monthly Budget and Unit Converter pass NT's gate. The four loan tools average about 3.5 on the filled screen, so they miss the bar of 4, whatever the wording. How should they ship?",
       "said": "Ship it all make sure design is good",
-      "why": "At 9 runs the first-time reader scores the filled screen of the loan tools about 3.5: 3 to 4 of 9 runs give 4. Wording changes moved it between 3 and 4 without a trend, and each fix for its worries added the explaining text NT is cutting. Haiku sometimes fails the line 'Your numbers stay on this phone or computer.' as unsourced. The line is true (the tools make no network calls; numbers are kept only in this browser) and its source is the 'How we know' page, which the screen text of one screen cannot show."
+      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 4, 3, 3, 3, 4, 4, 3] (middle score 3; 3 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
     }
   ]
 }

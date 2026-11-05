@@ -32,7 +32,8 @@ export const COPY = {
   },
   result: {
     totalLabel: "Total monthly payment",
-    totalLine: "Your loan payment plus any tax, insurance and fees you typed.",
+    totalLine: "Your loan payment plus the tax, insurance and fees you typed.",
+    loanOnly: "This is the loan payment only. Tax and insurance are not in it yet.",
     partsHeading: "What is in it",
     loan: "Loan amount",
     pi: "Loan payment",

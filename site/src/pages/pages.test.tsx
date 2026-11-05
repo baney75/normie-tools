@@ -19,7 +19,8 @@ describe("Home", () => {
     render(<Home />);
     expect(screen.getByRole("heading", { level: 1, name: "Small tools for everyday things." })).toBeInTheDocument();
     expect(screen.getByText("Use them yourself, or ask your AI app.")).toBeInTheDocument();
-    expect(screen.getByText(PAGES.home.promise)).toBeInTheDocument();
+    expect(screen.getByText(PAGES.home.promise, { exact: false })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: PAGES.tool.how })).toHaveAttribute("href", "#/private");
     expect(screen.getByRole("search")).toBeInTheDocument();
     expect(screen.getByLabelText("What do you want to get done?")).toBeInTheDocument();
     expect(screen.queryAllByRole("button")).toHaveLength(0);

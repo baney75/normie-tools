@@ -158,7 +158,10 @@ describe("Loan Explainer page", () => {
     await fill("Extra each month", "$100");
     const card = screen.getByLabelText("Monthly payment");
     expect(card).toHaveTextContent("$398.39");
-    expect(card).toHaveTextContent("Paid off in5 years");
+    // The card follows the extra payment, so it agrees with the section below, and it names the fees.
+    expect(card).toHaveTextContent("Paid off in47 months");
+    expect(card).toHaveTextContent("You pay back $22,974.16 in all, plus $500.00 in upfront fees. That counts your extra payment.");
+    expect(card).toHaveTextContent("Total interest$2,974.16");
     expect(lines()).toHaveTextContent("Loan length60 months");
     expect(lines()).toHaveTextContent("Upfront fees$500.00");
     expect(lines()).toHaveTextContent("Cost of borrowing$4,403.20");
@@ -333,3 +336,15 @@ describe("loan-explainer filled screen", () => {
     expect(open).not.toMatch(/APR|HOA/);
   });
 });
+
+describe("Loan Explainer length chips", () => {
+  it("keeps a typed length when Other is tapped again", async () => {
+    render(<Page />);
+    await userEvent.click(screen.getByLabelText("Other"));
+    await fill("Length of the loan", "3");
+    await userEvent.click(screen.getByLabelText("Years"));
+    await userEvent.click(screen.getByLabelText("Other"));
+    expect(screen.getByLabelText("Length of the loan")).toHaveValue("3");
+  });
+});
+

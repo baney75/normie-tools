@@ -8,14 +8,14 @@ export type SeeAnswerProps = {
 };
 
 /**
- * The one main button while there is no answer. It puts the cursor in the first empty box,
+ * The one main button while there is no answer. It puts the cursor in the first empty box that is needed (optional boxes are skipped),
  * or takes the person to the answer card when every box is filled. On a wide screen the
  * answer is already beside the boxes, so the button hides there.
  */
 export function SeeAnswer({ label, main }: SeeAnswerProps) {
   function go() {
     const card = document.getElementById("nt-answer");
-    const empty = Array.from(document.querySelectorAll<HTMLInputElement>(".nt-tool-inputs input.nt-field-input")).find((el) => !el.value.trim());
+    const empty = Array.from(document.querySelectorAll<HTMLInputElement>(".nt-tool-inputs input.nt-field-input:not([data-optional])")).find((el) => !el.value.trim());
     const target = empty ?? card;
     target?.scrollIntoView?.({ block: "center" });
     target?.focus();

@@ -16,12 +16,12 @@
       4,
       4,
       4,
-      4,
-      4,
-      4
+      3,
+      3,
+      3
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to look at my budget numbers, see I have $700 left over, and either stop or change a number.\n\n2. I'd tap \"I'm done\".\n\n3. Words I didn't understand or that felt techy:\n- \"How we know\" (know what?)\n- \"Print or save\" (save where?)\n- \"Remove asks first, and you can put the line back.\" (put back how?)\n- \"More options\" (options for what?)\n- \"See all the numbers\" (aren't these all the numbers?)\n- \"Add an income item\" / \"spending item\" (a bit stiff, but I got it)\n- \"stay on this phone or computer\" (I think that's reassuring, but I wasn't sure what it means)\n- \"filled\" and \"boxes\" didn't matter to me.\n\n4. Worries:\n- \"I'm done\": does it save my numbers, or lose them? I don't know what happens next.\n- \"Your numbers stay on this phone\" makes me wonder if I'll lose them if I close it.\n- The \"Remove\" buttons are right next to each number. I might tap one by accident. It says it asks first, which helps a bit.\n- \"Print or save\" makes me wonder if it costs anything or sends my numbers somewhere.\n- \"How we know\" looks like it might take me to another page.\n\n5. I'd skip \"More options\", \"See all the numbers\", and the \"Where it goes\" percentages. They don't help me decide what to do. I'd also skip the Remove buttons.\n\n6. Score: 4. The orange button is clear, but I'm not sure what \"I'm done\" does.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"How we know\", \"Print or save\", \"More options\", \"See all the numbers\", \"stay on this phone or computer\", \"put the line back\"], \"worries\": [\"Does I'm done save or lose my numbers\", \"Numbers only stay on this device, could lose them\", \"Remove buttons easy to tap by accident\", \"Print or save might cost or send data\", \"How we know might leave the page\"], \"skippable\": [\"More options\", \"See all the numbers\", \"Where it goes percentages\", \"Remove buttons\"], \"score\": 4}"
+    "output": "1. This screen shows me that I have $700 left over each month, and it wants me to either stop or change a number to try again.\n\n2. \"I'm done\"\n\n3. Words that felt like tech talk or unclear:\n- \"MAIN LINK\" (it's called a link but looks like a button, which is odd)\n- \"How we know\" (know what? It's not clear what it's explaining)\n- \"Print or save\" (save where?)\n- \"an x icon\" (I'd guess it means remove, but it isn't labeled)\n- \"More options\" (options for what?)\n- \"See all the numbers\" (aren't these already the numbers?)\n- \"Remove asks first, and you can put the line back\" (put it back how?)\n- \"This is money in that is not spent.\" (awkward wording, I had to read it twice)\n- \"Item\" and \"Each month\" headings over boxes that have no labels of their own\n\n4. Worries:\n- \"Your numbers stay on this phone or computer.\" That is reassuring, but I don't know who \"we\" is or how I would be sure. \"How we know\" makes me a little wary.\n- \"I'm done\": will it erase my numbers, send them somewhere, or just close? I don't know what happens.\n- \"Print or save\": I'm not sure where it saves or whether it sends anything.\n- The x buttons: I might delete a line by accident, though it says it asks first.\n- The boxes have no labels, so I'm not sure I'm allowed to change the words like \"Food.\"\n\n5. Things I'd skip:\n- \"Where it goes\" list with percentages (it repeats what I typed, and the percentages don't mean much to me)\n- \"More options\" and \"See all the numbers\" (closed, and I don't know why I'd open them)\n- \"How we know\" link\n\n6. Score: 4. The answer is clear and \"I'm done\" stands out, but I'm unsure what it does.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"MAIN LINK\", \"How we know\", \"Print or save\", \"an x icon\", \"More options\", \"See all the numbers\", \"This is money in that is not spent\", \"Remove asks first, and you can put the line back\", \"Item / Each month headings over unlabeled boxes\", \"percent of income\"], \"worries\": [\"Unclear what I'm done does (erase, send, or close)\", \"Where Print or save puts things\", \"Who 'we' is in How we know and whether numbers really stay private\", \"Accidentally deleting a line with the x\", \"Unlabeled boxes, unsure if I can change the words\"], \"skippable\": [\"Where it goes list with percentages\", \"More options\", \"See all the numbers\", \"How we know\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -41,19 +41,6 @@
       "fails": [],
       "runs": [
         {
-          "passes": 6,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "FAIL",
-            "PASS",
-            "FAIL"
-          ]
-        },
-        {
           "passes": 8,
           "rules": [
             "PASS",
@@ -62,6 +49,19 @@
             "PASS",
             "PASS",
             "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
             "PASS",
             "PASS"
           ]
@@ -106,7 +106,7 @@
           ]
         }
       ],
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"FAIL\",\"fails\":[\"Rule 6: Typed numbers change the totals right away with no preview, and the screen gives no way to undo a typed number. Only \\\"Remove\\\" says \\\"you can put the line back.\\\"\",\"Rule 8: \\\"Your numbers stay on this phone or computer.\\\" is stated as fact, but the page does not show its source. The \\\"How we know\\\" link is the only pointer, and its content is not on the screen.\"],\"score\":6}"
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
     },
     {
       "model": "sonnet",
@@ -203,7 +203,7 @@
           4,
           4,
           4,
-          4,
+          3,
           4,
           4,
           4,
@@ -211,7 +211,7 @@
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in how much I earn and spend each month, then see how much money is left over.\n\n2. I would tap the box for \"Pay, per month\" first, to type my pay. After that, the button \"See what is left over\".\n\n3. Words I did not understand or that felt like tech talk:\n- \"Your numbers stay on this phone or computer\" (I'm not sure what that means in practice, or where the numbers go)\n- \"How we know\" (know what? It sounds like a proof or explanation, but I'm not sure)\n- \"Name of income item 1\" (the word \"item\" is odd; \"income item\" sounds like an office form)\n- \"Remove\" (does it delete it for good?)\n- \"Add an income item\" / \"Add a spending item\"\n- \"per month\" in the box label is fine, but the boxes show only names like \"Pay, per month\" with nothing to show whether I type dollars or a plain number\n\n4. Worries:\n- Whether my numbers are really private. It says they stay on this device, but I don't know if I can trust that, and \"How we know\" makes me wonder what I'd be shown.\n- Pressing \"Remove\" by accident and losing something. The note says it asks first and I can put it back, which helps a little, but it is down at the bottom, far from the buttons.\n- Not knowing if I have to fill in every box. If I leave one empty, will it be wrong?\n- Not sure whether this asks for my bank details. It doesn't seem to, but I wasn't certain until I read through.\n- No mention of cost. I can't tell if it's free.\n\n5. What I would skip:\n- All the \"Remove\" buttons. I don't need them to start.\n- \"Add an income item\" and \"Add a spending item\" for now.\n- The \"How we know\" link, unless I get nervous.\n- The name boxes (\"Name of income item 1\" and so on), since the names are already filled in.\n\n6. Score: 4. I know I should type my pay and then tap the orange button, but I'm a bit unsure whether to fill every box and whether it costs anything.\n\nRESULT: {\"next_tap\": \"Pay, per month (the box), then See what is left over\", \"confusing_terms\": [\"Your numbers stay on this phone or computer\", \"How we know\", \"income item\", \"spending item\", \"Name of income item 1\", \"Remove\", \"Add an income item\", \"Add a spending item\", \"per month box (unclear if dollars or plain number)\"], \"worries\": [\"Whether my numbers are really private\", \"Pressing Remove by accident and losing something\", \"Not sure if every box must be filled in\", \"Not sure if it asks for bank details\", \"No mention of whether it is free\"], \"skippable\": [\"Remove buttons\", \"Add an income item\", \"Add a spending item\", \"How we know link\", \"Name boxes\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in my pay and what I spend each month, then find out how much money is left over.\n\n2. I would tap the box next to \"Pay\" first, to type my pay. After that, I'd tap \"See what is left over\".\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Item\" (it's okay, but a bit formal)\n- \"Add an income item\" (\"income item\" sounds like office talk)\n- \"How we know\" (I'm not sure what it's about knowing)\n- \"Remove asks first, and you can put the line back\" (what is a \"line\"?)\n- The little x icon with no words. I guess it removes, but it doesn't say so.\n- The boxes have no label, so I'm not sure which is the name and which is the dollar amount.\n\n4. Worries:\n- \"Your numbers stay on this phone or computer.\" That's comforting, but I'm not sure I believe it, and \"How we know\" makes me wonder what I'd be agreeing to.\n- The x icons: I might delete something by accident. The note says it asks first, but it's far down the page.\n- I'm putting in my pay, and I'm not sure who can see it.\n- I don't know if the \"See what is left over\" button costs anything or saves my numbers.\n- I don't know if I have to fill in every row or whether empty ones cause trouble.\n\n5. What I'd skip:\n- The x icons, at first.\n- The \"Add an income item\" and \"Add a spending item\" buttons, until I need them.\n- The \"How we know\" link, unless I get nervous.\n\n6. Score: 4. The orange button is clear, and \"Type your pay to start\" tells me where to begin. I'm only slightly unsure about the unlabeled boxes.\n\nRESULT: {\"next_tap\": \"the box next to Pay (then See what is left over)\", \"confusing_terms\": [\"Item\", \"Add an income item\", \"How we know\", \"line (in 'put the line back')\", \"x icon with no words\", \"unlabeled boxes\"], \"worries\": [\"whether my numbers are really kept private\", \"what 'How we know' leads to\", \"deleting a row by accident with the x\", \"whether anything costs money or gets saved\", \"whether every row must be filled in\"], \"skippable\": [\"x icons\", \"Add an income item\", \"Add a spending item\", \"How we know link\"], \"score\": 4}"
       },
       "designRubric": [
         {
@@ -231,7 +231,7 @@
           "fails": [],
           "runs": [
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -240,11 +240,11 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             },
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -253,7 +253,7 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             },
             {
@@ -296,7 +296,7 @@
               ]
             }
           ],
-          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"FAIL\", \"fails\": [\"rule8: \\\"Your numbers stay on this phone or computer.\\\" is stated as fact, but the only source is a \\\"How we know\\\" link whose content is not on the screen.\"], \"score\": 7}"
         },
         {
           "model": "sonnet",

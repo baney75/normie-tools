@@ -32,6 +32,8 @@ export function Page() {
   const v = flow.value;
   const set = (patch: Partial<Inputs>) => flow.setValue({ ...v, ...patch });
   const [otherOpen, setOtherOpen] = useState(false);
+  // True when the length came from a chip tap, so choosing Other may clear it. A typed length is never erased.
+  const [fromChip, setFromChip] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
 
   // Derived in render: no timers, no effects. The answer follows the typing.
@@ -49,9 +51,10 @@ export function Page() {
   const pickTerm = (choice: string) => {
     if (choice === "other") {
       setOtherOpen(true);
-      if (quick) set({ term: "" });
+      if (quick && fromChip) set({ term: "" });
     } else {
       setOtherOpen(false);
+      setFromChip(true);
       set({ term: choice });
     }
   };
@@ -61,7 +64,7 @@ export function Page() {
     <ToolLayout
       name={COPY.title}
       question={COPY.question}
-      answer={<Answer result={result.ok ? result : null} />}
+      answer={<Answer result={result.ok ? result : null} extras={hasExtras(v)} />}
       actions={result.ok ? <Save result={result} /> : null}
       below={<Details result={result.ok ? result : null} />}
     >
@@ -95,7 +98,7 @@ export function Page() {
         />
         {showOther ? (
           <NumberField label={COPY.term.otherLabel}
-            value={v.term} onChange={(t) => set({ term: t })} error={bad("term")} />
+            value={v.term} onChange={(t) => { setFromChip(false); set({ term: t }); }} error={bad("term")} />
         ) : null}
 
         {showMore ? (
@@ -159,13 +162,13 @@ function first(result: Good): [string, string][] {
   ];
 }
 
-function Answer({ result }: { result: Good | null }) {
+function Answer({ result, extras }: { result: Good | null; extras: boolean }) {
   const r = COPY.result;
   return (
     <ResultCard label={r.totalLabel} answer={result ? formatMoney(result.totalMonthlyCents) : undefined} waiting={COPY.waiting}>
       {result ? (
         <>
-          <p>{r.totalLine}</p>
+          <p>{extras ? r.totalLine : r.loanOnly}</p>
           <dl>
             <div>
               <dt>{r.loan}</dt>

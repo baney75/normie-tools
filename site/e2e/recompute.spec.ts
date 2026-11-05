@@ -84,7 +84,7 @@ test("loan-offer-compare: changing offer 1 gives its new payment and total", asy
   await offer(1, "10000", "6", "36");
   await offer(2, "10000", "5", "48");
   // The card holds each offer's monthly payment; totals are in the table under "See all the numbers".
-  const card = page.getByLabel("Cheaper overall");
+  const card = page.getByLabel("Costs less to borrow");
   await expect(card).toContainText("$304.22"); // same worked numbers as above
   await page.getByText("See all the numbers", { exact: true }).click();
   const all = page.locator("details").filter({ has: page.getByText("See all the numbers", { exact: true }) });

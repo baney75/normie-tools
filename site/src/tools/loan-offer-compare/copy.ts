@@ -29,10 +29,10 @@ export const COPY = {
     no: "No thanks",
   },
   facts: {
-    lowestCost: "Cheaper overall",
+    lowestCost: "Costs less to borrow",
     lessThan: "costs",
-    lessInAll: "less in all.",
-    lessInAllThan: "less in all than",
+    lessInAll: "less in interest and fees.",
+    lessInAllThan: "less in interest and fees than",
     nextLowest: "the next lowest offer",
     eachMonth: "each month",
     inAll: "interest and fees",

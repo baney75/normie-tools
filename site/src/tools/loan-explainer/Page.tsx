@@ -28,6 +28,8 @@ export function Page() {
   const v = flow.value;
   const set = (patch: Partial<Inputs>) => flow.setValue({ ...v, ...patch });
   const [otherOpen, setOtherOpen] = useState(false);
+  // True when the length came from a chip tap, so choosing Other may clear it. A typed length is never erased.
+  const [fromChip, setFromChip] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
 
   // Derived in render: no timers, no effects. The answer follows the typing.
@@ -44,9 +46,10 @@ export function Page() {
   const pickTerm = (choice: string) => {
     if (choice === "other") {
       setOtherOpen(true);
-      if (quick) set({ term: "", termUnit: "months" });
+      if (quick && fromChip) set({ term: "", termUnit: "months" });
     } else {
       setOtherOpen(false);
+      setFromChip(true);
       set({ term: choice, termUnit: "years" });
     }
   };
@@ -86,7 +89,7 @@ export function Page() {
         />
         {showOther ? (
           <>
-            <NumberField label={COPY.term.otherLabel} value={v.term} onChange={(t) => set({ term: t })} error={bad("term")} />
+            <NumberField label={COPY.term.otherLabel} value={v.term} onChange={(t) => { setFromChip(false); set({ term: t }); }} error={bad("term")} />
             <Chips
               legend={COPY.term.unitLegend}
               options={[
@@ -129,19 +132,27 @@ type Good = Extract<ReturnType<typeof explainLoan>, { ok: true }>;
 
 function Answer({ result }: { result: Good }) {
   const r = COPY.result;
+  // With an extra payment that finishes the loan sooner, the card shows that schedule, so it never
+  // disagrees with the extra-payment section below.
+  const e = result.extra && (result.extra.monthsSaved > 0 || result.extra.interestSaved > 0) ? result.extra : null;
+  const paid = e ? e.totalPaidCents : result.totalPaidCents;
+  const interest = e ? e.totalInterestCents : result.totalInterestCents;
+  const months = e ? e.months : result.months;
+  const fees = result.feesCents > 0 ? `, ${r.plus} ${formatMoney(result.feesCents)} ${r.inFees}` : "";
   return (
     <ResultCard label={r.paymentLabel} answer={formatMoney(result.monthlyPaymentCents)}>
       <p>
-        {r.payBack} {formatMoney(result.totalPaidCents)} {r.inAll}
+        {r.payBack} {formatMoney(paid)} {r.inAll}
+        {fees}.{e ? ` ${r.withExtra}` : ""}
       </p>
       <dl>
         <div>
           <dt>{r.totalInterest}</dt>
-          <dd>{formatMoney(result.totalInterestCents)}</dd>
+          <dd>{formatMoney(interest)}</dd>
         </div>
         <div>
           <dt>{r.paidOff}</dt>
-          <dd>{span(result.months)}</dd>
+          <dd>{span(months)}</dd>
         </div>
       </dl>
     </ResultCard>

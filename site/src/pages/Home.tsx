@@ -12,7 +12,9 @@ export function Home() {
     <div className="nt-home">
       <h1 className="nt-home-title">{c.tagline}</h1>
       <p className="nt-home-sub">{c.subline}</p>
-      <p className="nt-home-promise">{c.promise}</p>
+      <p className="nt-home-promise">
+        {c.promise} <a href={href("/private")}>{PAGES.tool.how}</a>
+      </p>
       <PromptSearch tools={TOOLS} />
       <h2 className="nt-home-heading">{c.readyHeading}</h2>
       {ready.length > 0 ? <ToolGrid tools={ready} /> : <p>{c.noneReady}</p>}

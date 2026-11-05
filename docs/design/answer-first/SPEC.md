@@ -47,7 +47,7 @@ The built result is in this folder as `after-*.webp` (phone 390px and desktop 12
 
 ## Must not happen
 
-- No changes to `tools/*/calc.mjs`, `tools/*/tests/`, skills, the ship gate, the evidence gate, or the review prompts.
+- No changes to `tools/*/calc.mjs`, `tools/*/tests/`, skills, the ship gate, or the review prompts. (The evidence gate later gained an owner waiver on the owner's answer of 2026-11-05; see `docs/decisions.md`.)
 - Do not weaken or delete a test to make it pass. Update a test only where it asserts the old copy or the old layout, and keep what it was really checking.
 - No em dash or en dash characters. No new dependencies besides what is already in `site/package.json`.
 

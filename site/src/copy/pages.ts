@@ -19,7 +19,7 @@ export const PAGES = {
   home: {
     tagline: "Small tools for everyday things.",
     subline: "Use them yourself, or ask your AI app.",
-    promise: "Free. No sign up. Nothing you type is sent anywhere.",
+    promise: "Free. No sign up. Your numbers stay on your phone or computer.",
     readyHeading: "Ready to use",
     noneReady: "No tool is ready yet. They are on the way.",
     more: "More tools are on the way.",

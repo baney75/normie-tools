@@ -4,11 +4,10 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Loan Offer Compare
 [heading 1] Which loan offer is cheaper?
-Your numbers stay on this phone or computer. How we know
-[link, plain] How we know
-Cheaper overall
+Your numbers stay on this phone or computer. How we know ("How we know" is a link)
+Costs less to borrow
 Offer 1
-Offer 1 costs $281.26 less in all. Offer 2 costs $3.29 less each month.
+Offer 1 costs $281.26 less in interest and fees. Offer 2 costs $3.29 less each month.
 Offer 1, interest and fees
 $1,437.91
 Offer 2, interest and fees
@@ -21,29 +20,35 @@ That is your estimate. You can stop here, or change a number to try again.
 [MAIN LINK, filled dark orange] I'm done
 [plain button, outline only] Print or save
 [question] Offer 1
-[label] Offer 1: Amount borrowed
-[box] Offer 1: Amount borrowed = "12000"
-[label] Offer 1: Yearly interest rate
-[box] Offer 1: Yearly interest rate = "7.5"
-[label] Offer 1: How long is the loan?
-[box] Offer 1: How long is the loan? = "36"
+[label] Amount borrowed
+$
+[box] Amount borrowed = "12000"
+[label] Yearly interest rate
+[box] Yearly interest rate = "7.5"
+%
+[label] How long is the loan?
+[box] How long is the loan? = "36"
 [question] Months or years?
 [choice] Months (selected)
 [choice] Years 
-[label] Offer 1: Upfront fees (optional)
-[box] Offer 1: Upfront fees (optional) = "0"
+[label] Upfront fees (optional)
+$
+[box] Upfront fees (optional) = "0"
 [question] Offer 2
-[label] Offer 2: Amount borrowed
-[box] Offer 2: Amount borrowed = "12000"
-[label] Offer 2: Yearly interest rate
-[box] Offer 2: Yearly interest rate = "6.9"
-[label] Offer 2: How long is the loan?
-[box] Offer 2: How long is the loan? = "36"
+[label] Amount borrowed
+$
+[box] Amount borrowed = "12000"
+[label] Yearly interest rate
+[box] Yearly interest rate = "6.9"
+%
+[label] How long is the loan?
+[box] How long is the loan? = "36"
 [question] Months or years?
 [choice] Months (selected)
 [choice] Years 
-[label] Offer 2: Upfront fees (optional)
-[box] Offer 2: Upfront fees (optional) = "400"
+[label] Upfront fees (optional)
+$
+[box] Upfront fees (optional) = "400"
 [plain button, outline only] Add a third offer
 [closed section, tap to open] More options
 [closed section, tap to open] See all the numbers

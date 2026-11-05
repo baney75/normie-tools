@@ -4,15 +4,16 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Loan Explainer
 [heading 1] What will my loan cost?
-Your numbers stay on this phone or computer. How we know
-[link, plain] How we know
+Your numbers stay on this phone or computer. How we know ("How we know" is a link)
 Type your numbers to see your monthly payment.
 [label] Amount borrowed
 On your loan papers.
+$
 [box] Amount borrowed = ""
 [label] Yearly interest rate
 On your loan papers, as a percent. Type 0 if there is none.
 [box] Yearly interest rate = ""
+%
 [question] How long is the loan?
 [choice] 2 years 
 [choice] 3 years 

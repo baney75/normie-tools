@@ -4,11 +4,10 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 Mortgage Payment Explainer
 [heading 1] What will my house payment be?
-Your numbers stay on this phone or computer. How we know
-[link, plain] How we know
+Your numbers stay on this phone or computer. How we know ("How we know" is a link)
 Total monthly payment
 $1,516.96
-Your loan payment plus any tax, insurance and fees you typed.
+This is the loan payment only. Tax and insurance are not in it yet.
 Loan amount
 $240,000.00
 Loan length
@@ -18,13 +17,16 @@ That is your estimate. You can stop here, or change a number to try again.
 [plain button, outline only] Print or save
 [label] Home price
 What the home costs.
+$
 [box] Home price = "300000"
 [label] Down payment
 Money you pay at the start. Type 0 if none.
+$
 [box] Down payment = "60000"
 [label] Yearly interest rate
 On your loan papers, as a percent.
 [box] Yearly interest rate = "6.5"
+%
 [question] How long is the loan?
 [choice] 15 years 
 [choice] 20 years 

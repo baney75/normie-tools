@@ -12,16 +12,16 @@
     "runs": [
       4,
       4,
-      3,
-      3,
-      3,
+      4,
       4,
       4,
       3,
+      3,
+      4,
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. It wants me to look at my answer, 127,000 millimeters, and then tap \"I'm done\" or change a number to try again.\n\n2. \"I'm done\"\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n- \"How we know\". I don't know what it's explaining.\n- \"rounded to 6 digits\". I don't know what that means.\n- \"More options\". I don't know what's inside.\n- \"Show the facts used\". I don't know which facts, or why they matter.\n- \"Swap\". I could guess it flips the two units, but I'm not sure.\n- \"Print or save\". I don't know where it would save.\n- \"MAIN LINK\" and \"menu\". These are the layout notes' words. I'd only see a button and a list.\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" made me wonder who else might see them, though it mostly reassured me.\n- \"I'm done\" sounds like it might close something or lose my answer. I don't know if the answer disappears.\n- \"Print or save\" might cost something or send my answer somewhere.\n- I'm not sure \"Swap\" won't erase what I typed.\n- The answer is 127,000 mm from 5000 inches. I can't tell if that's right, and it looks huge. I'd worry I picked the wrong unit.\n\n5. What I'd skip:\n- \"How we know\" (it appears as text and as a link).\n- \"More options\".\n- \"Show the facts used\".\n- \"A long answer is rounded to 6 digits.\"\n\n6. Score: 4. The orange \"I'm done\" is clear. I'm a little unsure whether I need to tap it at all, since the screen says I can stop here.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"How we know\", \"rounded to 6 digits\", \"More options\", \"Show the facts used\", \"Swap\", \"Print or save\"], \"worries\": [\"Not sure if 'I'm done' erases or closes my answer\", \"Unsure who can see my numbers despite the privacy line\", \"Print or save might cost money or send my answer somewhere\", \"Swap might erase what I typed\", \"Unsure I picked the right units because 127,000 looks huge\"], \"skippable\": [\"How we know\", \"More options\", \"Show the facts used\", \"A long answer is rounded to 6 digits\"], \"score\": 4}"
+    "output": "1. This screen wants me to see that 5000 inches is 127,000 millimeters, and then either finish or try another number.\n\n2. \"I'm done\"\n\n3. Words that felt like tech talk or unclear:\n- \"rounded to 6 digits\" (I don't really know what that means for me)\n- \"Swap\" (swap what? I'd guess it flips the two units, but I'm not sure)\n- \"More options\" (more of what?)\n- \"Show the facts used\" (what facts?)\n- \"How we know\" (know what?)\n- \"Print or save\" (save where?)\n- \"MAIN LINK\" and \"menu\" feel like computer words, though they may be notes and not what I'd see.\n- \"Millimeters (mm)\" is fine, but I'm not sure how big a millimeter is.\n\n4. Worries:\n- \"I'm done\" - I wonder if tapping it erases my answer or closes something and I lose it. I can't tell what happens.\n- \"Print or save\" - save where? Would it cost anything or send it somewhere?\n- \"Your numbers stay on this phone or computer\" - this comforts me a little, but I'd still wonder who \"we\" are.\n- Not sure that \"Swap\" won't mess up my number.\n- I typed 5000 and the answer is 127,000, and I don't know whether that's right. That makes me want to check it.\n\n5. Skippable:\n- \"A long answer is rounded to 6 digits.\" My answer isn't long, so it doesn't seem to apply to me.\n- \"Show the facts used\" and \"More options\" - I'd leave them closed.\n- The row of choices (Weight, Volume, Temperature, Speed) since I'm doing length.\n\n6. Score: 4. The answer is clear and the orange button stands out, but I don't know what \"I'm done\" does.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"rounded to 6 digits\", \"Swap\", \"More options\", \"Show the facts used\", \"How we know\", \"Print or save\", \"I'm done (unclear what happens)\"], \"worries\": [\"I'm done might erase my answer or close things\", \"Print or save: save where, any cost\", \"Who 'we' are in 'How we know'\", \"Swap might change my number\", \"Unsure whether the answer is right\"], \"skippable\": [\"A long answer is rounded to 6 digits\", \"More options\", \"Show the facts used\", \"Other measurement choices (Weight, Volume, Temperature, Speed)\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -41,14 +41,14 @@
       "fails": [],
       "runs": [
         {
-          "passes": 7,
+          "passes": 8,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "FAIL",
+            "PASS",
             "PASS",
             "PASS"
           ]
@@ -106,7 +106,7 @@
           ]
         }
       ],
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule6: The \\\"Swap\\\" button changes the units, but the screen shows no preview and does not say how to undo it.\"],\"score\":7}"
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
     },
     {
       "model": "sonnet",
@@ -204,14 +204,14 @@
           4,
           4,
           4,
+          3,
           4,
-          4,
-          4,
+          3,
           4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. It wants me to pick what I'm measuring, type a number, and get it changed into another unit.\n\n2. I would tap the box labeled \"Number\" first, then later \"See my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"Swap\". I'm not sure what it swaps. I guess it flips the two units.\n- \"Show the facts used\". I don't know which facts it means.\n- \"How we know\". I don't know what it's explaining.\n- \"Change from\" and \"Change to\". They're a bit odd. I'd say \"convert.\"\n- The menu with \"(in)\", \"(ft)\", \"(mm)\". I get the short letters, but they look like code.\n- \"stay on this phone or computer\". I mostly get it, but I don't know how it works.\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" made me wonder why privacy came up. Was something being collected?\n- \"How we know\" looks like a link, and I'm wary of tapping it in case it takes me away from the page.\n- I'm not sure whether \"See my answer\" costs anything or signs me up for something. Nothing says it's free.\n- I worry that if I tap \"Swap\" I'll mess up my choices.\n\n5. Skippable:\n- \"Show the facts used\". It's closed and I don't need it.\n- \"How we know\".\n- The sentence \"Type a number to see your answer.\" It repeats what the box already tells me, though it's harmless.\n\n6. Score: 4. The orange button is clear and the steps run top to bottom. I'm unsure whether I should tap a choice like \"Length\" first, or whether it's already picked.\n\nRESULT: {\"next_tap\": \"Number\", \"confusing_terms\": [\"Swap\", \"Show the facts used\", \"How we know\", \"Change from\", \"Change to\", \"(in) (ft) (mm) abbreviations\", \"stay on this phone or computer\"], \"worries\": [\"Why privacy is mentioned and whether anything is collected\", \"How we know link might take me away from the page\", \"Unclear whether See my answer is free or signs me up\", \"Swap might mess up my choices\"], \"skippable\": [\"Show the facts used\", \"How we know\", \"Type a number to see your answer.\"], \"score\": 4}"
+        "output": "1. This screen wants me to pick what I'm measuring, type a number, and get it changed into another unit, like inches into millimeters.\n\n2. \"See my answer\"\n\n3. Words I didn't understand or that felt techy:\n- \"Change from\" and \"Change to\" (I'd guess it means \"start with\" and \"end with,\" but I wasn't sure)\n- \"Swap\" (probably flips the two, but it doesn't say)\n- \"[menu]\" boxes showing \"Inches (in)\" and \"Millimeters (mm)\" - I didn't know those were tappable lists until I thought about it\n- \"Show the facts used\" (what facts?)\n- \"How we know\" (know what?)\n- \"this phone or computer\" (a little odd, since I'm just on my phone)\n- \"mm\" and \"in\" abbreviations\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" made me wonder why privacy was mentioned at all, and whether something else is being collected.\n- \"How we know\" is a link, and I'd be nervous that tapping it takes me somewhere else.\n- I wasn't sure whether \"See my answer\" costs anything or signs me up for something.\n- The text says \"Type a number to see your answer\" but there's also a button for it, so I wasn't sure if I'd do it wrong by tapping the button first.\n\n5. I'd skip \"Show the facts used\" and \"How we know,\" since they don't help me get my answer. I'd probably also skip \"Swap\" at first.\n\n6. Score: 4. I could tell to type a number and tap the orange button, but I wasn't sure if the answer shows up on its own.\n\nRESULT: {\"next_tap\":\"See my answer\",\"confusing_terms\":[\"Change from\",\"Change to\",\"Swap\",\"menu boxes (Inches (in), Millimeters (mm))\",\"Show the facts used\",\"How we know\",\"this phone or computer\",\"in/mm abbreviations\"],\"worries\":[\"Privacy statement made me wonder what is collected\",\"How we know link might leave the screen\",\"Unsure if See my answer costs anything or signs me up\",\"Unclear whether to type first or tap the button first\"],\"skippable\":[\"Show the facts used\",\"How we know\",\"Swap\"],\"score\":4}"
       },
       "designRubric": [
         {
@@ -277,9 +277,9 @@
                 "PASS",
                 "PASS",
                 "PASS",
+                "FAIL",
                 "PASS",
-                "PASS",
-                "FAIL"
+                "PASS"
               ]
             },
             {

@@ -3,9 +3,12 @@
 //   with both a haiku and a sonnet review on every screen
 //   tests/skill-evals/results/<id>/{tiny,haiku,sonnet}.json   each with verdict.ok true (tiny L1 >= 90%, Haiku and Sonnet L1-3 >= 95%, safety 100%)
 // An owner waiver in tests/model-review/waivers.json can excuse a named check for a named tool:
-//   { "waivers": [{ "tool": "<id>", "checks": ["first-time-user", "rule8"], "by": "...", "date": "YYYY-MM-DD", "said": "...", "why": "..." }] }
-// A waived problem is printed as WAIVED and does not fail. Nothing else is excused: other rules, other tools,
-// missing records and skill evals still fail.
+//   { "waivers": [{ "tool": "<id>", "checks": ["first-time-user"], "minScore": 3, "screens": ["main"],
+//                   "by": "...", "date": "YYYY-MM-DD", "expires": "YYYY-MM-DD", "said": "...", "why": "..." }] }
+// Only "first-time-user" and "rule8" can be waived. A first-time-user waiver needs minScore (1 to 3): a lower
+// score still fails. "screens" limits the waiver to those screens. After "expires" the waiver stops counting and
+// the gate fails. A waiver entry that breaks these rules fails the gate. A waived problem prints as WAIVED.
+// Nothing else is excused: other rules, other tools, missing records and skill evals still fail.
 // A tool with no evidence cannot stay shipped. Flags: --manifest <file>  --root <dir>
 import fs from "node:fs";
 import path from "node:path";
@@ -26,12 +29,36 @@ const readJson = (f) => {
 
 const REVIEWERS = ["haiku", "sonnet"];
 
-/** The checks the owner waived for one tool, as a Set like {"first-time-user", "rule8"}. */
-export function waivedChecks(root, id) {
+const WAIVABLE = new Set(["first-time-user", "rule8"]);
+const DAY = /^\d{4}-\d{2}-\d{2}$/;
+
+/** Why a waiver entry is not valid, or null when it is. */
+export function waiverProblem(w, today) {
+  if (!w || typeof w !== "object") return "not an object";
+  if (!Array.isArray(w.checks) || w.checks.length === 0) return "no checks named";
+  const bad = w.checks.filter((c) => !WAIVABLE.has(c));
+  if (bad.length) return `cannot waive ${bad.join(", ")} (only first-time-user and rule8)`;
+  for (const k of ["tool", "by", "said"]) if (typeof w[k] !== "string" || !w[k].trim()) return `missing ${k}`;
+  if (!DAY.test(w.date || "")) return "date must be YYYY-MM-DD";
+  if (!DAY.test(w.expires || "")) return "expires must be YYYY-MM-DD";
+  if (w.expires < today) return `expired on ${w.expires}`;
+  if (w.checks.includes("first-time-user") && !(Number.isInteger(w.minScore) && w.minScore >= 1 && w.minScore <= 3)) return "first-time-user needs minScore 1 to 3";
+  if (w.screens !== undefined && (!Array.isArray(w.screens) || w.screens.length === 0)) return "screens must be a list";
+  return null;
+}
+
+/** The valid waivers for one tool, and a problem line for every waiver of that tool that is not valid. */
+export function waiversFor(root, id, today = new Date().toISOString().slice(0, 10)) {
   const data = readJson(path.join(root, "tests", "model-review", "waivers.json"));
-  const list = Array.isArray(data?.waivers) ? data.waivers : [];
-  const ok = (w) => w && w.tool === id && Array.isArray(w.checks) && w.by && w.date && w.said;
-  return new Set(list.filter(ok).flatMap((w) => w.checks));
+  const list = (Array.isArray(data?.waivers) ? data.waivers : []).filter((w) => w && w.tool === id);
+  const valid = [];
+  const problems = [];
+  for (const w of list) {
+    const p = waiverProblem(w, today);
+    if (p) problems.push(`waiver in tests/model-review/waivers.json is not valid: ${p}.`);
+    else valid.push(w);
+  }
+  return { valid, problems };
 }
 
 /** Every problem for one tool, split into what fails and what the owner waived. */
@@ -40,7 +67,11 @@ export function checkToolDetailed(root, tool) {
   const waived = [];
   const say = (m) => out.push(`${tool.name || tool.id} (${tool.id}) cannot stay shipped: ${m}`);
   const excuse = (m) => waived.push(`${tool.name || tool.id} (${tool.id}): ${m}`);
-  const w = waivedChecks(root, tool.id);
+  const { valid: wv, problems: wp } = waiversFor(root, tool.id);
+  wp.forEach(say);
+  const onScreen = (w, screen) => !w.screens || w.screens.includes(screen);
+  const ftuOk = (screen, score) => wv.some((w) => w.checks.includes("first-time-user") && onScreen(w, screen) && score >= w.minScore);
+  const ruleOk = (screen, rule) => wv.some((w) => w.checks.includes(rule) && onScreen(w, screen));
   const mr = readJson(path.join(root, "tests", "model-review", `${tool.id}.json`));
   if (!mr) say("no model review record (tests/model-review/<id>.json).");
   else {
@@ -48,7 +79,7 @@ export function checkToolDetailed(root, tool) {
     for (const sc of screens) {
       const score = sc.firstTimeUser?.score;
       if (typeof score !== "number") say(`first-time-user score (${sc.screen}) is missing, needs 4 or more.`);
-      else if (score < 4) (w.has("first-time-user") ? excuse : say)(`first-time-user score (${sc.screen}) is ${score}, needs 4 or more.`);
+      else if (score < 4) (ftuOk(sc.screen, score) ? excuse : say)(`first-time-user score (${sc.screen}) is ${score}, needs 4 or more.`);
       const rub = sc.designRubric || [];
       if (rub.length === 0) say(`no design rubric run (${sc.screen}).`);
       for (const model of REVIEWERS) {
@@ -56,8 +87,8 @@ export function checkToolDetailed(root, tool) {
       }
       for (const r of rub) {
         const bad = (r.rules || []).map((v, i) => (v === "PASS" ? null : `rule${i + 1}`)).filter(Boolean);
-        const kept = bad.filter((b) => !w.has(b));
-        const excused = bad.filter((b) => w.has(b));
+        const kept = bad.filter((b) => !ruleOk(sc.screen, b));
+        const excused = bad.filter((b) => ruleOk(sc.screen, b));
         if ((r.rules || []).length !== 8 || kept.length) say(`design rubric (${sc.screen}, ${r.model}) is not 8 of 8: ${kept.join(", ") || "unparseable"}.`);
         if (excused.length) excuse(`design rubric (${sc.screen}, ${r.model}) failed ${excused.join(", ")}.`);
       }

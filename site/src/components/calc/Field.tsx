@@ -61,6 +61,7 @@ export function Field({
           // A number in a number box can be mistaken for something typed. Examples go in the hint instead.
           placeholder={inputMode === "text" ? placeholder : undefined}
           aria-invalid={error ? true : undefined}
+          data-optional={optional ? "" : undefined}
           aria-describedby={described}
           onChange={(e) => onChange(e.target.value)}
         />

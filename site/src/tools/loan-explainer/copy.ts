@@ -31,7 +31,10 @@ export const COPY = {
   result: {
     paymentLabel: "Monthly payment",
     payBack: "You pay back",
-    inAll: "in all.",
+    inAll: "in all",
+    plus: "plus",
+    inFees: "in upfront fees",
+    withExtra: "That counts your extra payment.",
     totalInterest: "Total interest",
     paidOff: "Paid off in",
     totalPaid: "Total paid",

@@ -64,4 +64,21 @@ describe("SeeAnswer", () => {
     await userEvent.click(screen.getByRole("button", { name: "See my answer" }));
     expect(screen.getByRole("button", { name: "See my answer" })).toBeInTheDocument();
   });
+
+  it("when main, skips optional boxes and goes to the first needed empty box", async () => {
+    render(
+      <div>
+        <section id="nt-answer" tabIndex={-1} aria-label="Answer">The answer</section>
+        <div className="nt-tool-inputs">
+          <input className="nt-field-input" aria-label="Amount" defaultValue="12000" />
+          <input className="nt-field-input" aria-label="Fees" data-optional="" defaultValue="" />
+          <input className="nt-field-input" aria-label="Rate" defaultValue="" />
+          <SeeAnswer label="See my answer" main />
+        </div>
+      </div>,
+    );
+    await userEvent.click(screen.getByRole("button", { name: "See my answer" }));
+    expect(screen.getByLabelText("Rate")).toHaveFocus();
+  });
 });
+
