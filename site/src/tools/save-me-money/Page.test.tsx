@@ -138,7 +138,7 @@ describe("Save Me Money page", () => {
 
   it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
+    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
   });
 
   it("says where the numbers come from and that weeks are an estimate", () => {

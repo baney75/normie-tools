@@ -50,7 +50,7 @@ test("the first screen asks one question with one main button", async ({ page })
   await expect(page.getByText(/^Question 1 of 4\./)).toBeVisible();
   await expect(page.getByLabel("Yes", { exact: true })).toBeFocused();
   await expect(page.locator("button.primary")).toHaveCount(1);
-  await expect(page.getByText(/stay on this phone/)).toBeVisible();
+  await expect(page.getByText(/no Send button/)).toBeVisible();
   await noSideScroll(page);
 });
 

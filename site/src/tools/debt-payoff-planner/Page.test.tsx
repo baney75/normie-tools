@@ -34,11 +34,11 @@ describe("Debt Payoff Planner page", () => {
     expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.waiting);
     expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
     const intro = screen.getByText(COPY.intro);
-    const privacy = screen.getByText(/stay on this phone/);
+    const privacy = screen.getByText(/no Send button/);
     expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(privacy.compareDocumentPosition(screen.getByLabelText("Debt 1 name", { exact: false })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.getByLabelText("Debt 1 name", { exact: false })).toHaveFocus();
-    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
+    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 

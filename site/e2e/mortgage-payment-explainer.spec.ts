@@ -26,7 +26,7 @@ test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Mortgage Payment Explainer" })).toBeVisible();
   await expect(page.getByText("Type the numbers for a home loan. Your answer shows below.")).toBeVisible();
   await expect(page.getByLabel("Total monthly payment")).toContainText("Your answer shows here");
-  await expect(page.getByText(/stay on this phone/)).toBeVisible();
+  await expect(page.getByText(/no Send button/)).toBeVisible();
   await expect(page.getByLabel("Home price")).toBeFocused();
   await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
   await expect(page.locator(".primary")).toHaveCount(1);

@@ -53,7 +53,7 @@ describe("Morning Briefing page", () => {
     render(<Page />);
     expect(screen.getByText(COPY.pick.preview)).toBeInTheDocument();
     const intro = screen.getByText(COPY.intro);
-    expect(intro.nextElementSibling).toHaveTextContent(/stay on this phone/);
+    expect(intro.nextElementSibling).toHaveTextContent(/no Send button/);
   });
 
   it("asks for at least one part and turns Next off", async () => {
@@ -154,7 +154,7 @@ describe("Morning Briefing page", () => {
 
   it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
+    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
   });
 
   it("offers to use saved choices and brings them back", async () => {

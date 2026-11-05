@@ -34,7 +34,7 @@ describe("Monthly Budget page", () => {
     }
     expect(screen.getByLabelText("Left over")).toHaveTextContent(COPY.waiting);
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
-    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/stay on this phone/);
+    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/no Send button/);
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -138,7 +138,7 @@ describe("Monthly Budget page", () => {
 
   it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
+    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
   });
 
   it("with no income, shows the totals and shares of spending", async () => {

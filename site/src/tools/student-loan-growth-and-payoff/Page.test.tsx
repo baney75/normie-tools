@@ -33,7 +33,7 @@ describe("Student Loan Growth and Payoff page", () => {
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
     expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
     expect(screen.getByLabelText("Loan balance", { exact: false })).toHaveFocus();
-    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
+    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -102,7 +102,7 @@ describe("Student Loan Growth and Payoff page", () => {
   it("puts the privacy line right under the intro", () => {
     render(<Page />);
     const intro = screen.getByText(COPY.intro);
-    expect(intro.nextElementSibling).toHaveTextContent(/stay on this phone/);
+    expect(intro.nextElementSibling).toHaveTextContent(/no Send button/);
   });
 
   it("says why no interest grew when no months passed", async () => {

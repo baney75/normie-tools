@@ -235,7 +235,7 @@ describe("Tax Filing Helper page", () => {
 
   it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
+    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
   });
 });
 

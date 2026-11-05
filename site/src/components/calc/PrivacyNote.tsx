@@ -1,6 +1,6 @@
 import "./calc.css";
 
-/** The privacy promise and its reason, in plain words. Same words on every calculator. The offline line is what e2e/offline.spec.ts proves. */
+/** What the person can see on the page: there is no Send button. Same words on every calculator. */
 export function PrivacyNote({ what = "Your numbers" }: { what?: string }) {
-  return <p className="nt-privacy">{what} stay on this phone. Nothing is sent. After this page loads once, it works with no internet.</p>;
+  return <p className="nt-privacy">There is no Send button on this page. {what} are worked out here.</p>;
 }

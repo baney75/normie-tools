@@ -22,7 +22,7 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByText(COPY.intro)).toBeInTheDocument();
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.waiting);
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
-    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/stay on this phone/);
+    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/no Send button/);
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -47,12 +47,12 @@ describe("Savings Goal Tracker page", () => {
 
   it("keeps the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
+    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
   });
 
   it("gives a plain reason for the privacy promise", () => {
     render(<Page />);
-    expect(screen.getByText(/Nothing is sent\. After this page loads once, it works with no internet\./)).toBeInTheDocument();
+    expect(screen.getByText(/Your numbers are worked out here\./)).toBeInTheDocument();
   });
 
   it("has labels above inputs, decimal keypads, no autofill", () => {
