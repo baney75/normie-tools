@@ -26,7 +26,10 @@
     "test:site": "npm test --workspace @nt/site",
     "build:skills": "python3 scripts/build_skills.py",
     "test:skills": "python3 -m unittest discover -s skills/receipt-to-spreadsheet/tests -p \"test_*.py\"",
-    "nt": "python3 cli/nt.py"
+    "nt": "python3 cli/nt.py",
+    "test:e2e": "npm run build && npm run test:e2e --workspace @nt/site",
+    "test:a11y": "npm run build && npm run test:e2e --workspace @nt/site -- accessibility reduced-motion stepper-intro autosave-resume",
+    "test:upload-contract": "npm test --workspace @nt/site -- UploadField upload-messages detectFileType && npm run build && npm run test:e2e --workspace @nt/site -- upload-error-contract"
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.24.0"
