@@ -1,0 +1,34 @@
+Screen: loan-explainer, empty state, phone 390px wide. Order is top to bottom.
+Layout notes: no button is filled. All buttons are outlines.
+
+[heading 1] Loan Explainer
+Type the numbers from your loan. See what it costs.
+Step 1 of 2: Type your numbers
+[label] Amount borrowed
+[box] Amount borrowed = "" (cursor is here)
+[label] Yearly interest rate
+[box] Yearly interest rate = ""
+[label] How long is the loan?
+[box] How long is the loan? = ""
+[label] Months
+[choice] Months (chosen)
+[label] Years
+[choice] Years (not chosen)
+[label] Upfront fees (optional)
+[box] Upfront fees (optional) = ""
+[label] Extra each month (optional)
+[box] Extra each month (optional) = ""
+[plain button, outline only, disabled] Start over
+Start over asks first, and you can undo it right after.
+Step 2 of 2: Read your answer
+Monthly payment
+Your answer shows here
+Start with the amount you borrow, the yearly interest rate, and how long the loan lasts. Your answer shows up below.
+This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+The yearly cost of a loan, with some fees, is on your lender statement. This tool does not work it out.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+[closed section, tap to open] What the words mean
+
+Back to home
+[link, plain] Back to home

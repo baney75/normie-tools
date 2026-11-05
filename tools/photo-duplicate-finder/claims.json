@@ -1,0 +1,13 @@
+{
+  "claims": [
+    { "id": "exact-by-sha256", "text": "Photos with the same bytes (same SHA-256) are grouped as exact copies, whatever their names." },
+    { "id": "different-bytes-not-exact", "text": "Photos with different bytes are never called exact copies." },
+    { "id": "lookalike-threshold", "text": "Photos join a look-alike group when their 64-bit difference hashes differ in 5 bits or fewer, and not at 6 or more." },
+    { "id": "lookalike-says-check-yourself", "text": "Look-alike groups are named apart from exact groups and say the person should check them." },
+    { "id": "keep-default-largest", "text": "In each group the largest file is the default one to keep, and every other file is only marked." },
+    { "id": "put-it-back-unmarks", "text": "Choosing which to keep, or putting a group back, changes the marked list and its count and size exactly." },
+    { "id": "caps-and-skips", "text": "At most 300 photos are looked at, and empty files and files over 25 MB are skipped with a plain note." },
+    { "id": "nothing-deleted", "text": "The saved list holds file names only, and nothing is deleted, moved, uploaded or sent." },
+    { "id": "messy-input-never-throws", "text": "Messy input never throws and never gives NaN, and a bad entry gets a plain-words problem." }
+  ]
+}

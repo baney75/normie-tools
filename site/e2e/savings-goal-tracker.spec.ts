@@ -22,7 +22,9 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Savings Goal Tracker" })).toBeVisible();
   await expect(page.getByText("Start with your goal amount")).toBeVisible();
-  await expect(page.getByLabel("Months to your goal")).toHaveCount(0);
+  await expect(page.getByLabel("Months to your goal")).toContainText("Your answer shows here");
+  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Print" })).toBeDisabled();
 });
 
 test("gives the exact months and landing month, with no sideways scroll", async ({ page }) => {
@@ -69,7 +71,7 @@ test("says so when the goal is reached, or nothing is saved", async ({ page }) =
 test("messy typing shows a calm error that names the field", async ({ page }) => {
   await fillWhen(page, { goal: "lots of money", saved: "", monthly: "100" });
   await expect(page.getByText("Goal amount: use a number above zero")).toBeVisible();
-  await expect(page.getByLabel("Months to your goal")).toHaveCount(0);
+  await expect(page.getByLabel("Months to your goal")).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Goal amount").fill("1e3");
   await expect(page.getByText("Goal amount: use a number above zero")).toBeVisible();

@@ -1,0 +1,38 @@
+Screen: tax-filing-helper, start state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Tax Filing Helper
+Practice site. Nothing here is real. Nothing is filed.
+Step 1 of 4: Pick your way
+Practice copying answers into a free tax site, one screen at a time.
+[label] Guided Free File Simple questions, one at a time. The software does the math. Free if you made $95,000 or less last season. Each company sets its own extra rules. Some companies do your state return for free. Some charge.
+[choice] Guided Free File Simple questions, one at a time. The software does the math. Free if you made $95,000 or less last season. Each company sets its own extra rules. Some companies do your state return for free. Some charge. (not chosen)
+[label] Free File Fillable Forms Online copies of the IRS forms. You type into the boxes. Only some of the math is done for you. Works at any income. It does not do state taxes.
+[choice] Free File Fillable Forms Online copies of the IRS forms. You type into the boxes. Only some of the math is done for you. Works at any income. It does not do state taxes. (not chosen)
+Free File is closed right now. It opens again on IRS.gov in January 2027. Check IRS.gov for the income limit and the list of companies.
+Always start at IRS.gov. If you go straight to a tax company's own website, you won't get the free deal.
+Source: IRS Free File, on IRS.gov
+[link, plain] Source: IRS Free File, on IRS.gov
+[heading 2] Who does what
+This is our plan. This practice shows only the answer sheet and the check.
+[cell] NT does
+[cell] You do
+[cell] Reads your papers and does the math
+[cell] Make your Free File account
+[cell] Makes the checklist and the screen-by-screen answer sheet
+[cell] Check every number on the review page
+[cell] Gives you the official IRS.gov link
+[cell] Sign with last year's income number or your 5-digit signing number
+[cell] Warns you about extra charges and fake sites
+[cell] Press Submit
+[cell] Saves your confirmation for you
+[cell] Pay any tax you owe, yourself
+NT never presses Submit, signs for you, pays anything, or picks a paid add-on. It never asks for your Free File password.
+Source: IRS Free File, on IRS.gov
+[link, plain] Source: IRS Free File, on IRS.gov
+[MAIN BUTTON, filled dark orange] Next
+This is a practice with made-up answers. It is not tax advice.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

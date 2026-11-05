@@ -1,0 +1,25 @@
+Screen: form-filler, start state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Form Filler
+Step 1 of 4: Is this for you?
+This gets your answers ready for IRS Free File. You make the account, sign, and press Submit yourself. This page never files for you.
+Question 1 of 4
+Free File only does this year's taxes. It can't do taxes from past years.
+[label] Yes
+[choice] Yes (not chosen)
+[label] No
+[choice] No (not chosen)
+[label] Not sure
+[choice] Not sure (not chosen)
+Source: IRS Free File page
+[link, plain] IRS Free File page
+[MAIN BUTTON, filled dark orange] Next
+[closed section, tap to open] Have saved answers?
+[label] 
+[box]  = ""
+
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

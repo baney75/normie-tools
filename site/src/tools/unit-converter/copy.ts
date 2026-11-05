@@ -3,12 +3,16 @@
 export const COPY = {
   title: "Unit Converter",
   intro: "Pick what you are measuring. Type a number. See it in another measure.",
+  step1: "Pick units and type a number",
+  step2: "Step 2 of 2: Read your answer",
+  waiting: "Your answer shows here",
   empty: "Type a number in the box. Your answer shows up below.",
   kind: { label: "What are you measuring?" },
   from: { label: "Change from" },
   to: { label: "Change to" },
   value: { label: "Number", hint: "Like 12 or 3.5. Commas are fine.", placeholder: "12" },
   swap: "Swap the two",
+  swapped: "Swapped. Tap Swap again to undo.",
   stillNeeded: "Still needed:",
   fixFirst: "Fix the note above to see your answer.",
   resume: {
@@ -23,7 +27,6 @@ export const COPY = {
   },
   more: {
     summary: "Show more",
-    heading: "Exact facts behind the answers",
     items: [
       "1 inch is exactly 25.4 millimeters.",
       "1 foot is 12 inches. 1 yard is 3 feet. 1 mile is 5,280 feet.",
@@ -34,13 +37,14 @@ export const COPY = {
       "0 degrees Celsius is 273.15 kelvins. Fahrenheit is Celsius times 9/5, plus 32.",
       "1 mile per hour is 1.609344 kilometers per hour.",
     ],
-    sources: "These come from the 1959 agreement on the inch and the pound, the NIST handbook for the US gallon, and the SI brochure for the kelvin.",
+    sources: "Where the facts come from: the inch and pound use the 1959 agreement between countries. The US gallon uses a US government weights and measures book (NIST Handbook 44). The kelvin uses the international units brochure.",
     rounding: "The math keeps every digit. Only the answer is rounded, to 6 digits, with 5 going up.",
   },
   save: {
-    summary: "Save or print",
+    summary: "Keep your answer if you want",
     title: "Answer to keep",
     fileName: "unit-answer.txt",
+    preview: "Your answer above, on paper or saved on this phone or computer.",
   },
   notes: {
     estimate: "The answer is rounded to 6 digits. Check the exact facts above if you need more.",

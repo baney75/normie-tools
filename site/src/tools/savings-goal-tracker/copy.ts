@@ -3,6 +3,9 @@
 export const COPY = {
   title: "Savings Goal Tracker",
   intro: "Type your goal and what you have saved. See when you get there.",
+  step1: "Type your numbers",
+  step2: "Step 2 of 2: Read your answer",
+  waiting: "Your answer shows here",
   empty: "Start with your goal amount and how much you have saved. Then type how much you save each month. Your answer shows up below.",
   mode: {
     legend: "What do you want to know?",
@@ -76,9 +79,10 @@ export const COPY = {
     ],
   },
   save: {
-    summary: "Save or print",
-    title: "Your savings numbers",
+    title: "Keep your answer if you want",
+    fileTitle: "Your savings numbers",
     fileName: "savings-numbers.txt",
+    preview: "Your answer above, on paper or saved on this phone or computer.",
   },
   notes: {
     estimate: "This is an estimate from the numbers you typed. Your bank statement is the final word. This page helps you understand the numbers.",

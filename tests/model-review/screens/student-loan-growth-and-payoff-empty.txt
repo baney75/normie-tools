@@ -1,0 +1,39 @@
+Screen: student-loan-growth-and-payoff, empty state, phone 390px wide. Order is top to bottom.
+Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+
+[heading 1] Student Loan Growth and Payoff
+Type the numbers for one student loan. See how it grows and when it is paid off.
+Step 1 of 2: Type your numbers
+[label] Loan balance
+[box] Loan balance = "" (cursor is here)
+[label] Yearly interest rate
+[box] Yearly interest rate = ""
+[label] Months with no payments so far (optional)
+[box] Months with no payments so far (optional) = ""
+[label] Add the unpaid interest to my balance Check this box if your loan works that way. The company that collects your payments can tell you.
+[tick box] Add the unpaid interest to my balance Check this box if your loan works that way. The company that collects your payments can tell you. (not chosen)
+[label] Monthly payment (optional)
+[box] Monthly payment (optional) = ""
+[label] First payment month (optional)
+[box] First payment month (optional) = ""
+[label] Years you want to pay it off in (optional)
+[box] Years you want to pay it off in (optional) = ""
+[plain button, outline only, disabled] Start over
+Start over asks first, and you can undo it right after.
+Step 2 of 2: Read your answer
+Balance when payments start
+Your answer shows here
+[heading 2] Keep your answer if you want
+[MAIN BUTTON, filled dark orange, disabled] Print
+[plain button, outline only, disabled] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+Start with your loan balance and the yearly interest rate. Your answer shows up below.
+Your loan statement is the final word. This page helps you understand it.
+These are facts about the numbers, not advice.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+[closed section, tap to open] How this is figured
+
+Back to home
+[link, plain] Back to home

@@ -1,0 +1,36 @@
+Screen: morning-briefing, briefing state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Morning Briefing
+Make a one page list for your morning. Pick the parts you want. Type your own things. Then save or print it.
+Step 3 of 3: Your briefing
+[plain button, outline only] Back
+[heading 2] Save or print my briefing
+[heading 3] Morning briefing
+Thursday, November 5, 2026
+[heading 4] Weather (Example)
+Example town: 58 degrees, clear.
+Example. Not today's weather.
+[heading 4] News headlines (Example)
+Example headline: The town pool opens for the summer.
+Example headline: A bake sale is on Saturday.
+Example headline: The library has a new sign.
+Example. Not today's news.
+[heading 4] My day
+8:30 am: Call Sample Person
+[heading 4] My reminders
+Water the plants
+Mail the letter
+Live weather and news need the NT app or your AI helper. This page does not go online.
+Everything marked Example is made up. It is not real news or weather. No source is claimed.
+[MAIN BUTTON, filled dark orange] Print
+[plain button, outline only] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+This lists what you typed. It does not tell you what to do.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

@@ -11,7 +11,7 @@ async function fillBasic(page: import("@playwright/test").Page) {
   await page.getByLabel("Years to pay it back").fill("30");
   await page.getByLabel("Property tax for the year").fill("$3,600");
   await page.getByLabel("Home insurance for the year").fill("$1,200");
-  await page.getByLabel("HOA each month").fill("$50");
+  await page.getByLabel("Neighborhood fee each month").fill("$50");
 }
 
 test.beforeEach(async ({ page }) => {
@@ -25,7 +25,13 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Mortgage Payment Explainer" })).toBeVisible();
   await expect(page.getByText("Start with the home price")).toBeVisible();
-  await expect(page.getByLabel("Total monthly payment")).toHaveCount(0);
+  await expect(page.getByLabel("Total monthly payment")).toContainText("Your answer shows here");
+  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
+  await expect(page.getByLabel("Total monthly payment")).toContainText("Step 2 of 2: Read your answer");
+  await expect(page.getByLabel("Home price")).toBeFocused();
+  await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
+  await expect(page.locator(".nt-sheet-primary")).toHaveCount(1);
+  await expect(page.getByRole("link", { name: "our public page" })).toBeVisible();
 });
 
 test("gives the exact total, parts, total interest and first payment, with no sideways scroll", async ({ page }) => {
@@ -51,7 +57,7 @@ test("quick year picks and mortgage insurance work", async ({ page }) => {
   await page.getByRole("button", { name: "15 years" }).click();
   await page.getByLabel("Property tax for the year").fill("2750.50");
   await page.getByLabel("Home insurance for the year").fill("1500.25");
-  await page.getByLabel("HOA each month").fill("120");
+  await page.getByLabel("Neighborhood fee each month").fill("120");
   await page.getByLabel("Mortgage insurance each month").fill("95.10");
   const card = page.getByLabel("Total monthly payment");
   await expect(card).toContainText("$2,737.38");
@@ -69,7 +75,7 @@ test("messy typing shows a calm error that names the field", async ({ page }) =>
   await page.getByLabel("Yearly interest rate").fill("6");
   await page.getByLabel("Years to pay it back").fill("30");
   await expect(page.getByText("Home price: use a number above zero")).toBeVisible();
-  await expect(page.getByLabel("Total monthly payment")).toHaveCount(0);
+  await expect(page.getByLabel("Total monthly payment")).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Home price").fill("1e3");
   await expect(page.getByText("Home price: use a number above zero")).toBeVisible();

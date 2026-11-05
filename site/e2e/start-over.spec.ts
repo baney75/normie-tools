@@ -24,9 +24,10 @@ for (const id of TOOLS) {
     await expect(box).toBeVisible();
     await box.fill("1234");
     await expect(box).toHaveValue("1234");
-    await expect(page.getByText("Start over clears the boxes. You can put them back.")).toBeVisible();
+    await expect(page.getByText("Start over asks first, and you can undo it right after.")).toBeVisible();
 
     await page.getByRole("button", { name: "Start over" }).click();
+    await page.getByRole("button", { name: "Clear the boxes" }).click();
     await expect(page.getByText(/Your numbers are cleared\./)).toBeVisible();
     await expect(box).toHaveValue("");
     expect(await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith("nt:flow:")))).toEqual([]);

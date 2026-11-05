@@ -22,7 +22,13 @@ async function fillBasic() {
   await fill("Years to pay it back", "30");
   await fill("Property tax for the year", "$3,600");
   await fill("Home insurance for the year", "$1,200");
-  await fill("HOA each month", "$50");
+  await fill("Neighborhood fee each month", "$50");
+}
+
+function expectWaiting() {
+  const card = screen.getByLabelText("Total monthly payment");
+  expect(card).toHaveTextContent("Your answer shows here");
+  expect(card).not.toHaveTextContent("$");
 }
 
 describe("Mortgage Payment Explainer page", () => {
@@ -30,13 +36,13 @@ describe("Mortgage Payment Explainer page", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Mortgage Payment Explainer" })).toBeInTheDocument();
     expect(screen.getByText(COPY.empty)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Total monthly payment")).toBeNull();
+    expectWaiting();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
   it("has labels above inputs, decimal keypads, no autofill", () => {
     render(<Page />);
-    for (const name of ["Home price", "Down payment", "Yearly interest rate", "Property tax for the year", "Home insurance for the year", "HOA each month", "Mortgage insurance each month"]) {
+    for (const name of ["Home price", "Down payment", "Yearly interest rate", "Property tax for the year", "Home insurance for the year", "Neighborhood fee each month", "Mortgage insurance each month"]) {
       const box = screen.getByLabelText(name, { exact: false });
       expect(box).toHaveAttribute("inputmode", "decimal");
       expect(box).toHaveAttribute("autocomplete", "off");
@@ -49,10 +55,10 @@ describe("Mortgage Payment Explainer page", () => {
     await fillBasic();
     const card = screen.getByLabelText("Total monthly payment");
     expect(card).toHaveTextContent("$1,888.92");
-    expect(card).toHaveTextContent("Principal and interest$1,438.92");
+    expect(card).toHaveTextContent("Loan payment$1,438.92");
     expect(card).toHaveTextContent("Property tax each month$300.00");
     expect(card).toHaveTextContent("Home insurance each month$100.00");
-    expect(card).toHaveTextContent("HOA each month$50.00");
+    expect(card).toHaveTextContent("Neighborhood fee each month$50.00");
     expect(card).toHaveTextContent("Mortgage insurance each month$0.00");
     expect(card).toHaveTextContent("Loan amount$240,000.00");
     expect(card).toHaveTextContent("Loan length30 years");
@@ -70,11 +76,11 @@ describe("Mortgage Payment Explainer page", () => {
     await userEvent.click(screen.getByRole("button", { name: "15 years" }));
     await fill("Property tax for the year", "2750.50");
     await fill("Home insurance for the year", "1500.25");
-    await fill("HOA each month", "120");
+    await fill("Neighborhood fee each month", "120");
     await fill("Mortgage insurance each month", "95.10");
     const card = screen.getByLabelText("Total monthly payment");
     expect(card).toHaveTextContent("$2,737.38");
-    expect(card).toHaveTextContent("Principal and interest$2,168.05");
+    expect(card).toHaveTextContent("Loan payment$2,168.05");
     expect(card).toHaveTextContent("Property tax each month$229.21");
     expect(card).toHaveTextContent("Home insurance each month$125.02");
     expect(card).toHaveTextContent("Mortgage insurance each month$95.10");
@@ -93,8 +99,8 @@ describe("Mortgage Payment Explainer page", () => {
   it("asks only for what is still needed", async () => {
     render(<Page />);
     await fill("Home price", "300000");
-    expect(screen.getByRole("status")).toHaveTextContent("Still needed: Down payment, Yearly interest rate, Years to pay it back.");
-    expect(screen.queryByLabelText("Total monthly payment")).toBeNull();
+    expect(screen.getByText(/Still needed/)).toHaveTextContent("Still needed: Down payment, Yearly interest rate, Years to pay it back.");
+    expectWaiting();
   });
 
   it("shows a calm error that names the field on junk, never NaN", async () => {
@@ -106,7 +112,7 @@ describe("Mortgage Payment Explainer page", () => {
     expect(screen.getByText(/Home price: use a number above zero/)).toBeInTheDocument();
     expect(screen.getByLabelText("Home price")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Total monthly payment")).toBeNull();
+    expectWaiting();
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
@@ -147,14 +153,41 @@ describe("Mortgage Payment Explainer page", () => {
 
   it("offers Save or print once there is an answer", async () => {
     render(<Page />);
-    expect(screen.queryByText("Save or print")).toBeNull();
+    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
     await fill("Home price", "130000");
     await fill("Down payment", "10000");
     await fill("Yearly interest rate", "0");
     await fill("Years to pay it back", "10");
-    expect(screen.getByText("Save or print")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Keep your answer if you want" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
     expect(screen.getByLabelText("Total monthly payment")).toHaveTextContent("$1,000.00");
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
+  });
+});
+
+describe("Mortgage Payment Explainer first-time help", () => {
+  it("shows Step 1 of 2, Step 2 of 2 and a waiting answer from the start", () => {
+    render(<Page />);
+    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
+    expect(screen.getByLabelText("Total monthly payment")).toHaveTextContent("Step 2 of 2");
+    expectWaiting();
+  });
+
+  it("puts the cursor in the first box", () => {
+    render(<Page />);
+    expect(screen.getByLabelText("Home price")).toHaveFocus();
+  });
+
+  it("has one primary button, always in view, outside any fold", () => {
+    const { container } = render(<Page />);
+    expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    expect(screen.getByRole("heading", { name: "Keep your answer if you want" }).closest("details")).toBeNull();
+  });
+
+  it("uses the shared privacy note with a place to check it", () => {
+    render(<Page />);
+    expect(screen.getByText(/Nothing is sent\. Numbers stay on this phone or computer\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 });
 
@@ -192,10 +225,29 @@ describe("mortgage-payment-explainer Start over", () => {
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:mortgage-payment-explainer")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    expect(box()).toHaveValue("1234");
+    await userEvent.click(screen.getByRole("button", { name: "Keep my numbers" }));
+    expect(box()).toHaveValue("1234");
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(box()).toHaveValue("");
     expect(window.localStorage.getItem("nt:flow:mortgage-payment-explainer")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Put it back" }));
     expect(box()).toHaveValue("1234");
+  });
+});
+
+describe("mortgage-payment-explainer filled screen", () => {
+  it("shows the estimate sentence once, no APR, one step 2 label, and a short save preview", async () => {
+    render(<Page />);
+    await fillBasic();
+    const body = document.body.textContent ?? "";
+    expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
+    expect(screen.getAllByText(/^Step 2 of 2: Read your answer/)).toHaveLength(1);
+    expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
+    expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
+    const open = body.replace(/What the words mean[\s\S]*$/, "");
+    expect(open).not.toMatch(/APR|HOA/);
   });
 });

@@ -1,0 +1,51 @@
+{
+  "skill": "debt-payoff-planner",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "haiku",
+  "by": {
+    "1": {
+      "passed": 11,
+      "total": 11,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "l1-four",
+      "level": 1,
+      "task": "I have four debts: a $500 card at 18% (minimum $25), a $2,500 card at 22.99% (minimum $60), a $5,000 loan at 6.5% (minimum $100) and a $9,000 car loan at 4.9% (minimum $200). I can add $100 a month. Compare snowball and avalanche.",
+      "reply": "Snowball plan: Extra money goes to the smallest balance first.\nSnowball, Months to debt-free: 40 months\nSnowball, Total interest: $2,098.91\nSnowball, Total paid: $19,098.91\nSnowball, Order of payoff: Card A is paid off in month 5.\nSnowball, Order of payoff: Card B is paid off in month 20.\nSnowball, Order of payoff: Loan is paid off in month 33.\nSnowball, Order of payoff: Car is paid off in month 40.\nAvalanche plan: Extra money goes to the highest interest rate first.\nAvalanche, Months to debt-free: 40 months\nAvalanche, Total interest: $2,071.01\nAvalanche, Total paid: $19,071.01\nAvalanche, Order of payoff: Card B is paid off in month 19.\nAvalanche, Order of payoff: Card A is paid off in month 20.\nAvalanche, Order of payoff: Loan is paid off in month 33.\nAvalanche, Order of payoff: Car is paid off in month 40.\nBoth plans take the same number of months.\nAvalanche pays $27.90 less interest than Snowball.\nWhen a debt is paid off, its smallest payment moves to the next debt. The money each month stays the same.\nIf two debts tie, the one typed first goes first.\nThese are facts about two plans. This does not tell you which one to use.\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    },
+    {
+      "id": "l1-two",
+      "level": 1,
+      "task": "I have a store card, $1,200 at 24.99% with a $45 minimum, and a family loan, $3,000 at 0% with a $150 minimum. No extra money. Compare snowball and avalanche.",
+      "reply": "Money each month: $195.00\nExtra each month: $0.00\nTotal balance: $4,200.00\nStore card: balance $1,200.00, yearly rate 24.99%, smallest payment $45.00\nFamily loan: balance $3,000.00, yearly rate 0%, smallest payment $150.00\nSnowball plan: Extra money goes to the smallest balance first.\nSnowball, Months to debt-free: 24 months\nSnowball, Total interest: $446.08\nSnowball, Total paid: $4,646.08\nSnowball, Order of payoff: Family loan is paid off in month 20.\nSnowball, Order of payoff: Store card is paid off in month 24.\nAvalanche plan: Extra money goes to the highest interest rate first.\nAvalanche, Months to debt-free: 24 months\nAvalanche, Total interest: $446.08\nAvalanche, Total paid: $4,646.08\nAvalanche, Order of payoff: Family loan is paid off in month 20.\nAvalanche, Order of payoff: Store card is paid off in month 24.\nBoth plans take the same number of months.\nBoth plans pay the same interest.\nWhen a debt is paid off, its smallest payment moves to the next debt. The money each month stays the same.\nIf two debts tie, the one typed first goes first.\nThese are facts about two plans. This does not tell you which one to use.\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    }
+  ]
+}

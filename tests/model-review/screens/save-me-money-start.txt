@@ -1,0 +1,68 @@
+Screen: save-me-money, start state, phone 390px wide. Order is top to bottom.
+Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+
+[heading 1] Save Me Money
+Type the costs you pay again and again. See what each one adds up to in a year.
+Step 1 of 3: Type your costs
+Remove takes out a line. You can put it back.
+[label] Name of cost 1
+[box] Name of cost 1 = "Phone"
+[label] Phone, amount
+[box] Phone, amount = "" (cursor is here)
+[label] Phone, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Phone
+[label] Name of cost 2
+[box] Name of cost 2 = "Internet"
+[label] Internet, amount
+[box] Internet, amount = ""
+[label] Internet, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Internet
+[label] Name of cost 3
+[box] Name of cost 3 = "Streaming"
+[label] Streaming, amount
+[box] Streaming, amount = ""
+[label] Streaming, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Streaming
+[label] Name of cost 4
+[box] Name of cost 4 = "Insurance"
+[label] Insurance, amount
+[box] Insurance, amount = ""
+[label] Insurance, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Insurance
+[label] Name of cost 5
+[box] Name of cost 5 = "Gym"
+[label] Gym, amount
+[box] Gym, amount = ""
+[label] Gym, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Gym
+[label] Name of cost 6
+[box] Name of cost 6 = "Other"
+[label] Other, amount
+[box] Other, amount = ""
+[label] Other, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Other
+[plain button, outline only] Add a cost
+Type an amount on any line. Your list shows up below.
+Step 2 of 3
+Total for a year
+Your total shows here
+[heading 2] Coming soon
+These helpers are coming soon: Subscription Finder, Bill Negotiation Prep and Cheaper Plan Finder. They are not ready yet.
+This page never calls, cancels or pays anything. You do that yourself.
+[heading 2] Save or print my list
+[MAIN BUTTON, filled dark orange, disabled] Print
+[plain button, outline only, disabled] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+This adds up the numbers you typed. It does not tell you what to do.
+Source: only the numbers you type. A week cost uses 52 weeks in a year. That is an estimate.
+Free to use. Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

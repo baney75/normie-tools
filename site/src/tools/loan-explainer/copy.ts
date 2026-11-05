@@ -4,6 +4,9 @@ export const COPY = {
   title: "Loan Explainer",
   intro: "Type the numbers from your loan. See what it costs.",
   empty: "Start with the amount you borrow, the yearly interest rate, and how long the loan lasts. Your answer shows up below.",
+  stepOne: "Type your numbers",
+  stepTwo: "Step 2 of 2: Read your answer",
+  waiting: "Your answer shows here",
   amount: { label: "Amount borrowed", hint: "The money you get, before any interest.", placeholder: "12,000" },
   rate: { label: "Yearly interest rate", hint: "A percent, like 6.5. Type 0 if there is none.", placeholder: "6.5" },
   term: {
@@ -55,6 +58,7 @@ export const COPY = {
   key: {
     summary: "What the words mean",
     items: [
+      { term: "APR", means: "The yearly cost of the loan, with some fees. Your lender statement shows it. This tool does not work it out." },
       { term: "Amount borrowed", means: "The money you get from the lender, before any interest." },
       { term: "Interest rate", means: "The yearly price of the loan, as a percent of what you owe." },
       { term: "Term", means: "How long you have to pay the loan back." },
@@ -62,12 +66,13 @@ export const COPY = {
   },
   save: {
     summary: "Save or print",
-    title: "Your loan numbers",
+    title: "Keep your answer if you want",
+    preview: "Your answer above, on paper or saved on this phone or computer.",
     fileName: "loan-numbers.txt",
   },
   notes: {
     estimate: "This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.",
-    apr: "APR is the yearly cost of the loan, counting some fees. Your lender statement shows it. This tool does not work it out.",
+    apr: "The yearly cost of a loan, with some fees, is on your lender statement. This tool does not work it out.",
   },
   back: "Back to home",
 } as const;

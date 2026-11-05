@@ -1,0 +1,44 @@
+Screen: mortgage-payment-explainer, empty state, phone 390px wide. Order is top to bottom.
+Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+
+[heading 1] Mortgage Payment Explainer
+Type the numbers for a home loan. See what you pay each month.
+Step 1 of 2: Type your numbers
+[label] Home price
+[box] Home price = "" (cursor is here)
+[label] Down payment
+[box] Down payment = ""
+[label] Yearly interest rate
+[box] Yearly interest rate = ""
+[label] Years to pay it back
+[box] Years to pay it back = ""
+[plain button, outline only] 15 years
+[plain button, outline only] 20 years
+[plain button, outline only] 30 years
+[label] Property tax for the year (optional)
+[box] Property tax for the year (optional) = ""
+[label] Home insurance for the year (optional)
+[box] Home insurance for the year (optional) = ""
+[label] Neighborhood fee each month (optional)
+[box] Neighborhood fee each month (optional) = ""
+[label] Mortgage insurance each month (optional)
+[box] Mortgage insurance each month (optional) = ""
+Step 2 of 2: Read your answer
+Total monthly payment
+Your answer shows here
+[heading 2] Keep your answer if you want
+[MAIN BUTTON, filled dark orange, disabled] Print
+[plain button, outline only, disabled] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+Start with the home price and your down payment, the yearly interest rate and the years. Your answer shows up below.
+[plain button, outline only, disabled] Start over
+Start over asks first, and you can undo it right after.
+This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+Tax and insurance can change. This tool uses only what you typed.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+[closed section, tap to open] What the words mean
+
+Back to home
+[link, plain] Back to home

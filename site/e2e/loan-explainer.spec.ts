@@ -19,13 +19,18 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Loan Explainer" })).toBeVisible();
   await expect(page.getByText("Start with the amount you borrow")).toBeVisible();
-  await expect(page.getByLabel("Monthly payment")).toHaveCount(0);
+  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
+  await expect(page.getByText("Nothing is sent.")).toBeVisible();
+  await expect(page.getByLabel("Amount borrowed")).toBeFocused();
+  await expect(page.getByLabel("Monthly payment")).toContainText("Your answer shows here");
 });
 
 test("gives the exact monthly payment, total paid and interest, with no sideways scroll", async ({ page }) => {
   await fillLoan(page, { amount: "$10,000", rate: "6", term: "36" });
   const card = page.getByLabel("Monthly payment");
   await expect(card).toContainText("$304.22");
+  await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
+  await expect(page.locator(".nt-sheet-primary")).toHaveCount(1);
   await expect(card).toContainText("$10,951.88");
   await expect(card).toContainText("$951.88");
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
@@ -53,7 +58,7 @@ test("extra payment shows months and interest saved, and the by-year table opens
 test("messy typing shows a calm error that names the field", async ({ page }) => {
   await fillLoan(page, { amount: "lots of money", rate: "6", term: "36" });
   await expect(page.getByText("Amount borrowed: use a number above zero")).toBeVisible();
-  await expect(page.getByLabel("Monthly payment")).toHaveCount(0);
+  await expect(page.getByLabel("Monthly payment")).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Amount borrowed").fill("1e3");
   await expect(page.getByText("Amount borrowed: use a number above zero")).toBeVisible();
@@ -89,4 +94,16 @@ test("a desktop screenshot", async ({ page }) => {
   await page.getByLabel("Years").check();
   await expect(page.getByLabel("Monthly payment")).toContainText("$1,264.14");
   await page.screenshot({ path: shotPath("loan-explainer-desktop.png"), fullPage: true });
+});
+
+test("Start over asks first and can be undone", async ({ page }) => {
+  await fillLoan(page, { amount: "1200", rate: "0", term: "12" });
+  await page.getByRole("button", { name: "Start over" }).click();
+  await page.getByRole("button", { name: "Keep my numbers" }).click();
+  await expect(page.getByLabel("Amount borrowed")).toHaveValue("1200");
+  await page.getByRole("button", { name: "Start over" }).click();
+  await page.getByRole("button", { name: "Clear the boxes" }).click();
+  await expect(page.getByLabel("Amount borrowed")).toHaveValue("");
+  await page.getByRole("button", { name: "Put it back" }).click();
+  await expect(page.getByLabel("Amount borrowed")).toHaveValue("1200");
 });

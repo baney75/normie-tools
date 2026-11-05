@@ -1,20 +1,52 @@
 {
   "tool": "debt-payoff-planner",
-  "screen": "empty state at 390px wide",
+  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
   "firstTimeUser": {
     "model": "sonnet",
-    "output": "1. This screen wants me to type in the money I owe, one debt at a time, and then it shows me two ways to pay it all off.\n\n2. I would tap the box labeled \"Debt 1 balance\".\n\n3. Words I did not understand or that felt like tech talk:\n- \"Yearly interest rate\". I would have to go find that on a statement.\n- \"Smallest monthly payment\". I think it means the minimum, but I'm not sure.\n- \"Two ways to pay them off, side by side\". It doesn't say what the two ways are.\n- \"Extra each month\". I'm not sure what counts as extra.\n- \"Take out the last debt\". It sounds like it removes a loan from somewhere real.\n- \"Start over clears the boxes. You can put them back\". I don't see how.\n- \"Lenders' statements win\". I get the idea but the wording is odd.\n- \"What the words mean\". This is a heading with nothing under it that I can see.\n- \"Estimate\" and \"facts about two plans\".\n\n4. What worried me:\n- Typing my debts and balances into a website made me ask who sees this. The screen says nothing about whether it's saved or sent.\n- \"Take out the last debt\" and \"Start over\" made me worry I'd erase something I can't get back.\n- I wasn't sure whether the numbers it gives me can be trusted. It says \"estimate\", then says the lender wins.\n- \"This page does not tell you which one to use.\" I would be left to choose between two plans on my own, and that made me nervous about choosing wrong.\n- No dollar cost is mentioned. I'd still wonder whether it's free.\n\n5. What I would skip:\n- The lines \"This is an estimate…\" and \"These are facts about two plans…\". They read like fine print.\n- \"What the words mean\" until I got stuck.\n- \"Back to home\".\n\n6. Score: 3. I know to start typing in Debt 1. I don't know where the answer will show up, or what to do with it.\n\nRESULT: {\"next_tap\": \"Debt 1 balance\", \"confusing_terms\": [\"yearly interest rate\", \"smallest monthly payment\", \"two ways to pay them off\", \"Extra each month\", \"Take out the last debt\", \"Start over clears the boxes. You can put them back\", \"What the words mean\", \"estimate\", \"Your lenders' statements win\", \"facts about two plans\"], \"worries\": [\"whether typed debt information is saved or shared\", \"Take out the last debt and Start over might erase things\", \"unclear whether the numbers can be trusted\", \"page won't say which plan to choose\", \"no mention of whether it is free\"], \"skippable\": [\"estimate and facts disclaimer lines\", \"What the words mean\", \"Back to home\"], \"score\": 3}"
+    "score": 3,
+    "output": "1. This screen wants me to look at the answer it already worked out for my two debts, and maybe print or save it.\n\n2. I would tap **Print**.\n\n3. Words I didn't understand or that felt like tech talk:\n- Snowball\n- Avalanche\n- Months to debt-free (clear enough, but I'm not sure how they get it)\n- Total interest\n- Order of payoff\n- Yearly interest rate\n- Smallest monthly payment\n- Interest difference between the two plans\n- \"Show more\" (I don't know what's inside)\n- \"What the words mean\" (a closed section, so I wasn't sure it would help)\n- \"Step 1 of 2 / Step 2 of 2\"\n- \"Save a copy\" (where does it go?)\n- \"Nothing is sent. Numbers stay on this phone or computer.\" (I wasn't sure how I'd know)\n- \"public page\"\n\n4. Worries:\n- I'm not sure that \"Save a copy\" won't put my money numbers somewhere others can see.\n- I worried that tapping \"Start over\" would erase my numbers. It says it asks first, which helps a little.\n- \"Nothing is sent\" is something I have to take on trust.\n- I worried that the numbers are wrong. It says it's an estimate, and the lender statement is the final word.\n- I wondered whether Print would use my paper and ink, or whether it would start something I can't stop.\n- I'm not sure why both plans came out identical. I'm unsure whether I typed something wrong, or whether the \"Extra each month\" box being empty caused it.\n\n5. Things I would skip:\n- The two big Snowball and Avalanche blocks, because they say the same thing.\n- \"Order of payoff\", since both debts end in month 30.\n- The small print about estimates and \"facts about two plans\".\n- \"Back to home\".\n\n6. Score: 3. I can see the answer, but I'm unsure whether I'm done and whether printing is what I need.\n\nRESULT: {\"next_tap\":\"Print\",\"confusing_terms\":[\"Snowball\",\"Avalanche\",\"Total interest\",\"Order of payoff\",\"Yearly interest rate\",\"Smallest monthly payment\",\"Interest difference between the two plans\",\"Show more\",\"What the words mean\",\"Step 1 of 2 / Step 2 of 2\",\"Save a copy\",\"Nothing is sent\",\"public page\"],\"worries\":[\"Save a copy might put my money numbers somewhere others can see\",\"Start over might erase my numbers\",\"Nothing is sent has to be taken on trust\",\"Numbers might be wrong, since it is only an estimate\",\"Unsure what Print will do\",\"Both plans are identical and I don't know if I typed something wrong or left Extra each month empty\"],\"skippable\":[\"Snowball and Avalanche blocks since they match\",\"Order of payoff\",\"small print about estimates and facts about two plans\",\"Back to home\"],\"score\":3}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: no button stands out as the one main action; \\\"Add another debt\\\", \\\"Take out the last debt\\\", \\\"Start over\\\" and \\\"Back to home\\\" are all small plain buttons per the layout notes\"], \"score\": 7}",
-      "output": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: no button stands out as the one main action; \\\"Add another debt\\\", \\\"Take out the last debt\\\", \\\"Start over\\\" and \\\"Back to home\\\" are all small plain buttons per the layout notes\"], \"score\": 7}"
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"FAIL\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"FAIL\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule2: empty [heading 3] with no text\", \"rule6: \\\"Remove the last debt\\\" changes the entered numbers with no preview and no note on how to undo\"], \"score\": 6}",
+      "rules": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS",
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 6,
+      "fails": [
+        "rule2: empty [heading 3] with no text",
+        "rule6: \"Remove the last debt\" changes the entered numbers with no preview and no note on how to undo"
+      ]
     },
     {
       "model": "sonnet",
-      "result": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 1: No single main action stands out. \\\"Add another debt\\\", \\\"Take out the last debt\\\", \\\"Start over\\\" and \\\"Back to home\\\" are all small plain buttons of equal weight, and the layout notes say none is primary.\"],\"score\":7}",
-      "output": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 1: No single main action stands out. \\\"Add another debt\\\", \\\"Take out the last debt\\\", \\\"Start over\\\" and \\\"Back to home\\\" are all small plain buttons of equal weight, and the layout notes say none is primary.\"],\"score\":7}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": []
     }
-  ]
+  ],
+  "otherScreens": []
 }

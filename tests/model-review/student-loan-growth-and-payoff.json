@@ -1,20 +1,49 @@
 {
   "tool": "student-loan-growth-and-payoff",
-  "screen": "empty state at 390px wide",
+  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
   "firstTimeUser": {
     "model": "sonnet",
-    "output": "1. This screen wants me to type in the numbers for one student loan and see how much it grows and when it gets paid off.\n\n2. I would tap the box under \"Loan balance\" and type what I owe.\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n   - \"Yearly interest rate\". I know interest, but I'm not sure where to find the rate.\n   - \"Months with no payments so far\", and \"grace time\". I know what school is, but not \"grace time\".\n   - \"Add the unpaid interest to my balance\". I don't know what that means, and the help line sends me to ask the company.\n   - \"interest that builds up before you pay\". I'm not sure how that differs from the interest rate.\n   - \"First payment month\" and \"2026-09\". Year, a dash, then month is an odd way to write a date.\n   - \"Put it back\". I don't know what it restores until I've pressed Start over.\n   - \"How this is figured\". It's a link with no hint of what's behind it.\n   - \"The company that collects your payments\". I'd call that my loan company.\n\n4. What worried me:\n   - The box about adding unpaid interest. If I check it wrong, I think my answer will be wrong, and I wouldn't know how it works.\n   - \"Start over clears the boxes\". I'd be afraid of wiping my numbers, though it says I can put them back.\n   - Typing in my loan balance. It says nothing is sent anywhere, but that is only in the notes, not on the screen, so I don't know if my numbers are kept.\n   - \"This page explains numbers. It does not tell you what to do.\" That makes me wonder whether I can trust the answer.\n   - The paper from the company \"wins\". It makes me wonder how right this page is.\n   - No cost is mentioned. I assume it's free but it doesn't say so.\n\n5. I would skip:\n   - \"Years you want to pay it off in\", at least at first.\n   - \"First payment month\".\n   - The \"Back to home\" link, unless I get lost.\n   - Probably \"How this is figured\".\n   - The optional boxes in general, until I've seen a first answer.\n\n6. Score: 4. I know to start with the balance, but the unpaid-interest box leaves me unsure.\n\nRESULT: {\"next_tap\": \"Loan balance\", \"confusing_terms\": [\"Yearly interest rate\", \"grace time\", \"Add the unpaid interest to my balance\", \"interest that builds up before you pay\", \"First payment month\", \"2026-09\", \"Put it back\", \"How this is figured\", \"the company that collects your payments\"], \"worries\": [\"checking the unpaid interest box wrong and getting a wrong answer\", \"Start over wiping my numbers\", \"unclear whether my loan numbers are kept or shared\", \"not sure the answer can be trusted since the company's paper wins\", \"no word that it is free\"], \"skippable\": [\"Years you want to pay it off in\", \"First payment month\", \"Back to home\", \"How this is figured\"], \"score\": 4}"
+    "score": 3,
+    "output": "1. This screen wants me to look at my loan's starting balance and then, if I like, print or save a copy.\n\n2. I would tap **Print**. It's the orange one, so it looks like the main button.\n\n3. Words that felt like tech talk or were unclear:\n- \"Add the unpaid interest to my balance\". I don't know what this means for my loan.\n- \"The company that collects your payments\". I'm not sure who that is.\n- \"Months with no payments so far\". It's unclear whether this applies to me.\n- \"First payment month\". I don't know if I should type a number or a name.\n- \"Yearly interest rate\". I'm not sure if I type 5.5 or 5.5%.\n- \"Balance when payments start\". It confused me because it shows $5,000.00, the same as what I typed.\n- \"Step 1 of 2\" and \"Step 2 of 2: You are here\". The steps are on one page, so it's odd.\n- \"Save a copy\". I don't know where it goes.\n- \"our public page\". I don't know what that is.\n- \"How this is figured\". I'm not sure it's meant for me.\n- \"Nothing is sent\". It sounds like tech talk.\n\n4. Worries:\n- I worry that typing my loan numbers will be seen or kept by someone. It says nothing is sent, but I can't check that myself.\n- I'm afraid \"Start over\" will wipe out what I typed. It says it asks first, which helps a little.\n- \"Save a copy\" on my phone makes me wonder what gets stored and where.\n- I don't know if Print will actually send something to a printer or cost me anything.\n- I'm not sure my answer is right. It says $0.00 interest grew, and I haven't said how long I waited. It also says the loan statement is the final word.\n- I don't know if I left boxes empty that I should have filled.\n\n5. I would skip:\n- The \"optional\" boxes for monthly payment, first payment month, and years to pay off. I only wanted to see how it grows.\n- \"How this is figured\".\n- \"Back to home\".\n- The small print about advice and facts.\n\n6. Score: 3. I'm fairly sure the answer is already showing. But the title promises \"payoff\", and I don't see a payoff date. Print also feels like an odd next step.\n\nRESULT: {\"next_tap\":\"Print\",\"confusing_terms\":[\"Add the unpaid interest to my balance\",\"The company that collects your payments\",\"Months with no payments so far\",\"First payment month\",\"Yearly interest rate\",\"Balance when payments start\",\"Step 1 of 2 / Step 2 of 2: You are here\",\"Save a copy\",\"our public page\",\"How this is figured\",\"Nothing is sent\"],\"worries\":[\"Whether my loan numbers are seen or kept by someone\",\"Start over might erase my numbers\",\"Where a saved copy goes and what it stores\",\"Whether Print costs anything or sends something\",\"The $0.00 interest looks wrong, and the loan statement is the final word\",\"Not knowing if I left needed boxes empty\"],\"skippable\":[\"Optional boxes: monthly payment, first payment month, years to pay off\",\"How this is figured\",\"Back to home\",\"Small print about advice and facts\"],\"score\":3}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: no action stands out; 'Start over' and 'Back to home' are both plain buttons/links per layout notes\"], \"score\": 7}",
-      "output": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: no action stands out; 'Start over' and 'Back to home' are both plain buttons/links per layout notes\"], \"score\": 7}"
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": []
     },
     {
       "model": "sonnet",
       "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
-      "output": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": []
     }
-  ]
+  ],
+  "otherScreens": []
 }

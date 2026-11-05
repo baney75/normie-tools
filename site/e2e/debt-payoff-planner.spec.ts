@@ -24,7 +24,10 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Debt Payoff Planner" })).toBeVisible();
   await expect(page.getByText("Start with one debt")).toBeVisible();
-  await expect(page.getByLabel("Interest difference between the two plans")).toHaveCount(0);
+  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
+  await expect(page.getByText("Nothing is sent.")).toBeVisible();
+  await expect(page.getByLabel("Debt 1 name")).toBeFocused();
+  await expect(page.getByLabel("Interest difference between the two plans")).toContainText("Your answer shows here");
 });
 
 test("gives the exact months, interest and order for both plans, with no sideways scroll", async ({ page }) => {
@@ -48,6 +51,8 @@ test("adds a third debt and opens the details", async ({ page }) => {
   await page.getByRole("button", { name: "Add another debt" }).click();
   await expect(page.getByLabel("Debt 3 balance")).toBeVisible();
   await page.getByText("Show more").click();
+  await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
+  await expect(page.locator(".nt-sheet-primary")).toHaveCount(1);
   await expect(page.getByRole("table")).toBeVisible();
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(wide).toBe(false);
@@ -58,7 +63,7 @@ test("a smallest payment that does not cover the interest is said plainly", asyn
   await page.getByLabel("Debt 1 yearly interest rate").fill("24");
   await page.getByLabel("Debt 1 smallest monthly payment").fill("200");
   await expect(page.getByText("does not cover the first month's interest")).toBeVisible();
-  await expect(page.getByLabel("Interest difference between the two plans")).toHaveCount(0);
+  await expect(page.getByLabel("Interest difference between the two plans")).toContainText("Your answer shows here");
 });
 
 test("messy typing shows a calm error that names the debt and field", async ({ page }) => {
@@ -66,7 +71,7 @@ test("messy typing shows a calm error that names the debt and field", async ({ p
   await page.getByLabel("Debt 1 yearly interest rate").fill("6");
   await page.getByLabel("Debt 1 smallest monthly payment").fill("50");
   await expect(page.getByText("Debt 1 balance: use a number above zero")).toBeVisible();
-  await expect(page.getByLabel("Interest difference between the two plans")).toHaveCount(0);
+  await expect(page.getByLabel("Interest difference between the two plans")).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Debt 1 balance").fill("1e3");
   await expect(page.getByText("Debt 1 balance: use a number above zero")).toBeVisible();
@@ -104,4 +109,19 @@ test("a desktop screenshot", async ({ page }) => {
   await fillTwo(page);
   await expect(page.getByLabel("Interest difference between the two plans")).toContainText("$361.25");
   await page.screenshot({ path: shotPath("debt-payoff-planner-desktop.png"), fullPage: true });
+});
+
+test("remove can be undone and Start over asks first", async ({ page }) => {
+  await fillTwo(page);
+  await expect(page.getByText("Remove takes out a line. You can put it back.")).toBeVisible();
+  await page.getByRole("button", { name: "Remove the last debt" }).click();
+  await expect(page.getByLabel("Debt 2 balance")).toHaveCount(0);
+  await page.getByRole("button", { name: "Put it back" }).click();
+  await expect(page.getByLabel("Debt 2 balance")).toHaveValue("$12,000");
+  await page.getByRole("button", { name: "Start over" }).click();
+  await page.getByRole("button", { name: "Keep my numbers" }).click();
+  await expect(page.getByLabel("Debt 1 balance")).toHaveValue("800");
+  await page.getByRole("button", { name: "Start over" }).click();
+  await page.getByRole("button", { name: "Clear the boxes" }).click();
+  await expect(page.getByLabel("Debt 1 balance")).toHaveValue("");
 });

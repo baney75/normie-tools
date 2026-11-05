@@ -1,0 +1,54 @@
+Screen: loan-explainer, filled state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Loan Explainer
+Type the numbers from your loan. See what it costs.
+Step 1 of 2: Type your numbers
+[label] Amount borrowed
+[box] Amount borrowed = "5000"
+[label] Yearly interest rate
+[box] Yearly interest rate = "5.5"
+[label] How long is the loan?
+[box] How long is the loan? = "48"
+[label] Months
+[choice] Months (chosen)
+[label] Years
+[choice] Years (not chosen)
+[label] Upfront fees (optional)
+[box] Upfront fees (optional) = ""
+[label] Extra each month (optional)
+[box] Extra each month (optional) = ""
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Step 2 of 2: Read your answer. You are here.
+Monthly payment
+$116.28
+Each month for the whole loan.
+Loan length
+48 months
+Total paid
+$5,581.61
+Total interest
+$581.61
+Upfront fees
+$0.00
+Cost of borrowing
+$581.61
+Cost of borrowing: Interest plus upfront fees.
+That is your answer. You can stop here, or keep a copy below.
+[closed section, tap to open] Show more
+
+[heading 2] Keep your answer if you want
+Your answer above, on paper or saved on this phone or computer.
+[MAIN BUTTON, filled dark orange] Print
+[plain button, outline only] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+The yearly cost of a loan, with some fees, is on your lender statement. This tool does not work it out.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+[closed section, tap to open] What the words mean
+
+Back to home
+[link, plain] Back to home

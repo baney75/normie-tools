@@ -1,0 +1,53 @@
+{
+  "skill": "student-loan-growth-and-payoff",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "haiku",
+  "by": {
+    "1": {
+      "passed": 5,
+      "total": 11,
+      "cases": 2,
+      "score": 0.45454545454545453
+    }
+  },
+  "verdict": {
+    "ok": false,
+    "fails": [
+      "level 1: 45.5% < 90%"
+    ]
+  },
+  "results": [
+    {
+      "id": "in-school",
+      "level": 1,
+      "task": "I owe $20,000 on one student loan at 5% a year. I have not paid for 6 months. The unpaid interest does not get added to the balance. I will pay $300 a month starting 2026-09. When do I finish and what is the total interest? What payment would finish it in 10 years?",
+      "reply": "You will finish paying off the loan in May 2033. The total interest will be $4,171.44. The smallest payment to finish it in 10 years would be $217.39.",
+      "met": [
+        false,
+        false,
+        true,
+        true,
+        false,
+        true
+      ],
+      "passed": 3,
+      "total": 6
+    },
+    {
+      "id": "added-to-balance",
+      "level": 1,
+      "task": "One student loan: $20,000 at 5% a year, 6 months with no payments. Yes, the unpaid interest gets added to the balance. I pay $300 a month from 2026-09. When am I done, what is the total interest, and what payment pays it off in 10 years?",
+      "reply": "One student loan: $20,000 at 5% a year, 6 months with no payments. Yes, the unpaid interest gets added to the balance. I pay $300 a month from 2026-09. When am I done, what is the total interest, and what payment pays it off in 10 years?\n\nBalance when payments start: $20,499.98\nInterest that grew while you waited: $499.98\nMonthly payment: $300.00\nMonths to pay off: 81 months (6 years and 9 months)\nTotal interest: $4,176.47\nPayoff month: May 2033\nSmallest payment to finish in 10 years: $217.44\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        false,
+        true,
+        false,
+        false,
+        true
+      ],
+      "passed": 2,
+      "total": 5
+    }
+  ]
+}

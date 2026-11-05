@@ -1,0 +1,22 @@
+Screen: photo-duplicate-finder, picked state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Photo Duplicate Finder
+Find photos that are the same. NT only looks. It never deletes, moves or sends a photo.
+Step 1 of 3: Pick your photos
+[label] Pick photos
+[box] Pick photos = "" (cursor is here)
+Or drop a file here.
+Pick up to 300 photos at once. Photos stay on this phone or computer.
+Photos picked
+3
+That is your answer. You can stop here, or keep a copy below.
+[MAIN BUTTON, filled dark orange] Look for copies
+[closed section, tap to open] Show more
+
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

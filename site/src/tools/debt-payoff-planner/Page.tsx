@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PercentField, ResultCard, StartOver } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -71,6 +71,7 @@ export function Page() {
           </div>
         ) : null}
 
+        <StepLabel n={1} of={2}>{COPY.stepOne}</StepLabel>
         <form className="nt-dpp-form" onSubmit={(e) => e.preventDefault()} noValidate>
           {shown.map((d, i) => {
             const r = i + 1;
@@ -82,6 +83,7 @@ export function Page() {
                   label={`${label} ${COPY.name.label}`}
                   placeholder={COPY.name.placeholder}
                   optional
+                  autoFocus={i === 0}
                   inputMode="text"
                   value={d.name}
                   onChange={(t) => setDebt(i, { name: t })}
@@ -115,9 +117,12 @@ export function Page() {
               {COPY.addDebt}
             </button>
             {shown.length > 1 ? (
-              <button type="button" className="nt-dpp-button" onClick={removeDebt}>
-                {COPY.removeDebt}
-              </button>
+              <>
+                <button type="button" className="nt-dpp-button" onClick={removeDebt}>
+                  {COPY.removeDebt}
+                </button>
+                <span className="nt-dpp-help">{COPY.removeHint}</span>
+              </>
             ) : null}
             {undo && shown.length < MAX ? (
               <>
@@ -143,7 +148,11 @@ export function Page() {
         <StartOver flowId="debt-payoff-planner" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
         {wholeBad ? <ErrorNote>{wholeBad}</ErrorNote> : null}
-        {result.ok ? <Answer result={result} /> : null}
+        {result.ok ? (
+          <Answer result={result} />
+        ) : (
+          <ResultCard label={COPY.result.label} step={COPY.stepTwo} waiting={COPY.waiting} />
+        )}
 
         {!result.ok && blank ? <p className="nt-dpp-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
@@ -160,6 +169,7 @@ export function Page() {
 
         <p className="nt-dpp-note">{COPY.notes.estimate}</p>
         <p className="nt-dpp-note">{COPY.notes.facts}</p>
+        <PrivacyNote />
 
         <details className="nt-dpp-details">
           <summary>{COPY.key.summary}</summary>
@@ -238,7 +248,7 @@ function Answer({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={r.label} answer={formatMoney(result.difference.interestApartCents)}>
+      <ResultCard label={r.label} step={COPY.stepTwo} answer={formatMoney(result.difference.interestApartCents)}>
         {lines.map((l) => (
           <p className="nt-dpp-help" key={l}>
             {l}
@@ -316,22 +326,9 @@ function Answer({ result }: { result: Good }) {
         </div>
       </details>
 
-      <details className="nt-dpp-details">
-        <summary>{COPY.save.summary}</summary>
-        <div className="nt-dpp-details-body">
-          <SavePrintSheet title={COPY.save.title} onSave={save}>
-            {lines.map((l) => (
-              <p key={l}>{l}</p>
-            ))}
-            {PLAN_KEYS.map((k) => (
-              <p key={k}>
-                {COPY.plans[k].name}: {months(result[k].months)}, {formatMoney(result[k].totalInterestCents)} {r.totalInterest.toLowerCase()}
-              </p>
-            ))}
-            <p>{COPY.notes.estimate}</p>
-          </SavePrintSheet>
-        </div>
-      </details>
+      <SavePrintSheet title={COPY.save.title} onSave={save}>
+        <p>{COPY.save.preview}</p>
+      </SavePrintSheet>
     </>
   );
 }

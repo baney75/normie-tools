@@ -5,6 +5,9 @@ export const COPY = {
   intro: "Type your debts. See two ways to pay them off, side by side.",
   empty:
     "Start with one debt: what you owe, its yearly interest rate, and the smallest payment due each month. Add more debts if you have them. Your answer shows up below.",
+  stepOne: "Type your numbers",
+  stepTwo: "Step 2 of 2: Read your answer",
+  waiting: "Your answer shows here",
   debtLegend: "Debt",
   name: { label: "name", placeholder: "Card A" },
   balance: { label: "balance", placeholder: "2,500" },
@@ -16,7 +19,8 @@ export const COPY = {
     placeholder: "0",
   },
   addDebt: "Add another debt",
-  removeDebt: "Take out the last debt",
+  removeDebt: "Remove the last debt",
+  removeHint: "Remove takes out a line. You can put it back.",
   undo: "Put it back",
   undoHelp: "You took out a debt. This puts it back.",
   upTo: "You can add up to 6 debts.",
@@ -74,7 +78,8 @@ export const COPY = {
   },
   save: {
     summary: "Save or print",
-    title: "Your debt payoff numbers",
+    title: "Keep your answer if you want",
+    preview: "Your answer above, on paper or saved on this phone or computer.",
     fileName: "debt-payoff-numbers.txt",
   },
   notes: {

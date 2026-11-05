@@ -1,0 +1,35 @@
+Screen: unit-converter, filled state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Unit Converter
+Pick what you are measuring. Type a number. See it in another measure.
+Step 1 of 2: Pick units and type a number
+[label] What are you measuring?
+[menu] Length Weight Volume Temperature Speed = "Length"
+[label] Number
+[box] Number = "5000"
+[label] Change from
+[menu] Inches (in) Feet (ft) Yards (yd) Miles (mi) Millimeters (mm) Centimeters (cm) Meters (m) Kilometers (km) = "Inches (in)"
+[plain button, outline only] Swap the two
+[label] Change to
+[menu] Inches (in) Feet (ft) Yards (yd) Miles (mi) Millimeters (mm) Centimeters (cm) Meters (m) Kilometers (km) = "Millimeters (mm)"
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Step 2 of 2: Read your answer. You are here.
+Your answer
+127,000 millimeters
+Shown to 6 digits.
+That is your answer. You can stop here, or keep a copy below.
+[heading 2] Keep your answer if you want
+Your answer above, on paper or saved on this phone or computer.
+[MAIN BUTTON, filled dark orange] Print
+[plain button, outline only] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+[closed section, tap to open] Show more
+
+Where the facts come from: the inch and pound use the 1959 agreement between countries. The US gallon uses a US government weights and measures book (NIST Handbook 44). The kelvin uses the international units brochure.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

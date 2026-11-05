@@ -1,0 +1,30 @@
+Screen: tax-filing-helper, copy-in state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Tax Filing Helper
+Practice site. Nothing here is real. Nothing is filed.
+Step 3 of 4: Copy the answers in
+[heading 2] Practice screen 1 of 3: About you
+Type it in the practice box. A mix-up here changes nothing real.
+Type this
+Sample
+[label] First name
+[box] First name = "Sample"
+Type this
+Person
+[label] Last name
+[box] Last name = "Person"
+Type this
+sample.person@example.com
+[label] Email
+[box] Email = "sample.person@example.com"
+Back goes to the screen before. Your typing stays.
+[plain button, outline only] Back
+[MAIN BUTTON, filled dark orange] Next screen
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+This is a practice with made-up answers. It is not tax advice.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

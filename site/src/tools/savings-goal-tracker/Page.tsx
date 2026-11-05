@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PercentField, ResultCard, StartOver } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -78,6 +78,7 @@ export function Page() {
           </div>
         ) : null}
 
+        <StepLabel n={1} of={2}>{COPY.step1}</StepLabel>
         <form className="nt-save-form" onSubmit={(e) => e.preventDefault()} noValidate>
           <fieldset className="nt-save-units">
             <legend>{COPY.mode.legend}</legend>
@@ -92,6 +93,7 @@ export function Page() {
           </fieldset>
           <MoneyField
             label={COPY.goal.label}
+            autoFocus
             hint={COPY.goal.hint}
             placeholder={COPY.goal.placeholder}
             value={v.goal}
@@ -151,7 +153,7 @@ export function Page() {
 
         <StartOver flowId="savings-goal-tracker" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
-        {result.ok ? <Answer result={result} /> : null}
+        <Answer result={result} mode={v.mode} />
 
         {!result.ok && blank ? <p className="nt-save-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
@@ -163,6 +165,7 @@ export function Page() {
 
         <p className="nt-save-note">{COPY.notes.estimate}</p>
         <p className="nt-save-note">{COPY.notes.rule}</p>
+        <PrivacyNote />
 
         <details className="nt-save-details">
           <summary>{COPY.key.summary}</summary>
@@ -184,7 +187,19 @@ export function Page() {
 
 type Good = Extract<ReturnType<typeof explainSavings>, { ok: true }>;
 
-function Answer({ result }: { result: Good }) {
+function Answer({ result: whole, mode }: { result: ReturnType<typeof explainSavings>; mode: "when" | "by" }) {
+  if (!whole.ok) {
+    return (
+      <>
+        <ResultCard label={mode === "by" ? COPY.by.label : COPY.when.label} step={COPY.step2} waiting={COPY.waiting} />
+        <SavePrintSheet title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
+      </>
+    );
+  }
+  return <Done result={whole} />;
+}
+
+function Done({ result }: { result: Good }) {
   const w = COPY.when;
   const b = COPY.by;
   let label: string;
@@ -233,7 +248,7 @@ function Answer({ result }: { result: Good }) {
   }
 
   function save() {
-    const text = [COPY.save.title, "", `${label}: ${answer}`, ...(help ? [help] : []), ...lines.map(([k, val]) => `${k}: ${val}`), "", COPY.notes.estimate, COPY.notes.rule, ""].join("\n");
+    const text = [COPY.save.fileTitle, "", `${label}: ${answer}`, ...(help ? [help] : []), ...lines.map(([k, val]) => `${k}: ${val}`), "", COPY.notes.estimate, COPY.notes.rule, ""].join("\n");
     try {
       const url = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
       const a = document.createElement("a");
@@ -250,7 +265,7 @@ function Answer({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={label} answer={answer}>
+      <ResultCard label={label} step={COPY.step2} answer={answer}>
         {help ? <p className="nt-save-help">{help}</p> : null}
         {lines.length > 0 ? (
           <dl className="nt-save-lines">
@@ -295,17 +310,9 @@ function Answer({ result }: { result: Good }) {
         </details>
       ) : null}
 
-      <details className="nt-save-details">
-        <summary>{COPY.save.summary}</summary>
-        <div className="nt-save-details-body">
-          <SavePrintSheet title={COPY.save.title} onSave={save}>
-            <p>{label}: {answer}</p>
-            {help ? <p>{help}</p> : null}
-            {lines.map(([k, val]) => <p key={k}>{k}: {val}</p>)}
-            <p>{COPY.notes.estimate}</p>
-          </SavePrintSheet>
-        </div>
-      </details>
+      <SavePrintSheet title={COPY.save.title} onSave={save}>
+        <p>{COPY.save.preview}</p>
+      </SavePrintSheet>
     </>
   );
 }

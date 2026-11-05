@@ -25,7 +25,13 @@ test("shows an empty state that says what to type, with two offers", async ({ pa
   await expect(page.getByText("Start with the amount")).toBeVisible();
   await expect(page.getByLabel("Offer 2: Amount borrowed")).toBeVisible();
   await expect(page.getByLabel("Offer 3: Amount borrowed")).toHaveCount(0);
-  await expect(page.getByLabel("Lowest cost of borrowing")).toHaveCount(0);
+  await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Your answer shows here");
+  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
+  await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Step 2 of 2: Read your answer");
+  await expect(page.getByLabel("Offer 1: Amount borrowed")).toBeFocused();
+  await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
+  await expect(page.locator(".nt-sheet-primary")).toHaveCount(1);
+  await expect(page.getByRole("link", { name: "our public page" })).toBeVisible();
 });
 
 test("gives the exact numbers for two offers and names the lowest, with no sideways scroll", async ({ page }) => {
@@ -52,10 +58,15 @@ test("a third offer can be added, and a tie names every offer", async ({ page })
   await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Offer 1 and Offer 2");
   await page.getByRole("button", { name: "Add a third offer" }).click();
   await expect(page.getByLabel("Offer 3: Amount borrowed")).toBeVisible();
-  await expect(page.getByLabel("Lowest cost of borrowing")).toHaveCount(0);
+  await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Your answer shows here");
   await fillOffer(page, 3, { amount: "5000", rate: "3", term: "24", fees: "50" });
   await expect(page.getByLabel("Offer 3, monthly payment")).toBeVisible();
   await expect(page.getByLabel("Lowest monthly payment")).toContainText("Offer 3");
+  await expect(page.getByText("Remove takes out a line. You can put it back.")).toBeVisible();
+  await page.getByRole("button", { name: "Remove the third offer" }).click();
+  await expect(page.getByLabel("Offer 3: Amount borrowed")).toHaveCount(0);
+  await page.getByRole("button", { name: "Put it back" }).click();
+  await expect(page.getByLabel("Offer 3: Amount borrowed")).toHaveValue("5000");
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(wide).toBe(false);
 });
@@ -64,7 +75,7 @@ test("messy typing shows a calm error that names the offer and field", async ({ 
   await fillOffer(page, 1, { amount: "1000", rate: "5", term: "12" });
   await fillOffer(page, 2, { amount: "lots of money", rate: "5", term: "12" });
   await expect(page.getByText("Offer 2: Amount borrowed: use a number above zero")).toBeVisible();
-  await expect(page.getByLabel("Lowest cost of borrowing")).toHaveCount(0);
+  await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Offer 2: Amount borrowed").fill("1e3");
   await expect(page.getByText("Offer 2: Amount borrowed: use a number above zero")).toBeVisible();

@@ -1,0 +1,96 @@
+Screen: save-me-money, typed state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Save Me Money
+Type the costs you pay again and again. See what each one adds up to in a year.
+Step 1 of 3: Type your costs
+Remove takes out a line. You can put it back.
+[label] Name of cost 1
+[box] Name of cost 1 = "Phone"
+[label] Phone, amount
+[box] Phone, amount = "45"
+[label] Phone, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Phone
+[label] Name of cost 2
+[box] Name of cost 2 = "Internet"
+[label] Internet, amount
+[box] Internet, amount = "60"
+[label] Internet, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Internet
+[label] Name of cost 3
+[box] Name of cost 3 = "Streaming"
+[label] Streaming, amount
+[box] Streaming, amount = ""
+[label] Streaming, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Streaming
+[label] Name of cost 4
+[box] Name of cost 4 = "Insurance"
+[label] Insurance, amount
+[box] Insurance, amount = "480"
+[label] Insurance, how often
+[menu] Every week Every month Every year = "Every year"
+[plain button, outline only] Remove Insurance
+[label] Name of cost 5
+[box] Name of cost 5 = "Gym"
+[label] Gym, amount
+[box] Gym, amount = ""
+[label] Gym, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Gym
+[label] Name of cost 6
+[box] Name of cost 6 = "Other"
+[label] Other, amount
+[box] Other, amount = ""
+[label] Other, how often
+[menu] Every week Every month Every year = "Every month"
+[plain button, outline only] Remove Other
+[plain button, outline only] Add a cost
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Step 2 of 3. You are here.
+Total for a year
+$1,740.00
+Total for a month
+$145.00
+Costs in your list
+3
+That is your answer. You can stop here, or keep a copy below.
+Step 3 of 3: Pick what to look at first
+[heading 2] Your costs, biggest first
+Tick the ones you want to look at first.
+Internet: $720.00 a year, $60.00 a month
+[label] Internet: $720.00 a year, $60.00 a month
+[tick box] Internet: $720.00 a year, $60.00 a month (not chosen)
+Phone: $540.00 a year, $45.00 a month
+[label] Phone: $540.00 a year, $45.00 a month
+[tick box] Phone: $540.00 a year, $45.00 a month (not chosen)
+Insurance: $480.00 a year, $40.00 a month
+[label] Insurance: $480.00 a year, $40.00 a month
+[tick box] Insurance: $480.00 a year, $40.00 a month (not chosen)
+[heading 2] Questions to ask before you call
+Tick a cost above to see questions for it.
+[heading 2] Coming soon
+These helpers are coming soon: Subscription Finder, Bill Negotiation Prep and Cheaper Plan Finder. They are not ready yet.
+This page never calls, cancels or pays anything. You do that yourself.
+[closed section, tap to open] Show more
+
+[heading 2] Save or print my list
+Total for a year: $1,740.00
+Total for a month: $145.00
+Internet: $720.00 a year, $60.00 a month
+Phone: $540.00 a year, $45.00 a month
+Insurance: $480.00 a year, $40.00 a month
+This page never calls, cancels or pays anything. You do that yourself.
+[MAIN BUTTON, filled dark orange] Print
+[plain button, outline only] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+This adds up the numbers you typed. It does not tell you what to do.
+Source: only the numbers you type. A week cost uses 52 weeks in a year. That is an estimate.
+Free to use. Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

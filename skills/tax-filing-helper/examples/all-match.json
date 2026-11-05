@@ -1,0 +1,12 @@
+{
+  "typed": {
+    "first-name": "Sample",
+    "last-name": "Person",
+    "email": "sample.person@example.com",
+    "employer": "Example Bakery",
+    "wages": "$32,450.00",
+    "withheld": "2,810.50",
+    "bank-name": "Example Credit Union",
+    "interest": "12.34"
+  }
+}

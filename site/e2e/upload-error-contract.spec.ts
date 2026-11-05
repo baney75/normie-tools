@@ -34,3 +34,36 @@ test("the right file type is accepted and no problem shows", async ({ page }) =>
   });
   await expect(page.getByRole("status")).toHaveCount(0);
 });
+
+test("Photo Duplicate Finder: a PDF says what it is, what is needed, what that is, and how to get it", async ({ page }) => {
+  await page.goto("/#/tools/photo-duplicate-finder");
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  const pdf = Buffer.from("%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\ntrailer\n<< /Root 1 0 R >>\n%%EOF\n");
+  await page.getByLabel("Pick photos").setInputFiles({ name: "statement.pdf", mimeType: "application/pdf", buffer: pdf });
+  const message = page.getByRole("status").first();
+  await expect(message).toBeVisible();
+  const paragraphs = await message.locator("p").allInnerTexts();
+  expect(paragraphs[0]).toMatch(/PDF/); // what you gave
+  expect(paragraphs[1]).toMatch(/photo/i); // what is needed
+  expect(paragraphs.length).toBeGreaterThanOrEqual(3); // what it is
+  await expect(message.getByRole("link").first()).toBeVisible(); // how to get it
+});
+
+// Form Filler takes a saved answer file. A wrong type gets the same four-part message.
+test("form-filler: a wrong file type says what was given, what is needed, what it is, and how to get it", async ({ page }) => {
+  await page.goto("/#/tools/form-filler");
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.getByText("Have saved answers?").click();
+  const pdf = Buffer.from("%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\ntrailer\n<< /Root 1 0 R >>\n%%EOF\n");
+  await page.getByLabel("Open my saved answers").setInputFiles({ name: "return.pdf", mimeType: "application/pdf", buffer: pdf });
+
+  const message = page.locator(".nt-upload-message");
+  await expect(message).toBeVisible();
+  const paragraphs = await message.locator("p").allInnerTexts();
+  expect(paragraphs[0]).toMatch(/PDF/);
+  expect(paragraphs[1]).toMatch(/plain text file/i);
+  expect(paragraphs.length).toBeGreaterThanOrEqual(3);
+  await expect(message.getByRole("link")).toBeVisible();
+});

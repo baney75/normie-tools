@@ -1,0 +1,347 @@
+{
+ "note": "Expected values worked out by hand, apart from calc.mjs and fill.py. Dates: 1900 is not a leap year (divisible by 100, not by 400), 2000 is. Phone: strip to digits, drop a leading 1 when 11 digits, group 3-3-4.",
+ "info": [
+  {
+   "field": "firstName",
+   "input": " Ana ",
+   "expect": "Ana"
+  },
+  {
+   "field": "firstName",
+   "input": "Mary  Ann",
+   "expect": "Mary Ann"
+  },
+  {
+   "field": "firstName",
+   "input": "O'Neil",
+   "expect": "O'Neil"
+  },
+  {
+   "field": "firstName",
+   "input": "Zoë",
+   "expect": "Zoë"
+  },
+  {
+   "field": "firstName",
+   "input": "",
+   "expect": ""
+  },
+  {
+   "field": "firstName",
+   "input": "R2D2",
+   "expect": null
+  },
+  {
+   "field": "firstName",
+   "input": "<b>",
+   "expect": null
+  },
+  {
+   "field": "firstName",
+   "input": "1234",
+   "expect": null
+  },
+  {
+   "field": "lastName",
+   "input": "Smith-Jones",
+   "expect": "Smith-Jones"
+  },
+  {
+   "field": "street",
+   "input": "12 Example St. Apt 4",
+   "expect": "12 Example St. Apt 4"
+  },
+  {
+   "field": "street",
+   "input": "a;b",
+   "expect": null
+  },
+  {
+   "field": "city",
+   "input": "St. Louis",
+   "expect": "St. Louis"
+  },
+  {
+   "field": "city",
+   "input": "City 9",
+   "expect": null
+  },
+  {
+   "field": "state",
+   "input": "tx",
+   "expect": "TX"
+  },
+  {
+   "field": "state",
+   "input": " ny ",
+   "expect": "NY"
+  },
+  {
+   "field": "state",
+   "input": "DC",
+   "expect": "DC"
+  },
+  {
+   "field": "state",
+   "input": "ZZ",
+   "expect": null
+  },
+  {
+   "field": "state",
+   "input": "Texas",
+   "expect": null
+  },
+  {
+   "field": "zip",
+   "input": "12345",
+   "expect": "12345"
+  },
+  {
+   "field": "zip",
+   "input": "12345-6789",
+   "expect": "12345-6789"
+  },
+  {
+   "field": "zip",
+   "input": "1234",
+   "expect": null
+  },
+  {
+   "field": "zip",
+   "input": "123456",
+   "expect": null
+  },
+  {
+   "field": "zip",
+   "input": "ab123",
+   "expect": null
+  },
+  {
+   "field": "birthDate",
+   "input": "1960-02-29",
+   "expect": "1960-02-29"
+  },
+  {
+   "field": "birthDate",
+   "input": "2/9/1960",
+   "expect": "1960-02-09"
+  },
+  {
+   "field": "birthDate",
+   "input": "02/29/1961",
+   "expect": null
+  },
+  {
+   "field": "birthDate",
+   "input": "2023-13-01",
+   "expect": null
+  },
+  {
+   "field": "birthDate",
+   "input": "1900-02-29",
+   "expect": null
+  },
+  {
+   "field": "birthDate",
+   "input": "2000-02-29",
+   "expect": "2000-02-29"
+  },
+  {
+   "field": "birthDate",
+   "input": "soon",
+   "expect": null
+  },
+  {
+   "field": "phone",
+   "input": "(555) 010-1234",
+   "expect": "555-010-1234"
+  },
+  {
+   "field": "phone",
+   "input": "1-555-010-1234",
+   "expect": "555-010-1234"
+  },
+  {
+   "field": "phone",
+   "input": "555.010.1234",
+   "expect": "555-010-1234"
+  },
+  {
+   "field": "phone",
+   "input": "555-0101",
+   "expect": null
+  },
+  {
+   "field": "phone",
+   "input": "call me",
+   "expect": null
+  },
+  {
+   "field": "phone",
+   "input": "15550101234567",
+   "expect": null
+  }
+ ],
+ "ways": [
+  {
+   "answers": {
+    "filing": "no",
+    "income": "yes"
+   },
+   "way": "past",
+   "name": "Not Free File",
+   "has": [
+    "Free File only does this year's taxes. It can't do taxes from past years."
+   ],
+   "hasNot": [
+    "closed"
+   ]
+  },
+  {
+   "answers": {
+    "filing": "yes",
+    "income": "yes",
+    "open": "yes"
+   },
+   "way": "guided",
+   "name": "Guided Free File",
+   "has": [
+    "Start at IRS.gov/freefile."
+   ],
+   "hasNot": [
+    "closed"
+   ]
+  },
+  {
+   "answers": {
+    "filing": "yes",
+    "income": "no",
+    "fillable": "no"
+   },
+   "way": "fillable",
+   "name": "Free File Fillable Forms",
+   "has": [
+    "If you would rather not do the work yourself, a VITA volunteer can help for free.",
+    "Check IRS.gov."
+   ]
+  },
+  {
+   "answers": {
+    "filing": "yes",
+    "income": "no",
+    "fillable": "yes"
+   },
+   "way": "fillable",
+   "name": "Free File Fillable Forms",
+   "hasNot": [
+    "VITA volunteer can help"
+   ]
+  },
+  {
+   "answers": {
+    "filing": "",
+    "income": "unsure"
+   },
+   "way": "check",
+   "name": "Find your income number first",
+   "has": [
+    "You can see it by signing in to your IRS online account, under Tax Records."
+   ]
+  },
+  {
+   "answers": {},
+   "way": "check",
+   "name": "Find your income number first"
+  }
+ ],
+ "sheets": [
+  {
+   "id": "empty",
+   "input": {},
+   "expect": "Form Filler answer sheet\nThis is a list of your answers. It is not a tax return. Nothing was sent.\n\nWhich free way may fit\nFind your income number first\n- The IRS calls your income number adjusted gross income, or AGI.\n- You can see it by signing in to your IRS online account, under Tax Records.\n- You can also ask the IRS to mail you a copy of last year's return.\n- Free File was closed when we checked on November 4, 2026. The IRS says it opens in January 2027. Check IRS.gov.\n- Always start at IRS.gov/freefile. If you go straight to a tax company's website, you won't get the free deal.\nOfficial link: https://www.irs.gov/freefile\nFree help from a VITA volunteer: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers or 800-906-9887\n\nYour answers\nAre you filing this year's taxes? Not answered\nWas your income $95,000 or less last year? Not answered\nAre you willing to type into online copies of the IRS forms yourself? Not answered\nIs Free File open on IRS.gov yet? Not answered\n\nMy info\nFirst name: Not filled in\nLast name: Not filled in\nStreet address: Not filled in\nCity: Not filled in\nState: Not filled in\nZIP code: Not filled in\nBirth date: Not filled in\nPhone number: Not filled in\nSocial Security number: You type your Social Security number yourself on the IRS partner site.\n\nPapers to find\n[ ] Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children\n[ ] W-2 from each job (your employer sends it in January or February)\n[ ] 1099 forms for other money you got\n[ ] 1095-A if you had health insurance from the Marketplace\n[ ] Last year's tax return, if you filed one\n[ ] Your IP code (an Identity Protection code), only if the IRS sent you one\n[ ] Your bank account and routing numbers, if you want your refund sent straight to your bank\n[ ] Papers for credits, if you have them\n[ ] For side jobs: what you were paid, and receipts for what you spent\n\nWhat you do yourself\n- Make your Free File account.\n- Check every number on the review page.\n- Sign with last year's income number or your 5-digit code.\n- Press Submit.\n- Pay any tax you owe, yourself.\n\nNT never presses Submit, signs for you, pays anything, or picks a paid add-on. It never asks for your Free File password.\nIf any screen asks for a card number, stop.\nSource: IRS Free File page, https://www.irs.gov/filing/irs-free-file-do-your-taxes-for-free\n",
+   "way": "check"
+  },
+  {
+   "id": "guided-full",
+   "input": {
+    "answers": {
+     "filing": "yes",
+     "income": "yes",
+     "fillable": "unsure",
+     "open": "no"
+    },
+    "info": {
+     "firstName": "Ana",
+     "lastName": "Rivera",
+     "street": "12 Example Street",
+     "city": "Springfield",
+     "state": "IL",
+     "zip": "62701",
+     "birthDate": "1960-02-29",
+     "phone": "(555) 010-1234"
+    },
+    "papers": [
+     "ssn",
+     "w2",
+     "lastreturn"
+    ]
+   },
+   "expect": "Form Filler answer sheet\nThis is a list of your answers. It is not a tax return. Nothing was sent.\n\nWhich free way may fit\nGuided Free File\n- Guided Free File asks simple questions, one at a time. The software does the math.\n- Last season it was free for people with income of $95,000 or less. Check IRS.gov for this year's limit.\n- Each company also sets its own rules, such as age or state.\n- Some companies do your state return for free, some charge.\n- Free File was closed when we checked on November 4, 2026. The IRS says it opens in January 2027. Check IRS.gov.\n- Always start at IRS.gov/freefile. If you go straight to a tax company's website, you won't get the free deal.\nOfficial link: https://www.irs.gov/freefile\nFree help from a VITA volunteer: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers or 800-906-9887\n\nYour answers\nAre you filing this year's taxes? Yes\nWas your income $95,000 or less last year? Yes\nAre you willing to type into online copies of the IRS forms yourself? Not sure\nIs Free File open on IRS.gov yet? No\n\nMy info\nFirst name: Ana\nLast name: Rivera\nStreet address: 12 Example Street\nCity: Springfield\nState: IL\nZIP code: 62701\nBirth date: 02/29/1960\nPhone number: 555-010-1234\nSocial Security number: You type your Social Security number yourself on the IRS partner site.\n\nPapers to find\n[x] Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children\n[x] W-2 from each job (your employer sends it in January or February)\n[ ] 1099 forms for other money you got\n[ ] 1095-A if you had health insurance from the Marketplace\n[x] Last year's tax return, if you filed one\n[ ] Your IP code (an Identity Protection code), only if the IRS sent you one\n[ ] Your bank account and routing numbers, if you want your refund sent straight to your bank\n[ ] Papers for credits, if you have them\n[ ] For side jobs: what you were paid, and receipts for what you spent\n\nWhat you do yourself\n- Make your Free File account.\n- Check every number on the review page.\n- Sign with last year's income number or your 5-digit code.\n- Press Submit.\n- Pay any tax you owe, yourself.\n\nNT never presses Submit, signs for you, pays anything, or picks a paid add-on. It never asks for your Free File password.\nIf any screen asks for a card number, stop.\nSource: IRS Free File page, https://www.irs.gov/filing/irs-free-file-do-your-taxes-for-free\n",
+   "way": "guided"
+  },
+  {
+   "id": "fillable-open",
+   "input": {
+    "answers": {
+     "filing": "yes",
+     "income": "no",
+     "fillable": "yes",
+     "open": "yes"
+    },
+    "info": {
+     "state": "tx",
+     "phone": "1-555-010-9876"
+    },
+    "papers": [
+     "bank",
+     "w2",
+     "w2"
+    ]
+   },
+   "expect": "Form Filler answer sheet\nThis is a list of your answers. It is not a tax return. Nothing was sent.\n\nWhich free way may fit\nFree File Fillable Forms\n- Free File Fillable Forms works at any income.\n- You type into online copies of the IRS forms. Only some of the math is done for you.\n- State taxes are not included.\n- Start at IRS.gov/freefile.\n- Always start at IRS.gov/freefile. If you go straight to a tax company's website, you won't get the free deal.\nOfficial link: https://www.irs.gov/freefile\nFree help from a VITA volunteer: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers or 800-906-9887\n\nYour answers\nAre you filing this year's taxes? Yes\nWas your income $95,000 or less last year? No\nAre you willing to type into online copies of the IRS forms yourself? Yes\nIs Free File open on IRS.gov yet? Yes\n\nMy info\nFirst name: Not filled in\nLast name: Not filled in\nStreet address: Not filled in\nCity: Not filled in\nState: TX\nZIP code: Not filled in\nBirth date: Not filled in\nPhone number: 555-010-9876\nSocial Security number: You type your Social Security number yourself on the IRS partner site.\n\nPapers to find\n[ ] Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children\n[x] W-2 from each job (your employer sends it in January or February)\n[ ] 1099 forms for other money you got\n[ ] 1095-A if you had health insurance from the Marketplace\n[ ] Last year's tax return, if you filed one\n[ ] Your IP code (an Identity Protection code), only if the IRS sent you one\n[x] Your bank account and routing numbers, if you want your refund sent straight to your bank\n[ ] Papers for credits, if you have them\n[ ] For side jobs: what you were paid, and receipts for what you spent\n\nWhat you do yourself\n- Make your Free File account.\n- Check every number on the review page.\n- Sign with last year's income number or your 5-digit code.\n- Press Submit.\n- Pay any tax you owe, yourself.\n\nNT never presses Submit, signs for you, pays anything, or picks a paid add-on. It never asks for your Free File password.\nIf any screen asks for a card number, stop.\nSource: IRS Free File page, https://www.irs.gov/filing/irs-free-file-do-your-taxes-for-free\n",
+   "way": "fillable"
+  }
+ ],
+ "saved": [
+  {
+   "id": "empty-text",
+   "text": "",
+   "message": "This file is empty."
+  },
+  {
+   "id": "not-json",
+   "text": "hello there",
+   "message": "This is not an answer file from Form Filler."
+  },
+  {
+   "id": "list",
+   "text": "[1,2]",
+   "message": "This is not an answer file from Form Filler."
+  },
+  {
+   "id": "wrong-format",
+   "text": "{\"format\":\"other\",\"version\":1}",
+   "message": "This is not an answer file from Form Filler."
+  },
+  {
+   "id": "wrong-version",
+   "text": "{\"format\":\"nt-form-filler\",\"version\":2}",
+   "message": "This answer file is from a different version."
+  },
+  {
+   "id": "true-is-not-one",
+   "text": "{\"format\":\"nt-form-filler\",\"version\":true}",
+   "message": "This answer file is from a different version."
+  }
+ ]
+}

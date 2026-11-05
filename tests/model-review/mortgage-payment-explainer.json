@@ -1,20 +1,49 @@
 {
   "tool": "mortgage-payment-explainer",
-  "screen": "empty state at 390px wide",
+  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
   "firstTimeUser": {
     "model": "sonnet",
-    "output": "1. This screen wants me to type in the numbers for a home loan so it can show what I'd pay each month.\n\n2. I would tap the box under \"Home price\".\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"Down payment\". I think it's money paid first, and the screen does explain it.\n- \"Yearly interest rate\"\n- \"Quick picks\"\n- \"HOA\"\n- \"Mortgage insurance\"\n- \"Property tax\"\n- \"Your lender's paper wins\". I had to guess what that means.\n- \"Estimate\"\n- \"What the words mean\". It's at the bottom, and I'm not sure it's a button or a link.\n- \"Start over clears the boxes. You can put them back.\" I don't see how I'd put them back until I try it.\n\n4. What made me worry:\n- I don't see a price anywhere, so I'm not worried about cost.\n- It says \"Nothing is sent\", so I'm not worried about privacy. It never says that on the screen itself, though. If I'd only read the screen, I would wonder where my numbers go.\n- I'd worry about typing a wrong number and getting a figure I might trust too much.\n- \"Start over\" is a little scary. It clears everything, and I don't know if I'd lose my work.\n- I don't have a property tax bill or insurance paper handy. I'd worry I was doing it wrong, though it says I can leave those empty.\n\n5. What I would skip:\n- All four optional boxes: property tax, home insurance, HOA and mortgage insurance. They say \"optional\", and I wouldn't know the numbers.\n- The two small notes near the bottom, \"Tax and insurance can change\" and the estimate line.\n- \"Back to home\".\n\n6. Score: 4. I know the first box to tap. I'm less sure where the answer will show up, because there's no button to press.\n\nRESULT: {\"next_tap\": \"Home price\", \"confusing_terms\": [\"Down payment\", \"Yearly interest rate\", \"Quick picks\", \"HOA\", \"Mortgage insurance\", \"Property tax\", \"Your lender's paper wins\", \"estimate\", \"What the words mean\", \"You can put them back\"], \"worries\": [\"Typing a wrong number and trusting the answer\", \"Start over might lose my work\", \"Don't have the tax and insurance papers\", \"Screen never says my numbers aren't sent anywhere\"], \"skippable\": [\"Property tax (optional)\", \"Home insurance (optional)\", \"HOA (optional)\", \"Mortgage insurance (optional)\", \"Tax and insurance can change note\", \"Back to home\"], \"score\": 4}"
+    "score": 3,
+    "output": "1. This screen wants me to look at the mortgage numbers already filled in and read the monthly payment. I can then print or save it if I want.\n\n2. I would tap **Print**. It's the only orange button, so it looks like the main thing to do.\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"Yearly interest rate\"\n- \"Loan payment\"\n- \"Property tax\"\n- \"Mortgage insurance\"\n- \"Neighborhood fee\"\n- \"Total interest over the loan\"\n- \"Goes to interest\" and \"Lowers what you owe\". I could guess these, but I'm not sure.\n- \"Down payment\". I know it, but I'm not sure how it becomes the \"Loan amount\".\n- \"Save a copy\" and \"saved on this phone or computer\". I don't know where it gets saved.\n- \"Show more\"\n- \"What the words mean\"\n- \"Estimate\"\n- \"Lender statement\"\n- \"public page\"\n- \"Start over asks first, and you can undo it right after\". \"Undo\" is a little odd.\n\n4. What made me worry:\n- Seeing \"Print\" in orange made me think I had to print something. I don't know if it will cost me anything or send something to a printer.\n- \"Save a copy\" makes me wonder where the copy goes and whether I can find it again.\n- \"Start over\" could wipe out my numbers. It says it asks first, which helps a little.\n- \"Nothing is sent. Numbers stay on this phone\" is reassuring, but I can't tell if it's true. I'd have to trust it.\n- The numbers were already filled in. I don't know whose numbers they are, or whether I'm supposed to change them.\n- \"Years to pay it back\" says 24, but the buttons say 15, 20 and 30. That looked like a mistake.\n- Every \"optional\" box is empty, so the answer might be too low. The $0.00 lines made me wonder whether something is missing.\n- \"Step 2 of 2 … You are here\" is confusing. I never pressed anything to get to step 2.\n\n5. What I would skip:\n- The three buttons \"15 years\", \"20 years\" and \"30 years\", unless I wanted to change the length.\n- The small print about estimates, tax and insurance changes, and \"Nothing is sent\".\n- The \"Your first payment\" section, because I don't need the interest split.\n- \"Show more\" and \"What the words mean\", unless I got stuck.\n- \"Back to home\".\n\n6. Score: 3. I can see the answer, $1,534.99 a month, but I'm not sure whether I'm meant to do anything else. The orange Print button makes it look like printing is the goal.\n\nRESULT: {\"next_tap\":\"Print\",\"confusing_terms\":[\"Yearly interest rate\",\"Loan payment\",\"Property tax\",\"Mortgage insurance\",\"Neighborhood fee\",\"Total interest over the loan\",\"Goes to interest\",\"Lowers what you owe\",\"Down payment\",\"Loan amount\",\"Save a copy\",\"Show more\",\"What the words mean\",\"estimate\",\"lender statement\",\"public page\",\"Start over\",\"undo\",\"Step 2 of 2 You are here\"],\"worries\":[\"Print might cost money or need a printer\",\"Save a copy: unclear where it goes\",\"Start over might erase my numbers\",\"Numbers are already filled in and I don't know whose they are\",\"24 years doesn't match the 15, 20 and 30 buttons\",\"Empty optional boxes and $0.00 lines may mean the answer is too low\",\"Privacy claim 'Nothing is sent' must be taken on trust\",\"Step 2 appeared without my pressing anything\"],\"skippable\":[\"15 years / 20 years / 30 years buttons\",\"small print about estimates and changing tax\",\"Your first payment section\",\"Show more\",\"What the words mean\",\"Back to home\"],\"score\":3}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"FAIL\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule1: No button stands out as the main action. 'Start over', 'Back to home' and 'What the words mean' are all plain, and the layout notes say every button is small and plain.\",\"rule4: The screen gives steps ('Start with the home price and your down payment. Then add...') but never says 'Step N of M' or where the person is.\"],\"score\":6}",
-      "output": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"FAIL\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule1: No button stands out as the main action. 'Start over', 'Back to home' and 'What the words mean' are all plain, and the layout notes say every button is small and plain.\",\"rule4: The screen gives steps ('Start with the home price and your down payment. Then add...') but never says 'Step N of M' or where the person is.\"],\"score\":6}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": []
     },
     {
       "model": "sonnet",
-      "result": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"Rule 1: No single primary action stands out. The layout notes say all buttons are small and plain, so \\\"15 years\\\", \\\"20 years\\\", \\\"30 years\\\", \\\"Start over\\\" and \\\"Back to home\\\" carry equal weight.\"], \"score\": 7}",
-      "output": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"Rule 1: No single primary action stands out. The layout notes say all buttons are small and plain, so \\\"15 years\\\", \\\"20 years\\\", \\\"30 years\\\", \\\"Start over\\\" and \\\"Back to home\\\" carry equal weight.\"], \"score\": 7}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": []
     }
-  ]
+  ],
+  "otherScreens": []
 }

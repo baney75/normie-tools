@@ -1,0 +1,52 @@
+{
+ "items": [
+  {
+   "id": "a1",
+   "name": "IMG_1.jpg",
+   "size": 3000,
+   "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+  },
+  {
+   "id": "a2",
+   "name": "IMG_1 copy.jpg",
+   "size": 3000,
+   "sha256": "0646ec37b6acf373135aebc2a1a6260749af63c58e3e6cd9f475dcd9b85989d6"
+  },
+  {
+   "id": "b1",
+   "name": "b.png",
+   "size": 5000,
+   "sha256": "97e9d57157e35c0c3890d4cc75c15cbcb23af7a5cbc0196ee4ea0bff35a1a560"
+  },
+  {
+   "id": "c1",
+   "name": "c.png",
+   "size": 100,
+   "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+  },
+  {
+   "id": "c2",
+   "name": "a.png",
+   "size": 100,
+   "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+  },
+  {
+   "id": "d1",
+   "name": "d.jpg",
+   "size": 10,
+   "sha256": "054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8"
+  },
+  {
+   "id": "z1",
+   "name": "empty.jpg",
+   "size": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "id": "z2",
+   "name": "empty2.jpg",
+   "size": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+ ]
+}

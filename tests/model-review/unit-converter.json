@@ -1,20 +1,49 @@
 {
   "tool": "unit-converter",
-  "screen": "empty state at 390px wide",
+  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
   "firstTimeUser": {
     "model": "sonnet",
-    "output": "1. I think this screen wants me to turn a measurement into a different unit, like inches into feet, by typing a number.\n\n2. The first thing I'd tap is **Length**, because it's the first choice under \"What are you measuring?\". I'm not sure whether it's already picked.\n\n3. Words I didn't understand or that felt like tech talk:\n   - \"Change from\" and \"Change to\". I'd guess they mean \"start with\" and \"end with\", but \"change\" sounds like I'm altering something.\n   - \"Swap the two\". Two of what? I'd guess the two lists.\n   - \"Start over clears the boxes. You can put them back.\" What boxes? I see lists, not boxes.\n   - \"Show more\". More of what?\n   - The abbreviations in brackets: (in), (ft), (yd), (mi), (mm), (cm), (m), (km). I know \"in\" and \"ft\", but \"mm\" and \"yd\" less so.\n   - \"Number\". It's listed beside Length and Weight, so is it a kind of measuring? Then \"Like 12 or 3.5. Commas are fine.\" sits right under it and I can't tell which belongs to which.\n   - \"Your answer shows up below\". I don't see any answer area yet, and that's odd.\n\n4. Things that made me worry:\n   - \"Start over clears the boxes\" made me nervous that I'd lose something. \"You can put them back\" helped a little, but only a little.\n   - \"Show more\" could open something I didn't ask for, and I don't know if it costs anything.\n   - I don't see a button to get the answer. I'd worry it's broken or that I missed something.\n   - Nothing asks for money or my information, so I'm not worried about cost or privacy.\n\n5. What I'd skip:\n   - \"Show more\", because it doesn't help me convert a number.\n   - \"Swap the two\", until I actually need it.\n   - \"Back to home\", unless I'm finished.\n   - The long lists of units I'll never use, like millimeters and kilometers.\n\n6. Score: 3 out of 5. The top lines tell me what to do, but I can't tell where to type or whether Length is already chosen.\n\nRESULT: {\"next_tap\": \"Length\", \"confusing_terms\": [\"Change from\", \"Change to\", \"Swap the two\", \"Start over clears the boxes\", \"Show more\", \"Number\", \"(yd)\", \"(mm)\", \"(km)\", \"Your answer shows up below\"], \"worries\": [\"Start over might erase my work\", \"No button to get the answer, so it might be broken\", \"Show more might open something unexpected\", \"Unclear which choice is already selected\"], \"skippable\": [\"Show more\", \"Swap the two\", \"Back to home\", \"long unit lists\"], \"score\": 3}"
+    "score": 3,
+    "output": "**1. What the screen wants:** It wants me to read my answer (5000 inches is 127,000 millimeters) and then, if I like, print it or save a copy.\n\n**2. Next tap:** \"Print\". It's the only orange button. I'm not sure I need it, since the screen says I can stop here.\n\n**3. Words or phrases I didn't understand or that felt like tech talk:**\n- \"Shown to 6 digits\"\n- \"Swap the two\" (the two what?)\n- \"Save a copy\" (a copy where?)\n- \"Step 1 of 2\" and \"You are here\"\n- \"menu\" and the boxes that open a list\n- \"the 1959 agreement between countries\"\n- \"NIST Handbook 44\"\n- \"The kelvin\" and \"the international units brochure\"\n- \"Nothing is sent\" (sent where?)\n- \"our public page\"\n- \"Show more\" (more of what?)\n\n**4. Worries:**\n- \"Print\": will it print right away? I don't know if my phone is hooked to a printer.\n- \"Save a copy\": I don't know where it goes on my phone or how I'd find it again. It says I can delete it, but not how.\n- \"Start over\": will it wipe my answer? It says it asks first, but I'd still be nervous.\n- \"Nothing is sent\": I have to take their word for it. The link to check might take me somewhere unfamiliar.\n- I'm not sure I'd know if I changed a number by accident.\n\n**5. What I'd skip:**\n- The \"Where the facts come from\" paragraph\n- \"Show more\"\n- The \"Step 1 of 2 / Step 2 of 2\" lines\n- \"Shown to 6 digits\"\n- Probably \"Swap the two\"\n\n**6. Score:** 3. I can see the answer, but I don't know whether I'm supposed to tap anything.\n\nRESULT: {\"next_tap\": \"Print\", \"confusing_terms\": [\"Shown to 6 digits\", \"Swap the two\", \"Save a copy\", \"Step 1 of 2 / You are here\", \"menu\", \"1959 agreement between countries\", \"NIST Handbook 44\", \"kelvin\", \"international units brochure\", \"Nothing is sent\", \"our public page\", \"Show more\"], \"worries\": [\"Print may start printing right away or need a printer I may not have\", \"Don't know where a saved copy goes or how to delete it\", \"Start over might wipe my answer\", \"Have to trust that nothing is sent\", \"Link to public page might take me somewhere unfamiliar\"], \"skippable\": [\"Where the facts come from paragraph\", \"Show more\", \"Step 1 of 2 / Step 2 of 2 lines\", \"Shown to 6 digits\", \"Swap the two\"], \"score\": 3}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: no button is marked as the main action; the layout notes call every button small and plain (e.g. \\\"Start over\\\", \\\"Swap the two\\\", \\\"Show more\\\")\"], \"score\": 7}",
-      "output": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: no button is marked as the main action; the layout notes call every button small and plain (e.g. \\\"Start over\\\", \\\"Swap the two\\\", \\\"Show more\\\")\"], \"score\": 7}"
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": []
     },
     {
       "model": "sonnet",
-      "result": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 1: No button or link stands out. 'Swap the two', 'Start over', 'Show more' and 'Back to home' are all small plain buttons of equal weight.\"],\"score\":7}",
-      "output": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 1: No button or link stands out. 'Swap the two', 'Start over', 'Show more' and 'Back to home' are all small plain buttons of equal weight.\"],\"score\":7}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": []
     }
-  ]
+  ],
+  "otherScreens": []
 }

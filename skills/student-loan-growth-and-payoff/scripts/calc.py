@@ -4,6 +4,7 @@
 Usage:
   python3 calc.py '{"balance":"20,000","rate":"5","waitMonths":"6","capitalize":false,"payment":"300","start":"2026-09","years":"10"}'
   python3 calc.py --file input.json
+  python3 calc.py --file input.json --text    (same answer in plain words and dollars)
 
 Prints one JSON object. On good input it holds the answer (money in whole cents, rates in
 basis points). On bad input it holds {"ok": false, "problems": [...]} with plain-words messages.
@@ -299,22 +300,90 @@ def explain_student_loan(inp):
             "balanceAtStartCents": balance_at_start, "payoff": payoff, "minPayment": min_payment}
 
 
+END_LINE = "This is an estimate from the numbers you typed. The paper from your bank or lender has the final word."
+
+
+def money_text(cents):
+    """Whole cents -> dollars with commas and two decimals, like $10,951.88."""
+    sign = "-" if cents < 0 else ""
+    c = abs(cents)
+    return "%s$%s.%02d" % (sign, format(c // 100, ","), c % 100)
+
+
+def percent_text(bps):
+    """Basis points -> a percent, like 6% or 7.25%."""
+    whole, frac = divmod(bps, 100)
+    return "%d%%" % whole if frac == 0 else ("%d.%02d" % (whole, frac)).rstrip("0") + "%"
+
+
+def count_text(n, word):
+    return "%s %s%s" % (format(n, ","), word, "" if n == 1 else "s")
+
+
+def months_text(months):
+    """Months, with years and months added when it is a year or more."""
+    base = count_text(months, "month")
+    if months < 12:
+        return base
+    years, rest = divmod(months, 12)
+    parts = [count_text(years, "year")] + ([count_text(rest, "month")] if rest else [])
+    return "%s (%s)" % (base, " and ".join(parts))
+
+
+def problem_lines(result):
+    return ["Fix this first: %s" % p["message"] for p in result.get("problems", [])] or ["Fix this first: Something is wrong with the numbers."]
+
+
+def student_text(result):
+    """The same answer as plain words in dollars, one short fact per line."""
+    if not result.get("ok"):
+        return problem_lines(result)
+    r = result
+    lines = [
+        "Loan balance: %s" % money_text(r["principalCents"]),
+        "Yearly interest rate: %s" % percent_text(r["rateBps"]),
+        "Months with no payments so far: %s" % count_text(r["waitMonths"], "month"),
+        "Add the unpaid interest to my balance: %s" % ("yes" if r["capitalize"] else "no"),
+        "Balance when payments start: %s" % money_text(r["balanceAtStartCents"]),
+        "Interest that grew while you waited: %s" % money_text(r["unpaidInterestCents"]),
+    ]
+    if r["paymentCents"] is not None:
+        lines.append("Monthly payment: %s" % money_text(r["paymentCents"]))
+    p = r["payoff"]
+    if p:
+        lines.append("Months to pay off: %s" % months_text(p["months"]))
+        lines.append("Total interest: %s" % money_text(p["totalInterestCents"]))
+        if p["payoffDate"]:
+            lines.append("Payoff month: %s" % p["payoffDate"]["label"])
+    m = r["minPayment"]
+    if m:
+        lines.append("Smallest payment to finish in %s: %s" % (count_text(m["years"], "year"), money_text(m["paymentCents"])))
+    lines.append(END_LINE)
+    return lines
+
+
 def main(argv):
-    if len(argv) >= 2 and argv[0] == "--file":
-        with open(argv[1], encoding="utf-8") as f:
+    args = [a for a in argv if a != "--text"]
+    as_text = len(args) != len(argv)
+    if len(args) >= 2 and args[0] == "--file":
+        with open(args[1], encoding="utf-8") as f:
             raw = f.read()
-    elif argv:
-        raw = argv[0]
+    elif args:
+        raw = args[0]
     else:
         print(__doc__)
         return 2
     try:
         data = json.loads(raw)
     except ValueError:
-        print(json.dumps({"ok": False, "problems": [{"field": "balance", "kind": "bad",
-              "message": "The input was not readable. Send the numbers as JSON."}]}))
+        unreadable = {"ok": False, "problems": [{"field": "balance", "kind": "bad",
+                      "message": "The input was not readable. Send the numbers as JSON."}]}
+        print("\n".join(student_text(unreadable)) if as_text else json.dumps(unreadable))
         return 1
     result = explain_student_loan(data)
+    if as_text:
+        print("\n".join(student_text(result)))
+        return 0 if result["ok"] else 1
     print(json.dumps(result, indent=1))
     return 0 if result["ok"] else 1
 

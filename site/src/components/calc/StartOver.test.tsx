@@ -21,10 +21,11 @@ function Demo() {
 beforeEach(() => window.localStorage.clear());
 
 describe("StartOver", () => {
-  it("is disabled while nothing is typed and says what it does in plain words", () => {
+  it("shows nothing while nothing is typed, then says what it does in plain words", async () => {
     render(<Demo />);
-    expect(screen.getByRole("button", { name: "Start over" })).toBeDisabled();
-    const hint = screen.getByText("Start over clears the boxes. You can put them back.");
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    await userEvent.type(screen.getByLabelText("A"), "1");
+    const hint = screen.getByText("Start over asks first, and you can undo it right after.");
     expect(hint.textContent).not.toMatch(/\u2013|\u2014/);
     expect(gradeOf(hint.textContent ?? "")!.grade).toBeLessThanOrEqual(7);
   });
@@ -35,6 +36,7 @@ describe("StartOver", () => {
     await userEvent.type(screen.getByLabelText("B"), "7");
     expect(readSaved("demo")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(screen.getByLabelText("A")).toHaveValue("");
     expect(screen.getByLabelText("B")).toHaveValue("");
     expect(readSaved("demo")).toBeNull();
@@ -50,6 +52,7 @@ describe("StartOver", () => {
     render(<Demo />);
     await userEvent.type(screen.getByLabelText("A"), "5");
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     await userEvent.type(screen.getByLabelText("A"), "9");
     expect(screen.queryByRole("button", { name: "Put it back" })).toBeNull();
   });

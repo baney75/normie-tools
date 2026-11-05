@@ -20,7 +20,12 @@ describe("Loan Explainer page", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Loan Explainer" })).toBeInTheDocument();
     expect(screen.getByText(COPY.empty)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Monthly payment")).toBeNull();
+    expect(screen.getByLabelText("Monthly payment")).toHaveTextContent(COPY.waiting);
+    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
+    expect(screen.getByText("Step 2 of 2: Read your answer")).toBeInTheDocument();
+    expect(screen.getByLabelText("Amount borrowed")).toHaveFocus();
+    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /our public page/ })).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -69,8 +74,8 @@ describe("Loan Explainer page", () => {
   it("asks only for what is still needed", async () => {
     render(<Page />);
     await fill("Amount borrowed", "5000");
-    expect(screen.getByRole("status")).toHaveTextContent("Still needed: Yearly interest rate, How long is the loan?.");
-    expect(screen.queryByLabelText("Monthly payment")).toBeNull();
+    expect(screen.getByText(/Still needed/)).toHaveTextContent("Still needed: Yearly interest rate, How long is the loan?.");
+    expect(screen.getByLabelText("Monthly payment")).toHaveTextContent(COPY.waiting);
   });
 
   it("shows a calm error that names the field on junk, never NaN", async () => {
@@ -81,14 +86,14 @@ describe("Loan Explainer page", () => {
     expect(screen.getByText(/Amount borrowed: use a number above zero/)).toBeInTheDocument();
     expect(screen.getByLabelText("Amount borrowed")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Monthly payment")).toBeNull();
+    expect(screen.getByLabelText("Monthly payment")).toHaveTextContent(COPY.waiting);
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
-  it("says it is an estimate, says the lender shows the APR, and explains the words", () => {
+  it("says it is an estimate, says the lender shows the yearly cost, and explains the words", () => {
     render(<Page />);
     expect(screen.getByText("This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
-    expect(screen.getByText(/APR is the yearly cost of the loan/)).toBeInTheDocument();
+    expect(screen.getByText(/The yearly cost of a loan, with some fees/)).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 
@@ -114,11 +119,13 @@ describe("Loan Explainer page", () => {
 
   it("offers Save or print once there is an answer", async () => {
     render(<Page />);
-    expect(screen.queryByText("Save or print")).toBeNull();
+    expect(screen.queryByText(COPY.save.title)).toBeNull();
     await fill("Amount borrowed", "10000");
     await fill("Yearly interest rate", "0");
     await fill("How long", "10");
-    expect(screen.getByText("Save or print")).toBeInTheDocument();
+    expect(screen.getByText(COPY.save.title)).toBeInTheDocument();
+    expect(screen.getByText(COPY.save.title).closest("details")).toBeNull();
+    expect(document.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
     expect(screen.getByLabelText("Monthly payment")).toHaveTextContent("$1,000.00");
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
   });
@@ -155,10 +162,37 @@ describe("loan-explainer Start over", () => {
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:loan-explainer")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(box()).toHaveValue("");
     expect(window.localStorage.getItem("nt:flow:loan-explainer")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Put it back" }));
     expect(box()).toHaveValue("1234");
+  });
+});
+
+describe("loan-explainer Start over can be called off", () => {
+  it("keeps the numbers when asked to", async () => {
+    render(<Page />);
+    await userEvent.type(screen.getAllByRole("textbox")[0], "55");
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Keep my numbers" }));
+    expect(screen.getAllByRole("textbox")[0]).toHaveValue("55");
+  });
+});
+
+describe("loan-explainer filled screen", () => {
+  it("shows the estimate sentence once, no APR, one step 2 label, and a short save preview", async () => {
+    render(<Page />);
+    await fill("Amount borrowed", "$10,000");
+    await fill("Yearly interest rate", "6");
+    await fill("How long", "36");
+    const body = document.body.textContent ?? "";
+    expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
+    expect(screen.getAllByText(/^Step 2 of 2: Read your answer/)).toHaveLength(1);
+    expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
+    expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
+    const open = body.replace(/What the words mean[\s\S]*$/, "");
+    expect(open).not.toMatch(/APR|HOA/);
   });
 });

@@ -1,0 +1,7 @@
+{
+  "format": "nt-form-filler",
+  "version": 1,
+  "answers": { "filing": "no", "income": "yes", "fillable": "", "open": "" },
+  "info": { "firstName": "Jo", "lastName": "Park" },
+  "papers": ["w2"]
+}

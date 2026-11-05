@@ -20,8 +20,27 @@ describe("Savings Goal Tracker page", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Savings Goal Tracker" })).toBeInTheDocument();
     expect(screen.getByText(COPY.empty)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Months to your goal")).toBeNull();
+    expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.waiting);
+    expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("Step 2 of 2: Read your answer");
+    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
+  });
+
+  it("focuses the first box", () => {
+    render(<Page />);
+    expect(screen.getByLabelText("Goal amount")).toHaveFocus();
+  });
+
+  it("has one filled button: Print", async () => {
+    const { container } = render(<Page />);
+    expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
+  });
+
+  it("says nothing is sent and links to the page code", () => {
+    render(<Page />);
+    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 
   it("has labels above inputs, decimal keypads, no autofill", () => {
@@ -96,8 +115,8 @@ describe("Savings Goal Tracker page", () => {
   it("asks only for what is still needed", async () => {
     render(<Page />);
     await fill("Goal amount", "5000");
-    expect(screen.getByRole("status")).toHaveTextContent("Still needed: Saved each month.");
-    expect(screen.queryByLabelText("Months to your goal")).toBeNull();
+    expect(screen.getByText("Still needed: Saved each month.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.waiting);
   });
 
   it("shows a calm error that names the field on junk, never NaN", async () => {
@@ -107,7 +126,7 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByText(/Goal amount: use a number above zero/)).toBeInTheDocument();
     expect(screen.getByLabelText("Goal amount")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Months to your goal")).toBeNull();
+    expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.waiting);
     await fill("Goal amount", "1000");
     await fill("Start month", "Dec 2026");
     expect(screen.getByText(/Start month: type the year/)).toBeInTheDocument();
@@ -140,12 +159,13 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
   });
 
-  it("offers Save or print once there is an answer", async () => {
+  it("always shows Save or print, and turns it on once there is an answer", async () => {
     render(<Page />);
-    expect(screen.queryByText("Save or print")).toBeNull();
+    expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save a copy" })).toBeDisabled();
     await fill("Goal amount", "1000");
     await fill("Saved each month", "100");
-    expect(screen.getByText("Save or print")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save a copy" })).toBeEnabled();
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("10 months");
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
   });
@@ -182,6 +202,10 @@ describe("savings-goal-tracker Start over", () => {
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:savings-goal-tracker")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Keep my numbers" }));
+    expect(box()).toHaveValue("1234");
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(box()).toHaveValue("");
     expect(window.localStorage.getItem("nt:flow:savings-goal-tracker")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();

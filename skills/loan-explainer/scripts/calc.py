@@ -4,7 +4,9 @@
 Usage:
   python3 calc.py '{"amount":"10,000","rate":"6","term":"36","termUnit":"months","fees":"","extra":""}'
   python3 calc.py --file input.json
+  python3 calc.py --file input.json --text
 
+With --text it prints the same answer as plain words in dollars instead, one fact per line.
 Prints one JSON object. On good input it holds the answer (money in whole cents, rates in
 basis points). On bad input it holds {"ok": false, "problems": [...]} with plain-words messages.
 
@@ -263,7 +265,63 @@ def explain_loan(inp):
             "costOfBorrowingCents": interest + fees, "extra": extra_result, "byYear": group_by_year(shown)}
 
 
+def _dollars(cents):
+    neg = cents < 0
+    a = -cents if neg else cents
+    return "%s$%s.%02d" % ("-" if neg else "", format(a // 100, ","), a % 100)
+
+
+def _percent(bps):
+    whole, frac = divmod(bps, 100)
+    return "%d%s%%" % (whole, ("." + ("%02d" % frac).rstrip("0")) if frac else "")
+
+
+def _count(n, word):
+    return "%d %s%s" % (n, word, "" if n == 1 else "s")
+
+
+def problem_text(result):
+    return "\n".join("Fix this first: %s" % p["message"] for p in result["problems"])
+
+
+def result_text(r):
+    """The same answer as explain_loan, as plain words in dollars. One short fact per line."""
+    if not r["ok"]:
+        return problem_text(r)
+    n = r["months"]
+    length = _count(n, "month")
+    if n % 12 == 0:
+        length += " (%s)" % _count(n // 12, "year")
+    out = ["Amount borrowed: %s" % _dollars(r["principalCents"]),
+           "Yearly interest rate: %s" % _percent(r["rateBps"]),
+           "Loan length: %s" % length,
+           "Monthly payment: %s. Each month for the whole loan." % _dollars(r["monthlyPaymentCents"]),
+           "Total paid: %s" % _dollars(r["totalPaidCents"]),
+           "Total interest: %s" % _dollars(r["totalInterestCents"])]
+    if r["feesCents"] > 0:
+        out.append("Upfront fees: %s" % _dollars(r["feesCents"]))
+        out.append("Total paid does not include the upfront fees.")
+    out.append("Cost of borrowing: %s. This is interest plus upfront fees." % _dollars(r["costOfBorrowingCents"]))
+    x = r["extra"]
+    if x is not None:
+        out.append("With your extra payment of %s each month:" % _dollars(r["extraCents"]))
+        out.append("Monthly payment with extra: %s" % _dollars(x["monthlyPaymentCents"]))
+        out.append("Paid off after: %s" % _count(x["months"], "month"))
+        out.append("Months saved: %s" % _count(x["monthsSaved"], "month"))
+        out.append("Total interest with extra: %s" % _dollars(x["totalInterestCents"]))
+        out.append("Total paid with extra: %s" % _dollars(x["totalPaidCents"]))
+        out.append("Interest saved: %s" % _dollars(x["interestSaved"]))
+        if x["monthsSaved"] == 0:
+            out.append("Your extra payment is too small to finish the loan sooner.")
+    out.append("This does not work out the APR. APR is the yearly cost of the loan, counting some fees. The paper from your lender shows it.")
+    out.append("This is an estimate from the numbers you typed. The paper from your bank or lender has the final word.")
+    return "\n".join(out)
+
+
+
 def main(argv):
+    text = "--text" in argv
+    argv = [a for a in argv if a != "--text"]
     if len(argv) >= 2 and argv[0] == "--file":
         with open(argv[1], encoding="utf-8") as f:
             raw = f.read()
@@ -279,7 +337,7 @@ def main(argv):
               "message": "The input was not readable. Send the numbers as JSON."}]}))
         return 1
     result = explain_loan(data)
-    print(json.dumps(result, indent=1))
+    print(result_text(result) if text else json.dumps(result, indent=1))
     return 0 if result["ok"] else 1
 
 

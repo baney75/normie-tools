@@ -1,20 +1,51 @@
 {
   "tool": "monthly-budget",
-  "screen": "empty state at 390px wide",
+  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
   "firstTimeUser": {
     "model": "sonnet",
-    "output": "1. This screen wants me to type in how much money I get and spend each month so it shows what's left over.\n\n2. I would tap in the box under \"Pay, per month\" and type my monthly pay.\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n   - \"Name of income line 1\": \"line\" sounds like a form or a spreadsheet, not everyday talk.\n   - \"Add an income line\" and \"Add a spending line\": same thing, I'm not sure what a \"line\" is.\n   - \"Start over clears the boxes. You can put them back.\" I don't know how I'd put them back.\n   - \"Your totals show up below.\" I don't see any totals yet, so I'm not sure where to look.\n   - \"Remove\": remove what? The whole line? My numbers?\n   - \"mortgage\": I know it, but it's a bit formal.\n\n4. What made me worry:\n   - Cost: nothing on the screen mentions a price, which is a relief.\n   - Privacy: it asks for money numbers. It says \"Nothing is sent anywhere,\" and I'd like to believe that, but I'm still a little wary.\n   - Doing the wrong thing: \"Start over\" and \"Remove\" sit near the boxes, so I might tap one by accident and lose what I typed. The note says I can put it back, but I don't see how.\n   - I don't know whether the names like \"Rent or mortgage\" are labels I'm allowed to change or fixed words.\n\n5. What I would skip:\n   - \"This adds up the numbers you typed. It does not tell you what to do.\" It's reassuring, but it doesn't help me do anything.\n   - \"Back to home\": not needed right now.\n   - The \"Name of income line 1\" text, since the other label already tells me what to type.\n\n6. Score: 4. I think I just type numbers into the boxes. I'm a bit unsure about the \"$\" and where the answer will appear.\n\nRESULT: {\"next_tap\": \"Pay, per month\", \"confusing_terms\": [\"Name of income line 1\", \"Add an income line\", \"Add a spending line\", \"Remove\", \"Start over clears the boxes. You can put them back.\", \"Your totals show up below\"], \"worries\": [\"Tapping Start over or Remove by accident and losing numbers\", \"Not knowing how to put numbers back\", \"Typing private money numbers, even though it says nothing is sent\", \"Not sure whether the labels can be changed\"], \"skippable\": [\"This adds up the numbers you typed. It does not tell you what to do.\", \"Back to home\", \"Name of income line 1\"], \"score\": 4}"
+    "score": 3,
+    "output": "1. This screen wants me to look at my money in and out, see that I'm $880 short, and then print or save the result if I want it.\n\n2. I would tap **Print**, because it's the one button that stands out. I'm not sure I want paper, though. I might tap **Show more** first to see what's hidden.\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n   - \"income line\" and \"spending line\". I would just say \"item\".\n   - \"Remove takes out a line. You can put it back.\" I'm not sure how I put it back.\n   - \"Step 1 of 2... You are here.\" The numbers are already filled in, so it felt odd to be at \"Step 2\".\n   - \"Show more\". It doesn't say more of what.\n   - \"Save a copy\". I don't know where on the phone it goes or how I'd find it again.\n   - \"saved on this phone or computer\"\n   - \"Nothing is sent\"\n   - \"our public page\". I don't know what is on it or why I would check it.\n   - \"91% of income\". It's a lot of percentages to take in.\n   - \"Each bar is as wide as the percent\". I'm not sure I see any bars.\n\n4. Things that made me worry:\n   - The big \"-$880.00\" looks alarming, like I'm in trouble.\n   - I didn't type these numbers, and I'm not sure whether they are mine or an example. Pay of 220 looks very small.\n   - The many **Remove** buttons and **Start over** make me afraid of wiping something out. It says it asks first and I can undo, but I'd still be nervous.\n   - **Save a copy** makes me wonder where my money numbers end up.\n   - \"Nothing is sent\" is reassuring, but I can't tell if I should believe it.\n   - **Print** might start something I don't know how to stop if I have no printer.\n\n5. I would skip the long list of repeated percentages under \"Where it goes\". Each one is written twice. I would also skip \"our public page\" and the \"Back to home\" link.\n\n6. Score: **3**. The big orange **Print** button tells me where to tap, but I'm not sure that's what I should do.\n\nRESULT: {\"next_tap\": \"Print\", \"confusing_terms\": [\"income line\", \"spending line\", \"Remove takes out a line. You can put it back\", \"Step 1 of 2 / You are here\", \"Show more\", \"Save a copy\", \"saved on this phone or computer\", \"Nothing is sent\", \"our public page\", \"% of income\", \"Each bar is as wide as the percent\"], \"worries\": [\"-$880.00 looks alarming\", \"unsure whether the pre-filled numbers are mine\", \"Remove and Start over might erase things\", \"Save a copy: where it goes and privacy\", \"Nothing is sent: unsure whether to believe it\", \"Print might start something with no printer\"], \"skippable\": [\"repeated percentage lines under Where it goes\", \"our public page\", \"Back to home\"], \"score\": 3}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"FAIL\", \"rule7\": \"PASS\", \"rule8\": \"FAIL\", \"fails\": [\"Rule 1: no button is marked as the main action. \\\"Add an income line\\\", \\\"Add a spending line\\\", \\\"Start over\\\" and \\\"Back to home\\\" are described as the same plain buttons.\", \"Rule 6: \\\"Start over clears the boxes\\\" runs with no preview first. The page says \\\"You can put them back\\\", but it does not show what will be cleared before it happens.\", \"Rule 8: \\\"Nothing is sent anywhere.\\\" has no source on the page. The layout notes assert it, but the screen does not cite anything for it.\"], \"score\": 5}",
-      "output": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"FAIL\", \"rule7\": \"PASS\", \"rule8\": \"FAIL\", \"fails\": [\"Rule 1: no button is marked as the main action. \\\"Add an income line\\\", \\\"Add a spending line\\\", \\\"Start over\\\" and \\\"Back to home\\\" are described as the same plain buttons.\", \"Rule 6: \\\"Start over clears the boxes\\\" runs with no preview first. The page says \\\"You can put them back\\\", but it does not show what will be cleared before it happens.\", \"Rule 8: \\\"Nothing is sent anywhere.\\\" has no source on the page. The layout notes assert it, but the screen does not cite anything for it.\"], \"score\": 5}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"FAIL\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule2: each bar row repeats the percent, e.g. \\\"Rent or mortgage $200.00 91% of income\\\" followed by \\\"91% of income\\\"\"],\"score\":7}",
+      "rules": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 7,
+      "fails": [
+        "rule2: each bar row repeats the percent, e.g. \"Rent or mortgage $200.00 91% of income\" followed by \"91% of income\""
+      ]
     },
     {
       "model": "sonnet",
-      "result": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 1: No single button or link stands out. \\\"Add an income line\\\", \\\"Add a spending line\\\", \\\"Start over\\\", \\\"Remove\\\" and \\\"Back to home\\\" are all small plain buttons of equal weight.\",\"Rule 6: Every \\\"Remove\\\" deletes a line the person typed, and the screen gives no undo for it. \\\"Start over clears the boxes. You can put them back.\\\" does not say how, and there is no preview before the clear.\"],\"score\":6}",
-      "output": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 1: No single button or link stands out. \\\"Add an income line\\\", \\\"Add a spending line\\\", \\\"Start over\\\", \\\"Remove\\\" and \\\"Back to home\\\" are all small plain buttons of equal weight.\",\"Rule 6: Every \\\"Remove\\\" deletes a line the person typed, and the screen gives no undo for it. \\\"Start over clears the boxes. You can put them back.\\\" does not say how, and there is no preview before the clear.\"],\"score\":6}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": []
     }
-  ]
+  ],
+  "otherScreens": []
 }

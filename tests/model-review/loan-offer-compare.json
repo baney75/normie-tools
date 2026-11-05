@@ -1,20 +1,54 @@
 {
   "tool": "loan-offer-compare",
-  "screen": "empty state at 390px wide",
+  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
   "firstTimeUser": {
     "model": "sonnet",
-    "output": "1. This screen wants me to type in the numbers from two loan offers so it can show them next to each other.\n\n2. I would tap the first box under \"Offer 1: Amount borrowed\" (the one with the $ sign). The screen has no button for getting the answer, so I'd start typing there.\n\n3. Words or phrases I did not understand or that felt like tech talk:\n   - \"Yearly interest rate\". I sort of know it, but I'm not sure what number to look for on my paperwork.\n   - \"Upfront fees (optional)\"\n   - \"Count in Months / Years\". It isn't clear whether I pick one or type something.\n   - \"APR\". The screen explains it, but then says the tool doesn't work it out, so I don't know why it's there.\n   - \"Your lender's paper wins\". I can guess it means the paper is the one to trust, but it's an odd way to say it.\n   - \"Side by side\". I think I get it, but I don't know what it will look like.\n   - \"Put it back\" and \"Start over\". I don't know what \"put it back\" restores.\n   - \"No submit step\". I don't see that on my screen, but I do notice there is no button to get my answer.\n\n4. Things that made me worry:\n   - I'm afraid I'll type something wrong and get a bad answer about real money.\n   - \"This is an estimate\". Can I trust it enough to choose a loan?\n   - It asks about loans and money, so I wonder if it's saving what I type. It doesn't say clearly that nothing is kept or sent.\n   - \"Start over\" might wipe everything I typed. The note says I can put it back, but I'd still be nervous.\n   - I don't know where the answer will show up. It says \"below\", but I see nothing yet, so I might think it's broken.\n\n5. What I would skip:\n   - The APR paragraph, because the tool doesn't use it.\n   - \"What the words mean\" and \"Back to home\". I might look at the first one if I got stuck.\n   - \"Add a third offer\", because I only have two.\n   - The \"Your lender's paper wins\" sentence.\n\n6. Score: 3. I know the first box to start in, but there's no button, I can't see where the answer will appear, and I'm unsure about a few terms.\n\nRESULT: {\"next_tap\": \"Offer 1: Amount borrowed\", \"confusing_terms\": [\"Yearly interest rate\", \"Upfront fees\", \"Count in Months/Years\", \"APR\", \"Your lender's paper wins\", \"Put it back\", \"side by side\"], \"worries\": [\"typing a wrong number and trusting a bad estimate about real money\", \"unclear if what I type is saved or sent anywhere\", \"Start over might wipe my numbers\", \"no button to get the answer and no visible result yet\", \"not sure where the answer will appear\"], \"skippable\": [\"APR paragraph\", \"What the words mean\", \"Back to home\", \"Add a third offer\", \"Your lender's paper wins sentence\"], \"score\": 3}"
+    "score": 2,
+    "output": "1. This screen wants me to compare two loans. It has already worked out which one costs less and which has the smaller monthly payment, and it offers to print or save the answer.\n\n2. I would tap **Print**.\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"Cost of borrowing\" (the note says \"Interest plus upfront fees\", but I'd still have to stop and think)\n- \"Upfront fees\"\n- \"Total interest\"\n- \"Yearly interest rate\"\n- \"Save a copy\" and \"saved on this phone or computer\"\n- \"Show more\" and \"What the words mean\" (I don't know what's inside them)\n- \"Start over asks first, and you can undo it right after\" (undo what?)\n- \"The yearly cost of a loan, with some fees\" (it seems to mean APR, but it doesn't say so)\n- \"Lowest is a fact about the numbers on the page, not advice\"\n- \"Step 1 of 2 … Step 2 of 2 … You are here\" (I can't tell if I'm supposed to tap something to move on)\n- \"public page\"\n\n4. Things that worried me:\n- I'm afraid of tapping Print and having something happen that I can't stop. I don't have a printer.\n- \"Save a copy\" makes me wonder where it goes on my phone and whether I could lose it or fill up my phone.\n- \"Nothing is sent\" is reassuring, but I only half believe it, and I don't know what \"check this on our public page\" means.\n- I'm not sure these numbers are right. It says \"This is an estimate,\" so I'm afraid of making a money decision based on it.\n- The note that the offers \"are for different loans\" makes me think the comparison may not be fair, and I don't know what to do about that.\n- I'm not sure if \"Start over\" would erase everything I typed.\n- Two different \"lowest\" answers confuse me. Offer 2 is cheapest overall, but Offer 1 has the lowest monthly payment. I don't know which one to pick.\n\n5. Things I would skip:\n- \"Add a third offer\"\n- The repeated \"That is your answer. You can stop here, or keep a copy below.\" (it appears four times)\n- \"Show more\"\n- \"What the words mean\" (I'd only open it if I got stuck)\n- \"Back to home\"\n- The long small-print lines at the bottom\n\n6. Score: **2**. I can see the answer, but I don't know what I'm meant to do next. The big orange button says Print, which isn't really what I want. I just want to know which loan to choose.\n\nRESULT: {\"next_tap\": \"Print\", \"confusing_terms\": [\"Cost of borrowing\", \"Upfront fees\", \"Total interest\", \"Yearly interest rate\", \"Save a copy\", \"Show more\", \"What the words mean\", \"Start over asks first, and you can undo it right after\", \"The yearly cost of a loan, with some fees\", \"Lowest is a fact about the numbers on the page, not advice\", \"Step 1 of 2 / Step 2 of 2 / You are here\", \"public page\"], \"worries\": [\"Print might do something I can't stop and I have no printer\", \"Where a saved copy goes on my phone\", \"Not sure Nothing is sent is true\", \"Estimate might be wrong and I could make a money mistake\", \"Offers are for different loans so comparison may not be fair\", \"Start over might erase what I typed\", \"Two different lowest answers and no guidance on which to choose\"], \"skippable\": [\"Add a third offer\", \"Repeated 'That is your answer' lines\", \"Show more\", \"What the words mean\", \"Back to home\", \"Small print at bottom\"], \"score\": 2}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: No action stands out as primary. 'Add a third offer' and 'Start over' are both small plain buttons.\"], \"score\": 7}",
-      "output": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: No action stands out as primary. 'Add a third offer' and 'Start over' are both small plain buttons.\"], \"score\": 7}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"FAIL\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule2: 'That is your answer. You can stop here, or keep a copy below.' is repeated three times, and the summary cards repeat the full offer cards.\",\"rule6: 'Save a copy' writes a saved file to the device with no preview shown on the page first.\"],\"score\":6}",
+      "rules": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS",
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 6,
+      "fails": [
+        "rule2: 'That is your answer. You can stop here, or keep a copy below.' is repeated three times, and the summary cards repeat the full offer cards.",
+        "rule6: 'Save a copy' writes a saved file to the device with no preview shown on the page first."
+      ]
     },
     {
       "model": "sonnet",
-      "result": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 1: no single primary action stands out. \\\"Add a third offer\\\", \\\"Start over\\\" and \\\"Back to home\\\" are all small plain buttons of equal weight, and the layout notes say none is emphasized.\"],\"score\":7}",
-      "output": "RESULT: {\"rule1\":\"FAIL\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 1: no single primary action stands out. \\\"Add a third offer\\\", \\\"Start over\\\" and \\\"Back to home\\\" are all small plain buttons of equal weight, and the layout notes say none is emphasized.\"],\"score\":7}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"FAIL\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 2: The same line, \\\"That is your answer. You can stop here, or keep a copy below.\\\", appears four times in the results, which adds clutter.\"],\"score\":7}",
+      "rules": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 7,
+      "fails": [
+        "Rule 2: The same line, \"That is your answer. You can stop here, or keep a copy below.\", appears four times in the results, which adds clutter."
+      ]
     }
-  ]
+  ],
+  "otherScreens": []
 }

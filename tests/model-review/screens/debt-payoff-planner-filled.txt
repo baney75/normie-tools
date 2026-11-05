@@ -1,0 +1,74 @@
+Screen: debt-payoff-planner, filled state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Debt Payoff Planner
+Type your debts. See two ways to pay them off, side by side.
+Step 1 of 2: Type your numbers
+[label] Debt 1 name (optional)
+[box] Debt 1 name (optional) = ""
+[label] Debt 1 balance
+[box] Debt 1 balance = "5500"
+[label] Debt 1 yearly interest rate
+[box] Debt 1 yearly interest rate = "6"
+[label] Debt 1 smallest monthly payment
+[box] Debt 1 smallest monthly payment = "200"
+[label] Debt 2 name (optional)
+[box] Debt 2 name (optional) = ""
+[label] Debt 2 balance
+[box] Debt 2 balance = "6000"
+[label] Debt 2 yearly interest rate
+[box] Debt 2 yearly interest rate = "5"
+[label] Debt 2 smallest monthly payment
+[box] Debt 2 smallest monthly payment = "220"
+[plain button, outline only] Add another debt
+[plain button, outline only] Remove the last debt
+[label] Extra each month (optional)
+[box] Extra each month (optional) = ""
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Step 2 of 2: Read your answer. You are here.
+Interest difference between the two plans
+$0.00
+Both plans pay the same interest.
+Both plans take the same number of months.
+That is your answer. You can stop here, or keep a copy below.
+[heading 2] Snowball
+Extra money goes to the smallest balance first.
+Months to debt-free
+30 months
+Total interest
+$814.09
+Total paid
+$12,314.09
+[heading 3] Order of payoff
+Debt 1: paid off in month 30
+Debt 2: paid off in month 30
+[heading 2] Avalanche
+Extra money goes to the highest interest rate first.
+Months to debt-free
+30 months
+Total interest
+$814.09
+Total paid
+$12,314.09
+[heading 3] Order of payoff
+Debt 1: paid off in month 30
+Debt 2: paid off in month 30
+[closed section, tap to open] Show more
+
+[heading 3] 
+
+[heading 2] Keep your answer if you want
+Your answer above, on paper or saved on this phone or computer.
+[MAIN BUTTON, filled dark orange] Print
+[plain button, outline only] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+These are facts about two plans. This page does not tell you which one to use.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+[closed section, tap to open] What the words mean
+
+Back to home
+[link, plain] Back to home

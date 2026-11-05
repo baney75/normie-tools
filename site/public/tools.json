@@ -5,11 +5,13 @@
     {
       "id": "save-me-money",
       "name": "Save Me Money",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "Money",
       "routes": [
         "/tools/save-me-money"
-      ]
+      ],
+      "claimsPath": "tools/save-me-money/claims.json",
+      "takesFiles": false
     },
     {
       "id": "receipt-to-spreadsheet",
@@ -192,11 +194,13 @@
     {
       "id": "tax-filing-helper",
       "name": "Tax Filing Helper",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "Taxes",
       "routes": [
         "/tools/tax-filing-helper"
-      ]
+      ],
+      "claimsPath": "tools/tax-filing-helper/claims.json",
+      "takesFiles": false
     },
     {
       "id": "bank-csv-to-tax-categories",
@@ -237,11 +241,13 @@
     {
       "id": "form-filler",
       "name": "Form Filler",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "Forms",
       "routes": [
         "/tools/form-filler"
-      ]
+      ],
+      "claimsPath": "tools/form-filler/claims.json",
+      "takesFiles": true
     },
     {
       "id": "form-finder",
@@ -388,11 +394,13 @@
     {
       "id": "photo-duplicate-finder",
       "name": "Photo Duplicate Finder",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "Files and photos",
       "routes": [
         "/tools/photo-duplicate-finder"
-      ]
+      ],
+      "claimsPath": "tools/photo-duplicate-finder/claims.json",
+      "takesFiles": true
     },
     {
       "id": "id-photo-maker",
@@ -499,11 +507,13 @@
     {
       "id": "morning-briefing",
       "name": "Morning Briefing",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "News and weather",
       "routes": [
         "/tools/morning-briefing"
-      ]
+      ],
+      "claimsPath": "tools/morning-briefing/claims.json",
+      "takesFiles": false
     },
     {
       "id": "weather-briefing",

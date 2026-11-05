@@ -31,7 +31,12 @@ describe("Debt Payoff Planner page", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Debt Payoff Planner" })).toBeInTheDocument();
     expect(screen.getByText(COPY.empty)).toBeInTheDocument();
-    expect(screen.queryByLabelText(COPY.result.label)).toBeNull();
+    expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.waiting);
+    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
+    expect(screen.getByText("Step 2 of 2: Read your answer")).toBeInTheDocument();
+    expect(screen.getByLabelText("Debt 1 name", { exact: false })).toHaveFocus();
+    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /our public page/ })).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -66,6 +71,7 @@ describe("Debt Payoff Planner page", () => {
   it("puts the last removed debt back with what was typed", async () => {
     render(<Page />);
     await userEvent.type(screen.getByLabelText("Debt 2 balance", { exact: false }), "900");
+    expect(screen.getByText(COPY.removeHint)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.removeDebt }));
     expect(screen.queryByLabelText("Debt 2 balance", { exact: false })).toBeNull();
     expect(screen.getByText(COPY.undoHelp)).toBeInTheDocument();
@@ -109,7 +115,7 @@ describe("Debt Payoff Planner page", () => {
     const status = screen.getByRole("status");
     expect(status).toHaveTextContent("Debt 1: type the yearly interest rate.");
     expect(status).toHaveTextContent("Debt 1: type the smallest payment due each month.");
-    expect(screen.queryByLabelText(COPY.result.label)).toBeNull();
+    expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.waiting);
   });
 
   it("shows a calm error that names the debt and field on junk, never NaN", async () => {
@@ -120,7 +126,7 @@ describe("Debt Payoff Planner page", () => {
     expect(screen.getByText(/Debt 1 balance: use a number above zero/)).toBeInTheDocument();
     expect(screen.getByLabelText("Debt 1 balance", { exact: false })).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.queryByLabelText(COPY.result.label)).toBeNull();
+    expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.waiting);
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
@@ -130,7 +136,7 @@ describe("Debt Payoff Planner page", () => {
     await fill("Debt 1 yearly interest rate", "24");
     await fill("Debt 1 smallest monthly payment", "200");
     expect(screen.getByText(/does not cover the first month's interest/)).toBeInTheDocument();
-    expect(screen.queryByLabelText(COPY.result.label)).toBeNull();
+    expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.waiting);
   });
 
   it("says it is an estimate and explains the words", () => {
@@ -162,10 +168,12 @@ describe("Debt Payoff Planner page", () => {
 
   it("offers Save or print once there is an answer", async () => {
     render(<Page />);
-    expect(screen.queryByText("Save or print")).toBeNull();
+    expect(screen.queryByText(COPY.save.title)).toBeNull();
     await typeTwoDebts();
-    expect(screen.getByText("Save or print")).toBeInTheDocument();
+    expect(screen.getByText(COPY.save.title)).toBeInTheDocument();
+    expect(screen.getByText(COPY.save.title).closest("details")).toBeNull();
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
+    expect(document.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
   });
 });
 
@@ -200,10 +208,35 @@ describe("debt-payoff-planner Start over", () => {
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:debt-payoff-planner")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(box()).toHaveValue("");
     expect(window.localStorage.getItem("nt:flow:debt-payoff-planner")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Put it back" }));
     expect(box()).toHaveValue("1234");
+  });
+});
+
+describe("debt-payoff-planner Start over can be called off", () => {
+  it("keeps the numbers when asked to", async () => {
+    render(<Page />);
+    await userEvent.type(screen.getAllByRole("textbox")[0], "abc");
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Keep my numbers" }));
+    expect(screen.getAllByRole("textbox")[0]).toHaveValue("abc");
+  });
+});
+
+describe("debt-payoff-planner filled screen", () => {
+  it("shows the estimate sentence once, no APR, one step 2 label, and a short save preview", async () => {
+    render(<Page />);
+    await typeTwoDebts();
+    const body = document.body.textContent ?? "";
+    expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
+    expect(screen.getAllByText(/^Step 2 of 2: Read your answer/)).toHaveLength(1);
+    expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
+    expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
+    const open = body.replace(/What the words mean[\s\S]*$/, "");
+    expect(open).not.toMatch(/APR|HOA/);
   });
 });

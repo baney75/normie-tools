@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, MoneyField, NumberField, PercentField, ResultCard, StartOver } from "../../components/calc";
+import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -55,8 +55,10 @@ export function Page() {
           </div>
         ) : null}
 
+        <StepLabel n={1} of={2}>{COPY.stepOne}</StepLabel>
         <form className="nt-loan-form" onSubmit={(e) => e.preventDefault()} noValidate>
           <MoneyField
+            autoFocus
             label={COPY.amount.label}
             hint={COPY.amount.hint}
             placeholder={COPY.amount.placeholder}
@@ -119,7 +121,11 @@ export function Page() {
 
         <StartOver flowId="loan-explainer" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
-        {result.ok ? <Answer result={result} /> : null}
+        {result.ok ? (
+          <Answer result={result} />
+        ) : (
+          <ResultCard label={COPY.result.paymentLabel} step={COPY.stepTwo} waiting={COPY.waiting} />
+        )}
 
         {!result.ok && blank ? <p className="nt-loan-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
@@ -133,6 +139,7 @@ export function Page() {
 
         <p className="nt-loan-note">{COPY.notes.estimate}</p>
         <p className="nt-loan-note">{COPY.notes.apr}</p>
+        <PrivacyNote />
 
         <details className="nt-loan-details">
           <summary>{COPY.key.summary}</summary>
@@ -181,7 +188,7 @@ function Answer({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={r.paymentLabel} answer={formatMoney(result.monthlyPaymentCents)}>
+      <ResultCard label={r.paymentLabel} step={COPY.stepTwo} answer={formatMoney(result.monthlyPaymentCents)}>
         <p className="nt-loan-help">{r.paymentLine}</p>
         <dl className="nt-loan-lines">
           {lines.map(([k, val]) => (
@@ -242,16 +249,9 @@ function Answer({ result }: { result: Good }) {
         </div>
       </details>
 
-      <details className="nt-loan-details">
-        <summary>{COPY.save.summary}</summary>
-        <div className="nt-loan-details-body">
-          <SavePrintSheet title={COPY.save.title} onSave={save}>
-            <p>{r.paymentLabel}: {formatMoney(result.monthlyPaymentCents)}</p>
-            {lines.map(([k, val]) => <p key={k}>{k}: {val}</p>)}
-            <p>{COPY.notes.estimate}</p>
-          </SavePrintSheet>
-        </div>
-      </details>
+      <SavePrintSheet title={COPY.save.title} onSave={save}>
+        <p>{COPY.save.preview}</p>
+      </SavePrintSheet>
     </>
   );
 }

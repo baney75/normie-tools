@@ -99,11 +99,11 @@ Log of choices made while scaffolding NT. Newest first.
 - The home subline "Use them yourself, or ask your AI app." stays. It is the brand subline.
 - Only that phrase is exempt from the jargon rule. Everywhere else, person-facing copy says "AI helper".
 
-## 2026-11-05 - Calculators have no primary button
+## 2026-11-05 - Calculators have a main action again (reverses "no primary button")
 
-- The eight round-2 calculators show the answer as the person types, so there is no submit step and no main button.
-- The Haiku design rubric marks rule 1 (one main action) as FAIL for this reason on most tools. Sonnet passes several.
-- Accepted for live calculators. Other rules pass in the recorded runs (`tests/model-review/` (one JSON file per tool)).
+- Earlier decision: live calculators may fail design rule 1 because the answer shows as the person types. That is reversed. The parent gate (round 3) says every rubric rule must pass for every shipped tool, so rule 1 FAIL is no longer accepted.
+- Fix: each calculator has one filled button, "Print" in the "Save or print your answer" sheet, which is always on screen below the answer. Every other button is an outline. The answer card has a heavy orange top edge and is always on screen ("Your answer shows here" until the numbers are in). The first box has the cursor on load.
+- Also added to all calculators: "Step 1 of 2 / Step 2 of 2" labels, one shared privacy line with a link to the page code, and Start over now asks first ("Clear the boxes" or "Keep my numbers") and then offers "Put it back".
 
 ## 2026-11-05 - Round 2 shipped calculators and what was not run
 

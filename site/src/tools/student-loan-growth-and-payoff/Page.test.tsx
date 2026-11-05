@@ -29,7 +29,11 @@ describe("Student Loan Growth and Payoff page", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Student Loan Growth and Payoff" })).toBeInTheDocument();
     expect(screen.getByText(COPY.empty)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Balance when payments start")).toBeNull();
+    expect(screen.getByLabelText("Balance when payments start")).toHaveTextContent("Your answer shows here");
+    expect(screen.getByText("Step 2 of 2: Read your answer")).toBeInTheDocument();
+    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
+    expect(screen.getByLabelText("Loan balance", { exact: false })).toHaveFocus();
+    expect(screen.getByText(/Nothing is sent/)).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -89,8 +93,8 @@ describe("Student Loan Growth and Payoff page", () => {
   it("asks only for what is still needed", async () => {
     render(<Page />);
     await fill("Loan balance", "5000");
-    expect(screen.getByRole("status")).toHaveTextContent("Still needed: Yearly interest rate.");
-    expect(screen.queryByLabelText("Balance when payments start")).toBeNull();
+    expect(screen.getByText("Still needed: Yearly interest rate.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Balance when payments start")).toHaveTextContent("Your answer shows here");
   });
 
   it("shows a calm error that names the field on junk, never NaN", async () => {
@@ -100,7 +104,7 @@ describe("Student Loan Growth and Payoff page", () => {
     expect(screen.getByText(/Loan balance: use a number above zero/)).toBeInTheDocument();
     expect(screen.getByLabelText("Loan balance")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Balance when payments start")).toBeNull();
+    expect(screen.getByLabelText("Balance when payments start")).toHaveTextContent("Your answer shows here");
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
@@ -142,11 +146,11 @@ describe("Student Loan Growth and Payoff page", () => {
 
   it("offers Save or print once there is an answer", async () => {
     render(<Page />);
-    expect(screen.queryByText("Save or print")).toBeNull();
+    expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
     await fill("Loan balance", "12000");
     await fill("Yearly interest rate", "0");
     await fill("Monthly payment", "250");
-    expect(screen.getByText("Save or print")).toBeInTheDocument();
     expect(screen.getByLabelText("Balance when payments start")).toHaveTextContent("Months to pay off48");
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
   });
@@ -183,6 +187,7 @@ describe("student-loan-growth-and-payoff Start over", () => {
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:student-loan-growth-and-payoff")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(box()).toHaveValue("");
     expect(window.localStorage.getItem("nt:flow:student-loan-growth-and-payoff")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();

@@ -1,0 +1,50 @@
+{
+  "skill": "loan-offer-compare",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "haiku",
+  "by": {
+    "1": {
+      "passed": 10,
+      "total": 10,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "two-offers",
+      "level": 1,
+      "task": "I have two offers for $10,000. One is 6% for 36 months. The other is 5% for 48 months with $200 in upfront fees. Line them up for me.",
+      "reply": "Offer 1 amount borrowed: $10,000.00\nOffer 1 yearly interest rate: 6%\nOffer 1 loan length: 36 months (3 years)\nOffer 1 upfront fees: $0.00\nOffer 1 monthly payment: $304.22\nOffer 1 total paid: $10,951.88\nOffer 1 total interest: $951.88\nOffer 1 cost of borrowing: $951.88 (interest plus upfront fees)\nOffer 2 amount borrowed: $10,000.00\nOffer 2 yearly interest rate: 5%\nOffer 2 loan length: 48 months (4 years)\nOffer 2 upfront fees: $200.00\nOffer 2 monthly payment: $230.29\nOffer 2 total paid: $11,054.11\nOffer 2 total interest: $1,054.11\nOffer 2 cost of borrowing: $1,254.11 (interest plus upfront fees)\nLowest cost of borrowing: Offer 1.\nLowest monthly payment: Offer 2.\nCompared on cost of borrowing (interest plus upfront fees) and on monthly payment.\nThese offers differ in amount or length. Their totals are for different loans.\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    },
+    {
+      "id": "three-offers",
+      "level": 1,
+      "task": "I have three offers for $20,000. Offer A: 7.25% for 5 years, $500 fees. Offer B: 6.5% for 60 months, $900 fees. Offer C: 8% for 4 years, no fees. Put them side by side.",
+      "reply": "Sure, let's compare the three offers side by side:\n\n### Offer A\n- **Amount Borrowed:** $20,000.00\n- **Yearly Interest Rate:** 7.25%\n- **Loan Length:** 5 years\n- **Upfront Fees:** $500.00\n- **Monthly Payment:** $398.39\n- **Total Paid:** $23,903.20\n- **Total Interest:** $3,903.20\n- **Cost of Borrowing:** $4,403.20 (interest plus upfront fees)\n\n### Offer B\n- **Amount Borrowed:** $20,000.00\n- **Yearly Interest Rate:** 6.5%\n- **Loan Length:** 60 months (5 years)\n- **Upfront Fees:** $900.00\n- **Monthly Payment:** $391.32\n- **Total Paid:** $23,479.43\n- **Total Interest:** $3,479.43\n- **Cost of Borrowing:** $4,379.43 (interest plus upfront fees)\n\n### Offer C\n- **Amount Borrowed:** $20,000.00\n- **Yearly Interest Rate:** 8%\n- **Loan Length:** 4 years\n- **Upfront Fees:** $0.00\n- **Monthly Payment:** $488.26\n- **Total Paid:** $23,436.41\n- **Total Interest:** $3,436.41\n- **Cost of Borrowing:** $3,436.41 (interest plus upfront fees)\n\n### Comparison\n- **Lowest Cost of Borrowing:** Offer C.\n- **Lowest Monthly Payment:** Offer B.\n\nThese offers differ in amount and length, so their totals measure different loans. This is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    }
+  ]
+}

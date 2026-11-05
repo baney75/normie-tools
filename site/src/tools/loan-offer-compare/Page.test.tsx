@@ -22,6 +22,13 @@ async function fillOffer(n: number, v: { amount: string; rate: string; term: str
   if (v.fees) await fill(`Offer ${n}: Upfront fees`, v.fees);
 }
 
+function expectWaiting() {
+  const card = screen.getByLabelText("Lowest cost of borrowing");
+  expect(card).toHaveTextContent("Your answer shows here");
+  expect(card).not.toHaveTextContent(/Offer \d/);
+  expect(screen.queryByLabelText("Lowest monthly payment")).toBeNull();
+}
+
 describe("Loan Offer Compare page", () => {
   it("starts with two offers, shows the empty state and no answer", () => {
     render(<Page />);
@@ -31,7 +38,7 @@ describe("Loan Offer Compare page", () => {
     expect(screen.getByRole("group", { name: "Offer 2" })).toBeInTheDocument();
     expect(screen.queryByRole("group", { name: "Offer 3" })).toBeNull();
     expect(screen.getByRole("button", { name: "Add a third offer" })).toBeInTheDocument();
-    expect(screen.queryByLabelText("Lowest cost of borrowing")).toBeNull();
+    expectWaiting();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -72,8 +79,8 @@ describe("Loan Offer Compare page", () => {
     await fillOffer(2, { amount: "20000", rate: "6.5", term: "60", fees: "900" });
     await userEvent.click(screen.getByRole("button", { name: "Add a third offer" }));
     expect(screen.getByRole("group", { name: "Offer 3" })).toBeInTheDocument();
-    expect(screen.queryByLabelText("Lowest cost of borrowing")).toBeNull();
-    expect(screen.getByRole("status")).toHaveTextContent("Still needed: Offer 3: Amount borrowed");
+    expectWaiting();
+    expect(screen.getByText(/Still needed/)).toHaveTextContent("Still needed: Offer 3: Amount borrowed");
     await fillOffer(3, { amount: "20000", rate: "8", term: "4" });
     await userEvent.click(screen.getByLabelText("Offer 3: Years"));
     expect(screen.getByLabelText("Offer 3, monthly payment")).toHaveTextContent("$488.26");
@@ -106,8 +113,8 @@ describe("Loan Offer Compare page", () => {
   it("asks only for what is still needed", async () => {
     render(<Page />);
     await fill("Offer 1: Amount borrowed", "5000");
-    expect(screen.getByRole("status")).toHaveTextContent("Still needed: Offer 1: Yearly interest rate, Offer 1: How long is the loan?, Offer 2: Amount borrowed");
-    expect(screen.queryByLabelText("Lowest cost of borrowing")).toBeNull();
+    expect(screen.getByText(/Still needed/)).toHaveTextContent("Still needed: Offer 1: Yearly interest rate, Offer 1: How long is the loan?, Offer 2: Amount borrowed");
+    expectWaiting();
   });
 
   it("shows a calm error that names the offer and field on junk, never NaN", async () => {
@@ -118,14 +125,14 @@ describe("Loan Offer Compare page", () => {
     expect(screen.getByLabelText("Offer 2: Amount borrowed")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByLabelText("Offer 1: Amount borrowed")).not.toHaveAttribute("aria-invalid");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Lowest cost of borrowing")).toBeNull();
+    expectWaiting();
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
-  it("says it is an estimate, says the lender shows the APR, and explains the words", () => {
+  it("says it is an estimate, says the lender shows the yearly cost, and explains the words", () => {
     render(<Page />);
     expect(screen.getByText("This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
-    expect(screen.getByText(/APR is the yearly cost of the loan/)).toBeInTheDocument();
+    expect(screen.getByText(/The yearly cost of a loan, with some fees/)).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 
@@ -151,12 +158,51 @@ describe("Loan Offer Compare page", () => {
 
   it("offers Save or print once there is an answer", async () => {
     render(<Page />);
-    expect(screen.queryByText("Save or print")).toBeNull();
+    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
     await fillOffer(1, { amount: "10000", rate: "0", term: "10" });
     await fillOffer(2, { amount: "10000", rate: "0", term: "20" });
-    expect(screen.getByText("Save or print")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Keep your answer if you want" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
     expect(screen.getByLabelText("Offer 1, monthly payment")).toHaveTextContent("$1,000.00");
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
+  });
+});
+
+describe("Loan Offer Compare first-time help", () => {
+  it("shows Step 1 of 2, Step 2 of 2 and a waiting answer from the start", () => {
+    render(<Page />);
+    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
+    expect(screen.getByLabelText("Lowest cost of borrowing")).toHaveTextContent("Step 2 of 2");
+    expectWaiting();
+  });
+
+  it("puts the cursor in the first box", () => {
+    render(<Page />);
+    expect(screen.getByLabelText("Offer 1: Amount borrowed", { exact: false })).toHaveFocus();
+  });
+
+  it("has one primary button, always in view, outside any fold", async () => {
+    const { container } = render(<Page />);
+    expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    expect(screen.getByRole("heading", { name: "Keep your answer if you want" }).closest("details")).toBeNull();
+  });
+
+  it("uses the shared privacy note with a place to check it", () => {
+    render(<Page />);
+    expect(screen.getByText(/Nothing is sent\. Numbers stay on this phone or computer\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+  });
+
+  it("explains Remove, then lets the person put the third offer back", async () => {
+    render(<Page />);
+    await userEvent.click(screen.getByRole("button", { name: "Add a third offer" }));
+    expect(screen.getByText("Remove takes out a line. You can put it back.")).toBeInTheDocument();
+    await fill("Offer 3: Amount borrowed", "7777");
+    await userEvent.click(screen.getByRole("button", { name: "Remove the third offer" }));
+    expect(screen.queryByRole("group", { name: "Offer 3" })).toBeNull();
+    await userEvent.click(screen.getByRole("button", { name: "Put it back" }));
+    expect(screen.getByLabelText("Offer 3: Amount borrowed")).toHaveValue("7777");
+    expect(screen.queryByRole("button", { name: "Put it back" })).toBeNull();
   });
 });
 
@@ -191,10 +237,30 @@ describe("loan-offer-compare Start over", () => {
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:loan-offer-compare")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    expect(box()).toHaveValue("1234");
+    await userEvent.click(screen.getByRole("button", { name: "Keep my numbers" }));
+    expect(box()).toHaveValue("1234");
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(box()).toHaveValue("");
     expect(window.localStorage.getItem("nt:flow:loan-offer-compare")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Put it back" }));
     expect(box()).toHaveValue("1234");
+  });
+});
+
+describe("loan-offer-compare filled screen", () => {
+  it("shows the estimate sentence once, no APR, one step 2 label, and a short save preview", async () => {
+    render(<Page />);
+    await fillOffer(1, { amount: "$10,000", rate: "6", term: "36" });
+    await fillOffer(2, { amount: "10000", rate: "5", term: "48", fees: "$200" });
+    const body = document.body.textContent ?? "";
+    expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
+    expect(screen.getAllByText(/^Step 2 of 2: Read your answer/)).toHaveLength(1);
+    expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
+    expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
+    const open = body.replace(/What the words mean[\s\S]*$/, "");
+    expect(open).not.toMatch(/APR|HOA/);
   });
 });

@@ -4,10 +4,12 @@
 Usage:
   python3 calc.py '{"mode":"when","goal":"5,000","saved":"500","monthly":"250","rate":"0","start":"2026-12"}'
   python3 calc.py --file input.json
+  python3 calc.py --file input.json --text
 
 mode "when": months to reach the goal, and the month it lands if a start month (YYYY-MM) is given.
 mode "by": the monthly amount needed to reach the goal by a goal month (needs start and target).
 
+With --text it prints the same answer as plain words in dollars instead, one fact per line.
 Prints one JSON object. Money is whole cents, rates are basis points. On bad input it holds
 {"ok": false, "problems": [...]} with plain-words messages.
 
@@ -303,7 +305,96 @@ def explain_savings(inp):
     return result
 
 
+def _dollars(cents):
+    neg = cents < 0
+    a = -cents if neg else cents
+    return "%s$%s.%02d" % ("-" if neg else "", format(a // 100, ","), a % 100)
+
+
+def _percent(bps):
+    whole, frac = divmod(bps, 100)
+    return "%d%s%%" % (whole, ("." + ("%02d" % frac).rstrip("0")) if frac else "")
+
+
+def _count(n, word):
+    return "%d %s%s" % (n, word, "" if n == 1 else "s")
+
+
+def problem_text(result):
+    return "\n".join("Fix this first: %s" % p["message"] for p in result["problems"])
+
+
+_MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"]
+
+
+def _month_name(text):
+    y, m = text.split("-")
+    return "%s %s" % (_MONTH_NAMES[int(m) - 1], int(y))
+
+
+def _length(months):
+    y, m = divmod(months, 12)
+    parts = []
+    if y:
+        parts.append(_count(y, "year"))
+    if m:
+        parts.append(_count(m, "month"))
+    return " ".join(parts)
+
+
+def result_text(r):
+    """The same answer as explain_savings, as plain words in dollars. One short fact per line."""
+    if not r["ok"]:
+        return problem_text(r)
+    out = ["Goal amount: %s" % _dollars(r["goalCents"]),
+           "Already saved: %s" % _dollars(r["savedCents"])]
+    if r["mode"] == "when":
+        out.append("Saved each month: %s" % _dollars(r["monthlyCents"]))
+    out.append("Yearly interest rate: %s" % _percent(r["rateBps"]))
+    if r["mode"] == "when":
+        st = r["status"]
+        if st == "reached":
+            out.append("Months to your goal: 0 months")
+            out.append("Already there. You have already saved your goal. No more months are needed.")
+            out.append("You have saved %s. The goal is %s." % (_dollars(r["savedCents"]), _dollars(r["goalCents"])))
+        elif st == "no-savings":
+            out.append("Not reached. You add nothing each month and there is no interest, so your savings stay the same.")
+            out.append("Your savings stay at %s." % _dollars(r["savedCents"]))
+        elif st == "too-long":
+            out.append("Over 1,200 months. At this pace the goal takes more than 100 years.")
+        else:
+            out.append("Months to your goal: %s" % _count(r["months"], "month"))
+            if r["landing"]:
+                out.append("You reach your goal in %s." % _month_name(r["landing"]))
+            else:
+                out.append("Add a start month to see the month and year.")
+            if r["months"] >= 12:
+                out.append("That is %s." % _length(r["months"]))
+            out.append("Total you add: %s" % _dollars(r["depositsCents"]))
+            out.append("Interest earned: %s" % _dollars(r["interestEarnedCents"]))
+            out.append("Saved at the end: %s" % _dollars(r["finalBalanceCents"]))
+    else:
+        out.append("Save each month: %s" % _dollars(r["monthlyNeededCents"]))
+        if r["status"] == "reached":
+            out.append("You have already saved your goal. You do not need to add more.")
+        else:
+            out.append("This is the smallest amount that reaches your goal by the goal month.")
+        out.append("Months counted: %s" % _count(r["months"], "month"))
+        out.append("Start month: %s" % _month_name(r["start"]))
+        out.append("Goal month: %s" % _month_name(r["target"]))
+        out.append("Total you add: %s" % _dollars(r["depositsCents"]))
+        out.append("Interest earned: %s" % _dollars(r["interestEarnedCents"]))
+        out.append("Saved in the goal month: %s" % _dollars(r["finalBalanceCents"]))
+    out.append("Each month, interest is added first. Then your monthly amount is added.")
+    out.append("This is an estimate from the numbers you typed. The paper from your bank or lender has the final word.")
+    return "\n".join(out)
+
+
+
 def main(argv):
+    text = "--text" in argv
+    argv = [a for a in argv if a != "--text"]
     if len(argv) >= 2 and argv[0] == "--file":
         with open(argv[1], encoding="utf-8") as f:
             raw = f.read()
@@ -319,7 +410,7 @@ def main(argv):
               "message": "The input was not readable. Send the numbers as JSON."}]}))
         return 1
     result = explain_savings(data)
-    print(json.dumps(result, indent=1))
+    print(result_text(result) if text else json.dumps(result, indent=1))
     return 0 if result["ok"] else 1
 
 

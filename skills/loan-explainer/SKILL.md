@@ -16,8 +16,8 @@ description: Explain a loan from the numbers a person types: monthly payment, to
 1. Run `python3 scripts/env_check.py`. If it says something is missing, tell the person in plain words and stop.
 2. Ask for the amount borrowed, the yearly interest rate (a percent), and how long the loan lasts (months or years). Ask for upfront fees and an extra monthly payment only if the person has them. Ask only for what the next step needs.
 3. Put the numbers in a JSON file like `examples/car-loan.json`. Keep the person's own words for each number. Do not fill in a number the person did not give.
-4. Run `python3 scripts/calc.py --file <input.json>`. It works in whole cents and prints the monthly payment, total paid, total interest, cost of borrowing, what an extra payment saves, and a by-year table. If it prints problems, read them to the person in plain words and ask for the fix.
-5. Show a preview: the monthly payment first, then total paid, total interest, fees, and the savings from any extra payment. Say "This is an estimate from the numbers you typed. Your lender's paper wins."
+4. Run `python3 scripts/calc.py --file <input.json> --text`. It prints the answer as plain words in dollars, one fact per line, with the labels the website uses. Read every line to the person as it is, in order, down to the last line about the estimate and the APR. Do not leave lines out. Do not do your own math or turn the numbers into other units. Use the JSON form (the same command without `--text`) only when you need more detail. The JSON works in whole cents and basis points. If the lines start with "Fix this first:", read each one to the person in plain words and ask for the fix.
+5. Show a preview: the monthly payment first, then total paid, total interest (say each number), fees, and the savings from any extra payment. Always say "This is an estimate from the numbers you typed. Your lender's paper has the final word."
 6. Explain the three terms with `references/how-it-works.md`: amount borrowed, interest rate, term. Say that this does not work out the APR and that the lender's paper shows the APR.
 7. If the person wants a copy, save a text file next to their other files. Never overwrite a file. Tell them where it is and how to undo (delete the new file).
 
@@ -25,7 +25,7 @@ description: Explain a loan from the numbers a person types: monthly payment, to
 
 1. Show a preview first.
 2. Ask before changing anything.
-3. Never send, pay, sign, file, or submit for the person.
+3. Never send, pay, sign, file, or submit for the person. If the person asks you to, say you will not and that they do it themselves.
 4. Never say whether the person should take a loan. Explain; do not advise.
 5. Keep undo available. Use the Trash, never delete.
 6. Ask only for the details a step needs.
@@ -37,6 +37,6 @@ description: Explain a loan from the numbers a person types: monthly payment, to
 - `references/how-it-works.md`: the formula, the rounding, and the plain-words key.
 - `references/messy-inputs.md`: commas, dollar signs, blanks, and numbers that do not make sense.
 - `scripts/env_check.py`: what this sandbox has.
-- `scripts/calc.py`: the math, in whole cents.
+- `scripts/calc.py`: the math, in whole cents. Add `--text` for plain words.
 - `scripts/refs.py`: search the notes in `references/`.
 - `examples/car-loan.json`, `examples/home-loan-extra.json`: made-up inputs.

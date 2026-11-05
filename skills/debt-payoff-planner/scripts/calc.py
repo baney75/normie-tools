@@ -4,7 +4,9 @@
 Usage:
   python3 calc.py '{"debts":[{"name":"Card","balance":"2,500","rate":"22.99","minimum":"60"}],"extra":"100"}'
   python3 calc.py --file input.json
+  python3 calc.py --file input.json --text
 
+With --text it prints the same answer as plain words in dollars instead, one fact per line.
 Prints one JSON object. On good input it holds both plans (money in whole cents, rates in
 basis points). On bad input it holds {"ok": false, "problems": [...]} with plain-words messages.
 
@@ -300,7 +302,67 @@ def plan_debt_payoff(inp):
     return result
 
 
+def _dollars(cents):
+    neg = cents < 0
+    a = -cents if neg else cents
+    return "%s$%s.%02d" % ("-" if neg else "", format(a // 100, ","), a % 100)
+
+
+def _percent(bps):
+    whole, frac = divmod(bps, 100)
+    return "%d%s%%" % (whole, ("." + ("%02d" % frac).rstrip("0")) if frac else "")
+
+
+def _count(n, word):
+    return "%d %s%s" % (n, word, "" if n == 1 else "s")
+
+
+def problem_text(result):
+    return "\n".join("Fix this first: %s" % p["message"] for p in result["problems"])
+
+
+def result_text(r):
+    """The same answer as plan_debt_payoff, as plain words in dollars. One short fact per line."""
+    if not r["ok"]:
+        return problem_text(r)
+    out = ["Money each month: %s" % _dollars(r["monthlyMoneyCents"]),
+           "Extra each month: %s" % _dollars(r["extraCents"]),
+           "Total balance: %s" % _dollars(r["totalBalanceCents"])]
+    for d in r["debts"]:
+        out.append("%s: balance %s, yearly rate %s, smallest payment %s" % (
+            d["name"], _dollars(d["balanceCents"]), _percent(d["rateBps"]), _dollars(d["minimumCents"])))
+    plans = (("Snowball", "snowball", "Extra money goes to the smallest balance first."),
+             ("Avalanche", "avalanche", "Extra money goes to the highest interest rate first."))
+    for title, key, line in plans:
+        p = r[key]
+        out.append("%s plan: %s" % (title, line))
+        out.append("%s, Months to debt-free: %s" % (title, _count(p["months"], "month")))
+        out.append("%s, Total interest: %s" % (title, _dollars(p["totalInterestCents"])))
+        out.append("%s, Total paid: %s" % (title, _dollars(p["totalPaidCents"])))
+        for o in p["order"]:
+            out.append("%s, Order of payoff: %s is paid off in month %d." % (title, o["name"], o["month"]))
+    d = r["difference"]
+    names = {"snowball": "Snowball", "avalanche": "Avalanche"}
+    if d["fewerMonths"] == "same":
+        out.append("Both plans take the same number of months.")
+    else:
+        out.append("%s finishes sooner, by %s." % (names[d["fewerMonths"]], _count(d["monthsApart"], "month")))
+    if d["lessInterest"] == "same":
+        out.append("Both plans pay the same interest.")
+    else:
+        other = "Snowball" if d["lessInterest"] == "avalanche" else "Avalanche"
+        out.append("%s pays %s less interest than %s." % (names[d["lessInterest"]], _dollars(d["interestApartCents"]), other))
+    out.append("When a debt is paid off, its smallest payment moves to the next debt. The money each month stays the same.")
+    out.append("If two debts tie, the one typed first goes first.")
+    out.append("These are facts about two plans. This does not tell you which one to use.")
+    out.append("This is an estimate from the numbers you typed. The paper from your bank or lender has the final word.")
+    return "\n".join(out)
+
+
+
 def main(argv):
+    text = "--text" in argv
+    argv = [a for a in argv if a != "--text"]
     try:
         if len(argv) >= 3 and argv[1] == "--file":
             with open(argv[2], encoding="utf-8") as f:
@@ -316,7 +378,7 @@ def main(argv):
         sys.stderr.write("input error: %s\n" % e)
         return 1
     result = plan_debt_payoff(data)
-    print(json.dumps(result, indent=2))
+    print(result_text(result) if text else json.dumps(result, indent=2))
     return 0 if result["ok"] else 1
 
 

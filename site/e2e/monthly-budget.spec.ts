@@ -23,7 +23,10 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Monthly Budget" })).toBeVisible();
   await expect(page.getByText("Type an amount on any line")).toBeVisible();
-  await expect(page.getByLabel("Left over")).toHaveCount(0);
+  await expect(page.getByLabel("Left over", { exact: true })).toContainText("Your answer shows here");
+  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
+  await expect(page.getByText("Remove takes out a line. You can put it back.").first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Print" })).toBeDisabled();
 });
 
 test("gives exact totals, left over and percents, with no sideways scroll", async ({ page }) => {
@@ -61,7 +64,7 @@ test("messy typing shows a calm error that names the line", async ({ page }) => 
   await page.getByLabel("Pay, per month").fill("3000");
   await page.getByLabel("Food, per month").fill("lots of money");
   await expect(page.getByText("Food: use a dollar amount")).toBeVisible();
-  await expect(page.getByLabel("Left over", { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel("Left over", { exact: true })).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Food, per month").fill("1e3");
   await expect(page.getByText("Food: use a dollar amount")).toBeVisible();

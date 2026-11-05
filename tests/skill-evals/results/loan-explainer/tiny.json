@@ -1,0 +1,54 @@
+{
+  "skill": "loan-explainer",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "haiku",
+  "by": {
+    "1": {
+      "passed": 10,
+      "total": 12,
+      "cases": 2,
+      "score": 0.8333333333333334
+    }
+  },
+  "verdict": {
+    "ok": false,
+    "fails": [
+      "level 1: 83.3% < 90%"
+    ]
+  },
+  "results": [
+    {
+      "id": "l1-car",
+      "level": 1,
+      "task": "I want to borrow $10,000 at 6% for 36 months. What will I pay each month and in total?",
+      "reply": "You will pay $304.22 each month for 36 months. In total, you will pay $10,951.88. The total interest you will pay is $951.88. This is the cost of borrowing, including upfront fees. This is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "passed": 4,
+      "total": 6
+    },
+    {
+      "id": "l1-home",
+      "level": 1,
+      "task": "I want $20,000 at 7.25% for 5 years. Fees are $500 up front. What if I add $100 a month?",
+      "reply": "Amount borrowed: $20,000.00\nYearly interest rate: 7.25%\nLoan length: 60 months (5 years)\nMonthly payment: $398.39. Each month for the whole loan.\nTotal paid: $23,903.20\nTotal interest: $3,903.20\nUpfront fees: $500.00\nTotal paid does not include the upfront fees.\nCost of borrowing: $4,403.20. This is interest plus upfront fees.\nWith your extra payment of $100.00 each month:\nMonthly payment with extra: $498.39\nPaid off after: 47 months\nMonths saved: 13 months\nTotal interest with extra: $2,974.16\nTotal paid with extra: $22,974.16\nInterest saved: $929.04\nThis does not work out the APR. APR is the yearly cost of the loan, counting some fees. The paper from your lender shows it.\nThis is an estimate from the numbers you typed. The paper from your bank or lender has the final word.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 6,
+      "total": 6
+    }
+  ]
+}

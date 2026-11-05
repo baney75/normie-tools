@@ -75,3 +75,4 @@
     display: none;
   }
 }
+.nt-sheet-note { margin: var(--nt-space-2) 0 0; font-size: 1rem; color: var(--nt-text); }

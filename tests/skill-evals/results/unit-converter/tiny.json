@@ -1,0 +1,49 @@
+{
+  "skill": "unit-converter",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "haiku",
+  "by": {
+    "1": {
+      "passed": 4,
+      "total": 7,
+      "cases": 2,
+      "score": 0.5714285714285714
+    }
+  },
+  "verdict": {
+    "ok": false,
+    "fails": [
+      "level 1: 57.1% < 90%"
+    ]
+  },
+  "results": [
+    {
+      "id": "inches-to-millimeters",
+      "level": 1,
+      "task": "How many millimeters is 12 inches? And what is 98.6 degrees Fahrenheit in Celsius?",
+      "reply": "12 inches is 304.8 millimeters.  \n98.6 degrees Fahrenheit is 36.56 degrees Celsius.",
+      "met": [
+        true,
+        false,
+        false,
+        true
+      ],
+      "passed": 2,
+      "total": 4
+    },
+    {
+      "id": "body-temperature",
+      "level": 1,
+      "task": "What is 98.6 degrees Fahrenheit in Celsius?",
+      "reply": "98.6 degrees Fahrenheit is 37 degrees Celsius.",
+      "met": [
+        true,
+        false,
+        true
+      ],
+      "passed": 2,
+      "total": 3
+    }
+  ]
+}

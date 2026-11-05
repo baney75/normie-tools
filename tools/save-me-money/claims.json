@@ -1,0 +1,12 @@
+{
+  "claims": [
+    { "id": "yearly-exact", "text": "Each line's yearly cost is exact: week amounts times 52, month amounts times 12, year amounts as typed." },
+    { "id": "monthly-half-up", "text": "Each line's monthly cost is its yearly cost divided by 12 and rounded half up to the cent, once per line." },
+    { "id": "totals-are-sums", "text": "The total per year and the total per month are plain sums of the line figures, to the cent." },
+    { "id": "biggest-first", "text": "Lines are listed biggest yearly cost first, and equal costs keep the typed order." },
+    { "id": "blank-left-out", "text": "Blank and zero lines are left out, so nothing is invented for them." },
+    { "id": "questions-invent-nothing", "text": "The questions to ask before a call are generic. They hold no prices, offers or advice." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the line." }
+  ]
+}

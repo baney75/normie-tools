@@ -3,6 +3,9 @@
 export const COPY = {
   title: "Student Loan Growth and Payoff",
   intro: "Type the numbers for one student loan. See how it grows and when it is paid off.",
+  step1: "Type your numbers",
+  step2: "Step 2 of 2: Read your answer",
+  waiting: "Your answer shows here",
   empty: "Start with your loan balance and the yearly interest rate. Your answer shows up below.",
   balance: { label: "Loan balance", hint: "What you owe now, not counting interest that builds up before you pay.", placeholder: "20,000" },
   rate: { label: "Yearly interest rate", hint: "A percent, like 5. Type 0 if there is none.", placeholder: "5" },
@@ -62,9 +65,10 @@ export const COPY = {
     ],
   },
   save: {
-    summary: "Save or print",
+    summary: "Keep your answer if you want",
     title: "Your student loan numbers",
     fileName: "student-loan-numbers.txt",
+    preview: "Your answer above, on paper or saved on this phone or computer.",
   },
   notes: {
     estimate: "Your loan statement is the final word. This page helps you understand it.",

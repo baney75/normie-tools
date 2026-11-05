@@ -62,6 +62,7 @@ export function SavePrintSheet({
           </button>
         )}
       </div>
+      <p className="nt-sheet-note">Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.</p>
       <p role="status" className="nt-sheet-status">
         {saved ? "Saved" : ""}
       </p>

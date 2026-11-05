@@ -3,6 +3,10 @@
 export const COPY = {
   title: "Monthly Budget",
   intro: "Type what comes in and what goes out each month. See what is left.",
+  step1: "Type your numbers",
+  step2: "Step 2 of 2: Read your answer",
+  waiting: "Your answer shows here",
+  removeHint: "Remove takes out a line. You can put it back.",
   empty: "Type an amount on any line. Your totals show up below.",
   income: { heading: "Money in each month", nameLabel: "Name of income line", add: "Add an income line", fallback: "Income line" },
   spending: { heading: "Money out each month", nameLabel: "Name of spending line", add: "Add a spending line", fallback: "Spending line" },
@@ -44,13 +48,13 @@ export const COPY = {
     spentPercent: "Percent of income spent",
   },
   save: {
-    summary: "Save or print",
-    title: "Your monthly budget",
+    title: "Keep your answer if you want",
+    fileTitle: "Your monthly budget",
     fileName: "monthly-budget.txt",
+    preview: "Your answer above, on paper or saved on this phone or computer.",
   },
   notes: {
     count: "This adds up the numbers you typed. It does not tell you what to do.",
-    local: "Your numbers stay on this phone or computer. Nothing is sent anywhere.",
   },
   back: "Back to home",
 } as const;

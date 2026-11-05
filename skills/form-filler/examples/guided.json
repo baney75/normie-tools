@@ -1,0 +1,16 @@
+{
+  "format": "nt-form-filler",
+  "version": 1,
+  "answers": { "filing": "yes", "income": "yes", "fillable": "unsure", "open": "no" },
+  "info": {
+    "firstName": "Ana",
+    "lastName": "Rivera",
+    "street": "12 Example Street",
+    "city": "Springfield",
+    "state": "IL",
+    "zip": "62701",
+    "birthDate": "1960-02-29",
+    "phone": "(555) 010-1234"
+  },
+  "papers": ["ssn", "w2", "lastreturn"]
+}

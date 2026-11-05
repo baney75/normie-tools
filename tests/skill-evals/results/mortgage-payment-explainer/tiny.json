@@ -1,0 +1,54 @@
+{
+  "skill": "mortgage-payment-explainer",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "haiku",
+  "by": {
+    "1": {
+      "passed": 4,
+      "total": 12,
+      "cases": 2,
+      "score": 0.3333333333333333
+    }
+  },
+  "verdict": {
+    "ok": false,
+    "fails": [
+      "level 1: 33.3% < 90%"
+    ]
+  },
+  "results": [
+    {
+      "id": "basic-home",
+      "level": 1,
+      "task": "I want to buy a $300,000 home with $60,000 down, a 6% yearly rate for 30 years, $3,600 yearly property tax, $1,200 yearly insurance and $50 a month HOA. What is my monthly payment?",
+      "reply": "Your monthly payment is $1,888.92.",
+      "met": [
+        true,
+        false,
+        false,
+        false,
+        true,
+        true
+      ],
+      "passed": 3,
+      "total": 6
+    },
+    {
+      "id": "with-mortgage-insurance",
+      "level": 1,
+      "task": "The home is $250,000 with $12,500 down at 7.25% for 15 years. Tax is $2,750.50 a year, insurance is $1,500.25 a year, HOA is $120 a month and mortgage insurance is $95.10 a month. What do I pay each month?",
+      "reply": "You will pay $2,737.38 each month.",
+      "met": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "passed": 1,
+      "total": 6
+    }
+  ]
+}

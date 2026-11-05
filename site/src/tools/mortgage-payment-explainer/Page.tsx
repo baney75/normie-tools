@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, MoneyField, NumberField, PercentField, ResultCard, StartOver } from "../../components/calc";
+import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -61,8 +61,9 @@ export function Page() {
           </div>
         ) : null}
 
+        <StepLabel n={1} of={2}>{COPY.stepOne}</StepLabel>
         <form className="nt-mort-form" onSubmit={(e) => e.preventDefault()} noValidate>
-          <MoneyField label={COPY.price.label} hint={COPY.price.hint} placeholder={COPY.price.placeholder}
+          <MoneyField autoFocus label={COPY.price.label} hint={COPY.price.hint} placeholder={COPY.price.placeholder}
             value={v.price} onChange={(t) => set({ price: t })} error={bad("price")} />
           <MoneyField label={COPY.down.label} hint={COPY.down.hint} placeholder={COPY.down.placeholder}
             value={v.down} onChange={(t) => set({ down: t })} error={bad("down")} />
@@ -91,9 +92,7 @@ export function Page() {
             value={v.pmi} onChange={(t) => set({ pmi: t })} error={bad("pmi")} />
         </form>
 
-        <StartOver flowId="mortgage-payment-explainer" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
-
-        {result.ok ? <Answer result={result} /> : null}
+        <Answer result={result.ok ? result : null} />
 
         {!result.ok && blank ? <p className="nt-mort-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
@@ -103,8 +102,11 @@ export function Page() {
         ) : null}
         {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
 
+        <StartOver flowId="mortgage-payment-explainer" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
+
         <p className="nt-mort-note">{COPY.notes.estimate}</p>
         <p className="nt-mort-note">{COPY.notes.changes}</p>
+        <PrivacyNote />
 
         <details className="nt-mort-details">
           <summary>{COPY.key.summary}</summary>
@@ -126,28 +128,35 @@ export function Page() {
 
 type Good = Extract<ReturnType<typeof explainMortgage>, { ok: true }>;
 
-function Answer({ result }: { result: Good }) {
+function Answer({ result }: { result: Good | null }) {
   const r = COPY.result;
-  const parts: [string, string][] = [
-    [r.pi, formatMoney(result.piCents)],
-    [r.tax, formatMoney(result.taxMonthCents)],
-    [r.insurance, formatMoney(result.insuranceMonthCents)],
-    [r.hoa, formatMoney(result.hoaCents)],
-    [r.pmi, formatMoney(result.pmiCents)],
-  ];
-  const lines: [string, string][] = [
-    [r.loan, formatMoney(result.loanCents)],
-    [r.lengthLabel, years(result.months / 12)],
-    [r.totalInterest, formatMoney(result.totalInterestCents)],
-  ];
-  const first: [string, string][] = [
-    [COPY.first.interest, formatMoney(result.firstInterestCents)],
-    [COPY.first.principal, formatMoney(result.firstPrincipalCents)],
-  ];
+  const parts: [string, string][] = result
+    ? [
+        [r.pi, formatMoney(result.piCents)],
+        [r.tax, formatMoney(result.taxMonthCents)],
+        [r.insurance, formatMoney(result.insuranceMonthCents)],
+        [r.hoa, formatMoney(result.hoaCents)],
+        [r.pmi, formatMoney(result.pmiCents)],
+      ]
+    : [];
+  const lines: [string, string][] = result
+    ? [
+        [r.loan, formatMoney(result.loanCents)],
+        [r.lengthLabel, years(result.months / 12)],
+        [r.totalInterest, formatMoney(result.totalInterestCents)],
+      ]
+    : [];
+  const first: [string, string][] = result
+    ? [
+        [COPY.first.interest, formatMoney(result.firstInterestCents)],
+        [COPY.first.principal, formatMoney(result.firstPrincipalCents)],
+      ]
+    : [];
 
   function save() {
+    if (!result) return;
     const text = [
-      COPY.save.title, "",
+      COPY.save.fileTitle, "",
       `${r.totalLabel}: ${formatMoney(result.totalMonthlyCents)}`,
       ...parts.map(([k, val]) => `${k}: ${val}`),
       ...lines.map(([k, val]) => `${k}: ${val}`),
@@ -169,7 +178,12 @@ function Answer({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={r.totalLabel} answer={formatMoney(result.totalMonthlyCents)}>
+      <ResultCard
+        label={r.totalLabel}
+        answer={result ? formatMoney(result.totalMonthlyCents) : undefined}
+        waiting={COPY.waiting}
+        step={COPY.stepTwo}
+      >
         <p className="nt-mort-help">{r.totalLine}</p>
         <dl className="nt-mort-lines">
           {parts.map(([k, val]) => (
@@ -189,38 +203,36 @@ function Answer({ result }: { result: Good }) {
         </dl>
       </ResultCard>
 
-      <section className="nt-mort-first" aria-label={COPY.first.heading}>
-        <h2>{COPY.first.heading}</h2>
-        <p className="nt-mort-help">{COPY.first.line}</p>
-        <dl className="nt-mort-lines">
-          {first.map(([k, val]) => (
-            <div key={k}>
-              <dt>{k}</dt>
-              <dd>{val}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
+      {result ? (
+        <section className="nt-mort-first" aria-label={COPY.first.heading}>
+          <h2>{COPY.first.heading}</h2>
+          <p className="nt-mort-help">{COPY.first.line}</p>
+          <dl className="nt-mort-lines">
+            {first.map(([k, val]) => (
+              <div key={k}>
+                <dt>{k}</dt>
+                <dd>{val}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ) : null}
 
-      <details className="nt-mort-details">
-        <summary>{COPY.more.summary}</summary>
-        <div className="nt-mort-details-body">
-          <p className="nt-mort-help">{COPY.more.loanWork}</p>
-          <p className="nt-mort-help">{COPY.more.how}</p>
-        </div>
-      </details>
+      <SavePrintSheet title={COPY.save.title} onSave={save}>
+        {result ? (
+          <p>{COPY.save.preview}</p>
+        ) : null}
+      </SavePrintSheet>
 
-      <details className="nt-mort-details">
-        <summary>{COPY.save.summary}</summary>
-        <div className="nt-mort-details-body">
-          <SavePrintSheet title={COPY.save.title} onSave={save}>
-            <p>{r.totalLabel}: {formatMoney(result.totalMonthlyCents)}</p>
-            {parts.map(([k, val]) => <p key={k}>{k}: {val}</p>)}
-            {lines.map(([k, val]) => <p key={k}>{k}: {val}</p>)}
-            <p>{COPY.notes.estimate}</p>
-          </SavePrintSheet>
-        </div>
-      </details>
+      {result ? (
+        <details className="nt-mort-details">
+          <summary>{COPY.more.summary}</summary>
+          <div className="nt-mort-details-body">
+            <p className="nt-mort-help">{COPY.more.loanWork}</p>
+            <p className="nt-mort-help">{COPY.more.how}</p>
+          </div>
+        </details>
+      ) : null}
     </>
   );
 }

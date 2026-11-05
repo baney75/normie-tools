@@ -4,7 +4,9 @@
 Usage:
   python3 calc.py '{"income":[{"name":"Pay","amount":"3,000"}],"expenses":[{"name":"Rent","amount":"1,200"}]}'
   python3 calc.py --file input.json
+  python3 calc.py --file input.json --text
 
+With --text it prints the same answer as plain words in dollars instead, one fact per line.
 Prints one JSON object. On good input it holds the totals, left over and percents (money in whole
 cents). On bad input it holds {"ok": false, "problems": [...]} with plain-words messages.
 
@@ -181,7 +183,64 @@ def plan_budget(data):
     }
 
 
+def _dollars(cents):
+    neg = cents < 0
+    a = -cents if neg else cents
+    return "%s$%s.%02d" % ("-" if neg else "", format(a // 100, ","), a % 100)
+
+
+def _percent(bps):
+    whole, frac = divmod(bps, 100)
+    return "%d%s%%" % (whole, ("." + ("%02d" % frac).rstrip("0")) if frac else "")
+
+
+def _count(n, word):
+    return "%d %s%s" % (n, word, "" if n == 1 else "s")
+
+
+def problem_text(result):
+    return "\n".join("Fix this first: %s" % p["message"] for p in result["problems"])
+
+
+def result_text(r):
+    """The same answer as plan_budget, as plain words in dollars. One short fact per line."""
+    if not r["ok"]:
+        return problem_text(r)
+    out = []
+    if not r["hasAmounts"]:
+        out.append("No amounts were typed yet.")
+    else:
+        out.append("Total income: %s" % _dollars(r["incomeCents"]))
+        out.append("Total spending: %s" % _dollars(r["spendingCents"]))
+        if r["overspent"]:
+            out.append("More goes out than comes in. The gap is %s." % _dollars(-r["leftCents"]))
+        elif r["leftCents"] == 0:
+            out.append("Left over: $0.00. All the money in is spent.")
+        else:
+            out.append("Left over: %s. This is money in that is not spent." % _dollars(r["leftCents"]))
+        if r["spendingPercentOfIncome"] is not None:
+            out.append("Percent of income spent: %d%%" % r["spendingPercentOfIncome"])
+        else:
+            out.append("There is no income, so there are no percents of income.")
+        for row in r["incomeRows"]:
+            out.append("Income, %s: %s" % (row["name"], _dollars(row["cents"])))
+        for row in r["expenseRows"]:
+            line = "Spending, %s: %s" % (row["name"], _dollars(row["cents"]))
+            if row["percentOfIncome"] is not None:
+                line += ", %d%% of income" % row["percentOfIncome"]
+            if row["shareOfSpending"] is not None:
+                line += ", %d%% of spending" % row["shareOfSpending"]
+            out.append(line)
+        if r["spendingCents"] > 0:
+            out.append("Percents are whole numbers. They are rounded and split so the percents of spending add up to 100.")
+    out.append("This adds up the numbers you typed. It does not tell you what to do.")
+    return "\n".join(out)
+
+
+
 def main(argv):
+    text = "--text" in argv
+    argv = [a for a in argv if a != "--text"]
     if len(argv) >= 2 and argv[0] == "--file":
         with open(argv[1], encoding="utf-8") as f:
             raw = f.read()
@@ -197,7 +256,7 @@ def main(argv):
               "message": "The input was not readable. Send the numbers as JSON."}]}))
         return 1
     result = plan_budget(data)
-    print(json.dumps(result, indent=1))
+    print(result_text(result) if text else json.dumps(result, indent=1))
     return 0 if result["ok"] else 1
 
 

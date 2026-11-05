@@ -4,6 +4,7 @@
 Usage:
   python3 calc.py '{"price":"300,000","down":"60,000","rate":"6","term":"30","tax":"3600","insurance":"1200","hoa":"50","pmi":""}'
   python3 calc.py --file input.json
+  python3 calc.py --file input.json --text    (same answer in plain words and dollars)
 
 Prints one JSON object. On good input it holds the answer (money in whole cents, rates in
 basis points). On bad input it holds {"ok": false, "problems": [...]} with plain-words messages.
@@ -264,22 +265,86 @@ def explain_mortgage(inp):
             "firstPrincipalCents": rows[0]["principalCents"]}
 
 
+END_LINE = "This is an estimate from the numbers you typed. The paper from your bank or lender has the final word."
+
+
+def money_text(cents):
+    """Whole cents -> dollars with commas and two decimals, like $10,951.88."""
+    sign = "-" if cents < 0 else ""
+    c = abs(cents)
+    return "%s$%s.%02d" % (sign, format(c // 100, ","), c % 100)
+
+
+def percent_text(bps):
+    """Basis points -> a percent, like 6% or 7.25%."""
+    whole, frac = divmod(bps, 100)
+    return "%d%%" % whole if frac == 0 else ("%d.%02d" % (whole, frac)).rstrip("0") + "%"
+
+
+def count_text(n, word):
+    return "%s %s%s" % (format(n, ","), word, "" if n == 1 else "s")
+
+
+def months_text(months):
+    """Months, with years and months added when it is a year or more."""
+    base = count_text(months, "month")
+    if months < 12:
+        return base
+    years, rest = divmod(months, 12)
+    parts = [count_text(years, "year")] + ([count_text(rest, "month")] if rest else [])
+    return "%s (%s)" % (base, " and ".join(parts))
+
+
+def problem_lines(result):
+    return ["Fix this first: %s" % p["message"] for p in result.get("problems", [])] or ["Fix this first: Something is wrong with the numbers."]
+
+
+def mortgage_text(result):
+    """The same answer as plain words in dollars, one short fact per line."""
+    if not result.get("ok"):
+        return problem_lines(result)
+    r = result
+    return [
+        "Total monthly payment: %s" % money_text(r["totalMonthlyCents"]),
+        "Home price: %s" % money_text(r["priceCents"]),
+        "Down payment: %s" % money_text(r["downCents"]),
+        "Loan amount: %s" % money_text(r["loanCents"]),
+        "Yearly interest rate: %s" % percent_text(r["rateBps"]),
+        "Loan length: %s" % months_text(r["months"]),
+        "Principal and interest: %s" % money_text(r["piCents"]),
+        "Property tax each month: %s" % money_text(r["taxMonthCents"]),
+        "Home insurance each month: %s" % money_text(r["insuranceMonthCents"]),
+        "HOA each month: %s" % money_text(r["hoaCents"]),
+        "Mortgage insurance each month: %s" % money_text(r["pmiCents"]),
+        "Total interest over the loan: %s" % money_text(r["totalInterestCents"]),
+        "Your first payment goes to interest: %s" % money_text(r["firstInterestCents"]),
+        "Your first payment lowers what you owe: %s" % money_text(r["firstPrincipalCents"]),
+        END_LINE,
+    ]
+
+
 def main(argv):
-    if len(argv) >= 2 and argv[0] == "--file":
-        with open(argv[1], encoding="utf-8") as f:
+    args = [a for a in argv if a != "--text"]
+    as_text = len(args) != len(argv)
+    if len(args) >= 2 and args[0] == "--file":
+        with open(args[1], encoding="utf-8") as f:
             raw = f.read()
-    elif argv:
-        raw = argv[0]
+    elif args:
+        raw = args[0]
     else:
         print(__doc__)
         return 2
     try:
         data = json.loads(raw)
     except ValueError:
-        print(json.dumps({"ok": False, "problems": [{"field": "price", "kind": "bad",
-              "message": "The input was not readable. Send the numbers as JSON."}]}))
+        unreadable = {"ok": False, "problems": [{"field": "price", "kind": "bad",
+                      "message": "The input was not readable. Send the numbers as JSON."}]}
+        print("\n".join(mortgage_text(unreadable)) if as_text else json.dumps(unreadable))
         return 1
     result = explain_mortgage(data)
+    if as_text:
+        print("\n".join(mortgage_text(result)))
+        return 0 if result["ok"] else 1
     print(json.dumps(result, indent=1))
     return 0 if result["ok"] else 1
 

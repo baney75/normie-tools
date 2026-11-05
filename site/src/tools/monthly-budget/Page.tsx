@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, ResultCard, StartOver } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -90,12 +90,14 @@ export function Page() {
           </div>
         ) : null}
 
+        <StepLabel n={1} of={2}>{COPY.step1}</StepLabel>
         <form className="nt-budget-form" onSubmit={(e) => e.preventDefault()} noValidate>
           {(["income", "expenses"] as const).map((kind) => {
             const c = kind === "income" ? COPY.income : COPY.spending;
             return (
               <section key={kind} className="nt-budget-list" aria-label={c.heading}>
                 <h2>{c.heading}</h2>
+                <p className="nt-budget-help">{COPY.removeHint}</p>
                 {v[kind].map((l, i) => {
                   const label = shown(l, c.fallback, i);
                   return (
@@ -110,6 +112,7 @@ export function Page() {
                       <MoneyField
                         label={`${label}, ${COPY.amount.suffix}`}
                         placeholder={COPY.amount.placeholder}
+                        autoFocus={kind === "income" && i === 0}
                         value={l.amount}
                         onChange={(t) => change(kind, l.id, { amount: t })}
                         error={bad(`${kind}.${i}`)}
@@ -142,12 +145,13 @@ export function Page() {
 
         <StartOver flowId="monthly-budget" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
-        {result.ok && result.hasAmounts ? <Answer result={result} /> : null}
         {result.ok && !result.hasAmounts ? <p className="nt-budget-status">{COPY.empty}</p> : null}
         {!result.ok ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
 
+        <Answer result={result} />
+
         <p className="nt-budget-note">{COPY.notes.count}</p>
-        <p className="nt-budget-note">{COPY.notes.local}</p>
+        <PrivacyNote />
       </div>
     </ScreenFrame>
   );
@@ -155,7 +159,20 @@ export function Page() {
 
 type Good = Extract<ReturnType<typeof planBudget>, { ok: true }>;
 
-function Answer({ result }: { result: Good }) {
+function Answer({ result: whole }: { result: ReturnType<typeof planBudget> }) {
+  const r = COPY.result;
+  if (!whole.ok || !whole.hasAmounts) {
+    return (
+      <>
+        <ResultCard label={r.leftLabel} step={COPY.step2} waiting={COPY.waiting} />
+        <SavePrintSheet title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
+      </>
+    );
+  }
+  return <Done result={whole} />;
+}
+
+function Done({ result }: { result: Good }) {
   const r = COPY.result;
   const hasIncome = result.incomeCents > 0;
   const rows = result.expenseRows.filter((x: { cents: number }) => x.cents > 0) as Good["expenseRows"];
@@ -171,7 +188,7 @@ function Answer({ result }: { result: Good }) {
 
   function save() {
     const text = [
-      COPY.save.title,
+      COPY.save.fileTitle,
       "",
       ...totals.map(([k, val]) => `${k}: ${val}`),
       `${r.leftLabel}: ${formatMoney(result.leftCents)}`,
@@ -195,7 +212,7 @@ function Answer({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={r.leftLabel} answer={formatMoney(result.leftCents)}>
+      <ResultCard label={r.leftLabel} step={COPY.step2} answer={formatMoney(result.leftCents)}>
         <p className="nt-budget-help">{leftHelp}</p>
         <dl className="nt-budget-lines">
           {totals.map(([k, val]) => (
@@ -264,17 +281,9 @@ function Answer({ result }: { result: Good }) {
         </div>
       </details>
 
-      <details className="nt-budget-details">
-        <summary>{COPY.save.summary}</summary>
-        <div className="nt-budget-details-body">
-          <SavePrintSheet title={COPY.save.title} onSave={save}>
-            {totals.map(([k, val]) => <p key={k}>{k}: {val}</p>)}
-            <p>{r.leftLabel}: {formatMoney(result.leftCents)}</p>
-            {rows.map((x, i) => <p key={`${x.name}-${i}`}>{x.name}: {formatMoney(x.cents)} ({sayPct(x)})</p>)}
-            <p>{COPY.notes.count}</p>
-          </SavePrintSheet>
-        </div>
-      </details>
+      <SavePrintSheet title={COPY.save.title} onSave={save}>
+        <p>{COPY.save.preview}</p>
+      </SavePrintSheet>
     </>
   );
 }

@@ -32,8 +32,28 @@ describe("Monthly Budget page", () => {
     for (const n of ["Pay", "Rent or mortgage", "Food", "Bills", "Transport", "Other"]) {
       expect(screen.getByLabelText(`${n}, per month`)).toHaveValue("");
     }
-    expect(screen.queryByLabelText("Left over")).toBeNull();
+    expect(screen.getByLabelText("Left over")).toHaveTextContent(COPY.waiting);
+    expect(screen.getByLabelText("Left over")).toHaveTextContent("Step 2 of 2: Read your answer");
+    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
+  });
+
+  it("focuses the first amount box", () => {
+    render(<Page />);
+    expect(screen.getByLabelText("Pay, per month")).toHaveFocus();
+  });
+
+  it("says what Remove does, next to the lines", () => {
+    render(<Page />);
+    expect(screen.getAllByText(COPY.removeHint)).toHaveLength(2);
+  });
+
+  it("has one filled button: Print", async () => {
+    const { container } = render(<Page />);
+    expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
+    await fillPlain();
+    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
   });
 
   it("has decimal keypads and no autofill on amounts", () => {
@@ -97,9 +117,10 @@ describe("Monthly Budget page", () => {
     expect(screen.queryByRole("button", { name: COPY.undo })).toBeNull();
   });
 
-  it("says nothing is sent anywhere", () => {
+  it("says nothing is sent and links to the page code", () => {
     render(<Page />);
-    expect(screen.getByText(/Nothing is sent anywhere\./)).toBeInTheDocument();
+    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 
   it("with no income, shows the totals and shares of spending", async () => {
@@ -130,7 +151,7 @@ describe("Monthly Budget page", () => {
     expect(screen.getByText(/Food: use a dollar amount/)).toBeInTheDocument();
     expect(screen.getByLabelText("Food, per month")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Left over")).toBeNull();
+    expect(screen.getByLabelText("Left over")).toHaveTextContent(COPY.waiting);
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
@@ -162,12 +183,13 @@ describe("Monthly Budget page", () => {
     expect(screen.getByRole("button", { name: "Add a spending line" })).toBeInTheDocument();
   });
 
-  it("offers Save or print once there is an answer", async () => {
+  it("always shows Save or print, and turns it on once there is an answer", async () => {
     render(<Page />);
-    expect(screen.queryByText("Save or print")).toBeNull();
+    expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save a copy" })).toBeDisabled();
     await fillPlain();
-    expect(screen.getByText("Save or print")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
+    expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save a copy" })).toBeEnabled();
   });
 });
 
@@ -202,6 +224,11 @@ describe("monthly-budget Start over", () => {
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:monthly-budget")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    expect(box()).toHaveValue("1234");
+    await userEvent.click(screen.getByRole("button", { name: "Keep my numbers" }));
+    expect(box()).toHaveValue("1234");
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(box()).toHaveValue("");
     expect(window.localStorage.getItem("nt:flow:monthly-budget")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();

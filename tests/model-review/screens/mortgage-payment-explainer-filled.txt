@@ -1,0 +1,70 @@
+Screen: mortgage-payment-explainer, filled state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Mortgage Payment Explainer
+Type the numbers for a home loan. See what you pay each month.
+Step 1 of 2: Type your numbers
+[label] Home price
+[box] Home price = "300000"
+[label] Down payment
+[box] Down payment = "66000"
+[label] Yearly interest rate
+[box] Yearly interest rate = "6"
+[label] Years to pay it back
+[box] Years to pay it back = "24"
+[plain button, outline only] 15 years
+[plain button, outline only] 20 years
+[plain button, outline only] 30 years
+[label] Property tax for the year (optional)
+[box] Property tax for the year (optional) = ""
+[label] Home insurance for the year (optional)
+[box] Home insurance for the year (optional) = ""
+[label] Neighborhood fee each month (optional)
+[box] Neighborhood fee each month (optional) = ""
+[label] Mortgage insurance each month (optional)
+[box] Mortgage insurance each month (optional) = ""
+Step 2 of 2: Read your answer. You are here.
+Total monthly payment
+$1,534.99
+All five parts below, added up.
+Loan payment
+$1,534.99
+Property tax each month
+$0.00
+Home insurance each month
+$0.00
+Neighborhood fee each month
+$0.00
+Mortgage insurance each month
+$0.00
+Loan amount
+$234,000.00
+Loan length
+24 years
+Total interest over the loan
+$208,076.23
+That is your answer. You can stop here, or keep a copy below.
+[heading 2] Your first payment
+Here is where the loan part of your first payment goes.
+Goes to interest
+$1,170.00
+Lowers what you owe
+$364.99
+[heading 2] Keep your answer if you want
+Your answer above, on paper or saved on this phone or computer.
+[MAIN BUTTON, filled dark orange] Print
+[plain button, outline only] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+[closed section, tap to open] Show more
+
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+Tax and insurance can change. This tool uses only what you typed.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+[closed section, tap to open] What the words mean
+
+Back to home
+[link, plain] Back to home

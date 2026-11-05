@@ -1,0 +1,23 @@
+Screen: morning-briefing, pick state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Morning Briefing
+Make a one page list for your morning. Pick the parts you want. Type your own things. Then save or print it.
+Step 1 of 3: Pick what to include
+[label] Weather (Example only)
+[tick box] Weather (Example only) (chosen)
+[label] News headlines (Example only)
+[tick box] News headlines (Example only) (chosen)
+[label] My day
+[tick box] My day (chosen)
+[label] My reminders
+[tick box] My reminders (chosen)
+Weather and news show made-up Example lines. This page does not go online.
+[MAIN BUTTON, filled dark orange] Next
+[plain button, outline only, disabled] Start over
+Start over asks first, and you can undo it right after.
+This lists what you typed. It does not tell you what to do.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

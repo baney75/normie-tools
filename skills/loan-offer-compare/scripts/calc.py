@@ -4,6 +4,7 @@
 Usage:
   python3 calc.py '{"offers":[{"amount":"10,000","rate":"6","term":"36","termUnit":"months","fees":""},{"amount":"10,000","rate":"5","term":"48","termUnit":"months","fees":"200"}]}'
   python3 calc.py --file input.json
+  python3 calc.py --file input.json --text    (same answer in plain words and dollars)
 
 Prints one JSON object. On good input it holds each offer's numbers (money in whole cents, rates in
 basis points) and which offers have the lowest cost of borrowing and the lowest monthly payment.
@@ -271,22 +272,94 @@ def compare_offers(inp):
             "sameAmountAndLength": same}
 
 
+END_LINE = "This is an estimate from the numbers you typed. The paper from your bank or lender has the final word."
+
+
+def money_text(cents):
+    """Whole cents -> dollars with commas and two decimals, like $10,951.88."""
+    sign = "-" if cents < 0 else ""
+    c = abs(cents)
+    return "%s$%s.%02d" % (sign, format(c // 100, ","), c % 100)
+
+
+def percent_text(bps):
+    """Basis points -> a percent, like 6% or 7.25%."""
+    whole, frac = divmod(bps, 100)
+    return "%d%%" % whole if frac == 0 else ("%d.%02d" % (whole, frac)).rstrip("0") + "%"
+
+
+def count_text(n, word):
+    return "%s %s%s" % (format(n, ","), word, "" if n == 1 else "s")
+
+
+def months_text(months):
+    """Months, with years and months added when it is a year or more."""
+    base = count_text(months, "month")
+    if months < 12:
+        return base
+    years, rest = divmod(months, 12)
+    parts = [count_text(years, "year")] + ([count_text(rest, "month")] if rest else [])
+    return "%s (%s)" % (base, " and ".join(parts))
+
+
+def problem_lines(result):
+    return ["Fix this first: %s" % p["message"] for p in result.get("problems", [])] or ["Fix this first: Something is wrong with the numbers."]
+
+
+def offer_text(result):
+    """The same answer as plain words in dollars, one short fact per line."""
+    if not result.get("ok"):
+        return problem_lines(result)
+    lines = []
+    for i, o in enumerate(result["offers"]):
+        name = "Offer %d" % (i + 1)
+        lines += [
+            "%s amount borrowed: %s" % (name, money_text(o["principalCents"])),
+            "%s yearly interest rate: %s" % (name, percent_text(o["rateBps"])),
+            "%s loan length: %s" % (name, months_text(o["months"])),
+            "%s upfront fees: %s" % (name, money_text(o["feesCents"])),
+            "%s monthly payment: %s" % (name, money_text(o["monthlyPaymentCents"])),
+            "%s total paid: %s" % (name, money_text(o["totalPaidCents"])),
+            "%s total interest: %s" % (name, money_text(o["totalInterestCents"])),
+            "%s cost of borrowing: %s (interest plus upfront fees)" % (name, money_text(o["costOfBorrowingCents"])),
+        ]
+    for key, label, tie, one in (
+            ("lowestCost", "cost of borrowing", "These offers tie on cost of borrowing", "Lowest cost of borrowing"),
+            ("lowestPayment", "monthly payment", "These offers tie on monthly payment", "Lowest monthly payment")):
+        names = ["Offer %d" % (i + 1) for i in result[key]["offers"]]
+        if result[key]["tie"]:
+            lines.append("%s: %s." % (tie, " and ".join(names)))
+        else:
+            lines.append("%s: %s." % (one, names[0]))
+    lines.append("Compared on cost of borrowing (interest plus upfront fees) and on monthly payment.")
+    if not result["sameAmountAndLength"]:
+        lines.append("These offers differ in amount or length. Their totals are for different loans.")
+    lines.append(END_LINE)
+    return lines
+
+
 def main(argv):
-    if len(argv) >= 2 and argv[0] == "--file":
-        with open(argv[1], encoding="utf-8") as f:
+    args = [a for a in argv if a != "--text"]
+    as_text = len(args) != len(argv)
+    if len(args) >= 2 and args[0] == "--file":
+        with open(args[1], encoding="utf-8") as f:
             raw = f.read()
-    elif argv:
-        raw = argv[0]
+    elif args:
+        raw = args[0]
     else:
         print(__doc__)
         return 2
     try:
         data = json.loads(raw)
     except ValueError:
-        print(json.dumps({"ok": False, "problems": [_problem(None, "offers", "bad",
-              "The input was not readable. Send the offers as JSON.")]}))
+        unreadable = {"ok": False, "problems": [_problem(None, "offers", "bad",
+                      "The input was not readable. Send the offers as JSON.")]}
+        print("\n".join(offer_text(unreadable)) if as_text else json.dumps(unreadable))
         return 1
     result = compare_offers(data)
+    if as_text:
+        print("\n".join(offer_text(result)))
+        return 0 if result["ok"] else 1
     print(json.dumps(result, indent=1))
     return 0 if result["ok"] else 1
 

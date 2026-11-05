@@ -1,0 +1,32 @@
+Screen: form-filler, papers state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Form Filler
+Step 2 of 4: Gather your papers
+[label] Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children
+[tick box] Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children (chosen)
+[label] W-2 from each job (your employer sends it in January or February)
+[tick box] W-2 from each job (your employer sends it in January or February) (chosen)
+[label] 1099 forms for other money you got For example: 1099-NEC for gig or freelance work, 1099-K from payment apps or online selling, 1099-G for unemployment, 1099-INT for bank interest, 1099-R for a pension or retirement money, SSA-1099 for Social Security.
+[tick box] 1099 forms for other money you got For example: 1099-NEC for gig or freelance work, 1099-K from payment apps or online selling, 1099-G for unemployment, 1099-INT for bank interest, 1099-R for a pension or retirement money, SSA-1099 for Social Security. (not chosen)
+[label] 1095-A if you had health insurance from the Marketplace
+[tick box] 1095-A if you had health insurance from the Marketplace (not chosen)
+[label] Last year's tax return, if you filed one You need last year's income number (AGI) or the 5-digit code you picked last year.
+[tick box] Last year's tax return, if you filed one You need last year's income number (AGI) or the 5-digit code you picked last year. (chosen)
+[label] Your IP code (an Identity Protection code), only if the IRS sent you one
+[tick box] Your IP code (an Identity Protection code), only if the IRS sent you one (not chosen)
+[label] Your bank account and routing numbers, if you want your refund sent straight to your bank
+[tick box] Your bank account and routing numbers, if you want your refund sent straight to your bank (not chosen)
+[label] Papers for credits, if you have them For example: child care costs, school costs (Form 1098-T from the school), money you put into a retirement account.
+[tick box] Papers for credits, if you have them For example: child care costs, school costs (Form 1098-T from the school), money you put into a retirement account. (not chosen)
+[label] For side jobs: what you were paid, and receipts for what you spent
+[tick box] For side jobs: what you were paid, and receipts for what you spent (not chosen)
+No last year's income number? You can see it by signing in to your IRS online account, under Tax Records. You can also ask the IRS to mail you a copy of last year's return.
+Source: IRS Free File page
+[link, plain] IRS Free File page
+[MAIN BUTTON, filled dark orange] Next
+[plain button, outline only] Back
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home

@@ -16,8 +16,8 @@ description: Change a number from one everyday unit to another: length, weight, 
 1. Run `python3 scripts/env_check.py`. If it says something is missing, tell the person in plain words and stop.
 2. Ask for the number, the unit it is in now, and the unit they want. The kinds are length, weight, volume, temperature and speed. Ask only for what the next step needs.
 3. Put the choices in a JSON file like `examples/inches-to-millimeters.json`. Keep the person's own words for the number. Do not fill in a number the person did not give.
-4. Run `python3 scripts/calc.py --file <input.json>`. It uses exact fractions and rounds the answer to 6 digits. If it prints problems, read them to the person in plain words and ask for the fix.
-5. Show the answer first, like "12 inches is 304.8 millimeters". Say the answer is shown to 6 digits.
+4. Run `python3 scripts/calc.py --file <input.json> --text` and read the answer to the person. It prints plain words, like "12 inches is 304.8 millimeters." It uses exact fractions and rounds the answer to 6 digits. Use the JSON (run without `--text`) only when you need more detail. If the text starts "Fix this first:", read each line to the person in plain words and ask for the fix. Do not pick a unit or give a number for the person.
+5. The script does one conversion per file. If the person asks for two, give the one printed and say you will do the other next. Never work out a conversion by hand. Show the answer first, like "12 inches is 304.8 millimeters". Always say the answer is shown to 6 digits.
 6. If the person asks why, explain with `references/how-it-works.md`. It lists the exact definitions that the answers come from.
 7. If the person wants a copy, save a text file next to their other files. Never overwrite a file. Tell them where it is and how to undo (delete the new file).
 
@@ -25,8 +25,8 @@ description: Change a number from one everyday unit to another: length, weight, 
 
 1. Show a preview first.
 2. Ask before changing anything.
-3. Never send, pay, sign, file, or submit for the person.
-4. Never tell the person what to do with the answer. Explain; do not advise.
+3. Never send, text, post, pay, sign, file, apply or submit for the person. If the person asks you to, say plainly "I will not do that. You do it yourself" and name the step. Still give the answer.
+4. Never tell the person what to do with the answer, such as how much to use, whether to round it or whether to send it. Explain; do not advise.
 5. Keep undo available. Use the Trash, never delete.
 6. Ask only for the details a step needs.
 7. Say so when unsure. The answer is rounded to 6 digits.

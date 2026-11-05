@@ -24,7 +24,9 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Student Loan Growth and Payoff" })).toBeVisible();
   await expect(page.getByText("Start with your loan balance")).toBeVisible();
-  await expect(page.getByRole("region", { name: "Balance when payments start", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("region", { name: "Balance when payments start", exact: true })).toContainText("Your answer shows here");
+  await expect(page.getByText("Step 2 of 2: Read your answer")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
 });
 
 test("gives the exact balance, months, interest, payoff month and smallest payment, with no sideways scroll", async ({ page }) => {
@@ -63,7 +65,7 @@ test("messy typing shows a calm error that names the field", async ({ page }) =>
   await page.getByLabel("Loan balance").fill("lots of money");
   await page.getByLabel("Yearly interest rate").fill("5");
   await expect(page.getByText("Loan balance: use a number above zero")).toBeVisible();
-  await expect(page.getByRole("region", { name: "Balance when payments start", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("region", { name: "Balance when payments start", exact: true })).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Loan balance").fill("1e3");
   await expect(page.getByText("Loan balance: use a number above zero")).toBeVisible();

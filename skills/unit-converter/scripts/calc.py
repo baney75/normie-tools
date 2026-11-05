@@ -4,6 +4,7 @@
 Usage:
   python3 calc.py '{"category":"length","from":"inch","to":"millimeter","value":"12"}'
   python3 calc.py --file input.json
+  python3 calc.py --file input.json --text    (same answer in plain words)
 
 Prints one JSON object. On good input it holds the answer as text, rounded half up to 6
 significant digits. On bad input it holds {"ok": false, "problems": [...]} with plain-words
@@ -277,22 +278,56 @@ def convert_unit(inp):
     }
 
 
+
+ONE_NAMES = {
+    "inch": "inch", "foot": "foot", "yard": "yard", "mile": "mile", "millimeter": "millimeter",
+    "centimeter": "centimeter", "meter": "meter", "kilometer": "kilometer", "ounce": "ounce",
+    "pound": "pound", "gram": "gram", "kilogram": "kilogram", "teaspoon": "teaspoon",
+    "tablespoon": "tablespoon", "fluid-ounce": "US fluid ounce", "cup": "US cup", "pint": "US pint",
+    "quart": "US quart", "gallon": "US gallon", "milliliter": "milliliter", "liter": "liter",
+    "fahrenheit": "degree Fahrenheit", "celsius": "degree Celsius", "kelvin": "kelvin",
+    "mph": "mile per hour", "kmh": "kilometer per hour",
+}
+
+
+def unit_text(result, inp):
+    """The same answer as plain words, one short fact per line."""
+    if not result.get("ok"):
+        return ["Fix this first: %s" % q["message"] for q in result.get("problems", [])] or ["Fix this first: Something is wrong with the numbers."]
+    typed = _text(inp.get("value") if isinstance(inp, dict) else None)
+    typed = typed.strip() if typed else ""
+    one = parse_decimal(typed) == (False, 1, 1)
+    from_name = ONE_NAMES[result["from"]] if one else result["fromName"]
+    return [
+        "%s %s is %s %s." % (typed, from_name, result["answer"], result["toName"]),
+        "Your answer: %s %s" % (result["answer"], result["toName"]),
+        "Shown to 6 digits.",
+        "Conversions use exact standard factors.",
+    ]
+
+
 def main(argv):
-    if len(argv) >= 2 and argv[0] == "--file":
-        with open(argv[1], encoding="utf-8") as f:
+    args = [a for a in argv if a != "--text"]
+    as_text = len(args) != len(argv)
+    if len(args) >= 2 and args[0] == "--file":
+        with open(args[1], encoding="utf-8") as f:
             raw = f.read()
-    elif argv:
-        raw = argv[0]
+    elif args:
+        raw = args[0]
     else:
         print(__doc__)
         return 2
     try:
         data = json.loads(raw)
     except ValueError:
-        print(json.dumps({"ok": False, "problems": [{"field": "value", "kind": "bad",
-              "message": "The input was not readable. Send the numbers as JSON."}]}))
+        unreadable = {"ok": False, "problems": [{"field": "value", "kind": "bad",
+                      "message": "The input was not readable. Send the numbers as JSON."}]}
+        print("\n".join(unit_text(unreadable, None)) if as_text else json.dumps(unreadable))
         return 1
     result = convert_unit(data)
+    if as_text:
+        print("\n".join(unit_text(result, data)))
+        return 0 if result["ok"] else 1
     print(json.dumps(result, indent=1, ensure_ascii=False))
     return 0 if result["ok"] else 1
 

@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, NumberField, PercentField, ResultCard, StartOver } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -56,8 +56,9 @@ export function Page() {
           </div>
         ) : null}
 
+        <StepLabel n={1} of={2}>{COPY.step1}</StepLabel>
         <form className="nt-slg-form" onSubmit={(e) => e.preventDefault()} noValidate>
-          <MoneyField label={COPY.balance.label} hint={COPY.balance.hint} placeholder={COPY.balance.placeholder} value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />
+          <MoneyField label={COPY.balance.label} hint={COPY.balance.hint} placeholder={COPY.balance.placeholder} autoFocus value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />
           <PercentField label={COPY.rate.label} hint={COPY.rate.hint} placeholder={COPY.rate.placeholder} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />
           <NumberField label={COPY.wait.label} hint={COPY.wait.hint} placeholder={COPY.wait.placeholder} unit={COPY.wait.unit} optional value={v.waitMonths} onChange={(t) => set({ waitMonths: t })} error={bad("waitMonths")} />
           <label className="nt-slg-toggle">
@@ -74,7 +75,7 @@ export function Page() {
 
         <StartOver flowId="student-loan-growth-and-payoff" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
-        {result.ok ? <Answer result={result} /> : null}
+        <Answer result={result.ok ? result : null} />
 
         {!result.ok && blank ? <p className="nt-slg-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
@@ -86,6 +87,7 @@ export function Page() {
 
         <p className="nt-slg-note">{COPY.notes.estimate}</p>
         <p className="nt-slg-note">{COPY.notes.noAdvice}</p>
+        <PrivacyNote />
 
         <details className="nt-slg-details">
           <summary>{COPY.how.summary}</summary>
@@ -104,18 +106,19 @@ export function Page() {
 
 type Good = Extract<ReturnType<typeof explainStudentLoan>, { ok: true }>;
 
-function Answer({ result }: { result: Good }) {
+function Answer({ result }: { result: Good | null }) {
   const r = COPY.result;
-  const pay = result.payoff;
-  const min = result.minPayment;
-  const lines: [string, string][] = [[r.unpaid, formatMoney(result.unpaidInterestCents)]];
-  if (pay) {
+  const pay = result?.payoff;
+  const min = result?.minPayment;
+  const lines: [string, string][] = result ? [[r.unpaid, formatMoney(result.unpaidInterestCents)]] : [];
+  if (result && pay) {
     lines.push([r.months, String(pay.months)], [r.totalInterest, formatMoney(pay.totalInterestCents)]);
     if (pay.payoffDate) lines.push([r.payoffMonth, pay.payoffDate.label]);
   }
   if (min) lines.push([`${r.minPayment} ${years(min.years)}`, formatMoney(min.paymentCents)]);
 
   function save() {
+    if (!result) return;
     const text = [COPY.save.title, "", `${r.balanceLabel}: ${formatMoney(result.balanceAtStartCents)}`, ...lines.map(([k, val]) => `${k}: ${val}`), "", COPY.notes.estimate, ""].join("\n");
     try {
       const url = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
@@ -131,7 +134,7 @@ function Answer({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={r.balanceLabel} answer={formatMoney(result.balanceAtStartCents)}>
+      <ResultCard label={r.balanceLabel} step={COPY.step2} answer={result ? formatMoney(result.balanceAtStartCents) : undefined} waiting={COPY.waiting}>
         <p className="nt-slg-help">{r.balanceLine}</p>
         <dl className="nt-slg-lines">
           {lines.map(([k, val]) => (
@@ -168,16 +171,9 @@ function Answer({ result }: { result: Good }) {
         </details>
       ) : null}
 
-      <details className="nt-slg-details">
-        <summary>{COPY.save.summary}</summary>
-        <div className="nt-slg-details-body">
-          <SavePrintSheet title={COPY.save.title} onSave={save}>
-            <p>{r.balanceLabel}: {formatMoney(result.balanceAtStartCents)}</p>
-            {lines.map(([k, val]) => <p key={k}>{k}: {val}</p>)}
-            <p>{COPY.notes.estimate}</p>
-          </SavePrintSheet>
-        </div>
-      </details>
+      <SavePrintSheet title={COPY.save.summary} onSave={save}>
+        {result ? <p>{COPY.save.preview}</p> : null}
+      </SavePrintSheet>
     </>
   );
 }

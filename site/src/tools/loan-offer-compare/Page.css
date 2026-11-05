@@ -57,3 +57,5 @@
 .nt-offers-key dt { font-weight: 700; color: var(--nt-ink); margin-top: var(--nt-space-3); }
 .nt-offers-key dd { margin: 0; }
 .nt-offers-note { font-size: 1rem; color: var(--nt-text); }
+.nt-offers-add { display: flex; flex-direction: column; align-items: flex-start; gap: var(--nt-space-2); margin: 0 0 var(--nt-space-4); }
+.nt-offers-hint { margin: 0; font-size: 1rem; color: var(--nt-text); }

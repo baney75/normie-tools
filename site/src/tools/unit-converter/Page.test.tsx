@@ -20,7 +20,12 @@ describe("Unit Converter page", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Unit Converter" })).toBeInTheDocument();
     expect(screen.getByText(COPY.empty)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Your answer")).toBeNull();
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent("Your answer shows here");
+    expect(screen.getByText("Step 2 of 2: Read your answer")).toBeInTheDocument();
+    expect(screen.getByText("Step 1 of 2: Pick units and type a number")).toBeInTheDocument();
+    expect(screen.getByLabelText("Number", { exact: false })).toHaveFocus();
+    expect(screen.getByText(/Nothing is sent/)).toBeInTheDocument();
+    expect(screen.getByText(COPY.more.sources)).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -38,8 +43,7 @@ describe("Unit Converter page", () => {
     render(<Page />);
     await fill("Number", "12");
     const card = screen.getByLabelText("Your answer");
-    expect(card).toHaveTextContent("304.8 mm");
-    expect(card).toHaveTextContent("12 inches is 304.8 millimeters.");
+    expect(card).toHaveTextContent("304.8 millimeters");
     expect(card).toHaveTextContent("Shown to 6 digits.");
   });
 
@@ -47,19 +51,20 @@ describe("Unit Converter page", () => {
     render(<Page />);
     await userEvent.selectOptions(screen.getByLabelText("What are you measuring?"), "temperature");
     await fill("Number", "98.6");
-    expect(screen.getByLabelText("Your answer")).toHaveTextContent("37 °C");
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent("37 degrees Celsius");
     await userEvent.click(screen.getByRole("button", { name: COPY.swap }));
-    expect(screen.getByLabelText("Your answer")).toHaveTextContent("209.48 °F");
+    expect(screen.getByText(COPY.swapped)).toBeInTheDocument();
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent("209.48 degrees Fahrenheit");
     await userEvent.selectOptions(screen.getByLabelText("What are you measuring?"), "volume");
     await fill("Number", "1,000");
-    expect(screen.getByLabelText("Your answer")).toHaveTextContent("236,588 mL");
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent("236,588 milliliters");
   });
 
   it("allows a minus sign for temperature only", async () => {
     render(<Page />);
     await userEvent.selectOptions(screen.getByLabelText("What are you measuring?"), "temperature");
     await fill("Number", "-40");
-    expect(screen.getByLabelText("Your answer")).toHaveTextContent("-40 °C");
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent("-40 degrees Celsius");
     await userEvent.selectOptions(screen.getByLabelText("What are you measuring?"), "length");
     expect(screen.getByText(/Number: use zero or more/)).toBeInTheDocument();
   });
@@ -70,7 +75,7 @@ describe("Unit Converter page", () => {
     expect(screen.getByText(/Number: use digits like 12 or 3.5/)).toBeInTheDocument();
     expect(screen.getByLabelText("Number", { exact: false })).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.queryByLabelText("Your answer")).toBeNull();
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent("Your answer shows here");
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
@@ -101,10 +106,11 @@ describe("Unit Converter page", () => {
 
   it("offers Save or print once there is an answer", async () => {
     render(<Page />);
-    expect(screen.queryByText("Save or print")).toBeNull();
+    expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
     await fill("Number", "1");
-    expect(screen.getByText("Save or print")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
+    expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
   });
 });
 
@@ -139,6 +145,7 @@ describe("unit-converter Start over", () => {
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:unit-converter")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     expect(box()).toHaveValue("");
     expect(window.localStorage.getItem("nt:flow:unit-converter")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();

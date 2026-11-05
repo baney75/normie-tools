@@ -16,8 +16,8 @@ description: Explain a home loan payment from the numbers a person types: loan a
 1. Run `python3 scripts/env_check.py`. If it says something is missing, tell the person in plain words and stop.
 2. Ask for the home price, the down payment in dollars (0 is fine), the yearly interest rate (a percent), and the number of years. Ask for yearly property tax, yearly home insurance, HOA each month, and mortgage insurance each month only if the person has them. Ask only for what the next step needs. Never suggest a rate or a tax amount. The person types every number.
 3. Put the numbers in a JSON file like `examples/basic-home.json`. Keep the person's own words for each number. Do not fill in a number the person did not give.
-4. Run `python3 scripts/calc.py --file <input.json>`. It works in whole cents. If it prints problems, read them to the person in plain words and ask for the fix.
-5. Show a preview: the total monthly payment first, then each part (principal and interest, tax, insurance, HOA, mortgage insurance), then the loan amount, total interest, and how the first payment splits between interest and principal. Say "This is an estimate from the numbers you typed. Your lender's paper wins."
+4. Run `python3 scripts/calc.py --file <input.json> --text` and read the answer to the person. It prints plain words in dollars, one fact per line. Use the dollar amounts exactly as printed. Use the JSON (run without `--text`) only when you need more detail. If the text starts "Fix this first:", read each line to the person in plain words and ask for the fix. Give no payment or cost, do not suggest, round or make up a replacement number (not even as an example), and do not offer "if you meant" figures.
+5. Show a preview, in full even for a short question: the total monthly payment first, then each part (principal and interest, tax, insurance, HOA, mortgage insurance), then the loan amount, the total interest over the loan, and how the first payment splits between interest and principal. Always say "This is an estimate from the numbers you typed. Your lender's paper wins."
 6. Explain the words with `references/how-it-works.md`. Say that tax and insurance are the yearly amounts the person typed, divided by 12, and that the real amounts can change.
 7. If the person wants a copy, save a text file next to their other files. Never overwrite a file. Tell them where it is and how to undo (delete the new file).
 
@@ -25,7 +25,7 @@ description: Explain a home loan payment from the numbers a person types: loan a
 
 1. Show a preview first.
 2. Ask before changing anything.
-3. Never send, pay, sign, file, or submit for the person.
+3. Never send, pay, sign, file, apply or submit for the person. If the person asks you to, say plainly "I will not do that. You do it yourself" and name the step (for example, you accept and sign, or you apply and pay). Still show the numbers.
 4. Never say whether the person should buy a home, take a loan, or pick a rate. Explain; do not advise. Do not say what is typical.
 5. Keep undo available. Use the Trash, never delete.
 6. Ask only for the details a step needs.

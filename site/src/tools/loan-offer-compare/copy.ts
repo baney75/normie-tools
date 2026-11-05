@@ -1,10 +1,16 @@
 // Every person-facing word on the Loan Offer Compare page. Plain words, grade 6.
 // It states facts about the numbers typed. It never says which loan to take.
-// It never works out an APR. Page.test.tsx checks this file.
+// It never works out the yearly cost with fees (APR). Page.test.tsx checks this file.
 export const COPY = {
   title: "Loan Offer Compare",
   intro: "Type the numbers from two loan offers. See them side by side.",
   empty: "Start with the amount, the yearly interest rate, and how long each loan lasts. Your answer shows up below.",
+  stepOne: "Type your numbers",
+  stepTwo: "Step 2 of 2: Read your answer",
+  waiting: "Your answer shows here",
+  removeHint: "Remove takes out a line. You can put it back.",
+  removedDone: "The third offer is removed.",
+  putBack: "Put it back",
   offerName: "Offer",
   amount: { label: "Amount borrowed", hint: "The money you get, before any interest.", placeholder: "12,000" },
   rate: { label: "Yearly interest rate", hint: "A percent, like 6.5. Type 0 if there is none.", placeholder: "6.5" },
@@ -54,19 +60,21 @@ export const COPY = {
   key: {
     summary: "What the words mean",
     items: [
+      { term: "APR", means: "The yearly cost of the loan, with some fees. Your lender statement shows it. This tool does not work it out." },
       { term: "Amount borrowed", means: "The money you get from the lender, before any interest." },
       { term: "Interest rate", means: "The yearly price of the loan, as a percent of what you owe." },
       { term: "Cost of borrowing", means: "All the interest you pay, plus the fees you pay at the start." },
     ],
   },
   save: {
-    summary: "Save or print",
-    title: "Your loan offers",
+    title: "Keep your answer if you want",
+    preview: "Your answer above, on paper or saved on this phone or computer.",
+    fileTitle: "Your loan offers",
     fileName: "loan-offers.txt",
   },
   notes: {
     estimate: "This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.",
-    apr: "APR is the yearly cost of the loan, counting some fees. Your lender statement shows it. This tool does not work it out.",
+    apr: "The yearly cost of a loan, with some fees, is on your lender statement. This tool does not work it out.",
     facts: "Lowest is a fact about the numbers on the page, not advice.",
   },
   back: "Back to home",

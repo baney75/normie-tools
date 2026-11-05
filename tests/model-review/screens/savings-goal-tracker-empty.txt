@@ -1,0 +1,39 @@
+Screen: savings-goal-tracker, empty state, phone 390px wide. Order is top to bottom.
+Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+
+[heading 1] Savings Goal Tracker
+Type your goal and what you have saved. See when you get there.
+Step 1 of 2: Type your numbers
+[label] How long will it take?
+[choice] How long will it take? (chosen)
+[label] How much each month?
+[choice] How much each month? (not chosen)
+[label] Goal amount
+[box] Goal amount = "" (cursor is here)
+[label] Already saved (optional)
+[box] Already saved (optional) = ""
+[label] Saved each month
+[box] Saved each month = ""
+[label] Yearly interest rate (optional)
+[box] Yearly interest rate (optional) = ""
+[label] Start month (optional)
+[box] Start month (optional) = ""
+[plain button, outline only, disabled] Start over
+Start over asks first, and you can undo it right after.
+Step 2 of 2: Read your answer
+Months to your goal
+Your answer shows here
+[heading 2] Keep your answer if you want
+[MAIN BUTTON, filled dark orange, disabled] Print
+[plain button, outline only, disabled] Save a copy
+Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+
+Start with your goal amount and how much you have saved. Then type how much you save each month. Your answer shows up below.
+This is an estimate from the numbers you typed. Your bank statement is the final word. This page helps you understand the numbers.
+Each month, interest is added first. Then your monthly amount is added.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+[closed section, tap to open] What the words mean
+
+Back to home
+[link, plain] Back to home

@@ -1,6 +1,6 @@
-import { useId, type ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, ResultCard, StartOver } from "../../components/calc";
+import { ErrorNote, Field, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -31,7 +31,11 @@ function Pick({ label, value, onChange, children }: { label: string; value: stri
 export function Page() {
   const flow = useAutosave<Inputs>("unit-converter", START);
   const v = flow.value;
-  const set = (patch: Partial<Inputs>) => flow.setValue({ ...v, ...patch });
+  const [swapped, setSwapped] = useState(false);
+  const set = (patch: Partial<Inputs>) => {
+    setSwapped(false);
+    flow.setValue({ ...v, ...patch });
+  };
 
   // Derived in render: no timers, no effects. The answer follows the typing.
   const result = convertUnit(v);
@@ -65,6 +69,7 @@ export function Page() {
           </div>
         ) : null}
 
+        <StepLabel n={1} of={2}>{COPY.step1}</StepLabel>
         <form className="nt-unit-form" onSubmit={(e) => e.preventDefault()} noValidate>
           <Pick label={COPY.kind.label} value={v.category} onChange={pickCategory}>
             {CATEGORY_IDS.map((id: string) => (
@@ -75,6 +80,7 @@ export function Page() {
             label={COPY.value.label}
             hint={COPY.value.hint}
             placeholder={COPY.value.placeholder}
+            autoFocus
             value={v.value}
             onChange={(t) => set({ value: t })}
             error={valueBad}
@@ -82,9 +88,13 @@ export function Page() {
           <Pick label={COPY.from.label} value={v.from} onChange={(from) => set({ from })}>
             {units.map((u) => <option key={u.id} value={u.id}>{upper(u.name)} ({u.short})</option>)}
           </Pick>
-          <button type="button" className="nt-unit-swap" onClick={() => set({ from: v.to, to: v.from })}>
+          <button type="button" className="nt-unit-swap" onClick={() => {
+            flow.setValue({ ...v, from: v.to, to: v.from });
+            setSwapped(!swapped);
+          }}>
             {COPY.swap}
           </button>
+          {swapped ? <p className="nt-unit-help" role="status">{COPY.swapped}</p> : null}
           <Pick label={COPY.to.label} value={v.to} onChange={(to) => set({ to })}>
             {units.map((u) => <option key={u.id} value={u.id}>{upper(u.name)} ({u.short})</option>)}
           </Pick>
@@ -92,21 +102,21 @@ export function Page() {
 
         <StartOver flowId="unit-converter" value={flow.value} empty={START} onChange={flow.setValue} />
 
-        {result.ok ? <Answer result={result} typed={v.value.trim()} /> : null}
+        <Answer result={result.ok ? result : null} typed={v.value.trim()} />
         {!result.ok && blank ? <p className="nt-unit-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && valueBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
 
         <details className="nt-unit-details">
           <summary>{COPY.more.summary}</summary>
           <div className="nt-unit-details-body">
-            <h2 className="nt-unit-h2">{COPY.more.heading}</h2>
             <ul className="nt-unit-facts">
               {COPY.more.items.map((t) => <li key={t}>{t}</li>)}
             </ul>
             <p className="nt-unit-help">{COPY.more.rounding}</p>
-            <p className="nt-unit-help">{COPY.more.sources}</p>
           </div>
         </details>
+        <p className="nt-unit-help">{COPY.more.sources}</p>
+        <PrivacyNote />
       </div>
     </ScreenFrame>
   );
@@ -114,10 +124,11 @@ export function Page() {
 
 type Good = Extract<ReturnType<typeof convertUnit>, { ok: true }>;
 
-function Answer({ result, typed }: { result: Good; typed: string }) {
-  const sentence = `${typed} ${result.fromName} is ${result.answer} ${result.toName}.`;
+function Answer({ result, typed }: { result: Good | null; typed: string }) {
+  const sentence = result ? `${typed} ${result.fromName} is ${result.answer} ${result.toName}.` : "";
 
   function save() {
+    if (!result) return;
     const text = [COPY.save.title, "", sentence, COPY.result.shown, ""].join("\n");
     try {
       const url = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
@@ -133,20 +144,13 @@ function Answer({ result, typed }: { result: Good; typed: string }) {
 
   return (
     <>
-      <ResultCard label={COPY.result.label} answer={`${result.answer} ${result.toShort}`}>
-        <p className="nt-unit-help">{sentence}</p>
+      <ResultCard label={COPY.result.label} step={COPY.step2} answer={result ? `${result.answer} ${result.toName}` : undefined} waiting={COPY.waiting}>
         <p className="nt-unit-help">{COPY.result.shown}</p>
       </ResultCard>
 
-      <details className="nt-unit-details">
-        <summary>{COPY.save.summary}</summary>
-        <div className="nt-unit-details-body">
-          <SavePrintSheet title={COPY.save.title} onSave={save}>
-            <p>{sentence}</p>
-            <p>{COPY.result.shown}</p>
-          </SavePrintSheet>
-        </div>
-      </details>
+      <SavePrintSheet title={COPY.save.summary} onSave={save}>
+        {result ? <p>{COPY.save.preview}</p> : null}
+      </SavePrintSheet>
     </>
   );
 }

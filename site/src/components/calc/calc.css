@@ -34,10 +34,13 @@
 
 .nt-result {
   margin: 0 0 var(--nt-space-4);
+  border-top: 8px solid var(--nt-tomato);
   padding: var(--nt-space-4);
   background: var(--nt-mint);
   color: var(--nt-text);
-  border: 1px solid var(--nt-line);
+  border-right: 1px solid var(--nt-line);
+  border-bottom: 1px solid var(--nt-line);
+  border-left: 1px solid var(--nt-line);
   border-radius: var(--nt-radius);
   font-family: var(--nt-font-text);
 }
@@ -70,3 +73,10 @@
 .nt-startover-btn:hover:not(:disabled) { border-color: var(--nt-ink); }
 .nt-startover-btn:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
 .nt-startover-btn:disabled { opacity: 0.6; cursor: default; }
+
+.nt-result-waiting-text { margin: 0; font-size: 1.25rem; color: var(--nt-text); }
+.nt-step { margin: 0 0 var(--nt-space-2); font-size: 1rem; font-weight: 700; color: var(--nt-tdeep); }
+.nt-privacy { margin: var(--nt-space-4) 0; font-size: 1rem; color: var(--nt-text); }
+.nt-startover-ask { margin: 0 0 var(--nt-space-2); font-size: 1rem; color: var(--nt-text); }
+.nt-startover-row { display: flex; flex-wrap: wrap; gap: var(--nt-space-2); }
+.nt-result-done { margin: var(--nt-space-3) 0 0; font-size: 1rem; font-weight: 700; color: var(--nt-ink); }

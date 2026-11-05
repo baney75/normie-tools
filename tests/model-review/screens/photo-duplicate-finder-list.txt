@@ -1,0 +1,23 @@
+Screen: photo-duplicate-finder, list state, phone 390px wide. Order is top to bottom.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+[heading 1] Photo Duplicate Finder
+Find photos that are the same. NT only looks. It never deletes, moves or sends a photo.
+Step 3 of 3: Check your list
+Marked to remove
+1 file
+Room they take: 110 bytes
+That is your answer. You can stop here, or keep a copy below.
+[heading 2] Files on your list
+beach-2.png (110 bytes)
+Nothing was deleted. Your photos are untouched. Use this list to remove them yourself, from your Photos app or Files app.
+[MAIN BUTTON, filled dark orange] Save my list of extras
+[plain button, outline only] Back to the groups
+[closed section, tap to open] Show more
+
+[plain button, outline only] Start over
+Start over asks first, and you can undo it right after.
+Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
+[link, plain] our public page
+Back to home
+[link, plain] Back to home
