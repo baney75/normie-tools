@@ -1,0 +1,73 @@
+// Every person-facing word on the Loan Explainer page. Plain words, grade 6.
+// It never gives advice. It never works out an APR. Page.test.tsx checks this file.
+export const COPY = {
+  title: "Loan Explainer",
+  intro: "Type the numbers from your loan. See what it costs.",
+  empty: "Start with the amount you borrow, the yearly interest rate, and how long the loan lasts. Your answer shows up below.",
+  amount: { label: "Amount borrowed", hint: "The money you get, before any interest.", placeholder: "12,000" },
+  rate: { label: "Yearly interest rate", hint: "A percent, like 6.5. Type 0 if there is none.", placeholder: "6.5" },
+  term: {
+    label: "How long is the loan?",
+    hint: "A whole number.",
+    placeholder: "36",
+    unitLegend: "Count in",
+    months: "Months",
+    years: "Years",
+  },
+  fees: { label: "Upfront fees", hint: "Fees you pay at the start. Leave it empty if none.", placeholder: "0" },
+  extra: { label: "Extra each month", hint: "Money you add to every payment. Leave it empty if none.", placeholder: "0" },
+  stillNeeded: "Still needed:",
+  fixFirst: "Fix the note above to see your answer.",
+  resume: {
+    title: "Use your last numbers?",
+    body: "You typed numbers here before. They were saved on your phone or computer.",
+    yes: "Use them",
+    no: "Start fresh",
+  },
+  result: {
+    paymentLabel: "Monthly payment",
+    paymentLine: "Each month for the whole loan.",
+    totalPaid: "Total paid",
+    totalInterest: "Total interest",
+    fees: "Upfront fees",
+    cost: "Cost of borrowing",
+    costHelp: "Interest plus upfront fees.",
+    lengthLabel: "Loan length",
+  },
+  extraBox: {
+    heading: "With your extra payment",
+    payment: "Monthly payment with extra",
+    done: "Paid off after",
+    monthsSaved: "Months saved",
+    interestSaved: "Interest saved",
+    none: "Your extra payment is too small to finish the loan sooner.",
+  },
+  more: {
+    summary: "Show more",
+    tableHeading: "Year by year",
+    tableNote: "This table includes your extra payment, if you typed one.",
+    year: "Year",
+    paid: "You pay",
+    interest: "Interest",
+    down: "Loan goes down",
+    owe: "Still owe",
+  },
+  key: {
+    summary: "What the words mean",
+    items: [
+      { term: "Amount borrowed", means: "The money you get from the lender, before any interest." },
+      { term: "Interest rate", means: "The yearly price of the loan, as a percent of what you owe." },
+      { term: "Term", means: "How long you have to pay the loan back." },
+    ],
+  },
+  save: {
+    summary: "Save or print",
+    title: "Your loan numbers",
+    fileName: "loan-numbers.txt",
+  },
+  notes: {
+    estimate: "This is an estimate from the numbers you typed. Your lender's paper wins.",
+    apr: "This does not work out the APR. Your lender's paper shows the APR.",
+  },
+  back: "Back to home",
+} as const;

@@ -17,7 +17,10 @@ export const PAGES = {
   home: {
     tagline: "Small tools for everyday things.",
     subline: "Use them yourself, or ask your AI app.",
-    countAfter: "tools are on the way. None is ready yet.",
+    countNone: "tools are on the way. None is ready yet.",
+    countAll: "tools in all.",
+    readyOne: "is ready now. The rest are on the way.",
+    readyMany: "are ready now. The rest are on the way.",
     gridHeading: "All tools",
     agentsLink: "Point your agent here",
   },
@@ -25,6 +28,7 @@ export const PAGES = {
     title: "Point your agent here",
     intro: "Have an AI helper? Point it at NT. It reads this page and sets itself up.",
     noToolsYet: "No NT tool is ready yet. Your helper will tell you the same.",
+    someReady: "Some NT tools are ready. The rest are on the way. Your helper will tell you which.",
     stepsHeading: "Three steps",
     steps: [
       "Copy the sentence below.",
@@ -53,7 +57,7 @@ export const PAGES = {
       heading: "For builders",
       intro: "These files describe NT in a form programs can read. Links are relative to this site.",
       llms: "llms.txt: a short index for AI agents. It has the safety rules and a list of tools.",
-      tools: "tools.json: every tool with its id, name, group, and status. All are coming_soon.",
+      tools: "tools.json: every tool with its id, name, group, and status. Each one is shipped or coming_soon.",
       planned: "Skill downloads, checksums, and the nt command are planned. They are not published yet.",
     },
   },
@@ -87,6 +91,7 @@ export const PAGES = {
     notFound: "We could not find that tool.",
     notReady: "This tool is not ready yet.",
     shippedPlaceholder: "Tool page",
+    loading: "Getting your tool ready.",
     back: "Back to home",
   },
   notFound: {

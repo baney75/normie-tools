@@ -1,0 +1,13 @@
+{
+  "claims": [
+    { "id": "monthly-payment-exact", "text": "The monthly payment is the standard fixed-rate payment, exact to the cent." },
+    { "id": "total-paid-exact", "text": "Total paid is the sum of every monthly payment, exact to the cent." },
+    { "id": "total-interest-exact", "text": "Total interest is the sum of each month's interest, rounded half up to the cent each month." },
+    { "id": "cost-of-borrowing-exact", "text": "Cost of borrowing is total interest plus the upfront fees you typed." },
+    { "id": "extra-payment-savings-exact", "text": "Months saved and interest saved compare the plain schedule with the same schedule plus your extra payment." },
+    { "id": "by-year-table-adds-up", "text": "The by-year table adds up to the totals, and the balance ends at zero." },
+    { "id": "zero-rate-and-edges", "text": "A rate of 0, a one-month loan and a 1,200-month loan all work out exactly." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the field." }
+  ]
+}

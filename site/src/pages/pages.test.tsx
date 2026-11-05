@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { TOOLS } from "../data/tools";
+import { TOOLS, isUsable } from "../data/tools";
 import { Agents } from "./Agents";
 import { Home } from "./Home";
 import { Install } from "./Install";
@@ -15,12 +15,19 @@ describe("Home", () => {
     // The prompt box button is the only button on the page.
     expect(screen.getAllByRole("button")).toHaveLength(1);
   });
-  it("shows all tools, none linkable", () => {
+  it("shows all tools, links only the shipped ones", () => {
     render(<Home />);
-    expect(TOOLS).toHaveLength(76);
+    const shipped = TOOLS.filter(isUsable);
     const links = screen.getAllByRole("link").filter((a) => (a.getAttribute("href") ?? "").startsWith("#/tools"));
-    expect(links).toHaveLength(0);
-    expect(screen.getAllByText(/coming soon/i).length).toBeGreaterThanOrEqual(76);
+    expect(links.map((a) => a.getAttribute("href")).sort()).toEqual(shipped.map((t) => `#/tools/${t.id}`).sort());
+    expect(screen.getAllByText(/coming soon/i)).toHaveLength(TOOLS.length - shipped.length);
+  });
+  it("says how many tools are ready", () => {
+    render(<Home />);
+    const shipped = TOOLS.filter(isUsable).length;
+    expect(shipped).toBeGreaterThan(0);
+    expect(screen.getByText(new RegExp(`^${TOOLS.length} tools in all\\. ${shipped} (is|are) ready now`))).toBeInTheDocument();
+    expect(screen.queryByText(/None is ready/)).toBeNull();
   });
 });
 

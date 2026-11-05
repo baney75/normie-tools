@@ -1,0 +1,1649 @@
+{
+ "note": "Computed with Python Fractions and Decimal (ROUND_HALF_UP) from the textbook formulas, independent of calc.mjs. Rates are basis points, money is cents.",
+ "money": [
+  {
+   "text": "1,000",
+   "cents": 100000
+  },
+  {
+   "text": "$1,000.50",
+   "cents": 100050
+  },
+  {
+   "text": " 12 ",
+   "cents": 1200
+  },
+  {
+   "text": "1e3",
+   "cents": null
+  },
+  {
+   "text": "-5",
+   "cents": -500
+  },
+  {
+   "text": "0",
+   "cents": 0
+  },
+  {
+   "text": "",
+   "cents": null
+  },
+  {
+   "text": "abc",
+   "cents": null
+  },
+  {
+   "text": "😀",
+   "cents": null
+  },
+  {
+   "text": "NaN",
+   "cents": null
+  },
+  {
+   "text": "1000000000000000",
+   "cents": null
+  },
+  {
+   "text": "1.005",
+   "cents": null
+  },
+  {
+   "text": "1.50",
+   "cents": 150
+  },
+  {
+   "text": ".5",
+   "cents": 50
+  },
+  {
+   "text": "12.",
+   "cents": 1200
+  },
+  {
+   "text": "1,00",
+   "cents": null
+  },
+  {
+   "text": "$ 7",
+   "cents": 700
+  },
+  {
+   "text": "1.100",
+   "cents": 110
+  },
+  {
+   "text": "--5",
+   "cents": null
+  },
+  {
+   "text": "5-",
+   "cents": null
+  }
+ ],
+ "rate": [
+  {
+   "text": "6.5",
+   "bps": 650
+  },
+  {
+   "text": "6.5%",
+   "bps": 650
+  },
+  {
+   "text": "0",
+   "bps": 0
+  },
+  {
+   "text": " 12.25 ",
+   "bps": 1225
+  },
+  {
+   "text": "1e1",
+   "bps": null
+  },
+  {
+   "text": "-1",
+   "bps": -100
+  },
+  {
+   "text": "",
+   "bps": null
+  },
+  {
+   "text": "x",
+   "bps": null
+  },
+  {
+   "text": "6.555",
+   "bps": null
+  },
+  {
+   "text": "100",
+   "bps": 10000
+  },
+  {
+   "text": ".25",
+   "bps": 25
+  }
+ ],
+ "loans": [
+  {
+   "id": "car-36",
+   "note": "P=1,000,000c, 6%/yr -> i=0.005/mo, n=36. pmt=P*i/(1-(1+i)^-36)=30421.0... computed with exact Fractions, rounded half up to the cent; interest each month = round_half_up(balance*i); last payment trued up.",
+   "input": {
+    "amount": "$10,000",
+    "rate": "6",
+    "term": "36",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "expect": {
+    "principalCents": 1000000,
+    "rateBps": 600,
+    "months": 36,
+    "feesCents": 0,
+    "extraCents": 0,
+    "monthlyPaymentCents": 30422,
+    "totalPaidCents": 1095188,
+    "totalInterestCents": 95188,
+    "costOfBorrowingCents": 95188,
+    "extra": null,
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 365064,
+      "interestCents": 51470,
+      "principalCents": 313594,
+      "balanceCents": 686406
+     },
+     {
+      "year": 2,
+      "paidCents": 365064,
+      "interestCents": 32126,
+      "principalCents": 332938,
+      "balanceCents": 353468
+     },
+     {
+      "year": 3,
+      "paidCents": 365060,
+      "interestCents": 11592,
+      "principalCents": 353468,
+      "balanceCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "home-30y",
+   "note": "P=20,000,000c, 6.5%/yr, 30 years = 360 months. Exact Fraction formula, then monthly half-up interest.",
+   "input": {
+    "amount": "200,000",
+    "rate": "6.5%",
+    "term": "30",
+    "termUnit": "years",
+    "fees": "",
+    "extra": ""
+   },
+   "expect": {
+    "principalCents": 20000000,
+    "rateBps": 650,
+    "months": 360,
+    "feesCents": 0,
+    "extraCents": 0,
+    "monthlyPaymentCents": 126414,
+    "totalPaidCents": 45508582,
+    "totalInterestCents": 25508582,
+    "costOfBorrowingCents": 25508582,
+    "extra": null,
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 1516968,
+      "interestCents": 1293418,
+      "principalCents": 223550,
+      "balanceCents": 19776450
+     },
+     {
+      "year": 2,
+      "paidCents": 1516968,
+      "interestCents": 1278445,
+      "principalCents": 238523,
+      "balanceCents": 19537927
+     },
+     {
+      "year": 3,
+      "paidCents": 1516968,
+      "interestCents": 1262471,
+      "principalCents": 254497,
+      "balanceCents": 19283430
+     },
+     {
+      "year": 4,
+      "paidCents": 1516968,
+      "interestCents": 1245428,
+      "principalCents": 271540,
+      "balanceCents": 19011890
+     },
+     {
+      "year": 5,
+      "paidCents": 1516968,
+      "interestCents": 1227242,
+      "principalCents": 289726,
+      "balanceCents": 18722164
+     },
+     {
+      "year": 6,
+      "paidCents": 1516968,
+      "interestCents": 1207839,
+      "principalCents": 309129,
+      "balanceCents": 18413035
+     },
+     {
+      "year": 7,
+      "paidCents": 1516968,
+      "interestCents": 1187135,
+      "principalCents": 329833,
+      "balanceCents": 18083202
+     },
+     {
+      "year": 8,
+      "paidCents": 1516968,
+      "interestCents": 1165048,
+      "principalCents": 351920,
+      "balanceCents": 17731282
+     },
+     {
+      "year": 9,
+      "paidCents": 1516968,
+      "interestCents": 1141477,
+      "principalCents": 375491,
+      "balanceCents": 17355791
+     },
+     {
+      "year": 10,
+      "paidCents": 1516968,
+      "interestCents": 1116331,
+      "principalCents": 400637,
+      "balanceCents": 16955154
+     },
+     {
+      "year": 11,
+      "paidCents": 1516968,
+      "interestCents": 1089499,
+      "principalCents": 427469,
+      "balanceCents": 16527685
+     },
+     {
+      "year": 12,
+      "paidCents": 1516968,
+      "interestCents": 1060869,
+      "principalCents": 456099,
+      "balanceCents": 16071586
+     },
+     {
+      "year": 13,
+      "paidCents": 1516968,
+      "interestCents": 1030326,
+      "principalCents": 486642,
+      "balanceCents": 15584944
+     },
+     {
+      "year": 14,
+      "paidCents": 1516968,
+      "interestCents": 997732,
+      "principalCents": 519236,
+      "balanceCents": 15065708
+     },
+     {
+      "year": 15,
+      "paidCents": 1516968,
+      "interestCents": 962960,
+      "principalCents": 554008,
+      "balanceCents": 14511700
+     },
+     {
+      "year": 16,
+      "paidCents": 1516968,
+      "interestCents": 925857,
+      "principalCents": 591111,
+      "balanceCents": 13920589
+     },
+     {
+      "year": 17,
+      "paidCents": 1516968,
+      "interestCents": 886269,
+      "principalCents": 630699,
+      "balanceCents": 13289890
+     },
+     {
+      "year": 18,
+      "paidCents": 1516968,
+      "interestCents": 844030,
+      "principalCents": 672938,
+      "balanceCents": 12616952
+     },
+     {
+      "year": 19,
+      "paidCents": 1516968,
+      "interestCents": 798961,
+      "principalCents": 718007,
+      "balanceCents": 11898945
+     },
+     {
+      "year": 20,
+      "paidCents": 1516968,
+      "interestCents": 750875,
+      "principalCents": 766093,
+      "balanceCents": 11132852
+     },
+     {
+      "year": 21,
+      "paidCents": 1516968,
+      "interestCents": 699568,
+      "principalCents": 817400,
+      "balanceCents": 10315452
+     },
+     {
+      "year": 22,
+      "paidCents": 1516968,
+      "interestCents": 644826,
+      "principalCents": 872142,
+      "balanceCents": 9443310
+     },
+     {
+      "year": 23,
+      "paidCents": 1516968,
+      "interestCents": 586418,
+      "principalCents": 930550,
+      "balanceCents": 8512760
+     },
+     {
+      "year": 24,
+      "paidCents": 1516968,
+      "interestCents": 524095,
+      "principalCents": 992873,
+      "balanceCents": 7519887
+     },
+     {
+      "year": 25,
+      "paidCents": 1516968,
+      "interestCents": 457603,
+      "principalCents": 1059365,
+      "balanceCents": 6460522
+     },
+     {
+      "year": 26,
+      "paidCents": 1516968,
+      "interestCents": 386653,
+      "principalCents": 1130315,
+      "balanceCents": 5330207
+     },
+     {
+      "year": 27,
+      "paidCents": 1516968,
+      "interestCents": 310954,
+      "principalCents": 1206014,
+      "balanceCents": 4124193
+     },
+     {
+      "year": 28,
+      "paidCents": 1516968,
+      "interestCents": 230187,
+      "principalCents": 1286781,
+      "balanceCents": 2837412
+     },
+     {
+      "year": 29,
+      "paidCents": 1516968,
+      "interestCents": 144008,
+      "principalCents": 1372960,
+      "balanceCents": 1464452
+     },
+     {
+      "year": 30,
+      "paidCents": 1516510,
+      "interestCents": 52058,
+      "principalCents": 1464452,
+      "balanceCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "zero-rate",
+   "note": "Rate 0: payment = 120000c / 12 = 10000c exactly, no interest.",
+   "input": {
+    "amount": "1,200",
+    "rate": "0",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "expect": {
+    "principalCents": 120000,
+    "rateBps": 0,
+    "months": 12,
+    "feesCents": 0,
+    "extraCents": 0,
+    "monthlyPaymentCents": 10000,
+    "totalPaidCents": 120000,
+    "totalInterestCents": 0,
+    "costOfBorrowingCents": 0,
+    "extra": null,
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 120000,
+      "interestCents": 0,
+      "principalCents": 120000,
+      "balanceCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "fees-extra",
+   "note": "P=2,000,000c, 7.25%/yr, 60 months, fees 50,000c, extra 10,000c a month. Both schedules by exact Fractions with half-up monthly interest.",
+   "input": {
+    "amount": "$20,000",
+    "rate": "7.25",
+    "term": "5",
+    "termUnit": "years",
+    "fees": "$500",
+    "extra": "$100"
+   },
+   "expect": {
+    "principalCents": 2000000,
+    "rateBps": 725,
+    "months": 60,
+    "feesCents": 50000,
+    "extraCents": 10000,
+    "monthlyPaymentCents": 39839,
+    "totalPaidCents": 2390320,
+    "totalInterestCents": 390320,
+    "costOfBorrowingCents": 440320,
+    "extra": {
+     "monthlyPaymentCents": 49839,
+     "months": 47,
+     "totalPaidCents": 2297416,
+     "totalInterestCents": 297416,
+     "monthsSaved": 13,
+     "interestSaved": 92904
+    },
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 598068,
+      "interestCents": 129637,
+      "principalCents": 468431,
+      "balanceCents": 1531569
+     },
+     {
+      "year": 2,
+      "paidCents": 598068,
+      "interestCents": 94523,
+      "principalCents": 503545,
+      "balanceCents": 1028024
+     },
+     {
+      "year": 3,
+      "paidCents": 598068,
+      "interestCents": 56778,
+      "principalCents": 541290,
+      "balanceCents": 486734
+     },
+     {
+      "year": 4,
+      "paidCents": 503212,
+      "interestCents": 16478,
+      "principalCents": 486734,
+      "balanceCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "one-month",
+   "note": "P=100,000c at 12%/yr for 1 month: i=0.01, payment=100000*1.01=101000c, interest 1000c.",
+   "input": {
+    "amount": "1000",
+    "rate": "12",
+    "term": "1",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "expect": {
+    "principalCents": 100000,
+    "rateBps": 1200,
+    "months": 1,
+    "feesCents": 0,
+    "extraCents": 0,
+    "monthlyPaymentCents": 101000,
+    "totalPaidCents": 101000,
+    "totalInterestCents": 1000,
+    "costOfBorrowingCents": 1000,
+    "extra": null,
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 101000,
+      "interestCents": 1000,
+      "principalCents": 100000,
+      "balanceCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "long-1200",
+   "note": "P=10,000,000c, 5%/yr, 1200 months (100 years). Exact Fractions.",
+   "input": {
+    "amount": "100000",
+    "rate": "5",
+    "term": "1200",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "expect": {
+    "principalCents": 10000000,
+    "rateBps": 500,
+    "months": 1200,
+    "feesCents": 0,
+    "extraCents": 0,
+    "monthlyPaymentCents": 41952,
+    "totalPaidCents": 50352435,
+    "totalInterestCents": 40352435,
+    "costOfBorrowingCents": 40352435,
+    "extra": null,
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 503424,
+      "interestCents": 499920,
+      "principalCents": 3504,
+      "balanceCents": 9996496
+     },
+     {
+      "year": 2,
+      "paidCents": 503424,
+      "interestCents": 499741,
+      "principalCents": 3683,
+      "balanceCents": 9992813
+     },
+     {
+      "year": 3,
+      "paidCents": 503424,
+      "interestCents": 499552,
+      "principalCents": 3872,
+      "balanceCents": 9988941
+     },
+     {
+      "year": 4,
+      "paidCents": 503424,
+      "interestCents": 499355,
+      "principalCents": 4069,
+      "balanceCents": 9984872
+     },
+     {
+      "year": 5,
+      "paidCents": 503424,
+      "interestCents": 499146,
+      "principalCents": 4278,
+      "balanceCents": 9980594
+     },
+     {
+      "year": 6,
+      "paidCents": 503424,
+      "interestCents": 498928,
+      "principalCents": 4496,
+      "balanceCents": 9976098
+     },
+     {
+      "year": 7,
+      "paidCents": 503424,
+      "interestCents": 498697,
+      "principalCents": 4727,
+      "balanceCents": 9971371
+     },
+     {
+      "year": 8,
+      "paidCents": 503424,
+      "interestCents": 498455,
+      "principalCents": 4969,
+      "balanceCents": 9966402
+     },
+     {
+      "year": 9,
+      "paidCents": 503424,
+      "interestCents": 498202,
+      "principalCents": 5222,
+      "balanceCents": 9961180
+     },
+     {
+      "year": 10,
+      "paidCents": 503424,
+      "interestCents": 497935,
+      "principalCents": 5489,
+      "balanceCents": 9955691
+     },
+     {
+      "year": 11,
+      "paidCents": 503424,
+      "interestCents": 497652,
+      "principalCents": 5772,
+      "balanceCents": 9949919
+     },
+     {
+      "year": 12,
+      "paidCents": 503424,
+      "interestCents": 497359,
+      "principalCents": 6065,
+      "balanceCents": 9943854
+     },
+     {
+      "year": 13,
+      "paidCents": 503424,
+      "interestCents": 497048,
+      "principalCents": 6376,
+      "balanceCents": 9937478
+     },
+     {
+      "year": 14,
+      "paidCents": 503424,
+      "interestCents": 496722,
+      "principalCents": 6702,
+      "balanceCents": 9930776
+     },
+     {
+      "year": 15,
+      "paidCents": 503424,
+      "interestCents": 496378,
+      "principalCents": 7046,
+      "balanceCents": 9923730
+     },
+     {
+      "year": 16,
+      "paidCents": 503424,
+      "interestCents": 496018,
+      "principalCents": 7406,
+      "balanceCents": 9916324
+     },
+     {
+      "year": 17,
+      "paidCents": 503424,
+      "interestCents": 495639,
+      "principalCents": 7785,
+      "balanceCents": 9908539
+     },
+     {
+      "year": 18,
+      "paidCents": 503424,
+      "interestCents": 495241,
+      "principalCents": 8183,
+      "balanceCents": 9900356
+     },
+     {
+      "year": 19,
+      "paidCents": 503424,
+      "interestCents": 494825,
+      "principalCents": 8599,
+      "balanceCents": 9891757
+     },
+     {
+      "year": 20,
+      "paidCents": 503424,
+      "interestCents": 494383,
+      "principalCents": 9041,
+      "balanceCents": 9882716
+     },
+     {
+      "year": 21,
+      "paidCents": 503424,
+      "interestCents": 493920,
+      "principalCents": 9504,
+      "balanceCents": 9873212
+     },
+     {
+      "year": 22,
+      "paidCents": 503424,
+      "interestCents": 493433,
+      "principalCents": 9991,
+      "balanceCents": 9863221
+     },
+     {
+      "year": 23,
+      "paidCents": 503424,
+      "interestCents": 492922,
+      "principalCents": 10502,
+      "balanceCents": 9852719
+     },
+     {
+      "year": 24,
+      "paidCents": 503424,
+      "interestCents": 492385,
+      "principalCents": 11039,
+      "balanceCents": 9841680
+     },
+     {
+      "year": 25,
+      "paidCents": 503424,
+      "interestCents": 491820,
+      "principalCents": 11604,
+      "balanceCents": 9830076
+     },
+     {
+      "year": 26,
+      "paidCents": 503424,
+      "interestCents": 491227,
+      "principalCents": 12197,
+      "balanceCents": 9817879
+     },
+     {
+      "year": 27,
+      "paidCents": 503424,
+      "interestCents": 490602,
+      "principalCents": 12822,
+      "balanceCents": 9805057
+     },
+     {
+      "year": 28,
+      "paidCents": 503424,
+      "interestCents": 489947,
+      "principalCents": 13477,
+      "balanceCents": 9791580
+     },
+     {
+      "year": 29,
+      "paidCents": 503424,
+      "interestCents": 489256,
+      "principalCents": 14168,
+      "balanceCents": 9777412
+     },
+     {
+      "year": 30,
+      "paidCents": 503424,
+      "interestCents": 488532,
+      "principalCents": 14892,
+      "balanceCents": 9762520
+     },
+     {
+      "year": 31,
+      "paidCents": 503424,
+      "interestCents": 487772,
+      "principalCents": 15652,
+      "balanceCents": 9746868
+     },
+     {
+      "year": 32,
+      "paidCents": 503424,
+      "interestCents": 486969,
+      "principalCents": 16455,
+      "balanceCents": 9730413
+     },
+     {
+      "year": 33,
+      "paidCents": 503424,
+      "interestCents": 486130,
+      "principalCents": 17294,
+      "balanceCents": 9713119
+     },
+     {
+      "year": 34,
+      "paidCents": 503424,
+      "interestCents": 485242,
+      "principalCents": 18182,
+      "balanceCents": 9694937
+     },
+     {
+      "year": 35,
+      "paidCents": 503424,
+      "interestCents": 484313,
+      "principalCents": 19111,
+      "balanceCents": 9675826
+     },
+     {
+      "year": 36,
+      "paidCents": 503424,
+      "interestCents": 483336,
+      "principalCents": 20088,
+      "balanceCents": 9655738
+     },
+     {
+      "year": 37,
+      "paidCents": 503424,
+      "interestCents": 482307,
+      "principalCents": 21117,
+      "balanceCents": 9634621
+     },
+     {
+      "year": 38,
+      "paidCents": 503424,
+      "interestCents": 481228,
+      "principalCents": 22196,
+      "balanceCents": 9612425
+     },
+     {
+      "year": 39,
+      "paidCents": 503424,
+      "interestCents": 480093,
+      "principalCents": 23331,
+      "balanceCents": 9589094
+     },
+     {
+      "year": 40,
+      "paidCents": 503424,
+      "interestCents": 478898,
+      "principalCents": 24526,
+      "balanceCents": 9564568
+     },
+     {
+      "year": 41,
+      "paidCents": 503424,
+      "interestCents": 477641,
+      "principalCents": 25783,
+      "balanceCents": 9538785
+     },
+     {
+      "year": 42,
+      "paidCents": 503424,
+      "interestCents": 476325,
+      "principalCents": 27099,
+      "balanceCents": 9511686
+     },
+     {
+      "year": 43,
+      "paidCents": 503424,
+      "interestCents": 474938,
+      "principalCents": 28486,
+      "balanceCents": 9483200
+     },
+     {
+      "year": 44,
+      "paidCents": 503424,
+      "interestCents": 473479,
+      "principalCents": 29945,
+      "balanceCents": 9453255
+     },
+     {
+      "year": 45,
+      "paidCents": 503424,
+      "interestCents": 471950,
+      "principalCents": 31474,
+      "balanceCents": 9421781
+     },
+     {
+      "year": 46,
+      "paidCents": 503424,
+      "interestCents": 470337,
+      "principalCents": 33087,
+      "balanceCents": 9388694
+     },
+     {
+      "year": 47,
+      "paidCents": 503424,
+      "interestCents": 468646,
+      "principalCents": 34778,
+      "balanceCents": 9353916
+     },
+     {
+      "year": 48,
+      "paidCents": 503424,
+      "interestCents": 466865,
+      "principalCents": 36559,
+      "balanceCents": 9317357
+     },
+     {
+      "year": 49,
+      "paidCents": 503424,
+      "interestCents": 464994,
+      "principalCents": 38430,
+      "balanceCents": 9278927
+     },
+     {
+      "year": 50,
+      "paidCents": 503424,
+      "interestCents": 463029,
+      "principalCents": 40395,
+      "balanceCents": 9238532
+     },
+     {
+      "year": 51,
+      "paidCents": 503424,
+      "interestCents": 460962,
+      "principalCents": 42462,
+      "balanceCents": 9196070
+     },
+     {
+      "year": 52,
+      "paidCents": 503424,
+      "interestCents": 458791,
+      "principalCents": 44633,
+      "balanceCents": 9151437
+     },
+     {
+      "year": 53,
+      "paidCents": 503424,
+      "interestCents": 456506,
+      "principalCents": 46918,
+      "balanceCents": 9104519
+     },
+     {
+      "year": 54,
+      "paidCents": 503424,
+      "interestCents": 454106,
+      "principalCents": 49318,
+      "balanceCents": 9055201
+     },
+     {
+      "year": 55,
+      "paidCents": 503424,
+      "interestCents": 451581,
+      "principalCents": 51843,
+      "balanceCents": 9003358
+     },
+     {
+      "year": 56,
+      "paidCents": 503424,
+      "interestCents": 448932,
+      "principalCents": 54492,
+      "balanceCents": 8948866
+     },
+     {
+      "year": 57,
+      "paidCents": 503424,
+      "interestCents": 446143,
+      "principalCents": 57281,
+      "balanceCents": 8891585
+     },
+     {
+      "year": 58,
+      "paidCents": 503424,
+      "interestCents": 443210,
+      "principalCents": 60214,
+      "balanceCents": 8831371
+     },
+     {
+      "year": 59,
+      "paidCents": 503424,
+      "interestCents": 440131,
+      "principalCents": 63293,
+      "balanceCents": 8768078
+     },
+     {
+      "year": 60,
+      "paidCents": 503424,
+      "interestCents": 436894,
+      "principalCents": 66530,
+      "balanceCents": 8701548
+     },
+     {
+      "year": 61,
+      "paidCents": 503424,
+      "interestCents": 433490,
+      "principalCents": 69934,
+      "balanceCents": 8631614
+     },
+     {
+      "year": 62,
+      "paidCents": 503424,
+      "interestCents": 429912,
+      "principalCents": 73512,
+      "balanceCents": 8558102
+     },
+     {
+      "year": 63,
+      "paidCents": 503424,
+      "interestCents": 426152,
+      "principalCents": 77272,
+      "balanceCents": 8480830
+     },
+     {
+      "year": 64,
+      "paidCents": 503424,
+      "interestCents": 422198,
+      "principalCents": 81226,
+      "balanceCents": 8399604
+     },
+     {
+      "year": 65,
+      "paidCents": 503424,
+      "interestCents": 418040,
+      "principalCents": 85384,
+      "balanceCents": 8314220
+     },
+     {
+      "year": 66,
+      "paidCents": 503424,
+      "interestCents": 413674,
+      "principalCents": 89750,
+      "balanceCents": 8224470
+     },
+     {
+      "year": 67,
+      "paidCents": 503424,
+      "interestCents": 409082,
+      "principalCents": 94342,
+      "balanceCents": 8130128
+     },
+     {
+      "year": 68,
+      "paidCents": 503424,
+      "interestCents": 404256,
+      "principalCents": 99168,
+      "balanceCents": 8030960
+     },
+     {
+      "year": 69,
+      "paidCents": 503424,
+      "interestCents": 399181,
+      "principalCents": 104243,
+      "balanceCents": 7926717
+     },
+     {
+      "year": 70,
+      "paidCents": 503424,
+      "interestCents": 393847,
+      "principalCents": 109577,
+      "balanceCents": 7817140
+     },
+     {
+      "year": 71,
+      "paidCents": 503424,
+      "interestCents": 388239,
+      "principalCents": 115185,
+      "balanceCents": 7701955
+     },
+     {
+      "year": 72,
+      "paidCents": 503424,
+      "interestCents": 382346,
+      "principalCents": 121078,
+      "balanceCents": 7580877
+     },
+     {
+      "year": 73,
+      "paidCents": 503424,
+      "interestCents": 376153,
+      "principalCents": 127271,
+      "balanceCents": 7453606
+     },
+     {
+      "year": 74,
+      "paidCents": 503424,
+      "interestCents": 369642,
+      "principalCents": 133782,
+      "balanceCents": 7319824
+     },
+     {
+      "year": 75,
+      "paidCents": 503424,
+      "interestCents": 362799,
+      "principalCents": 140625,
+      "balanceCents": 7179199
+     },
+     {
+      "year": 76,
+      "paidCents": 503424,
+      "interestCents": 355601,
+      "principalCents": 147823,
+      "balanceCents": 7031376
+     },
+     {
+      "year": 77,
+      "paidCents": 503424,
+      "interestCents": 348041,
+      "principalCents": 155383,
+      "balanceCents": 6875993
+     },
+     {
+      "year": 78,
+      "paidCents": 503424,
+      "interestCents": 340091,
+      "principalCents": 163333,
+      "balanceCents": 6712660
+     },
+     {
+      "year": 79,
+      "paidCents": 503424,
+      "interestCents": 331733,
+      "principalCents": 171691,
+      "balanceCents": 6540969
+     },
+     {
+      "year": 80,
+      "paidCents": 503424,
+      "interestCents": 322951,
+      "principalCents": 180473,
+      "balanceCents": 6360496
+     },
+     {
+      "year": 81,
+      "paidCents": 503424,
+      "interestCents": 313718,
+      "principalCents": 189706,
+      "balanceCents": 6170790
+     },
+     {
+      "year": 82,
+      "paidCents": 503424,
+      "interestCents": 304010,
+      "principalCents": 199414,
+      "balanceCents": 5971376
+     },
+     {
+      "year": 83,
+      "paidCents": 503424,
+      "interestCents": 293808,
+      "principalCents": 209616,
+      "balanceCents": 5761760
+     },
+     {
+      "year": 84,
+      "paidCents": 503424,
+      "interestCents": 283082,
+      "principalCents": 220342,
+      "balanceCents": 5541418
+     },
+     {
+      "year": 85,
+      "paidCents": 503424,
+      "interestCents": 271810,
+      "principalCents": 231614,
+      "balanceCents": 5309804
+     },
+     {
+      "year": 86,
+      "paidCents": 503424,
+      "interestCents": 259962,
+      "principalCents": 243462,
+      "balanceCents": 5066342
+     },
+     {
+      "year": 87,
+      "paidCents": 503424,
+      "interestCents": 247505,
+      "principalCents": 255919,
+      "balanceCents": 4810423
+     },
+     {
+      "year": 88,
+      "paidCents": 503424,
+      "interestCents": 234409,
+      "principalCents": 269015,
+      "balanceCents": 4541408
+     },
+     {
+      "year": 89,
+      "paidCents": 503424,
+      "interestCents": 220649,
+      "principalCents": 282775,
+      "balanceCents": 4258633
+     },
+     {
+      "year": 90,
+      "paidCents": 503424,
+      "interestCents": 206180,
+      "principalCents": 297244,
+      "balanceCents": 3961389
+     },
+     {
+      "year": 91,
+      "paidCents": 503424,
+      "interestCents": 190972,
+      "principalCents": 312452,
+      "balanceCents": 3648937
+     },
+     {
+      "year": 92,
+      "paidCents": 503424,
+      "interestCents": 174987,
+      "principalCents": 328437,
+      "balanceCents": 3320500
+     },
+     {
+      "year": 93,
+      "paidCents": 503424,
+      "interestCents": 158184,
+      "principalCents": 345240,
+      "balanceCents": 2975260
+     },
+     {
+      "year": 94,
+      "paidCents": 503424,
+      "interestCents": 140521,
+      "principalCents": 362903,
+      "balanceCents": 2612357
+     },
+     {
+      "year": 95,
+      "paidCents": 503424,
+      "interestCents": 121954,
+      "principalCents": 381470,
+      "balanceCents": 2230887
+     },
+     {
+      "year": 96,
+      "paidCents": 503424,
+      "interestCents": 102437,
+      "principalCents": 400987,
+      "balanceCents": 1829900
+     },
+     {
+      "year": 97,
+      "paidCents": 503424,
+      "interestCents": 81924,
+      "principalCents": 421500,
+      "balanceCents": 1408400
+     },
+     {
+      "year": 98,
+      "paidCents": 503424,
+      "interestCents": 60357,
+      "principalCents": 443067,
+      "balanceCents": 965333
+     },
+     {
+      "year": 99,
+      "paidCents": 503424,
+      "interestCents": 37688,
+      "principalCents": 465736,
+      "balanceCents": 499597
+     },
+     {
+      "year": 100,
+      "paidCents": 513459,
+      "interestCents": 13862,
+      "principalCents": 499597,
+      "balanceCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "tiny-rounding",
+   "note": "P=1,000c ($10), 18.99%/yr, 7 months: checks cent rounding of payment and a trued-up last payment.",
+   "input": {
+    "amount": "10.00",
+    "rate": "18.99",
+    "term": "7",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "expect": {
+    "principalCents": 1000,
+    "rateBps": 1899,
+    "months": 7,
+    "feesCents": 0,
+    "extraCents": 0,
+    "monthlyPaymentCents": 152,
+    "totalPaidCents": 1064,
+    "totalInterestCents": 64,
+    "costOfBorrowingCents": 64,
+    "extra": null,
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 1064,
+      "interestCents": 64,
+      "principalCents": 1000,
+      "balanceCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "messy-typing",
+   "note": "Same as car-36 but typed with spaces, commas and a percent sign.",
+   "input": {
+    "amount": " $10,000.00 ",
+    "rate": " 6.00% ",
+    "term": " 3 ",
+    "termUnit": "years",
+    "fees": " 0 ",
+    "extra": ""
+   },
+   "expect": {
+    "principalCents": 1000000,
+    "rateBps": 600,
+    "months": 36,
+    "feesCents": 0,
+    "extraCents": 0,
+    "monthlyPaymentCents": 30422,
+    "totalPaidCents": 1095188,
+    "totalInterestCents": 95188,
+    "costOfBorrowingCents": 95188,
+    "extra": null,
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 365064,
+      "interestCents": 51470,
+      "principalCents": 313594,
+      "balanceCents": 686406
+     },
+     {
+      "year": 2,
+      "paidCents": 365064,
+      "interestCents": 32126,
+      "principalCents": 332938,
+      "balanceCents": 353468
+     },
+     {
+      "year": 3,
+      "paidCents": 365060,
+      "interestCents": 11592,
+      "principalCents": 353468,
+      "balanceCents": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "extra-clears-early",
+   "note": "P=500,000c, 4.5%/yr, 24 months, extra 100,000c a month: loan ends in about 5 months.",
+   "input": {
+    "amount": "5,000",
+    "rate": "4.5",
+    "term": "24",
+    "termUnit": "months",
+    "fees": "",
+    "extra": "1,000"
+   },
+   "expect": {
+    "principalCents": 500000,
+    "rateBps": 450,
+    "months": 24,
+    "feesCents": 0,
+    "extraCents": 100000,
+    "monthlyPaymentCents": 21824,
+    "totalPaidCents": 523776,
+    "totalInterestCents": 23776,
+    "costOfBorrowingCents": 23776,
+    "extra": {
+     "monthlyPaymentCents": 121824,
+     "months": 5,
+     "totalPaidCents": 504861,
+     "totalInterestCents": 4861,
+     "monthsSaved": 19,
+     "interestSaved": 18915
+    },
+    "byYear": [
+     {
+      "year": 1,
+      "paidCents": 504861,
+      "interestCents": 4861,
+      "principalCents": 500000,
+      "balanceCents": 0
+     }
+    ]
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "blank",
+   "input": {
+    "amount": "",
+    "rate": "",
+    "term": "",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "amount",
+     "missing"
+    ],
+    [
+     "rate",
+     "missing"
+    ],
+    [
+     "term",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "text-amount",
+   "input": {
+    "amount": "lots",
+    "rate": "5",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "amount",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "negative-amount",
+   "input": {
+    "amount": "-100",
+    "rate": "5",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "amount",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "zero-amount",
+   "input": {
+    "amount": "0",
+    "rate": "5",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "amount",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "huge-amount",
+   "input": {
+    "amount": "1000000000000000",
+    "rate": "5",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "amount",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "exponent-amount",
+   "input": {
+    "amount": "1e3",
+    "rate": "5",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "amount",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "rate-over-100",
+   "input": {
+    "amount": "1000",
+    "rate": "150",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "rate",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "negative-rate",
+   "input": {
+    "amount": "1000",
+    "rate": "-2",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "rate",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "term-zero",
+   "input": {
+    "amount": "1000",
+    "rate": "5",
+    "term": "0",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "term-1201-months",
+   "input": {
+    "amount": "1000",
+    "rate": "5",
+    "term": "1201",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "term-101-years",
+   "input": {
+    "amount": "1000",
+    "rate": "5",
+    "term": "101",
+    "termUnit": "years",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "term-fraction",
+   "input": {
+    "amount": "1000",
+    "rate": "5",
+    "term": "2.5",
+    "termUnit": "years",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "bad-fees-and-extra",
+   "input": {
+    "amount": "1000",
+    "rate": "5",
+    "term": "12",
+    "termUnit": "months",
+    "fees": "-1",
+    "extra": "??"
+   },
+   "errors": [
+    [
+     "fees",
+     "bad"
+    ],
+    [
+     "extra",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "emoji",
+   "input": {
+    "amount": "💰",
+    "rate": "😀",
+    "term": "🚀",
+    "termUnit": "months",
+    "fees": "",
+    "extra": ""
+   },
+   "errors": [
+    [
+     "amount",
+     "bad"
+    ],
+    [
+     "rate",
+     "bad"
+    ],
+    [
+     "term",
+     "bad"
+    ]
+   ]
+  }
+ ]
+}

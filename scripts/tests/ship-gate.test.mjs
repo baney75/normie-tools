@@ -19,10 +19,13 @@ test("ship-gate: exits zero on the real manifest", () => {
   assert.equal(r.status, 0, r.stderr);
 });
 
-test("ship-gate: real manifest has no dummy tool and no shipped tool yet", () => {
+test("ship-gate: real manifest has no dummy tool, and every shipped tool names its claims file", () => {
   const m = JSON.parse(fs.readFileSync(path.join(root, "site/public/tools.json"), "utf8"));
   assert.ok(!m.tools.some((t) => t.id === "ship-gate-dummy"));
-  assert.ok(m.tools.every((t) => t.status === "coming_soon"));
+  for (const t of m.tools.filter((x) => x.status === "shipped")) {
+    assert.equal(t.claimsPath, `tools/${t.id}/claims.json`, t.id);
+  }
+  for (const t of m.tools.filter((x) => x.status !== "shipped")) assert.equal(t.status, "coming_soon", t.id);
 });
 
 test("ship-gate: exits non-zero when the dummy fixture is enabled, with plain messages", () => {

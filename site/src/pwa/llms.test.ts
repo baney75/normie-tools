@@ -15,11 +15,18 @@ describe("llms.txt", () => {
     expect(txt.startsWith("# NT\n")).toBe(true);
     expect(txt).toMatch(/^> /m);
   });
-  it("lists all 76 tools, all coming soon", () => {
-    expect(index.tools).toHaveLength(76);
+  it("lists every tool, marks only the unfinished ones as coming soon", () => {
     const lines = txt.split("\n").filter((l: string) => l.startsWith("- ") && l.includes("(coming soon)"));
-    expect(lines).toHaveLength(76);
-    for (const t of index.tools) expect(txt).toContain(`- ${t.name} (coming soon)`);
+    const soon = index.tools.filter((t: { status: string }) => t.status !== "shipped");
+    expect(lines).toHaveLength(soon.length);
+    for (const t of index.tools) {
+      if (t.status === "shipped") expect(txt).toMatch(new RegExp(`^- ${t.name}$`, "m"));
+      else expect(txt).toContain(`- ${t.name} (coming soon)`);
+    }
+  });
+  it("says how many tools are ready", () => {
+    const ready = index.tools.filter((t: { status: string }) => t.status === "shipped").length;
+    expect(txt).toContain(ready === 0 ? "No tool is ready yet." : `${ready} of ${index.tools.length} tools are ready.`);
   });
   it("has no em or en dashes, and no absolute links", () => {
     expect(txt).not.toMatch(DASH_RE);

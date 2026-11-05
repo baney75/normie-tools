@@ -83,7 +83,11 @@ test("build-skills: skips coming soon by default, builds a checked zip when aske
   const out = fs.mkdtempSync(path.join(os.tmpdir(), "nt-skills-"));
   const none = py(["scripts/build_skills.py", "--out", out]);
   assert.equal(none.status, 0, none.stderr);
-  assert.deepEqual(fs.readdirSync(out), []);
+  const m = JSON.parse(fs.readFileSync(path.join(root, "site/public/tools.json"), "utf8"));
+  const shipped = m.tools.filter((t) => t.status === "shipped" && fs.existsSync(path.join(root, "skills", t.id, "SKILL.md"))).map((t) => `${t.id}.zip`);
+  assert.deepEqual(fs.readdirSync(out).sort(), shipped.sort());
+  fs.rmSync(out, { recursive: true, force: true });
+  fs.mkdirSync(out);
   const r = py(["scripts/build_skills.py", "--out", out, "--include-coming-soon"]);
   assert.equal(r.status, 0, r.stderr);
   const zip = path.join(out, "receipt-to-spreadsheet.zip");
@@ -94,6 +98,23 @@ test("build-skills: skips coming soon by default, builds a checked zip when aske
   assert.ok(list.includes("receipt-to-spreadsheet/SKILL.md"));
   assert.ok(list.includes("receipt-to-spreadsheet/scripts/refs.py"));
   assert.ok(!list.some((n) => n.includes("__pycache__")));
+});
+
+test("skill: loan-explainer zip is self contained, with its golden copy and tests", () => {
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), "nt-loan-"));
+  const r = py(["scripts/build_skills.py", "--out", out]);
+  assert.equal(r.status, 0, r.stderr);
+  const zip = path.join(out, "loan-explainer.zip");
+  assert.ok(fs.existsSync(zip));
+  const list = py(["-c", "import zipfile,sys\nz=zipfile.ZipFile(sys.argv[1])\nprint('\\n'.join(z.namelist()))", zip]).stdout.split("\n").filter(Boolean);
+  for (const f of ["SKILL.md", "scripts/calc.py", "scripts/env_check.py", "tests/golden.json", "tests/test_calc.py"]) {
+    assert.ok(list.includes(`loan-explainer/${f}`), f);
+  }
+  const unpack = fs.mkdtempSync(path.join(os.tmpdir(), "nt-loan-unzip-"));
+  const u = py(["-c", "import zipfile,sys\nzipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])", zip, unpack]);
+  assert.equal(u.status, 0, u.stderr);
+  const t = py(["-m", "unittest", "discover", "-s", path.join(unpack, "loan-explainer", "tests"), "-p", "test_*.py"], { offline: true });
+  assert.equal(t.status, 0, t.stderr);
 });
 
 test("build-skills: fails when the header name does not match the folder", () => {

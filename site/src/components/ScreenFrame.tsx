@@ -10,11 +10,14 @@ export type ScreenFrameProps = {
   primary?: PrimaryAction;
   more?: MoreItem[];
   reserve?: string;
+  /** Use "div" when the page already sits inside the shell's main area. */
+  as?: "main" | "div";
 };
 
-export function ScreenFrame({ title, children, primary, more, reserve = "12rem" }: ScreenFrameProps) {
+export function ScreenFrame({ title, children, primary, more, reserve = "12rem", as = "main" }: ScreenFrameProps) {
+  const Root = as;
   return (
-    <main className="nt-frame">
+    <Root className="nt-frame">
       <h1 className="nt-frame-title">{title}</h1>
       <div className="nt-frame-body" style={{ minHeight: reserve }}>
         {children}
@@ -35,6 +38,6 @@ export function ScreenFrame({ title, children, primary, more, reserve = "12rem" 
           {more && more.length > 0 ? <MoreMenu items={more} /> : null}
         </div>
       ) : null}
-    </main>
+    </Root>
   );
 }

@@ -4,6 +4,8 @@ export type Tool = {
   status: "shipped" | "coming_soon";
   routes: string[];
   claimsPath?: string;
+  takesFiles?: boolean;
+  dir?: string;
   group?: string;
   icon?: string;
 };
@@ -19,6 +21,7 @@ export const TOOLS: Tool[] = [
   {"id":"spending-check-in","name":"Spending Check-in","status":"coming_soon","group":"Money","routes":["/tools/spending-check-in"]},
   {"id":"savings-goal-tracker","name":"Savings Goal Tracker","status":"coming_soon","group":"Money","routes":["/tools/savings-goal-tracker"]},
   {"id":"debt-payoff-planner","name":"Debt Payoff Planner","status":"coming_soon","group":"Money","routes":["/tools/debt-payoff-planner"]},
+  {"id":"loan-explainer","name":"Loan Explainer","status":"shipped","group":"Money","routes":["/tools/loan-explainer"],"claimsPath":"tools/loan-explainer/claims.json","takesFiles":false},
   {"id":"bill-negotiation-prep","name":"Bill Negotiation Prep","status":"coming_soon","group":"Money","routes":["/tools/bill-negotiation-prep"]},
   {"id":"cheaper-plan-finder","name":"Cheaper Plan Finder","status":"coming_soon","group":"Money","routes":["/tools/cheaper-plan-finder"]},
   {"id":"price-drop-watch","name":"Price Drop Watch","status":"coming_soon","group":"Money","routes":["/tools/price-drop-watch"]},

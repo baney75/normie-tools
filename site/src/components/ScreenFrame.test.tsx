@@ -18,6 +18,13 @@ describe("ScreenFrame", () => {
     expect(screen.getByText("More")).toBeInTheDocument();
   });
 
+  it("can be a div so it does not nest a second main", () => {
+    const { container } = render(<ScreenFrame title="T" as="div" />);
+    expect(container.querySelector("main")).toBeNull();
+    expect(container.querySelector("div.nt-frame")).not.toBeNull();
+    expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
+  });
+
   it("renders a link primary when href is given", () => {
     render(<ScreenFrame title="T" primary={{ label: "Go", href: "/go" }} />);
     expect(screen.getByRole("link", { name: "Go" })).toHaveClass("nt-primary");

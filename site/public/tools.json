@@ -95,6 +95,17 @@
       ]
     },
     {
+      "id": "loan-explainer",
+      "name": "Loan Explainer",
+      "status": "shipped",
+      "group": "Money",
+      "routes": [
+        "/tools/loan-explainer"
+      ],
+      "claimsPath": "tools/loan-explainer/claims.json",
+      "takesFiles": false
+    },
+    {
       "id": "bill-negotiation-prep",
       "name": "Bill Negotiation Prep",
       "status": "coming_soon",

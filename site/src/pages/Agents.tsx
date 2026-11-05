@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PAGES } from "../copy/pages";
+import { TOOLS, isUsable } from "../data/tools";
 
 export function Agents() {
   const c = PAGES.agents;
@@ -21,7 +22,7 @@ export function Agents() {
     <>
       <h1>{c.title}</h1>
       <p>{c.intro}</p>
-      <p>{c.noToolsYet}</p>
+      <p>{TOOLS.some(isUsable) ? c.someReady : c.noToolsYet}</p>
       <h2>{c.stepsHeading}</h2>
       <ol className="nt-list">
         {c.steps.map((s) => <li key={s}>{s}</li>)}

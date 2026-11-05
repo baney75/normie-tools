@@ -2,10 +2,14 @@ import { describe, it, expect } from "vitest";
 import raw from "../../public/tools.json";
 import { TOOLS, isUsable, type Tool } from "./tools";
 
+// Add an id here when a tool ships. Nothing else may be "shipped".
+const SHIPPED_IDS = ["loan-explainer"];
+const EXPECTED_TOTAL = 77;
+
 describe("TOOLS", () => {
   it("matches public/tools.json", () => {
     expect(TOOLS).toEqual(raw.tools);
-    expect(TOOLS).toHaveLength(76);
+    expect(TOOLS).toHaveLength(EXPECTED_TOTAL);
   });
   it("uses the expected schema", () => {
     expect(raw.schema).toBe("nt-tools/1");
@@ -13,8 +17,16 @@ describe("TOOLS", () => {
   it("has unique ids", () => {
     expect(new Set(TOOLS.map((t) => t.id)).size).toBe(TOOLS.length);
   });
-  it("is all coming soon this round", () => {
-    for (const t of TOOLS) expect(t.status).toBe("coming_soon");
+  it("only listed shipped ids are shipped", () => {
+    const shipped = TOOLS.filter((t) => t.status === "shipped").map((t) => t.id).sort();
+    expect(shipped).toEqual([...SHIPPED_IDS].sort());
+    for (const t of TOOLS) if (!SHIPPED_IDS.includes(t.id)) expect(t.status).toBe("coming_soon");
+  });
+  it("every shipped tool names its claims file and takes no files unless it says so", () => {
+    for (const t of TOOLS.filter((x) => x.status === "shipped")) {
+      expect(t.claimsPath).toBe(`tools/${t.id}/claims.json`);
+      expect(typeof t.takesFiles).toBe("boolean");
+    }
   });
   it("has routes under /tools/", () => {
     for (const t of TOOLS) for (const r of t.routes) expect(r.startsWith("/tools/")).toBe(true);
@@ -22,6 +34,6 @@ describe("TOOLS", () => {
   it("isUsable is true only for shipped", () => {
     const shipped: Tool = { id: "x", name: "X", status: "shipped", routes: ["/tools/x"] };
     expect(isUsable(shipped)).toBe(true);
-    for (const t of TOOLS) expect(isUsable(t)).toBe(false);
+    for (const t of TOOLS) expect(isUsable(t)).toBe(SHIPPED_IDS.includes(t.id));
   });
 });
