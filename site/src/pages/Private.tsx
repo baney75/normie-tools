@@ -17,7 +17,7 @@ export function Private() {
         <a href="https://github.com/baney75/normie-tools" rel="noopener noreferrer">{c.checkLink}</a>.
       </p>
       <p>
-        <a href={href("/")}>{c.back}</a>
+        <a className="nt-back" href={href("/")}>{c.back}</a>
       </p>
     </>
   );

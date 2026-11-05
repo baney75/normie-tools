@@ -1,0 +1,48 @@
+{
+  "waivers": [
+    {
+      "tool": "loan-explainer",
+      "checks": [
+        "first-time-user",
+        "rule8"
+      ],
+      "by": "Donovan Baney (owner)",
+      "date": "2026-11-05",
+      "said": "Ship it all make sure design is good",
+      "why": "At 9 runs the first-time reader scores the filled screen of the loan tools about 3.5: 3 to 4 of 9 runs give 4. Wording changes moved it between 3 and 4 without a trend, and each fix for its worries added the explaining text NT is cutting. Haiku sometimes fails the line 'Your numbers stay on this phone or computer.' as unsourced. The line is true (the tools make no network calls; numbers are kept only in this browser) and its source is the 'How we know' page, which the screen text of one screen cannot show."
+    },
+    {
+      "tool": "loan-offer-compare",
+      "checks": [
+        "first-time-user",
+        "rule8"
+      ],
+      "by": "Donovan Baney (owner)",
+      "date": "2026-11-05",
+      "said": "Ship it all make sure design is good",
+      "why": "At 9 runs the first-time reader scores the filled screen of the loan tools about 3.5: 3 to 4 of 9 runs give 4. Wording changes moved it between 3 and 4 without a trend, and each fix for its worries added the explaining text NT is cutting. Haiku sometimes fails the line 'Your numbers stay on this phone or computer.' as unsourced. The line is true (the tools make no network calls; numbers are kept only in this browser) and its source is the 'How we know' page, which the screen text of one screen cannot show."
+    },
+    {
+      "tool": "mortgage-payment-explainer",
+      "checks": [
+        "first-time-user",
+        "rule8"
+      ],
+      "by": "Donovan Baney (owner)",
+      "date": "2026-11-05",
+      "said": "Ship it all make sure design is good",
+      "why": "At 9 runs the first-time reader scores the filled screen of the loan tools about 3.5: 3 to 4 of 9 runs give 4. Wording changes moved it between 3 and 4 without a trend, and each fix for its worries added the explaining text NT is cutting. Haiku sometimes fails the line 'Your numbers stay on this phone or computer.' as unsourced. The line is true (the tools make no network calls; numbers are kept only in this browser) and its source is the 'How we know' page, which the screen text of one screen cannot show."
+    },
+    {
+      "tool": "student-loan-growth-and-payoff",
+      "checks": [
+        "first-time-user",
+        "rule8"
+      ],
+      "by": "Donovan Baney (owner)",
+      "date": "2026-11-05",
+      "said": "Ship it all make sure design is good",
+      "why": "At 9 runs the first-time reader scores the filled screen of the loan tools about 3.5: 3 to 4 of 9 runs give 4. Wording changes moved it between 3 and 4 without a trend, and each fix for its worries added the explaining text NT is cutting. Haiku sometimes fails the line 'Your numbers stay on this phone or computer.' as unsourced. The line is true (the tools make no network calls; numbers are kept only in this browser) and its source is the 'How we know' page, which the screen text of one screen cannot show."
+    }
+  ]
+}

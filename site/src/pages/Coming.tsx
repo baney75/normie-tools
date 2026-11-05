@@ -27,7 +27,7 @@ export function Coming() {
         </section>
       ))}
       <p>
-        <a href={href("/")}>{c.back}</a>
+        <a className="nt-back" href={href("/")}>{c.back}</a>
       </p>
     </>
   );

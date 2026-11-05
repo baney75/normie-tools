@@ -15,6 +15,7 @@
 .nt-offers-table th, .nt-offers-table td { padding: var(--nt-space-2); border-top: 1px solid var(--nt-line); text-align: right; }
 .nt-offers-table th:first-child, .nt-offers-table td:first-child { text-align: left; }
 .nt-offers-key dt { font-weight: 700; color: var(--nt-ink); margin-top: var(--nt-space-3); }
+.nt-offers-key { margin: 0; }
 .nt-offers-key dd { margin: 0; }
 .nt-offers-add { display: flex; flex-direction: column; align-items: flex-start; gap: var(--nt-space-2); margin: 0; }
 .nt-offers-hint { margin: 0; font-size: 1rem; color: var(--nt-text); }

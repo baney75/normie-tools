@@ -23,7 +23,7 @@
   font-size: 1rem;
   font-weight: 700;
   color: var(--nt-ink);
-  background: var(--nt-white);
+  background: transparent;
   border: 1.5px solid var(--nt-muted);
   border-radius: 999px;
   cursor: pointer;

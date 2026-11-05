@@ -8,4 +8,5 @@
 .nt-mort-sub { font-size: 1.125rem; margin: var(--nt-space-3) 0 var(--nt-space-2); }
 .nt-mort-details-body { padding: 0 var(--nt-space-3) var(--nt-space-3); }
 .nt-mort-key dt { font-weight: 700; color: var(--nt-ink); margin-top: var(--nt-space-3); }
+.nt-mort-key { margin: 0; }
 .nt-mort-key dd { margin: 0; }

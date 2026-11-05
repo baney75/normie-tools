@@ -56,4 +56,5 @@
 .nt-list { padding-left: 1.25rem; }
 .nt-list li { margin-bottom: var(--nt-space-2); }
 .nt-muted { color: var(--nt-muted); }
+.nt-back { display: inline-flex; align-items: center; min-height: var(--nt-tap); }
 .nt-instruction { background: var(--nt-mint); border-radius: var(--nt-radius); padding: var(--nt-space-3); user-select: all; }

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { checkTool } from "../check-evidence.mjs";
+import { checkTool, checkToolDetailed } from "../check-evidence.mjs";
 
 function repo(files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "nt-evidence-"));
@@ -67,4 +67,38 @@ test("evidence: an extra screen with no Haiku review fails", () => {
   const review = { ...goodReview, otherScreens: [{ screen: "empty", firstTimeUser: { score: 5 }, designRubric: [{ model: "sonnet", rules: pass8 }] }] };
   const out = checkTool(repo(files({ "tests/model-review/t.json": review })), { id: "t" });
   assert.ok(out.some((m) => /\(empty\) has no haiku review/.test(m)));
+});
+
+const waiver = (checks, extra = {}) => ({ waivers: [{ tool: "t", checks, by: "owner", date: "2026-11-05", said: "Ship it all", ...extra }] });
+
+test("evidence: an owner waiver excuses only the named check for the named tool", () => {
+  const review = { ...goodReview, firstTimeUser: { score: 3 } };
+  const root = repo(files({ "tests/model-review/t.json": review, "tests/model-review/waivers.json": waiver(["first-time-user"]) }));
+  const r = checkToolDetailed(root, { id: "t" });
+  assert.deepEqual(r.failures, []);
+  assert.ok(r.waived.some((m) => /first-time-user score \(main\) is 3/.test(m)));
+  assert.ok(checkTool(root, { id: "other" }).some((m) => /no model review record/.test(m)));
+});
+
+test("evidence: a rule waiver excuses that rule only, so another failed rule still fails", () => {
+  const rules = [...pass8.slice(0, 1), "FAIL", ...pass8.slice(2, 7), "FAIL"];
+  const review = { ...goodReview, designRubric: [{ model: "haiku", rules }, goodReview.designRubric[1]] };
+  const root = repo(files({ "tests/model-review/t.json": review, "tests/model-review/waivers.json": waiver(["rule8"]) }));
+  const r = checkToolDetailed(root, { id: "t" });
+  assert.ok(r.failures.some((m) => /not 8 of 8: rule2\./.test(m)));
+  assert.ok(r.waived.some((m) => /failed rule8/.test(m)));
+});
+
+test("evidence: a waiver without who, when and their words does nothing", () => {
+  const review = { ...goodReview, firstTimeUser: { score: 3 } };
+  const root = repo(files({ "tests/model-review/t.json": review, "tests/model-review/waivers.json": { waivers: [{ tool: "t", checks: ["first-time-user"] }] } }));
+  assert.ok(checkTool(root, { id: "t" }).some((m) => /needs 4 or more/.test(m)));
+});
+
+test("evidence: a waiver never excuses a missing score or a skill eval", () => {
+  const review = { ...goodReview, firstTimeUser: {} };
+  const root = repo(files({ "tests/model-review/t.json": review, "tests/skill-evals/results/t/tiny.json": { verdict: { ok: false } }, "tests/model-review/waivers.json": waiver(["first-time-user", "rule8"]) }));
+  const out = checkTool(root, { id: "t" });
+  assert.ok(out.some((m) => /is missing/.test(m)));
+  assert.ok(out.some((m) => /tiny is below the bar/.test(m)));
 });

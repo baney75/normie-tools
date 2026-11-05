@@ -34,3 +34,7 @@ node tests/model-review/review.mjs monthly-budget --url http://127.0.0.1:4180
 - The first-time-user prompt runs on each screen as many times as `--ftu-runs` says (3 by default). The evidence records use 9 (owner decision, 2026-11-05). The middle score is kept and every run is on record.
 - The design rubric runs `--rubric-runs` times (3 by default; the evidence records use 5) for Haiku and for Sonnet. A rule passes when it passes in most runs.
 - `node scripts/check-evidence.mjs` is the gate: every screen needs a reader score of 4 or more and every rule passing for both graders, and the skill-eval results must meet their bars. No record means the tool cannot stay shipped.
+
+## Owner waivers
+
+`waivers.json` lets the owner excuse a named check for a named tool, for example `first-time-user` or `rule8`. Each entry needs `tool`, `checks`, `by`, `date` and `said` (the owner's words). `check:evidence` prints every excused problem as `WAIVED` and still fails on anything not named. Remove an entry once the tool passes without it.

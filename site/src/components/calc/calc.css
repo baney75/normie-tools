@@ -37,6 +37,8 @@
 
 .nt-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
+.nt-tool-inputs p, .nt-tool-below p, .nt-tool-trust { max-width: 65ch; }
+
 /* The note above the boxes while they hold example numbers. */
 .nt-example { margin: 0 0 var(--nt-space-4); font-size: 1rem; color: var(--nt-muted); }
 
@@ -67,7 +69,7 @@
 .nt-chips { border: 0; margin: 0 0 var(--nt-space-4); padding: 0; min-width: 0; }
 .nt-chips-row { display: flex; flex-wrap: wrap; gap: var(--nt-space-2); }
 .nt-chip { position: relative; display: inline-flex; }
-.nt-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.nt-chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
 .nt-chip span {
   display: inline-flex;
   align-items: center;
@@ -131,7 +133,7 @@
 .nt-result-unit { font-family: var(--nt-font-text); font-size: 1.125rem; font-weight: 500; color: var(--nt-mint); }
 .nt-result-body { margin-top: var(--nt-space-3); }
 .nt-result .nt-result-body p { margin: 0 0 var(--nt-space-3); font-size: 1.0625rem; color: var(--nt-white); }
-.nt-result .nt-result-body dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--nt-space-3); margin: 0; padding-top: var(--nt-space-3); border-top: 1px solid rgb(255 255 255 / 0.25); }
+.nt-result .nt-result-body dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--nt-space-3); margin: var(--nt-space-4) 0 0; }
 .nt-result .nt-result-body dl > div { display: block; padding: 0; border: 0; }
 .nt-result .nt-result-body dt { margin: 0; font-size: 0.9375rem; color: var(--nt-mint); }
 .nt-result .nt-result-body dd { margin: 0; font-size: 1.1875rem; font-weight: 700; color: var(--nt-white); text-align: left; }
@@ -155,7 +157,7 @@
   text-decoration: none;
 }
 .nt-finish-done:hover { color: var(--nt-white); }
-.nt-finish-save { width: 100%; min-height: 3.25rem; font-weight: 700; }
+.nt-finish-save { width: 100%; min-height: 3.25rem; font-weight: 700; background: transparent; }
 
 .nt-more { margin: 0 0 var(--nt-space-3); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-more > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-3); font-weight: 700; color: var(--nt-ink); cursor: pointer; }
