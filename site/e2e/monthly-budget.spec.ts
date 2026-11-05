@@ -34,11 +34,11 @@ test("gives exact totals, left over and percents, with no sideways scroll", asyn
   await expect(card).toContainText("$3,000.00");
   await expect(card).toContainText("$2,300.00");
   const where = page.getByRole("region", { name: "Where it goes" });
-  await expect(where).toContainText("40% of income");
-  await expect(where).toContainText("15% of income");
-  await expect(where).toContainText("10% of income");
-  await expect(where).toContainText("9% of income");
-  await expect(where).toContainText("3% of income");
+  await expect(where).toContainText("40.0% of income");
+  await expect(where).toContainText("15.0% of income");
+  await expect(where).toContainText("10.0% of income");
+  await expect(where).toContainText("8.3% of income");
+  await expect(where).toContainText("3.3% of income");
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(wide).toBe(false);
   await page.screenshot({ path: shotPath("monthly-budget-phone.png"), fullPage: true });

@@ -36,7 +36,12 @@ function tidy(v: Inputs): Inputs {
 }
 
 const shown = (l: Line, fallback: string, i: number) => l.name.trim() || `${fallback} ${i + 1}`;
-const pct = (n: number | null) => (n === null ? "" : `${n}%`);
+/** Percent with one decimal, worked straight from the cents so no line is off. */
+const pct = (cents: number, base: number) => {
+  if (base <= 0) return "";
+  const tenths = Math.floor((cents * 2000 + base) / (base * 2));
+  return `${Math.floor(tenths / 10)}.${tenths % 10}%`;
+};
 
 export function Page() {
   const flow = useAutosave<Inputs>("monthly-budget", EMPTY);
@@ -179,8 +184,11 @@ function Done({ result }: { result: Good }) {
     [r.totalSpending, formatMoney(result.spendingCents)],
   ];
   const sayPct = (x: Good["expenseRows"][number]) =>
-    hasIncome ? `${pct(x.percentOfIncome)} ${COPY.where.ofIncome}` : `${pct(x.shareOfSpending)} ${COPY.where.ofSpending}`;
-  const width = (x: Good["expenseRows"][number]) => Math.max(0, Math.min(100, (hasIncome ? x.percentOfIncome : x.shareOfSpending) ?? 0));
+    hasIncome
+      ? `${pct(x.cents, result.incomeCents)} ${COPY.where.ofIncome}`
+      : `${pct(x.cents, result.spendingCents)} ${COPY.where.ofSpending}`;
+  const width = (x: Good["expenseRows"][number]) =>
+    Math.max(0, Math.min(100, (x.cents * 100) / (hasIncome ? result.incomeCents : result.spendingCents || 1)));
 
   function save() {
     const text = [
@@ -235,7 +243,6 @@ function Done({ result }: { result: Good }) {
               </li>
             ))}
           </ul>
-          <p className="nt-budget-help">{hasIncome ? COPY.where.roundedIncome : COPY.where.rounded}</p>
         </section>
       ) : null}
 
@@ -259,8 +266,8 @@ function Done({ result }: { result: Good }) {
                     <tr key={`${x.name}-${i}`}>
                       <th scope="row">{x.name}</th>
                       <td>{formatMoney(x.cents)}</td>
-                      <td>{pct(x.percentOfIncome) || "-"}</td>
-                      <td>{pct(x.shareOfSpending)}</td>
+                      <td>{hasIncome ? pct(x.cents, result.incomeCents) : "-"}</td>
+                      <td>{pct(x.cents, result.spendingCents)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -268,9 +275,8 @@ function Done({ result }: { result: Good }) {
             </div>
           ) : null}
           {hasIncome ? (
-            <p className="nt-budget-help">{COPY.more.spentPercent}: {pct(result.spendingPercentOfIncome)}</p>
+            <p className="nt-budget-help">{COPY.more.spentPercent}: {pct(result.spendingCents, result.incomeCents)}</p>
           ) : null}
-          <p className="nt-budget-help">{COPY.more.note}</p>
         </div>
       </details>
 

@@ -31,8 +31,6 @@ export const COPY = {
     heading: "Where it goes",
     ofIncome: "of income",
     ofSpending: "of spending",
-    rounded: "Each percent is a whole number. One may be 1 higher than its exact value, so that they add up to 100.",
-    roundedIncome: "Each percent is a whole number. One may be 1 higher than its exact value, so that they add up to the percent of income spent.",
     noIncome: "Add income to see percents of income. These show each line as part of your spending.",
   },
   more: {
@@ -42,7 +40,6 @@ export const COPY = {
     amount: "Amount",
     ofIncome: "Percent of income",
     ofSpending: "Percent of spending",
-    note: "Percents are whole numbers. They are split so the percents of spending add up to exactly 100.",
     spentPercent: "Percent of income spent",
   },
   save: {

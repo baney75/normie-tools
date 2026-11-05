@@ -47,7 +47,7 @@ describe("Monthly Budget page", () => {
     render(<Page />);
     await fill("Pay, per month", "1000");
     await fill("Food, per month", "250");
-    expect(screen.getAllByText(/25% of income/)).toHaveLength(1);
+    expect(screen.getAllByText(/25.0% of income/)).toHaveLength(1);
     expect(screen.queryByText(/Each bar is as wide/)).toBeNull();
   });
 
@@ -76,25 +76,26 @@ describe("Monthly Budget page", () => {
     expect(card).toHaveTextContent("Total income$3,000.00");
     expect(card).toHaveTextContent("Total spending$2,300.00");
     const where = screen.getByRole("region", { name: "Where it goes" });
-    expect(where).toHaveTextContent("Rent or mortgage$1,200.00, 40% of income");
-    expect(where).toHaveTextContent("Food$450.00, 15% of income");
-    expect(where).toHaveTextContent("Bills$300.00, 10% of income");
-    expect(where).toHaveTextContent("Transport$250.00, 9% of income");
-    expect(where).toHaveTextContent("Other$100.00, 3% of income");
+    expect(where).toHaveTextContent("Rent or mortgage$1,200.00, 40.0% of income");
+    expect(where).toHaveTextContent("Food$450.00, 15.0% of income");
+    expect(where).toHaveTextContent("Bills$300.00, 10.0% of income");
+    expect(where).toHaveTextContent("Transport$250.00, 8.3% of income");
+    expect(where).toHaveTextContent("Other$100.00, 3.3% of income");
   });
 
-  it("says percents are rounded", async () => {
+  it("shows one decimal worked from the amounts, so $250 of $3,000 is 8.3%", async () => {
     render(<Page />);
     await fill("Pay, per month", "3000");
     await fill("Transport, per month", "250");
-    expect(screen.getByText(COPY.where.roundedIncome)).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Where it goes" })).toHaveTextContent("Transport$250.00, 8.3% of income");
   });
 
   it("draws a bar as wide as the percent", async () => {
     const { container } = render(<Page />);
     await fillPlain();
     const fills = Array.from(container.querySelectorAll<HTMLElement>(".nt-budget-bar-fill")).map((e) => e.style.width);
-    expect(fills).toEqual(["40%", "15%", "10%", "9%", "3%"]);
+    const widths = fills.map((w) => Math.round(parseFloat(w) * 10) / 10);
+    expect(widths).toEqual([40, 15, 10, 8.3, 3.3]);
   });
 
   it("shows a negative left over plainly", async () => {
@@ -112,7 +113,7 @@ describe("Monthly Budget page", () => {
     await fill("Name of spending item 6", "Phone");
     await fill("Phone, per month", "$40.50");
     await fill("Pay, per month", "1000");
-    expect(screen.getByRole("region", { name: "Where it goes" })).toHaveTextContent("Phone$40.50, 4% of income");
+    expect(screen.getByRole("region", { name: "Where it goes" })).toHaveTextContent("Phone$40.50, 4.1% of income");
     await userEvent.click(screen.getByRole("button", { name: "Remove Phone" }));
     expect(screen.queryByLabelText("Phone, per month")).toBeNull();
     expect(screen.queryByRole("region", { name: "Where it goes" })).toBeNull();
@@ -140,8 +141,8 @@ describe("Monthly Budget page", () => {
     await fill("Food, per month", "300");
     expect(screen.getByLabelText("Left over")).toHaveTextContent("-$1,000.00");
     const where = screen.getByRole("region", { name: "Where it goes" });
-    expect(where).toHaveTextContent("70% of spending");
-    expect(where).toHaveTextContent("30% of spending");
+    expect(where).toHaveTextContent("70.0% of spending");
+    expect(where).toHaveTextContent("30.0% of spending");
     expect(where).toHaveTextContent(COPY.where.noIncome);
   });
 
@@ -151,8 +152,8 @@ describe("Monthly Budget page", () => {
     await userEvent.click(screen.getByText("Show the numbers in a table"));
     const table = screen.getByRole("table");
     expect(within(table).getAllByRole("row")).toHaveLength(1 + 5);
-    expect(within(table).getAllByRole("row")[1]).toHaveTextContent("Rent or mortgage$1,200.0040%52%");
-    expect(screen.getByText(/Percent of income spent: 77%/)).toBeInTheDocument();
+    expect(within(table).getAllByRole("row")[1]).toHaveTextContent("Rent or mortgage$1,200.0040.0%52.2%");
+    expect(screen.getByText(/Percent of income spent: 76.7%/)).toBeInTheDocument();
   });
 
   it("shows a calm error that names the line on junk, never NaN", async () => {
