@@ -42,6 +42,11 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();
   });
 
+  it("gives a plain reason for the privacy promise", () => {
+    render(<Page />);
+    expect(screen.getByText(/Nothing is sent\. After this page loads once, it works with no internet\./)).toBeInTheDocument();
+  });
+
   it("has labels above inputs, decimal keypads, no autofill", () => {
     render(<Page />);
     for (const name of ["Goal amount", "Already saved", "Amount you save each month", "Yearly interest rate"]) {
