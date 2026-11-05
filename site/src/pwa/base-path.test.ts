@@ -1,5 +1,4 @@
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { build } from "vite";
@@ -10,7 +9,7 @@ let out = "";
 let html = "";
 
 beforeAll(async () => {
-  out = fs.mkdtempSync(path.join(os.tmpdir(), "nt-base-"));
+  out = fs.mkdtempSync(path.join(root, ".nt-base-"));
   await build({ root, logLevel: "silent", build: { outDir: out, emptyOutDir: true } });
   html = fs.readFileSync(path.join(out, "index.html"), "utf8");
 }, 120_000);
