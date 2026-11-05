@@ -69,6 +69,17 @@ test("privacy: flags real emails, machine names, paths and tokens; allows exampl
   assert.ok(!out.join("\n").includes(sk), "secrets are never echoed");
 });
 
+test("privacy: skips a top-level .git pointer file but still scans other files", () => {
+  const home = ["/ho", "me/", "someone"].join("");
+  const root = fixture({
+    ".git": `gitdir: ${home}/repo/.git/worktrees/x\n`,
+    "nested/.git": `gitdir: ${home}/other\n`,
+    "ok.md": "clean\n",
+  });
+  const files = privacy(root).map((l) => l.split(":")[0]);
+  assert.deepEqual(files, ["nested/.git"]);
+});
+
 test("sources: needs URL or link plus a real Checked date", () => {
   const root = fixture({
     "research/README.md": "no sources here\n",
