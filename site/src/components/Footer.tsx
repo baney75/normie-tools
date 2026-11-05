@@ -9,6 +9,8 @@ export function Footer() {
         <li><a href={href("/research")}>{c.research}</a></li>
         <li><a href={href("/agents")}>{PAGES.home.agentsLink}</a></li>
         <li><a href={href("/install")}>{c.install}</a></li>
+        <li><a href="https://github.com/baney75/normie-tools" rel="noopener noreferrer">{c.code}</a></li>
+        <li><a href="https://github.com/baney75/normie-tools/tree/main/skills" rel="noopener noreferrer">{c.skills}</a></li>
       </ul>
       <p className="nt-muted">{c.license}</p>
     </nav>

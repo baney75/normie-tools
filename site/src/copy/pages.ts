@@ -12,6 +12,8 @@ export const PAGES = {
     label: "More about NT",
     research: "Research",
     install: "Add to Home Screen",
+    code: "See the code",
+    skills: "Ready-made helpers",
     license: "NT is free and open. Apache 2.0.",
   },
   home: {
