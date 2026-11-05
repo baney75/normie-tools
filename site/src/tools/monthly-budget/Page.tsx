@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
+import { amountText, ErrorNote, Field, MoneyField, PrivacyNote, RemoveAsk, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -50,7 +50,9 @@ export function Page() {
   const change = (kind: Kind, id: string, patch: Partial<Line>) =>
     set({ ...v, [kind]: v[kind].map((l) => (l.id === id ? { ...l, ...patch } : l)) });
   const [undo, setUndo] = useState<{ kind: Kind; index: number; line: Line } | null>(null);
+  const [asking, setAsking] = useState<{ kind: Kind; id: string } | null>(null);
   const remove = (kind: Kind, id: string) => {
+    setAsking(null);
     const index = v[kind].findIndex((l) => l.id === id);
     if (index < 0) return;
     setUndo({ kind, index, line: v[kind][index] });
@@ -99,6 +101,7 @@ export function Page() {
         <form className="nt-budget-form" onSubmit={(e) => e.preventDefault()} noValidate>
           {(["income", "expenses"] as const).map((kind) => {
             const c = kind === "income" ? COPY.income : COPY.spending;
+            const askIndex = asking && asking.kind === kind ? v[kind].findIndex((l) => l.id === asking.id) : -1;
             return (
               <section key={kind} className="nt-budget-list" aria-label={c.heading}>
                 <h2>{c.heading}</h2>
@@ -121,12 +124,19 @@ export function Page() {
                         onChange={(t) => change(kind, l.id, { amount: t })}
                         error={bad(`${kind}.${i}`)}
                       />
-                      <button type="button" className="nt-budget-remove" aria-label={`${COPY.remove} ${label}`} onClick={() => remove(kind, l.id)}>
+                      <button type="button" className="nt-budget-remove" aria-label={`${COPY.remove} ${label}`} onClick={() => setAsking({ kind, id: l.id })}>
                         {COPY.remove}
                       </button>
                     </div>
                   );
                 })}
+                {askIndex >= 0 ? (
+                  <RemoveAsk
+                    what={`${shown(v[kind][askIndex], c.fallback, askIndex)}, ${amountText(v[kind][askIndex].amount)}`}
+                    onRemove={() => remove(kind, v[kind][askIndex].id)}
+                    onKeep={() => setAsking(null)}
+                  />
+                ) : null}
                 {undo && undo.kind === kind ? (
                   <p className="nt-budget-help">
                     <button type="button" className="nt-budget-add" onClick={putBack}>

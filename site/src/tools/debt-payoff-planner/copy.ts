@@ -15,7 +15,7 @@ export const COPY = {
   },
   addDebt: "Add another debt",
   removeDebt: "Remove the last debt",
-  removeHint: "Remove takes out the last debt line. Put it back undoes it.",
+  removeHint: "Remove asks first and shows which debt goes. Put it back undoes it.",
   undo: "Put it back",
   undoHelp: "You took out a debt. This puts it back with its numbers.",
   upTo: "You can add up to 6 debts.",

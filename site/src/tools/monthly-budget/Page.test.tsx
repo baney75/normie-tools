@@ -115,6 +115,11 @@ describe("Monthly Budget page", () => {
     await fill("Pay, per month", "1000");
     expect(screen.getByRole("region", { name: "Where it goes" })).toHaveTextContent("Phone$40.50, 4.1% of income");
     await userEvent.click(screen.getByRole("button", { name: "Remove Phone" }));
+    expect(screen.getByRole("group", { name: "Before you remove" })).toHaveTextContent("Phone, $40.50");
+    await userEvent.click(screen.getByRole("button", { name: "Keep it" }));
+    expect(screen.getByLabelText("Phone, per month")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Remove Phone" }));
+    await userEvent.click(screen.getByRole("button", { name: "Yes, remove it" }));
     expect(screen.queryByLabelText("Phone, per month")).toBeNull();
     expect(screen.queryByRole("region", { name: "Where it goes" })).toBeNull();
   });
@@ -123,6 +128,7 @@ describe("Monthly Budget page", () => {
     render(<Page />);
     await fill("Food, per month", "450");
     await userEvent.click(screen.getByRole("button", { name: "Remove Food" }));
+    await userEvent.click(screen.getByRole("button", { name: "Yes, remove it" }));
     expect(screen.queryByLabelText("Food, per month")).toBeNull();
     expect(screen.getByText(COPY.undoHelp)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.undo }));

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PercentField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
+import { amountText, ErrorNote, Field, MoneyField, PercentField, PrivacyNote, RemoveAsk, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -33,7 +33,11 @@ export function Page() {
     flow.setValue({ ...v, count: shown.length + 1, debts: v.debts.map((d, k) => (k === shown.length ? undo : d)) });
     setUndo(null);
   };
+  const [asking, setAsking] = useState(false);
+  const last = shown[shown.length - 1];
+  const lastWhat = `${last.name.trim() || `${COPY.debtLegend} ${shown.length}`}, ${COPY.balance.label} ${amountText(last.balance)}`;
   const removeDebt = () => {
+    setAsking(false);
     setUndo(shown[shown.length - 1]);
     flow.setValue({
       ...v,
@@ -119,12 +123,13 @@ export function Page() {
             </button>
             {shown.length > 1 ? (
               <div className="nt-dpp-pair">
-                <button type="button" className="nt-dpp-button" onClick={removeDebt}>
+                <button type="button" className="nt-dpp-button" onClick={() => setAsking(true)} disabled={asking}>
                   {COPY.removeDebt}
                 </button>
                 <span className="nt-dpp-help">{COPY.removeHint}</span>
               </div>
             ) : null}
+            {asking && shown.length > 1 ? <RemoveAsk what={lastWhat} onRemove={removeDebt} onKeep={() => setAsking(false)} /> : null}
             {undo && shown.length < MAX ? (
               <div className="nt-dpp-pair">
                 <button type="button" className="nt-dpp-button" onClick={putBack}>

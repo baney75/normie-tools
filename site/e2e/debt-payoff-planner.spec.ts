@@ -113,8 +113,13 @@ test("a desktop screenshot", async ({ page }) => {
 
 test("remove can be undone and Start over asks first", async ({ page }) => {
   await fillTwo(page);
-  await expect(page.getByText("Remove takes out the last debt line. Put it back undoes it.")).toBeVisible();
+  await expect(page.getByText("Remove asks first and shows which debt goes. Put it back undoes it.")).toBeVisible();
   await page.getByRole("button", { name: "Remove the last debt" }).click();
+  await expect(page.getByRole("group", { name: "Before you remove" })).toContainText("Debt 2, balance $12,000");
+  await page.getByRole("button", { name: "Keep it" }).click();
+  await expect(page.getByLabel("Debt 2 balance")).toHaveValue("$12,000");
+  await page.getByRole("button", { name: "Remove the last debt" }).click();
+  await page.getByRole("button", { name: "Yes, remove it" }).click();
   await expect(page.getByLabel("Debt 2 balance")).toHaveCount(0);
   await page.getByRole("button", { name: "Put it back" }).click();
   await expect(page.getByLabel("Debt 2 balance")).toHaveValue("$12,000");

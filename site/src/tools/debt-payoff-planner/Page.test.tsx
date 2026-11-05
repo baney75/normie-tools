@@ -75,6 +75,9 @@ describe("Debt Payoff Planner page", () => {
     await userEvent.type(screen.getByLabelText("Debt 2 balance", { exact: false }), "900");
     expect(screen.getByText(COPY.removeHint)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.removeDebt }));
+    expect(screen.getByRole("group", { name: "Before you remove" })).toHaveTextContent("Debt 2, balance $900");
+    expect(screen.getByLabelText("Debt 2 balance", { exact: false })).toHaveValue("900");
+    await userEvent.click(screen.getByRole("button", { name: "Yes, remove it" }));
     expect(screen.queryByLabelText("Debt 2 balance", { exact: false })).toBeNull();
     expect(screen.getByText(COPY.undoHelp)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.undo }));
@@ -87,10 +90,15 @@ describe("Debt Payoff Planner page", () => {
     await userEvent.click(screen.getByRole("button", { name: COPY.addDebt }));
     expect(screen.getByLabelText("Debt 3 balance", { exact: false })).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.removeDebt }));
+    await userEvent.click(screen.getByRole("button", { name: "Keep it" }));
+    expect(screen.getByLabelText("Debt 3 balance", { exact: false })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: COPY.removeDebt }));
+    await userEvent.click(screen.getByRole("button", { name: "Yes, remove it" }));
     expect(screen.queryByLabelText("Debt 3 balance", { exact: false })).toBeNull();
     await userEvent.click(screen.getByRole("button", { name: COPY.undo }));
     expect(screen.getByLabelText("Debt 3 balance", { exact: false })).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.removeDebt }));
+    await userEvent.click(screen.getByRole("button", { name: "Yes, remove it" }));
     for (let i = 0; i < 6; i++) {
       const add = screen.getByRole("button", { name: COPY.addDebt });
       if (!(add as HTMLButtonElement).disabled) await userEvent.click(add);
