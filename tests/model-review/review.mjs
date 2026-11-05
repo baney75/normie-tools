@@ -61,7 +61,7 @@ const CAPTURE = () => {
       } else if (tag === "LABEL") lines.push(`[label] ${name(el)}`);
       else if (tag === "INPUT" && (el.type === "radio" || el.type === "checkbox")) {
         const lab = el.id ? document.querySelector(`label[for="${el.id}"]`) : el.closest("label");
-        lines.push(`[${el.type === "radio" ? "choice" : "tick box"}] ${lab ? name(lab) : name(el)} ${el.checked ? "(chosen)" : "(not chosen)"}`);
+        lines.push(`[${el.type === "radio" ? "choice" : "tick box"}] ${lab ? name(lab) : name(el)} ${el.checked ? "(selected)" : ""}`);
       } else if (tag === "INPUT") {
         const lab = el.id ? document.querySelector(`label[for="${el.id}"]`) : null;
         lines.push(`[box${el.disabled ? ", disabled" : ""}] ${lab ? name(lab) : name(el)} = "${el.value}"${el === document.activeElement ? " (cursor is here)" : ""}`);

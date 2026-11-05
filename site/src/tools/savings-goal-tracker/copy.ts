@@ -5,7 +5,7 @@ export const COPY = {
   intro: "Type your goal and what you have saved. Your answer shows below.",
   waiting: "Your answer shows here",
   mode: {
-    legend: "Pick what you want to know",
+    legend: "What do you want to find out?",
     when: "How long will it take?",
     by: "How much to save each month?",
   },

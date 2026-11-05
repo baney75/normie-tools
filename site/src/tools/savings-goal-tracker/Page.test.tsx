@@ -37,6 +37,14 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
   });
 
+  it("asks one plain question with two radio choices and says why Print is off", () => {
+    render(<Page />);
+    const group = screen.getByRole("group", { name: "What do you want to find out?" });
+    expect(within(group).getAllByRole("radio")).toHaveLength(2);
+    expect(within(group).getByLabelText(COPY.mode.when)).toBeChecked();
+    expect(screen.getByText("They work after you type your numbers.")).toBeInTheDocument();
+  });
+
   it("keeps the privacy note", () => {
     render(<Page />);
     expect(screen.getByText(/stay on this phone/)).toBeInTheDocument();

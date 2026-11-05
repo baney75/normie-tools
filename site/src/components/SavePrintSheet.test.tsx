@@ -74,4 +74,10 @@ describe("SavePrintSheet", () => {
     expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Save a copy" })).toBeDisabled();
   });
+  it("says why the buttons are off, only while there is no preview", () => {
+    const { rerender } = render(<SavePrintSheet title="T" onSave={() => {}}>{null}</SavePrintSheet>);
+    expect(screen.getByText("They work after you type your numbers.")).toBeInTheDocument();
+    rerender(<SavePrintSheet title="T" onSave={() => {}}><p>x</p></SavePrintSheet>);
+    expect(screen.queryByText("They work after you type your numbers.")).toBeNull();
+  });
 });

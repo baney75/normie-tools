@@ -69,6 +69,7 @@ export function SavePrintSheet({
           </button>
         )}
       </div>
+      {hasPreview ? null : <p className="nt-sheet-note">They work after you type your numbers.</p>}
       {asking ? (
         <div className="nt-sheet-ask" role="group" aria-label="Before you save">
           <p>Saves a file on this phone. Nothing leaves it. You can delete the file any time. It will hold:</p>
