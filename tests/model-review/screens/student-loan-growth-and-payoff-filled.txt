@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 [heading 1] Student Loan Growth and Payoff
 Type what you owe and the yearly interest rate. Your answer shows below.
-There is no Send button on this page. Your numbers are worked out here.
+There is no Send button on this page.
 [label] Loan balance
 Find it on your loan statement. Type the amount you owe now. For example: 20000.
 [box] Loan balance = "20000"

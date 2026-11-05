@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 [heading 1] Monthly Budget
 Type what you get and what you spend each month. Your answer shows below.
-There is no Send button on this page. Your numbers are worked out here.
+There is no Send button on this page.
 [heading 2] Money in each month
 Remove asks first and shows which line goes. Put it back undoes it.
 [label] Name of income item 1

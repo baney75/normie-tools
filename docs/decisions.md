@@ -151,3 +151,8 @@ Their code, tests, skills, e2e specs and review records stay in the repo. Their 
 - Reviewer noise, same page, no change between runs: Loan Offer Compare reader score was 4 (runs 4,4,4,3,4) in the committed record and 3 (4,3,3,4,3) in the next full review on 2026-11-05. Unit Converter rule 8 passed in 2 of 5 Haiku runs in one invocation and in all five after the note change. The five-run majority vote is what the gate uses; no result was kept or dropped by hand.
 - After the note change, Loan Offer Compare and Unit Converter were reviewed again and are 8/8 for both graders with reader scores of 4 or more. Savings Goal Tracker still scores 3 on the empty screen (the two choices at the top and "goal month" confuse the reader), so it is coming soon. Its code, tests and review record stay; its e2e spec skips itself.
 - Debt Payoff, Loan Explainer, Monthly Budget, Mortgage and Student Loan were last reviewed with the longer note; their pages now carry the shorter one. The shorter note removes the claim the graders questioned, but those five were not re-reviewed after the change.
+
+### Round 2026-11-05 (re-review after the shorter privacy note)
+
+- Loan Explainer, Monthly Budget, Mortgage Payment Explainer and Student Loan Growth and Payoff were reviewed again with the shorter note. Both graders gave 8/8 on every screen and the reader scored 4 on every screen, so they stay shipped.
+- Debt Payoff Planner scored 3 for the reader on the empty screen (runs 4, 3, 3). The reader's complaints are spread over several terms, with no single copy bug to fix, so it is coming soon. Its code, tests and review record stay; its e2e spec skips itself.

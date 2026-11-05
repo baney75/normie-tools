@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 [heading 1] Mortgage Payment Explainer
 Type the numbers for a home loan. Your answer shows below.
-There is no Send button on this page. Your numbers are worked out here.
+There is no Send button on this page.
 [label] Home price
 On your sales paper or the listing. It is what the home costs. For example: 300000.
 [box] Home price = "300000"

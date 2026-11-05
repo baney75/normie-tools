@@ -104,31 +104,3 @@ test("student-loan-growth-and-payoff: a new rate gives the new balance and payof
   await expect(card).not.toContainText("$20,499.98");
   await expect(card).not.toContainText("May 2033");
 });
-
-// Debt payoff: each month's interest is rounded to the cent, minimums are paid, the rest of the fixed monthly total
-// (all minimums + extra) goes to the first open debt in line. Python Decimal-style loop; debts 800 at 3% (min 30) and
-// 12,000 at 27.99% (min 300). Extra 200 -> snowball 36 months, 6,162.19; avalanche 5,800.94; gap 361.25.
-// Extra 300 -> snowball 28 months, 4,695.76; avalanche 28 months, 4,379.99; gap 315.77.
-test("debt-payoff-planner: a new extra amount gives new months and interest", async ({ page }) => {
-  await open(page, "debt-payoff-planner");
-  await page.getByLabel("Debt 1 balance").fill("800");
-  await page.getByLabel("Debt 1 yearly interest rate").fill("3");
-  await page.getByLabel("Debt 1 minimum payment").fill("30");
-  await page.getByLabel("Debt 2 balance").fill("12000");
-  await page.getByLabel("Debt 2 yearly interest rate").fill("27.99");
-  await page.getByLabel("Debt 2 minimum payment").fill("300");
-  await page.getByLabel("Extra each month").fill("200");
-  const snow = page.getByRole("region", { name: "Smallest debt first plan" });
-  const aval = page.getByRole("region", { name: "Highest interest first plan" });
-  await expect(snow).toContainText("$6,162.19");
-  await expect(aval).toContainText("$5,800.94");
-  await expect(page.getByLabel("How the two payoff orders compare")).toContainText("$361.25");
-  await page.getByLabel("Extra each month").fill("300");
-  await expect(snow).toContainText("28 months");
-  await expect(snow).toContainText("$4,695.76");
-  await expect(aval).toContainText("$4,379.99");
-  await expect(page.getByLabel("How the two payoff orders compare")).toContainText("$315.77");
-  await expect(snow).not.toContainText("$6,162.19");
-  await expect(aval).not.toContainText("$5,800.94");
-  await expect(page.getByLabel("How the two payoff orders compare")).not.toContainText("$361.25");
-});

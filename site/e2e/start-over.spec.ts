@@ -7,7 +7,6 @@ const TOOLS = [
   "loan-offer-compare",
   "mortgage-payment-explainer",
   "student-loan-growth-and-payoff",
-  "debt-payoff-planner",
   "monthly-budget",
   "unit-converter",
 ];

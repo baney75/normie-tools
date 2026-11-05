@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 [heading 1] Loan Explainer
 Type the numbers from your loan. Your answer shows below.
-There is no Send button on this page. Your numbers are worked out here.
+There is no Send button on this page.
 [label] Amount borrowed
 On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
 [box] Amount borrowed = "5000"

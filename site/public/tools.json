@@ -90,13 +90,11 @@
     {
       "id": "debt-payoff-planner",
       "name": "Debt Payoff Planner",
-      "status": "shipped",
+      "status": "coming_soon",
       "group": "Money",
       "routes": [
         "/tools/debt-payoff-planner"
-      ],
-      "claimsPath": "tools/debt-payoff-planner/claims.json",
-      "takesFiles": false
+      ]
     },
     {
       "id": "loan-explainer",

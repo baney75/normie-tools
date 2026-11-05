@@ -20,7 +20,7 @@ export const TOOLS: Tool[] = [
   {"id":"medical-bill-explainer","name":"Medical Bill Explainer","status":"coming_soon","group":"Money","routes":["/tools/medical-bill-explainer"]},
   {"id":"spending-check-in","name":"Spending Check-in","status":"coming_soon","group":"Money","routes":["/tools/spending-check-in"]},
   {"id":"savings-goal-tracker","name":"Savings Goal Tracker","status":"coming_soon","group":"Money","routes":["/tools/savings-goal-tracker"]},
-  {"id":"debt-payoff-planner","name":"Debt Payoff Planner","status":"shipped","group":"Money","routes":["/tools/debt-payoff-planner"],"claimsPath":"tools/debt-payoff-planner/claims.json","takesFiles":false},
+  {"id":"debt-payoff-planner","name":"Debt Payoff Planner","status":"coming_soon","group":"Money","routes":["/tools/debt-payoff-planner"]},
   {"id":"loan-explainer","name":"Loan Explainer","status":"shipped","group":"Money","routes":["/tools/loan-explainer"],"claimsPath":"tools/loan-explainer/claims.json","takesFiles":false},
   {"id":"loan-offer-compare","name":"Loan Offer Compare","status":"shipped","group":"Money","routes":["/tools/loan-offer-compare"],"claimsPath":"tools/loan-offer-compare/claims.json","takesFiles":false},
   {"id":"mortgage-payment-explainer","name":"Mortgage Payment Explainer","status":"shipped","group":"Money","routes":["/tools/mortgage-payment-explainer"],"claimsPath":"tools/mortgage-payment-explainer/claims.json","takesFiles":false},

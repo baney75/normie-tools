@@ -12,17 +12,15 @@
     "runs": [
       4,
       4,
-      4,
-      4,
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to type the numbers from my loan paper, read what the loan costs, and then leave when I'm finished.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n   - \"Amount borrowed\" and \"Yearly interest rate\" are fine, but \"term\" and \"number of payments\" are not words I use.\n   - \"Upfront fees\"\n   - \"Total interest\"\n   - \"Cost of borrowing\". It is explained, but it sounds like a bank word.\n   - \"Show the year by year table\". I don't know what table it means.\n   - \"Save a copy\" and \"file\". I'm not sure where a file would go on my phone.\n   - \"Print opens a preview\" and \"Close the print box\". I don't know what a preview or a print box is.\n   - \"Lender statement\". I think it's the paper from the bank.\n   - \"Estimate\"\n   - \"Worked out here\". I think it means the math happens on the page.\n\n4. Things that made me worry:\n   - My loan numbers are on a screen. \"There is no Send button\" calms me a little, but I'm still not fully sure nothing is being sent.\n   - \"Done. Back to home\" might wipe my numbers. Another line says \"Your numbers stay\", but that seems to be about changing a number.\n   - \"Start over\" sounds like it could erase everything. It says it asks first and I can undo, which helps.\n   - \"Save a copy\" puts something on my phone, and I don't know where.\n   - \"This is an estimate\", so I'm not sure I can trust the dollar amounts. I'd check against the bank's paper.\n   - I can't tell whether the \"48\" is months or years. Months looks selected, so I think it's fine.\n\n5. Things I would skip:\n   - The \"Upfront fees\" and \"Extra each month\" boxes, because I have neither.\n   - \"Show the year by year table\".\n   - The whole \"Keep your answer if you want\" part, including Print and Save a copy.\n   - \"What the words mean\", unless I got stuck.\n   - \"Start over\", since I'm not starting over.\n\n6. Score: 4. The answer is clear and the screen says I can stop, but I'm unsure whether \"Done. Back to home\" throws away my numbers.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"term\", \"number of payments\", \"Upfront fees\", \"Total interest\", \"Cost of borrowing\", \"year by year table\", \"Save a copy / file\", \"Print preview / print box\", \"lender statement\", \"estimate\"], \"worries\": [\"Not fully sure my numbers aren't sent anywhere\", \"Unsure if 'Done. Back to home' erases my numbers\", \"Start over might erase everything\", \"Save a copy puts a file on my phone and I don't know where\", \"Answer is only an estimate\", \"Unsure if 48 means months or years\"], \"skippable\": [\"Upfront fees box\", \"Extra each month box\", \"Show the year by year table\", \"Keep your answer if you want / Print / Save a copy\", \"What the words mean\", \"Start over\"], \"score\": 4}"
+    "output": "1. This screen wants me to type in my loan numbers and read what the loan costs, and then I can stop.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words that felt like tech talk or were unclear:\n- \"Cost of borrowing\" (it is explained, but the name is odd to me)\n- \"Yearly interest rate\" and \"Term\" (I'd need to check my paper)\n- \"Upfront fees\"\n- \"Show the year by year table\" (I don't know what table it means or why I'd want it)\n- \"Save a copy ... what goes in the file\" (what kind of file, and where does it go?)\n- \"Print opens a preview\" and \"Close the print box\"\n- \"Estimate\" (how close is close?)\n- \"Total paid\" versus \"Cost of borrowing\" (they look like two similar things)\n- \"MAIN LINK\" is not something I'd see, but the idea of a \"link\" that leaves the page made me unsure.\n\n4. Worries:\n- \"Done. Back to home.\" might wipe my numbers. It says \"Your numbers stay,\" but that is about changing a number, so I'm not sure.\n- I worry that \"Start over\" could erase everything, though it says it asks first and I can undo it.\n- \"Save a copy\" puts a file on my phone, and I don't know where it goes or whether it shares my loan details with anyone.\n- I was a bit unsure whether anything I typed is sent somewhere. It says there is no Send button, which helps, but I can't tell if the numbers are kept.\n- I worry the answer is wrong, since it says it's only an estimate and the lender has the final word.\n\n5. I would skip:\n- \"Start over\" (I don't need it right now)\n- The whole \"Keep your answer if you want\" section with Print and Save a copy\n- \"Show the year by year table\"\n- \"What the words mean\" (though I might open it if I got stuck)\n- The \"Upfront fees\" and \"Extra each month\" boxes, since they're optional and empty\n\n6. Score: 4. The orange button stands out and the screen says I can stop, but I'm not sure \"Done\" saves anything or clears my numbers.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Cost of borrowing\", \"Total paid vs Cost of borrowing\", \"Upfront fees\", \"Term\", \"Show the year by year table\", \"Save a copy / file\", \"Print preview\", \"Estimate\", \"link\"], \"worries\": [\"Done. Back to home. might erase my numbers\", \"Start over might erase everything\", \"Save a copy puts a file on my device and I don't know where or who sees it\", \"Unsure whether my numbers are kept or sent anywhere\", \"Answer is only an estimate\"], \"skippable\": [\"Start over\", \"Keep your answer if you want section (Print, Save a copy)\", \"Show the year by year table\", \"What the words mean\", \"optional fee and extra boxes\"], \"score\": 4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "rule": "a rule passes when it passes in most of 5 runs",
+      "rule": "a rule passes when it passes in most of 3 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -36,32 +34,6 @@
       "passes": 8,
       "fails": [],
       "runs": [
-        {
-          "passes": 8,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
-        {
-          "passes": 8,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
         {
           "passes": 8,
           "rules": [
@@ -106,7 +78,7 @@
     },
     {
       "model": "sonnet",
-      "rule": "a rule passes when it passes in most of 5 runs",
+      "rule": "a rule passes when it passes in most of 3 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -120,32 +92,6 @@
       "passes": 8,
       "fails": [],
       "runs": [
-        {
-          "passes": 8,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
-        {
-          "passes": 8,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
         {
           "passes": 8,
           "rules": [
@@ -198,17 +144,15 @@
         "runs": [
           4,
           4,
-          4,
-          4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in the numbers from my loan paper and then get a monthly payment.\n\n2. I would tap the first box, \"Amount borrowed\". After filling in the boxes, I'd tap \"Show my answer\".\n\n3. Words and phrases that felt like tech talk or were unclear:\n- \"Yearly interest rate\". I sort of know it, but I'm not sure which number on my paper it is.\n- \"Term\". The screen explains it, but it's still a loan word.\n- \"Upfront fees\".\n- \"Extra each month\". I'm not sure whether this is something I'd have.\n- \"Estimate\".\n- \"Lender statement\".\n- \"What the words mean\". It's closed, so I'm not sure it's for me.\n- \"Months / Years\". It's not clear that this goes with the \"How long is the loan?\" box. The two labels also show up twice, once as labels and once as choices.\n- \"There is no Send button on this page. Your numbers are worked out here.\" I don't know what this means, and it made me think about where my numbers go.\n\n4. Worries:\n- The line about no Send button helps a little, but it also made me wonder if my numbers are being sent somewhere. I'm not fully sure they stay on my phone.\n- I'm being asked for loan details, and the screen doesn't ask for my name. That's a small relief.\n- I might type the wrong number, like putting 6.5 for a rate that's really 6.5%, or mixing up months and years.\n- I'm not sure whether the answer is exact. It says \"estimate\", so I wouldn't rely on it for a real decision.\n- I'm afraid of picking \"Years\" when I should have picked \"Months\".\n\n5. I would skip the \"Upfront fees (optional)\" and \"Extra each month (optional)\" boxes. I'd leave them empty. I'd also skip the \"This is an estimate…\" note, though I'd read it once. I might skip \"What the words mean\" unless I got stuck.\n\n6. Score: 4. The first box and the orange button are clear. I'm only unsure about the Months/Years choice and whether my numbers stay private.\n\nRESULT: {\"next_tap\":\"Amount borrowed\",\"confusing_terms\":[\"Yearly interest rate\",\"term\",\"Upfront fees\",\"Extra each month\",\"estimate\",\"lender statement\",\"What the words mean\",\"Months/Years choice\",\"There is no Send button on this page\"],\"worries\":[\"not sure whether my numbers are sent anywhere\",\"typing the wrong number\",\"mixing up Months and Years\",\"answer is only an estimate\"],\"skippable\":[\"Upfront fees (optional)\",\"Extra each month (optional)\",\"estimate note\"],\"score\":4}"
+        "output": "1. This screen wants me to type in the numbers from my loan paper and then get an estimate of my monthly payment.\n\n2. I would tap the first box, \"Amount borrowed,\" and start typing. After filling the boxes, I would tap \"Show my answer.\"\n\n3. Words I did not understand or that felt like tech talk:\n- \"Yearly interest rate\" (I know interest, but not sure if it's the same as APR on my paper)\n- \"Term\" (I'd have to trust the hint)\n- \"Upfront fees\"\n- \"Estimate\"\n- \"Lender statement\"\n- \"Months / Years\" choice: it's not clear this goes with the \"How long is the loan?\" box\n- \"Extra each month\"\n- \"Empty state\"-style wording like \"Your answer shows here\" was fine, but \"What the words mean\" made me think there are more words I might not know\n\n4. Worries:\n- I don't have my loan paper in front of me, so I might get stuck or guess wrong.\n- I'm not sure whether typing a dollar sign or comma would break it (the example shows 12000 with no comma).\n- Nothing says whether my numbers are saved or sent anywhere, so I wonder about privacy.\n- \"There is no Send button on this page\" is a little odd. It reassures me, but it also makes me wonder what \"Send\" would have done.\n- I might pick Months when my loan is in Years and get a wrong answer without knowing.\n- It says it's only a close guess, so I'm not sure how much to trust it.\n\n5. What I would skip:\n- \"There is no Send button on this page.\" It doesn't help me.\n- The two optional boxes (\"Upfront fees\" and \"Extra each month\") unless I know I have them.\n- The \"What the words mean\" section, unless I got stuck.\n\n6. Score: 4. The orange button and the highlighted first box are clear, but I'm unsure about the Months/Years choice and having the right numbers.\n\nRESULT: {\"next_tap\": \"Amount borrowed\", \"confusing_terms\": [\"Yearly interest rate\", \"term\", \"Upfront fees\", \"estimate\", \"lender statement\", \"Months/Years choice\", \"Extra each month\", \"What the words mean\"], \"worries\": [\"don't have loan paper handy\", \"unsure if dollar signs or commas are allowed\", \"no word on whether numbers are saved or sent\", \"odd 'no Send button' note\", \"could pick Months vs Years wrong\", \"answer is only an estimate\"], \"skippable\": [\"There is no Send button on this page\", \"Upfront fees (optional)\", \"Extra each month (optional)\", \"What the words mean\"], \"score\": 4}"
       },
       "designRubric": [
         {
           "model": "haiku",
-          "rule": "a rule passes when it passes in most of 5 runs",
+          "rule": "a rule passes when it passes in most of 3 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -222,32 +166,6 @@
           "passes": 8,
           "fails": [],
           "runs": [
-            {
-              "passes": 8,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
-            },
-            {
-              "passes": 8,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
-            },
             {
               "passes": 8,
               "rules": [
@@ -288,11 +206,11 @@
               ]
             }
           ],
-          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
         },
         {
           "model": "sonnet",
-          "rule": "a rule passes when it passes in most of 5 runs",
+          "rule": "a rule passes when it passes in most of 3 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -306,32 +224,6 @@
           "passes": 8,
           "fails": [],
           "runs": [
-            {
-              "passes": 8,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
-            },
-            {
-              "passes": 8,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
-            },
             {
               "passes": 8,
               "rules": [

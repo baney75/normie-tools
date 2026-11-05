@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 [heading 1] Debt Payoff Planner
 Type the amount you owe on each debt. Your answer shows below. It compares two plans: pay the smallest debt first, or pay the highest interest first. Interest is the extra money the lender charges.
-There is no Send button on this page. Your numbers are worked out here.
+There is no Send button on this page.
 [label] Debt 1 name (optional)
 Any name you like, so you know which debt it is.
 [box] Debt 1 name (optional) = ""

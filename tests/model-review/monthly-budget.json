@@ -12,17 +12,15 @@
     "runs": [
       4,
       4,
-      4,
-      4,
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to check my money-in and money-out numbers, see what is left over each month ($700), and then either change a number or finish.\n\n2. I would tap **Done. Back to home.**\n\n3. Words and phrases that felt like tech talk or were unclear:\n- \"Send button\": I don't know what I'd be sending or where.\n- \"Your numbers are worked out here\": I think it means the sum is done on my phone, but I'm not sure.\n- \"Put it back undoes it\": it reads oddly, and I don't see a \"Put it back\" button.\n- \"Start over asks first, and you can undo it right after\": I'm not sure how the undo works.\n- \"Save a copy shows what goes in the file first\": what file, and where does it go?\n- \"Show the numbers in a table\": I'm not sure what kind of table this means.\n- \"Print opens a preview\" and \"Close the print box\": a little techy.\n- \"Saved on this phone or computer\": I don't know where it would end up.\n- \"Your numbers stay\": stay where? For how long?\n- \"Back to home\": which home? I don't know what the home page is.\n\n4. Worries:\n- Whether \"Done. Back to home.\" will erase my numbers. The screen says they stay, but I'm not sure I believe it.\n- The Remove buttons and Start over could wipe my entries. They say they'll ask first, which helps.\n- \"Save a copy\" makes a file on my phone. I'm not sure what it contains or whether it's private.\n- My income and spending figures are personal. I wonder if they go anywhere, though it says no Send button.\n- I don't know whether Print will cost anything or start printing right away.\n\n5. Things I would skip:\n- \"Show the numbers in a table\", because the list above it already shows the same numbers.\n- The \"Keep your answer if you want\" section (Print, Save a copy), because I don't need it right now.\n- The \"There is no Send button on this page\" line, because it didn't help me.\n\n6. Score: 4. The orange button is clear, and the answer is easy to see. I'm only unsure what \"Back to home\" does with my numbers.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Send button\", \"Your numbers are worked out here\", \"Put it back undoes it\", \"Start over asks first, and you can undo it right after\", \"Save a copy shows what goes in the file first\", \"Show the numbers in a table\", \"Print opens a preview\", \"Close the print box\", \"saved on this phone or computer\", \"Your numbers stay\", \"Back to home\"], \"worries\": [\"Done may erase my numbers\", \"Remove and Start over could delete entries\", \"Save a copy creates a file and I don't know what is in it or where it goes\", \"Privacy of my income and spending figures\", \"Print may start printing or cost something\"], \"skippable\": [\"Show the numbers in a table\", \"Keep your answer if you want section (Print, Save a copy)\", \"There is no Send button on this page\"], \"score\": 4}"
+    "output": "1. This screen wants me to check my monthly money in and out, see what is left over, and then finish up and go back home.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words that felt like tech talk or unclear:\n- \"filled state\" doesn't show to me, but \"Remove asks first\" is a bit odd wording\n- \"Put it back undoes it\" (confusing wording)\n- \"Start over asks first, and you can undo it right after\"\n- \"Show the numbers in a table\" (I'm not sure what table means here)\n- \"Save a copy\" (copy where? \"the file\")\n- \"what goes in the file\" (what file?)\n- \"Print opens a preview\" and \"Close the print box\" (what is a preview, what is a print box)\n- \"Name of income item 1\" (item feels like office language)\n- \"MAIN LINK\" is not something I'd see, so I ignore it\n- \"Left over\" with \"money in that is not spent\" took me a second to read\n\n4. Worries:\n- \"Remove\" buttons sit right under each number. I might tap one by accident and lose a line. It says it asks first, which helps a little.\n- \"Start over\" sits close to the answer. I worry it would wipe my numbers.\n- \"Done. Back to home.\" makes me wonder if my numbers will be lost or kept. It says \"Your numbers stay\" but that is a few lines above.\n- \"Save a copy\" puts a file on my phone, and I don't know where it goes.\n- Typing my pay and bills makes me wonder who can see it. The screen doesn't say.\n- No cost is mentioned, so I assume it is free but I'm not sure.\n\n5. Things I would skip:\n- The \"Remove asks first and shows which line goes. Put it back undoes it.\" sentences, repeated twice.\n- \"There is no Send button on this page.\" I didn't think there would be one.\n- \"Show the numbers in a table.\"\n- The \"Keep your answer if you want\" section with Print and Save a copy.\n- The \"Where it goes\" percentages, mostly.\n\n6. Score: 4. The orange button is clear, but I would stop a moment over whether my numbers are kept when I leave.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Put it back undoes it\", \"Start over asks first\", \"Show the numbers in a table\", \"Save a copy\", \"what goes in the file\", \"Print opens a preview\", \"Close the print box\", \"Name of income item 1\", \"Left over\"], \"worries\": [\"Remove buttons could be tapped by accident\", \"Start over might wipe my numbers\", \"Unsure if numbers are kept after Done. Back to home.\", \"Save a copy puts a file on my phone and I don't know where\", \"Privacy of my pay and bills not stated\", \"Cost not stated\"], \"skippable\": [\"Remove asks first / Put it back undoes it text\", \"There is no Send button on this page\", \"Show the numbers in a table\", \"Keep your answer if you want section (Print, Save a copy)\", \"Where it goes percentages\"], \"score\": 4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "rule": "a rule passes when it passes in most of 5 runs",
+      "rule": "a rule passes when it passes in most of 3 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -71,32 +69,6 @@
             "PASS",
             "PASS",
             "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
-        {
-          "passes": 8,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
-        {
-          "passes": 7,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "FAIL",
             "PASS",
             "PASS"
           ]
@@ -106,7 +78,7 @@
     },
     {
       "model": "sonnet",
-      "rule": "a rule passes when it passes in most of 5 runs",
+      "rule": "a rule passes when it passes in most of 3 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -120,32 +92,6 @@
       "passes": 8,
       "fails": [],
       "runs": [
-        {
-          "passes": 8,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
-        {
-          "passes": 8,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
         {
           "passes": 8,
           "rules": [
@@ -198,17 +144,15 @@
         "runs": [
           4,
           4,
-          3,
-          4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in how much money I get and spend each month, then see what's left over.\n\n2. I would tap the \"Pay, per month\" box, which already has the cursor in it. After typing my pay, the next tap would be \"Show my answer\".\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Name of income item 1\". \"Item\" is an odd word for pay.\n- \"Remove asks first and shows which line goes. Put it back undoes it.\" I don't know what \"shows which line goes\" means. I also don't see a \"Put it back\" button anywhere.\n- \"There is no Send button on this page. Your numbers are worked out here.\" I wasn't expecting a Send button. I don't know whether \"worked out here\" means my numbers stay on my phone.\n- \"Save a copy shows what goes in the file first.\" What file? Where does it go?\n- \"Print opens a preview\" and \"Close the print box.\"\n- \"Left over\" with no number under it. I'm only guessing it means what's left after bills.\n\n4. What made me worry:\n- Whether my numbers get sent somewhere. The \"no Send button\" line helps a little, but I'm not fully sure.\n- The \"Remove\" buttons are close to the boxes I'll type in. I might tap one by accident and lose a line.\n- \"Save a copy\" makes a file. I don't know where it lands on my phone, and I worry about clutter.\n- Do I have to fill in every box? I don't know if leaving \"Other\" empty is okay.\n- Should I type the dollar sign or commas? It doesn't say.\n\n5. I would skip:\n- The \"Remove asks first…\" sentence, which is repeated under both headings.\n- The \"There is no Send button\" sentence.\n- The whole \"Keep your answer if you want\" section, until I have an answer. Its buttons are greyed out anyway.\n- The \"Name of…\" boxes, since the names are already filled in.\n\n6. Score: 4. I know to start typing in the box with the cursor and then tap the orange button. I'm less sure about the middle part, which has a lot of boxes.\n\nRESULT: {\"next_tap\": \"Pay, per month\", \"confusing_terms\": [\"Name of income item 1\", \"Remove asks first and shows which line goes\", \"Put it back undoes it\", \"There is no Send button\", \"Your numbers are worked out here\", \"Save a copy / file\", \"Print opens a preview\", \"Left over\"], \"worries\": [\"whether my numbers are sent or stored somewhere\", \"accidentally tapping Remove\", \"Save a copy makes a file I can't find\", \"whether empty boxes are okay\", \"whether to type $ or commas\"], \"skippable\": [\"repeated Remove explanation under both headings\", \"There is no Send button sentence\", \"Keep your answer if you want section (disabled)\", \"Name of item boxes\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in my monthly money coming in and going out, then see what is left over.\n\n2. I would tap **Show my answer**. But first I'd probably tap the box \"Pay, per month,\" since the cursor is already there and it's where I type my pay.\n\n3. Words that felt like tech talk or were unclear:\n- \"Remove asks first and shows which line goes. Put it back undoes it.\" It's wordy, and I don't see a \"Put it back\" button anywhere.\n- \"Save a copy\" (a copy where? what kind of file?)\n- \"shows what goes in the file first\"\n- \"Print opens a preview\" and \"Close the print box\"\n- \"Left over\" with no explanation of what it means\n- \"income item\" and \"spending item\" sound like office language\n- \"disabled\" isn't on the screen for me, but the Print and Save buttons look faded and I wasn't sure why.\n\n4. Worries:\n- \"Remove\" buttons sit right under each box. I might tap one by accident and lose a line, though it says it asks first.\n- \"Save a copy\" makes a file. I don't know where it goes or whether it leaves my phone.\n- I'm typing in my money details, and the screen doesn't say whether it is kept or shared.\n- \"There is no Send button\" is reassuring, but it made me wonder why it was mentioned.\n- I'm not sure whether to type dollar signs or commas.\n\n5. Things I'd skip:\n- The repeated line \"Remove asks first and shows which line goes. Put it back undoes it.\" under both headings.\n- The whole \"Keep your answer if you want\" section at first, since the buttons don't work yet.\n- The \"Name of...\" boxes, since the names are already filled in.\n\n6. Score: 4. The cursor is already in the first box and there is one bright orange button, so I mostly know what to do. I'm unsure how many boxes I must fill in and whether I can leave some empty.\n\nRESULT: {\"next_tap\": \"Show my answer\", \"confusing_terms\": [\"Put it back undoes it\", \"Save a copy\", \"shows what goes in the file first\", \"Print opens a preview\", \"Close the print box\", \"Left over\", \"income item\", \"spending item\", \"faded Print and Save buttons\"], \"worries\": [\"Tapping Remove by accident\", \"Where the saved file goes\", \"Whether my money numbers are stored or shared\", \"Whether to type dollar signs or commas\", \"Whether empty boxes are okay\"], \"skippable\": [\"Repeated 'Remove asks first' text under both headings\", \"Keep your answer if you want section until numbers are typed\", \"Name of item boxes already filled in\"], \"score\": 4}"
       },
       "designRubric": [
         {
           "model": "haiku",
-          "rule": "a rule passes when it passes in most of 5 runs",
+          "rule": "a rule passes when it passes in most of 3 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -223,19 +167,6 @@
           "fails": [],
           "runs": [
             {
-              "passes": 7,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "FAIL",
-                "PASS",
-                "PASS"
-              ]
-            },
-            {
               "passes": 8,
               "rules": [
                 "PASS",
@@ -259,19 +190,6 @@
                 "PASS",
                 "PASS",
                 "PASS"
-              ]
-            },
-            {
-              "passes": 7,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "FAIL"
               ]
             },
             {
@@ -288,11 +206,11 @@
               ]
             }
           ],
-          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule6: \\\"Add an income item\\\" and \\\"Add a spending item\\\" change the list, but the screen gives no preview and no note on how to undo the change.\"],\"score\":7}"
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
         },
         {
           "model": "sonnet",
-          "rule": "a rule passes when it passes in most of 5 runs",
+          "rule": "a rule passes when it passes in most of 3 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -306,32 +224,6 @@
           "passes": 8,
           "fails": [],
           "runs": [
-            {
-              "passes": 8,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
-            },
-            {
-              "passes": 8,
-              "rules": [
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS",
-                "PASS"
-              ]
-            },
             {
               "passes": 8,
               "rules": [
