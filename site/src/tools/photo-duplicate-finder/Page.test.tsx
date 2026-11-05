@@ -74,7 +74,7 @@ describe("Photo Duplicate Finder page", () => {
     expect(screen.getByText("You picked 0 photos. Pick 2 or more.")).toBeInTheDocument();
     expect(screen.queryByText(/at least 2/)).toBeNull();
     expect(screen.queryByText(/That is your answer/)).toBeNull();
-    expect(screen.getByText(/Your photos are worked out here/)).toBeInTheDocument();
+    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
     expect(primaries()).toHaveLength(1);
     expect(picker().multiple).toBe(true);
     expect(picker()).toHaveFocus();

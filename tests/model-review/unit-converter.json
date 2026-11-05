@@ -17,7 +17,7 @@
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to see that 5000 inches is 127,000 millimeters, and then tap the orange button to finish and go back home.\n\n2. \"Done. Back to home.\"\n\n3. Words that felt like tech talk or unclear:\n- \"menu\" (I only see it is a box with a list)\n- \"Source: how this page is made\"\n- \"rounded to 6 digits\"\n- \"Show the facts used\"\n- \"Save a copy\" and \"a file\" (where does it go?)\n- \"preview\"\n- \"Swap 'from' and 'to'\" (a little confusing at first)\n\n4. Worries:\n- \"Start over asks first, and you can undo it\" made me a bit nervous that I might lose my numbers.\n- \"Save a copy... makes the file on this phone\" made me wonder where the file goes and whether it takes up space.\n- \"Nothing is sent\" is reassuring, but I wasn't sure I fully believed it.\n- I was not sure whether tapping \"Done. Back to home.\" would wipe my answer. It says \"You can stop here,\" which helped, but I'd still want to be sure.\n\n5. I would skip:\n- The \"how this page is made\" link.\n- \"Show the facts used.\"\n- The \"Print\" and \"Save a copy\" part, unless I wanted to keep the answer.\n- \"Swap 'from' and 'to'.\"\n- The second \"Back to home\" link at the bottom, which repeats the orange button.\n\n6. Score: 4. The orange button is clear, but I wasn't sure whether leaving would lose my answer.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"menu\", \"Source: how this page is made\", \"rounded to 6 digits\", \"Show the facts used\", \"Save a copy\", \"file\", \"preview\", \"Swap 'from' and 'to'\"], \"worries\": [\"Start over might lose my numbers\", \"Save a copy makes a file on my phone, unsure where it goes or space used\", \"Unsure whether 'Nothing is sent' is fully true\", \"Unsure if Done. Back to home. erases my answer\"], \"skippable\": [\"how this page is made link\", \"Show the facts used\", \"Print\", \"Save a copy\", \"Swap 'from' and 'to'\", \"second Back to home link\"], \"score\": 4}"
+    "output": "1. This screen wants me to read my answer, 5000 inches is 127,000 millimeters, and then either finish or change a number.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"menu\" (I only know it from restaurants)\n- \"Tap a box with a list\"\n- \"Swap 'from' and 'to'\"\n- \"rounded to 6 digits\"\n- \"Save a copy\" and \"the file\"\n- \"what goes in the file\"\n- \"Print opens a preview\"\n- \"Close the print box\"\n- \"Show the facts used\" (which facts?)\n- \"There is no Send button on this page\" (I never thought there would be one, so now I wonder if I missed something)\n- \"Back to home\" (which home?)\n\n4. Things that made me worry:\n- \"Done. Back to home\" might wipe my answer. It says \"Your numbers stay,\" but I'm not sure that covers leaving the page.\n- \"Start over\" sounds like it could erase everything. It says it asks first, but I'd still be nervous.\n- \"Save a copy\" puts a file on my phone, and I don't know where it goes or whether I could find it again.\n- \"Print\" might start printing or cost paper. It says I can cancel, but \"preview\" and \"print box\" are unfamiliar.\n- \"Show the facts used\" is closed, and I don't know what it will reveal.\n- Nothing mentions money, but nothing says it's free either.\n\n5. I would skip:\n- \"There is no Send button on this page.\"\n- \"Swap 'from' and 'to'\" and its note\n- The \"Keep your answer if you want\" section with Print and Save a copy\n- \"Show the facts used\"\n- \"A long answer is rounded to 6 digits.\" My answer isn't long.\n\n6. Score: 4\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"menu\", \"Tap a box with a list\", \"Swap 'from' and 'to'\", \"rounded to 6 digits\", \"Save a copy\", \"file\", \"Print opens a preview\", \"Close the print box\", \"Show the facts used\", \"There is no Send button on this page\", \"Back to home\"], \"worries\": [\"Done. Back to home might lose my answer\", \"Start over might erase everything\", \"Save a copy puts a file on my phone and I don't know where\", \"Print might start printing or cost paper\", \"Show the facts used is unknown\", \"No mention of whether it is free\"], \"skippable\": [\"There is no Send button on this page\", \"Swap 'from' and 'to'\", \"Keep your answer if you want section (Print, Save a copy)\", \"Show the facts used\", \"A long answer is rounded to 6 digits\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -50,14 +50,14 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "PASS",
+            "FAIL",
             "PASS",
             "PASS"
           ]
@@ -102,7 +102,7 @@
           ]
         }
       ],
-      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
     },
     {
       "model": "sonnet",
@@ -203,7 +203,7 @@
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type a number, pick what I'm changing from and to, and then tap the orange button to see my answer.\n\n2. I would tap the box labeled \"Number\" and type a number. After that I would tap \"Show my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"Source: how this page is made\" (why would I care how a page is made?)\n- \"Show the facts used\" (what facts? facts about what?)\n- \"Swap 'from' and 'to'\" (I get it after a moment, but \"swap\" is a little odd)\n- \"menu\" and \"Tap a box with a list\" (the boxes don't say they are lists until I read the hint)\n- \"Save a copy\" (a copy of what? where does it go?)\n- \"file\" (what kind of file, and where do I find it later?)\n- \"preview\" (I think it means a look before printing)\n- \"on this phone or computer\" (I only have a phone, so the \"or computer\" part is noise)\n\n4. Worries:\n- \"Nothing is sent. Numbers stay on this phone\" calms me, but then I wonder why they feel the need to say it.\n- \"Save a copy... makes the file on this phone.\" I worry about putting something on my phone that I can't find or that takes up room.\n- \"You can delete a saved copy any time\" is comforting, but it doesn't say how.\n- The link \"how this page is made\" might take me away from this page and I could lose my place.\n- Print: I don't know if my phone is connected to a printer, and I don't want to print by accident. (Both buttons are greyed out, so I can't tap them yet, which is fine.)\n\n5. I would skip:\n- \"Source: how this page is made\" link\n- \"Show the facts used\"\n- The \"Keep your answer if you want\" section, including Print and Save a copy, until I have an answer\n- The long paragraph about Print and Save a copy\n- \"Back to home\" (until I'm done)\n\n6. Score: 4. I know to type in the number box, and the orange button is clear. I'm a little unsure whether the first box (\"What are you measuring?\") needs attention, since it already says \"Length\" and the cursor is on the number box.\n\nRESULT: {\"next_tap\": \"Number\", \"confusing_terms\": [\"Source: how this page is made\", \"Show the facts used\", \"Swap 'from' and 'to'\", \"menu\", \"Save a copy\", \"file\", \"preview\", \"on this phone or computer\"], \"worries\": [\"Save a copy puts a file on my phone and I may not find it or know how to delete it\", \"Link 'how this page is made' might take me away and lose my place\", \"Not sure if Print will start printing by accident\", \"Why it says nothing is sent makes me wonder\"], \"skippable\": [\"Source: how this page is made\", \"Show the facts used\", \"Keep your answer if you want section (Print, Save a copy)\", \"long paragraph about Print and Save a copy\", \"Back to home\"], \"score\": 4}"
+        "output": "1. This screen wants me to pick what I'm measuring, type a number, and then tap the button to see the converted answer.\n\n2. I would tap the box labeled \"Number\" and type a number. After that I'd tap \"Show my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"menu\" (I'd just think of it as a box with a list)\n- \"Swap 'from' and 'to'\" (I can guess it flips the two units, but it's a little odd)\n- \"Save a copy\" (a copy of what, and where does it go?)\n- \"the file\" (what file?)\n- \"Show the facts used\" (which facts?)\n- \"disabled\" isn't written, but the Print and Save a copy buttons look greyed out and I wouldn't know why until I read the small print\n- \"Print opens a preview\" and \"Close the print box\" (what is a print box?)\n- \"Commas are fine\" (a bit confusing at first)\n- \"There is no Send button on this page.\" (odd to say, since I wasn't looking for one)\n\n4. Worries:\n- \"Save a copy\" makes a file. I'm not sure where it goes on my phone, and I worry about clutter or something I can't find.\n- \"Show the facts used\": I'm not sure whether it asks for anything or shares anything.\n- \"There is no Send button\" makes me wonder whether something gets sent somewhere.\n- The Print and Save buttons are greyed out, so I worry I did something wrong until I read that they work after I type.\n- Nothing mentions cost, which is a relief, but it also doesn't say outright that this is free.\n\n5. I would skip:\n- \"There is no Send button on this page.\"\n- The whole \"Keep your answer if you want\" part (Print and Save a copy) until I have an answer.\n- \"Show the facts used.\"\n- The \"Swap 'from' and 'to'\" button, at first.\n\n6. Score: 4. The cursor is already in the Number box, and there is one bright orange button. I'm only a little unsure whether to pick from the lists first.\n\nRESULT: {\"next_tap\": \"Number\", \"confusing_terms\": [\"menu\", \"Swap 'from' and 'to'\", \"Save a copy\", \"the file\", \"Show the facts used\", \"print box\", \"preview\", \"There is no Send button\"], \"worries\": [\"Save a copy makes a file and I don't know where it goes\", \"Show the facts used might share something\", \"No Send button line makes me wonder if something is sent\", \"Print and Save buttons look greyed out so I think I did something wrong\", \"Cost is never mentioned\"], \"skippable\": [\"There is no Send button on this page.\", \"Keep your answer if you want section\", \"Show the facts used\", \"Swap 'from' and 'to'\"], \"score\": 4}"
       },
       "designRubric": [
         {
@@ -275,10 +275,10 @@
               ]
             },
             {
-              "passes": 7,
+              "passes": 8,
               "rules": [
                 "PASS",
-                "FAIL",
+                "PASS",
                 "PASS",
                 "PASS",
                 "PASS",

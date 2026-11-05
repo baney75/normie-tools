@@ -1,5 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { shotPath } from "./paths";
+import { isShipped } from "./shipped";
+
+// This tool is coming soon until its review clears, so its page is not on the site. The spec runs again when it ships.
+test.beforeEach(() => {
+  test.skip(!isShipped("savings-goal-tracker"), "coming soon");
+});
 
 // The golden answers come from tools/savings-goal-tracker/tests/golden.json (worked out apart from the code).
 test.use({ viewport: { width: 390, height: 844 } });

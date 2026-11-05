@@ -10,14 +10,14 @@
     "model": "sonnet",
     "score": 4,
     "runs": [
-      3,
-      3,
       4,
       4,
+      4,
+      3,
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. The screen wants me to look at the answer it worked out from my numbers, which says one way of paying off debts costs less than the other, and then finish.\n\n2. \"Done. Back to home.\"\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"Snowball\" and \"Avalanche\". They're explained a little, but the names are odd.\n- \"Yearly interest rate\".\n- \"Smallest monthly payment\". It's also called \"minimum payment\" elsewhere, which made me wonder if they're the same thing.\n- \"Months to debt-free\".\n- \"Total interest\" and \"Total paid\".\n- \"Order of payoff\".\n- \"Show your debts and how each month works\".\n- \"What the words mean\".\n- \"Source: how this page is made\".\n- \"Nothing is sent\".\n- \"Put it back\".\n- \"Save a copy\" and \"a file\". I'm not sure where it goes on my phone.\n- \"Print opens a preview\".\n\n4. What worried me:\n- \"Start over\" might wipe my numbers. It says it asks first, which helps a bit.\n- \"Remove the last debt\" might delete something I typed.\n- \"Save a copy\" puts a file on my phone. I don't know where it goes or if it's safe.\n- I wonder if \"Done. Back to home\" erases my numbers. It says \"Your numbers stay,\" but that was about changing a number.\n- It says \"Nothing is sent.\" I'd like to believe that, but I can't check it.\n- I'm not sure how much to trust the answer. It says \"estimate.\"\n- Nothing mentioned money to pay, which is good.\n\n5. What I would skip:\n- The \"Snowball\" and \"Avalanche\" detail blocks with their month and interest figures, once I've seen the big $125.14 answer.\n- \"Print\" and \"Save a copy\".\n- \"Add another debt\" and \"Remove the last debt\".\n- The \"Source: how this page is made\" link.\n- The closed sections.\n\n6. Score: 4. The orange button is clear. But \"Done. Back to home\" feels like it might throw my answer away, and I'm not sure what I'm supposed to do with the result.\n\nRESULT: {\"next_tap\":\"Done. Back to home.\",\"confusing_terms\":[\"Snowball\",\"Avalanche\",\"yearly interest rate\",\"smallest monthly payment\",\"Months to debt-free\",\"Total interest\",\"Total paid\",\"Order of payoff\",\"Show your debts and how each month works\",\"What the words mean\",\"Source: how this page is made\",\"Nothing is sent\",\"Put it back\",\"Save a copy\",\"Print opens a preview\"],\"worries\":[\"Start over might erase my numbers\",\"Remove the last debt might delete what I typed\",\"Save a copy puts a file on my phone and I don't know where\",\"Done. Back to home might lose my answer\",\"Can't check that nothing is sent\",\"It's only an estimate\"],\"skippable\":[\"Snowball and Avalanche detail blocks\",\"Print\",\"Save a copy\",\"Add another debt\",\"Remove the last debt\",\"Source: how this page is made link\",\"closed sections\"],\"score\":4}"
+    "output": "1. This screen wants me to look at which of two ways of paying my debts costs less, and then finish.\n\n2. I would tap **Done. Back to home.**\n\n3. Words or phrases I did not understand or that felt like tech talk:\n- \"Highest interest first\" and \"Smallest debt first\". I can guess, but I'm not sure.\n- \"Yearly interest rate\"\n- \"Balance\"\n- \"Interest you pay\", which I think means the extra money, but I'm not certain.\n- \"Extra each month\". Is that on top of the minimum?\n- \"Which debt goes first\". Underneath it are only months, so I can't tell which one goes first.\n- \"There is no Send button on this page. Your numbers are worked out here.\" I don't know what \"worked out here\" means.\n- \"Show your debts and how each month works\"\n- \"Save a copy\", \"saved as a file\", and \"Print opens a preview\"\n- \"Close the print box\"\n- \"Estimate\"\n- \"What the words mean\". It's closed, so I don't know what's inside.\n\n4. Things that made me worry:\n- \"Done. Back to home.\" I can't tell whether my numbers will be erased. I'd also like to know if I can come back.\n- \"Start over\" and \"Remove the last debt\". I might wipe something by accident, though the screen says it asks first.\n- \"Save a copy\" puts a file on my phone. I don't know where it goes or who can see it.\n- Debt 1 gets paid off in month 6 under one plan and month 22 under the other. I wasn't sure which plan I should follow.\n- The \"All you pay\" totals of $7,575.57 and $7,450.43 are much more than the $5,800 I owe. That's a lot of interest.\n- The screen says this is only an estimate, so I don't know how far I can trust it.\n- I'm not sure my numbers stay private, even though it says nothing is sent.\n\n5. I would skip:\n- The two notes about Remove and Start over.\n- The \"Keep your answer if you want\" part, with Print and Save a copy.\n- The \"Add another debt\" and \"Remove the last debt\" buttons, since I only have two debts.\n- The long explanation of each button.\n- Probably the closed section \"Show your debts and how each month works\".\n\n6. Score: 4. I know I should tap the orange button, but I'm unsure which plan the screen wants me to pick and what happens to my numbers.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Highest interest first\", \"Smallest debt first\", \"yearly interest rate\", \"balance\", \"Interest you pay\", \"Extra each month\", \"Which debt goes first (shows months only)\", \"There is no Send button... worked out here\", \"Show your debts and how each month works\", \"Save a copy\", \"file\", \"Print opens a preview\", \"Close the print box\", \"estimate\", \"What the words mean\"], \"worries\": [\"Done. Back to home may erase my numbers\", \"Start over / Remove the last debt could wipe something\", \"Save a copy puts a file on my phone, unsure where it goes\", \"Debt 1 paid off in month 6 vs month 22, unsure which plan to follow\", \"Total paid is much more than I owe\", \"Only an estimate\", \"Unsure my numbers stay private\"], \"skippable\": [\"Notes about Remove and Start over\", \"Keep your answer if you want (Print, Save a copy)\", \"Add another debt\", \"Remove the last debt\", \"Show your debts and how each month works\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -37,19 +37,6 @@
       "fails": [],
       "runs": [
         {
-          "passes": 7,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "FAIL",
-            "PASS",
-            "PASS"
-          ]
-        },
-        {
           "passes": 8,
           "rules": [
             "PASS",
@@ -89,20 +76,33 @@
           ]
         },
         {
-          "passes": 7,
+          "passes": 8,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
             "PASS",
             "PASS"
           ]
         }
       ],
-      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"FAIL\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule6: \\\"Remove takes out one line. A Put it back button shows right after.\\\" The line is removed with no preview shown before the change, only an undo afterward.\"], \"score\": 7}"
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
     },
     {
       "model": "sonnet",
@@ -196,14 +196,14 @@
         "model": "sonnet",
         "score": 4,
         "runs": [
-          3,
+          4,
           4,
           4,
           4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in what I owe on my debts, then press a button to see which way of paying them off is better.\n\n2. I would tap the first box, \"Debt 1 name (optional)\", and start typing. After I fill things in, I would tap \"Show my answer\".\n\n3. Words that felt like tech talk or confusing:\n- \"Snowball\" and \"Avalanche\" (they sound like weather, and the screen only explains them in one short line)\n- \"yearly interest rate\" (I know it is on my bill, but I might not know which number it is)\n- \"smallest monthly payment\" (is that the same as \"minimum payment\"? I think so, but the words differ)\n- \"how this page is made\" (an odd link name, and I am not sure what it leads to)\n- \"Remove takes out one line. A Put it back button shows right after.\" (confusing, and I don't see a \"Put it back\" button now)\n- \"What the words mean\" (I'm glad it is there, but it is closed)\n- \"estimate\" and \"lender statement\" (the second one I can guess, but it is a formal term)\n\n4. Worries:\n- It asks about my debts, which is private. The line \"Nothing is sent. Numbers stay on this phone or computer\" helps, but I would still wonder if it is true.\n- \"Remove the last debt\" sounds like it could delete something, and I'm not sure whether I could undo it.\n- I don't know if I need to fill in both Debt 1 and Debt 2, or if I can leave Debt 2 empty.\n- I don't know if I need to type a dollar sign or a percent sign.\n- \"Show my answer\" makes me wonder if I will be asked to pay or sign up. It doesn't say so, though.\n\n5. I would skip:\n- The \"Source: how this page is made\" line and its link.\n- The \"How the two payoff orders compare / Your answer shows here\" part, since nothing is there yet.\n- \"Back to home,\" unless I got stuck.\n- \"Extra each month (optional)\" on my first try, since it is optional.\n\n6. Score: 4. The first box is highlighted and the orange button is clear, but I'm unsure about Debt 2 and the typing format.\n\nRESULT: {\"next_tap\": \"Debt 1 name (optional)\", \"confusing_terms\": [\"Snowball\", \"Avalanche\", \"yearly interest rate\", \"smallest monthly payment\", \"how this page is made\", \"Put it back button\", \"What the words mean\", \"lender statement\", \"estimate\"], \"worries\": [\"Privacy of debt information, even with the 'Nothing is sent' note\", \"Remove the last debt might delete my entries and I'm not sure I can undo it\", \"Unsure whether Debt 2 must be filled in\", \"Unsure whether to type $ or %\", \"Unsure if Show my answer leads to a cost or sign-up\"], \"skippable\": [\"Source: how this page is made link\", \"How the two payoff orders compare / Your answer shows here\", \"Back to home\", \"Extra each month (optional)\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in what I owe on my debts, then tap the button to see which way of paying them off is better.\n\n2. I would tap the first box, \"Debt 1 name (optional)\", since the cursor is already there. After filling things in, I'd tap \"Show my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"Debt Payoff Planner\" is fine, but \"payoff orders\" is odd.\n- \"Yearly interest rate\" (I know interest, but not sure which number on my bill that is)\n- \"Minimum payment\" (fine, but \"payment due\" might be a different number)\n- \"Balance\"\n- \"Estimate\"\n- \"Send button\" (confusing that it mentions something that isn't there)\n- \"Your numbers are worked out here\" (here where? On my phone? Somewhere else?)\n- \"How the two payoff orders compare\"\n- \"Highest interest first\"\n- \"What the words mean\" (I'd guess it is a help section)\n- \"Remove asks first and shows which debt goes. Put it back undoes it.\" (I don't see a \"Put it back\" button yet)\n\n4. Worries:\n- Typing my real debt numbers. The page says there is no Send button and numbers are worked out here, which helps, but I can't fully tell if it's saved or shared.\n- \"Remove the last debt\" sounds like it could delete something, though it says it asks first.\n- I don't know if I'm supposed to fill in every box or if blank ones cause trouble.\n- It's a long page of boxes, and I might type a number in the wrong one.\n- Whether the answer is reliable enough to act on. It says it's only an estimate.\n- No cost is mentioned, so I assume it's free, but it never says so.\n\n5. Skippable:\n- \"Remove the last debt\" and its note, since I have nothing to remove yet.\n- \"How the two payoff orders compare / Your answer shows here\" is just a placeholder.\n- The \"Any name you like\" line repeated under each name box.\n\n6. Score: 4. I know to start at the top and tap \"Show my answer\" at the end, but I'm unsure whether I must fill every box and what happens to my numbers.\n\nRESULT: {\"next_tap\":\"Debt 1 name (optional)\",\"confusing_terms\":[\"payoff orders\",\"yearly interest rate\",\"payment due\",\"balance\",\"estimate\",\"Send button\",\"worked out here\",\"highest interest first\",\"Put it back\",\"What the words mean\"],\"worries\":[\"typing real debt numbers and whether they are saved or shared\",\"Remove the last debt could delete something\",\"unsure if every box must be filled\",\"might type in the wrong box\",\"answer is only an estimate\",\"cost never stated\"],\"skippable\":[\"Remove the last debt and its note\",\"How the two payoff orders compare / Your answer shows here placeholder\",\"repeated 'Any name you like' lines\"],\"score\":4}"
       },
       "designRubric": [
         {
@@ -223,7 +223,7 @@
           "fails": [],
           "runs": [
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -232,7 +232,7 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             },
             {
@@ -288,7 +288,7 @@
               ]
             }
           ],
-          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"FAIL\", \"fails\": [\"Rule 8: \\\"Your numbers are worked out here\\\" is a claim about where calculation happens, and the page gives no source for it.\"], \"score\": 7}"
         },
         {
           "model": "sonnet",

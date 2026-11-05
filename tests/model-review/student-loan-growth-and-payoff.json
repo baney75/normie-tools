@@ -11,13 +11,13 @@
     "score": 4,
     "runs": [
       4,
-      4,
-      4,
       3,
+      4,
+      4,
       3
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to look at the answer it worked out from my numbers (79 months, $3,479.30 interest) and then finish by going back to the home page.\n\n2. \"Done. Back to home.\"\n\n3. Words that felt like tech talk or unclear:\n- \"Loan balance\" (I think it's what I owe, but it took the help line to be sure)\n- \"Interest that grew\" / \"Balance when payments start\"\n- \"Add the unpaid interest to my balance\" (shows up twice, once as a box and once as a label)\n- \"Show year by year\"\n- \"How this is figured\"\n- \"Save a copy\" and \"a file\"\n- \"Print opens a preview\"\n- \"how this page is made\" (a link in the top text)\n- \"Nothing is sent\"\n\n4. Worries:\n- \"Save a copy… makes the file on this phone.\" I wasn't sure where it goes or whether I could find it.\n- \"Start over asks first, and you can undo it right after.\" That was reassuring, but it also made me wonder if I could lose my numbers by accident.\n- \"Done. Back to home.\" I wondered if tapping it would erase my answer, since it's the big orange button. I'd lose it if I hadn't printed or saved.\n- \"Your loan statement is the final word.\" I'm not sure how far to trust the answer, and I don't want to rely on it for a real decision.\n- Typing a rate with no percent sign made me worry I'd get it wrong.\n\n5. Skippable:\n- The \"how this page is made\" link\n- \"Show year by year\"\n- \"How this is figured\"\n- The \"Years you want to pay it off in\" and \"First payment month\" boxes, since they're optional and I left them empty\n- The second \"Back to home\" link at the bottom, since it repeats the orange button\n\n6. Score: 4. I know the answer is on the screen and the orange button finishes things. I'm slightly unsure whether that button throws my answer away.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Loan balance\", \"Balance when payments start\", \"Interest that grew before your first payment\", \"Add the unpaid interest to my balance\", \"Show year by year\", \"How this is figured\", \"Save a copy\", \"file\", \"Print opens a preview\", \"how this page is made\", \"Nothing is sent\"], \"worries\": [\"Save a copy: where the file goes and whether I can find it\", \"Done. Back to home might erase my answer\", \"Start over could lose my numbers\", \"Loan statement is the final word, so can I trust the answer\", \"Rate typed with no percent sign\"], \"skippable\": [\"how this page is made link\", \"Show year by year\", \"How this is figured\", \"optional boxes left empty\", \"second Back to home link\"], \"score\": 4}"
+    "output": "1. This screen wants me to put in my loan numbers and read how long it will take to pay off and how much interest I'll pay. I've done that, so I'm just reading the answer.\n\n2. \"Done. Back to home.\"\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n- \"Balance when payments start\". It's not clear why it differs from what I owe, and here it's the same.\n- \"Add the unpaid interest to my balance\". I'm not sure what it means or whether I should check it.\n- \"Months with no payments so far\". The wording is awkward.\n- \"Show year by year\". I don't know what it will show.\n- \"How this is figured\".\n- \"Save a copy\". I don't know where it goes.\n- \"Print opens a preview\" and \"Close the print box\".\n- \"Start over asks first, and you can undo it right after\". It's a bit odd.\n- \"Your numbers are worked out here\". I wondered where \"here\" is.\n- \"Interest that grew before your first payment\". It's fine, but it's a lot of words.\n\n4. What made me worry:\n- \"There is no Send button\" is reassuring, but it made me wonder whether my numbers go anywhere.\n- \"Done. Back to home.\" might wipe my answer. It doesn't say whether my answer is kept.\n- \"Start over\" might erase everything. It says it asks first, which helps.\n- \"Save a copy\" puts a file on my phone, and I'm not sure I want that.\n- I couldn't tell whether the unpaid interest box should be checked. If I get it wrong, my answer may be wrong.\n- I'm not sure the \"79\" months is right. The page says my loan statement is the final word.\n\n5. What I would skip:\n- \"Show year by year\".\n- \"How this is figured\".\n- \"Print\" and \"Save a copy\".\n- \"First payment month\" and \"Years you want to pay it off in\", since both are optional.\n- \"Interest that grew before your first payment\", because it says $0.00.\n\n6. Score: 4. The answer is clear and the orange button stands out. I'm a little unsure what \"Done. Back to home.\" does to my answer.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Balance when payments start\", \"Add the unpaid interest to my balance\", \"Months with no payments so far\", \"Show year by year\", \"How this is figured\", \"Save a copy\", \"Print opens a preview\", \"Close the print box\", \"Your numbers are worked out here\", \"Interest that grew before your first payment\"], \"worries\": [\"Done. Back to home. might lose my answer\", \"Start over might erase everything\", \"Save a copy puts a file on my phone\", \"unsure whether to check the unpaid interest box\", \"unsure my numbers go anywhere\", \"unsure the 79 months is right\"], \"skippable\": [\"Show year by year\", \"How this is figured\", \"Print\", \"Save a copy\", \"First payment month\", \"Years you want to pay it off in\", \"Interest that grew before your first payment\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -50,7 +50,7 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
@@ -59,7 +59,7 @@
             "PASS",
             "PASS",
             "PASS",
-            "PASS"
+            "FAIL"
           ]
         },
         {
@@ -200,10 +200,10 @@
           4,
           4,
           4,
-          3
+          4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in what I owe and my interest rate, then press the button to see what my loan will be when payments start.\n\n2. I would tap the box called \"Loan balance,\" since the cursor is already there. After typing, I'd tap \"Show my answer.\"\n\n3. Words that felt like tech talk or unclear:\n- \"Unpaid interest added to my balance.\" I don't really know what that means for my own loan.\n- \"Months with no payments so far.\" The wording is a bit tangled, even with the \"time in school\" hint.\n- \"Balance when payments start.\" I'm not sure if that's the answer I'm after.\n- \"Save a copy\" and \"the file.\" I don't know what kind of file or where it goes.\n- \"Print opens a preview.\" I'm not sure what a preview is.\n- \"Source: how this page is made.\" That seems like computer-maker talk.\n- \"How this is figured.\" Fine, but I don't know what's inside.\n- \"Disabled.\" I wouldn't see this word, but the Print and Save buttons look faded and I wouldn't know why.\n- \"2026-09\" format. Odd way to write a date.\n\n4. Worries:\n- I don't have my loan statement in front of me, so I might guess wrong.\n- Typing the wrong thing and getting a wrong answer. It says the loan statement is the final word, which helps a bit.\n- \"Nothing is sent\" is reassuring, but I'd still wonder if it's true.\n- \"Save a copy\" makes a file on my phone. I'm not sure where it goes or if it could clutter things up.\n- Several boxes are optional, and I'm unsure whether skipping them gives a bad answer.\n- The checkbox about unpaid interest: if I tick it wrong, my answer could be off.\n\n5. Skippable:\n- The link \"how this page is made.\"\n- \"Keep your answer if you want,\" with Print and Save a copy, until I have an answer.\n- \"Back to home,\" unless I'm lost.\n- The optional boxes: monthly payment, first payment month, and years to pay off.\n\n6. Score: 4. I know to start at the top and tap \"Show my answer,\" but I'm unsure about the checkbox and the optional boxes.\n\nRESULT: {\"next_tap\": \"Loan balance\", \"confusing_terms\": [\"Add the unpaid interest to my balance\", \"Months with no payments so far\", \"Balance when payments start\", \"Save a copy / the file\", \"Print opens a preview\", \"Source: how this page is made\", \"How this is figured\", \"2026-09 date format\", \"Print and Save a copy look faded\"], \"worries\": [\"Don't have loan statement handy\", \"Entering wrong numbers gives wrong answer\", \"Unsure if 'nothing is sent' is true\", \"Save a copy makes a file, unsure where it goes\", \"Unsure if skipping optional boxes changes the answer\", \"Unsure whether to tick the unpaid interest box\"], \"skippable\": [\"how this page is made link\", \"Print and Save a copy section\", \"Back to home\", \"optional boxes: Monthly payment, First payment month, Years you want to pay it off in\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in what I owe and my interest rate, then tap the button to see how much I'll owe when payments start.\n\n2. \"Show my answer\"\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Add the unpaid interest to my balance\" (I don't know what that means for my loan, though it says to check my statement)\n- \"Balance when payments start\"\n- \"Months with no payments so far\"\n- \"Yearly interest rate\" (I'm not sure if it's the same as \"APR\" on my statement)\n- \"Your numbers are worked out here\" (unclear what \"here\" means)\n- \"There is no Send button\" (odd to say; I wasn't expecting one)\n- \"Save a copy\" (a copy where? what kind of file?)\n- \"Close the print box\"\n- \"How this is figured\"\n- \"Optional\" fields: I'm not sure which ones I really need\n\n4. Worries:\n- I'm asked for my loan balance and rate, which feels private. The page says the numbers are worked out here, which reassures me a bit, but I'm still not fully sure nothing is sent anywhere.\n- \"Save a copy\" makes a file, and I don't know where it goes.\n- I might check the tick box wrongly and get a wrong answer.\n- Many optional boxes make me worry I'll leave out something I need.\n- The page says my statement is the final word, so I worry the answer might be wrong.\n\n5. Things I would skip:\n- The \"Print\" and \"Save a copy\" buttons, since they're greyed out and only work later.\n- The \"How this is figured\" section, since it's closed and I don't need it.\n- The optional boxes (first payment month, years to pay off), at least at first.\n\n6. Score: 4\n\nRESULT: {\"next_tap\": \"Show my answer\", \"confusing_terms\": [\"Add the unpaid interest to my balance\", \"Balance when payments start\", \"Months with no payments so far\", \"Yearly interest rate\", \"Your numbers are worked out here\", \"There is no Send button\", \"Save a copy\", \"Close the print box\", \"How this is figured\", \"optional\"], \"worries\": [\"Typing private loan numbers; unsure nothing is sent anywhere\", \"Save a copy makes a file; unsure where it goes\", \"Might tick the interest box wrongly and get a wrong answer\", \"Unsure whether leaving optional boxes empty leaves out something needed\", \"Answer may not match my statement\"], \"skippable\": [\"Print button (disabled)\", \"Save a copy button (disabled)\", \"How this is figured\", \"Optional boxes: First payment month, Years you want to pay it off in\"], \"score\": 4}"
       },
       "designRubric": [
         {
@@ -275,20 +275,20 @@
               ]
             },
             {
-              "passes": 7,
+              "passes": 8,
               "rules": [
                 "PASS",
                 "PASS",
                 "PASS",
                 "PASS",
                 "PASS",
-                "FAIL",
+                "PASS",
                 "PASS",
                 "PASS"
               ]
             }
           ],
-          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
         },
         {
           "model": "sonnet",

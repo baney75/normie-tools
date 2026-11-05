@@ -4,26 +4,27 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 [heading 1] Savings Goal Tracker
 Type your goal and what you have saved. Your answer shows below.
-Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
-[link, plain] how this page is made
+There is no Send button on this page.
 [label] How long will it take?
-[choice] How long will it take? (chosen)
+[choice] How long will it take? (selected)
 [label] How much to save each month?
-[choice] How much to save each month? (not chosen)
+[choice] How much to save each month? 
+How long: you give the monthly amount. You get the time.
+How much: you give the goal month. You get the monthly amount.
 [label] Goal amount
-The amount you want to have saved.
+The amount you want to have saved. For example: 5000.
 [box] Goal amount = "5000"
 [label] Already saved (optional)
-What you have now. Leave it empty if none.
+What you have now. Leave it empty if none. For example: 500.
 [box] Already saved (optional) = ""
 [label] Amount you save each month
-What you add every month. Type 0 if none.
+What you add every month. For example: 250.
 [box] Amount you save each month = "240"
 [label] Yearly interest rate (optional)
 Find it on your bank statement. Type just the number, like 4.5. Leave it empty if none or if you do not know.
 [box] Yearly interest rate (optional) = ""
 [label] Start month (optional)
-Type the year, a dash, then the month, like 2026-12, to see the month and year you reach your goal.
+Add it to see the month you reach your goal. Like 2026-12. Year, a dash, then month.
 [box] Start month (optional) = ""
 [plain button, outline only] Start over
 Start over asks first, and you can undo it right after.
@@ -48,8 +49,6 @@ That is your answer. You can stop here. Or change a number to try again. Your nu
 Your answer above, on paper or saved on this phone or computer.
 [plain button, outline only] Print
 [plain button, outline only] Save a copy
-Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
+Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
 
 Your bank statement is the final word. This page helps you understand the numbers you typed.
-Back to home
-[link, plain] Back to home

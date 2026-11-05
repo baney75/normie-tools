@@ -4,10 +4,9 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 [heading 1] Monthly Budget
 Type what you get and what you spend each month. Your answer shows below.
-Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
-[link, plain] how this page is made
+There is no Send button on this page. Your numbers are worked out here.
 [heading 2] Money in each month
-Remove takes out one line. A Put it back button shows right after.
+Remove asks first and shows which line goes. Put it back undoes it.
 [label] Name of income item 1
 [box] Name of income item 1 = "Pay"
 [label] Pay, per month
@@ -15,7 +14,7 @@ Remove takes out one line. A Put it back button shows right after.
 [plain button, outline only] Remove Pay
 [plain button, outline only] Add an income item
 [heading 2] Money out each month
-Remove takes out one line. A Put it back button shows right after.
+Remove asks first and shows which line goes. Put it back undoes it.
 [label] Name of spending item 1
 [box] Name of spending item 1 = "Rent or mortgage"
 [label] Rent or mortgage, per month
@@ -55,19 +54,16 @@ That is your answer. You can stop here. Or change a number to try again. Your nu
 [MAIN LINK, filled dark orange] Done. Back to home.
 [plain button, outline only] Change a number
 [heading 2] Where it goes
-Rent or mortgage $1,200.00, 40% of income
-Food $450.00, 15% of income
-Bills $300.00, 10% of income
-Transport $250.00, 9% of income
-Other $100.00, 3% of income
-Each percent is a whole number. One may be 1 higher than its exact value, so that they add up to the percent of income spent.
+Rent or mortgage $1,200.00, 40.0% of income
+Food $450.00, 15.0% of income
+Bills $300.00, 10.0% of income
+Transport $250.00, 8.3% of income
+Other $100.00, 3.3% of income
 [closed section, tap to open] Show the numbers in a table
 
 [heading 2] Keep your answer if you want
 Your answer above, on paper or saved on this phone or computer.
 [plain button, outline only] Print
 [plain button, outline only] Save a copy
-Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
+Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
 
-Back to home
-[link, plain] Back to home

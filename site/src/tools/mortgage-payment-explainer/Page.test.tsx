@@ -190,7 +190,7 @@ describe("Mortgage Payment Explainer first-time help", () => {
 
   it("uses the shared privacy note with a place to check it", () => {
     render(<Page />);
-    expect(screen.getByText(/There is no Send button on this page\. Your numbers are worked out here\./)).toBeInTheDocument();
+    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
   });
 });
 

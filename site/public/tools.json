@@ -81,13 +81,11 @@
     {
       "id": "savings-goal-tracker",
       "name": "Savings Goal Tracker",
-      "status": "shipped",
+      "status": "coming_soon",
       "group": "Money",
       "routes": [
         "/tools/savings-goal-tracker"
-      ],
-      "claimsPath": "tools/savings-goal-tracker/claims.json",
-      "takesFiles": false
+      ]
     },
     {
       "id": "debt-payoff-planner",

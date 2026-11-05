@@ -19,7 +19,7 @@ export const TOOLS: Tool[] = [
   {"id":"warranty-and-returns-keeper","name":"Warranty and Returns Keeper","status":"coming_soon","group":"Money","routes":["/tools/warranty-and-returns-keeper"],"icon":"shield-check"},
   {"id":"medical-bill-explainer","name":"Medical Bill Explainer","status":"coming_soon","group":"Money","routes":["/tools/medical-bill-explainer"]},
   {"id":"spending-check-in","name":"Spending Check-in","status":"coming_soon","group":"Money","routes":["/tools/spending-check-in"]},
-  {"id":"savings-goal-tracker","name":"Savings Goal Tracker","status":"shipped","group":"Money","routes":["/tools/savings-goal-tracker"],"claimsPath":"tools/savings-goal-tracker/claims.json","takesFiles":false},
+  {"id":"savings-goal-tracker","name":"Savings Goal Tracker","status":"coming_soon","group":"Money","routes":["/tools/savings-goal-tracker"]},
   {"id":"debt-payoff-planner","name":"Debt Payoff Planner","status":"shipped","group":"Money","routes":["/tools/debt-payoff-planner"],"claimsPath":"tools/debt-payoff-planner/claims.json","takesFiles":false},
   {"id":"loan-explainer","name":"Loan Explainer","status":"shipped","group":"Money","routes":["/tools/loan-explainer"],"claimsPath":"tools/loan-explainer/claims.json","takesFiles":false},
   {"id":"loan-offer-compare","name":"Loan Offer Compare","status":"shipped","group":"Money","routes":["/tools/loan-offer-compare"],"claimsPath":"tools/loan-offer-compare/claims.json","takesFiles":false},

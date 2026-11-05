@@ -9,7 +9,6 @@ const TOOLS = [
   "student-loan-growth-and-payoff",
   "debt-payoff-planner",
   "monthly-budget",
-  "savings-goal-tracker",
   "unit-converter",
 ];
 

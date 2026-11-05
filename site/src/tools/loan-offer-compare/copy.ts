@@ -39,7 +39,7 @@ export const COPY = {
     onePayment: "This offer has the lowest monthly payment.",
     split: "Two different offers are lowest here. One costs less in all. The other costs less each month.",
     payLine: "Lowest monthly payment:",
-    differ: "These offers differ in amount or length, so the totals are for different loans. Each total is right for its own offer.",
+    differ: "These offers are not the same amount or length. Each total is right for its own offer, so read the monthly payment too.",
   },
   result: {
     paymentLabel: "monthly payment",

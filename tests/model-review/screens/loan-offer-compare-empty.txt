@@ -4,7 +4,7 @@ The first box has the cursor in it and a bright outline: that is where to start 
 
 [heading 1] Loan Offer Compare
 Type the numbers from two loan offers. Your answer shows below.
-There is no Send button on this page. Your numbers are worked out here.
+There is no Send button on this page.
 [label] Offer 1: Amount borrowed
 On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
 [box] Offer 1: Amount borrowed = "" (cursor is here)

@@ -3,38 +3,37 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Debt Payoff Planner
-Type the amount you owe on each debt. Your answer shows below. This compares two ways to pay debts off: Snowball pays the smallest balance first. Avalanche pays the highest rate first.
-Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
-[link, plain] how this page is made
+Type the amount you owe on each debt. Your answer shows below. It compares two plans: pay the smallest debt first, or pay the highest interest first. Interest is the extra money the lender charges.
+There is no Send button on this page. Your numbers are worked out here.
 [label] Debt 1 name (optional)
 Any name you like, so you know which debt it is.
 [box] Debt 1 name (optional) = "" (cursor is here)
 [label] Debt 1 balance
-On your latest bill. Look for the words 'balance' or 'amount owed'.
+On your latest bill. Look for the words 'balance' or 'amount owed'. For example: 2500.
 [box] Debt 1 balance = ""
 [label] Debt 1 yearly interest rate
-On your bill. Look for the words 'interest rate'. It is a percent, like 19.99.
+On your bill. Look for the words 'interest rate'. It is a percent. For example: 19.99.
 [box] Debt 1 yearly interest rate = ""
-[label] Debt 1 smallest monthly payment
-On your bill. Look for 'minimum payment' or 'payment due'.
-[box] Debt 1 smallest monthly payment = ""
+[label] Debt 1 minimum payment
+On your bill. Look for 'minimum payment' or 'payment due'. It is the least you must pay each month. For example: 60.
+[box] Debt 1 minimum payment = ""
 [label] Debt 2 name (optional)
 Any name you like, so you know which debt it is.
 [box] Debt 2 name (optional) = ""
 [label] Debt 2 balance
-On your latest bill. Look for the words 'balance' or 'amount owed'.
+On your latest bill. Look for the words 'balance' or 'amount owed'. For example: 2500.
 [box] Debt 2 balance = ""
 [label] Debt 2 yearly interest rate
-On your bill. Look for the words 'interest rate'. It is a percent, like 19.99.
+On your bill. Look for the words 'interest rate'. It is a percent. For example: 19.99.
 [box] Debt 2 yearly interest rate = ""
-[label] Debt 2 smallest monthly payment
-On your bill. Look for 'minimum payment' or 'payment due'.
-[box] Debt 2 smallest monthly payment = ""
+[label] Debt 2 minimum payment
+On your bill. Look for 'minimum payment' or 'payment due'. It is the least you must pay each month. For example: 60.
+[box] Debt 2 minimum payment = ""
 [plain button, outline only] Add another debt
 [plain button, outline only] Remove the last debt
-Remove takes out one line. A Put it back button shows right after.
+Remove asks first and shows which debt goes. Put it back undoes it.
 [label] Extra each month (optional)
-Extra money you can add each month on top of all the smallest payments. Leave it empty if none.
+Extra money you can add each month on top of all the minimum payments. Leave it empty if none.
 [box] Extra each month (optional) = ""
 How the two payoff orders compare
 Your answer shows here
@@ -42,5 +41,3 @@ Your answer shows here
 This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
 [closed section, tap to open] What the words mean
 
-Back to home
-[link, plain] Back to home

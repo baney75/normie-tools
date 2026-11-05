@@ -9,7 +9,6 @@ export const REGISTRY: Record<string, LazyExoticComponent<ComponentType>> = {
   "student-loan-growth-and-payoff": lazy(() => import("./student-loan-growth-and-payoff/Page")),
   "debt-payoff-planner": lazy(() => import("./debt-payoff-planner/Page")),
   "monthly-budget": lazy(() => import("./monthly-budget/Page")),
-  "savings-goal-tracker": lazy(() => import("./savings-goal-tracker/Page")),
   "unit-converter": lazy(() => import("./unit-converter/Page")),
 };
 

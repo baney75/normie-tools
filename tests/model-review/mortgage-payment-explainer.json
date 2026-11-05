@@ -17,7 +17,7 @@
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to look at my mortgage payment answer, and then either finish or change a number.\n\n2. \"Done. Back to home.\"\n\n3. Words I did not understand or that felt like tech talk:\n- \"Mortgage insurance\" (I'm not sure if I need it)\n- \"Property tax\" and \"Neighborhood fee\" (I only half know what they mean)\n- \"Loan amount\" and \"Loan length\" (fine, but are they the same as what I typed?)\n- \"Total interest over the loan\"\n- \"Goes to interest\" and \"Lowers what you owe\"\n- \"Show how we add it up\"\n- \"What the words mean\"\n- \"Source: how this page is made\"\n- \"Save a copy\" and \"file\"\n- \"Start over asks first, and you can undo it right after\" (undo what?)\n- \"Estimate\" and \"lender statement\"\n- \"Print opens a preview first\"\n\n4. Things that made me worry:\n- \"Done. Back to home.\" could close everything and lose my numbers. It says \"Your numbers stay,\" but I'm not sure.\n- \"Start over\" might wipe everything. It says it asks first, which helps a little.\n- \"Save a copy\" makes a file on my phone. I don't know where it goes or whether it costs anything.\n- The big total of $271,060.24 in interest scared me.\n- I'm not sure the answer is right. It says \"estimate,\" so I can't rely on it.\n- I did not leave the optional boxes filled. I'm not sure the total is real without tax and insurance.\n- \"Nothing is sent\" is calming, but I can't check it.\n\n5. I would skip these:\n- \"Print\" and \"Save a copy\"\n- \"Start over\"\n- \"Show how we add it up\"\n- \"What the words mean\" (unless I got stuck)\n- The 15, 20 and 30 years buttons, since I already typed 30\n- The second \"Back to home\" at the bottom, because it repeats the orange one\n\n6. Score: 4. The orange button stands out. But \"Done\" feels like a weird next step. I'm also not sure whether I should leave the optional boxes empty.\n\nRESULT: {\"next_tap\":\"Done. Back to home.\",\"confusing_terms\":[\"mortgage insurance\",\"property tax\",\"neighborhood fee\",\"total interest over the loan\",\"goes to interest\",\"lowers what you owe\",\"show how we add it up\",\"what the words mean\",\"how this page is made\",\"save a copy\",\"file\",\"undo\",\"estimate\",\"lender statement\",\"print preview\"],\"worries\":[\"Done may lose my numbers\",\"Start over might wipe everything\",\"Save a copy makes a file and I don't know where it goes\",\"total interest of $271,060.24 is scary\",\"answer is only an estimate\",\"optional boxes empty so total may be incomplete\",\"can't verify nothing is sent\"],\"skippable\":[\"Print\",\"Save a copy\",\"Start over\",\"Show how we add it up\",\"What the words mean\",\"15/20/30 years buttons\",\"second Back to home link\"],\"score\":4}"
+    "output": "1. This screen wants me to read my monthly payment, which is $1,402.95, and then either leave or change a number.\n\n2. I would tap **Done. Back to home.**\n\n3. Words and phrases I did not understand or that felt like tech talk:\n- \"Mortgage insurance\". It says to look on my loan paper, but I'm not sure what it is.\n- \"Neighborhood fee\" and \"the neighborhood group\". I'm not sure who that is.\n- \"Loan amount\" and \"Loan length\". I can guess, but I'm not sure.\n- \"Total interest over the loan\". $271,060.24 is a huge number, and I don't know why it's so big.\n- \"Goes to interest\" and \"Lowers what you owe\". I half understand them.\n- \"Save a copy\" and \"saved as a file\". I don't know where the file goes on my phone.\n- \"Show how we add it up\" and \"What the words mean\". They are closed, so I don't know what's inside.\n- \"Estimate\" and \"lender statement\".\n- \"Print opens a preview\" and \"Close the print box\".\n- \"Your numbers are worked out here\". I'm not sure what that means for my numbers, or whether they go anywhere.\n\n4. Things that worried me:\n- \"Done. Back to home.\" might wipe my answer. It says \"Your numbers stay\", but that sentence is about changing a number, not about this button.\n- \"Start over\" might erase everything. It says it asks first, which helps a little.\n- $271,060.24 in total interest scared me. It's more than the house payment I expected.\n- The Down payment box shows 66000, but the example says 60000. I'm not sure if I typed it right.\n- \"Save a copy\" puts a file on my phone. I'm not sure what's in it or whether it has my private numbers.\n- \"This is an estimate\". I'm not sure how much I can trust the number.\n- The page says there is no Send button, which is a relief, but I'm still not sure my numbers stay private.\n\n5. What I would skip:\n- The 15, 20 and 30 years buttons, because I already typed 30.\n- The four lines showing $0.00, because I left those boxes empty.\n- The \"Your first payment\" section (interest versus what I owe). It's interesting, but I don't need it.\n- \"Print\" and \"Save a copy\", unless I want paper.\n- The two closed sections.\n\n6. Score: 4. I know the answer is at the top and the orange button is the obvious one. I'm still a bit unsure what \"Done. Back to home.\" does to my answer.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Mortgage insurance\", \"Neighborhood fee / neighborhood group\", \"Loan amount\", \"Loan length\", \"Total interest over the loan\", \"Goes to interest\", \"Lowers what you owe\", \"Save a copy / saved as a file\", \"Show how we add it up\", \"What the words mean\", \"estimate\", \"lender statement\", \"Print opens a preview\", \"Your numbers are worked out here\"], \"worries\": [\"Done. Back to home might erase my answer\", \"Start over might erase everything\", \"Total interest of $271,060.24 is scary\", \"Down payment shows 66000 but example says 60000, maybe a typo\", \"Save a copy puts a file on my phone and I don't know what's in it\", \"It is only an estimate, so I'm unsure whether to trust it\", \"Not sure my numbers stay private\"], \"skippable\": [\"15 years / 20 years / 30 years buttons\", \"the $0.00 lines for empty boxes\", \"Your first payment section\", \"Print\", \"Save a copy\", \"the two closed sections\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -50,14 +50,14 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "PASS",
+            "FAIL",
             "PASS",
             "PASS"
           ]
@@ -89,7 +89,7 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
@@ -98,7 +98,7 @@
             "PASS",
             "PASS",
             "PASS",
-            "PASS"
+            "FAIL"
           ]
         }
       ],
@@ -199,11 +199,11 @@
           4,
           4,
           4,
-          4,
+          3,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in the numbers for a home loan, starting with the home price, and then see what my monthly payment would be.\n\n2. I would tap the first box, \"Home price\", and type the price. (The cursor is already there, so I might just start typing.) After filling in the boxes, I would tap \"Show my answer\".\n\n3. Words that felt like tech talk or were unclear:\n- \"Down payment\" (I sort of know it, but the screen explains it)\n- \"Yearly interest rate\"\n- \"Property tax\"\n- \"Mortgage insurance\" (and how it differs from \"Home insurance\")\n- \"Neighborhood fee\" (it says to ask the neighborhood group, and I may not know who that is)\n- \"Estimate\"\n- \"Lender statement\"\n- \"Source: how this page is made\" (I don't know why a page's making matters to me)\n- \"Save a copy\" and \"file\" (not sure what file, or where it goes)\n- \"Print opens a preview\"\n- \"disabled\" (the Print and Save buttons look faded, and I don't know why)\n- \"What the words mean\" (I'm glad it's there, but it is closed)\n\n4. Worries:\n- The line \"Nothing is sent. Numbers stay on this phone or computer.\" calms me, but I'm still a little unsure whether to trust it.\n- I might type a wrong number, since I need papers I may not have in front of me (loan paper, tax bill, insurance paper).\n- \"Save a copy\" makes a file on my phone, and I'm not sure where it goes or whether it could clutter or break something. It does say I can delete it.\n- I worry the answer is only a \"close guess\" and I might rely on it wrongly.\n- The \"Back to home\" link might wipe out what I typed.\n- I'm unsure about the numbers: do I type dollar signs or commas? It doesn't say.\n\n5. I would skip:\n- \"Source: how this page is made\" and its link\n- The \"Keep your answer if you want\" section, including the Print and Save a copy buttons, until I have an answer\n- The four optional boxes if I don't have the papers\n- The 15, 20, and 30 years buttons, if I already know my number of years (though they might be a handy shortcut)\n\n6. Score: 4. I know to start at the top and finish with \"Show my answer\", but I'm unsure about the papers and the number format.\n\nRESULT: {\"next_tap\": \"Home price\", \"confusing_terms\": [\"Down payment\", \"Yearly interest rate\", \"Property tax\", \"Mortgage insurance\", \"Neighborhood fee\", \"estimate\", \"lender statement\", \"Source: how this page is made\", \"Save a copy\", \"file\", \"Print opens a preview\", \"disabled buttons\", \"What the words mean\"], \"worries\": [\"Needing papers I may not have at hand\", \"Typing a wrong number\", \"Unsure if dollar signs or commas are okay\", \"Save a copy makes a file on my phone, unsure where it goes\", \"Answer is only a close guess\", \"Back to home might erase my numbers\", \"Trusting that nothing is sent\"], \"skippable\": [\"Source: how this page is made\", \"Keep your answer if you want section (Print, Save a copy)\", \"Optional boxes if no papers\", \"15/20/30 years buttons if I know my years\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in the numbers for a home loan, and then it will tell me what my monthly payment would be.\n\n2. I would tap the first box, \"Home price\", and start typing.\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n- \"Mortgage Payment Explainer\" (I know \"mortgage,\" but \"explainer\" is a bit odd)\n- \"Down payment\" (I sort of know it, but it's explained)\n- \"Yearly interest rate\"\n- \"Property tax\"\n- \"Mortgage insurance\" (and how it differs from \"Home insurance\")\n- \"Neighborhood fee\" (the screen's name for what I'd call HOA dues)\n- \"Sales paper\" and \"loan paper\" (I'm not sure which papers these mean)\n- \"Disabled\" (the Print and Save a copy buttons look faded, and I don't know why)\n- \"Estimate\"\n- \"What the words mean\" (I don't know what's inside)\n- \"Save a copy ... what goes in the file\" (what file, and where does it go?)\n\n4. Things that made me worry:\n- \"There is no Send button on this page\" is reassuring, but it also made me wonder whether something might be sent.\n- I don't have my loan papers handy, so I might type the wrong thing.\n- There are many boxes, and I don't know which ones I must fill in. Only some say optional.\n- \"Save a copy\" puts a file on my phone, and I don't know where it goes.\n- I worry the answer isn't real, since it says it's only a close guess.\n- Typing 0 for the interest rate seems odd, and I'm afraid of getting it wrong.\n\n5. I would skip:\n- The \"15 years / 20 years / 30 years\" buttons if I already know my number, though they might save typing.\n- The \"Print\" and \"Save a copy\" buttons, since they're faded and I haven't got an answer yet.\n- The small print about \"This is an estimate...\".\n- \"What the words mean\" for now.\n\n6. Score: 4. The first box is clear, but I'm not sure which boxes I have to fill in before tapping \"Show my answer.\"\n\nRESULT: {\"next_tap\": \"Home price\", \"confusing_terms\": [\"Mortgage Payment Explainer\", \"Yearly interest rate\", \"Property tax\", \"Mortgage insurance\", \"Neighborhood fee\", \"sales paper\", \"loan paper\", \"disabled\", \"estimate\", \"Save a copy\", \"the file\"], \"worries\": [\"I might not have my loan papers to find the numbers\", \"Not sure which boxes I must fill in\", \"Not sure where a saved file goes\", \"No Send button, but I wondered if something gets sent\", \"The answer is only a close guess\", \"Typing 0 for interest rate seemed odd\"], \"skippable\": [\"15 years / 20 years / 30 years buttons\", \"Print and Save a copy\", \"estimate small print\", \"What the words mean\"], \"score\": 4}"
       },
       "designRubric": [
         {
@@ -262,7 +262,7 @@
               ]
             },
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -271,11 +271,11 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             },
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -284,7 +284,7 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             }
           ],

@@ -199,7 +199,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-pdf">
         <p className="nt-pdf-intro">{COPY.intro}</p>
-        <PrivacyNote what="Your photos" />
+        <PrivacyNote />
 
         {data.view === 1 ? (
           <>

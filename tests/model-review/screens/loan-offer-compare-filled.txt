@@ -4,7 +4,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 [heading 1] Loan Offer Compare
 Type the numbers from two loan offers. Your answer shows below.
-There is no Send button on this page. Your numbers are worked out here.
+There is no Send button on this page.
 [label] Offer 1: Amount borrowed
 On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
 [box] Offer 1: Amount borrowed = "5000"
@@ -45,7 +45,7 @@ This offer has the lowest cost of borrowing.
 That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
 [MAIN LINK, filled dark orange] Done. Back to home.
 [plain button, outline only] Change a number
-These offers differ in amount or length, so the totals are for different loans. Each total is right for its own offer.
+These offers are not the same amount or length. Each total is right for its own offer, so read the monthly payment too.
 Offer 1, monthly payment
 $116.28
 Loan length

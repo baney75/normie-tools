@@ -54,7 +54,7 @@ describe("Savings Goal Tracker page", () => {
 
   it("gives a plain reason for the privacy promise", () => {
     render(<Page />);
-    expect(screen.getByText(/Your numbers are worked out here\./)).toBeInTheDocument();
+    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
   });
 
   it("has labels above inputs, decimal keypads, no autofill", () => {

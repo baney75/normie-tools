@@ -43,18 +43,6 @@ test("unit-converter: a new number gives the new converted number", async ({ pag
   await expect(card).toContainText("609.6 millimeters"); // 24 x 25.4
 });
 
-test("savings-goal-tracker: a bigger monthly amount gives fewer months", async ({ page }) => {
-  await open(page, "savings-goal-tracker");
-  await page.getByLabel("Goal amount").fill("5000");
-  await page.getByLabel("Already saved").fill("500");
-  await page.getByLabel("Amount you save each month").fill("250");
-  const card = page.getByLabel("Months to your goal");
-  await expect(card).toContainText("18 months"); // 4,500 / 250
-  await page.getByLabel("Amount you save each month").fill("500");
-  await expect(card).toContainText("9 months"); // 4,500 / 500
-  await expect(card).not.toContainText("18 months");
-});
-
 // Loan math for the three loan tools: payment = P*r / (1 - (1+r)^-n), r = rate/12, rounded half up to the cent.
 // Each month's interest is rounded to the cent and the last payment is trued up, so total paid is not payment x n.
 // Worked in Python Fractions: 10,000 at 6% for 36 months -> 304.22, total 10,951.88; 12,000 at 6.5% for 36 -> 367.79, 13,240.36.
