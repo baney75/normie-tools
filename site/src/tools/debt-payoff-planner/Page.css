@@ -37,7 +37,7 @@
 .nt-dpp-table-wrap { overflow-x: auto; }
 .nt-dpp-table { width: 100%; border-collapse: collapse; font-size: 1rem; font-variant-numeric: tabular-nums; }
 .nt-dpp-table caption { text-align: left; font-weight: 700; padding-bottom: var(--nt-space-2); color: var(--nt-ink); }
-.nt-dpp-table th, .nt-dpp-table td { padding: var(--nt-space-2); border-top: 1px solid var(--nt-line); text-align: right; overflow-wrap: anywhere; }
+.nt-dpp-table th, .nt-dpp-table td { padding: var(--nt-space-2); border-top: 1px solid var(--nt-line); text-align: right; }
 .nt-dpp-table th:first-child, .nt-dpp-table td:first-child { text-align: left; }
 .nt-dpp-key dt { font-weight: 700; color: var(--nt-ink); margin-top: var(--nt-space-3); }
 .nt-dpp-key dd { margin: 0; }

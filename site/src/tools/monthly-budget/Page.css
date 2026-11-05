@@ -33,8 +33,9 @@
 .nt-budget-where h2 { font-size: 1.25rem; margin: 0 0 var(--nt-space-3); }
 .nt-budget-bars { list-style: none; margin: 0 0 var(--nt-space-3); padding: 0; }
 .nt-budget-bars li { margin: 0 0 var(--nt-space-3); }
-.nt-budget-bar-head { display: flex; justify-content: space-between; gap: var(--nt-space-3); font-weight: 700; color: var(--nt-ink); overflow-wrap: anywhere; }
-.nt-budget-bar-num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.nt-budget-bar-head { display: flex; justify-content: space-between; gap: var(--nt-space-3); font-weight: 700; color: var(--nt-ink); }
+.nt-budget-bar-head > :first-child { min-width: 0; overflow-wrap: anywhere; }
+.nt-budget-bar-num { font-variant-numeric: tabular-nums; white-space: nowrap; overflow-wrap: normal; word-break: normal; flex-shrink: 0; }
 .nt-budget-bar { height: 0.75rem; margin: var(--nt-space-1) 0; border: 2px solid var(--nt-ink); border-radius: var(--nt-radius); background: var(--nt-white); overflow: hidden; }
 .nt-budget-bar-fill { height: 100%; background: var(--nt-ink); }
 .nt-budget-bar-pct { margin: 0; font-size: 1rem; }

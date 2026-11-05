@@ -27,6 +27,11 @@ function goTo(el: HTMLElement | null) {
   el?.focus();
 }
 
+/** A money or number answer, like "$304.22" or "12.5%". Anything with words in it is text. */
+function isNumber(answer: string): boolean {
+  return /^[-+$\d.,%\s]+$/.test(answer);
+}
+
 /** The main card with the big answer in Fraunces. It is a polite live region, so a screen reader hears updates. */
 export function ResultCard({ label, answer, waiting = "Your answer shows here", step, closing = true, children }: ResultCardProps) {
   const has = answer !== undefined && answer !== "";
@@ -34,7 +39,7 @@ export function ResultCard({ label, answer, waiting = "Your answer shows here", 
     <section className={`nt-result${has ? "" : " nt-result-waiting"}`} aria-live="polite" aria-label={label}>
       {step ? <p className="nt-step">{step}</p> : null}
       <p className="nt-result-label">{label}</p>
-      {has ? <p className="nt-result-answer">{answer}</p> : <p className="nt-result-waiting-text">{waiting}</p>}
+      {has ? <p className={isNumber(answer) ? "nt-result-answer" : "nt-result-answer nt-result-answer-text"}>{answer}</p> : <p className="nt-result-waiting-text">{waiting}</p>}
       {has && children ? <div className="nt-result-body">{children}</div> : null}
       {!has && closing ? (
         <button type="button" className="primary nt-result-again" onClick={() => goTo(firstBox(true))}>

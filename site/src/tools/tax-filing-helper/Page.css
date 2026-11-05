@@ -18,14 +18,14 @@
 .nt-tfh-who { margin: 0 0 var(--nt-space-4); }
 .nt-tfh-who h2, .nt-tfh-compare h3, .nt-tfh-watch h3 { font-size: 1.25rem; margin: 0 0 var(--nt-space-3); }
 .nt-tfh-table { width: 100%; border-collapse: collapse; margin: 0 0 var(--nt-space-3); }
-.nt-tfh-table th, .nt-tfh-table td { text-align: left; vertical-align: top; padding: var(--nt-space-2); border-top: 1px solid var(--nt-line); overflow-wrap: anywhere; }
+.nt-tfh-table th, .nt-tfh-table td { text-align: left; vertical-align: top; padding: var(--nt-space-2); border-top: 1px solid var(--nt-line); }
 
 .nt-tfh-card { margin: 0 0 var(--nt-space-3); padding: var(--nt-space-3); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-tfh-card h3 { font-size: 1.125rem; margin: 0 0 var(--nt-space-2); }
 .nt-tfh-lines { margin: 0; }
 .nt-tfh-lines div { display: flex; justify-content: space-between; gap: var(--nt-space-3); padding: var(--nt-space-2) 0; border-top: 1px solid var(--nt-line); }
 .nt-tfh-lines dt { margin: 0; }
-.nt-tfh-lines dd { margin: 0; font-weight: 700; text-align: right; overflow-wrap: anywhere; }
+.nt-tfh-lines dd { margin: 0; font-weight: 700; text-align: right; }
 
 .nt-tfh-form { margin: 0 0 var(--nt-space-3); }
 .nt-tfh-item { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }

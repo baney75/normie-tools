@@ -53,7 +53,6 @@
   line-height: 1.1;
   font-weight: 600;
   color: var(--nt-ink);
-  overflow-wrap: anywhere;
 }
 .nt-result-body > :last-child { margin-bottom: 0; }
 
@@ -92,14 +91,22 @@
 
 /* A number never breaks across lines. The label next to it wraps instead. */
 [class$="-lines"] > div { gap: var(--nt-space-3); }
-[class$="-lines"] dt { min-width: 0; overflow-wrap: anywhere; }
-[class$="-lines"] dd,
-.nt-result-answer,
-table td {
+[class$="-lines"] dt,
+table th,
+table td:first-child { min-width: 0; overflow-wrap: anywhere; }
+main [class$="-lines"] dd,
+main .nt-result-answer,
+main table td:not(:first-child) {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   overflow-wrap: normal;
   word-break: normal;
   flex-shrink: 0;
 }
-.nt-result-answer { white-space: normal; overflow-wrap: normal; }
+/* Text answers (a number and a unit name) may wrap at spaces, never inside a word or number. */
+main .nt-result-answer.nt-result-answer-text { white-space: normal; overflow-wrap: normal; }
+/* Tables that hold sentences, not numbers, wrap as normal text. */
+main .nt-tfh-table td { white-space: normal; }
+@media (max-width: 480px) {
+  .nt-result-answer { font-size: 2rem; }
+}

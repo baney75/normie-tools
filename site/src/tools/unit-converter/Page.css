@@ -36,4 +36,3 @@
 .nt-unit-details > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-3); font-weight: 700; color: var(--nt-ink); cursor: pointer; }
 .nt-unit-details > summary:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
 .nt-unit-details-body { padding: 0 var(--nt-space-3) var(--nt-space-3); }
-.nt-unit .nt-result-answer { overflow-wrap: anywhere; }

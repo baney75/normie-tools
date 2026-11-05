@@ -17,14 +17,17 @@ const CASES: { id: string; boxes: [string, string][] }[] = [
   { id: "loan-explainer", boxes: [["Amount borrowed", "357125.12"], ["Yearly interest rate", "6.5"], ["How long is the loan?", "360"]] },
   { id: "savings-goal-tracker", boxes: [["Goal amount", "1250000"], ["Already saved", "10000"], ["Amount you save each month", "1234.56"]] },
   { id: "debt-payoff-planner", boxes: [["Debt 1 balance", "24500.55"], ["Debt 1 yearly interest rate", "22.99"], ["Debt 1 smallest monthly payment", "489.01"], ["Debt 2 balance", "5000"], ["Debt 2 yearly interest rate", "6.5"], ["Debt 2 smallest monthly payment", "100"]] },
+  { id: "monthly-budget", boxes: [["Pay, per month", "15432.10"], ["Rent or mortgage, per month", "3200.55"], ["Food, per month", "1450.25"], ["Bills, per month", "900.75"], ["Transport, per month", "650"], ["Other, per month", "99999.99"]] },
+  { id: "loan-offer-compare", boxes: [["Offer 1: Amount borrowed", "357125.12"], ["Offer 1: Yearly interest rate", "6.5"], ["Offer 1: How long is the loan?", "30"], ["Offer 1: Upfront fees", "4500"], ["Offer 2: Amount borrowed", "357125.12"], ["Offer 2: Yearly interest rate", "5.9"], ["Offer 2: How long is the loan?", "15"], ["Offer 2: Upfront fees", "12000"]] },
+  { id: "unit-converter", boxes: [["Number", "1234567.89"]] },
 ];
 
 for (const c of CASES) {
   test(`${c.id}: every result number is one line at 375px`, async ({ page }) => {
     await fill(page, c.id, c.boxes);
-    await expect(page.locator(".nt-result-answer")).toBeVisible();
+    await expect(page.locator(".nt-result-answer").first()).toBeVisible();
     const broken = await page.evaluate(() => {
-      const nodes = document.querySelectorAll<HTMLElement>('[class$="-lines"] dd, .nt-result-answer, main table td');
+      const nodes = document.querySelectorAll<HTMLElement>('[class$="-lines"] dd, .nt-result-answer:not(.nt-result-answer-text), main table td:not(:first-child)');
       return [...nodes]
         .filter((n) => n.getBoundingClientRect().width > 0 && (n.textContent ?? "").trim() !== "")
         .filter((n) => {
