@@ -92,7 +92,7 @@ export function SavePrintSheet({
           </div>
         </div>
       ) : null}
-      <p className="nt-sheet-note">Save a copy shows what goes in the file first. You tap Save only if it looks right, and you can delete the file any time to undo. Print shows a preview first.</p>
+      <p className="nt-sheet-note">Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.</p>
       <p role="status" className="nt-sheet-status">
         {saved ? "Saved" : ""}
       </p>
