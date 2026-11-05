@@ -19,10 +19,10 @@ async function fill(label: string, text: string) {
 async function typeTwoDebts() {
   await fill("Debt 1 balance", "800");
   await fill("Debt 1 yearly interest rate", "3");
-  await fill("Debt 1 smallest monthly payment", "30");
+  await fill("Debt 1 minimum payment", "30");
   await fill("Debt 2 balance", "12,000");
   await fill("Debt 2 yearly interest rate", "27.99");
-  await fill("Debt 2 smallest monthly payment", "300");
+  await fill("Debt 2 minimum payment", "300");
   await fill("Extra each month", "200");
 }
 
@@ -44,7 +44,7 @@ describe("Debt Payoff Planner page", () => {
 
   it("has labels above inputs, decimal keypads, no autofill", () => {
     render(<Page />);
-    for (const name of ["Debt 1 balance", "Debt 1 yearly interest rate", "Debt 1 smallest monthly payment", "Extra each month"]) {
+    for (const name of ["Debt 1 balance", "Debt 1 yearly interest rate", "Debt 1 minimum payment", "Extra each month"]) {
       const box = screen.getByLabelText(name, { exact: false });
       expect(box).toHaveAttribute("inputmode", "decimal");
       expect(box).toHaveAttribute("autocomplete", "off");
@@ -55,14 +55,14 @@ describe("Debt Payoff Planner page", () => {
     render(<Page />);
     await typeTwoDebts();
     expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent("$361.25");
-    expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent("Avalanche pays this much less interest than Snowball.");
+    expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent("Highest interest first pays this much less interest than Smallest debt first.");
     expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent("Both plans take the same number of months.");
-    const snow = screen.getByRole("region", { name: "Snowball plan" });
-    expect(snow).toHaveTextContent("Months to debt-free36 months");
-    expect(snow).toHaveTextContent("Total interest$6,162.19");
-    expect(snow).toHaveTextContent("Total paid$18,962.19");
-    const aval = screen.getByRole("region", { name: "Avalanche plan" });
-    expect(aval).toHaveTextContent("Total interest$5,800.94");
+    const snow = screen.getByRole("region", { name: "Smallest debt first plan" });
+    expect(snow).toHaveTextContent("Months until all paid36 months");
+    expect(snow).toHaveTextContent("Interest you pay$6,162.19");
+    expect(snow).toHaveTextContent("All you pay$18,962.19");
+    const aval = screen.getByRole("region", { name: "Highest interest first plan" });
+    expect(aval).toHaveTextContent("Interest you pay$5,800.94");
     const items = within(aval).getAllByRole("listitem");
     expect(items).toHaveLength(2);
     expect(items[0]).toHaveTextContent("Debt 1: paid off in month 28");
@@ -104,9 +104,9 @@ describe("Debt Payoff Planner page", () => {
     await fill("Debt 1 name", "Tiny");
     await fill("Debt 1 balance", "12");
     await fill("Debt 1 yearly interest rate", "0.5");
-    await fill("Debt 1 smallest monthly payment", "5");
-    expect(screen.getByRole("region", { name: "Both plans" })).toHaveTextContent("Months to debt-free3 months");
-    expect(screen.getByRole("region", { name: "Both plans" })).toHaveTextContent("Total interest$0.01");
+    await fill("Debt 1 minimum payment", "5");
+    expect(screen.getByRole("region", { name: "Both plans" })).toHaveTextContent("Months until all paid3 months");
+    expect(screen.getByRole("region", { name: "Both plans" })).toHaveTextContent("Interest you pay$0.01");
     expect(screen.getByRole("region", { name: "Both plans" })).toHaveTextContent("Tiny: paid off in month 3");
     expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.result.same);
   });
@@ -124,7 +124,7 @@ describe("Debt Payoff Planner page", () => {
     render(<Page />);
     await fill("Debt 1 balance", "lots");
     await fill("Debt 1 yearly interest rate", "6");
-    await fill("Debt 1 smallest monthly payment", "50");
+    await fill("Debt 1 minimum payment", "50");
     expect(screen.getByText(/Debt 1 balance: use a number above zero/)).toBeInTheDocument();
     expect(screen.getByLabelText("Debt 1 balance", { exact: false })).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
@@ -136,7 +136,7 @@ describe("Debt Payoff Planner page", () => {
     render(<Page />);
     await fill("Debt 1 balance", "10,000");
     await fill("Debt 1 yearly interest rate", "24");
-    await fill("Debt 1 smallest monthly payment", "200");
+    await fill("Debt 1 minimum payment", "200");
     expect(screen.getByText(/does not cover the first month's interest/)).toBeInTheDocument();
     expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.waiting);
   });

@@ -7,10 +7,10 @@ test.use({ viewport: { width: 390, height: 844 } });
 async function fillTwo(page: import("@playwright/test").Page) {
   await page.getByLabel("Debt 1 balance").fill("800");
   await page.getByLabel("Debt 1 yearly interest rate").fill("3");
-  await page.getByLabel("Debt 1 smallest monthly payment").fill("30");
+  await page.getByLabel("Debt 1 minimum payment").fill("30");
   await page.getByLabel("Debt 2 balance").fill("$12,000");
   await page.getByLabel("Debt 2 yearly interest rate").fill("27.99");
-  await page.getByLabel("Debt 2 smallest monthly payment").fill("300");
+  await page.getByLabel("Debt 2 minimum payment").fill("300");
   await page.getByLabel("Extra each month").fill("200");
 }
 
@@ -33,11 +33,11 @@ test("shows an empty state that says what to type", async ({ page }) => {
 test("gives the exact months, interest and order for both plans, with no sideways scroll", async ({ page }) => {
   await fillTwo(page);
   await expect(page.getByLabel("How the two payoff orders compare")).toContainText("$361.25");
-  const snow = page.getByRole("region", { name: "Snowball plan" });
+  const snow = page.getByRole("region", { name: "Smallest debt first plan" });
   await expect(snow).toContainText("36 months");
   await expect(snow).toContainText("$6,162.19");
   await expect(snow).toContainText("Debt 1: paid off in month 4");
-  const aval = page.getByRole("region", { name: "Avalanche plan" });
+  const aval = page.getByRole("region", { name: "Highest interest first plan" });
   await expect(aval).toContainText("$5,800.94");
   await expect(aval).toContainText("Debt 1: paid off in month 28");
   await expect(aval).toContainText("Debt 2: paid off in month 36");
@@ -61,7 +61,7 @@ test("adds a third debt and opens the details", async ({ page }) => {
 test("a smallest payment that does not cover the interest is said plainly", async ({ page }) => {
   await page.getByLabel("Debt 1 balance").fill("10,000");
   await page.getByLabel("Debt 1 yearly interest rate").fill("24");
-  await page.getByLabel("Debt 1 smallest monthly payment").fill("200");
+  await page.getByLabel("Debt 1 minimum payment").fill("200");
   await expect(page.getByText("does not cover the first month's interest")).toBeVisible();
   await expect(page.getByLabel("How the two payoff orders compare")).toContainText("Your answer shows here");
 });
@@ -69,7 +69,7 @@ test("a smallest payment that does not cover the interest is said plainly", asyn
 test("messy typing shows a calm error that names the debt and field", async ({ page }) => {
   await page.getByLabel("Debt 1 balance").fill("lots of money");
   await page.getByLabel("Debt 1 yearly interest rate").fill("6");
-  await page.getByLabel("Debt 1 smallest monthly payment").fill("50");
+  await page.getByLabel("Debt 1 minimum payment").fill("50");
   await expect(page.getByText("Debt 1 balance: use a number above zero")).toBeVisible();
   await expect(page.getByLabel("How the two payoff orders compare")).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
@@ -95,7 +95,7 @@ test("tap targets are 44px or more and text is 16px or more", async ({ page }) =
 test("numbers come back after leaving", async ({ page }) => {
   await page.getByLabel("Debt 1 balance").fill("1200");
   await page.getByLabel("Debt 1 yearly interest rate").fill("0");
-  await page.getByLabel("Debt 1 smallest monthly payment").fill("100");
+  await page.getByLabel("Debt 1 minimum payment").fill("100");
   await expect(page.getByRole("region", { name: "Both plans" })).toContainText("12 months");
   await page.goto("about:blank");
   await page.goto("/#/tools/debt-payoff-planner");
@@ -113,7 +113,7 @@ test("a desktop screenshot", async ({ page }) => {
 
 test("remove can be undone and Start over asks first", async ({ page }) => {
   await fillTwo(page);
-  await expect(page.getByText("Remove takes out one line. Put it back brings it back.")).toBeVisible();
+  await expect(page.getByText("Remove takes out the last debt line. Put it back undoes it.")).toBeVisible();
   await page.getByRole("button", { name: "Remove the last debt" }).click();
   await expect(page.getByLabel("Debt 2 balance")).toHaveCount(0);
   await page.getByRole("button", { name: "Put it back" }).click();
