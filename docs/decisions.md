@@ -31,7 +31,7 @@ Log of choices made while scaffolding NT. Newest first.
 
 - Components size themselves from their own container, not the screen. The same Stepper, ToolGrid, and UploadField work in a phone column, an iPad Split View, and a wide page.
 - Text keeps a maximum readable width on wide screens. The optional "Where you are" side panel shows only when the container is wide.
-- Why: iPad Split View and Slide Over give odd widths that screen-width rules miss. Checked with the Playwright viewport matrix.
+- Why: iPad Split View and Slide Over give odd widths that screen-width rules miss. The Playwright viewport matrix will check it.
 
 ## 2026-11-05 - Self-hosted fonts
 
