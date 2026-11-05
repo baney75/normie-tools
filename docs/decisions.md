@@ -2,6 +2,48 @@
 
 Log of choices made while scaffolding NT. Newest first.
 
+## 2026-11-05 - Round 1 build decisions
+
+- Stack: Vite, React, TypeScript, vitest, Playwright. Static PWA, no backend. All data tools run on the device.
+- Money math: integer cents only. Exact to the cent, no float bugs.
+- Claude.ai scripts: Python standard library plus the documented preinstalled packages. Assume no network. Matches the Anthropic sandbox and works for Free and Pro with code execution on.
+- Skill zip budget: 30 MB uncompressed, the Anthropic Skills API upload limit.
+- Primary screen: 390px iPhone width first, then the iPad matrix. Desktop comes second.
+- Form Filler: prepare only. No signature capture. Share through the share sheet when the device offers one. The person signs.
+- Morning Briefing: National Weather Service only, with the required User-Agent. Works offline with a calm message. No other news sources this round.
+- Calorie foods: a bundled example list only, unless a USDA data dump is clearly licensed and fits. Legal safety.
+- Tiny eval model: first available small local model, installed in user space only if missing and quick. Runs on one designated dev machine, never on seat machines.
+
+## 2026-11-05 - Ship gate
+
+- Every tool is listed in `public/tools.json` as `shipped` or `coming_soon`. The site shows a tool as usable only when it is `shipped`.
+- A tool may be `shipped` only with a page-claims file, an accuracy test per claim, a reliability suite on messy inputs, a phone-size end-to-end test, and an upload-error contract test if it takes files. All must pass at 100%.
+- The CI job `ship-gate` fails the build if any shipped tool misses one of these. A dummy fixture stays off the shipped list, and a test checks that the gate script exits non-zero when the fixture is turned on.
+- A tool that misses any bar stays `coming_soon`. We never show a broken tool.
+
+## 2026-11-05 - Every tool starts as coming_soon
+
+- This round every tool in `tools.json` is `coming_soon`. The home page, search, and grid show it with a Coming soon badge and no working page.
+- Why: nothing has passed the ship gate yet. Honest status beats a demo that fails.
+- A tool moves to `shipped` in its own change, with the gate evidence in the pull request.
+
+## 2026-11-05 - Container queries for layout
+
+- Components size themselves from their own container, not the screen. The same Stepper, ToolGrid, and UploadField work in a phone column, an iPad Split View, and a wide page.
+- Text keeps a maximum readable width on wide screens. The optional "Where you are" side panel shows only when the container is wide.
+- Why: iPad Split View and Slide Over give odd widths that screen-width rules miss. Checked with the Playwright viewport matrix.
+
+## 2026-11-05 - Self-hosted fonts
+
+- Fraunces and Figtree ship from the site itself (both OFL). No font files load from another server.
+- Why: privacy (no third party sees a visit), offline use as a PWA, and no layout jump while a remote font loads.
+- Icons come from lucide-react (ISC).
+
+## 2026-11-05 - Research drives design
+
+- `docs/design-from-research.md` maps each design rule to a research finding, its source, the component that enforces it, and the test that checks it.
+- A component is built from a row in that table, not the other way around.
+
 ## 2026-11-05 - Privacy machine list and path markers
 
 - Kept the four house machine names as fragment-built patterns only (never written as full hostnames in this file).
