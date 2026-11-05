@@ -1,0 +1,10 @@
+.nt-resume { container-type: inline-size; max-width: var(--nt-measure); font-family: var(--nt-font-text); color: var(--nt-text); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); padding: var(--nt-space-4); background: var(--nt-white); }
+.nt-resume h2 { font-family: var(--nt-font-display); margin: 0 0 var(--nt-space-2); }
+.nt-resume-actions { display: flex; flex-direction: column; gap: var(--nt-space-3); }
+.nt-resume button { min-height: var(--nt-tap); padding: 0 var(--nt-space-5); border-radius: var(--nt-radius); font: inherit; cursor: pointer; }
+.nt-resume .nt-primary { background: var(--nt-tomato); color: var(--nt-white); border: 2px solid var(--nt-tomato); }
+.nt-resume .nt-secondary { background: var(--nt-paper); color: var(--nt-ink); border: 2px solid var(--nt-line); }
+.nt-resume button:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+@container (min-width: 30rem) {
+  .nt-resume-actions { flex-direction: row; }
+}

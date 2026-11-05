@@ -1,0 +1,16 @@
+/* Narrow containers: a collapsed <details>, one tap away.
+   Wide containers (min-width 60rem on the wrapper): shown as an always-open side panel. */
+.nt-where { container-type: inline-size; font-family: var(--nt-font-text); color: var(--nt-text); }
+.nt-where-details > summary { min-height: var(--nt-tap); display: flex; align-items: center; cursor: pointer; font-family: var(--nt-font-display); }
+.nt-where-details > summary:focus-visible, .nt-where button:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-where-list { list-style: none; margin: 0; padding: 0; }
+.nt-where-item { display: flex; flex-wrap: wrap; align-items: center; gap: var(--nt-space-2); padding: var(--nt-space-2) 0; border-bottom: 1px solid var(--nt-line); }
+.nt-where-label { font-weight: 700; min-width: 3.5rem; color: var(--nt-muted); }
+.nt-where-now .nt-where-label { color: var(--nt-tdeep); }
+.nt-where-now .nt-where-title { font-weight: 700; }
+.nt-where-answer { flex-basis: 100%; color: var(--nt-muted); }
+.nt-where button { min-height: var(--nt-tap); background: var(--nt-paper); color: var(--nt-ink); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); padding: 0 var(--nt-space-3); font: inherit; cursor: pointer; }
+@container (min-width: 60rem) {
+  .nt-where-details > summary { pointer-events: none; }
+  .nt-where-details > summary::marker { content: ""; }
+}

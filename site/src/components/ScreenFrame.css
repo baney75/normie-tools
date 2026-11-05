@@ -1,0 +1,9 @@
+.nt-frame { container-type: inline-size; max-width: var(--nt-measure); font-family: var(--nt-font-text); color: var(--nt-text); }
+.nt-frame-title { font-family: var(--nt-font-display); color: var(--nt-ink); margin: 0 0 var(--nt-space-4); }
+.nt-frame-body { margin-bottom: var(--nt-space-4); }
+.nt-frame-actions { display: flex; flex-direction: column; gap: var(--nt-space-3); }
+.nt-frame .nt-primary { display: inline-flex; align-items: center; justify-content: center; min-height: var(--nt-tap); padding: 0 var(--nt-space-5); border-radius: var(--nt-radius); background: var(--nt-tomato); color: var(--nt-white); border: 2px solid var(--nt-tomato); font: inherit; text-decoration: none; cursor: pointer; }
+.nt-frame .nt-primary:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+@container (min-width: 30rem) {
+  .nt-frame-actions { flex-direction: row; align-items: flex-start; justify-content: space-between; }
+}
