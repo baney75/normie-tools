@@ -1,0 +1,12 @@
+.nt-badge-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nt-space-1);
+  padding: var(--nt-space-1) var(--nt-space-2);
+  border: 1px solid var(--nt-line);
+  border-radius: var(--nt-radius);
+  background: var(--nt-paper);
+  color: var(--nt-text);
+  font-family: var(--nt-font-text);
+  font-size: 0.875rem;
+}
