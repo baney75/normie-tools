@@ -91,7 +91,7 @@ export function SavePrintSheet({
           </div>
         </div>
       ) : null}
-      <p className="nt-sheet-note">Save a copy shows you the file first, then keeps it on this phone only. Print shows a preview first. The numbers on this page stay.</p>
+      <p className="nt-sheet-note">Save a copy shows what goes in the file first. You tap Save only if it looks right, and you can delete the file any time to undo. Print shows a preview first.</p>
       <p role="status" className="nt-sheet-status">
         {saved ? "Saved" : ""}
       </p>
