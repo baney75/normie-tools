@@ -37,6 +37,15 @@ describe("Student Loan Growth and Payoff page", () => {
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
+  it("keeps every closed section labeled and has one way home", async () => {
+    const { container } = render(<Page />);
+    await fillGolden();
+    const sums = Array.from(container.querySelectorAll("summary"));
+    expect(sums.length).toBeLessThanOrEqual(2);
+    for (const el of sums) expect((el.textContent ?? "").trim()).not.toBe("");
+    expect(screen.getAllByText(/Back to home/)).toHaveLength(1);
+  });
+
   it("has labels above inputs, a keypad that fits each box, no autofill", () => {
     render(<Page />);
     for (const name of ["Loan balance", "Yearly interest rate", "Monthly payment"]) {
