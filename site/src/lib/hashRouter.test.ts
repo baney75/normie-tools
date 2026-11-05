@@ -10,6 +10,7 @@ describe("hashRouter", () => {
     expect(parseHash("#/agents")).toEqual({ name: "agents" });
     expect(parseHash("#/install")).toEqual({ name: "install" });
     expect(parseHash("#/research")).toEqual({ name: "research" });
+    expect(parseHash("#/harness")).toEqual({ name: "harness" });
     expect(parseHash("#/tools/big-print")).toEqual({ name: "tool", id: "big-print" });
     expect(parseHash("#/agents/")).toEqual({ name: "agents" });
   });

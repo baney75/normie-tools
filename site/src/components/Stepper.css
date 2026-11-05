@@ -7,7 +7,7 @@
 .nt-stepper-body { margin: var(--nt-space-3) 0; }
 .nt-stepper-actions { display: flex; flex-direction: column-reverse; gap: var(--nt-space-3); }
 .nt-stepper button { min-height: var(--nt-tap); padding: 0 var(--nt-space-5); border-radius: var(--nt-radius); font: inherit; cursor: pointer; }
-.nt-stepper .nt-primary { background: var(--nt-tomato); color: var(--nt-white); border: 2px solid var(--nt-tomato); }
+.nt-stepper .nt-primary { background: var(--nt-tdeep); color: var(--nt-white); border: 2px solid var(--nt-tdeep); }
 .nt-stepper .nt-secondary { background: var(--nt-paper); color: var(--nt-ink); border: 2px solid var(--nt-line); }
 .nt-stepper button:disabled { color: var(--nt-muted); cursor: default; }
 .nt-stepper button:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }

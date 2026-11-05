@@ -1,6 +1,7 @@
 import { Shell } from "./components/Shell";
 import { useHashRoute } from "./lib/hashRouter";
 import { Agents } from "./pages/Agents";
+import { Harness } from "./pages/Harness";
 import { Home } from "./pages/Home";
 import { Install } from "./pages/Install";
 import { NotFound } from "./pages/NotFound";
@@ -14,6 +15,7 @@ export function App() {
     case "home": page = <Home />; break;
     case "agents": page = <Agents />; break;
     case "install": page = <Install />; break;
+    case "harness": page = <Harness />; break;
     case "research": page = <Research />; break;
     case "tool": page = <ToolPage id={route.id} />; break;
     default: page = <NotFound />;
