@@ -1,0 +1,28 @@
+{
+  "name": "normie-tools",
+  "version": "0.0.0",
+  "private": true,
+  "description": "NT: everyday tools for people with no tech background. Plan and checks scaffold.",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/run-all.mjs",
+    "check:banned-characters": "node scripts/check-banned-characters.mjs",
+    "check:privacy": "node scripts/check-privacy.mjs",
+    "check:sources": "node scripts/check-sources.mjs",
+    "check:licenses": "node scripts/check-licenses.mjs",
+    "check:required-tests": "node scripts/check-required-tests.mjs",
+    "check:markdown": "markdownlint-cli2",
+    "check:jargon": "node scripts/check-banned-jargon.mjs",
+    "check:reading-level": "node scripts/check-reading-level.mjs",
+    "check:no-clutter": "node scripts/check-no-clutter.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "test:unit": "node --test \"scripts/tests/*.test.mjs\""
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.24.0"
+  }
+}

@@ -1,0 +1,183 @@
+# Strict CI for NT. Runs on pull requests and on pushes to main and master.
+# The repo default branch is currently master locally; renaming it to main is out of scope for this scaffold.
+# Live jobs run now. Jobs prefixed placeholder- skip cleanly until code exists.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  markdown-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run check:markdown
+
+  link-check:
+    name: link check (offline)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:links
+
+  banned-characters:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:banned-characters
+
+  banned-jargon:
+    name: banned jargon (person-facing scope)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:jargon
+
+  reading-level:
+    name: reading level (person-facing scope)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:reading-level
+
+  no-clutter:
+    name: no clutter (person-facing scope)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:no-clutter
+
+  privacy:
+    name: privacy scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:privacy
+      # Free gitleaks binary from the official release. No org license key needed.
+      - name: gitleaks (history and tree)
+        env:
+          GITLEAKS_VERSION: "8.28.0"
+        run: |
+          set -euo pipefail
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" -o "$RUNNER_TEMP/gitleaks.tgz"
+          tar -xzf "$RUNNER_TEMP/gitleaks.tgz" -C "$RUNNER_TEMP" gitleaks
+          "$RUNNER_TEMP/gitleaks" detect --source . --redact --no-banner --verbose
+
+  sources:
+    name: sources check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:sources
+
+  licenses:
+    name: license allow-list
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run check:licenses
+
+  required-tests:
+    name: required-tests rule
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run check:required-tests
+
+  checker-unit-tests:
+    name: checker unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run test:unit
+
+  # ---------------------------------------------------------------------------
+  # Placeholder jobs. They activate when code exists: remove `if: false`, replace
+  # the echo step with the real command, and add the job to branch protection.
+  # ---------------------------------------------------------------------------
+
+  placeholder-accessibility:
+    name: placeholder accessibility
+    # Activates when the site or app exists. Will run axe at phone size, check
+    # reduced motion, no layout shift, a progress indicator, and autosave and resume.
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "SKIP placeholder-accessibility (no site or app code yet)"
+
+  placeholder-upload-error-contract:
+    name: placeholder upload-error message contract
+    # Activates when the first tool accepts files. Will check that a wrong file
+    # type message names the type given, the type needed, and how to get it.
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "SKIP placeholder-upload-error-contract (no tool code yet)"
+
+  placeholder-golden-accuracy:
+    name: placeholder golden accuracy
+    # Activates when Form Filler and File Converter exist. Will run the Free File
+    # tax cases and the File Converter document pairs from tests/golden/.
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "SKIP placeholder-golden-accuracy (no golden cases or tools yet)"
+
+  placeholder-tool-search-eval:
+    name: placeholder tool-search eval
+    # Activates when the router exists. Will score finding the right tool.
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "SKIP placeholder-tool-search-eval (no router code yet)"

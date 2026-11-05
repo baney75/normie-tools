@@ -1,0 +1,19 @@
+{
+  // Plan notes are imported planning output. Only layout style rules are relaxed
+  // here (blank lines, trailing spaces, emphasis, angle-bracket text, fence language).
+  // Everything else, such as heading order, duplicate headings and link syntax, stays on.
+  // The rest of the repo keeps all of these rules on. Keep the top-level
+  // .markdownlint-cli2.jsonc settings in sync for MD013, MD034 and MD060.
+  "default": true,
+  "MD009": false,
+  "MD012": false,
+  "MD013": false,
+  "MD022": false,
+  "MD026": false,
+  "MD032": false,
+  "MD033": false,
+  "MD034": false,
+  "MD036": false,
+  "MD040": false,
+  "MD060": false
+}

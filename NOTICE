@@ -1,0 +1,13 @@
+NT (normie-tools)
+Copyright 2026 Donovan Baney and the NT contributors
+
+This product includes software developed by Donovan Baney and the NT contributors.
+The NT name and logo are trademarks of Donovan Baney. The Apache License 2.0 does
+not grant trademark rights.
+
+Third-party components that may be bundled later (kept as separate modules):
+- LGPL FFmpeg build and libvips (separate modules)
+- MPL Mediabunny
+- GPL pandoc (optional separate module; needs approval and lawyer review)
+
+See docs/license-choice.md and LICENSE.

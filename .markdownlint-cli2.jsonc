@@ -1,0 +1,14 @@
+{
+  // Markdown lint for NT.
+  // MD013 off: docs use long prose lines and wide tables.
+  // MD034 off: research files list sources as "URL: https://..." on purpose.
+  // MD060 off: existing tables use compact pipes without padding.
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD034": false,
+    "MD060": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "**/node_modules/**"]
+}

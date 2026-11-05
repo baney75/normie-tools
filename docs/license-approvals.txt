@@ -1,0 +1,8 @@
+# Package names approved by a maintainer despite their license, one per line.
+# Use it for a GPL or AGPL package (also needs lawyer review before shipping)
+# or for one package whose license is not on the allow list.
+# Lines starting with # are comments.
+#
+# argparse: Python-2.0 and PSF-2.0, both permissive. Dev tool dependency of
+# markdownlint-cli2. Never shipped to people.
+argparse
