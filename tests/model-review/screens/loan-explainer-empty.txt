@@ -4,21 +4,20 @@ The first box has the cursor in it and a bright outline: that is where to start 
 
 [heading 1] Loan Explainer
 Type the numbers from your loan. Your answer shows below.
-Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
-[link, plain] how this page is made
+There is no Send button on this page. Your numbers are worked out here.
 [label] Amount borrowed
-On your loan paper. Look for the words 'amount borrowed' or 'loan amount'.
+On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
 [box] Amount borrowed = "" (cursor is here)
 [label] Yearly interest rate
-On your loan paper. Look for the words 'interest rate'. It is a percent, like 6.5. Type 0 if there is none.
+On your loan paper. Look for the words 'interest rate'. It is a percent. Type 0 if there is none. For example: 6.5.
 [box] Yearly interest rate = ""
 [label] How long is the loan?
-On your loan paper. Look for 'term' or 'number of payments'. Use a whole number.
+On your loan paper. Look for 'term' or 'number of payments'. Use a whole number. For example: 36.
 [box] How long is the loan? = ""
 [label] Months
-[choice] Months (chosen)
+[choice] Months (selected)
 [label] Years
-[choice] Years (not chosen)
+[choice] Years 
 [label] Upfront fees (optional)
 Fees you pay once, at the start, like a setup fee. Leave it empty if none.
 [box] Upfront fees (optional) = ""
@@ -31,5 +30,3 @@ Your answer shows here
 This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
 [closed section, tap to open] What the words mean
 
-Back to home
-[link, plain] Back to home

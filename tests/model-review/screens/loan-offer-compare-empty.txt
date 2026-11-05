@@ -4,37 +4,36 @@ The first box has the cursor in it and a bright outline: that is where to start 
 
 [heading 1] Loan Offer Compare
 Type the numbers from two loan offers. Your answer shows below.
-Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
-[link, plain] how this page is made
+There is no Send button on this page. Your numbers are worked out here.
 [label] Offer 1: Amount borrowed
-On your loan paper. Look for the words 'amount borrowed' or 'loan amount'.
+On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
 [box] Offer 1: Amount borrowed = "" (cursor is here)
 [label] Offer 1: Yearly interest rate
-On your loan paper. Look for the words 'interest rate'. It is a percent, like 6.5. Type 0 if there is none.
+On your loan paper. Look for the words 'interest rate'. It is a percent. Type 0 if there is none. For example: 6.5.
 [box] Offer 1: Yearly interest rate = ""
 [label] Offer 1: How long is the loan?
-On your loan paper. Look for 'term' or 'number of payments'. Use a whole number.
+On your loan paper. Look for 'term' or 'number of payments'. Use a whole number. For example: 36.
 [box] Offer 1: How long is the loan? = ""
 [label] Months
-[choice] Months (chosen)
+[choice] Months (selected)
 [label] Years
-[choice] Years (not chosen)
+[choice] Years 
 [label] Offer 1: Upfront fees (optional)
 Fees you pay once, at the start, like a setup fee. Leave it empty if none.
 [box] Offer 1: Upfront fees (optional) = ""
 [label] Offer 2: Amount borrowed
-On your loan paper. Look for the words 'amount borrowed' or 'loan amount'.
+On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
 [box] Offer 2: Amount borrowed = ""
 [label] Offer 2: Yearly interest rate
-On your loan paper. Look for the words 'interest rate'. It is a percent, like 6.5. Type 0 if there is none.
+On your loan paper. Look for the words 'interest rate'. It is a percent. Type 0 if there is none. For example: 6.5.
 [box] Offer 2: Yearly interest rate = ""
 [label] Offer 2: How long is the loan?
-On your loan paper. Look for 'term' or 'number of payments'. Use a whole number.
+On your loan paper. Look for 'term' or 'number of payments'. Use a whole number. For example: 36.
 [box] Offer 2: How long is the loan? = ""
 [label] Months
-[choice] Months (chosen)
+[choice] Months (selected)
 [label] Years
-[choice] Years (not chosen)
+[choice] Years 
 [label] Offer 2: Upfront fees (optional)
 Fees you pay once, at the start, like a setup fee. Leave it empty if none.
 [box] Offer 2: Upfront fees (optional) = ""
@@ -46,10 +45,9 @@ Your answer shows here
 [heading 2] Keep your answer if you want
 [plain button, outline only, disabled] Print
 [plain button, outline only, disabled] Save a copy
-Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
+They work after you type your numbers.
+Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
 
 This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
 [closed section, tap to open] What the words mean
 
-Back to home
-[link, plain] Back to home
