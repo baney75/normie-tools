@@ -2,55 +2,34 @@ Screen: loan-explainer, filled state, phone 390px wide. Order is top to bottom. 
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
 
 
-[heading 1] Loan Explainer
-Type the numbers from your loan. Your answer shows below.
-There is no Send button on this page.
-[label] Amount borrowed
-On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
-[box] Amount borrowed = "5000"
-[label] Yearly interest rate
-On your loan paper. Look for the words 'interest rate'. It is a percent. Type 0 if there is none. For example: 6.5.
-[box] Yearly interest rate = "5.5"
-[label] How long is the loan?
-On your loan paper. Look for 'term' or 'number of payments'. Use a whole number. For example: 36.
-[box] How long is the loan? = "48"
-[label] Months
-[choice] Months (selected)
-[label] Years
-[choice] Years 
-[label] Upfront fees (optional)
-Fees you pay once, at the start, like a setup fee. Leave it empty if none.
-[box] Upfront fees (optional) = ""
-[label] Extra each month (optional)
-Extra money you choose to add to your payment each month. Leave it empty if none.
-[box] Extra each month (optional) = ""
-[plain button, outline only] Start over
-Start over asks first, and you can undo it right after.
+Loan Explainer
+[heading 1] What will my loan cost?
+There is no Send button on this page. How we know
+[link, plain] How we know
 Monthly payment
-$116.28
-Each month for the whole loan.
-Loan length
-48 months
-Total paid
-$5,581.61
+$367.79
+You pay back $13,240.36 in all.
 Total interest
-$581.61
-Upfront fees
-$0.00
-Cost of borrowing
-$581.61
-Cost of borrowing: It is the interest plus the upfront fees. It is what the loan costs you.
-That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
+$1,240.36
+Paid off in
+3 years
+That is your answer. You can stop here, or change a number to try again. Your numbers stay.
 [MAIN LINK, filled dark orange] Done. Back to home.
-[plain button, outline only] Change a number
-[closed section, tap to open] Show the year by year table
-
-[heading 2] Keep your answer if you want
-Your answer above, on paper or saved as a file on this phone or computer.
-[plain button, outline only] Print
-[plain button, outline only] Save a copy
-Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
-
-This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+[plain button, outline only] Print or save
+[label] Amount borrowed
+On your loan papers.
+[box] Amount borrowed = "12000"
+[label] Yearly interest rate
+On your loan papers, as a percent. Type 0 if there is none.
+[box] Yearly interest rate = "6.5"
+[question] How long is the loan?
+[choice] 2 years 
+[choice] 3 years (selected)
+[choice] 4 years 
+[choice] 5 years 
+[choice] Other 
+[plain button, outline only] Add fees or extra payments, if you have them
+[closed section, tap to open] More options
+[closed section, tap to open] See all the numbers
 [closed section, tap to open] What the words mean
-
+This is an estimate. Your lender statement has the final numbers.

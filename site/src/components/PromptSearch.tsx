@@ -32,9 +32,6 @@ export function PromptSearch({ tools, initialQuery = "" }: PromptSearchProps) {
           autoComplete="off"
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit" className="nt-prompt-button">
-          Find a tool
-        </button>
       </form>
       <div className="nt-prompt-results">
         {hasQuery && results.length > 0 && <ToolGrid tools={results} />}

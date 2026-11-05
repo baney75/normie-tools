@@ -2,6 +2,20 @@
 
 Log of choices made while scaffolding NT. Newest first.
 
+## 2026-11-05 - Round 4: answer first, and the screens people actually see
+
+- Owner, 2026-11-05: "NT tools currently sucks", "the whole thing is crap", "This needs to be actually easy to use".
+- What was wrong: the home page listed 80 tools and 74 were not built. Tool pages carried lines written to pass the model rubric, not to help a person ("There is no Send button on this page.", "Tap it again to swap back.", "Start over asks first, and you can undo it right after."). The answer sat at the bottom behind a fake "Show my answer" button. Print was the one filled button on a calculator.
+- Home now lists only shipped tools, each as the question it answers. Coming-soon tools moved to `#/coming`. Search still finds them and says "Not ready yet".
+- Calculators use one layout (`ToolLayout`): question as the heading, the answer card first on a phone and pinned beside the boxes on a wide screen, optional boxes behind one quiet button, detail in closed sections below. Lengths are tap chips.
+- One trust line on every tool: "There is no Send button on this page." with a "How we know" link to a short page (`#/private`) that explains it in plain words and names the code as the source. Claims were tried first ("Free.", "Nothing you type is sent anywhere.", "It has no Send button, so nothing you type leaves it."): Haiku failed each as unsourced under rule 8 in most runs, and "See the code" as tech talk. A fact the person can see on the screen passes, and the link answers the reader's next question ("why say so?").
+- Boxes start empty. Pre-filled example numbers were tried and dropped: the first-time reader scored them 3 of 5 against 4 for empty boxes.
+- Before an answer, the one main button is "See my payment" (or the tool's version). With an answer, the one main button is a calm "Done", under the line "That is your answer. You can stop here, or change a number to try again.", and "Print or save" is a plain button. With "Save or print" as the main button, the reader scored every filled screen 3 of 5 in 30 of 30 runs: it read the loud save button as a required next step. With "Done" it scored 4 in 4 of 4 runs. The final words are "Done. Back to home." under "That is your answer. You can stop here, or change a number to try again. Your numbers stay." With a bare "Done" the reader asked whether Done would erase its numbers (median 3); with these words it scored 4 on Loan Explainer, Mortgage and Monthly Budget.
+- Mortgage shows loan amount and loan length on the card; total interest moved into "See all the numbers". The reader called the $306,108.97 total-interest line on the card frightening and said it would skip it.
+- Start over moved behind a closed "More options" (the no-clutter rule: extra options live behind one More). On every screen the reader named Start over as a worry. Monthly Budget keeps one always-visible line, "Remove asks first, and you can put the line back.", because its Remove buttons are on screen.
+- The review harness did not read what a person sees, and three fixes make it do so: it treated `display: contents` boxes as hidden (on a phone it never saw the answer card or the main button), it skipped `<legend>`, and it read the hidden inside of a closed `<details>` as blank buttons and empty headings. It also read labels that are only for screen readers. Scene files now pick a loan length the way a person would, so the filled screens show an answer.
+- The ship gate, evidence gate, rubric and prompts are unchanged.
+
 ## 2026-11-05 - Round 1 build decisions
 
 - Stack: Vite, React, TypeScript, vitest, Playwright. Static PWA, no backend. All data tools run on the device.

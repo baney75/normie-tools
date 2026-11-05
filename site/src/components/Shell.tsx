@@ -9,9 +9,11 @@ export type ShellProps = {
   aside?: ReactNode;
   /** Replaces the default footer content. */
   footer?: ReactNode;
+  /** Tool pages use more width so the answer can sit beside the boxes. */
+  wide?: boolean;
 };
 
-export function Shell({ children, aside, footer }: ShellProps) {
+export function Shell({ children, aside, footer, wide = false }: ShellProps) {
   const base = import.meta.env.BASE_URL;
   return (
     <div className="nt-shell">
@@ -30,8 +32,8 @@ export function Shell({ children, aside, footer }: ShellProps) {
         </a>
       </header>
       <main id="main" className="nt-main" tabIndex={-1}>
-        <div className="nt-layout">
-          <div className="nt-content">{children}</div>
+        <div className={wide ? "nt-layout nt-layout-wide" : "nt-layout"}>
+          <div className={wide ? "nt-content nt-content-wide" : "nt-content"}>{children}</div>
           {aside ? <aside className="nt-aside" aria-label={PAGES.shell.asideLabel}>{aside}</aside> : null}
         </div>
       </main>

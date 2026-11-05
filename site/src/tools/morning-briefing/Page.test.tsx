@@ -49,11 +49,11 @@ describe("Morning Briefing page", () => {
     expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(0);
   });
 
-  it("tells what Next does and how to undo, and the privacy line comes under the intro", () => {
+  it("tells what Next does and how to undo, with no privacy line under the intro", () => {
     render(<Page />);
     expect(screen.getByText(COPY.pick.preview)).toBeInTheDocument();
     const intro = screen.getByText(COPY.intro);
-    expect(intro.nextElementSibling).toHaveTextContent(/no Send button/);
+    expect(intro.nextElementSibling).not.toHaveTextContent(/no Send button/);
   });
 
   it("asks for at least one part and turns Next off", async () => {
@@ -152,9 +152,9 @@ describe("Morning Briefing page", () => {
     expect(screen.getByLabelText("Reminder 1")).toHaveValue("Water the plants");
   });
 
-  it("keeps the privacy note", () => {
+  it("no longer shows the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
+    expect(screen.queryByText(/no Send button/)).toBeNull();
   });
 
   it("offers to use saved choices and brings them back", async () => {

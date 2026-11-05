@@ -8,23 +8,25 @@ export type Tool = {
   dir?: string;
   group?: string;
   icon?: string;
+  /** The plain question a shipped tool answers. The home page shows it. */
+  question?: string;
 };
 
 export const TOOLS: Tool[] = [
   {"id":"save-me-money","name":"Save Me Money","status":"coming_soon","group":"Money","routes":["/tools/save-me-money"]},
   {"id":"receipt-to-spreadsheet","name":"Receipt to Spreadsheet","status":"coming_soon","group":"Money","routes":["/tools/receipt-to-spreadsheet"],"icon":"receipt"},
   {"id":"subscription-finder","name":"Subscription Finder","status":"coming_soon","group":"Money","routes":["/tools/subscription-finder"]},
-  {"id":"monthly-budget","name":"Monthly Budget","status":"shipped","group":"Money","routes":["/tools/monthly-budget"],"claimsPath":"tools/monthly-budget/claims.json","takesFiles":false},
+  {"id":"monthly-budget","name":"Monthly Budget","status":"shipped","group":"Money","routes":["/tools/monthly-budget"],"claimsPath":"tools/monthly-budget/claims.json","takesFiles":false,"icon":"wallet","question":"Where does my money go each month?"},
   {"id":"bill-due-reminders","name":"Bill Due Reminders","status":"coming_soon","group":"Money","routes":["/tools/bill-due-reminders"]},
   {"id":"warranty-and-returns-keeper","name":"Warranty and Returns Keeper","status":"coming_soon","group":"Money","routes":["/tools/warranty-and-returns-keeper"],"icon":"shield-check"},
   {"id":"medical-bill-explainer","name":"Medical Bill Explainer","status":"coming_soon","group":"Money","routes":["/tools/medical-bill-explainer"]},
   {"id":"spending-check-in","name":"Spending Check-in","status":"coming_soon","group":"Money","routes":["/tools/spending-check-in"]},
   {"id":"savings-goal-tracker","name":"Savings Goal Tracker","status":"coming_soon","group":"Money","routes":["/tools/savings-goal-tracker"]},
   {"id":"debt-payoff-planner","name":"Debt Payoff Planner","status":"coming_soon","group":"Money","routes":["/tools/debt-payoff-planner"]},
-  {"id":"loan-explainer","name":"Loan Explainer","status":"shipped","group":"Money","routes":["/tools/loan-explainer"],"claimsPath":"tools/loan-explainer/claims.json","takesFiles":false},
-  {"id":"loan-offer-compare","name":"Loan Offer Compare","status":"shipped","group":"Money","routes":["/tools/loan-offer-compare"],"claimsPath":"tools/loan-offer-compare/claims.json","takesFiles":false},
-  {"id":"mortgage-payment-explainer","name":"Mortgage Payment Explainer","status":"shipped","group":"Money","routes":["/tools/mortgage-payment-explainer"],"claimsPath":"tools/mortgage-payment-explainer/claims.json","takesFiles":false},
-  {"id":"student-loan-growth-and-payoff","name":"Student Loan Growth and Payoff","status":"shipped","group":"Money","routes":["/tools/student-loan-growth-and-payoff"],"claimsPath":"tools/student-loan-growth-and-payoff/claims.json","takesFiles":false},
+  {"id":"loan-explainer","name":"Loan Explainer","status":"shipped","group":"Money","routes":["/tools/loan-explainer"],"claimsPath":"tools/loan-explainer/claims.json","takesFiles":false,"icon":"credit-card","question":"What will my loan cost?"},
+  {"id":"loan-offer-compare","name":"Loan Offer Compare","status":"shipped","group":"Money","routes":["/tools/loan-offer-compare"],"claimsPath":"tools/loan-offer-compare/claims.json","takesFiles":false,"icon":"scale","question":"Which loan offer is cheaper?"},
+  {"id":"mortgage-payment-explainer","name":"Mortgage Payment Explainer","status":"shipped","group":"Money","routes":["/tools/mortgage-payment-explainer"],"claimsPath":"tools/mortgage-payment-explainer/claims.json","takesFiles":false,"icon":"house","question":"What will my house payment be?"},
+  {"id":"student-loan-growth-and-payoff","name":"Student Loan Growth and Payoff","status":"shipped","group":"Money","routes":["/tools/student-loan-growth-and-payoff"],"claimsPath":"tools/student-loan-growth-and-payoff/claims.json","takesFiles":false,"icon":"graduation-cap","question":"When will my student loan be paid off?"},
   {"id":"bill-negotiation-prep","name":"Bill Negotiation Prep","status":"coming_soon","group":"Money","routes":["/tools/bill-negotiation-prep"]},
   {"id":"cheaper-plan-finder","name":"Cheaper Plan Finder","status":"coming_soon","group":"Money","routes":["/tools/cheaper-plan-finder"]},
   {"id":"price-drop-watch","name":"Price Drop Watch","status":"coming_soon","group":"Money","routes":["/tools/price-drop-watch"]},
@@ -49,7 +51,7 @@ export const TOOLS: Tool[] = [
   {"id":"video-converter","name":"Video Converter","status":"coming_soon","group":"Converters","routes":["/tools/video-converter"]},
   {"id":"audio-converter","name":"Audio Converter","status":"coming_soon","group":"Converters","routes":["/tools/audio-converter"]},
   {"id":"document-converter","name":"Document Converter","status":"coming_soon","group":"Converters","routes":["/tools/document-converter"]},
-  {"id":"unit-converter","name":"Unit Converter","status":"shipped","group":"Converters","routes":["/tools/unit-converter"],"claimsPath":"tools/unit-converter/claims.json","takesFiles":false},
+  {"id":"unit-converter","name":"Unit Converter","status":"shipped","group":"Converters","routes":["/tools/unit-converter"],"claimsPath":"tools/unit-converter/claims.json","takesFiles":false,"icon":"ruler","question":"Change cups, inches, pounds and more"},
   {"id":"storage-checker","name":"Storage Checker","status":"coming_soon","group":"Files and photos","routes":["/tools/storage-checker"]},
   {"id":"photo-duplicate-finder","name":"Photo Duplicate Finder","status":"coming_soon","group":"Files and photos","routes":["/tools/photo-duplicate-finder"]},
   {"id":"id-photo-maker","name":"ID Photo Maker","status":"coming_soon","group":"Files and photos","routes":["/tools/id-photo-maker"],"icon":"id-card"},

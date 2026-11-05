@@ -97,11 +97,14 @@ for (const vp of VIEWPORTS) {
 test.describe("home loads", () => {
   test.use({ viewport: { width: PHONE.width, height: PHONE.height } });
 
-  test("home shows one prompt box and a grid of tools", async ({ page }) => {
+  test("home shows one search box and only the tools that are ready", async ({ page }) => {
     await page.goto("./");
     await expect(page.getByRole("search")).toBeVisible();
     await expect(page.getByLabel("What do you want to get done?")).toBeVisible();
-    await expect(page.getByText("Coming soon").first()).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "Ready to use" })).toBeVisible();
+    await expect(page.locator("a.nt-row")).toHaveCount(shippedTools().length);
+    await expect(page.getByText("Coming soon")).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "See what is coming" })).toBeVisible();
   });
 });
 

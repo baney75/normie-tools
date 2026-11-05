@@ -15,31 +15,107 @@ async function fill(label: string, text: string) {
   if (text) await userEvent.type(box, text);
 }
 
-async function fillOffer(n: number, v: { amount: string; rate: string; term: string; fees?: string }) {
+const offerBox = (n: number) => screen.getByRole("group", { name: `Offer ${n}` });
+
+/** Types one offer. Every box is cleared first, and the unit chip is set. */
+async function fillOffer(n: number, v: { amount: string; rate: string; term: string; fees?: string; unit?: "Months" | "Years" }) {
   await fill(`Offer ${n}: Amount borrowed`, v.amount);
   await fill(`Offer ${n}: Yearly interest rate`, v.rate);
   await fill(`Offer ${n}: How long`, v.term);
-  if (v.fees) await fill(`Offer ${n}: Upfront fees`, v.fees);
+  await userEvent.click(within(offerBox(n)).getByRole("radio", { name: v.unit ?? "Months" }));
+  await fill(`Offer ${n}: Upfront fees`, v.fees ?? "");
 }
+
+const card = () => screen.getByLabelText(COPY.facts.lowestCost);
+const more = () => screen.getByText(COPY.more.summary).closest("details") as HTMLElement;
+/** One row of the all-offers table, like "Total paid$10,951.88$12,000.00". */
+const row = (label: string) => (within(within(more()).getByRole("table")).getByRole("rowheader", { name: label }).closest("tr") as HTMLElement);
 
 function expectWaiting() {
-  const card = screen.getByLabelText("Lowest cost of borrowing");
-  expect(card).toHaveTextContent("Your answer shows here");
-  expect(card).not.toHaveTextContent(/Offer \d/);
+  expect(card()).toHaveTextContent(COPY.waiting);
+  expect(card()).not.toHaveTextContent(/Offer \d/);
 }
 
+const seeBtn = () => screen.getByRole("button", { name: COPY.see });
+
 describe("Loan Offer Compare page", () => {
-  it("starts with two offers, shows the empty state and no answer", () => {
+  it("opens with two empty offers and only the waiting words in the answer card", () => {
     render(<Page />);
-    expect(screen.getByRole("heading", { level: 1, name: "Loan Offer Compare" })).toBeInTheDocument();
-    expect(screen.getByText("Type the numbers from two loan offers. Your answer shows below.")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: COPY.question })).toBeInTheDocument();
+    expect(screen.getByText(COPY.title)).toBeInTheDocument();
+    expect(screen.queryByText(/These are example numbers/)).toBeNull();
     expect(screen.getByRole("group", { name: "Offer 1" })).toBeInTheDocument();
     expect(screen.getByRole("group", { name: "Offer 2" })).toBeInTheDocument();
     expect(screen.queryByRole("group", { name: "Offer 3" })).toBeNull();
     expect(screen.getByRole("button", { name: "Add a third offer" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.addHint)).toBeInTheDocument();
+    for (const n of [1, 2]) {
+      expect(screen.getByLabelText(`Offer ${n}: Amount borrowed`)).toHaveValue("");
+      expect(screen.getByLabelText(`Offer ${n}: Upfront fees`, { exact: false })).toHaveValue("");
+    }
     expectWaiting();
-    expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
+    expect(card().querySelector(".nt-result-label")).toBeNull();
+    expect(card().querySelector(".nt-result-tag")).toBeNull();
+    expect(card()).toHaveAttribute("id", "nt-answer");
+    expect(card()).toHaveAttribute("tabindex", "-1");
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
+  });
+
+  it("says it is free and sends nothing, and links to the code", () => {
+    render(<Page />);
+    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+    expect(document.body.textContent?.match(/There is no Send button on this page/g)).toHaveLength(1);
+  });
+
+  it("puts the answer first, with no autofocus, no step labels and no old hints", () => {
+    render(<Page />);
+    const box = screen.getByLabelText("Offer 1: Amount borrowed", { exact: false });
+    expect(card().compareDocumentPosition(box) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(box).not.toHaveFocus();
+    const text = document.body.textContent ?? "";
+    expect(text).not.toMatch(/Step \d of \d|You are here/);
+    expect(text).not.toMatch(/Show my answer|That is your answer|Done\. Back to home|Change a number|Type my own numbers/);
+  });
+
+  it("the See which costs less button is the one main button while there is no answer, and it focuses the first empty box", async () => {
+    render(<Page />);
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    expect(seeBtn()).toHaveClass("primary");
+    expect(seeBtn().closest("details")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    await userEvent.click(seeBtn());
+    expect(screen.getByLabelText("Offer 1: Amount borrowed")).toHaveFocus();
+    await fill("Offer 1: Amount borrowed", "5000");
+    await userEvent.click(seeBtn());
+    expect(screen.getByLabelText("Offer 1: Yearly interest rate")).toHaveFocus();
+  });
+
+  it("once there is an answer, Done is the one main link, Print or save is an outline, and See which costs less is gone", async () => {
+    render(<Page />);
+    await fillOffer(1, { amount: "10000", rate: "0", term: "10" });
+    await fillOffer(2, { amount: "10000", rate: "0", term: "20" });
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveAttribute("href", "#/");
+    expect(screen.getByRole("button", { name: "Print or save" })).not.toHaveClass("primary");
+    expect(screen.getByRole("button", { name: "Print or save" }).closest("details")).toBeNull();
+    expect(screen.queryByRole("button", { name: COPY.see })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Go up to my answer" })).toBeNull();
+  });
+
+  it("shows Start over once something is typed, with its undo note, and clearing shows the waiting words", async () => {
+    render(<Page />);
+    expect(screen.queryByText("You can put your numbers back.")).toBeNull();
+    await fill("Offer 1: Amount borrowed", "9000");
+    expect(screen.getByText("You can put your numbers back.")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
+    expectWaiting();
+    expect(screen.getByLabelText("Offer 1: Amount borrowed")).toHaveValue("");
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
   it("has decimal keypads and no autofill on every box", () => {
@@ -58,23 +134,20 @@ describe("Loan Offer Compare page", () => {
     render(<Page />);
     await fillOffer(1, { amount: "$10,000", rate: "6", term: "36" });
     await fillOffer(2, { amount: "10000", rate: "5", term: "48", fees: "$200" });
-    const one = screen.getByLabelText("Offer 1, monthly payment");
-    expect(one).toHaveTextContent("$304.22");
-    expect(one).toHaveTextContent("Total paid$10,951.88");
-    expect(one).toHaveTextContent("Total interest$951.88");
-    expect(one).toHaveTextContent("Cost of borrowing$951.88");
-    const two = screen.getByLabelText("Offer 2, monthly payment");
-    expect(two).toHaveTextContent("$230.29");
-    expect(two).toHaveTextContent("Upfront fees$200.00");
-    expect(two).toHaveTextContent("Cost of borrowing$1,254.11");
-    expect(screen.getByLabelText("Lowest cost of borrowing")).toHaveTextContent("Offer 1");
-    const card = screen.getByLabelText("Lowest cost of borrowing");
-    expect(card).not.toHaveTextContent("Lowest monthly payment");
-    expect(card).not.toHaveTextContent(COPY.facts.split);
-    const more = screen.getByText("More about the offers").closest("details") as HTMLElement;
-    expect(more).not.toHaveAttribute("open");
-    expect(more).toHaveTextContent("Lowest monthly payment: Offer 2");
-    expect(more).toHaveTextContent(COPY.facts.split);
+    expect(card()).toHaveTextContent("Offer 1");
+    expect(card()).toHaveTextContent("Offer 1 costs $302.23 less to borrow than Offer 2.");
+    expect(card()).toHaveTextContent("Offer 1, each month$304.22");
+    expect(card()).toHaveTextContent("Offer 2, each month$230.29");
+    expect(card()).not.toHaveTextContent("Lowest monthly payment");
+    expect(card()).not.toHaveTextContent(COPY.facts.split);
+    expect(row(COPY.result.paymentLabel)).toHaveTextContent("$304.22$230.29");
+    expect(row("Total paid")).toHaveTextContent("$10,951.88");
+    expect(row("Total interest")).toHaveTextContent("$951.88");
+    expect(row("Upfront fees")).toHaveTextContent("$0.00$200.00");
+    expect(row("Cost of borrowing")).toHaveTextContent("$951.88$1,254.11");
+    expect(more()).not.toHaveAttribute("open");
+    expect(more()).toHaveTextContent("Lowest monthly payment: Offer 2");
+    expect(more()).toHaveTextContent(COPY.facts.split);
     expect(screen.queryByLabelText("Lowest monthly payment")).toBeNull();
     expect(screen.getByText(COPY.facts.differ)).toBeInTheDocument();
     expect(document.body.textContent).not.toMatch(/\bbest\b/i);
@@ -88,11 +161,11 @@ describe("Loan Offer Compare page", () => {
     expect(screen.getByRole("group", { name: "Offer 3" })).toBeInTheDocument();
     expectWaiting();
     expect(screen.getByText(/Still needed/)).toHaveTextContent("Still needed: Offer 3: Amount borrowed");
-    await fillOffer(3, { amount: "20000", rate: "8", term: "4" });
-    await userEvent.click(screen.getByLabelText("Offer 3: Years"));
-    expect(screen.getByLabelText("Offer 3, monthly payment")).toHaveTextContent("$488.26");
-    expect(screen.getByLabelText("Lowest cost of borrowing")).toHaveTextContent("Offer 3");
-    expect(screen.getByText("More about the offers").closest("details")).toHaveTextContent("Lowest monthly payment: Offer 2");
+    await fillOffer(3, { amount: "20000", rate: "8", term: "4", unit: "Years" });
+    expect(card()).toHaveTextContent("Offer 3, each month$488.26");
+    expect(card()).toHaveTextContent("Offer 3");
+    expect(row(COPY.result.paymentLabel)).toHaveTextContent("$488.26");
+    expect(more()).toHaveTextContent("Lowest monthly payment: Offer 2");
     await userEvent.click(screen.getByRole("button", { name: "Remove the third offer" }));
     expect(screen.queryByRole("group", { name: "Offer 3" })).toBeNull();
   });
@@ -101,9 +174,10 @@ describe("Loan Offer Compare page", () => {
     render(<Page />);
     await fillOffer(1, { amount: "5000", rate: "4", term: "24", fees: "50" });
     await fillOffer(2, { amount: "5,000", rate: "4.00", term: "24", fees: "50" });
-    expect(screen.getByLabelText("Lowest cost of borrowing")).toHaveTextContent("Offer 1 and Offer 2");
-    expect(screen.getByLabelText("Lowest cost of borrowing")).toHaveTextContent(COPY.facts.tieCost);
-    expect(screen.getByLabelText("Lowest cost of borrowing")).not.toHaveTextContent(COPY.facts.tiePayment);
+    expect(card()).toHaveTextContent("Offer 1 and Offer 2");
+    expect(card()).toHaveTextContent(COPY.facts.tieCost);
+    expect(card()).not.toHaveTextContent(COPY.facts.tiePayment);
+    expect(more()).toHaveTextContent(COPY.facts.tiePayment);
     expect(screen.queryByText(COPY.facts.differ)).toBeNull();
   });
 
@@ -111,7 +185,7 @@ describe("Loan Offer Compare page", () => {
     render(<Page />);
     await fillOffer(1, { amount: "10000", rate: "0", term: "10" });
     await fillOffer(2, { amount: "10000", rate: "0", term: "20" });
-    await userEvent.click(screen.getByText("More about the offers"));
+    await userEvent.click(screen.getByText(COPY.more.summary));
     const table = screen.getByRole("table");
     expect(within(table).getAllByRole("columnheader")).toHaveLength(3);
     expect(within(table).getAllByRole("row")[1]).toHaveTextContent("$1,000.00$500.00");
@@ -138,9 +212,10 @@ describe("Loan Offer Compare page", () => {
 
   it("says it is an estimate, says the lender shows the yearly cost, and explains the words", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
+    expect(screen.getByText(COPY.notes.estimate)).toBeInTheDocument();
     expect(screen.getAllByText(/The yearly cost of the loan, with some fees/)).toHaveLength(1);
-    for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
+    const words = within(screen.getByText(COPY.key.summary).closest("details") as HTMLElement);
+    for (const k of COPY.key.items) expect(words.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 
   it("offers to use saved numbers and brings them back", async () => {
@@ -151,62 +226,76 @@ describe("Loan Offer Compare page", () => {
     expect(screen.getByText(COPY.resume.title, { exact: false })).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.yes }));
     expect(screen.getByLabelText("Offer 1: Amount borrowed")).toHaveValue("1200");
+    expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
   });
 
-  it("starts fresh when asked", async () => {
+  it("drops the saved copy and the prompt when the person says no thanks", async () => {
     const first = render(<Page />);
     await fill("Offer 1: Amount borrowed", "1200");
     first.unmount();
     render(<Page />);
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.no }));
-    expect(screen.getByLabelText("Offer 1: Amount borrowed")).toHaveValue("");
     expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
-  });
-
-  it("offers Save or print once there is an answer", async () => {
-    render(<Page />);
-    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
-    await fillOffer(1, { amount: "10000", rate: "0", term: "10" });
-    await fillOffer(2, { amount: "10000", rate: "0", term: "20" });
-    expect(screen.getByRole("heading", { name: "Keep your answer if you want" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
-    expect(screen.getByLabelText("Offer 1, monthly payment")).toHaveTextContent("$1,000.00");
-    expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
-  });
-});
-
-describe("Loan Offer Compare first-time help", () => {
-  it("shows a waiting answer from the start, with no step labels, and the privacy line under the intro", () => {
-    render(<Page />);
-    expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
-    const intro = screen.getByText(COPY.intro);
-    const privacy = screen.getByText(/no Send button/);
-    expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(privacy.compareDocumentPosition(screen.getByLabelText("Offer 1: Amount borrowed", { exact: false })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(window.localStorage.getItem("nt:flow:loan-offer-compare")).toBeNull();
+    expect(screen.getByLabelText("Offer 1: Amount borrowed")).toHaveValue("");
     expectWaiting();
   });
 
-  it("puts the cursor in the first box", () => {
+  it("shows the resume prompt only while the boxes are blank", async () => {
+    const first = render(<Page />);
+    await fill("Offer 1: Amount borrowed", "1200");
+    first.unmount();
     render(<Page />);
-    expect(screen.getByLabelText("Offer 1: Amount borrowed", { exact: false })).toHaveFocus();
+    expect(screen.getByText(COPY.resume.title, { exact: false })).toBeInTheDocument();
+    await fill("Offer 1: Amount borrowed", "7");
+    expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
   });
 
-  it("has one primary button, always in view, outside any fold", async () => {
+  it("offers Print or save once there is an answer, and opens Print and Save a copy", async () => {
     render(<Page />);
-    // Nothing typed yet: the one filled button sends the person to the first box.
-    expect(screen.getByRole("button", { name: "Show my answer" })).toHaveClass("primary");
-    expect(screen.getByRole("heading", { name: "Keep your answer if you want" }).closest("details")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    await fillOffer(1, { amount: "10000", rate: "0", term: "10" });
+    await fillOffer(2, { amount: "10000", rate: "0", term: "20" });
+    expect(card()).toHaveTextContent("Offer 1, each month$1,000.00");
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveAttribute("href", "#/");
+    expect(screen.getByRole("button", { name: "Print or save" })).not.toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: "Print" })).toBeNull();
+    await userEvent.click(screen.getByRole("button", { name: "Print or save" }));
+    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Save a copy" })).toBeEnabled();
+    expect(screen.getByText(COPY.save.preview)).toBeInTheDocument();
+  });
+});
+
+describe("Loan Offer Compare answer-first page", () => {
+  it("keeps the Months and Years chips inside each offer", () => {
+    render(<Page />);
+    for (const n of [1, 2]) {
+      const box = within(offerBox(n));
+      expect(box.getByRole("radio", { name: "Months" })).toBeChecked();
+      expect(box.getByRole("radio", { name: "Years" })).not.toBeChecked();
+    }
   });
 
-  it("uses the shared privacy note with a place to check it", () => {
+  it("hands the one main button back from Done to See which costs less when the answer goes away", async () => {
     render(<Page />);
-    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    await fillOffer(1, { amount: "10000", rate: "0", term: "10" });
+    await fillOffer(2, { amount: "10000", rate: "0", term: "20" });
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveAttribute("href", "#/");
+    expect(screen.getByRole("button", { name: "Print or save" })).not.toHaveClass("primary");
+    await fill("Offer 1: Yearly interest rate", "");
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    expect(seeBtn()).toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Done. Back to home." })).toBeNull();
   });
 
-  it("explains Remove, then lets the person put the third offer back", async () => {
+  it("lets the person remove the third offer, then put it back", async () => {
     render(<Page />);
     await userEvent.click(screen.getByRole("button", { name: "Add a third offer" }));
-    expect(screen.getByText("Remove takes out one line. Put it back brings it back.")).toBeInTheDocument();
     await fill("Offer 3: Amount borrowed", "7777");
     await userEvent.click(screen.getByRole("button", { name: "Remove the third offer" }));
     expect(screen.queryByRole("group", { name: "Offer 3" })).toBeNull();
@@ -244,7 +333,7 @@ describe("loan-offer-compare Start over", () => {
   it("clears the first box and the saved copy, then puts it back", async () => {
     render(<Page />);
     const box = () => screen.getAllByRole("textbox")[0];
-    await userEvent.type(box(), "1234");
+    await fill("Offer 1: Amount borrowed", "1234");
     expect(window.localStorage.getItem("nt:flow:loan-offer-compare")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
     expect(box()).toHaveValue("1234");
@@ -261,18 +350,17 @@ describe("loan-offer-compare Start over", () => {
 });
 
 describe("loan-offer-compare filled screen", () => {
-  it("shows the estimate sentence once, no APR, one answer line, and a short save preview", async () => {
+  it("shows the estimate sentence once, no APR, and a short save preview", async () => {
     render(<Page />);
     await fillOffer(1, { amount: "$10,000", rate: "6", term: "36" });
     await fillOffer(2, { amount: "10000", rate: "5", term: "48", fees: "$200" });
     const body = document.body.textContent ?? "";
-    expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
-    expect(body.split("That is your answer").length - 1).toBe(1);
-    expect(body.split("Each month for the whole loan").length - 1).toBe(0);
+    expect(body.split(COPY.notes.estimate).length - 1).toBe(1);
     expect(body.split(COPY.result.costHelp).length - 1).toBe(1);
+    await userEvent.click(screen.getByRole("button", { name: "Print or save" }));
     expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
     expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
-    const open = body.replace(/What the words mean[\s\S]*$/, "");
+    const open = (document.body.textContent ?? "").replace(/What the words mean[\s\S]*$/, "");
     expect(open).not.toMatch(/APR|HOA/);
   });
 });

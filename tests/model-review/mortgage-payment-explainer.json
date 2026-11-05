@@ -8,19 +8,21 @@
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 4,
+    "score": 3,
     "runs": [
-      4,
-      4,
-      4
+      3,
+      3,
+      3,
+      3,
+      3
     ],
     "rule": "middle score of the runs",
-    "output": "**1. What the screen wants:** It wants me to look at the monthly payment it worked out from my numbers ($1,402.95), and then either change a number or finish.\n\n**2. Next tap:** \"Done. Back to home.\"\n\n**3. Words that felt like tech talk or confusing:**\n- \"Mortgage\" and \"Mortgage insurance\"\n- \"Loan payment\" (is that the whole payment or only part of it?)\n- \"Total interest over the loan\"\n- \"Lowers what you owe\"\n- \"Neighborhood fee\" (I'd have to ask someone about it)\n- \"Lender statement\"\n- \"Estimate\"\n- \"Save a copy ... as a file\" (I don't know where the file goes on my phone)\n- \"Opens a preview\"\n- \"Show how we add it up\"\n- \"What the words mean\" (I might need this, but it's closed)\n- \"Property tax\"\n- \"Start over asks first, and you can undo it right after\" (undo what, exactly?)\n\n**4. Worries:**\n- $271,060.24 in interest is a scary number, and I don't know if I did something wrong.\n- \"Done. Back to home\" might wipe out what I typed. It does say \"Your numbers stay,\" which helps a little.\n- \"Save a copy\" puts a file on my phone, and I'm not sure I'd find it again or what's in it.\n- \"Start over\" might erase everything.\n- \"This is an estimate\" and \"Your lender statement is the final word\" make me unsure whether I can trust the number.\n- The page never asks for my name or any private details, which is a relief.\n\n**5. What I'd skip:**\n- The lines showing $0.00 for property tax, home insurance, neighborhood fee and mortgage insurance, since I left those empty.\n- \"Your first payment\" with its interest and \"lowers what you owe\" numbers.\n- \"Print\" and \"Save a copy.\"\n- \"There is no Send button on this page.\"\n- The 15, 20 and 30 years buttons, since I already typed 30.\n\n**6. Score:** 4. The orange button is clear, and the screen says I can stop here. I'm still a little unsure what happens to my numbers when I leave.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"mortgage\", \"mortgage insurance\", \"Loan payment\", \"Total interest over the loan\", \"Lowers what you owe\", \"Neighborhood fee\", \"lender statement\", \"estimate\", \"Save a copy as a file\", \"preview\", \"Show how we add it up\", \"What the words mean\", \"property tax\", \"Start over ... undo it right after\"], \"worries\": [\"$271,060.24 total interest looks scary\", \"Done. Back to home might erase my numbers\", \"Save a copy puts a file on my phone and I may not find it\", \"Start over might erase everything\", \"estimate may not be the real number\", \"unsure whether I typed something wrong\"], \"skippable\": [\"$0.00 lines for the empty optional boxes\", \"Your first payment section\", \"Print\", \"Save a copy\", \"There is no Send button on this page\", \"15/20/30 years buttons\"], \"score\": 4}"
+    "output": "1. This screen wants me to read my monthly house payment, $1,516.96, and then either leave or change a number to try again.\n\n2. I would tap \"Done. Back to home.\" It is the orange one and it looks like the main thing to do. I'm not sure it saves anything, though.\n\n3. Words and phrases I did not understand or that felt like tech talk:\n- \"How we know\". I don't know what it will open.\n- \"Loan amount\". I'm not sure why it is $240,000 when I typed $300,000 for the home.\n- \"Down payment\". I know it roughly, but not exactly.\n- \"Yearly interest rate\"\n- \"Add tax, insurance and fees, if you know them\". I don't know what counts as \"fees.\"\n- \"More options\". It doesn't say what the options are.\n- \"See all the numbers\"\n- \"Print or save\". I don't know where it saves.\n- \"Other\" under loan length\n- \"Your numbers stay\". I don't know where they stay or for how long.\n- \"lender statement\"\n\n4. Things that made me worry:\n- \"Your numbers stay\" made me wonder whether my money details are being kept somewhere.\n- I don't know what \"Done. Back to home\" does. Will I lose my numbers, or will it send them somewhere?\n- The note \"There is no Send button on this page\" is odd. It made me wonder what would be sent.\n- The answer sits above the boxes where I typed, which felt backwards. I wasn't sure it was my answer.\n- The $1,516.96 might not be the real payment. The bottom says it is only an estimate, and I'm afraid of relying on it.\n- Nothing asked for my name or card, which is good, but I still don't know who \"we\" are.\n\n5. What I would skip:\n- \"How we know\".\n- \"Print or save\".\n- The three closed sections: \"More options\", \"See all the numbers\" and \"What the words mean\". I might open \"What the words mean\" if I got stuck.\n- The line \"There is no Send button on this page.\"\n\n6. Score: 3. The answer is clear, but I don't know whether the orange button is the right thing to tap, and I'm unsure what happens to my numbers.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"How we know\", \"Loan amount (differs from home price)\", \"Down payment\", \"Yearly interest rate\", \"Add tax, insurance and fees\", \"fees\", \"More options\", \"See all the numbers\", \"Print or save\", \"Other\", \"Your numbers stay\", \"lender statement\"], \"worries\": [\"Your numbers stay: where are they kept?\", \"Unsure what Done. Back to home does to my numbers\", \"No Send button note is odd\", \"Answer is above the boxes, which felt backwards\", \"Estimate may not be the real payment\", \"Don't know who we is\"], \"skippable\": [\"How we know\", \"Print or save\", \"More options\", \"See all the numbers\", \"What the words mean\", \"There is no Send button on this page\"], \"score\": 3}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "rule": "a rule passes when it passes in most of 3 runs",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -29,11 +31,27 @@
         "PASS",
         "PASS",
         "PASS",
-        "PASS"
+        "FAIL"
       ],
-      "passes": 8,
-      "fails": [],
+      "passes": 7,
+      "fails": [
+        "rule8: \"Your numbers stay.\" makes a claim about where or how numbers are kept, and the page gives no source for it",
+        "rule8: \"Total monthly payment\" $1,516.96 is labeled total, but no tax, insurance, or fees were entered, so the figure is loan payment only. The page does not say this plainly."
+      ],
       "runs": [
+        {
+          "passes": 6,
+          "rules": [
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
+          ]
+        },
         {
           "passes": 8,
           "rules": [
@@ -48,7 +66,7 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
@@ -57,7 +75,20 @@
             "PASS",
             "PASS",
             "PASS",
-            "PASS"
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
           ]
         },
         {
@@ -74,11 +105,11 @@
           ]
         }
       ],
-      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"FAIL\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"FAIL\", \"fails\": [\"rule2: stray line \\\"There is no Send button on this page. How we know\\\" does not help the task, and \\\"How we know\\\" appears twice\", \"rule8: \\\"Your numbers stay.\\\" makes a claim about where or how numbers are kept, and the page gives no source for it\"], \"score\": 6}"
     },
     {
       "model": "sonnet",
-      "rule": "a rule passes when it passes in most of 3 runs",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -92,6 +123,32 @@
       "passes": 8,
       "fails": [],
       "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
         {
           "passes": 8,
           "rules": [
@@ -143,16 +200,18 @@
         "score": 4,
         "runs": [
           4,
-          3,
+          4,
+          4,
+          4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in the numbers for a home loan and then get a monthly payment.\n\n2. I would tap the first box, \"Home price\", and type a number. After I fill things in, I would tap \"Show my answer\".\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n- \"Mortgage Payment Explainer\". I think I get it, but \"explainer\" is an odd word.\n- \"Down payment\". I know it, but I'm not sure I'm sure.\n- \"Yearly interest rate\"\n- \"Property tax\"\n- \"Mortgage insurance\". It's different from home insurance, and I don't see why there are two.\n- \"Neighborhood fee\". I'd guess it's what some people call an HOA, but the screen doesn't say that.\n- \"Estimate\"\n- \"Lender statement\"\n- \"Disabled\". I didn't see that word on the screen, but the Print and Save buttons are grayed out, and I would wonder why.\n- \"Preview\" and \"Print box\". I'm not sure what they look like.\n- \"Save a copy shows what goes in the file\". I don't know what file, or where it goes.\n- \"There is no Send button on this page\". That's an odd thing to say, and it made me wonder if something should be sent.\n\n4. Things that made me worry:\n- Typing a wrong number and getting a wrong answer that I might rely on.\n- I don't have my loan papers in front of me, and there are many boxes. I'd be afraid I couldn't finish.\n- \"Save a copy\" makes a file on my phone. They say I can delete it, but I wouldn't know how.\n- It's asking about money, so I wonder who sees these numbers. The screen never says if it keeps them.\n- Whether the \"15 years / 20 years / 30 years\" buttons will change what I typed.\n- Whether I should type commas or dollar signs. The examples show none, which helps.\n\n5. I'd skip:\n- \"There is no Send button on this page.\"\n- The \"Keep your answer if you want\" section with Print and Save a copy, since they're grayed out until I have an answer.\n- The four \"(optional)\" boxes at first, until I see how the answer looks.\n- The small print about the estimate, though I'd probably read it later.\n\n6. Score: 4. The first box is clearly marked, and \"Show my answer\" is the only filled button.\n\nRESULT: {\"next_tap\":\"Home price\",\"confusing_terms\":[\"Mortgage Payment Explainer\",\"Yearly interest rate\",\"Property tax\",\"Mortgage insurance\",\"Neighborhood fee\",\"estimate\",\"lender statement\",\"preview\",\"print box\",\"Save a copy shows what goes in the file\",\"There is no Send button on this page\"],\"worries\":[\"typing a wrong number and trusting a wrong answer\",\"not having loan papers handy\",\"Save a copy makes a file and I might not know how to delete it\",\"who sees or keeps my money numbers\",\"whether the 15/20/30 years buttons change what I typed\"],\"skippable\":[\"There is no Send button on this page\",\"Keep your answer if you want (Print and Save a copy)\",\"optional boxes at first\",\"estimate fine print\"],\"score\":4}"
+        "output": "1. This screen wants me to type in my home price, down payment, interest rate, and loan length so it can show me my monthly house payment.\n\n2. \"Home price\" (the first box). If I were ready to finish, I'd then tap \"See my payment.\"\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n- \"How we know\". It's a link, and I'm not sure what it leads to.\n- \"Yearly interest rate\". I sort of know it, but I'd have to dig out my loan papers.\n- \"Other\" under the loan length. I don't know what it asks me to do.\n- \"Add tax, insurance and fees\". It's unclear whether this is required and what \"fees\" means.\n- \"What the words mean\". It tells me there are words I may not know, but I don't know which ones.\n- \"Estimate\". I understand it, but I don't know how rough it is.\n- \"There is no Send button on this page\". This is odd. I wasn't expecting a Send button, so it made me wonder what is being sent.\n\n4. Worries:\n- \"There is no Send button\" and \"How we know\" make me wonder whether my numbers are being sent somewhere or saved.\n- I don't know if typing my numbers costs anything or if it's tied to a lender.\n- I'm afraid I'll get the interest rate wrong and see a wrong payment.\n- \"Type 0 if none\" is helpful, but I'm not sure whether I can leave the box empty.\n- I don't know whether I should tap \"Add tax, insurance and fees\" before \"See my payment,\" or whether skipping it gives me a wrong number.\n\n5. I'd skip \"There is no Send button on this page\" and \"How we know\" at first. I'd also skip \"What the words mean\" unless I got stuck.\n\n6. Score: 4. The boxes are in order and the orange button is clear. The tax and fees button and the odd Send button line made me hesitate a little.\n\nRESULT: {\"next_tap\":\"Home price\",\"confusing_terms\":[\"How we know\",\"Yearly interest rate\",\"Other\",\"Add tax, insurance and fees, if you know them\",\"What the words mean\",\"There is no Send button on this page\"],\"worries\":[\"Unsure whether my numbers are sent or saved, given the 'no Send button' line and 'How we know'\",\"Unsure whether this costs anything\",\"Might enter the wrong interest rate and get a wrong payment\",\"Unsure whether I can leave a box empty\",\"Unsure whether to tap the tax, insurance and fees button before See my payment\"],\"skippable\":[\"There is no Send button on this page\",\"How we know\",\"What the words mean\"],\"score\":4}"
       },
       "designRubric": [
         {
           "model": "haiku",
-          "rule": "a rule passes when it passes in most of 3 runs",
+          "rule": "a rule passes when it passes in most of 5 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -184,6 +243,32 @@
               "rules": [
                 "PASS",
                 "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "FAIL",
                 "PASS",
                 "PASS",
                 "PASS",
@@ -210,7 +295,7 @@
         },
         {
           "model": "sonnet",
-          "rule": "a rule passes when it passes in most of 3 runs",
+          "rule": "a rule passes when it passes in most of 5 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -224,6 +309,32 @@
           "passes": 8,
           "fails": [],
           "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
             {
               "passes": 8,
               "rules": [

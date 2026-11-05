@@ -7,11 +7,12 @@ import { PromptSearch } from "./PromptSearch";
 afterEach(() => vi.unstubAllGlobals());
 
 describe("PromptSearch", () => {
-  it("has one labeled box and one primary button", () => {
+  it("has one labeled box, a search form and no button", () => {
     render(<PromptSearch tools={TOOLS} />);
     expect(screen.getByLabelText("What do you want to get done?")).toBeInTheDocument();
-    expect(screen.getAllByRole("button")).toHaveLength(1);
-    expect(screen.getByRole("button", { name: "Find a tool" })).toBeInTheDocument();
+    expect(screen.getByRole("search")).toBeInTheDocument();
+    expect(screen.queryAllByRole("button")).toHaveLength(0);
+    expect(screen.queryByRole("button", { name: "Find a tool" })).toBeNull();
   });
   it("shows nothing extra when empty", () => {
     render(<PromptSearch tools={TOOLS} />);
@@ -33,12 +34,12 @@ describe("PromptSearch", () => {
     await user.type(screen.getByLabelText("What do you want to get done?"), "zzzzqq");
     expect(screen.getByRole("status")).toHaveTextContent("Nothing matches yet. Try other words.");
   });
-  it("never submits anywhere", async () => {
+  it("never submits anywhere, even on Enter", async () => {
     const user = userEvent.setup();
     render(<PromptSearch tools={TOOLS} initialQuery="tax" />);
     expect(screen.getByText("Tax Filing Helper")).toBeInTheDocument();
     const before = window.location.href;
-    await user.click(screen.getByRole("button", { name: "Find a tool" }));
+    await user.type(screen.getByLabelText("What do you want to get done?"), "{Enter}");
     expect(window.location.href).toBe(before);
     expect(screen.getByText("Tax Filing Helper")).toBeInTheDocument();
   });

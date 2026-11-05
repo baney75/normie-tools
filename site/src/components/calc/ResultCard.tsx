@@ -1,64 +1,43 @@
 import type { ReactNode } from "react";
-import { href } from "../../lib/hashRouter";
 import "./calc.css";
 
 export type ResultCardProps = {
-  /** What the big number is, like "Monthly payment". */
+  /** What the big number is, like "Each month". */
   label: string;
   /** The big plain answer, like "$304.22". Leave out before the person has typed enough. */
   answer?: string;
-  /** Shown in the big spot until there is an answer, like "Your answer shows here". */
+  /** Short words after the big number, like "a month". */
+  unit?: string;
+  /** Shown in the big spot until there is an answer. */
   waiting?: string;
-  /** Like "Step 2 of 2". Shown small above the label. */
+  /** Like "Step 2 of 2". Only for tools with real steps. */
   step?: string;
-  /** Set false when the page shows more than one card, so "That is your answer" shows once. */
-  closing?: boolean;
-  /** Short lines under the answer. */
+  /** One plain sentence and at most two key numbers. */
   children?: ReactNode;
 };
-
-function firstBox(emptyOnly: boolean): HTMLElement | null {
-  const all = Array.from(document.querySelectorAll<HTMLInputElement>("input.nt-field-input"));
-  return (emptyOnly ? all.find((el) => !el.value) : all[0]) ?? document.querySelector<HTMLElement>("select");
-}
-
-function goTo(el: HTMLElement | null) {
-  el?.scrollIntoView?.({ block: "center" });
-  el?.focus();
-}
 
 /** A money or number answer, like "$304.22" or "12.5%". Anything with words in it is text. */
 function isNumber(answer: string): boolean {
   return /^[-+$\d.,%\s]+$/.test(answer);
 }
 
-/** The main card with the big answer in Fraunces. It is a polite live region, so a screen reader hears updates. */
-export function ResultCard({ label, answer, waiting = "Your answer shows here", step, closing = true, children }: ResultCardProps) {
+/** The answer card. It is a polite live region, so a screen reader hears updates. */
+export function ResultCard({ label, answer, unit, waiting = "Type your numbers to see your answer.", step, children }: ResultCardProps) {
   const has = answer !== undefined && answer !== "";
   return (
-    <section className={`nt-result${has ? "" : " nt-result-waiting"}`} aria-live="polite" aria-label={label}>
+    <section className={`nt-result${has ? "" : " nt-result-waiting"}`} aria-live="polite" aria-label={label} id="nt-answer" tabIndex={-1}>
       {step ? <p className="nt-step">{step}</p> : null}
-      <p className="nt-result-label">{label}</p>
-      {has ? <p className={isNumber(answer) ? "nt-result-answer" : "nt-result-answer nt-result-answer-text"}>{answer}</p> : <p className="nt-result-waiting-text">{waiting}</p>}
+      {/* While waiting, the label would title an empty box, so only the waiting words show. */}
+      {has ? <p className="nt-result-label">{label}</p> : null}
+      {has ? (
+        <p className={isNumber(answer) ? "nt-result-answer" : "nt-result-answer nt-result-answer-text"}>
+          {answer}
+          {unit ? <span className="nt-result-unit"> {unit}</span> : null}
+        </p>
+      ) : (
+        <p className="nt-result-waiting-text">{waiting}</p>
+      )}
       {has && children ? <div className="nt-result-body">{children}</div> : null}
-      {!has && closing ? (
-        <button type="button" className="primary nt-result-again" onClick={() => goTo(firstBox(true))}>
-          Show my answer
-        </button>
-      ) : null}
-      {has && closing ? (
-        <>
-          <p className="nt-result-done">That is your answer. You can stop here. Or change a number to try again. Your numbers stay.</p>
-          <div className="nt-result-row">
-            <a className="primary nt-result-again nt-result-done-link" href={href("/")}>
-              Done. Back to home.
-            </a>
-            <button type="button" className="nt-result-change" onClick={() => goTo(firstBox(false))}>
-              Change a number
-            </button>
-          </div>
-        </>
-      ) : null}
     </section>
   );
 }

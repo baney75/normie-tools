@@ -39,13 +39,14 @@ describe("ToolPage shipped tools", () => {
   it("shows a calm loading line, then the registered page", async () => {
     render(<ToolPage id="loan-explainer" />);
     expect(screen.getByRole("status")).toHaveTextContent("Getting your tool ready.");
-    expect(await screen.findByRole("heading", { level: 1, name: "Loan Explainer" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { level: 1, name: "What will my loan cost?" })).toBeInTheDocument();
     expect(screen.getByLabelText("Amount borrowed")).toBeInTheDocument();
   });
-  it("adds no second Back to home link: the answer card has the one", async () => {
+  it("shows no Back to home link or Done button inside the answer card", async () => {
     render(<ToolPage id="monthly-budget" />);
-    await screen.findByRole("heading", { level: 1, name: "Monthly Budget" });
+    await screen.findByRole("heading", { level: 1, name: "Where does my money go each month?" });
     expect(screen.queryAllByRole("link", { name: /Back to home/ })).toHaveLength(0);
+    expect(screen.queryByText("Done. Back to home.")).toBeNull();
   });
   it("falls back to the old placeholder when a shipped tool has no page yet", () => {
     render(<ToolPage id="ghost-shipped" />);

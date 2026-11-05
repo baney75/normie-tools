@@ -2,85 +2,46 @@ Screen: loan-offer-compare, filled state, phone 390px wide. Order is top to bott
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
 
 
-[heading 1] Loan Offer Compare
-Type the numbers from two loan offers. Your answer shows below.
-There is no Send button on this page.
+Loan Offer Compare
+[heading 1] Which loan offer is cheaper?
+There is no Send button on this page. How we know
+[link, plain] How we know
+Costs less in all
+Offer 1
+Offer 1 costs $281.26 less to borrow than Offer 2. Offer 2 has the lower monthly payment.
+Offer 1, each month
+$373.27
+Offer 2, each month
+$369.98
+That is your answer. You can stop here, or change a number to try again. Your numbers stay.
+[MAIN LINK, filled dark orange] Done. Back to home.
+[plain button, outline only] Print or save
+[question] Offer 1
 [label] Offer 1: Amount borrowed
-On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
-[box] Offer 1: Amount borrowed = "5000"
+[box] Offer 1: Amount borrowed = "12000"
 [label] Offer 1: Yearly interest rate
-On your loan paper. Look for the words 'interest rate'. It is a percent. Type 0 if there is none. For example: 6.5.
-[box] Offer 1: Yearly interest rate = "5.5"
+[box] Offer 1: Yearly interest rate = "7.5"
 [label] Offer 1: How long is the loan?
-On your loan paper. Look for 'term' or 'number of payments'. Use a whole number. For example: 36.
-[box] Offer 1: How long is the loan? = "48"
-[label] Months
+[box] Offer 1: How long is the loan? = "36"
+[question] Count in
 [choice] Months (selected)
-[label] Years
 [choice] Years 
 [label] Offer 1: Upfront fees (optional)
-Fees you pay once, at the start, like a setup fee. Leave it empty if none.
-[box] Offer 1: Upfront fees (optional) = ""
+[box] Offer 1: Upfront fees (optional) = "0"
+[question] Offer 2
 [label] Offer 2: Amount borrowed
-On your loan paper. Look for the words 'amount borrowed' or 'loan amount'. For example: 12000.
-[box] Offer 2: Amount borrowed = "5500"
+[box] Offer 2: Amount borrowed = "12000"
 [label] Offer 2: Yearly interest rate
-On your loan paper. Look for the words 'interest rate'. It is a percent. Type 0 if there is none. For example: 6.5.
-[box] Offer 2: Yearly interest rate = "6"
+[box] Offer 2: Yearly interest rate = "6.9"
 [label] Offer 2: How long is the loan?
-On your loan paper. Look for 'term' or 'number of payments'. Use a whole number. For example: 36.
-[box] Offer 2: How long is the loan? = "24"
-[label] Months
+[box] Offer 2: How long is the loan? = "36"
+[question] Count in
 [choice] Months (selected)
-[label] Years
 [choice] Years 
 [label] Offer 2: Upfront fees (optional)
-Fees you pay once, at the start, like a setup fee. Leave it empty if none.
-[box] Offer 2: Upfront fees (optional) = ""
+[box] Offer 2: Upfront fees (optional) = "400"
 [plain button, outline only] Add a third offer
-Add a third offer. Remove the third offer to go back.
-Lowest cost of borrowing
-Offer 2
-This offer has the lowest cost of borrowing.
-That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
-[MAIN LINK, filled dark orange] Done. Back to home.
-[plain button, outline only] Change a number
-These offers are not the same amount or length. Each total is right for its own offer, so read the monthly payment too.
-Offer 1, monthly payment
-$116.28
-Loan length
-48 months
-Total paid
-$5,581.61
-Total interest
-$581.61
-Upfront fees
-$0.00
-Cost of borrowing
-$581.61
-Offer 2, monthly payment
-$243.76
-Loan length
-24 months
-Total paid
-$5,850.32
-Total interest
-$350.32
-Upfront fees
-$0.00
-Cost of borrowing
-$350.32
-Cost of borrowing is the interest plus the upfront fees.
-[heading 2] Keep your answer if you want
-Your answer above, on paper or saved as a file on this phone or computer.
-[plain button, outline only] Print
-[plain button, outline only] Save a copy
-Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
-
-[closed section, tap to open] More about the offers
-
-[plain button, outline only] Start over
-Start over asks first, and you can undo it right after.
-This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+[closed section, tap to open] More options
+[closed section, tap to open] See all the numbers
 [closed section, tap to open] What the words mean
-
+This is an estimate. Your lender statement has the final numbers.

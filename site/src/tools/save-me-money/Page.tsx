@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -71,7 +71,6 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-smm">
         <p className="nt-smm-intro">{COPY.intro}</p>
-        <PrivacyNote />
 
         {flow.hasSaved && pristine ? (
           <div className="nt-smm-status">
@@ -146,7 +145,7 @@ export function Page() {
         ) : (
           <>
             <h2 className="nt-smm-h">{COPY.step2}</h2>
-            <ResultCard label={COPY.result.label} waiting={COPY.waiting} closing={false} />
+            <ResultCard label={COPY.result.label} waiting={COPY.waiting} />
             <Soon />
             <h2 className="nt-smm-h">{COPY.step3}</h2>
             <SavePrintSheet savePrimary title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
@@ -225,7 +224,7 @@ function Done({ result, items, picked, toggle }: { result: Good; items: Line[]; 
   return (
     <>
       <h2 className="nt-smm-h">{COPY.step2}</h2>
-      <ResultCard label={r.label} answer={formatMoney(result.yearlyCents)} closing={false}>
+      <ResultCard label={r.label} answer={formatMoney(result.yearlyCents)}>
         <dl className="nt-smm-lines">
           <div>
             <dt>{r.perMonth}</dt>

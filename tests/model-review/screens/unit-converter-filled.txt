@@ -2,34 +2,28 @@ Screen: unit-converter, filled state, phone 390px wide. Order is top to bottom. 
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
 
 
-[heading 1] Unit Converter
-Pick what you are measuring and type a number. Your answer shows below.
-There is no Send button on this page.
-[label] What are you measuring?
-Tap a box with a list to see your choices.
-[menu] Length Weight Volume Temperature Speed = "Length"
-[label] Number
-Commas are fine. For example: 12 or 3.5.
-[box] Number = "5000"
-[label] Change from
-[menu] Inches (in) Feet (ft) Yards (yd) Miles (mi) Millimeters (mm) Centimeters (cm) Meters (m) Kilometers (km) = "Inches (in)"
-[plain button, outline only] Swap 'from' and 'to'
-Tap it again to swap back.
-[label] Change to
-[menu] Inches (in) Feet (ft) Yards (yd) Miles (mi) Millimeters (mm) Centimeters (cm) Meters (m) Kilometers (km) = "Millimeters (mm)"
-[plain button, outline only] Start over
-Start over asks first, and you can undo it right after.
+Unit Converter
+[heading 1] Change cups, inches, pounds and more
+There is no Send button on this page. How we know
+[link, plain] How we know
 Your answer
 127,000 millimeters
 A long answer is rounded to 6 digits.
-That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
+That is your answer. You can stop here, or change a number to try again. Your numbers stay.
 [MAIN LINK, filled dark orange] Done. Back to home.
-[plain button, outline only] Change a number
-[heading 2] Keep your answer if you want
-Your answer above, on paper or saved on this phone or computer.
-[plain button, outline only] Print
-[plain button, outline only] Save a copy
-Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
-
+[plain button, outline only] Print or save
+[question] What are you measuring?
+[choice] Length (selected)
+[choice] Weight 
+[choice] Volume 
+[choice] Temperature 
+[choice] Speed 
+[label] Number
+[box] Number = "5000"
+[label] Change from
+[menu] Inches (in) Feet (ft) Yards (yd) Miles (mi) Millimeters (mm) Centimeters (cm) Meters (m) Kilometers (km) = "Inches (in)"
+[plain button, outline only] Swap
+[label] Change to
+[menu] Inches (in) Feet (ft) Yards (yd) Miles (mi) Millimeters (mm) Centimeters (cm) Meters (m) Kilometers (km) = "Millimeters (mm)"
+[closed section, tap to open] More options
 [closed section, tap to open] Show the facts used
-

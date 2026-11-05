@@ -15,6 +15,13 @@ async function fill(label: string, text: string) {
   if (text) await userEvent.type(box, text);
 }
 
+const LINES = ["Pay", "Rent or mortgage", "Food", "Bills", "Transport", "Other"];
+
+/** The page opens with example numbers. This empties every amount box. */
+async function blank() {
+  for (const n of LINES) await fill(`${n}, per month`, "");
+}
+
 async function fillPlain() {
   await fill("Pay, per month", "3000");
   await fill("Rent or mortgage, per month", "1200");
@@ -25,40 +32,131 @@ async function fillPlain() {
 }
 
 describe("Monthly Budget page", () => {
-  it("shows the empty state, prefilled labels and no answer", () => {
-    render(<Page />);
-    expect(screen.getByRole("heading", { level: 1, name: "Monthly Budget" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.intro)).toBeInTheDocument();
-    for (const n of ["Pay", "Rent or mortgage", "Food", "Bills", "Transport", "Other"]) {
-      expect(screen.getByLabelText(`${n}, per month`)).toHaveValue("");
-    }
-    expect(screen.getByLabelText("Left over")).toHaveTextContent(COPY.waiting);
+  it("opens with the names kept, the amounts blank and only the waiting words for an answer", () => {
+    const { container } = render(<Page />);
+    expect(screen.getByRole("heading", { level: 1, name: COPY.question })).toBeInTheDocument();
+    expect(screen.getByText(COPY.title)).toBeInTheDocument();
+    for (const n of LINES) expect(screen.getByLabelText(`${n}, per month`)).toHaveValue("");
+    const card = screen.getByLabelText("Left over each month");
+    expect(COPY.waiting).toBe("Type your pay to start.");
+    expect(card).toHaveTextContent(/^Type your pay to start\.$/);
+    expect(card.querySelector(".nt-result-label")).toBeNull();
+    expect(card).toHaveAttribute("id", "nt-answer");
+    expect(card).toHaveAttribute("tabindex", "-1");
+    expect(container.querySelector(".nt-result-tag")).toBeNull();
+    expect(screen.queryByText(/example/i)).toBeNull();
+    expect(screen.queryByRole("button", { name: "Type my own numbers" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
-    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/no Send button/);
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
-  it("focuses the first amount box", () => {
+  it("says it is free and sends nothing, and links the code", () => {
     render(<Page />);
-    expect(screen.getByLabelText("Pay, per month")).toHaveFocus();
+    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+  });
+
+  it("shows a calm waiting line again once every amount is cleared", async () => {
+    const { container } = render(<Page />);
+    await fillPlain();
+    expect(screen.getByLabelText("Left over each month")).toHaveTextContent("$700.00");
+    await blank();
+    const card = screen.getByLabelText("Left over each month");
+    expect(card).toHaveTextContent(/^Type your pay to start\.$/);
+    expect(card.querySelector(".nt-result-label")).toBeNull();
+    expect(container.querySelector(".nt-result-tag")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
+  });
+
+  it("gives the same accessible names to name boxes, amount boxes and remove buttons", () => {
+    render(<Page />);
+    expect(screen.getByLabelText("Name of income item 1")).toHaveValue("Pay");
+    expect(screen.getByLabelText("Name of spending item 5")).toBeInTheDocument();
+    for (const n of LINES) expect(screen.getByRole("button", { name: `Remove ${n}` })).toBeInTheDocument();
+    expect(screen.queryByText("Remove")).toBeNull();
+  });
+
+  it("puts the cursor nowhere on load", () => {
+    render(<Page />);
+    expect(document.body).toHaveFocus();
   });
 
   it("shows each bar percent once", async () => {
     render(<Page />);
+    await blank();
     await fill("Pay, per month", "1000");
     await fill("Food, per month", "250");
     expect(screen.getAllByText(/25.0% of income/)).toHaveLength(1);
     expect(screen.queryByText(/Each bar is as wide/)).toBeNull();
   });
 
-  it("has one filled button: Print", async () => {
+  it("has one filled button while there is no answer: See what is left over, which puts the cursor in the first empty amount", async () => {
     const { container } = render(<Page />);
-    expect(screen.getByRole("button", { name: "Show my answer" })).toHaveClass("primary");
-    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
-    await fillPlain();
-    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
+    expect(screen.queryByRole("button", { name: "Show my answer" })).toBeNull();
     expect(container.querySelectorAll(".primary")).toHaveLength(1);
-    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
+    const see = screen.getByRole("button", { name: COPY.see });
+    expect(see).toHaveClass("primary");
+    await userEvent.click(see);
+    expect(screen.getByLabelText("Pay, per month")).toHaveFocus();
+    await fill("Pay, per month", "lots");
+    await userEvent.click(see);
+    expect(screen.getByLabelText("Rent or mortgage, per month")).toHaveFocus();
+    expect(screen.queryByRole("link", { name: "Done. Back to home." })).toBeNull();
+  });
+
+  it("with an answer, Done is the one filled link, Print or save is an outline that opens the sheet, and the See button is gone", async () => {
+    const { container } = render(<Page />);
+    await fill("Pay, per month", "3000");
+    await fill("Food, per month", "450");
+    expect(container.querySelectorAll(".primary")).toHaveLength(1);
+    const done = screen.getByRole("link", { name: "Done. Back to home." });
+    expect(done).toHaveClass("primary");
+    expect(done).toHaveAttribute("href", "#/");
+    const main = screen.getByRole("button", { name: "Print or save" });
+    expect(main).toHaveClass("nt-finish-save");
+    expect(main).not.toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: "See what is left over" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Go up to my answer" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print" })).toBeNull();
+    await userEvent.click(main);
+    expect(main).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Save a copy" })).toBeEnabled();
+    expect(container.querySelectorAll(".primary")).toHaveLength(1);
+  });
+
+  it("keeps a quiet Start over inside More options, with its default undo note, as soon as anything is typed", async () => {
+    const { container } = render(<Page />);
+    await blank();
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    expect(container.querySelector("details.nt-more")).toBeNull();
+    await fill("Pay, per month", "lots");
+    expect(screen.getByLabelText("Left over each month")).toHaveTextContent(COPY.waiting);
+    const more = container.querySelector("details.nt-more") as HTMLDetailsElement;
+    expect(more).not.toBeNull();
+    expect(more.querySelector("summary")).toHaveTextContent("More options");
+    await userEvent.click(screen.getByText("More options"));
+    const start = screen.getByRole("button", { name: "Start over" });
+    expect(more).toContainElement(start);
+    const note = screen.getByText("You can put your numbers back.");
+    expect(more).toContainElement(note);
+    expect("startOverNote" in COPY).toBe(false);
+  });
+
+  it("shows the remove note at the end of the form even with nothing typed", async () => {
+    const { container } = render(<Page />);
+    await blank();
+    const note = screen.getByText(COPY.removeNote);
+    expect(note).toBeVisible();
+    expect(note.closest("details")).toBeNull();
+    const form = container.querySelector("form") as HTMLFormElement;
+    expect(form.lastElementChild).toBe(note);
+    expect(note.textContent).toBe("Remove asks first, and you can put the line back.");
+    expect(note.textContent).not.toMatch(/\u2013|\u2014/);
   });
 
   it("has decimal keypads and no autofill on amounts", () => {
@@ -71,7 +169,7 @@ describe("Monthly Budget page", () => {
   it("shows exact totals, left over and percents as the person types", async () => {
     render(<Page />);
     await fillPlain();
-    const card = screen.getByLabelText("Left over");
+    const card = screen.getByLabelText("Left over each month");
     expect(card).toHaveTextContent("$700.00");
     expect(card).toHaveTextContent("Total income$3,000.00");
     expect(card).toHaveTextContent("Total spending$2,300.00");
@@ -85,6 +183,7 @@ describe("Monthly Budget page", () => {
 
   it("shows one decimal worked from the amounts, so $250 of $3,000 is 8.3%", async () => {
     render(<Page />);
+    await blank();
     await fill("Pay, per month", "3000");
     await fill("Transport, per month", "250");
     expect(screen.getByRole("region", { name: "Where it goes" })).toHaveTextContent("Transport$250.00, 8.3% of income");
@@ -100,15 +199,17 @@ describe("Monthly Budget page", () => {
 
   it("shows a negative left over plainly", async () => {
     render(<Page />);
+    await blank();
     await fill("Pay, per month", "1000");
     await fill("Rent or mortgage, per month", "1100");
-    const card = screen.getByLabelText("Left over");
+    const card = screen.getByLabelText("Left over each month");
     expect(card).toHaveTextContent("-$100.00");
     expect(card).toHaveTextContent("More goes out than comes in. The gap is $100.00.");
   });
 
   it("adds a line, names it, and removes it", async () => {
     render(<Page />);
+    await blank();
     await userEvent.click(screen.getByRole("button", { name: "Add a spending item" }));
     await fill("Name of spending item 6", "Phone");
     await fill("Phone, per month", "$40.50");
@@ -136,26 +237,27 @@ describe("Monthly Budget page", () => {
     expect(screen.queryByRole("button", { name: COPY.undo })).toBeNull();
   });
 
-  it("keeps the privacy note", () => {
+  it("no longer shows the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
+    expect(screen.getByText(/There is no Send button on this page/).closest(".nt-tool-trust")).not.toBeNull();
   });
 
   it("with no income, shows the totals and shares of spending", async () => {
     render(<Page />);
+    await blank();
     await fill("Rent or mortgage, per month", "700");
     await fill("Food, per month", "300");
-    expect(screen.getByLabelText("Left over")).toHaveTextContent("-$1,000.00");
+    expect(screen.getByLabelText("Left over each month")).toHaveTextContent("-$1,000.00");
     const where = screen.getByRole("region", { name: "Where it goes" });
     expect(where).toHaveTextContent("70.0% of spending");
     expect(where).toHaveTextContent("30.0% of spending");
     expect(where).toHaveTextContent(COPY.where.noIncome);
   });
 
-  it("lists every line with both percents under Show more", async () => {
+  it("lists every line with both percents under See all the numbers", async () => {
     render(<Page />);
     await fillPlain();
-    await userEvent.click(screen.getByText("Show the numbers in a table"));
+    await userEvent.click(screen.getByText(COPY.more.summary));
     const table = screen.getByRole("table");
     expect(within(table).getAllByRole("row")).toHaveLength(1 + 5);
     expect(within(table).getAllByRole("row")[1]).toHaveTextContent("Rent or mortgage$1,200.0040.0%52.2%");
@@ -169,7 +271,7 @@ describe("Monthly Budget page", () => {
     expect(screen.getByText(/Food: use a dollar amount/)).toBeInTheDocument();
     expect(screen.getByLabelText("Food, per month")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.getByLabelText("Left over")).toHaveTextContent(COPY.waiting);
+    expect(screen.getByLabelText("Left over each month")).toHaveTextContent(COPY.waiting);
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
@@ -183,7 +285,7 @@ describe("Monthly Budget page", () => {
     expect(screen.getByLabelText("Pay, per month")).toHaveValue("1200");
   });
 
-  it("starts fresh when asked", async () => {
+  it("keeps the boxes blank when the person says No thanks to saved ones", async () => {
     const first = render(<Page />);
     await fill("Pay, per month", "1200");
     first.unmount();
@@ -191,6 +293,7 @@ describe("Monthly Budget page", () => {
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.no }));
     expect(screen.getByLabelText("Pay, per month")).toHaveValue("");
     expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
+    expect(window.localStorage.getItem("nt:flow:monthly-budget")).toBeNull();
   });
 
   it("survives damaged saved data", async () => {
@@ -201,12 +304,18 @@ describe("Monthly Budget page", () => {
     expect(screen.getByRole("button", { name: "Add a spending item" })).toBeInTheDocument();
   });
 
-  it("always shows Save or print, and turns it on once there is an answer", async () => {
+  it("shows Print or save only once there is an answer", async () => {
     render(<Page />);
-    expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Save a copy" })).toBeDisabled();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    await fill("Pay, per month", "lots");
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    await fill("Pay, per month", "3000");
+    expect(screen.getByRole("button", { name: "Print or save" })).toBeInTheDocument();
+    await blank();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
     await fillPlain();
-    expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Print or save" })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Print or save" }));
     expect(screen.getByRole("button", { name: "Save a copy" })).toBeEnabled();
   });
 });
@@ -239,6 +348,7 @@ describe("monthly-budget Start over", () => {
   it("clears the first box and the saved copy, then puts it back", async () => {
     render(<Page />);
     const box = () => screen.getAllByRole("textbox")[1];
+    await userEvent.clear(box());
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:monthly-budget")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));

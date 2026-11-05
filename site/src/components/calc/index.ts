@@ -7,4 +7,7 @@ export { RemoveAsk, amountText, type RemoveAskProps } from "./RemoveAsk";
 export { ResultCard, type ResultCardProps } from "./ResultCard";
 export { StartOver, type StartOverProps } from "./StartOver";
 export { StepLabel } from "./StepLabel";
-export { PrivacyNote } from "./PrivacyNote";
+export { Chips, type ChipOption, type ChipsProps } from "./Chips";
+export { Finish, type FinishProps } from "./Finish";
+export { ToolLayout, type ToolLayoutProps } from "./ToolLayout";
+export { SeeAnswer } from "./SeeAnswer";

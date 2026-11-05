@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { UploadField } from "../../components/UploadField";
 import { damaged, genericMessage, messageFor } from "../../copy/upload-messages";
@@ -199,7 +199,6 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-pdf">
         <p className="nt-pdf-intro">{COPY.intro}</p>
-        <PrivacyNote />
 
         {data.view === 1 ? (
           <>
@@ -224,7 +223,6 @@ export function Page() {
             <ResultCard
               label={COPY.pick.count}
               waiting={COPY.pick.waiting(data.photos.length)}
-              closing={false}
               answer={data.photos.length > 1 ? String(data.photos.length) : undefined}
             >
             </ResultCard>
@@ -242,7 +240,6 @@ export function Page() {
             <ResultCard
               label={COPY.groups.label}
               waiting={COPY.groups.waiting}
-              closing={false}
               answer={groups.length > 0 ? String(groups.length) : undefined}
             >
               <p className="nt-pdf-help">{COPY.groups.summary(exactCount, alikeCount)}</p>
@@ -325,7 +322,6 @@ export function Page() {
             <ResultCard
               label={COPY.review.label}
               waiting={COPY.review.empty}
-              closing={false}
               answer={plan.count > 0 ? COPY.review.count(plan.count) : undefined}
             >
             </ResultCard>

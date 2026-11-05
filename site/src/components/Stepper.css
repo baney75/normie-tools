@@ -10,7 +10,7 @@
 .nt-stepper .nt-primary { background: var(--nt-tdeep); color: var(--nt-white); border: 2px solid var(--nt-tdeep); }
 .nt-stepper .nt-secondary { background: var(--nt-paper); color: var(--nt-ink); border: 2px solid var(--nt-line); }
 .nt-stepper button:disabled { color: var(--nt-muted); cursor: default; }
-.nt-stepper button:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-stepper button:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 @container (min-width: 30rem) {
   .nt-stepper-actions { flex-direction: row; justify-content: space-between; }
 }

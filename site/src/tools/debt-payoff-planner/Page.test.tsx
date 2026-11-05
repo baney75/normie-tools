@@ -34,11 +34,9 @@ describe("Debt Payoff Planner page", () => {
     expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.waiting);
     expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
     const intro = screen.getByText(COPY.intro);
-    const privacy = screen.getByText(/no Send button/);
-    expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(privacy.compareDocumentPosition(screen.getByLabelText("Debt 1 name", { exact: false })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(intro.compareDocumentPosition(screen.getByLabelText("Debt 1 name", { exact: false })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.getByLabelText("Debt 1 name", { exact: false })).toHaveFocus();
-    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
+    expect(screen.queryByText(/no Send button/)).toBeNull();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -183,7 +181,9 @@ describe("Debt Payoff Planner page", () => {
     expect(screen.getByText(COPY.save.title)).toBeInTheDocument();
     expect(screen.getByText(COPY.save.title).closest("details")).toBeNull();
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
-    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    // The only filled button was the old "Done. Back to home." link, which is gone on purpose.
+    expect(screen.queryByText("Done. Back to home.")).toBeNull();
+    expect(document.querySelectorAll(".primary")).toHaveLength(0);
   });
 });
 
@@ -243,7 +243,7 @@ describe("debt-payoff-planner filled screen", () => {
     await typeTwoDebts();
     const body = document.body.textContent ?? "";
     expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
-    expect(body.split("That is your answer").length - 1).toBe(1);
+    expect(body).not.toContain("That is your answer");
     for (const h of screen.getAllByRole("heading")) expect(h.textContent?.trim()).not.toBe("");
     expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
     expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");

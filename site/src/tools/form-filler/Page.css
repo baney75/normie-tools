@@ -32,7 +32,7 @@
 .nt-ff-check { align-items: flex-start; font-size: 1.0625rem; }
 .nt-ff-choice input, .nt-ff-check input { flex: none; width: 1.5rem; height: 1.5rem; margin: 0; accent-color: var(--nt-ink); }
 .nt-ff-choice:has(input:checked), .nt-ff-check:has(input:checked) { background: var(--nt-mint); font-weight: 700; }
-.nt-ff-choice:has(input:focus-visible), .nt-ff-check:has(input:focus-visible) { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-ff-choice:has(input:focus-visible), .nt-ff-check:has(input:focus-visible) { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 .nt-ff-sub { display: block; margin-top: var(--nt-space-1); font-size: 1rem; font-weight: 400; color: var(--nt-muted); }
 
 .nt-ff-field { margin: 0 0 var(--nt-space-3); scroll-margin-block: var(--nt-space-5); }
@@ -51,7 +51,7 @@
   border-radius: var(--nt-radius);
   scroll-margin-block: var(--nt-space-5);
 }
-.nt-ff-input:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-ff-input:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 .nt-ff-input[aria-invalid="true"] { border-color: var(--nt-tdeep); }
 
 .nt-ff-actions, .nt-ff-save { display: flex; flex-wrap: wrap; gap: var(--nt-space-3); margin: 0 0 var(--nt-space-4); }
@@ -62,7 +62,7 @@
 
 .nt-ff-open { margin: 0 0 var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-ff-open > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-3); font-weight: 700; color: var(--nt-ink); cursor: pointer; }
-.nt-ff-open > summary:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-ff-open > summary:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 .nt-ff-open > :not(summary) { margin: var(--nt-space-3); }
 .nt-ff-pre { margin: var(--nt-space-3); padding: var(--nt-space-3); max-width: 100%; box-sizing: border-box; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.9375rem; background: var(--nt-paper); border-radius: var(--nt-radius); }
 

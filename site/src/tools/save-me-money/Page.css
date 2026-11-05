@@ -34,7 +34,7 @@
 .nt-smm-add:focus-visible,
 .nt-smm-select:focus-visible,
 .nt-smm-details > summary:focus-visible,
-.nt-smm-pick input:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-smm-pick input:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 
 .nt-smm-status { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-smm-lines { margin: 0 0 var(--nt-space-3); }

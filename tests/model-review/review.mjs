@@ -36,6 +36,8 @@ const CAPTURE = () => {
   const vis = (el) => {
     const r = el.getBoundingClientRect();
     const s = getComputedStyle(el);
+    // A display: contents box has no size of its own, but its children show. Walk into it.
+    if (s.display === "contents") return true;
     return r.width > 0 && r.height > 0 && s.visibility !== "hidden" && s.display !== "none";
   };
   const filled = (el) => {
@@ -58,7 +60,10 @@ const CAPTURE = () => {
       if (/^H[1-6]$/.test(tag)) lines.push(`[heading ${tag[1]}] ${name(el)}`);
       else if (tag === "P" || tag === "LI" || tag === "DT" || tag === "DD" || tag === "SUMMARY" || tag === "CAPTION") {
         if (!el.closest("button") && !seen.has(el)) lines.push(`${tag === "SUMMARY" ? "[closed section, tap to open] " : ""}${name(el)}`);
-      } else if (tag === "LABEL") lines.push(`[label] ${name(el)}`);
+      } else if (tag === "LEGEND") lines.push(`[question] ${name(el)}`);
+      // A label that wraps a choice is read once, on the choice line.
+      // Labels hidden from sight (screen reader only) are not on the screen; the box line still carries the name.
+      else if (tag === "LABEL") { if (!el.querySelector("input[type=radio], input[type=checkbox]") && el.getBoundingClientRect().width > 1) lines.push(`[label] ${name(el)}`); }
       else if (tag === "INPUT" && (el.type === "radio" || el.type === "checkbox")) {
         const lab = el.id ? document.querySelector(`label[for="${el.id}"]`) : el.closest("label");
         lines.push(`[${el.type === "radio" ? "choice" : "tick box"}] ${lab ? name(lab) : name(el)} ${el.checked ? "(selected)" : ""}`);
@@ -77,8 +82,13 @@ const CAPTURE = () => {
         if (own && !el.closest("p, li, dt, dd, button, label, h1, h2, h3, h4, h5, h6, summary, a, caption, th, td, [aria-hidden=true]")) lines.push(own);
       }
     }
-    // next element in document order, skipping hidden subtrees
-    let next = vis(el) || el === main ? el.firstElementChild : null;
+    // next element in document order, skipping hidden subtrees. A closed <details> shows only its summary.
+    const closed = el.tagName === "DETAILS" && !el.open;
+    if (closed && vis(el)) {
+      const sum = el.querySelector(":scope > summary");
+      if (sum) lines.push(`[closed section, tap to open] ${name(sum)}`);
+    }
+    let next = (vis(el) || el === main) && !closed ? el.firstElementChild : null;
     if (!next) {
       let n = el;
       while (n && n !== main && !n.nextElementSibling) n = n.parentElement;

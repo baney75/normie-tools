@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
@@ -15,54 +15,160 @@ async function fill(label: string, text: string) {
   if (text) await userEvent.type(box, text);
 }
 
+async function showMore() {
+  await userEvent.click(screen.getByRole("button", { name: COPY.moreButton }));
+}
+
+/** Picks the loan length the way a person does: a chip when there is one, else Other and a number. */
+async function setYears(n: string) {
+  if (COPY.term.quick.includes(n as never)) {
+    await userEvent.click(screen.getByRole("radio", { name: `${n} ${COPY.term.quickSuffix}` }));
+    return;
+  }
+  await userEvent.click(screen.getByRole("radio", { name: COPY.term.other }));
+  await fill(COPY.term.otherLabel, n);
+}
+
+async function fillCore() {
+  await fill("Home price", "$300,000");
+  await fill("Down payment", "$60,000");
+  await fill("Yearly interest rate", "6");
+  await setYears("30");
+}
+
 async function fillBasic() {
   await fill("Home price", "$300,000");
   await fill("Down payment", "$60,000");
   await fill("Yearly interest rate", "6");
-  await fill("Years to pay it back", "30");
+  await setYears("30");
+  await showMore();
   await fill("Property tax for the year", "$3,600");
   await fill("Home insurance for the year", "$1,200");
   await fill("Neighborhood fee each month", "$50");
 }
 
+const card = () => screen.getByLabelText("Total monthly payment");
+const more = () => screen.getByText(COPY.more.summary).closest("details") as HTMLElement;
+
 function expectWaiting() {
-  const card = screen.getByLabelText("Total monthly payment");
-  expect(card).toHaveTextContent("Your answer shows here");
-  expect(card).not.toHaveTextContent("$");
+  expect(card()).toHaveTextContent(COPY.waiting);
+  expect(card()).not.toHaveTextContent("$");
 }
 
+const seeBtn = () => screen.getByRole("button", { name: COPY.see });
+
 describe("Mortgage Payment Explainer page", () => {
-  it("shows the empty state and no answer", () => {
+  it("opens with empty boxes and only the waiting words in the answer card", () => {
     render(<Page />);
-    expect(screen.getByRole("heading", { level: 1, name: "Mortgage Payment Explainer" })).toBeInTheDocument();
-    expect(screen.getByText("Type the numbers for a home loan. Your answer shows below.")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: COPY.question })).toBeInTheDocument();
+    expect(screen.getByText(COPY.title)).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
+    expect(screen.queryByText(/These are example numbers/)).toBeNull();
+    expect(screen.getByLabelText("Home price")).toHaveValue("");
+    expect(screen.getByLabelText("Down payment")).toHaveValue("");
+    expect(screen.getByLabelText("Yearly interest rate")).toHaveValue("");
+    for (const r of screen.getAllByRole("radio")) expect(r).not.toBeChecked();
     expectWaiting();
-    expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
+    expect(card().querySelector(".nt-result-label")).toBeNull();
+    expect(card().querySelector(".nt-result-tag")).toBeNull();
+    expect(card()).toHaveAttribute("id", "nt-answer");
+    expect(card()).toHaveAttribute("tabindex", "-1");
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
-  it("has labels above inputs, decimal keypads, no autofill", () => {
+  it("says it is free and sends nothing, and links to the code", () => {
     render(<Page />);
+    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+    expect(document.body.textContent?.match(/There is no Send button on this page/g)).toHaveLength(1);
+  });
+
+  it("puts the answer first, with no autofocus and no old buttons", () => {
+    render(<Page />);
+    const box = screen.getByLabelText("Home price");
+    expect(card().compareDocumentPosition(box) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(box).not.toHaveFocus();
+    expect(document.body.textContent).not.toMatch(/Show my answer|That is your answer|Done\. Back to home|Change a number|Type my own numbers/);
+  });
+
+  it("the See my payment button is the one main button while there is no answer, and it focuses the first empty box", async () => {
+    render(<Page />);
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    expect(seeBtn()).toHaveClass("primary");
+    expect(seeBtn().closest("details")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    await userEvent.click(seeBtn());
+    expect(screen.getByLabelText("Home price")).toHaveFocus();
+    await fill("Home price", "250000");
+    await userEvent.click(seeBtn());
+    expect(screen.getByLabelText("Down payment")).toHaveFocus();
+  });
+
+  it("once there is an answer, Done is the one main link, Print or save is an outline, and See my payment is gone", async () => {
+    render(<Page />);
+    await fillCore();
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveAttribute("href", "#/");
+    expect(screen.getByRole("button", { name: "Print or save" })).not.toHaveClass("primary");
+    expect(screen.getByRole("button", { name: "Print or save" }).closest("details")).toBeNull();
+    expect(screen.queryByRole("button", { name: COPY.see })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Go up to my answer" })).toBeNull();
+  });
+
+  it("shows Start over once something is typed, with its undo note, and clearing shows the waiting words", async () => {
+    render(<Page />);
+    expect(screen.queryByText("You can put your numbers back.")).toBeNull();
+    await fillCore();
+    expect(screen.getByText("You can put your numbers back.")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
+    expectWaiting();
+    expect(screen.getByLabelText("Home price")).toHaveValue("");
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
+  });
+
+  it("has labels above inputs, decimal keypads, no autofill", async () => {
+    render(<Page />);
+    await showMore();
     for (const name of ["Home price", "Down payment", "Yearly interest rate", "Property tax for the year", "Home insurance for the year", "Neighborhood fee each month", "Mortgage insurance each month"]) {
       const box = screen.getByLabelText(name, { exact: false });
       expect(box).toHaveAttribute("inputmode", "decimal");
       expect(box).toHaveAttribute("autocomplete", "off");
     }
+    await userEvent.click(screen.getByRole("radio", { name: COPY.term.other }));
     expect(screen.getByLabelText("Years to pay it back")).toHaveAttribute("inputmode", "numeric");
+  });
+
+  it("keeps tax, insurance and fees behind one quiet button until it is clicked", async () => {
+    render(<Page />);
+    expect(screen.queryByLabelText("Property tax for the year", { exact: false })).toBeNull();
+    expect(screen.queryByLabelText("Mortgage insurance each month", { exact: false })).toBeNull();
+    await showMore();
+    expect(screen.getByLabelText("Property tax for the year", { exact: false })).toBeInTheDocument();
+    expect(screen.getByLabelText("Mortgage insurance each month", { exact: false })).toBeInTheDocument();
   });
 
   it("shows the exact answer as the person types", async () => {
     render(<Page />);
     await fillBasic();
-    const card = screen.getByLabelText("Total monthly payment");
-    expect(card).toHaveTextContent("$1,888.92");
-    expect(card).toHaveTextContent("Loan payment$1,438.92");
-    expect(card).toHaveTextContent("Property tax each month$300.00");
-    expect(card).toHaveTextContent("Home insurance each month$100.00");
-    expect(card).toHaveTextContent("Neighborhood fee each month$50.00");
-    expect(card).toHaveTextContent("Mortgage insurance each month$0.00");
-    expect(card).toHaveTextContent("Loan amount$240,000.00");
-    expect(card).toHaveTextContent("Loan length30 years");
-    expect(card).toHaveTextContent("Total interest over the loan$278,012.58");
+    expect(card()).toHaveTextContent("$1,888.92");
+    expect(card()).toHaveTextContent(COPY.result.totalLine);
+    expect(card()).toHaveTextContent("Loan amount$240,000.00");
+    expect(card()).toHaveTextContent("Loan length30 years");
+    expect(card()).not.toHaveTextContent("Total interest");
+    expect(more()).toHaveTextContent("Total interest over the loan$278,012.58");
+    expect(more()).toHaveTextContent("Loan payment$1,438.92");
+    expect(more()).toHaveTextContent("Property tax each month$300.00");
+    expect(more()).toHaveTextContent("Home insurance each month$100.00");
+    expect(more()).toHaveTextContent("Neighborhood fee each month$50.00");
+    expect(more()).toHaveTextContent("Mortgage insurance each month$0.00");
+    expect(more()).toHaveTextContent("Loan amount$240,000.00");
+    expect(more()).toHaveTextContent("Loan length30 years");
+    expect(more()).toHaveTextContent("Total interest over the loan$278,012.58");
     const first = screen.getByRole("region", { name: "Your first payment" });
     expect(first).toHaveTextContent("Goes to interest$1,200.00");
     expect(first).toHaveTextContent("Lowers what you owe$238.92");
@@ -73,33 +179,42 @@ describe("Mortgage Payment Explainer page", () => {
     await fill("Home price", "250,000");
     await fill("Down payment", "12,500");
     await fill("Yearly interest rate", "7.25%");
-    await userEvent.click(screen.getByRole("button", { name: "15 years" }));
+    await setYears("15");
+    await showMore();
     await fill("Property tax for the year", "2750.50");
     await fill("Home insurance for the year", "1500.25");
     await fill("Neighborhood fee each month", "120");
     await fill("Mortgage insurance each month", "95.10");
-    const card = screen.getByLabelText("Total monthly payment");
-    expect(card).toHaveTextContent("$2,737.38");
-    expect(card).toHaveTextContent("Loan payment$2,168.05");
-    expect(card).toHaveTextContent("Property tax each month$229.21");
-    expect(card).toHaveTextContent("Home insurance each month$125.02");
-    expect(card).toHaveTextContent("Mortgage insurance each month$95.10");
+    expect(card()).toHaveTextContent("$2,737.38");
+    expect(more()).toHaveTextContent("Loan payment$2,168.05");
+    expect(more()).toHaveTextContent("Property tax each month$229.21");
+    expect(more()).toHaveTextContent("Home insurance each month$125.02");
+    expect(more()).toHaveTextContent("Mortgage insurance each month$95.10");
   });
 
   it("quick picks set the years and show which one is chosen", async () => {
     render(<Page />);
-    await userEvent.click(screen.getByRole("button", { name: "20 years" }));
-    expect(screen.getByLabelText("Years to pay it back")).toHaveValue("20");
-    expect(screen.getByRole("button", { name: "20 years" })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByRole("button", { name: "15 years" })).toHaveAttribute("aria-pressed", "false");
+    await fill("Home price", "$300,000");
+    await fill("Down payment", "$60,000");
+    await fill("Yearly interest rate", "6");
+    expect(screen.queryByLabelText("Years to pay it back")).toBeNull();
+    await userEvent.click(screen.getByRole("radio", { name: "20 years" }));
+    expect(screen.getByRole("radio", { name: "20 years" })).toBeChecked();
+    expect(screen.getByRole("radio", { name: "15 years" })).not.toBeChecked();
+    expect(screen.getByRole("radio", { name: "30 years" })).not.toBeChecked();
+    expect(more()).toHaveTextContent("Loan length20 years");
+    await userEvent.click(screen.getByRole("radio", { name: COPY.term.other }));
+    expect(screen.getByRole("radio", { name: COPY.term.other })).toBeChecked();
     await fill("Years to pay it back", "17");
-    expect(screen.getByRole("button", { name: "20 years" })).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByRole("radio", { name: "20 years" })).not.toBeChecked();
+    expect(screen.getByRole("radio", { name: COPY.term.other })).toBeChecked();
+    expect(more()).toHaveTextContent("Loan length17 years");
   });
 
   it("asks only for what is still needed", async () => {
     render(<Page />);
     await fill("Home price", "300000");
-    expect(screen.getByText(/Still needed/)).toHaveTextContent("Still needed: Down payment, Yearly interest rate, Years to pay it back.");
+    expect(screen.getByText(/Still needed/)).toHaveTextContent("Still needed: Down payment, Yearly interest rate, How long is the loan?.");
     expectWaiting();
   });
 
@@ -108,7 +223,7 @@ describe("Mortgage Payment Explainer page", () => {
     await fill("Home price", "lots");
     await fill("Down payment", "0");
     await fill("Yearly interest rate", "6");
-    await fill("Years to pay it back", "30");
+    await setYears("30");
     expect(screen.getByText(/Home price: use a number above zero/)).toBeInTheDocument();
     expect(screen.getByLabelText("Home price")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
@@ -121,14 +236,15 @@ describe("Mortgage Payment Explainer page", () => {
     await fill("Home price", "100000");
     await fill("Down payment", "100000");
     await fill("Yearly interest rate", "6");
-    await fill("Years to pay it back", "30");
+    await setYears("30");
     expect(screen.getByText("Down payment: it must be less than the home price.")).toBeInTheDocument();
   });
 
   it("says it is an estimate and explains every word", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
-    for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
+    expect(screen.getByText(COPY.notes.estimate)).toBeInTheDocument();
+    const words = within(screen.getByText(COPY.key.summary).closest("details") as HTMLElement);
+    for (const k of COPY.key.items) expect(words.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 
   it("offers to use saved numbers and brings them back", async () => {
@@ -139,58 +255,62 @@ describe("Mortgage Payment Explainer page", () => {
     expect(screen.getByText(COPY.resume.title, { exact: false })).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.yes }));
     expect(screen.getByLabelText("Home price")).toHaveValue("1200");
+    expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
   });
 
-  it("starts fresh when asked", async () => {
+  it("drops the saved copy and the prompt when the person says no thanks", async () => {
     const first = render(<Page />);
     await fill("Home price", "1200");
     first.unmount();
     render(<Page />);
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.no }));
-    expect(screen.getByLabelText("Home price")).toHaveValue("");
     expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
-  });
-
-  it("offers Save or print once there is an answer", async () => {
-    render(<Page />);
-    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
-    await fill("Home price", "130000");
-    await fill("Down payment", "10000");
-    await fill("Yearly interest rate", "0");
-    await fill("Years to pay it back", "10");
-    expect(screen.getByRole("heading", { name: "Keep your answer if you want" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
-    expect(screen.getByLabelText("Total monthly payment")).toHaveTextContent("$1,000.00");
-    expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
-  });
-});
-
-describe("Mortgage Payment Explainer first-time help", () => {
-  it("shows a waiting answer, no step labels, and the privacy line under the intro", () => {
-    render(<Page />);
-    expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
-    const intro = screen.getByText(COPY.intro);
-    const privacy = screen.getByText(/no Send button/);
-    expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(privacy.compareDocumentPosition(screen.getByLabelText("Home price", { exact: false })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(window.localStorage.getItem("nt:flow:mortgage-payment-explainer")).toBeNull();
+    expect(screen.getByLabelText("Home price")).toHaveValue("");
     expectWaiting();
   });
 
-  it("puts the cursor in the first box", () => {
+  it("shows the resume prompt only while the boxes are blank", async () => {
+    const first = render(<Page />);
+    await fill("Home price", "1200");
+    first.unmount();
     render(<Page />);
-    expect(screen.getByLabelText("Home price")).toHaveFocus();
+    expect(screen.getByText(COPY.resume.title, { exact: false })).toBeInTheDocument();
+    await fill("Home price", "7");
+    expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
   });
 
-  it("has one primary button, always in view, outside any fold", () => {
+  it("offers Print or save once there is an answer, and opens Print and Save a copy", async () => {
     render(<Page />);
-    // Nothing typed yet: the one filled button sends the person to the first box.
-    expect(screen.getByRole("button", { name: "Show my answer" })).toHaveClass("primary");
-    expect(screen.getByRole("heading", { name: "Keep your answer if you want" }).closest("details")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    await fill("Home price", "130000");
+    await fill("Down payment", "10000");
+    await fill("Yearly interest rate", "0");
+    await setYears("10");
+    expect(card()).toHaveTextContent("$1,000.00");
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveAttribute("href", "#/");
+    expect(screen.getByRole("button", { name: "Print or save" })).not.toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: "Print" })).toBeNull();
+    await userEvent.click(screen.getByRole("button", { name: "Print or save" }));
+    expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Save a copy" })).toBeEnabled();
+    expect(screen.getByText(COPY.save.preview)).toBeInTheDocument();
   });
+});
 
-  it("uses the shared privacy note with a place to check it", () => {
+describe("Mortgage Payment Explainer answer-first page", () => {
+  it("hands the one main button back from Done to See my payment when the answer goes away", async () => {
     render(<Page />);
-    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    await fillCore();
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveAttribute("href", "#/");
+    expect(screen.getByRole("button", { name: "Print or save" })).not.toHaveClass("primary");
+    await fill("Yearly interest rate", "");
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
+    expect(seeBtn()).toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
   });
 });
 
@@ -225,7 +345,7 @@ describe("mortgage-payment-explainer Start over", () => {
   it("clears the first box and the saved copy, then puts it back", async () => {
     render(<Page />);
     const box = () => screen.getAllByRole("textbox")[0];
-    await userEvent.type(box(), "1234");
+    await fill("Home price", "1234");
     expect(window.localStorage.getItem("nt:flow:mortgage-payment-explainer")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
     expect(box()).toHaveValue("1234");
@@ -242,15 +362,15 @@ describe("mortgage-payment-explainer Start over", () => {
 });
 
 describe("mortgage-payment-explainer filled screen", () => {
-  it("shows the estimate sentence once, no APR, one step 2 label, and a short save preview", async () => {
+  it("shows the estimate sentence once, no APR, and a short save preview", async () => {
     render(<Page />);
     await fillBasic();
     const body = document.body.textContent ?? "";
-    expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
-    expect(document.body.textContent!.split("That is your answer").length - 1).toBe(1);
+    expect(body.split(COPY.notes.estimate).length - 1).toBe(1);
+    await userEvent.click(screen.getByRole("button", { name: "Print or save" }));
     expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
     expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
-    const open = body.replace(/What the words mean[\s\S]*$/, "");
+    const open = (document.body.textContent ?? "").replace(/What the words mean[\s\S]*$/, "");
     expect(open).not.toMatch(/APR|HOA/);
   });
 });

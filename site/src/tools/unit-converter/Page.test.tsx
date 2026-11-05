@@ -15,18 +15,55 @@ async function fill(label: string, text: string) {
   if (text) await userEvent.type(box, text);
 }
 
+const pick = (name: string) => userEvent.click(screen.getByRole("radio", { name }));
+
 describe("Unit Converter page", () => {
-  it("shows the empty state and no answer", () => {
-    render(<Page />);
-    expect(screen.getByRole("heading", { level: 1, name: "Unit Converter" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.intro)).toBeInTheDocument();
-    expect(screen.getByLabelText("Your answer")).toHaveTextContent("Your answer shows here");
+  it("opens empty: length, inch to millimeter, no number, and only the waiting words for an answer", () => {
+    const { container } = render(<Page />);
+    expect(screen.getByRole("heading", { level: 1, name: COPY.question })).toBeInTheDocument();
+    expect(screen.getByText(COPY.title)).toBeInTheDocument();
+    expect(screen.getByLabelText("Number", { exact: false })).toHaveValue("");
+    expect(screen.getByRole("radio", { name: "Length" })).toBeChecked();
+    expect(screen.getByLabelText("Change from")).toHaveValue("inch");
+    expect(screen.getByLabelText("Change to")).toHaveValue("millimeter");
+    const card = screen.getByLabelText("Your answer");
+    expect(card).toHaveTextContent(new RegExp(`^${COPY.waiting.replace(/\./g, "\\.")}$`));
+    expect(card.querySelector(".nt-result-label")).toBeNull();
+    expect(card).toHaveAttribute("id", "nt-answer");
+    expect(card).toHaveAttribute("tabindex", "-1");
+    expect(container.querySelector(".nt-result-tag")).toBeNull();
+    expect(screen.queryByText(/example/i)).toBeNull();
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
-    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/no Send button/);
-    expect(screen.getByRole("button", { name: "Swap 'from' and 'to'" })).toBeInTheDocument();
-    expect(screen.getByLabelText("Number", { exact: false })).toHaveFocus();
-    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
     expect(screen.getByText(COPY.more.sources)).toBeInTheDocument();
+    expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
+  });
+
+  it("says it is free and sends nothing, and links the code", () => {
+    render(<Page />);
+    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+  });
+
+  it("puts the cursor nowhere on load and has a Swap button with no hint", () => {
+    render(<Page />);
+    expect(document.body).toHaveFocus();
+    expect(screen.getByRole("button", { name: COPY.swap })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Swap 'from' and 'to'" })).toBeNull();
+    expect(screen.queryByText(/swap back/i)).toBeNull();
+    expect(screen.getByText(/There is no Send button on this page/).closest(".nt-tool-trust")).not.toBeNull();
+  });
+
+  it("shows the waiting words again when the number is cleared", async () => {
+    render(<Page />);
+    await fill("Number", "12");
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent("304.8 millimeters");
+    await fill("Number", "");
+    const card = screen.getByLabelText("Your answer");
+    expect(card).toHaveTextContent(COPY.waiting);
+    expect(card.querySelector(".nt-result-label")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -35,13 +72,22 @@ describe("Unit Converter page", () => {
     const box = screen.getByLabelText("Number", { exact: false });
     expect(box).toHaveAttribute("inputmode", "decimal");
     expect(box).toHaveAttribute("autocomplete", "off");
-    for (const name of ["What are you measuring?", "Change from", "Change to"]) {
+    expect(screen.getByRole("group", { name: "What are you measuring?" })).toBeInTheDocument();
+    for (const name of ["Change from", "Change to"]) {
       expect(screen.getByLabelText(name)).toBeInTheDocument();
     }
   });
 
+  it("uses chips, not a select, for the kind", () => {
+    render(<Page />);
+    expect(screen.getAllByRole("radio").map((r) => (r as HTMLInputElement).value)).toEqual(["length", "weight", "volume", "temperature", "speed"]);
+    expect(screen.getAllByRole("combobox")).toHaveLength(2);
+    expect(screen.getAllByRole("radio").filter((r) => (r as HTMLInputElement).checked)).toHaveLength(1);
+  });
+
   it("shows the exact answer as the person types", async () => {
     render(<Page />);
+    await pick("Length");
     await fill("Number", "12");
     const card = screen.getByLabelText("Your answer");
     expect(card).toHaveTextContent("304.8 millimeters");
@@ -50,23 +96,25 @@ describe("Unit Converter page", () => {
 
   it("changes kind, swaps the two units and counts commas", async () => {
     render(<Page />);
-    await userEvent.selectOptions(screen.getByLabelText("What are you measuring?"), "temperature");
+    await pick("Temperature");
+    expect(screen.getByRole("radio", { name: "Temperature" })).toBeChecked();
     await fill("Number", "98.6");
     expect(screen.getByLabelText("Your answer")).toHaveTextContent("37 degrees Celsius");
     await userEvent.click(screen.getByRole("button", { name: COPY.swap }));
-    expect(screen.getByText(COPY.swapped)).toBeInTheDocument();
+    expect(screen.getByLabelText("Change from")).toHaveValue("celsius");
+    expect(screen.getByLabelText("Change to")).toHaveValue("fahrenheit");
     expect(screen.getByLabelText("Your answer")).toHaveTextContent("209.48 degrees Fahrenheit");
-    await userEvent.selectOptions(screen.getByLabelText("What are you measuring?"), "volume");
+    await pick("Volume");
     await fill("Number", "1,000");
     expect(screen.getByLabelText("Your answer")).toHaveTextContent("236,588 milliliters");
   });
 
   it("allows a minus sign for temperature only", async () => {
     render(<Page />);
-    await userEvent.selectOptions(screen.getByLabelText("What are you measuring?"), "temperature");
+    await pick("Temperature");
     await fill("Number", "-40");
     expect(screen.getByLabelText("Your answer")).toHaveTextContent("-40 degrees Celsius");
-    await userEvent.selectOptions(screen.getByLabelText("What are you measuring?"), "length");
+    await pick("Length");
     expect(screen.getByText(/Number: use zero or more/)).toBeInTheDocument();
   });
 
@@ -76,7 +124,7 @@ describe("Unit Converter page", () => {
     expect(screen.getByText(/Number: use digits like 12 or 3.5/)).toBeInTheDocument();
     expect(screen.getByLabelText("Number", { exact: false })).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
-    expect(screen.getByLabelText("Your answer")).toHaveTextContent("Your answer shows here");
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent(COPY.waiting);
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
@@ -95,7 +143,7 @@ describe("Unit Converter page", () => {
     expect(screen.getByLabelText("Number", { exact: false })).toHaveValue("77");
   });
 
-  it("starts fresh when asked", async () => {
+  it("keeps the boxes blank when the person says No thanks to saved numbers", async () => {
     const first = render(<Page />);
     await fill("Number", "77");
     first.unmount();
@@ -103,15 +151,48 @@ describe("Unit Converter page", () => {
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.no }));
     expect(screen.getByLabelText("Number", { exact: false })).toHaveValue("");
     expect(screen.queryByText(COPY.resume.title, { exact: false })).toBeNull();
+    expect(window.localStorage.getItem("nt:flow:unit-converter")).toBeNull();
   });
 
-  it("offers Save or print once there is an answer", async () => {
-    render(<Page />);
-    expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
-    await fill("Number", "1");
+  it("has one filled button while there is no answer: See my answer, which puts the cursor in the empty number box", async () => {
+    const { container } = render(<Page />);
+    expect(container.querySelectorAll(".primary")).toHaveLength(1);
+    const see = screen.getByRole("button", { name: COPY.see });
+    expect(COPY.see).toBe("See my answer");
+    expect(see).toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
+    await userEvent.click(see);
+    expect(screen.getByLabelText("Number", { exact: false })).toHaveFocus();
+    expect(container.querySelector(".nt-tool-inputs input.nt-field-input")).toBe(screen.getByLabelText("Number", { exact: false }));
+  });
+
+  it("with an answer, Done is the one filled link, Print or save is an outline that opens the sheet, and the See button is gone", async () => {
+    const { container } = render(<Page />);
+    await fill("Number", "2");
+    expect(container.querySelectorAll(".primary")).toHaveLength(1);
+    const done = screen.getByRole("link", { name: "Done. Back to home." });
+    expect(done).toHaveClass("primary");
+    expect(done).toHaveAttribute("href", "#/");
+    const main = screen.getByRole("button", { name: "Print or save" });
+    expect(main).toHaveClass("nt-finish-save");
+    expect(main).not.toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: COPY.see })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Go up to my answer" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Print" })).toBeNull();
+    await userEvent.click(main);
+    expect(main).toHaveAttribute("aria-expanded", "true");
     expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
     expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
+    expect(container.querySelectorAll(".primary")).toHaveLength(1);
+  });
+
+  it("shows a quiet Start over with its undo note as soon as anything is typed", async () => {
+    render(<Page />);
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    await fill("Number", "lots");
+    expect(screen.getByLabelText("Your answer")).toHaveTextContent(COPY.waiting);
+    expect(screen.getByRole("button", { name: "Start over" })).toBeInTheDocument();
+    expect(screen.getByText("You can put your numbers back.")).toBeInTheDocument();
   });
 });
 
@@ -143,6 +224,7 @@ describe("unit-converter Start over", () => {
   it("clears the first box and the saved copy, then puts it back", async () => {
     render(<Page />);
     const box = () => screen.getAllByRole("textbox")[0];
+    await userEvent.clear(box());
     await userEvent.type(box(), "1234");
     expect(window.localStorage.getItem("nt:flow:unit-converter")).not.toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));

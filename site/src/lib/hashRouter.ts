@@ -6,6 +6,8 @@ export type Route =
   | { name: "install" }
   | { name: "research" }
   | { name: "harness" }
+  | { name: "coming" }
+  | { name: "private" }
   | { name: "tool"; id: string }
   | { name: "notfound"; path: string };
 
@@ -27,6 +29,8 @@ export function parseHash(hash: string): Route {
   if (path === "/install") return { name: "install" };
   if (path === "/research") return { name: "research" };
   if (path === "/harness") return { name: "harness" };
+  if (path === "/coming") return { name: "coming" };
+  if (path === "/private") return { name: "private" };
   const m = /^\/tools\/([A-Za-z0-9-]+)$/.exec(path);
   if (m) return { name: "tool", id: m[1] };
   return { name: "notfound", path };

@@ -23,11 +23,15 @@ export type FieldProps = {
   extra?: ReactNode;
   /** Puts the cursor here when the page opens. Use on the first box only. */
   autoFocus?: boolean;
+  /** Words read before the label by a screen reader but not shown, like "Offer 1:". */
+  hiddenPrefix?: string;
+  /** Keeps the label for screen readers but does not show it. For rows under shown column names. */
+  hideLabel?: boolean;
 };
 
 /** The base field the others wrap: label above, one text box, hint and error below. */
 export function Field({
-  label, value, onChange, hint, error, optional, placeholder, prefix, suffix, inputMode = "decimal", id, extra, autoFocus,
+  label, value, onChange, hint, error, optional, placeholder, prefix, suffix, inputMode = "decimal", id, extra, autoFocus, hiddenPrefix, hideLabel,
 }: FieldProps) {
   const auto = useId();
   const inputId = id ?? auto;
@@ -36,7 +40,8 @@ export function Field({
   const described = [hint ? hintId : "", error ? errId : ""].filter(Boolean).join(" ") || undefined;
   return (
     <div className="nt-field">
-      <label className="nt-field-label" htmlFor={inputId}>
+      <label className={hideLabel ? "nt-field-label nt-sr-only" : "nt-field-label"} htmlFor={inputId}>
+        {hiddenPrefix ? <span className="nt-sr-only">{`${hiddenPrefix} `}</span> : null}
         {label}
         {optional ? <span className="nt-field-optional"> (optional)</span> : null}
       </label>

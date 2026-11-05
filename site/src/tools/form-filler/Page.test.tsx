@@ -57,28 +57,29 @@ describe("Form Filler first screen", () => {
     expect(screen.getByText("Are you filing this year's taxes?")).toBeInTheDocument();
     expect(screen.getByLabelText("Yes")).toHaveFocus();
     expect(primaries()).toBe(1);
-    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
+    expect(screen.queryByText(/no Send button/)).toBeNull();
     expect(screen.getAllByRole("link", { name: COPY.sources.freeFile })[0]).toHaveAttribute("href", "https://www.irs.gov/filing/irs-free-file-do-your-taxes-for-free");
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 });
 
 describe("Form Filler reader fixes", () => {
-  it("shows no file box on the first screen until asked, and puts the privacy line under the intro", async () => {
+  it("shows no file box on the first screen until asked, and no privacy line under the intro", async () => {
     render(<Page />);
     expect(document.querySelector('input[type="file"]')).toBeNull();
     const intro = screen.getByText(/This page never files for you\./);
-    expect(intro.nextElementSibling).toHaveTextContent(/no Send button/);
-    expect(document.querySelectorAll(".nt-privacy")).toHaveLength(1);
+    expect(intro.nextElementSibling).not.toHaveTextContent(/no Send button/);
+    expect(document.querySelectorAll(".nt-privacy")).toHaveLength(0);
     await userEvent.click(screen.getByRole("button", { name: "Have saved answers?" }));
     expect(screen.getByLabelText("Open my saved answers")).toBeInTheDocument();
   });
 
-  it("says Free File opens again in January 2027 with a source, and shows privacy on every screen", async () => {
+  it("says Free File opens again in January 2027 with a source, and shows no privacy note on any screen", async () => {
     render(<Page />);
     expect(screen.getByText(/Free File opens again in January 2027\. You can fill this in now and use it then\./)).toBeInTheDocument();
     for (let i = 0; i < 14; i++) {
-      expect(document.querySelector(".nt-privacy"), `screen ${i + 1}`).not.toBeNull();
+      expect(document.querySelector(".nt-privacy"), `screen ${i + 1}`).toBeNull();
+      expect(screen.queryByText(/no Send button/), `screen ${i + 1}`).toBeNull();
       await next();
     }
   });
@@ -268,9 +269,9 @@ describe("Form Filler review", () => {
     expect(screen.getByText(/The file stays where you save it\./)).toBeInTheDocument();
   });
 
-  it("says the privacy note once, has no unnamed button, and says what the sheet is for", async () => {
+  it("shows no privacy note, has no unnamed button, and says what the sheet is for", async () => {
     await toReview();
-    expect(screen.getAllByText(/no Send button/)).toHaveLength(1);
+    expect(screen.queryByText(/no Send button/)).toBeNull();
     for (const b of screen.getAllByRole("button")) expect(b.textContent!.trim().length, b.outerHTML).toBeGreaterThan(0);
     expect(screen.getByText("Your answer sheet is a list to read from when you type your answers in at IRS.gov/freefile.")).toBeInTheDocument();
     const way = screen.getByText(/Guided Free File asks simple questions, one at a time\. The software does the math\./, { selector: "p" });

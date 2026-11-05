@@ -1,46 +1,27 @@
 Screen: mortgage-payment-explainer, empty state, phone 390px wide. Order is top to bottom. Nothing is typed yet.
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
-The first box has the cursor in it and a bright outline: that is where to start typing.
 
-[heading 1] Mortgage Payment Explainer
-Type the numbers for a home loan. Your answer shows below.
-There is no Send button on this page.
+
+Mortgage Payment Explainer
+[heading 1] What will my house payment be?
+There is no Send button on this page. How we know
+[link, plain] How we know
+Type your numbers to see your monthly payment.
 [label] Home price
-On your sales paper or the listing. It is what the home costs. For example: 300000.
-[box] Home price = "" (cursor is here)
+What the home costs.
+[box] Home price = ""
 [label] Down payment
-Money you pay at the start, in dollars. It makes the loan smaller. Type 0 if none. For example: 60000.
+Money you pay at the start. Type 0 if none.
 [box] Down payment = ""
 [label] Yearly interest rate
-On your loan paper. Look for the words 'interest rate'. It is a percent. Type 0 if there is none. For example: 6.5.
+On your loan papers, as a percent.
 [box] Yearly interest rate = ""
-[label] Years to pay it back
-On your loan paper, as years. You can type any number of years. For example: 30.
-[box] Years to pay it back = ""
-[plain button, outline only] 15 years
-[plain button, outline only] 20 years
-[plain button, outline only] 30 years
-[label] Property tax for the year (optional)
-On your tax bill. Look for the words 'property tax'. Leave it empty if none. For example: 3600.
-[box] Property tax for the year (optional) = ""
-[label] Home insurance for the year (optional)
-On your insurance paper. Look for the price for the year. Leave it empty if none. For example: 1200.
-[box] Home insurance for the year (optional) = ""
-[label] Neighborhood fee each month (optional)
-A fee some neighborhoods charge each month. Ask the neighborhood group. Leave it empty if none. For example: 50.
-[box] Neighborhood fee each month (optional) = ""
-[label] Mortgage insurance each month (optional)
-Only if your loan adds it. On your loan paper, look for 'mortgage insurance'. Leave it empty if none. For example: 95.
-[box] Mortgage insurance each month (optional) = ""
-Total monthly payment
-Your answer shows here
-[MAIN BUTTON, filled dark orange] Show my answer
-[heading 2] Keep your answer if you want
-[plain button, outline only, disabled] Print
-[plain button, outline only, disabled] Save a copy
-They work after you type your numbers.
-Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
-
-This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.
+[question] How long is the loan?
+[choice] 15 years 
+[choice] 20 years 
+[choice] 30 years 
+[choice] Other 
+[plain button, outline only] Add tax, insurance and fees, if you know them
+[MAIN BUTTON, filled dark orange] See my payment
 [closed section, tap to open] What the words mean
-
+This is an estimate. Your lender statement has the final numbers.

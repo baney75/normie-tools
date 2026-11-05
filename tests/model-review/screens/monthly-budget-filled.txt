@@ -2,68 +2,48 @@ Screen: monthly-budget, filled state, phone 390px wide. Order is top to bottom. 
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
 
 
-[heading 1] Monthly Budget
-Type what you get and what you spend each month. Your answer shows below.
-There is no Send button on this page.
-[heading 2] Money in each month
-Remove asks first and shows which line goes. Put it back undoes it.
-[label] Name of income item 1
-[box] Name of income item 1 = "Pay"
-[label] Pay, per month
-[box] Pay, per month = "3000"
-[plain button, outline only] Remove Pay
-[plain button, outline only] Add an income item
-[heading 2] Money out each month
-Remove asks first and shows which line goes. Put it back undoes it.
-[label] Name of spending item 1
-[box] Name of spending item 1 = "Rent or mortgage"
-[label] Rent or mortgage, per month
-[box] Rent or mortgage, per month = "1200"
-[plain button, outline only] Remove Rent or mortgage
-[label] Name of spending item 2
-[box] Name of spending item 2 = "Food"
-[label] Food, per month
-[box] Food, per month = "450"
-[plain button, outline only] Remove Food
-[label] Name of spending item 3
-[box] Name of spending item 3 = "Bills"
-[label] Bills, per month
-[box] Bills, per month = "300"
-[plain button, outline only] Remove Bills
-[label] Name of spending item 4
-[box] Name of spending item 4 = "Transport"
-[label] Transport, per month
-[box] Transport, per month = "250"
-[plain button, outline only] Remove Transport
-[label] Name of spending item 5
-[box] Name of spending item 5 = "Other"
-[label] Other, per month
-[box] Other, per month = "100"
-[plain button, outline only] Remove Other
-[plain button, outline only] Add a spending item
-[plain button, outline only] Start over
-Start over asks first, and you can undo it right after.
-Left over
+Monthly Budget
+[heading 1] Where does my money go each month?
+There is no Send button on this page. How we know
+[link, plain] How we know
+Left over each month
 $700.00
 This is money in that is not spent.
 Total income
 $3,000.00
 Total spending
 $2,300.00
-That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
+That is your answer. You can stop here, or change a number to try again. Your numbers stay.
 [MAIN LINK, filled dark orange] Done. Back to home.
-[plain button, outline only] Change a number
+[plain button, outline only] Print or save
+[heading 2] Money in each month
+[box] Name of income item 1 = "Pay"
+[box] Pay, per month = "3000"
+[plain button, outline only] Remove Pay
+[plain button, outline only] Add an income item
+[heading 2] Money out each month
+[box] Name of spending item 1 = "Rent or mortgage"
+[box] Rent or mortgage, per month = "1200"
+[plain button, outline only] Remove Rent or mortgage
+[box] Name of spending item 2 = "Food"
+[box] Food, per month = "450"
+[plain button, outline only] Remove Food
+[box] Name of spending item 3 = "Bills"
+[box] Bills, per month = "300"
+[plain button, outline only] Remove Bills
+[box] Name of spending item 4 = "Transport"
+[box] Transport, per month = "250"
+[plain button, outline only] Remove Transport
+[box] Name of spending item 5 = "Other"
+[box] Other, per month = "100"
+[plain button, outline only] Remove Other
+[plain button, outline only] Add a spending item
+Remove asks first, and you can put the line back.
+[closed section, tap to open] More options
 [heading 2] Where it goes
 Rent or mortgage $1,200.00, 40.0% of income
 Food $450.00, 15.0% of income
 Bills $300.00, 10.0% of income
 Transport $250.00, 8.3% of income
 Other $100.00, 3.3% of income
-[closed section, tap to open] Show the numbers in a table
-
-[heading 2] Keep your answer if you want
-Your answer above, on paper or saved on this phone or computer.
-[plain button, outline only] Print
-[plain button, outline only] Save a copy
-Save a copy shows what goes in the file first, and you can delete the file any time to undo. Print opens a preview. Close the print box without printing to cancel.
-
+[closed section, tap to open] See all the numbers

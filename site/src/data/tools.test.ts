@@ -28,6 +28,13 @@ describe("TOOLS", () => {
       expect(typeof t.takesFiles).toBe("boolean");
     }
   });
+  it("every shipped tool has a plain question and a named icon that is not the generic wrench", () => {
+    for (const t of TOOLS.filter((x) => x.status === "shipped")) {
+      expect(t.question, t.id).toMatch(/\S/);
+      expect(t.icon, t.id).toMatch(/\S/);
+      expect(t.icon, t.id).not.toBe("wrench");
+    }
+  });
   it("has routes under /tools/", () => {
     for (const t of TOOLS) for (const r of t.routes) expect(r.startsWith("/tools/")).toBe(true);
   });

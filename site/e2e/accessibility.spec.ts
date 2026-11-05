@@ -1,6 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { PHONE } from "./viewports";
+import { shippedTools } from "./shipped";
 
 test.use({ viewport: { width: PHONE.width, height: PHONE.height } });
 
@@ -9,6 +10,10 @@ const PAGES = [
   { name: "agents", hash: "#/agents" },
   { name: "install", hash: "#/install" },
   { name: "demo flow", hash: "#/harness" },
+  { name: "coming", hash: "#/coming" },
+  { name: "private", hash: "#/private" },
+  // Every shipped tool opens with example numbers and an answer, so the answer card is scanned too.
+  ...shippedTools().map((t) => ({ name: t.id, hash: t.hash })),
 ];
 
 for (const p of PAGES) {
@@ -21,3 +26,8 @@ for (const p of PAGES) {
     expect(result.violations.map((v) => `${v.id}: ${v.help} (${v.nodes.length})`)).toEqual([]);
   });
 }
+
+test("#/private loads with its title as the h1", async ({ page }) => {
+  await page.goto("#/private");
+  await expect(page.getByRole("heading", { level: 1, name: "Your numbers stay with you" })).toBeVisible();
+});

@@ -2,7 +2,7 @@
    Wide containers (min-width 60rem on the wrapper): shown as an always-open side panel. */
 .nt-where { container-type: inline-size; font-family: var(--nt-font-text); color: var(--nt-text); }
 .nt-where-details > summary { min-height: var(--nt-tap); display: flex; align-items: center; cursor: pointer; font-family: var(--nt-font-display); }
-.nt-where-details > summary:focus-visible, .nt-where button:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-where-details > summary:focus-visible, .nt-where button:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 .nt-where-list { list-style: none; margin: 0; padding: 0; }
 .nt-where-item { display: flex; flex-wrap: wrap; align-items: center; gap: var(--nt-space-2); padding: var(--nt-space-2) 0; border-bottom: 1px solid var(--nt-line); }
 .nt-where-label { font-weight: 700; min-width: 3.5rem; color: var(--nt-muted); }

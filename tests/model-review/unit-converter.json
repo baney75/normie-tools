@@ -8,16 +8,16 @@
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 4,
+    "score": 3,
     "runs": [
       4,
-      4,
-      4,
-      4,
-      4
+      3,
+      3,
+      3,
+      3
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to read my answer, 5000 inches is 127,000 millimeters, and then either finish or change a number.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"menu\" (I only know it from restaurants)\n- \"Tap a box with a list\"\n- \"Swap 'from' and 'to'\"\n- \"rounded to 6 digits\"\n- \"Save a copy\" and \"the file\"\n- \"what goes in the file\"\n- \"Print opens a preview\"\n- \"Close the print box\"\n- \"Show the facts used\" (which facts?)\n- \"There is no Send button on this page\" (I never thought there would be one, so now I wonder if I missed something)\n- \"Back to home\" (which home?)\n\n4. Things that made me worry:\n- \"Done. Back to home\" might wipe my answer. It says \"Your numbers stay,\" but I'm not sure that covers leaving the page.\n- \"Start over\" sounds like it could erase everything. It says it asks first, but I'd still be nervous.\n- \"Save a copy\" puts a file on my phone, and I don't know where it goes or whether I could find it again.\n- \"Print\" might start printing or cost paper. It says I can cancel, but \"preview\" and \"print box\" are unfamiliar.\n- \"Show the facts used\" is closed, and I don't know what it will reveal.\n- Nothing mentions money, but nothing says it's free either.\n\n5. I would skip:\n- \"There is no Send button on this page.\"\n- \"Swap 'from' and 'to'\" and its note\n- The \"Keep your answer if you want\" section with Print and Save a copy\n- \"Show the facts used\"\n- \"A long answer is rounded to 6 digits.\" My answer isn't long.\n\n6. Score: 4\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"menu\", \"Tap a box with a list\", \"Swap 'from' and 'to'\", \"rounded to 6 digits\", \"Save a copy\", \"file\", \"Print opens a preview\", \"Close the print box\", \"Show the facts used\", \"There is no Send button on this page\", \"Back to home\"], \"worries\": [\"Done. Back to home might lose my answer\", \"Start over might erase everything\", \"Save a copy puts a file on my phone and I don't know where\", \"Print might start printing or cost paper\", \"Show the facts used is unknown\", \"No mention of whether it is free\"], \"skippable\": [\"There is no Send button on this page\", \"Swap 'from' and 'to'\", \"Keep your answer if you want section (Print, Save a copy)\", \"Show the facts used\", \"A long answer is rounded to 6 digits\"], \"score\": 4}"
+    "output": "1. This screen wants me to look at my answer (127,000 millimeters) and then either stop or change a number to try again.\n\n2. I would tap **Done. Back to home.**\n\n3. Words I didn't understand or that felt like tech talk:\n- \"How we know\" (know what? It's next to \"There is no Send button on this page,\" which is an odd thing to say)\n- \"rounded to 6 digits\"\n- \"Swap\"\n- \"More options\"\n- \"Show the facts used\"\n- \"Print or save\" (save where?)\n- \"Your numbers stay\" (stay where?)\n- \"Change from\" / \"Change to\" (I'd say \"convert\")\n- The \"(in)\", \"(mm)\" and \"(ft)\" short forms\n- \"MAIN LINK\"\n\n4. Worries:\n- \"There is no Send button on this page\" made me wonder if something was being sent somewhere, and why they brought it up.\n- \"Your numbers stay\" made me wonder if they are saving what I typed.\n- \"Print or save\" made me wonder if saving costs something or puts my numbers somewhere.\n- \"Done. Back to home.\" might wipe my answer. I haven't written it down.\n- I'm not sure \"More options\" isn't a paid extra.\n- I don't know if I picked the right units, so I can't tell if 127,000 is right. I typed 5000, and I'm not sure inches was what I meant.\n\n5. I would skip:\n- \"There is no Send button on this page. How we know\"\n- \"A long answer is rounded to 6 digits.\"\n- \"More options\"\n- \"Show the facts used\"\n\n6. Score: 3. The answer is plain to see, but the orange \"Done\" button might lose it, and the line about the Send button threw me.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"How we know\", \"rounded to 6 digits\", \"Swap\", \"More options\", \"Show the facts used\", \"Print or save\", \"Your numbers stay\", \"Change from / Change to\", \"(in) (mm) abbreviations\", \"MAIN LINK\"], \"worries\": [\"No Send button line made me wonder if data is sent\", \"Your numbers stay - are they saved somewhere\", \"Print or save - cost or where it goes\", \"Done may lose my answer\", \"More options may cost money\", \"unsure the units I picked are right\"], \"skippable\": [\"There is no Send button on this page. How we know\", \"A long answer is rounded to 6 digits.\", \"More options\", \"Show the facts used\"], \"score\": 3}"
   },
   "designRubric": [
     {
@@ -50,14 +50,14 @@
           ]
         },
         {
-          "passes": 7,
+          "passes": 8,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "FAIL",
+            "PASS",
             "PASS",
             "PASS"
           ]
@@ -194,16 +194,16 @@
       "screen": "empty",
       "firstTimeUser": {
         "model": "sonnet",
-        "score": 4,
+        "score": 3,
         "runs": [
+          3,
+          3,
           4,
           4,
-          4,
-          4,
-          4
+          3
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to pick what I'm measuring, type a number, and then tap the button to see the converted answer.\n\n2. I would tap the box labeled \"Number\" and type a number. After that I'd tap \"Show my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"menu\" (I'd just think of it as a box with a list)\n- \"Swap 'from' and 'to'\" (I can guess it flips the two units, but it's a little odd)\n- \"Save a copy\" (a copy of what, and where does it go?)\n- \"the file\" (what file?)\n- \"Show the facts used\" (which facts?)\n- \"disabled\" isn't written, but the Print and Save a copy buttons look greyed out and I wouldn't know why until I read the small print\n- \"Print opens a preview\" and \"Close the print box\" (what is a print box?)\n- \"Commas are fine\" (a bit confusing at first)\n- \"There is no Send button on this page.\" (odd to say, since I wasn't looking for one)\n\n4. Worries:\n- \"Save a copy\" makes a file. I'm not sure where it goes on my phone, and I worry about clutter or something I can't find.\n- \"Show the facts used\": I'm not sure whether it asks for anything or shares anything.\n- \"There is no Send button\" makes me wonder whether something gets sent somewhere.\n- The Print and Save buttons are greyed out, so I worry I did something wrong until I read that they work after I type.\n- Nothing mentions cost, which is a relief, but it also doesn't say outright that this is free.\n\n5. I would skip:\n- \"There is no Send button on this page.\"\n- The whole \"Keep your answer if you want\" part (Print and Save a copy) until I have an answer.\n- \"Show the facts used.\"\n- The \"Swap 'from' and 'to'\" button, at first.\n\n6. Score: 4. The cursor is already in the Number box, and there is one bright orange button. I'm only a little unsure whether to pick from the lists first.\n\nRESULT: {\"next_tap\": \"Number\", \"confusing_terms\": [\"menu\", \"Swap 'from' and 'to'\", \"Save a copy\", \"the file\", \"Show the facts used\", \"print box\", \"preview\", \"There is no Send button\"], \"worries\": [\"Save a copy makes a file and I don't know where it goes\", \"Show the facts used might share something\", \"No Send button line makes me wonder if something is sent\", \"Print and Save buttons look greyed out so I think I did something wrong\", \"Cost is never mentioned\"], \"skippable\": [\"There is no Send button on this page.\", \"Keep your answer if you want section\", \"Show the facts used\", \"Swap 'from' and 'to'\"], \"score\": 4}"
+        "output": "1. This screen wants me to pick what I'm measuring, type a number, and get a converted answer.\n\n2. I would tap \"See my answer\". (First I'd have to type in the Number box, but that button is the one that stands out.)\n\n3. Words I didn't understand or that felt like tech talk:\n- \"How we know\". It's a link, and I can't tell what it leads to.\n- \"There is no Send button on this page\". I didn't know why it was telling me that.\n- \"Show the facts used\". I don't know which facts, or what they're used for.\n- \"Swap\". I'd guess it flips the two units, but I'm not sure.\n- \"Change from\" and \"Change to\". They're a bit odd. \"Convert\" would be more familiar.\n- \"[menu]\". I don't know that the units are a list I have to tap to pick from.\n- \"Millimeters (mm)\". I don't know what that is, and it's already filled in for me.\n\n4. What made me worry:\n- \"There is no Send button on this page\" makes me wonder what would be sent, and to whom. It makes me think about privacy.\n- \"How we know\" and \"Show the facts used\" make me wonder whether I'm being tracked or whether it's a trick.\n- I'm not sure whether tapping \"See my answer\" costs anything or signs me up for something.\n- Millimeters is already chosen, and I didn't choose it. I might get an answer I didn't want.\n\n5. What I would skip:\n- \"There is no Send button on this page. How we know\".\n- \"Show the facts used\".\n- The \"Swap\" button, until I need it.\n\n6. Score: 3. I can see the main button, but I'm not sure I should tap it before typing a number. The line \"Type a number to see your answer\" helps.\n\nRESULT: {\"next_tap\": \"See my answer\", \"confusing_terms\": [\"How we know\", \"There is no Send button on this page\", \"Show the facts used\", \"Swap\", \"Change from\", \"Change to\", \"menu\", \"Millimeters (mm)\"], \"worries\": [\"what 'no Send button' means for privacy\", \"being tracked or tricked by 'How we know' and 'Show the facts used'\", \"unsure if tapping See my answer costs anything\", \"Millimeters already chosen for me\"], \"skippable\": [\"There is no Send button on this page. How we know\", \"Show the facts used\", \"Swap\"], \"score\": 3}"
       },
       "designRubric": [
         {
@@ -223,7 +223,7 @@
           "fails": [],
           "runs": [
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -232,7 +232,7 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             },
             {
@@ -249,10 +249,10 @@
               ]
             },
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
-                "PASS",
+                "FAIL",
                 "PASS",
                 "PASS",
                 "PASS",
@@ -288,7 +288,7 @@
               ]
             }
           ],
-          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"FAIL\", \"fails\": [\"rule8: The heading says \\\"Change cups, inches, pounds and more\\\", but the visible Length menus list only length units. Cups and pounds do not appear anywhere on the page, so the claim has no source here.\"], \"score\": 7}"
         },
         {
           "model": "sonnet",

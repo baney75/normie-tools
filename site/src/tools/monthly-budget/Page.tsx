@@ -1,8 +1,7 @@
 import { useState } from "react";
+import { X } from "lucide-react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { amountText, ErrorNote, Field, MoneyField, PrivacyNote, RemoveAsk, ResultCard, StartOver } from "../../components/calc";
-import { SavePrintSheet } from "../../components/SavePrintSheet";
-import { ScreenFrame } from "../../components/ScreenFrame";
+import { amountText, ErrorNote, Field, MoneyField, RemoveAsk, ResultCard, Finish, SeeAnswer, StartOver, ToolLayout } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { formatMoney, MAX_ROWS, planBudget } from "../../../../tools/monthly-budget/calc.mjs";
 import { COPY } from "./copy";
@@ -77,137 +76,145 @@ export function Page() {
   const bad = (field: string) => problems.find((p: { field: string }) => p.field === field)?.message as string | undefined;
   const pristine = JSON.stringify(v) === START;
 
+  const good = result.ok && result.hasAmounts ? result : null;
+
   return (
-    <ScreenFrame title={COPY.title} as="div" reserve="0">
-      <div className="nt-budget">
-        <p className="nt-budget-intro">{COPY.intro}</p>
-        <PrivacyNote />
+    <ToolLayout
+      name={COPY.title}
+      question={COPY.question}
+      answer={<Answer result={good} />}
+      actions={good ? <Save result={good} /> : null}
+      below={good ? <Details result={good} /> : null}
+    >
+      {flow.hasSaved && pristine ? (
+        <div className="nt-budget-status">
+          <CalmMessage
+            tone="info"
+            title={COPY.resume.title}
+            actions={[
+              { label: COPY.resume.yes, onClick: flow.restore },
+              { label: COPY.resume.no, onClick: flow.clear },
+            ]}
+          >
+            {COPY.resume.body}
+          </CalmMessage>
+        </div>
+      ) : null}
 
-        {flow.hasSaved && pristine ? (
-          <div className="nt-budget-status">
-            <CalmMessage
-              tone="info"
-              title={COPY.resume.title}
-              actions={[
-                { label: COPY.resume.yes, onClick: flow.restore },
-                { label: COPY.resume.no, onClick: flow.clear },
-              ]}
-            >
-              {COPY.resume.body}
-            </CalmMessage>
-          </div>
-        ) : null}
-
-        <form className="nt-budget-form" onSubmit={(e) => e.preventDefault()} noValidate>
-          {(["income", "expenses"] as const).map((kind) => {
-            const c = kind === "income" ? COPY.income : COPY.spending;
-            const askIndex = asking && asking.kind === kind ? v[kind].findIndex((l) => l.id === asking.id) : -1;
-            return (
-              <section key={kind} className="nt-budget-list" aria-label={c.heading}>
-                <h2>{c.heading}</h2>
-                <p className="nt-budget-help">{COPY.removeHint}</p>
-                {v[kind].map((l, i) => {
-                  const label = shown(l, c.fallback, i);
-                  return (
-                    <div key={l.id} className="nt-budget-row">
-                      <Field
-                        label={`${c.nameLabel} ${i + 1}`}
-                        inputMode="text"
-                        value={l.name}
-                        placeholder={c.fallback}
-                        onChange={(t) => change(kind, l.id, { name: t })}
-                      />
-                      <MoneyField
-                        label={`${label}, ${COPY.amount.suffix}`}
-                        autoFocus={kind === "income" && i === 0}
-                        value={l.amount}
-                        onChange={(t) => change(kind, l.id, { amount: t })}
-                        error={bad(`${kind}.${i}`)}
-                      />
-                      <button type="button" className="nt-budget-remove" aria-label={`${COPY.remove} ${label}`} onClick={() => setAsking({ kind, id: l.id })}>
-                        {COPY.remove}
-                      </button>
-                    </div>
-                  );
-                })}
-                {askIndex >= 0 ? (
-                  <RemoveAsk
-                    what={`${shown(v[kind][askIndex], c.fallback, askIndex)}, ${amountText(v[kind][askIndex].amount)}`}
-                    onRemove={() => remove(kind, v[kind][askIndex].id)}
-                    onKeep={() => setAsking(null)}
-                  />
-                ) : null}
-                {undo && undo.kind === kind ? (
-                  <p className="nt-budget-help">
-                    <button type="button" className="nt-budget-add" onClick={putBack}>
-                      {COPY.undo}
-                    </button>{" "}
-                    {COPY.undoHelp}
-                  </p>
-                ) : null}
-                {v[kind].length < MAX_ROWS ? (
-                  <button type="button" className="nt-budget-add" onClick={() => add(kind)}>
-                    {c.add}
+      <form className="nt-budget-form" onSubmit={(e) => e.preventDefault()} noValidate>
+        {(["income", "expenses"] as const).map((kind) => {
+          const c = kind === "income" ? COPY.income : COPY.spending;
+          const askIndex = asking && asking.kind === kind ? v[kind].findIndex((l) => l.id === asking.id) : -1;
+          return (
+            <section key={kind} className="nt-budget-list" aria-label={c.heading}>
+              <h2>{c.heading}</h2>
+              <div className="nt-budget-cols" aria-hidden="true">
+                <span>{COPY.columns.name}</span>
+                <span>{COPY.columns.amount}</span>
+              </div>
+              {v[kind].map((l, i) => {
+                const label = shown(l, c.fallback, i);
+                return (
+                  <div key={l.id} className="nt-budget-row">
+                    <Field
+                      hideLabel
+                      label={`${c.nameLabel} ${i + 1}`}
+                      inputMode="text"
+                      value={l.name}
+                      placeholder={c.fallback}
+                      onChange={(t) => change(kind, l.id, { name: t })}
+                    />
+                    <MoneyField
+                      hideLabel
+                      label={`${label}, ${COPY.amount.suffix}`}
+                      value={l.amount}
+                      onChange={(t) => change(kind, l.id, { amount: t })}
+                      error={bad(`${kind}.${i}`)}
+                    />
+                    <button type="button" className="nt-budget-remove" aria-label={`${COPY.remove} ${label}`} onClick={() => setAsking({ kind, id: l.id })}>
+                      <X aria-hidden="true" focusable="false" size={20} />
+                    </button>
+                  </div>
+                );
+              })}
+              {askIndex >= 0 ? (
+                <RemoveAsk
+                  what={`${shown(v[kind][askIndex], c.fallback, askIndex)}, ${amountText(v[kind][askIndex].amount)}`}
+                  onRemove={() => remove(kind, v[kind][askIndex].id)}
+                  onKeep={() => setAsking(null)}
+                />
+              ) : null}
+              {undo && undo.kind === kind ? (
+                <p className="nt-budget-help">
+                  {COPY.undoHelp}{" "}
+                  <button type="button" className="nt-more-btn" onClick={putBack}>
+                    {COPY.undo}
                   </button>
-                ) : (
-                  <p className="nt-budget-help">{COPY.full}</p>
-                )}
-              </section>
-            );
-          })}
-        </form>
+                </p>
+              ) : null}
+              {v[kind].length < MAX_ROWS ? (
+                <button type="button" className="nt-more-btn" onClick={() => add(kind)}>
+                  {c.add}
+                </button>
+              ) : (
+                <p className="nt-budget-help">{COPY.full}</p>
+              )}
+            </section>
+          );
+        })}
+        <p className="nt-budget-help">{COPY.removeNote}</p>
+      </form>
 
-        <StartOver flowId="monthly-budget" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
+      {!result.ok ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
 
-        {!result.ok ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-
-        <Answer result={result} />
-
-      </div>
-    </ScreenFrame>
+      <SeeAnswer label={COPY.see} main={!good} />
+      <StartOver flowId="monthly-budget" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
+    </ToolLayout>
   );
 }
 
 type Good = Extract<ReturnType<typeof planBudget>, { ok: true }>;
 
-function Answer({ result: whole }: { result: ReturnType<typeof planBudget> }) {
-  const r = COPY.result;
-  if (!whole.ok || !whole.hasAmounts) {
-    return (
-      <>
-        <ResultCard label={r.leftLabel} waiting={COPY.waiting} />
-        <SavePrintSheet quiet title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
-      </>
-    );
-  }
-  return <Done result={whole} />;
-}
+const pctOf = (result: Good) => (x: Good["expenseRows"][number]) =>
+  result.incomeCents > 0
+    ? `${pct(x.cents, result.incomeCents)} ${COPY.where.ofIncome}`
+    : `${pct(x.cents, result.spendingCents)} ${COPY.where.ofSpending}`;
+const spentRows = (result: Good) => result.expenseRows.filter((x: { cents: number }) => x.cents > 0) as Good["expenseRows"];
 
-function Done({ result }: { result: Good }) {
+function Answer({ result }: { result: Good | null }) {
   const r = COPY.result;
-  const hasIncome = result.incomeCents > 0;
-  const rows = result.expenseRows.filter((x: { cents: number }) => x.cents > 0) as Good["expenseRows"];
+  if (!result) return <ResultCard label={r.leftLabel} waiting={COPY.waiting} />;
   const leftHelp =
     result.leftCents < 0 ? `${r.leftMinus} ${formatMoney(-result.leftCents)}.` : result.leftCents === 0 ? r.leftZero : r.leftPlus;
-  const totals: [string, string][] = [
-    [r.totalIncome, formatMoney(result.incomeCents)],
-    [r.totalSpending, formatMoney(result.spendingCents)],
-  ];
-  const sayPct = (x: Good["expenseRows"][number]) =>
-    hasIncome
-      ? `${pct(x.cents, result.incomeCents)} ${COPY.where.ofIncome}`
-      : `${pct(x.cents, result.spendingCents)} ${COPY.where.ofSpending}`;
-  const width = (x: Good["expenseRows"][number]) =>
-    Math.max(0, Math.min(100, (x.cents * 100) / (hasIncome ? result.incomeCents : result.spendingCents || 1)));
+  return (
+    <ResultCard label={r.leftLabel} answer={formatMoney(result.leftCents)}>
+      <p>{leftHelp}</p>
+      <dl>
+        <div>
+          <dt>{r.totalIncome}</dt>
+          <dd>{formatMoney(result.incomeCents)}</dd>
+        </div>
+        <div>
+          <dt>{r.totalSpending}</dt>
+          <dd>{formatMoney(result.spendingCents)}</dd>
+        </div>
+      </dl>
+    </ResultCard>
+  );
+}
 
+function Save({ result }: { result: Good }) {
+  const r = COPY.result;
+  const sayPct = pctOf(result);
   function save() {
     const text = [
       COPY.save.fileTitle,
       "",
-      ...totals.map(([k, val]) => `${k}: ${val}`),
+      `${r.totalIncome}: ${formatMoney(result.incomeCents)}`,
+      `${r.totalSpending}: ${formatMoney(result.spendingCents)}`,
       `${r.leftLabel}: ${formatMoney(result.leftCents)}`,
       "",
-      ...rows.map((x) => `${x.name}: ${formatMoney(x.cents)} (${sayPct(x)})`),
+      ...spentRows(result).map((x) => `${x.name}: ${formatMoney(x.cents)} (${sayPct(x)})`),
       "",
     ].join("\n");
     try {
@@ -221,21 +228,21 @@ function Done({ result }: { result: Good }) {
       /* Print still works. */
     }
   }
+  return (
+    <Finish onSave={save}>
+      <p>{COPY.save.preview}</p>
+    </Finish>
+  );
+}
 
+function Details({ result }: { result: Good }) {
+  const hasIncome = result.incomeCents > 0;
+  const rows = spentRows(result);
+  const sayPct = pctOf(result);
+  const width = (x: Good["expenseRows"][number]) =>
+    Math.max(0, Math.min(100, (x.cents * 100) / (hasIncome ? result.incomeCents : result.spendingCents || 1)));
   return (
     <>
-      <ResultCard label={r.leftLabel} answer={formatMoney(result.leftCents)}>
-        <p className="nt-budget-help">{leftHelp}</p>
-        <dl className="nt-budget-lines">
-          {totals.map(([k, val]) => (
-            <div key={k}>
-              <dt>{k}</dt>
-              <dd>{val}</dd>
-            </div>
-          ))}
-        </dl>
-      </ResultCard>
-
       {rows.length > 0 ? (
         <section className="nt-budget-where" aria-label={COPY.where.heading}>
           <h2>{COPY.where.heading}</h2>
@@ -256,7 +263,7 @@ function Done({ result }: { result: Good }) {
         </section>
       ) : null}
 
-      <details className="nt-budget-details">
+      <details>
         <summary>{COPY.more.summary}</summary>
         <div className="nt-budget-details-body">
           {rows.length > 0 ? (
@@ -289,10 +296,6 @@ function Done({ result }: { result: Good }) {
           ) : null}
         </div>
       </details>
-
-      <SavePrintSheet quiet title={COPY.save.title} onSave={save}>
-        <p>{COPY.save.preview}</p>
-      </SavePrintSheet>
     </>
   );
 }

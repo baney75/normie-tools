@@ -23,7 +23,7 @@
 .nt-pdf-primary:focus-visible,
 .nt-pdf-btn:focus-visible,
 .nt-pdf-details > summary:focus-visible,
-.nt-pdf-member:focus-within { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-pdf-member:focus-within { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 
 .nt-pdf-group { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-pdf-group h2 { font-size: 1.25rem; margin: 0 0 var(--nt-space-2); }
