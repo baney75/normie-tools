@@ -1,0 +1,6 @@
+{
+  "skill": "monthly-budget",
+  "task": "I make $3,000 a month. I pay $1,200 rent, $450 food, $300 bills, $250 transport and $100 other. Where does it go?",
+  "files": ["examples/starter-budget.json"],
+  "expect": ["total income is 3,000.00", "total spending is 2,300.00", "left over is 700.00", "rent is 40 percent of income", "gives no advice about what to cut or save"]
+}

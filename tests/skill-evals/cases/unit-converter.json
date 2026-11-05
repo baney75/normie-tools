@@ -1,0 +1,6 @@
+{
+  "skill": "unit-converter",
+  "task": "How many millimeters is 12 inches? And what is 98.6 degrees Fahrenheit in Celsius?",
+  "files": ["examples/inches-to-millimeters.json", "examples/body-temperature.json"],
+  "expect": ["12 inches is 304.8 millimeters", "98.6 degrees Fahrenheit is 37 degrees Celsius", "says the answer is shown to 6 digits", "gives no advice about what to do with the answer"]
+}

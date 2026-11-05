@@ -1,0 +1,20 @@
+{
+  "tool": "savings-goal-tracker",
+  "screen": "empty state at 390px wide",
+  "firstTimeUser": {
+    "model": "sonnet",
+    "output": "1. This screen wants me to type in my savings goal and what I put aside each month, and then it tells me how long it will take.\n\n2. I would tap the box under **Goal amount**.\n\n3. Words I didn't understand or that felt like tech talk:\n- \"What do you want to know?\" with \"How long will it take?\" and \"How much each month?\". I can't tell if these are buttons, tabs or just text.\n- \"Yearly interest rate\"\n- \"Start month (optional)\". It doesn't say what to put in it.\n- \"Start over clears the boxes. You can put them back.\" I don't know how, and the screen doesn't say.\n- \"Your bank's paper wins.\" This is an odd way to say the bank's statement is the one to trust.\n- \"Each month, interest is added first. Then your monthly amount is added.\"\n- \"What the words mean\". I can't tell whether it opens something or just sits there.\n- \"Back to home\". I don't know which home it means.\n\n4. Worries:\n- I'm typing money amounts, and I wonder whether my numbers are kept or seen by someone. Nothing on the screen tells me.\n- There is no button to get my answer, so I'm not sure it will work. I worry I'll type and nothing will happen.\n- \"Start over\" might wipe out what I typed. I'd be nervous to press it.\n- I don't know if I should fill in the optional boxes. I'm afraid of getting something wrong.\n\n5. I would skip:\n- \"Each month, interest is added first. Then your monthly amount is added.\" It's math explanation I don't need.\n- \"What the words mean\", unless I got stuck.\n- \"Start month (optional)\".\n- The bank's paper line.\n\n6. Score: 3. I know the first box to tap. I'm not sure what the \"How long / How much\" choices do, and I don't see how the answer will appear.\n\nRESULT: {\"next_tap\": \"Goal amount\", \"confusing_terms\": [\"What do you want to know? / How long will it take? / How much each month?\", \"Yearly interest rate\", \"Start month (optional)\", \"Start over ... You can put them back\", \"Your bank's paper wins\", \"interest is added first\", \"What the words mean\", \"Back to home\"], \"worries\": [\"whether my money numbers are saved or seen by anyone\", \"no button, so unsure the answer will appear\", \"Start over might erase my typing\", \"unsure whether to fill in the optional boxes\"], \"skippable\": [\"Each month, interest is added first. Then your monthly amount is added.\", \"What the words mean\", \"Start month (optional)\", \"Your bank's paper wins\"], \"score\": 3}"
+  },
+  "designRubric": [
+    {
+      "model": "haiku",
+      "result": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: No button stands out as the primary action. The only controls are \\\"Start over\\\" and \\\"Back to home\\\", and the layout notes call both small plain buttons.\"], \"score\": 7}",
+      "output": "RESULT: {\"rule1\": \"FAIL\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule1: No button stands out as the primary action. The only controls are \\\"Start over\\\" and \\\"Back to home\\\", and the layout notes call both small plain buttons.\"], \"score\": 7}"
+    },
+    {
+      "model": "sonnet",
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "output": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    }
+  ]
+}

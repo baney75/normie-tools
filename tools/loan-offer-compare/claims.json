@@ -1,0 +1,14 @@
+{
+  "claims": [
+    { "id": "monthly-payment-exact", "text": "Each offer's monthly payment is the standard fixed-rate payment, exact to the cent." },
+    { "id": "total-paid-exact", "text": "Total paid is the sum of every monthly payment for that offer, exact to the cent." },
+    { "id": "total-interest-exact", "text": "Total interest is the sum of each month's interest, rounded half up to the cent each month." },
+    { "id": "cost-of-borrowing-exact", "text": "Cost of borrowing is total interest plus the upfront fees you typed for that offer." },
+    { "id": "lowest-cost-fact", "text": "The page names the offer or offers with the lowest cost of borrowing. It states a fact and gives no advice." },
+    { "id": "lowest-payment-fact", "text": "The page names the offer or offers with the lowest monthly payment. It states a fact and gives no advice." },
+    { "id": "ties-listed", "text": "When offers tie, every tied offer is named and none is picked over the others." },
+    { "id": "zero-rate-and-edges", "text": "A rate of 0, a one-month loan and a 1,200-month loan all work out exactly." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the offer and the field." }
+  ]
+}

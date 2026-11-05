@@ -1,0 +1,14 @@
+{
+  "claims": [
+    { "id": "waiting-interest-exact", "text": "Interest while you wait is one month's interest, rounded half up to the cent, times the months you wait." },
+    { "id": "balance-at-start-exact", "text": "The balance when payments start is the loan balance plus the unpaid interest, exact to the cent." },
+    { "id": "toggle-adds-interest", "text": "With the toggle on, unpaid interest is added to the balance when payments start. With it off, interest keeps growing on the original balance only." },
+    { "id": "months-to-payoff-exact", "text": "Months to pay off and total interest match a month-by-month schedule, rounded half up to the cent each month." },
+    { "id": "payoff-date-exact", "text": "The payoff date is the start month plus the months to pay off, counted exactly." },
+    { "id": "minimum-payment-exact", "text": "The minimum payment is the smallest payment, to the cent, that pays off the loan in the years you chose." },
+    { "id": "by-year-table-adds-up", "text": "The year-by-year sections add up to the totals and the balance ends at zero." },
+    { "id": "zero-rate-and-edges", "text": "A rate of 0, a one-payment payoff and a 100-year payoff all work out exactly." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the field." }
+  ]
+}

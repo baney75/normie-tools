@@ -1,0 +1,6 @@
+{
+  "skill": "debt-payoff-planner",
+  "task": "I have four debts: a $500 card at 18% (minimum $25), a $2,500 card at 22.99% (minimum $60), a $5,000 loan at 6.5% (minimum $100) and a $9,000 car loan at 4.9% (minimum $200). I can add $100 a month. Compare snowball and avalanche.",
+  "files": ["examples/four-debts.json"],
+  "expect": ["both plans take 40 months", "snowball total interest is 2,098.91", "avalanche total interest is 2,071.01", "lists the payoff order for each plan", "says it is an estimate", "gives no advice about which plan to use"]
+}

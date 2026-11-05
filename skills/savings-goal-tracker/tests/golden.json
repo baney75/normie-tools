@@ -1,0 +1,1417 @@
+{
+ "note": "Computed with Python Fractions (half up each month) written apart from calc.mjs. Month: interest = balance*bps/120000 rounded half up, then add the monthly amount. Month 1 is the start month.",
+ "when": [
+  {
+   "id": "plain-18",
+   "note": "Goal 5,000, saved 500, 250 a month, no interest: 4,500 / 250 = 18 months. Start 2026-12 plus 17 = 2028-05.",
+   "input": {
+    "mode": "when",
+    "goal": "5,000",
+    "saved": "500",
+    "monthly": "250",
+    "rate": "0",
+    "start": "2026-12"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 500000,
+    "savedCents": 50000,
+    "monthlyCents": 25000,
+    "rateBps": 0,
+    "start": "2026-12",
+    "status": "will-reach",
+    "months": 18,
+    "landing": "2028-05",
+    "finalBalanceCents": 500000,
+    "depositsCents": 450000,
+    "interestEarnedCents": 0,
+    "byYear": [
+     {
+      "year": 1,
+      "depositsCents": 300000,
+      "interestCents": 0,
+      "balanceCents": 350000
+     },
+     {
+      "year": 2,
+      "depositsCents": 150000,
+      "interestCents": 0,
+      "balanceCents": 500000
+     }
+    ]
+   }
+  },
+  {
+   "id": "interest-45",
+   "note": "4.5% a year, 0.375% a month, half up each month, counted one month at a time.",
+   "input": {
+    "mode": "when",
+    "goal": "$10,000",
+    "saved": "1,000",
+    "monthly": "300",
+    "rate": "4.5",
+    "start": "2026-01"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 1000000,
+    "savedCents": 100000,
+    "monthlyCents": 30000,
+    "rateBps": 450,
+    "start": "2026-01",
+    "status": "will-reach",
+    "months": 29,
+    "landing": "2028-05",
+    "finalBalanceCents": 1028721,
+    "depositsCents": 870000,
+    "interestEarnedCents": 58721,
+    "byYear": [
+     {
+      "year": 1,
+      "depositsCents": 360000,
+      "interestCents": 12112,
+      "balanceCents": 472112
+     },
+     {
+      "year": 2,
+      "depositsCents": 360000,
+      "interestCents": 29208,
+      "balanceCents": 861320
+     },
+     {
+      "year": 3,
+      "depositsCents": 150000,
+      "interestCents": 17401,
+      "balanceCents": 1028721
+     }
+    ]
+   }
+  },
+  {
+   "id": "no-start",
+   "note": "Same as interest-45 with no start month: no landing month.",
+   "input": {
+    "mode": "when",
+    "goal": "10000",
+    "saved": "1000",
+    "monthly": "300",
+    "rate": "4.5",
+    "start": ""
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 1000000,
+    "savedCents": 100000,
+    "monthlyCents": 30000,
+    "rateBps": 450,
+    "start": "",
+    "status": "will-reach",
+    "months": 29,
+    "landing": null,
+    "finalBalanceCents": 1028721,
+    "depositsCents": 870000,
+    "interestEarnedCents": 58721,
+    "byYear": [
+     {
+      "year": 1,
+      "depositsCents": 360000,
+      "interestCents": 12112,
+      "balanceCents": 472112
+     },
+     {
+      "year": 2,
+      "depositsCents": 360000,
+      "interestCents": 29208,
+      "balanceCents": 861320
+     },
+     {
+      "year": 3,
+      "depositsCents": 150000,
+      "interestCents": 17401,
+      "balanceCents": 1028721
+     }
+    ]
+   }
+  },
+  {
+   "id": "already",
+   "note": "Saved 6,000 is at least the goal 5,000: 0 months.",
+   "input": {
+    "mode": "when",
+    "goal": "5,000",
+    "saved": "6,000",
+    "monthly": "0",
+    "rate": "",
+    "start": "2026-05"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 500000,
+    "savedCents": 600000,
+    "monthlyCents": 0,
+    "rateBps": 0,
+    "start": "2026-05",
+    "status": "reached",
+    "months": 0,
+    "landing": null,
+    "finalBalanceCents": 600000,
+    "depositsCents": 0,
+    "interestEarnedCents": 0,
+    "byYear": []
+   }
+  },
+  {
+   "id": "exact-equal",
+   "note": "Saved equals the goal: already reached.",
+   "input": {
+    "mode": "when",
+    "goal": "750",
+    "saved": "750",
+    "monthly": "10",
+    "rate": "3",
+    "start": ""
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 75000,
+    "savedCents": 75000,
+    "monthlyCents": 1000,
+    "rateBps": 300,
+    "start": "",
+    "status": "reached",
+    "months": 0,
+    "landing": null,
+    "finalBalanceCents": 75000,
+    "depositsCents": 0,
+    "interestEarnedCents": 0,
+    "byYear": []
+   }
+  },
+  {
+   "id": "zero-monthly",
+   "note": "Nothing added and no interest: it will not reach.",
+   "input": {
+    "mode": "when",
+    "goal": "5,000",
+    "saved": "500",
+    "monthly": "0",
+    "rate": "0",
+    "start": "2026-12"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 500000,
+    "savedCents": 50000,
+    "monthlyCents": 0,
+    "rateBps": 0,
+    "start": "2026-12",
+    "status": "no-savings",
+    "months": null,
+    "landing": null,
+    "finalBalanceCents": 50000,
+    "depositsCents": 0,
+    "interestEarnedCents": 0,
+    "byYear": []
+   }
+  },
+  {
+   "id": "zero-monthly-interest",
+   "note": "Nothing added, 12% a year (1% a month) on 1,000 reaches 1,100 by interest alone.",
+   "input": {
+    "mode": "when",
+    "goal": "1,100",
+    "saved": "1,000",
+    "monthly": "0",
+    "rate": "12",
+    "start": "2027-03"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 110000,
+    "savedCents": 100000,
+    "monthlyCents": 0,
+    "rateBps": 1200,
+    "start": "2027-03",
+    "status": "will-reach",
+    "months": 10,
+    "landing": "2027-12",
+    "finalBalanceCents": 110463,
+    "depositsCents": 0,
+    "interestEarnedCents": 10463,
+    "byYear": [
+     {
+      "year": 1,
+      "depositsCents": 0,
+      "interestCents": 10463,
+      "balanceCents": 110463
+     }
+    ]
+   }
+  },
+  {
+   "id": "cap-1200-ok",
+   "note": "1,200 / 1 = exactly 1,200 months, the cap. Start 2000-01 plus 1199 = 2099-12.",
+   "input": {
+    "mode": "when",
+    "goal": "1,200",
+    "saved": "0",
+    "monthly": "1",
+    "rate": "0",
+    "start": "2000-01"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 120000,
+    "savedCents": 0,
+    "monthlyCents": 100,
+    "rateBps": 0,
+    "start": "2000-01",
+    "status": "will-reach",
+    "months": 1200,
+    "landing": "2099-12",
+    "finalBalanceCents": 120000,
+    "depositsCents": 120000,
+    "interestEarnedCents": 0,
+    "byYear": [
+     {
+      "year": 1,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 1200
+     },
+     {
+      "year": 2,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 2400
+     },
+     {
+      "year": 3,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 3600
+     },
+     {
+      "year": 4,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 4800
+     },
+     {
+      "year": 5,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 6000
+     },
+     {
+      "year": 6,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 7200
+     },
+     {
+      "year": 7,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 8400
+     },
+     {
+      "year": 8,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 9600
+     },
+     {
+      "year": 9,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 10800
+     },
+     {
+      "year": 10,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 12000
+     },
+     {
+      "year": 11,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 13200
+     },
+     {
+      "year": 12,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 14400
+     },
+     {
+      "year": 13,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 15600
+     },
+     {
+      "year": 14,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 16800
+     },
+     {
+      "year": 15,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 18000
+     },
+     {
+      "year": 16,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 19200
+     },
+     {
+      "year": 17,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 20400
+     },
+     {
+      "year": 18,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 21600
+     },
+     {
+      "year": 19,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 22800
+     },
+     {
+      "year": 20,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 24000
+     },
+     {
+      "year": 21,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 25200
+     },
+     {
+      "year": 22,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 26400
+     },
+     {
+      "year": 23,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 27600
+     },
+     {
+      "year": 24,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 28800
+     },
+     {
+      "year": 25,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 30000
+     },
+     {
+      "year": 26,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 31200
+     },
+     {
+      "year": 27,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 32400
+     },
+     {
+      "year": 28,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 33600
+     },
+     {
+      "year": 29,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 34800
+     },
+     {
+      "year": 30,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 36000
+     },
+     {
+      "year": 31,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 37200
+     },
+     {
+      "year": 32,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 38400
+     },
+     {
+      "year": 33,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 39600
+     },
+     {
+      "year": 34,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 40800
+     },
+     {
+      "year": 35,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 42000
+     },
+     {
+      "year": 36,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 43200
+     },
+     {
+      "year": 37,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 44400
+     },
+     {
+      "year": 38,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 45600
+     },
+     {
+      "year": 39,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 46800
+     },
+     {
+      "year": 40,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 48000
+     },
+     {
+      "year": 41,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 49200
+     },
+     {
+      "year": 42,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 50400
+     },
+     {
+      "year": 43,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 51600
+     },
+     {
+      "year": 44,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 52800
+     },
+     {
+      "year": 45,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 54000
+     },
+     {
+      "year": 46,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 55200
+     },
+     {
+      "year": 47,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 56400
+     },
+     {
+      "year": 48,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 57600
+     },
+     {
+      "year": 49,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 58800
+     },
+     {
+      "year": 50,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 60000
+     },
+     {
+      "year": 51,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 61200
+     },
+     {
+      "year": 52,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 62400
+     },
+     {
+      "year": 53,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 63600
+     },
+     {
+      "year": 54,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 64800
+     },
+     {
+      "year": 55,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 66000
+     },
+     {
+      "year": 56,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 67200
+     },
+     {
+      "year": 57,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 68400
+     },
+     {
+      "year": 58,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 69600
+     },
+     {
+      "year": 59,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 70800
+     },
+     {
+      "year": 60,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 72000
+     },
+     {
+      "year": 61,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 73200
+     },
+     {
+      "year": 62,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 74400
+     },
+     {
+      "year": 63,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 75600
+     },
+     {
+      "year": 64,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 76800
+     },
+     {
+      "year": 65,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 78000
+     },
+     {
+      "year": 66,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 79200
+     },
+     {
+      "year": 67,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 80400
+     },
+     {
+      "year": 68,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 81600
+     },
+     {
+      "year": 69,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 82800
+     },
+     {
+      "year": 70,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 84000
+     },
+     {
+      "year": 71,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 85200
+     },
+     {
+      "year": 72,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 86400
+     },
+     {
+      "year": 73,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 87600
+     },
+     {
+      "year": 74,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 88800
+     },
+     {
+      "year": 75,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 90000
+     },
+     {
+      "year": 76,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 91200
+     },
+     {
+      "year": 77,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 92400
+     },
+     {
+      "year": 78,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 93600
+     },
+     {
+      "year": 79,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 94800
+     },
+     {
+      "year": 80,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 96000
+     },
+     {
+      "year": 81,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 97200
+     },
+     {
+      "year": 82,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 98400
+     },
+     {
+      "year": 83,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 99600
+     },
+     {
+      "year": 84,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 100800
+     },
+     {
+      "year": 85,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 102000
+     },
+     {
+      "year": 86,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 103200
+     },
+     {
+      "year": 87,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 104400
+     },
+     {
+      "year": 88,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 105600
+     },
+     {
+      "year": 89,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 106800
+     },
+     {
+      "year": 90,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 108000
+     },
+     {
+      "year": 91,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 109200
+     },
+     {
+      "year": 92,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 110400
+     },
+     {
+      "year": 93,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 111600
+     },
+     {
+      "year": 94,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 112800
+     },
+     {
+      "year": 95,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 114000
+     },
+     {
+      "year": 96,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 115200
+     },
+     {
+      "year": 97,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 116400
+     },
+     {
+      "year": 98,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 117600
+     },
+     {
+      "year": 99,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 118800
+     },
+     {
+      "year": 100,
+      "depositsCents": 1200,
+      "interestCents": 0,
+      "balanceCents": 120000
+     }
+    ]
+   }
+  },
+  {
+   "id": "cap-1201-too-long",
+   "note": "1,201 / 1 = 1,201 months, past the cap.",
+   "input": {
+    "mode": "when",
+    "goal": "1,201",
+    "saved": "",
+    "monthly": "1",
+    "rate": "0",
+    "start": "2000-01"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 120100,
+    "savedCents": 0,
+    "monthlyCents": 100,
+    "rateBps": 0,
+    "start": "2000-01",
+    "status": "too-long",
+    "months": null,
+    "landing": null,
+    "finalBalanceCents": 120000,
+    "depositsCents": 120000,
+    "interestEarnedCents": 0,
+    "byYear": []
+   }
+  },
+  {
+   "id": "one-month",
+   "note": "Saved 900, goal 1,000, 100 a month, no interest: 1 month.",
+   "input": {
+    "mode": "when",
+    "goal": "1000",
+    "saved": "900",
+    "monthly": "100",
+    "rate": "",
+    "start": "2026-12"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 100000,
+    "savedCents": 90000,
+    "monthlyCents": 10000,
+    "rateBps": 0,
+    "start": "2026-12",
+    "status": "will-reach",
+    "months": 1,
+    "landing": "2026-12",
+    "finalBalanceCents": 100000,
+    "depositsCents": 10000,
+    "interestEarnedCents": 0,
+    "byYear": [
+     {
+      "year": 1,
+      "depositsCents": 10000,
+      "interestCents": 0,
+      "balanceCents": 100000
+     }
+    ]
+   }
+  },
+  {
+   "id": "half-up-edge",
+   "note": "Balance 600.00 at 0.01% a year: 60000 * 1 / 120000 = 0.5 cent, rounds up to 1 cent each time it is exactly half.",
+   "input": {
+    "mode": "when",
+    "goal": "600.05",
+    "saved": "600",
+    "monthly": "0.01",
+    "rate": "0.01",
+    "start": ""
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 60005,
+    "savedCents": 60000,
+    "monthlyCents": 1,
+    "rateBps": 1,
+    "start": "",
+    "status": "will-reach",
+    "months": 3,
+    "landing": null,
+    "finalBalanceCents": 60006,
+    "depositsCents": 3,
+    "interestEarnedCents": 3,
+    "byYear": [
+     {
+      "year": 1,
+      "depositsCents": 3,
+      "interestCents": 3,
+      "balanceCents": 60006
+     }
+    ]
+   }
+  },
+  {
+   "id": "year-boundary",
+   "note": "Goal 1,200, 100 a month, no interest: 12 months from 2026-07 lands 2027-06.",
+   "input": {
+    "mode": "when",
+    "goal": "1200",
+    "saved": "0",
+    "monthly": "100",
+    "rate": "0",
+    "start": "2026-07"
+   },
+   "expect": {
+    "mode": "when",
+    "goalCents": 120000,
+    "savedCents": 0,
+    "monthlyCents": 10000,
+    "rateBps": 0,
+    "start": "2026-07",
+    "status": "will-reach",
+    "months": 12,
+    "landing": "2027-06",
+    "finalBalanceCents": 120000,
+    "depositsCents": 120000,
+    "interestEarnedCents": 0,
+    "byYear": [
+     {
+      "year": 1,
+      "depositsCents": 120000,
+      "interestCents": 0,
+      "balanceCents": 120000
+     }
+    ]
+   }
+  }
+ ],
+ "by": [
+  {
+   "id": "by-12-plain",
+   "note": "9,000 still needed over 12 months with no interest: 750 a month. 2026-12 to 2027-11 is 12 months.",
+   "input": {
+    "mode": "by",
+    "goal": "10,000",
+    "saved": "1,000",
+    "rate": "0",
+    "start": "2026-12",
+    "target": "2027-11"
+   },
+   "expect": {
+    "mode": "by",
+    "goalCents": 1000000,
+    "savedCents": 100000,
+    "rateBps": 0,
+    "start": "2026-12",
+    "months": 12,
+    "target": "2027-11",
+    "status": "needs",
+    "monthlyNeededCents": 75000,
+    "finalBalanceCents": 1000000,
+    "depositsCents": 900000,
+    "interestEarnedCents": 0
+   }
+  },
+  {
+   "id": "by-24-interest",
+   "note": "5% a year, 24 months: the smallest whole-cent monthly amount whose month-by-month balance is at least 10,000.",
+   "input": {
+    "mode": "by",
+    "goal": "10,000",
+    "saved": "500",
+    "rate": "5",
+    "start": "2026-01",
+    "target": "2027-12"
+   },
+   "expect": {
+    "mode": "by",
+    "goalCents": 1000000,
+    "savedCents": 50000,
+    "rateBps": 500,
+    "start": "2026-01",
+    "months": 24,
+    "target": "2027-12",
+    "status": "needs",
+    "monthlyNeededCents": 37512,
+    "finalBalanceCents": 1000021,
+    "depositsCents": 900288,
+    "interestEarnedCents": 49733
+   }
+  },
+  {
+   "id": "by-one-month",
+   "note": "Start and goal month are the same: 1 month.",
+   "input": {
+    "mode": "by",
+    "goal": "1,000",
+    "saved": "400",
+    "rate": "0",
+    "start": "2026-06",
+    "target": "2026-06"
+   },
+   "expect": {
+    "mode": "by",
+    "goalCents": 100000,
+    "savedCents": 40000,
+    "rateBps": 0,
+    "start": "2026-06",
+    "months": 1,
+    "target": "2026-06",
+    "status": "needs",
+    "monthlyNeededCents": 60000,
+    "finalBalanceCents": 100000,
+    "depositsCents": 60000,
+    "interestEarnedCents": 0
+   }
+  },
+  {
+   "id": "by-already",
+   "note": "Saved is at least the goal: 0 a month.",
+   "input": {
+    "mode": "by",
+    "goal": "1,000",
+    "saved": "1,000",
+    "rate": "2",
+    "start": "2026-06",
+    "target": "2028-06"
+   },
+   "expect": {
+    "mode": "by",
+    "goalCents": 100000,
+    "savedCents": 100000,
+    "rateBps": 200,
+    "start": "2026-06",
+    "months": 25,
+    "target": "2028-06",
+    "status": "reached",
+    "monthlyNeededCents": 0,
+    "finalBalanceCents": 100000,
+    "depositsCents": 0,
+    "interestEarnedCents": 0
+   }
+  },
+  {
+   "id": "by-uneven",
+   "note": "1,000 over 7 months with no interest: 142.857... rounds up to 142.86 so the goal is met.",
+   "input": {
+    "mode": "by",
+    "goal": "1,000",
+    "saved": "0",
+    "rate": "0",
+    "start": "2026-01",
+    "target": "2026-07"
+   },
+   "expect": {
+    "mode": "by",
+    "goalCents": 100000,
+    "savedCents": 0,
+    "rateBps": 0,
+    "start": "2026-01",
+    "months": 7,
+    "target": "2026-07",
+    "status": "needs",
+    "monthlyNeededCents": 14286,
+    "finalBalanceCents": 100002,
+    "depositsCents": 100002,
+    "interestEarnedCents": 0
+   }
+  },
+  {
+   "id": "by-long",
+   "note": "20,000 over 600 months at 3%.",
+   "input": {
+    "mode": "by",
+    "goal": "20,000",
+    "saved": "0",
+    "rate": "3",
+    "start": "2026-01",
+    "target": "2075-12"
+   },
+   "expect": {
+    "mode": "by",
+    "goalCents": 2000000,
+    "savedCents": 0,
+    "rateBps": 300,
+    "start": "2026-01",
+    "months": 600,
+    "target": "2075-12",
+    "status": "needs",
+    "monthlyNeededCents": 1440,
+    "finalBalanceCents": 2000613,
+    "depositsCents": 864000,
+    "interestEarnedCents": 1136613
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "blank",
+   "input": {},
+   "errors": [
+    [
+     "goal",
+     "missing"
+    ],
+    [
+     "monthly",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "goal-text",
+   "input": {
+    "goal": "lots",
+    "monthly": "100"
+   },
+   "errors": [
+    [
+     "goal",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "goal-zero",
+   "input": {
+    "goal": "0",
+    "monthly": "100"
+   },
+   "errors": [
+    [
+     "goal",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "goal-negative",
+   "input": {
+    "goal": "-5",
+    "monthly": "100"
+   },
+   "errors": [
+    [
+     "goal",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "goal-expo",
+   "input": {
+    "goal": "1e3",
+    "monthly": "100"
+   },
+   "errors": [
+    [
+     "goal",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "goal-huge",
+   "input": {
+    "goal": "1e15",
+    "monthly": "100"
+   },
+   "errors": [
+    [
+     "goal",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "goal-too-big",
+   "input": {
+    "goal": "2000000000",
+    "monthly": "100"
+   },
+   "errors": [
+    [
+     "goal",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "saved-bad",
+   "input": {
+    "goal": "100",
+    "saved": "abc",
+    "monthly": "1"
+   },
+   "errors": [
+    [
+     "saved",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "monthly-neg",
+   "input": {
+    "goal": "100",
+    "monthly": "-1"
+   },
+   "errors": [
+    [
+     "monthly",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "rate-high",
+   "input": {
+    "goal": "100",
+    "monthly": "1",
+    "rate": "101"
+   },
+   "errors": [
+    [
+     "rate",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "rate-three-decimals",
+   "input": {
+    "goal": "100",
+    "monthly": "1",
+    "rate": "1.234"
+   },
+   "errors": [
+    [
+     "rate",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "start-bad",
+   "input": {
+    "goal": "100",
+    "monthly": "1",
+    "start": "2026/12"
+   },
+   "errors": [
+    [
+     "start",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "start-month-13",
+   "input": {
+    "goal": "100",
+    "monthly": "1",
+    "start": "2026-13"
+   },
+   "errors": [
+    [
+     "start",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "by-needs-start",
+   "input": {
+    "mode": "by",
+    "goal": "100",
+    "target": "2027-01"
+   },
+   "errors": [
+    [
+     "start",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "by-needs-target",
+   "input": {
+    "mode": "by",
+    "goal": "100",
+    "start": "2027-01"
+   },
+   "errors": [
+    [
+     "target",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "by-target-early",
+   "input": {
+    "mode": "by",
+    "goal": "100",
+    "start": "2027-05",
+    "target": "2027-04"
+   },
+   "errors": [
+    [
+     "target",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "by-target-far",
+   "input": {
+    "mode": "by",
+    "goal": "100",
+    "start": "2026-01",
+    "target": "2126-02"
+   },
+   "errors": [
+    [
+     "target",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "by-target-bad",
+   "input": {
+    "mode": "by",
+    "goal": "100",
+    "start": "2026-01",
+    "target": "soon"
+   },
+   "errors": [
+    [
+     "target",
+     "bad"
+    ]
+   ]
+  }
+ ]
+}

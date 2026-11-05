@@ -1,0 +1,13 @@
+{
+  "claims": [
+    { "id": "length-exact", "text": "Length answers use the exact international definitions, such as 1 inch = 25.4 millimeters, and show 6 significant digits." },
+    { "id": "weight-exact", "text": "Weight answers use the exact pound, 0.45359237 kilograms, and an ounce of one sixteenth of a pound." },
+    { "id": "volume-exact", "text": "Volume answers use the exact US gallon, 3.785411784 liters, and its exact parts: quart, pint, cup, fluid ounce, tablespoon and teaspoon." },
+    { "id": "temperature-exact", "text": "Temperature answers are exact: 32 F is 0 C, 0 C is 273.15 K, and nothing goes below absolute zero." },
+    { "id": "speed-exact", "text": "Speed answers use the exact mile, 1609.344 meters, so 1 mph is 1.609344 km/h." },
+    { "id": "six-digits-half-up", "text": "Every answer is rounded half up to 6 significant digits, once, at the very end." },
+    { "id": "round-trip-no-drift", "text": "Math is exact fractions of whole numbers, so exact answers such as 5 miles to 26,400 feet never drift." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the field." }
+  ]
+}

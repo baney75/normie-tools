@@ -1,0 +1,750 @@
+{
+ "note": "Computed with Python Fraction and Decimal (ROUND_HALF_UP) from the plain definitions, independent of calc.mjs. Money is cents. Largest remainder: floor each exact percent, give missing points to biggest fractions, ties to earlier rows.",
+ "money": [
+  {
+   "text": "1,000",
+   "cents": 100000
+  },
+  {
+   "text": "$1,000.50",
+   "cents": 100050
+  },
+  {
+   "text": " 12 ",
+   "cents": 1200
+  },
+  {
+   "text": "1e3",
+   "cents": null
+  },
+  {
+   "text": "-5",
+   "cents": -500
+  },
+  {
+   "text": "0",
+   "cents": 0
+  },
+  {
+   "text": "",
+   "cents": null
+  },
+  {
+   "text": "abc",
+   "cents": null
+  },
+  {
+   "text": "😀",
+   "cents": null
+  },
+  {
+   "text": "NaN",
+   "cents": null
+  },
+  {
+   "text": "1000000000000000",
+   "cents": null
+  },
+  {
+   "text": "1.005",
+   "cents": null
+  },
+  {
+   "text": "1.50",
+   "cents": 150
+  },
+  {
+   "text": ".5",
+   "cents": 50
+  },
+  {
+   "text": "12.",
+   "cents": 1200
+  },
+  {
+   "text": "1,00",
+   "cents": null
+  },
+  {
+   "text": "$ 7",
+   "cents": 700
+  },
+  {
+   "text": "1.100",
+   "cents": 110
+  },
+  {
+   "text": "--5",
+   "cents": null
+  },
+  {
+   "text": "5-",
+   "cents": null
+  }
+ ],
+ "budgets": [
+  {
+   "id": "plain",
+   "note": "Independent Python Fraction/Decimal. Pay 3,000; spending 2,300; 40+15+10.83..",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "3,000"
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent or mortgage",
+      "amount": "1,200"
+     },
+     {
+      "name": "Food",
+      "amount": "450"
+     },
+     {
+      "name": "Bills",
+      "amount": "300"
+     },
+     {
+      "name": "Transport",
+      "amount": "250"
+     },
+     {
+      "name": "Other",
+      "amount": "100"
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 300000,
+    "spendingCents": 230000,
+    "leftCents": 70000,
+    "overspent": false,
+    "hasAmounts": true,
+    "spendingPercentOfIncome": 77,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 300000
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "Rent or mortgage",
+      "cents": 120000,
+      "percentOfIncome": 40,
+      "shareOfSpending": 52
+     },
+     {
+      "name": "Food",
+      "cents": 45000,
+      "percentOfIncome": 15,
+      "shareOfSpending": 20
+     },
+     {
+      "name": "Bills",
+      "cents": 30000,
+      "percentOfIncome": 10,
+      "shareOfSpending": 13
+     },
+     {
+      "name": "Transport",
+      "cents": 25000,
+      "percentOfIncome": 9,
+      "shareOfSpending": 11
+     },
+     {
+      "name": "Other",
+      "cents": 10000,
+      "percentOfIncome": 3,
+      "shareOfSpending": 4
+     }
+    ]
+   }
+  },
+  {
+   "id": "thirds",
+   "note": "Independent Python Fraction/Decimal. Three equal lines: 33.33 each of spending, remainders tie so earliest rows get the extra point",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "$900.00"
+     }
+    ],
+    "expenses": [
+     {
+      "name": "A",
+      "amount": "100"
+     },
+     {
+      "name": "B",
+      "amount": "100"
+     },
+     {
+      "name": "C",
+      "amount": "100"
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 90000,
+    "spendingCents": 30000,
+    "leftCents": 60000,
+    "overspent": false,
+    "hasAmounts": true,
+    "spendingPercentOfIncome": 33,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 90000
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "A",
+      "cents": 10000,
+      "percentOfIncome": 11,
+      "shareOfSpending": 34
+     },
+     {
+      "name": "B",
+      "cents": 10000,
+      "percentOfIncome": 11,
+      "shareOfSpending": 33
+     },
+     {
+      "name": "C",
+      "cents": 10000,
+      "percentOfIncome": 11,
+      "shareOfSpending": 33
+     }
+    ]
+   }
+  },
+  {
+   "id": "overspent",
+   "note": "Independent Python Fraction/Decimal. Spends more than income: left over negative, percent of income above 100",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "1,000"
+     },
+     {
+      "name": "Side job",
+      "amount": "250.50"
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": "1,100"
+     },
+     {
+      "name": "Food",
+      "amount": "400.25"
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 125050,
+    "spendingCents": 150025,
+    "leftCents": -24975,
+    "overspent": true,
+    "hasAmounts": true,
+    "spendingPercentOfIncome": 120,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 100000
+     },
+     {
+      "name": "Side job",
+      "cents": 25050
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "Rent",
+      "cents": 110000,
+      "percentOfIncome": 88,
+      "shareOfSpending": 73
+     },
+     {
+      "name": "Food",
+      "cents": 40025,
+      "percentOfIncome": 32,
+      "shareOfSpending": 27
+     }
+    ]
+   }
+  },
+  {
+   "id": "no-income",
+   "note": "Independent Python Fraction/Decimal. No income: no percent of income, shares of spending still add to 100",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": ""
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": "700"
+     },
+     {
+      "name": "Food",
+      "amount": "300"
+     },
+     {
+      "name": "Other",
+      "amount": "1"
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 0,
+    "spendingCents": 100100,
+    "leftCents": -100100,
+    "overspent": true,
+    "hasAmounts": true,
+    "spendingPercentOfIncome": null,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 0
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "Rent",
+      "cents": 70000,
+      "percentOfIncome": null,
+      "shareOfSpending": 70
+     },
+     {
+      "name": "Food",
+      "cents": 30000,
+      "percentOfIncome": null,
+      "shareOfSpending": 30
+     },
+     {
+      "name": "Other",
+      "cents": 100,
+      "percentOfIncome": null,
+      "shareOfSpending": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "blank",
+   "note": "Independent Python Fraction/Decimal. Everything blank means zero and no answer yet",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": ""
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": ""
+     },
+     {
+      "name": "Food",
+      "amount": ""
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 0,
+    "spendingCents": 0,
+    "leftCents": 0,
+    "overspent": false,
+    "hasAmounts": false,
+    "spendingPercentOfIncome": null,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 0
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "Rent",
+      "cents": 0,
+      "percentOfIncome": null,
+      "shareOfSpending": null
+     },
+     {
+      "name": "Food",
+      "cents": 0,
+      "percentOfIncome": null,
+      "shareOfSpending": null
+     }
+    ]
+   }
+  },
+  {
+   "id": "cents",
+   "note": "Independent Python Fraction/Decimal. Cents and spacing and dollar signs",
+   "input": {
+    "income": [
+     {
+      "name": " Pay ",
+      "amount": "$2,345.67"
+     },
+     {
+      "name": "Gift",
+      "amount": " 10 "
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": "$1,000.01"
+     },
+     {
+      "name": "Food",
+      "amount": "333.33"
+     },
+     {
+      "name": "Fun",
+      "amount": ".99"
+     },
+     {
+      "name": "Gas",
+      "amount": "  "
+     },
+     {
+      "name": "",
+      "amount": "5"
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 235567,
+    "spendingCents": 133933,
+    "leftCents": 101634,
+    "overspent": false,
+    "hasAmounts": true,
+    "spendingPercentOfIncome": 57,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 234567
+     },
+     {
+      "name": "Gift",
+      "cents": 1000
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "Rent",
+      "cents": 100001,
+      "percentOfIncome": 43,
+      "shareOfSpending": 75
+     },
+     {
+      "name": "Food",
+      "cents": 33333,
+      "percentOfIncome": 14,
+      "shareOfSpending": 25
+     },
+     {
+      "name": "Fun",
+      "cents": 99,
+      "percentOfIncome": 0,
+      "shareOfSpending": 0
+     },
+     {
+      "name": "Gas",
+      "cents": 0,
+      "percentOfIncome": 0,
+      "shareOfSpending": 0
+     },
+     {
+      "name": "Spending line 5",
+      "cents": 500,
+      "percentOfIncome": 0,
+      "shareOfSpending": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "tiny-share",
+   "note": "Independent Python Fraction/Decimal. One tiny line still gets a whole-number share; largest remainder",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "10,000"
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": "9,999.97"
+     },
+     {
+      "name": "Gum",
+      "amount": "0.01"
+     },
+     {
+      "name": "Pen",
+      "amount": "0.02"
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 1000000,
+    "spendingCents": 1000000,
+    "leftCents": 0,
+    "overspent": false,
+    "hasAmounts": true,
+    "spendingPercentOfIncome": 100,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 1000000
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "Rent",
+      "cents": 999997,
+      "percentOfIncome": 100,
+      "shareOfSpending": 100
+     },
+     {
+      "name": "Gum",
+      "cents": 1,
+      "percentOfIncome": 0,
+      "shareOfSpending": 0
+     },
+     {
+      "name": "Pen",
+      "cents": 2,
+      "percentOfIncome": 0,
+      "shareOfSpending": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "exact-income",
+   "note": "Independent Python Fraction/Decimal. Spends exactly all income: left over 0, percents add to 100",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "1,000"
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": "333.33"
+     },
+     {
+      "name": "Food",
+      "amount": "333.33"
+     },
+     {
+      "name": "Bills",
+      "amount": "333.34"
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 100000,
+    "spendingCents": 100000,
+    "leftCents": 0,
+    "overspent": false,
+    "hasAmounts": true,
+    "spendingPercentOfIncome": 100,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 100000
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "Rent",
+      "cents": 33333,
+      "percentOfIncome": 33,
+      "shareOfSpending": 33
+     },
+     {
+      "name": "Food",
+      "cents": 33333,
+      "percentOfIncome": 33,
+      "shareOfSpending": 33
+     },
+     {
+      "name": "Bills",
+      "cents": 33334,
+      "percentOfIncome": 34,
+      "shareOfSpending": 34
+     }
+    ]
+   }
+  },
+  {
+   "id": "no-spending",
+   "note": "Independent Python Fraction/Decimal. Income and no spending: left over is all of income, percents 0",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "500"
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": ""
+     },
+     {
+      "name": "Food",
+      "amount": ""
+     }
+    ]
+   },
+   "expect": {
+    "incomeCents": 50000,
+    "spendingCents": 0,
+    "leftCents": 50000,
+    "overspent": false,
+    "hasAmounts": true,
+    "spendingPercentOfIncome": 0,
+    "incomeRows": [
+     {
+      "name": "Pay",
+      "cents": 50000
+     }
+    ],
+    "expenseRows": [
+     {
+      "name": "Rent",
+      "cents": 0,
+      "percentOfIncome": 0,
+      "shareOfSpending": null
+     },
+     {
+      "name": "Food",
+      "cents": 0,
+      "percentOfIncome": 0,
+      "shareOfSpending": null
+     }
+    ]
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "text",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "lots"
+     }
+    ],
+    "expenses": []
+   },
+   "errors": [
+    [
+     "income.0",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "negative",
+   "input": {
+    "income": [],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": "-5"
+     }
+    ]
+   },
+   "errors": [
+    [
+     "expenses.0",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "exponent",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "1e3"
+     }
+    ],
+    "expenses": [
+     {
+      "name": "Rent",
+      "amount": "1,00"
+     }
+    ]
+   },
+   "errors": [
+    [
+     "income.0",
+     "bad"
+    ],
+    [
+     "expenses.0",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "too-big",
+   "input": {
+    "income": [
+     {
+      "name": "Pay",
+      "amount": "1,000,000,000.01"
+     }
+    ],
+    "expenses": []
+   },
+   "errors": [
+    [
+     "income.0",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "no-lists",
+   "input": {},
+   "errors": [
+    [
+     "income",
+     "missing"
+    ],
+    [
+     "expenses",
+     "missing"
+    ]
+   ]
+  }
+ ]
+}

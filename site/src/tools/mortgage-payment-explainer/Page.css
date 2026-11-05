@@ -1,0 +1,40 @@
+.nt-mort { max-width: var(--nt-measure); }
+.nt-mort-intro { font-size: 1.125rem; margin: 0 0 var(--nt-space-4); }
+.nt-mort-form { margin: 0 0 var(--nt-space-4); }
+.nt-mort-quick { border: 0; margin: 0 0 var(--nt-space-4); padding: 0; min-width: 0; }
+.nt-mort-quick legend { padding: 0; margin: 0 0 var(--nt-space-2); font-weight: 700; color: var(--nt-ink); }
+.nt-mort-quick-row { display: flex; gap: var(--nt-space-3); flex-wrap: wrap; }
+.nt-mort-pick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--nt-tap);
+  min-width: var(--nt-tap);
+  padding: 0 var(--nt-space-3);
+  border: 2px solid var(--nt-ink);
+  border-radius: var(--nt-radius);
+  background: var(--nt-white);
+  color: var(--nt-ink);
+  font: inherit;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+.nt-mort-pick[aria-pressed="true"] { background: var(--nt-mint); font-weight: 700; }
+.nt-mort-pick:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+
+.nt-mort-status { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
+.nt-mort-lines { margin: 0 0 var(--nt-space-3); }
+.nt-mort-lines div { display: flex; justify-content: space-between; gap: var(--nt-space-3); padding: var(--nt-space-2) 0; border-top: 1px solid var(--nt-line); }
+.nt-mort-lines dt { margin: 0; }
+.nt-mort-lines dd { margin: 0; font-weight: 700; text-align: right; }
+.nt-mort-help { margin: 0 0 var(--nt-space-3); font-size: 1rem; color: var(--nt-muted); }
+.nt-mort-first { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
+.nt-mort-first h2 { font-size: 1.25rem; }
+
+.nt-mort-details { margin: 0 0 var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
+.nt-mort-details > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-3); font-weight: 700; color: var(--nt-ink); cursor: pointer; }
+.nt-mort-details > summary:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-mort-details-body { padding: 0 var(--nt-space-3) var(--nt-space-3); }
+.nt-mort-key dt { font-weight: 700; color: var(--nt-ink); margin-top: var(--nt-space-3); }
+.nt-mort-key dd { margin: 0; }
+.nt-mort-note { font-size: 1rem; color: var(--nt-text); }

@@ -1,0 +1,6 @@
+{
+  "skill": "student-loan-growth-and-payoff",
+  "task": "I owe $20,000 on one student loan at 5% a year. I have not paid for 6 months. The unpaid interest does not get added to the balance. I will pay $300 a month starting 2026-09. When do I finish and what is the total interest? What payment would finish it in 10 years?",
+  "files": ["examples/in-school.json"],
+  "expect": ["balance when payments start is 20,499.98", "payoff is 81 months, May 2033", "total interest is 4,171.44", "smallest payment for 10 years is 217.39", "says it is an estimate and the loan servicer paper wins", "gives no advice about what to do with the loan"]
+}

@@ -3,8 +3,8 @@ import raw from "../../public/tools.json";
 import { TOOLS, isUsable, type Tool } from "./tools";
 
 // Add an id here when a tool ships. Nothing else may be "shipped".
-const SHIPPED_IDS = ["loan-explainer"];
-const EXPECTED_TOTAL = 77;
+const SHIPPED_IDS = ["debt-payoff-planner", "loan-explainer", "loan-offer-compare", "monthly-budget", "mortgage-payment-explainer", "savings-goal-tracker", "student-loan-growth-and-payoff", "unit-converter"];
+const EXPECTED_TOTAL = 80;
 
 describe("TOOLS", () => {
   it("matches public/tools.json", () => {

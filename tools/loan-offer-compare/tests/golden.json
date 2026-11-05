@@ -1,0 +1,544 @@
+{
+ "note": "Computed with Python Fractions (round half up) from the textbook formulas, independent of calc.mjs. Rates are basis points, money is cents. Total paid leaves out upfront fees. Cost of borrowing is total interest plus fees.",
+ "cases": [
+  {
+   "id": "two-offers",
+   "note": "Offer 1: 10000 at 6% for 36 months, Offer 2: 10000 at 5% for 48 months plus 200 fees. Each worked with Fractions: i=bps/120000, payment=P*i/(1-(1+i)^-n) rounded half up, month interest=balance*i rounded half up, last payment trued up.",
+   "input": {
+    "offers": [
+     {
+      "amount": "10,000",
+      "rate": "6",
+      "term": "36",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "$10,000",
+      "rate": "5",
+      "term": "48",
+      "termUnit": "months",
+      "fees": "$200"
+     }
+    ]
+   },
+   "expect": {
+    "offers": [
+     {
+      "principalCents": 1000000,
+      "rateBps": 600,
+      "months": 36,
+      "feesCents": 0,
+      "monthlyPaymentCents": 30422,
+      "totalPaidCents": 1095188,
+      "totalInterestCents": 95188,
+      "costOfBorrowingCents": 95188
+     },
+     {
+      "principalCents": 1000000,
+      "rateBps": 500,
+      "months": 48,
+      "feesCents": 20000,
+      "monthlyPaymentCents": 23029,
+      "totalPaidCents": 1105411,
+      "totalInterestCents": 105411,
+      "costOfBorrowingCents": 125411
+     }
+    ],
+    "lowestCost": {
+     "offers": [
+      0
+     ],
+     "tie": false
+    },
+    "lowestPayment": {
+     "offers": [
+      1
+     ],
+     "tie": false
+    },
+    "sameAmountAndLength": false
+   }
+  },
+  {
+   "id": "three-offers",
+   "note": "Three offers: 20000 at 7.25% 5 years fees 500; 20000 at 6.5% 60 months fees 900; 20000 at 8% 4 years fees 0.",
+   "input": {
+    "offers": [
+     {
+      "amount": "20000",
+      "rate": "7.25",
+      "term": "5",
+      "termUnit": "years",
+      "fees": "500"
+     },
+     {
+      "amount": "20000",
+      "rate": "6.5",
+      "term": "60",
+      "termUnit": "months",
+      "fees": "900"
+     },
+     {
+      "amount": "20000",
+      "rate": "8",
+      "term": "4",
+      "termUnit": "years",
+      "fees": ""
+     }
+    ]
+   },
+   "expect": {
+    "offers": [
+     {
+      "principalCents": 2000000,
+      "rateBps": 725,
+      "months": 60,
+      "feesCents": 50000,
+      "monthlyPaymentCents": 39839,
+      "totalPaidCents": 2390320,
+      "totalInterestCents": 390320,
+      "costOfBorrowingCents": 440320
+     },
+     {
+      "principalCents": 2000000,
+      "rateBps": 650,
+      "months": 60,
+      "feesCents": 90000,
+      "monthlyPaymentCents": 39132,
+      "totalPaidCents": 2347943,
+      "totalInterestCents": 347943,
+      "costOfBorrowingCents": 437943
+     },
+     {
+      "principalCents": 2000000,
+      "rateBps": 800,
+      "months": 48,
+      "feesCents": 0,
+      "monthlyPaymentCents": 48826,
+      "totalPaidCents": 2343641,
+      "totalInterestCents": 343641,
+      "costOfBorrowingCents": 343641
+     }
+    ],
+    "lowestCost": {
+     "offers": [
+      2
+     ],
+     "tie": false
+    },
+    "lowestPayment": {
+     "offers": [
+      1
+     ],
+     "tie": false
+    },
+    "sameAmountAndLength": false
+   }
+  },
+  {
+   "id": "tie-identical",
+   "note": "Two identical offers tie on payment and cost.",
+   "input": {
+    "offers": [
+     {
+      "amount": "5000",
+      "rate": "4",
+      "term": "24",
+      "termUnit": "months",
+      "fees": "50"
+     },
+     {
+      "amount": "5,000",
+      "rate": "4.00",
+      "term": "2",
+      "termUnit": "years",
+      "fees": "$50"
+     }
+    ]
+   },
+   "expect": {
+    "offers": [
+     {
+      "principalCents": 500000,
+      "rateBps": 400,
+      "months": 24,
+      "feesCents": 5000,
+      "monthlyPaymentCents": 21712,
+      "totalPaidCents": 521098,
+      "totalInterestCents": 21098,
+      "costOfBorrowingCents": 26098
+     },
+     {
+      "principalCents": 500000,
+      "rateBps": 400,
+      "months": 24,
+      "feesCents": 5000,
+      "monthlyPaymentCents": 21712,
+      "totalPaidCents": 521098,
+      "totalInterestCents": 21098,
+      "costOfBorrowingCents": 26098
+     }
+    ],
+    "lowestCost": {
+     "offers": [
+      0,
+      1
+     ],
+     "tie": true
+    },
+    "lowestPayment": {
+     "offers": [
+      0,
+      1
+     ],
+     "tie": true
+    },
+    "sameAmountAndLength": true
+   }
+  },
+  {
+   "id": "tie-payment-only",
+   "note": "Same payment, different fees: zero rate 1200 over 12 months is 100.00 both; fees differ so cost differs.",
+   "input": {
+    "offers": [
+     {
+      "amount": "1200",
+      "rate": "0",
+      "term": "12",
+      "termUnit": "months",
+      "fees": "0"
+     },
+     {
+      "amount": "1200",
+      "rate": "0",
+      "term": "12",
+      "termUnit": "months",
+      "fees": "25"
+     }
+    ]
+   },
+   "expect": {
+    "offers": [
+     {
+      "principalCents": 120000,
+      "rateBps": 0,
+      "months": 12,
+      "feesCents": 0,
+      "monthlyPaymentCents": 10000,
+      "totalPaidCents": 120000,
+      "totalInterestCents": 0,
+      "costOfBorrowingCents": 0
+     },
+     {
+      "principalCents": 120000,
+      "rateBps": 0,
+      "months": 12,
+      "feesCents": 2500,
+      "monthlyPaymentCents": 10000,
+      "totalPaidCents": 120000,
+      "totalInterestCents": 0,
+      "costOfBorrowingCents": 2500
+     }
+    ],
+    "lowestCost": {
+     "offers": [
+      0
+     ],
+     "tie": false
+    },
+    "lowestPayment": {
+     "offers": [
+      0,
+      1
+     ],
+     "tie": true
+    },
+    "sameAmountAndLength": true
+   }
+  },
+  {
+   "id": "edges",
+   "note": "Rate 0, one month loan, and 1200 months.",
+   "input": {
+    "offers": [
+     {
+      "amount": "100",
+      "rate": "0",
+      "term": "1",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "100000",
+      "rate": "3.5",
+      "term": "1200",
+      "termUnit": "months",
+      "fees": ""
+     }
+    ]
+   },
+   "expect": {
+    "offers": [
+     {
+      "principalCents": 10000,
+      "rateBps": 0,
+      "months": 1,
+      "feesCents": 0,
+      "monthlyPaymentCents": 10000,
+      "totalPaidCents": 10000,
+      "totalInterestCents": 0,
+      "costOfBorrowingCents": 0
+     },
+     {
+      "principalCents": 10000000,
+      "rateBps": 350,
+      "months": 1200,
+      "feesCents": 0,
+      "monthlyPaymentCents": 30080,
+      "totalPaidCents": 36092154,
+      "totalInterestCents": 26092154,
+      "costOfBorrowingCents": 26092154
+     }
+    ],
+    "lowestCost": {
+     "offers": [
+      0
+     ],
+     "tie": false
+    },
+    "lowestPayment": {
+     "offers": [
+      0
+     ],
+     "tie": false
+    },
+    "sameAmountAndLength": false
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "blank-both",
+   "input": {
+    "offers": [
+     {
+      "amount": "",
+      "rate": "",
+      "term": "",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "",
+      "rate": "",
+      "term": "",
+      "termUnit": "months",
+      "fees": ""
+     }
+    ]
+   },
+   "errors": [
+    [
+     0,
+     "amount",
+     "missing"
+    ],
+    [
+     0,
+     "rate",
+     "missing"
+    ],
+    [
+     0,
+     "term",
+     "missing"
+    ],
+    [
+     1,
+     "amount",
+     "missing"
+    ],
+    [
+     1,
+     "rate",
+     "missing"
+    ],
+    [
+     1,
+     "term",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "bad-second-amount",
+   "input": {
+    "offers": [
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "lots",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     }
+    ]
+   },
+   "errors": [
+    [
+     1,
+     "amount",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "bad-rate-term-fees",
+   "input": {
+    "offers": [
+     {
+      "amount": "1000",
+      "rate": "101",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "1201",
+      "termUnit": "months",
+      "fees": "x"
+     }
+    ]
+   },
+   "errors": [
+    [
+     0,
+     "rate",
+     "bad"
+    ],
+    [
+     1,
+     "term",
+     "bad"
+    ],
+    [
+     1,
+     "fees",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "one-offer",
+   "input": {
+    "offers": [
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     }
+    ]
+   },
+   "errors": [
+    [
+     null,
+     "offers",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "four-offers",
+   "input": {
+    "offers": [
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     }
+    ]
+   },
+   "errors": [
+    [
+     null,
+     "offers",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "third-half-typed",
+   "input": {
+    "offers": [
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "1000",
+      "rate": "5",
+      "term": "12",
+      "termUnit": "months",
+      "fees": ""
+     },
+     {
+      "amount": "500",
+      "rate": "",
+      "term": "",
+      "termUnit": "months",
+      "fees": ""
+     }
+    ]
+   },
+   "errors": [
+    [
+     2,
+     "rate",
+     "missing"
+    ],
+    [
+     2,
+     "term",
+     "missing"
+    ]
+   ]
+  }
+ ]
+}

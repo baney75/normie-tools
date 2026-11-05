@@ -53,3 +53,20 @@
   overflow-wrap: anywhere;
 }
 .nt-result-body > :last-child { margin-bottom: 0; }
+
+.nt-startover { margin: var(--nt-space-4) 0; }
+.nt-startover-hint, .nt-startover-done { margin: var(--nt-space-2) 0 0; font-size: 1rem; color: var(--nt-text); }
+.nt-startover-btn {
+  min-height: 44px;
+  padding: 0 var(--nt-space-4);
+  font: inherit;
+  font-size: 1rem;
+  color: var(--nt-ink);
+  background: transparent;
+  border: 1px solid var(--nt-line);
+  border-radius: var(--nt-radius);
+  cursor: pointer;
+}
+.nt-startover-btn:hover:not(:disabled) { border-color: var(--nt-ink); }
+.nt-startover-btn:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-startover-btn:disabled { opacity: 0.6; cursor: default; }

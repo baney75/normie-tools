@@ -33,11 +33,13 @@
     {
       "id": "monthly-budget",
       "name": "Monthly Budget",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "Money",
       "routes": [
         "/tools/monthly-budget"
-      ]
+      ],
+      "claimsPath": "tools/monthly-budget/claims.json",
+      "takesFiles": false
     },
     {
       "id": "bill-due-reminders",
@@ -79,20 +81,24 @@
     {
       "id": "savings-goal-tracker",
       "name": "Savings Goal Tracker",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "Money",
       "routes": [
         "/tools/savings-goal-tracker"
-      ]
+      ],
+      "claimsPath": "tools/savings-goal-tracker/claims.json",
+      "takesFiles": false
     },
     {
       "id": "debt-payoff-planner",
       "name": "Debt Payoff Planner",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "Money",
       "routes": [
         "/tools/debt-payoff-planner"
-      ]
+      ],
+      "claimsPath": "tools/debt-payoff-planner/claims.json",
+      "takesFiles": false
     },
     {
       "id": "loan-explainer",
@@ -103,6 +109,39 @@
         "/tools/loan-explainer"
       ],
       "claimsPath": "tools/loan-explainer/claims.json",
+      "takesFiles": false
+    },
+    {
+      "id": "loan-offer-compare",
+      "name": "Loan Offer Compare",
+      "status": "shipped",
+      "group": "Money",
+      "routes": [
+        "/tools/loan-offer-compare"
+      ],
+      "claimsPath": "tools/loan-offer-compare/claims.json",
+      "takesFiles": false
+    },
+    {
+      "id": "mortgage-payment-explainer",
+      "name": "Mortgage Payment Explainer",
+      "status": "shipped",
+      "group": "Money",
+      "routes": [
+        "/tools/mortgage-payment-explainer"
+      ],
+      "claimsPath": "tools/mortgage-payment-explainer/claims.json",
+      "takesFiles": false
+    },
+    {
+      "id": "student-loan-growth-and-payoff",
+      "name": "Student Loan Growth and Payoff",
+      "status": "shipped",
+      "group": "Money",
+      "routes": [
+        "/tools/student-loan-growth-and-payoff"
+      ],
+      "claimsPath": "tools/student-loan-growth-and-payoff/claims.json",
       "takesFiles": false
     },
     {
@@ -329,11 +368,13 @@
     {
       "id": "unit-converter",
       "name": "Unit Converter",
-      "status": "coming_soon",
+      "status": "shipped",
       "group": "Converters",
       "routes": [
         "/tools/unit-converter"
-      ]
+      ],
+      "claimsPath": "tools/unit-converter/claims.json",
+      "takesFiles": false
     },
     {
       "id": "storage-checker",

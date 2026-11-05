@@ -1,0 +1,10 @@
+{
+  "income": [{ "name": "Pay", "amount": "3,000" }],
+  "expenses": [
+    { "name": "Rent or mortgage", "amount": "1,200" },
+    { "name": "Food", "amount": "450" },
+    { "name": "Bills", "amount": "300" },
+    { "name": "Transport", "amount": "250" },
+    { "name": "Other", "amount": "100" }
+  ]
+}

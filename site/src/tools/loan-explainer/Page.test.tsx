@@ -88,7 +88,7 @@ describe("Loan Explainer page", () => {
   it("says it is an estimate, says the lender shows the APR, and explains the words", () => {
     render(<Page />);
     expect(screen.getByText("This is an estimate from the numbers you typed. Your lender's paper wins.")).toBeInTheDocument();
-    expect(screen.getByText(/does not work out the APR/)).toBeInTheDocument();
+    expect(screen.getByText(/APR is the yearly cost of the loan/)).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 
@@ -145,5 +145,20 @@ describe("Loan Explainer copy", () => {
   });
   it("never gives advice", () => {
     expect(strings.join(" ")).not.toMatch(/\byou should\b|\bwe recommend\b|\bbest loan\b|\btake this loan\b/i);
+  });
+});
+
+describe("loan-explainer Start over", () => {
+  it("clears the first box and the saved copy, then puts it back", async () => {
+    render(<Page />);
+    const box = () => screen.getAllByRole("textbox")[0];
+    await userEvent.type(box(), "1234");
+    expect(window.localStorage.getItem("nt:flow:loan-explainer")).not.toBeNull();
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    expect(box()).toHaveValue("");
+    expect(window.localStorage.getItem("nt:flow:loan-explainer")).toBeNull();
+    expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Put it back" }));
+    expect(box()).toHaveValue("1234");
   });
 });

@@ -1,0 +1,6 @@
+{
+  "skill": "mortgage-payment-explainer",
+  "task": "I want to buy a $300,000 home with $60,000 down, a 6% yearly rate for 30 years, $3,600 yearly property tax, $1,200 yearly insurance and $50 a month HOA. What is my monthly payment?",
+  "files": ["examples/basic-home.json"],
+  "expect": ["total monthly payment is 1,888.92", "principal and interest is 1,438.92", "total interest is 278,012.58", "says it is an estimate and the lender's paper wins", "gives no advice about buying or taking the loan", "does not say what rates or taxes are typical"]
+}

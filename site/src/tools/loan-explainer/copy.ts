@@ -67,7 +67,7 @@ export const COPY = {
   },
   notes: {
     estimate: "This is an estimate from the numbers you typed. Your lender's paper wins.",
-    apr: "This does not work out the APR. Your lender's paper shows the APR.",
+    apr: "APR is the yearly cost of the loan, counting some fees. Your lender's paper shows it. This tool does not work it out.",
   },
   back: "Back to home",
 } as const;

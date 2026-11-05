@@ -1,0 +1,817 @@
+{
+ "note": "Computed with Python Fractions (exact interest, round half up) and plain loops, independent of calc.mjs. Money is cents, rates are basis points. minPayment.exactFormulaCents is the unrounded textbook payment, shown only to prove the found payment is within a few cents of it.",
+ "money": [
+  {
+   "text": "1,000",
+   "cents": 100000
+  },
+  {
+   "text": "$1,000.50",
+   "cents": 100050
+  },
+  {
+   "text": " 12 ",
+   "cents": 1200
+  },
+  {
+   "text": "1e3",
+   "cents": null
+  },
+  {
+   "text": "-5",
+   "cents": -500
+  },
+  {
+   "text": "0",
+   "cents": 0
+  },
+  {
+   "text": "",
+   "cents": null
+  },
+  {
+   "text": "abc",
+   "cents": null
+  },
+  {
+   "text": "😀",
+   "cents": null
+  },
+  {
+   "text": "NaN",
+   "cents": null
+  },
+  {
+   "text": "1000000000000000",
+   "cents": null
+  },
+  {
+   "text": "1.005",
+   "cents": null
+  },
+  {
+   "text": "1.50",
+   "cents": 150
+  },
+  {
+   "text": ".5",
+   "cents": 50
+  },
+  {
+   "text": "12.",
+   "cents": 1200
+  },
+  {
+   "text": "1,00",
+   "cents": null
+  },
+  {
+   "text": "$ 7",
+   "cents": 700
+  }
+ ],
+ "rate": [
+  {
+   "text": "6.5",
+   "bps": 650
+  },
+  {
+   "text": "6.5%",
+   "bps": 650
+  },
+  {
+   "text": "0",
+   "bps": 0
+  },
+  {
+   "text": " 12.25 ",
+   "bps": 1225
+  },
+  {
+   "text": "1e1",
+   "bps": null
+  },
+  {
+   "text": "-1",
+   "bps": -100
+  },
+  {
+   "text": "",
+   "bps": null
+  },
+  {
+   "text": "x",
+   "bps": null
+  },
+  {
+   "text": "6.555",
+   "bps": null
+  },
+  {
+   "text": "100",
+   "bps": 10000
+  },
+  {
+   "text": ".25",
+   "bps": 25
+  }
+ ],
+ "loans": [
+  {
+   "id": "grad-no-cap",
+   "note": "P=20,000.00 at 5%: month interest=round_half_up(2000000*500/120000)=8333c; 6 months wait -> 49998c unpaid. Toggle off: interest keeps being figured on 20,000.00 only; payment pays unpaid interest first. Schedule run by exact Fraction arithmetic; last payment trued up. Min payment found by stepping a payment up or down from the textbook formula until the 120 payment loan just clears.",
+   "input": {
+    "balance": "$20,000",
+    "rate": "5",
+    "waitMonths": "6",
+    "capitalize": false,
+    "payment": "300",
+    "start": "2026-09",
+    "years": "10"
+   },
+   "expect": {
+    "monthlyInterestCents": 8333,
+    "unpaidInterestCents": 49998,
+    "balanceAtStartCents": 2049998,
+    "payoff": {
+     "months": 81,
+     "totalPaidCents": 2417144,
+     "totalInterestCents": 417144,
+     "payoffDate": {
+      "year": 2033,
+      "month": 5,
+      "label": "May 2033"
+     },
+     "byYear": [
+      {
+       "year": 1,
+       "paidCents": 360000,
+       "interestCents": 146142,
+       "principalCents": 213858,
+       "balanceCents": 1786142
+      },
+      {
+       "year": 2,
+       "paidCents": 360000,
+       "interestCents": 83016,
+       "principalCents": 276984,
+       "balanceCents": 1509158
+      },
+      {
+       "year": 3,
+       "paidCents": 360000,
+       "interestCents": 68844,
+       "principalCents": 291156,
+       "balanceCents": 1218002
+      },
+      {
+       "year": 4,
+       "paidCents": 360000,
+       "interestCents": 53950,
+       "principalCents": 306050,
+       "balanceCents": 911952
+      },
+      {
+       "year": 5,
+       "paidCents": 360000,
+       "interestCents": 38292,
+       "principalCents": 321708,
+       "balanceCents": 590244
+      },
+      {
+       "year": 6,
+       "paidCents": 360000,
+       "interestCents": 21832,
+       "principalCents": 338168,
+       "balanceCents": 252076
+      },
+      {
+       "year": 7,
+       "paidCents": 257144,
+       "interestCents": 5068,
+       "principalCents": 252076,
+       "balanceCents": 0
+      }
+     ]
+    },
+    "minPayment": {
+     "years": 10,
+     "months": 120,
+     "paymentCents": 21739
+    }
+   }
+  },
+  {
+   "id": "grad-cap",
+   "note": "Same loan, toggle on: 49998c unpaid interest is added to the principal when payments start (balance 2,049,998c), then standard amortization at 5%/12.",
+   "input": {
+    "balance": "20000",
+    "rate": "5",
+    "waitMonths": "6",
+    "capitalize": true,
+    "payment": "300",
+    "start": "2026-09",
+    "years": "10"
+   },
+   "expect": {
+    "monthlyInterestCents": 8333,
+    "unpaidInterestCents": 49998,
+    "balanceAtStartCents": 2049998,
+    "payoff": {
+     "months": 81,
+     "totalPaidCents": 2417647,
+     "totalInterestCents": 417647,
+     "payoffDate": {
+      "year": 2033,
+      "month": 5,
+      "label": "May 2033"
+     },
+     "byYear": [
+      {
+       "year": 1,
+       "paidCents": 360000,
+       "interestCents": 96516,
+       "principalCents": 263484,
+       "balanceCents": 1786514
+      },
+      {
+       "year": 2,
+       "paidCents": 360000,
+       "interestCents": 83037,
+       "principalCents": 276963,
+       "balanceCents": 1509551
+      },
+      {
+       "year": 3,
+       "paidCents": 360000,
+       "interestCents": 68867,
+       "principalCents": 291133,
+       "balanceCents": 1218418
+      },
+      {
+       "year": 4,
+       "paidCents": 360000,
+       "interestCents": 53972,
+       "principalCents": 306028,
+       "balanceCents": 912390
+      },
+      {
+       "year": 5,
+       "paidCents": 360000,
+       "interestCents": 38315,
+       "principalCents": 321685,
+       "balanceCents": 590705
+      },
+      {
+       "year": 6,
+       "paidCents": 360000,
+       "interestCents": 21856,
+       "principalCents": 338144,
+       "balanceCents": 252561
+      },
+      {
+       "year": 7,
+       "paidCents": 257647,
+       "interestCents": 5086,
+       "principalCents": 252561,
+       "balanceCents": 0
+      }
+     ]
+    },
+    "minPayment": {
+     "years": 10,
+     "months": 120,
+     "paymentCents": 21744,
+     "exactFormulaCents": 21743.4094
+    }
+   }
+  },
+  {
+   "id": "zero-rate",
+   "note": "Rate 0: no interest, 12,000.00 / 250.00 = 48 payments exactly. Start 2027-01 so the last payment is month 48 = December 2030. Min payment for 4 years = 1,200,000/48 = 25,000c.",
+   "input": {
+    "balance": "12,000",
+    "rate": "0",
+    "waitMonths": "10",
+    "capitalize": false,
+    "payment": "250",
+    "start": "2027-01",
+    "years": "4"
+   },
+   "expect": {
+    "monthlyInterestCents": 0,
+    "unpaidInterestCents": 0,
+    "balanceAtStartCents": 1200000,
+    "payoff": {
+     "months": 48,
+     "totalPaidCents": 1200000,
+     "totalInterestCents": 0,
+     "payoffDate": {
+      "year": 2030,
+      "month": 12,
+      "label": "December 2030"
+     },
+     "byYear": [
+      {
+       "year": 1,
+       "paidCents": 300000,
+       "interestCents": 0,
+       "principalCents": 300000,
+       "balanceCents": 900000
+      },
+      {
+       "year": 2,
+       "paidCents": 300000,
+       "interestCents": 0,
+       "principalCents": 300000,
+       "balanceCents": 600000
+      },
+      {
+       "year": 3,
+       "paidCents": 300000,
+       "interestCents": 0,
+       "principalCents": 300000,
+       "balanceCents": 300000
+      },
+      {
+       "year": 4,
+       "paidCents": 300000,
+       "interestCents": 0,
+       "principalCents": 300000,
+       "balanceCents": 0
+      }
+     ]
+    },
+    "minPayment": {
+     "years": 4,
+     "months": 48,
+     "paymentCents": 25000,
+     "exactFormulaCents": 25000.0
+    }
+   }
+  },
+  {
+   "id": "one-payment",
+   "note": "Balance 1,000.00 at 6%: month interest 500c. Payment 2,000.00 is more than the 1,000.00 plus 5.00 interest, so the one payment is 100,500c and the loan is paid in 1 month. Start 2026-12 so payoff is December 2026.",
+   "input": {
+    "balance": "1000",
+    "rate": "6",
+    "waitMonths": "",
+    "capitalize": false,
+    "payment": "2000",
+    "start": "2026-12",
+    "years": "1"
+   },
+   "expect": {
+    "monthlyInterestCents": 500,
+    "unpaidInterestCents": 0,
+    "balanceAtStartCents": 100000,
+    "payoff": {
+     "months": 1,
+     "totalPaidCents": 100500,
+     "totalInterestCents": 500,
+     "payoffDate": {
+      "year": 2026,
+      "month": 12,
+      "label": "December 2026"
+     },
+     "byYear": [
+      {
+       "year": 1,
+       "paidCents": 100500,
+       "interestCents": 500,
+       "principalCents": 100000,
+       "balanceCents": 0
+      }
+     ]
+    },
+    "minPayment": {
+     "years": 1,
+     "months": 12,
+     "paymentCents": 8607,
+     "exactFormulaCents": 8606.643
+    }
+   }
+  },
+  {
+   "id": "long-wait-cap",
+   "note": "P=50,000.00 at 7.5%: month interest=round_half_up(5000000*750/120000)=31250c, 48 months -> 1,500,000c unpaid, balance 6,500,000c. Toggle on. Start 2030-03, payoff date counted from that month.",
+   "input": {
+    "balance": "50,000",
+    "rate": "7.5",
+    "waitMonths": "48",
+    "capitalize": true,
+    "payment": "$600",
+    "start": "2030-03",
+    "years": "20"
+   },
+   "expect": {
+    "monthlyInterestCents": 31250,
+    "unpaidInterestCents": 1500000,
+    "balanceAtStartCents": 6500000,
+    "payoff": {
+     "months": 182,
+     "totalPaidCents": 10885385,
+     "totalInterestCents": 5885385,
+     "payoffDate": {
+      "year": 2045,
+      "month": 4,
+      "label": "April 2045"
+     },
+     "byYear": [
+      {
+       "year": 1,
+       "paidCents": 720000,
+       "interestCents": 479339,
+       "principalCents": 240661,
+       "balanceCents": 6259339
+      },
+      {
+       "year": 2,
+       "paidCents": 720000,
+       "interestCents": 460657,
+       "principalCents": 259343,
+       "balanceCents": 5999996
+      },
+      {
+       "year": 3,
+       "paidCents": 720000,
+       "interestCents": 440522,
+       "principalCents": 279478,
+       "balanceCents": 5720518
+      },
+      {
+       "year": 4,
+       "paidCents": 720000,
+       "interestCents": 418825,
+       "principalCents": 301175,
+       "balanceCents": 5419343
+      },
+      {
+       "year": 5,
+       "paidCents": 720000,
+       "interestCents": 395446,
+       "principalCents": 324554,
+       "balanceCents": 5094789
+      },
+      {
+       "year": 6,
+       "paidCents": 720000,
+       "interestCents": 370246,
+       "principalCents": 349754,
+       "balanceCents": 4745035
+      },
+      {
+       "year": 7,
+       "paidCents": 720000,
+       "interestCents": 343097,
+       "principalCents": 376903,
+       "balanceCents": 4368132
+      },
+      {
+       "year": 8,
+       "paidCents": 720000,
+       "interestCents": 313837,
+       "principalCents": 406163,
+       "balanceCents": 3961969
+      },
+      {
+       "year": 9,
+       "paidCents": 720000,
+       "interestCents": 282303,
+       "principalCents": 437697,
+       "balanceCents": 3524272
+      },
+      {
+       "year": 10,
+       "paidCents": 720000,
+       "interestCents": 248325,
+       "principalCents": 471675,
+       "balanceCents": 3052597
+      },
+      {
+       "year": 11,
+       "paidCents": 720000,
+       "interestCents": 211710,
+       "principalCents": 508290,
+       "balanceCents": 2544307
+      },
+      {
+       "year": 12,
+       "paidCents": 720000,
+       "interestCents": 172248,
+       "principalCents": 547752,
+       "balanceCents": 1996555
+      },
+      {
+       "year": 13,
+       "paidCents": 720000,
+       "interestCents": 129724,
+       "principalCents": 590276,
+       "balanceCents": 1406279
+      },
+      {
+       "year": 14,
+       "paidCents": 720000,
+       "interestCents": 83900,
+       "principalCents": 636100,
+       "balanceCents": 770179
+      },
+      {
+       "year": 15,
+       "paidCents": 720000,
+       "interestCents": 34519,
+       "principalCents": 685481,
+       "balanceCents": 84698
+      },
+      {
+       "year": 16,
+       "paidCents": 85385,
+       "interestCents": 687,
+       "principalCents": 84698,
+       "balanceCents": 0
+      }
+     ]
+    },
+    "minPayment": {
+     "years": 20,
+     "months": 240,
+     "paymentCents": 52364,
+     "exactFormulaCents": 52363.5576
+    }
+   }
+  },
+  {
+   "id": "balance-only",
+   "note": "P=5,000.00 at 4.5%, no payment typed: month interest=round_half_up(500000*450/120000)=1875c, times 12 = 22500c, balance 522,500c. No payoff section.",
+   "input": {
+    "balance": "5000",
+    "rate": "4.5",
+    "waitMonths": "12",
+    "capitalize": false,
+    "payment": "",
+    "start": "",
+    "years": ""
+   },
+   "expect": {
+    "monthlyInterestCents": 1875,
+    "unpaidInterestCents": 22500,
+    "balanceAtStartCents": 522500,
+    "payoff": null,
+    "minPayment": null
+   }
+  },
+  {
+   "id": "min-100-years",
+   "note": "10,000.00 at 6%, no wait: smallest payment that clears in 1200 payments, found by stepping from the textbook formula. Interest is 50.00 a month, so it must be just above that.",
+   "input": {
+    "balance": "10000",
+    "rate": "6",
+    "waitMonths": "",
+    "capitalize": false,
+    "payment": "",
+    "start": "",
+    "years": "100"
+   },
+   "expect": {
+    "monthlyInterestCents": 5000,
+    "unpaidInterestCents": 0,
+    "balanceAtStartCents": 1000000,
+    "payoff": null,
+    "minPayment": {
+     "years": 100,
+     "months": 1200,
+     "paymentCents": 5013,
+     "exactFormulaCents": 5012.6122
+    }
+   }
+  },
+  {
+   "id": "tiny-loan",
+   "note": "5 cents at 12%: month interest=round_half_up(5*1200/120000)=0.05 -> 0c. Payment 1c a month takes 5 payments, no interest. Start 2026-01 -> payoff May 2026.",
+   "input": {
+    "balance": "0.05",
+    "rate": "12",
+    "waitMonths": "",
+    "capitalize": false,
+    "payment": "0.01",
+    "start": "2026-01",
+    "years": ""
+   },
+   "expect": {
+    "monthlyInterestCents": 0,
+    "unpaidInterestCents": 0,
+    "balanceAtStartCents": 5,
+    "payoff": {
+     "months": 5,
+     "totalPaidCents": 5,
+     "totalInterestCents": 0,
+     "payoffDate": {
+      "year": 2026,
+      "month": 5,
+      "label": "May 2026"
+     },
+     "byYear": [
+      {
+       "year": 1,
+       "paidCents": 5,
+       "interestCents": 0,
+       "principalCents": 5,
+       "balanceCents": 0
+      }
+     ]
+    },
+    "minPayment": null
+   }
+  },
+  {
+   "id": "no-start-date",
+   "note": "P=8,000.00 at 3.25%, 3 months wait, toggle off, pay 200.00, no start month: payoffDate is null.",
+   "input": {
+    "balance": "8000",
+    "rate": "3.25",
+    "waitMonths": "3",
+    "capitalize": false,
+    "payment": "200",
+    "start": "",
+    "years": ""
+   },
+   "expect": {
+    "monthlyInterestCents": 2167,
+    "unpaidInterestCents": 6501,
+    "balanceAtStartCents": 806501,
+    "payoff": {
+     "months": 43,
+     "totalPaidCents": 855180,
+     "totalInterestCents": 55180,
+     "payoffDate": null,
+     "byYear": [
+      {
+       "year": 1,
+       "paidCents": 240000,
+       "interestCents": 29482,
+       "principalCents": 210518,
+       "balanceCents": 589482
+      },
+      {
+       "year": 2,
+       "paidCents": 240000,
+       "interestCents": 15840,
+       "principalCents": 224160,
+       "balanceCents": 365322
+      },
+      {
+       "year": 3,
+       "paidCents": 240000,
+       "interestCents": 8444,
+       "principalCents": 231556,
+       "balanceCents": 133766
+      },
+      {
+       "year": 4,
+       "paidCents": 135180,
+       "interestCents": 1414,
+       "principalCents": 133766,
+       "balanceCents": 0
+      }
+     ]
+    },
+    "minPayment": null
+   }
+  }
+ ],
+ "errors": [
+  {
+   "id": "payment-too-small",
+   "input": {
+    "balance": "10000",
+    "rate": "6",
+    "waitMonths": "",
+    "capitalize": false,
+    "payment": "50",
+    "start": "",
+    "years": ""
+   },
+   "errors": [
+    [
+     "payment",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "all-blank",
+   "input": {
+    "balance": "",
+    "rate": "",
+    "waitMonths": "",
+    "capitalize": false,
+    "payment": "",
+    "start": "",
+    "years": ""
+   },
+   "errors": [
+    [
+     "balance",
+     "missing"
+    ],
+    [
+     "rate",
+     "missing"
+    ]
+   ]
+  },
+  {
+   "id": "junk-everything",
+   "input": {
+    "balance": "lots",
+    "rate": "x",
+    "waitMonths": "-1",
+    "capitalize": false,
+    "payment": "0",
+    "start": "2026-13",
+    "years": "0"
+   },
+   "errors": [
+    [
+     "balance",
+     "bad"
+    ],
+    [
+     "rate",
+     "bad"
+    ],
+    [
+     "waitMonths",
+     "bad"
+    ],
+    [
+     "payment",
+     "bad"
+    ],
+    [
+     "start",
+     "bad"
+    ],
+    [
+     "years",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "start-format",
+   "input": {
+    "balance": "100",
+    "rate": "1",
+    "waitMonths": "",
+    "capitalize": false,
+    "payment": "",
+    "start": "9/2026",
+    "years": ""
+   },
+   "errors": [
+    [
+     "start",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "wait-too-long",
+   "input": {
+    "balance": "100",
+    "rate": "1",
+    "waitMonths": "601",
+    "capitalize": false,
+    "payment": "",
+    "start": "",
+    "years": ""
+   },
+   "errors": [
+    [
+     "waitMonths",
+     "bad"
+    ]
+   ]
+  },
+  {
+   "id": "years-101",
+   "input": {
+    "balance": "100",
+    "rate": "1",
+    "waitMonths": "",
+    "capitalize": false,
+    "payment": "",
+    "start": "",
+    "years": "101"
+   },
+   "errors": [
+    [
+     "years",
+     "bad"
+    ]
+   ]
+  }
+ ]
+}

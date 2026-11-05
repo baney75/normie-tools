@@ -1,0 +1,4 @@
+{ "offers": [
+  { "amount": "$10,000", "rate": "6", "term": "36", "termUnit": "months", "fees": "" },
+  { "amount": "$10,000", "rate": "5", "term": "48", "termUnit": "months", "fees": "$200" }
+] }

@@ -1,0 +1,56 @@
+// Every person-facing word on the Monthly Budget page. Plain words, grade 6.
+// It counts what you type. It never gives advice. Page.test.tsx checks this file.
+export const COPY = {
+  title: "Monthly Budget",
+  intro: "Type what comes in and what goes out each month. See what is left.",
+  empty: "Type an amount on any line. Your totals show up below.",
+  income: { heading: "Money in each month", nameLabel: "Name of income line", add: "Add an income line", fallback: "Income line" },
+  spending: { heading: "Money out each month", nameLabel: "Name of spending line", add: "Add a spending line", fallback: "Spending line" },
+  amount: { suffix: "per month", placeholder: "0" },
+  remove: "Remove",
+  undo: "Put it back",
+  undoHelp: "You took out a line. This puts it back.",
+  full: "This list is full. Remove a line to add another.",
+  fixFirst: "Fix the notes above to see your totals.",
+  resume: {
+    title: "Use your last numbers?",
+    body: "You typed numbers here before. They were saved on your phone or computer.",
+    yes: "Use them",
+    no: "Start fresh",
+  },
+  result: {
+    leftLabel: "Left over",
+    leftPlus: "This is money in that is not spent.",
+    leftZero: "All the money in is spent.",
+    leftMinus: "More goes out than comes in. The gap is",
+    totalIncome: "Total income",
+    totalSpending: "Total spending",
+  },
+  where: {
+    heading: "Where it goes",
+    ofIncome: "of income",
+    ofSpending: "of spending",
+    noIncome: "Add income to see percents of income. These show each line as part of your spending.",
+    barNote: "Each bar is as wide as the percent. The number is written next to it.",
+  },
+  more: {
+    summary: "Show more",
+    tableHeading: "Each spending line",
+    line: "Line",
+    amount: "Amount",
+    ofIncome: "Percent of income",
+    ofSpending: "Percent of spending",
+    note: "Percents are whole numbers. They are split so the percents of spending add up to exactly 100.",
+    spentPercent: "Percent of income spent",
+  },
+  save: {
+    summary: "Save or print",
+    title: "Your monthly budget",
+    fileName: "monthly-budget.txt",
+  },
+  notes: {
+    count: "This adds up the numbers you typed. It does not tell you what to do.",
+    local: "Your numbers stay on this phone or computer. Nothing is sent anywhere.",
+  },
+  back: "Back to home",
+} as const;

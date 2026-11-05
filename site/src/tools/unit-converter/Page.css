@@ -1,0 +1,39 @@
+.nt-unit { max-width: var(--nt-measure); }
+.nt-unit-intro { font-size: 1.125rem; margin: 0 0 var(--nt-space-4); }
+.nt-unit-form { margin: 0 0 var(--nt-space-4); }
+.nt-unit-select {
+  display: block;
+  width: 100%;
+  min-height: var(--nt-tap);
+  padding: var(--nt-space-2) var(--nt-space-3);
+  font: inherit;
+  font-size: 1.125rem; /* 16px or more stops the iPhone zoom */
+  color: var(--nt-text);
+  background: var(--nt-white);
+  border: 2px solid var(--nt-ink);
+  border-radius: var(--nt-radius);
+}
+.nt-unit-select:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-unit-swap {
+  min-height: var(--nt-tap);
+  margin: 0 0 var(--nt-space-4);
+  padding: 0 var(--nt-space-3);
+  font: inherit;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--nt-ink);
+  background: var(--nt-white);
+  border: 2px solid var(--nt-ink);
+  border-radius: var(--nt-radius);
+  cursor: pointer;
+}
+.nt-unit-swap:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-unit-status { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
+.nt-unit-help { margin: 0 0 var(--nt-space-3); font-size: 1rem; color: var(--nt-muted); }
+.nt-unit-h2 { font-size: 1.25rem; margin: var(--nt-space-3) 0 var(--nt-space-2); }
+.nt-unit-facts { margin: 0 0 var(--nt-space-3); padding-left: 1.25rem; }
+.nt-unit-details { margin: 0 0 var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
+.nt-unit-details > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-3); font-weight: 700; color: var(--nt-ink); cursor: pointer; }
+.nt-unit-details > summary:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-unit-details-body { padding: 0 var(--nt-space-3) var(--nt-space-3); }
+.nt-unit .nt-result-answer { overflow-wrap: anywhere; }

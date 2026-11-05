@@ -93,3 +93,21 @@ Log of choices made while scaffolding NT. Newest first.
 
 - Local import used master.
 - Rename to main before the first GitHub push so CI and docs match the brief.
+
+## 2026-11-05 - Brand subline keeps "AI app"
+
+- The home subline "Use them yourself, or ask your AI app." stays. It is the brand subline.
+- Only that phrase is exempt from the jargon rule. Everywhere else, person-facing copy says "AI helper".
+
+## 2026-11-05 - Calculators have no primary button
+
+- The eight round-2 calculators show the answer as the person types, so there is no submit step and no main button.
+- The Haiku design rubric marks rule 1 (one main action) as FAIL for this reason on most tools. Sonnet passes several.
+- Accepted for live calculators. Other rules pass in the recorded runs (`tests/model-review/` (one JSON file per tool)).
+
+## 2026-11-05 - Round 2 shipped calculators and what was not run
+
+- Shipped: Loan Explainer, Loan Offer Compare, Mortgage Payment Explainer, Student Loan Growth and Payoff, Debt Payoff Planner, Monthly Budget, Savings Goal Tracker, Unit Converter. Each has a skill.
+- Skill evals were not run. The remote eval host was not reachable from this host (SSH key refused) and no local model is installed, so the eval runner stays a shape check. Skills are covered by Python tests with shared golden cases and the sandbox mimic test.
+- placeholder-golden-accuracy stays off: it is for Free File tax cases and File Converter document pairs, and neither shipped.
+- Tax Filing Helper, Save Me Money, Form Filler, Photo Duplicate Finder and Morning Briefing stay coming_soon (budget).

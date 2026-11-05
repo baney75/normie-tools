@@ -1,0 +1,6 @@
+{
+  "skill": "loan-offer-compare",
+  "task": "I have two offers for $10,000. One is 6% for 36 months. The other is 5% for 48 months with $200 in upfront fees. Line them up for me.",
+  "files": ["examples/two-offers.json"],
+  "expect": ["offer 1 monthly payment is 304.22 and offer 2 is 230.29", "offer 1 cost of borrowing is 951.88 and offer 2 is 1,254.11", "states offer 1 has the lowest cost of borrowing and offer 2 has the lowest monthly payment as facts", "does not call either offer best", "says it is an estimate and the lender's paper wins", "says the lender's paper shows the APR", "gives no advice about which loan to take"]
+}

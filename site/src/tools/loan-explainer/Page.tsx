@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, MoneyField, NumberField, PercentField, ResultCard } from "../../components/calc";
+import { ErrorNote, MoneyField, NumberField, PercentField, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -116,6 +116,8 @@ export function Page() {
             error={bad("extra")}
           />
         </form>
+
+        <StartOver flowId="loan-explainer" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
         {result.ok ? <Answer result={result} /> : null}
 

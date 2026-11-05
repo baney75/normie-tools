@@ -1,0 +1,14 @@
+{
+  "claims": [
+    { "id": "monthly-interest-exact", "text": "Each month's interest on each debt is balance times yearly rate divided by 12, rounded half up to the cent." },
+    { "id": "months-to-debt-free-exact", "text": "Months to debt-free for each plan is counted month by month, exactly." },
+    { "id": "total-interest-exact", "text": "Total interest for each plan is the sum of every month's interest, to the cent." },
+    { "id": "payoff-order-exact", "text": "The order of payoff lists each debt with the month it reaches zero." },
+    { "id": "rolled-minimums-exact", "text": "When a debt is paid off, its smallest payment rolls into the next debt in line." },
+    { "id": "plans-difference-exact", "text": "The difference shows how many months and how many dollars of interest the two plans are apart." },
+    { "id": "payment-too-small-says-so", "text": "If a smallest payment does not cover the first month's interest, the tool says so plainly and works out nothing." },
+    { "id": "stops-at-1200-months", "text": "A plan that would pass 1,200 months stops with a plain message instead of looping." },
+    { "id": "messy-input-never-nan", "text": "Messy typing never gives a wrong number, NaN or a crash." },
+    { "id": "plain-error-words", "text": "A bad entry gets a calm message in plain words that names the debt and the field." }
+  ]
+}

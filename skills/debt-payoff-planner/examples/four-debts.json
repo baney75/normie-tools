@@ -1,0 +1,6 @@
+{ "debts": [
+  { "name": "Card A", "balance": "500", "rate": "18", "minimum": "25" },
+  { "name": "Card B", "balance": "$2,500", "rate": "22.99", "minimum": "60" },
+  { "name": "Loan", "balance": "5,000", "rate": "6.5", "minimum": "100" },
+  { "name": "Car", "balance": "9,000", "rate": "4.9", "minimum": "200" }
+], "extra": "100" }

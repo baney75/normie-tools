@@ -1,0 +1,6 @@
+{
+  "skill": "savings-goal-tracker",
+  "task": "I want to save $5,000. I have $500 saved and I put away $250 a month, starting 2026-12. How long until I get there?",
+  "files": ["examples/months-to-goal.json"],
+  "expect": ["says 18 months", "says it lands in May 2028", "says it is an estimate and the bank's paper wins", "gives no advice about how much to save", "keeps the words plain"]
+}

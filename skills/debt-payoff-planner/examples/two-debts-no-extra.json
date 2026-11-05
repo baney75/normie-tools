@@ -1,0 +1,4 @@
+{ "debts": [
+  { "name": "Store card", "balance": "1,200", "rate": "24.99", "minimum": "45" },
+  { "name": "Family loan", "balance": "3,000", "rate": "0", "minimum": "150" }
+], "extra": "" }
