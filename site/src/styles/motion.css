@@ -1,0 +1,6 @@
+/*
+ * Reduced motion. Source: plan/v5-work/no-clutter-rule.md.
+ * NT adds no animation by default. If the device asks for less, there is none at all.
+ * Scripted motion must also check src/lib/prefersReducedMotion.ts first.
+ */
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

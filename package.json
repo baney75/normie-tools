@@ -20,9 +20,14 @@
     "check:reading-level": "node scripts/check-reading-level.mjs",
     "check:no-clutter": "node scripts/check-no-clutter.mjs",
     "check:links": "node scripts/check-links.mjs",
-    "test:unit": "node --test \"scripts/tests/*.test.mjs\""
+    "test:unit": "node --test \"scripts/tests/*.test.mjs\"",
+    "build": "npm run build --workspace @nt/site",
+    "test:site": "npm test --workspace @nt/site"
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.24.0"
-  }
+  },
+  "workspaces": [
+    "site"
+  ]
 }

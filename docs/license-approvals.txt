@@ -6,3 +6,14 @@
 # argparse: Python-2.0 and PSF-2.0, both permissive. Dev tool dependency of
 # markdownlint-cli2. Never shipped to people.
 argparse
+#
+# SIL Open Font License 1.1 (OFL-1.1). These two packages ship the Fraunces and
+# Figtree font files, which the site serves itself. OFL allows bundling and
+# redistribution of the fonts unmodified, and the font files are not sold alone.
+# The license text ships in each package. Brand fonts, see brand/tokens.json.
+@fontsource-variable/fraunces
+@fontsource-variable/figtree
+#
+# lru-cache: BlueOak-1.0.0, a permissive license. Pulled in by jsdom, a test-only
+# dependency of site/. Never shipped to people.
+lru-cache
