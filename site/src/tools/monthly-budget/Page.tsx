@@ -111,7 +111,6 @@ export function Page() {
                       />
                       <MoneyField
                         label={`${label}, ${COPY.amount.suffix}`}
-                        placeholder={COPY.amount.placeholder}
                         autoFocus={kind === "income" && i === 0}
                         value={l.amount}
                         onChange={(t) => change(kind, l.id, { amount: t })}

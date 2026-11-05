@@ -7,7 +7,7 @@ export const COPY = {
   kind: { label: "What are you measuring?", hint: "Tap a box with a list to see your choices." },
   from: { label: "Change from" },
   to: { label: "Change to" },
-  value: { label: "Number", hint: "Like 12 or 3.5. Commas are fine.", placeholder: "12" },
+  value: { label: "Number", hint: "Commas are fine. For example: 12 or 3.5." },
   swap: "Swap 'from' and 'to'",
   swapHint: "Tap it again to swap back.",
   swapped: "Swapped.",

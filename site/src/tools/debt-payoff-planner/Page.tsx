@@ -92,7 +92,6 @@ export function Page() {
                 <MoneyField
                   label={`${label} ${COPY.balance.label}`}
                   hint={COPY.balance.hint}
-                  placeholder={COPY.balance.placeholder}
                   value={d.balance}
                   onChange={(t) => setDebt(i, { balance: t })}
                   error={bad(`balance${r}`)}
@@ -100,7 +99,6 @@ export function Page() {
                 <PercentField
                   label={`${label} ${COPY.rate.label}`}
                   hint={COPY.rate.hint}
-                  placeholder={COPY.rate.placeholder}
                   value={d.rate}
                   onChange={(t) => setDebt(i, { rate: t })}
                   error={bad(`rate${r}`)}
@@ -108,7 +106,6 @@ export function Page() {
                 <MoneyField
                   label={`${label} ${COPY.minimum.label}`}
                   hint={COPY.minimum.hint}
-                  placeholder={COPY.minimum.placeholder}
                   value={d.minimum}
                   onChange={(t) => setDebt(i, { minimum: t })}
                   error={bad(`minimum${r}`)}
@@ -141,7 +138,6 @@ export function Page() {
           <MoneyField
             label={COPY.extra.label}
             hint={COPY.extra.hint}
-            placeholder={COPY.extra.placeholder}
             optional
             value={v.extra}
             onChange={(t) => flow.setValue({ ...v, extra: t })}

@@ -58,9 +58,9 @@ export function Page() {
         ) : null}
 
         <form className="nt-slg-form" onSubmit={(e) => e.preventDefault()} noValidate>
-          <MoneyField label={COPY.balance.label} hint={COPY.balance.hint} placeholder={COPY.balance.placeholder} autoFocus value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />
-          <PercentField label={COPY.rate.label} hint={COPY.rate.hint} placeholder={COPY.rate.placeholder} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />
-          <NumberField label={COPY.wait.label} hint={COPY.wait.hint} placeholder={COPY.wait.placeholder} unit={COPY.wait.unit} optional value={v.waitMonths} onChange={(t) => set({ waitMonths: t })} error={bad("waitMonths")} />
+          <MoneyField label={COPY.balance.label} hint={COPY.balance.hint} autoFocus value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />
+          <PercentField label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />
+          <NumberField label={COPY.wait.label} hint={COPY.wait.hint} unit={COPY.wait.unit} optional value={v.waitMonths} onChange={(t) => set({ waitMonths: t })} error={bad("waitMonths")} />
           <div className="nt-slg-toggle">
             <input id="nt-slg-capitalize" type="checkbox" aria-describedby="nt-slg-capitalize-hint" checked={v.capitalize} onChange={(e) => set({ capitalize: e.target.checked })} />
             <span className="nt-slg-toggle-text">
@@ -68,9 +68,9 @@ export function Page() {
               <span id="nt-slg-capitalize-hint" className="nt-slg-toggle-hint">{COPY.toggle.hint}</span>
             </span>
           </div>
-          <MoneyField label={COPY.payment.label} hint={COPY.payment.hint} placeholder={COPY.payment.placeholder} optional value={v.payment} onChange={(t) => set({ payment: t })} error={bad("payment")} />
-          <Field label={COPY.start.label} hint={COPY.start.hint} placeholder={COPY.start.placeholder} optional inputMode="text" value={v.start} onChange={(t) => set({ start: t })} error={bad("start")} />
-          <NumberField label={COPY.years.label} hint={COPY.years.hint} placeholder={COPY.years.placeholder} optional value={v.years} onChange={(t) => set({ years: t })} error={bad("years")} />
+          <MoneyField label={COPY.payment.label} hint={COPY.payment.hint} optional value={v.payment} onChange={(t) => set({ payment: t })} error={bad("payment")} />
+          <Field label={COPY.start.label} hint={COPY.start.hint} optional inputMode="text" value={v.start} onChange={(t) => set({ start: t })} error={bad("start")} />
+          <NumberField label={COPY.years.label} hint={COPY.years.hint} optional value={v.years} onChange={(t) => set({ years: t })} error={bad("years")} />
         </form>
 
         <StartOver flowId="student-loan-growth-and-payoff" value={flow.value} empty={EMPTY} onChange={flow.setValue} />

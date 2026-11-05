@@ -6,7 +6,7 @@ export const COPY = {
   waiting: "Your answer shows here",
   income: { heading: "Money in each month", nameLabel: "Name of income item", add: "Add an income item", fallback: "Income item" },
   spending: { heading: "Money out each month", nameLabel: "Name of spending item", add: "Add a spending item", fallback: "Spending item" },
-  amount: { suffix: "per month", placeholder: "0" },
+  amount: { suffix: "per month" },
   remove: "Remove",
   removeHint: "Remove takes out one line. Put it back brings it back.",
   undo: "Put it back",

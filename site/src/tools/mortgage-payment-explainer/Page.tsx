@@ -63,13 +63,13 @@ export function Page() {
         ) : null}
 
         <form className="nt-mort-form" onSubmit={(e) => e.preventDefault()} noValidate>
-          <MoneyField autoFocus label={COPY.price.label} hint={COPY.price.hint} placeholder={COPY.price.placeholder}
+          <MoneyField autoFocus label={COPY.price.label} hint={COPY.price.hint}
             value={v.price} onChange={(t) => set({ price: t })} error={bad("price")} />
-          <MoneyField label={COPY.down.label} hint={COPY.down.hint} placeholder={COPY.down.placeholder}
+          <MoneyField label={COPY.down.label} hint={COPY.down.hint}
             value={v.down} onChange={(t) => set({ down: t })} error={bad("down")} />
-          <PercentField label={COPY.rate.label} hint={COPY.rate.hint} placeholder={COPY.rate.placeholder}
+          <PercentField label={COPY.rate.label} hint={COPY.rate.hint}
             value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />
-          <NumberField label={COPY.term.label} hint={COPY.term.hint} placeholder={COPY.term.placeholder}
+          <NumberField label={COPY.term.label} hint={COPY.term.hint}
             value={v.term} onChange={(t) => set({ term: t })} error={bad("term")} />
           <fieldset className="nt-mort-quick">
             <legend>{COPY.term.quickLegend}</legend>
@@ -82,13 +82,13 @@ export function Page() {
               ))}
             </div>
           </fieldset>
-          <MoneyField label={COPY.tax.label} hint={COPY.tax.hint} placeholder={COPY.tax.placeholder} optional
+          <MoneyField label={COPY.tax.label} hint={COPY.tax.hint} optional
             value={v.tax} onChange={(t) => set({ tax: t })} error={bad("tax")} />
-          <MoneyField label={COPY.insurance.label} hint={COPY.insurance.hint} placeholder={COPY.insurance.placeholder} optional
+          <MoneyField label={COPY.insurance.label} hint={COPY.insurance.hint} optional
             value={v.insurance} onChange={(t) => set({ insurance: t })} error={bad("insurance")} />
-          <MoneyField label={COPY.hoa.label} hint={COPY.hoa.hint} placeholder={COPY.hoa.placeholder} optional
+          <MoneyField label={COPY.hoa.label} hint={COPY.hoa.hint} optional
             value={v.hoa} onChange={(t) => set({ hoa: t })} error={bad("hoa")} />
-          <MoneyField label={COPY.pmi.label} hint={COPY.pmi.hint} placeholder={COPY.pmi.placeholder} optional
+          <MoneyField label={COPY.pmi.label} hint={COPY.pmi.hint} optional
             value={v.pmi} onChange={(t) => set({ pmi: t })} error={bad("pmi")} />
         </form>
 

@@ -61,7 +61,6 @@ export function Page() {
             autoFocus
             label={COPY.amount.label}
             hint={COPY.amount.hint}
-            placeholder={COPY.amount.placeholder}
             value={v.amount}
             onChange={(t) => set({ amount: t })}
             error={bad("amount")}
@@ -69,7 +68,6 @@ export function Page() {
           <PercentField
             label={COPY.rate.label}
             hint={COPY.rate.hint}
-            placeholder={COPY.rate.placeholder}
             value={v.rate}
             onChange={(t) => set({ rate: t })}
             error={bad("rate")}
@@ -77,7 +75,6 @@ export function Page() {
           <NumberField
             label={COPY.term.label}
             hint={COPY.term.hint}
-            placeholder={COPY.term.placeholder}
             value={v.term}
             onChange={(t) => set({ term: t })}
             error={bad("term")}
@@ -102,7 +99,6 @@ export function Page() {
           <MoneyField
             label={COPY.fees.label}
             hint={COPY.fees.hint}
-            placeholder={COPY.fees.placeholder}
             optional
             value={v.fees}
             onChange={(t) => set({ fees: t })}
@@ -111,7 +107,6 @@ export function Page() {
           <MoneyField
             label={COPY.extra.label}
             hint={COPY.extra.hint}
-            placeholder={COPY.extra.placeholder}
             optional
             value={v.extra}
             onChange={(t) => set({ extra: t })}

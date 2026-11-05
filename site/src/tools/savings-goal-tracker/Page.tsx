@@ -95,7 +95,6 @@ export function Page() {
             label={COPY.goal.label}
             autoFocus
             hint={COPY.goal.hint}
-            placeholder={COPY.goal.placeholder}
             value={v.goal}
             onChange={(t) => set({ goal: t })}
             error={bad("goal")}
@@ -103,7 +102,6 @@ export function Page() {
           <MoneyField
             label={COPY.saved.label}
             hint={COPY.saved.hint}
-            placeholder={COPY.saved.placeholder}
             optional
             value={v.saved}
             onChange={(t) => set({ saved: t })}
@@ -113,7 +111,6 @@ export function Page() {
             <MoneyField
               label={COPY.monthly.label}
               hint={COPY.monthly.hint}
-              placeholder={COPY.monthly.placeholder}
               value={v.monthly}
               onChange={(t) => set({ monthly: t })}
               error={bad("monthly")}
@@ -122,7 +119,6 @@ export function Page() {
           <PercentField
             label={COPY.rate.label}
             hint={COPY.rate.hint}
-            placeholder={COPY.rate.placeholder}
             optional
             value={v.rate}
             onChange={(t) => set({ rate: t })}
@@ -131,7 +127,6 @@ export function Page() {
           <Field
             label={COPY.start.label}
             hint={v.mode === "by" ? COPY.start.hint : COPY.start.hintOptional}
-            placeholder={COPY.start.placeholder}
             optional={v.mode === "when"}
             inputMode="text"
             value={v.start}
@@ -142,7 +137,6 @@ export function Page() {
             <Field
               label={COPY.target.label}
               hint={COPY.target.hint}
-              placeholder={COPY.target.placeholder}
               inputMode="text"
               value={v.target}
               onChange={(t) => set({ target: t })}

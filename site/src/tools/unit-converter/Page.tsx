@@ -80,7 +80,6 @@ export function Page() {
           <Field
             label={COPY.value.label}
             hint={COPY.value.hint}
-            placeholder={COPY.value.placeholder}
             autoFocus
             value={v.value}
             onChange={(t) => set({ value: t })}
