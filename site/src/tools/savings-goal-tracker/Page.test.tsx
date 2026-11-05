@@ -39,9 +39,11 @@ describe("Savings Goal Tracker page", () => {
 
   it("asks one plain question with two radio choices and says why Print is off", () => {
     render(<Page />);
-    const group = screen.getByRole("group", { name: "What do you want to find out?" });
+    const group = screen.getByRole("group", { name: "Pick one: what do you want to find out?" });
     expect(within(group).getAllByRole("radio")).toHaveLength(2);
     expect(within(group).getByLabelText(COPY.mode.when)).toBeChecked();
+    expect(screen.getByText(COPY.mode.whenHelp)).toBeInTheDocument();
+    expect(screen.getByText(COPY.mode.byHelp)).toBeInTheDocument();
     expect(screen.getByText("They work after you type your numbers.")).toBeInTheDocument();
   });
 

@@ -90,6 +90,8 @@ export function Page() {
                 </label>
               ))}
             </div>
+            <p className="nt-save-help">{COPY.mode.whenHelp}</p>
+            <p className="nt-save-help">{COPY.mode.byHelp}</p>
           </fieldset>
           <MoneyField
             label={COPY.goal.label}
