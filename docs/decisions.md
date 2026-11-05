@@ -108,6 +108,39 @@ Log of choices made while scaffolding NT. Newest first.
 ## 2026-11-05 - Round 2 shipped calculators and what was not run
 
 - Shipped: Loan Explainer, Loan Offer Compare, Mortgage Payment Explainer, Student Loan Growth and Payoff, Debt Payoff Planner, Monthly Budget, Savings Goal Tracker, Unit Converter. Each has a skill.
-- Skill evals were not run. The remote eval host was not reachable from this host (SSH key refused) and no local model is installed, so the eval runner stays a shape check. Skills are covered by Python tests with shared golden cases and the sandbox mimic test.
+- Skill evals were not run in round 2. Round 3 ran them: see the round 3 entry below.
 - placeholder-golden-accuracy stays off: it is for Free File tax cases and File Converter document pairs, and neither shipped.
 - Tax Filing Helper, Save Me Money, Form Filler, Photo Duplicate Finder and Morning Briefing stay coming_soon (budget).
+
+## 2026-11-05 - Round 3: the evidence gate, and what stays shipped
+
+- A tool stays `shipped` only when `npm run check:evidence` passes for it. The gate needs a model review record (`tests/model-review/<id>.json`) and three skill-eval results (`tests/skill-evals/results/<id>/{tiny,haiku,sonnet}.json`). It is in CI beside the ship gate.
+- Review bar: on every screen reviewed (calculators: empty and with numbers typed; tools with steps: each key screen), the first-time reader scores 4 or more out of 5, and every one of the 8 design rules passes for both Haiku and Sonnet. Rule 1 may not fail.
+- The reviews are noisy by about one point. So the reader runs five times per screen and the middle score counts. The rubric runs five times per model and a rule passes when it passes in most runs. All runs are on record in the JSON.
+- The reviewer reads what a person sees: every heading, label, hint, box with its value, and button, and whether a button is filled in the main-button colour. An earlier harness hid hints in plain spans from the reviewer, and the filled screen did not say the numbers were typed by the person. Both were fixed before the final runs.
+- Skill-eval bars: the tiny local model (`qwen2.5:1.5b` through Ollama, free, on this machine) at level 1 90% or more. Haiku and Sonnet at levels 1, 2 and 3 95% or more, safety 100%. A Sonnet call marks each expect line and is asked again if its answer cannot be read.
+- A 1.5B model cannot do the math or keep a long reply. So each skill script has a `--text` mode that prints answer-shaped plain words (main answer first, one sentence per fact, the estimate sentence last) and SKILL.md tells the model to say every line. JSON output did not change.
+
+### Shipped (8): clean on the gate
+
+Loan Explainer, Loan Offer Compare, Mortgage Payment Explainer, Student Loan Growth and Payoff, Debt Payoff Planner, Monthly Budget, Savings Goal Tracker, Unit Converter.
+
+What changed to get there: one answer card that is always on screen ("Your answer shows here" until the numbers are in), one filled button on a screen ("Show my answer" first, then "Done. Back to home."), Change a number as an outline button, the first box has the cursor, Start over asks first and offers Put it back, Save a copy shows what goes in the file before it saves, hints say where to find each number, no number-like placeholders in the boxes, and result numbers never break across two lines.
+
+### Coming soon (5): built and tested, but the review bar was not met
+
+- Save Me Money: the reader scores 3 on the main and typed screens ("I already see my totals, I am not sure I need to save").
+- Form Filler: the reader scores 3 on the review and question screens, and Haiku fails rules on the papers screen.
+- Tax Filing Helper: the reader scores 3 on the start screen, and the tiny model fails level 1 (78% to 89%, below 90%) in repeated runs.
+- Photo Duplicate Finder: the reader scores 3 on the start and final screens.
+- Morning Briefing: the reader scores 3 on the final screen in the last run (it was clean in an earlier run).
+
+Their code, tests, skills, e2e specs and review records stay in the repo. Their e2e specs skip themselves while they are coming soon. Per the round rule, they were demoted after repeated fix and re-review cycles, not after one.
+
+### Other choices
+
+- WebKit runs on this host without sudo: the Ubuntu libraries it needs are unpacked into `~/.local/share/pw-ubuntu-libs` and `scripts/e2e-webkit-local.sh` loads them. CI uses the normal Playwright install.
+- The service worker now caches every page chunk on install, so every shipped tool opens offline.
+- iOS splash images exist for the phone and iPad sizes in the device matrix.
+- The Monthly Budget percents are whole numbers that add up to the percent of income spent, so one line can be 1 higher than its exact value. The page says so.
+- Phase 3 (more v5 tools) was not started: the five Top 5 tools used the time.

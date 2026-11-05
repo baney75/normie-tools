@@ -288,32 +288,21 @@ def result_text(r):
     """The same answer as explain_loan, as plain words in dollars. One short fact per line."""
     if not r["ok"]:
         return problem_text(r)
-    n = r["months"]
-    length = _count(n, "month")
-    if n % 12 == 0:
-        length += " (%s)" % _count(n // 12, "year")
-    out = ["Amount borrowed: %s" % _dollars(r["principalCents"]),
-           "Yearly interest rate: %s" % _percent(r["rateBps"]),
-           "Loan length: %s" % length,
-           "Monthly payment: %s. Each month for the whole loan." % _dollars(r["monthlyPaymentCents"]),
-           "Total paid: %s" % _dollars(r["totalPaidCents"]),
-           "Total interest: %s" % _dollars(r["totalInterestCents"])]
+    out = ["Your monthly payment is %s, every month for the whole loan." % _dollars(r["monthlyPaymentCents"]),
+           "The total you pay is %s." % _dollars(r["totalPaidCents"]),
+           "The total interest is %s." % _dollars(r["totalInterestCents"])]
     if r["feesCents"] > 0:
-        out.append("Upfront fees: %s" % _dollars(r["feesCents"]))
-        out.append("Total paid does not include the upfront fees.")
-    out.append("Cost of borrowing: %s. This is interest plus upfront fees." % _dollars(r["costOfBorrowingCents"]))
+        out.append("The upfront fees are %s, and they are not in the total you pay." % _dollars(r["feesCents"]))
+    out.append("The cost of borrowing is %s. That is interest plus upfront fees." % _dollars(r["costOfBorrowingCents"]))
     x = r["extra"]
     if x is not None:
-        out.append("With your extra payment of %s each month:" % _dollars(r["extraCents"]))
-        out.append("Monthly payment with extra: %s" % _dollars(x["monthlyPaymentCents"]))
-        out.append("Paid off after: %s" % _count(x["months"], "month"))
-        out.append("Months saved: %s" % _count(x["monthsSaved"], "month"))
-        out.append("Total interest with extra: %s" % _dollars(x["totalInterestCents"]))
-        out.append("Total paid with extra: %s" % _dollars(x["totalPaidCents"]))
-        out.append("Interest saved: %s" % _dollars(x["interestSaved"]))
+        out.append("With your extra %s each month, your monthly payment is %s." % (_dollars(r["extraCents"]), _dollars(x["monthlyPaymentCents"])))
         if x["monthsSaved"] == 0:
             out.append("Your extra payment is too small to finish the loan sooner.")
-    out.append("This does not work out the APR. APR is the yearly cost of the loan, counting some fees. The paper from your lender shows it.")
+        else:
+            out.append("You pay it off after %s, which is %s sooner." % (_count(x["months"], "month"), _count(x["monthsSaved"], "month")))
+        out.append("Your total interest with the extra is %s, so you save %s in interest." % (_dollars(x["totalInterestCents"]), _dollars(x["interestSaved"])))
+    out.append("This does not work out the APR. The paper from your lender shows the APR.")
     out.append("This is an estimate from the numbers you typed. The paper from your bank or lender has the final word.")
     return "\n".join(out)
 

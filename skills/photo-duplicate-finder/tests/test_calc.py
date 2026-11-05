@@ -133,7 +133,7 @@ class Folder(unittest.TestCase):
     def test_example_items_file(self):
         code, out = run_cli("--file", os.path.join(HERE, "..", "examples", "sample-items.json"), "--text")
         self.assertEqual(code, 0)
-        self.assertIn("Exact copy groups: 2", out)
+        self.assertIn("I found 2 groups of exact copies.", out)
 
 
 class TextOutput(unittest.TestCase):
@@ -143,14 +143,14 @@ class TextOutput(unittest.TestCase):
             code, out = run_cli("--folder", d, "--text")
             self.assertEqual(code, 0)
             lines = out.strip().split("\n")
-            self.assertEqual(lines[0], "Photos checked: 6")
-            self.assertEqual(lines[1], "Exact copy groups: 2")
+            self.assertEqual(lines[:2], ["I checked 6 photos.", "I found 2 groups of exact copies."])
+            self.assertLessEqual(len(lines), 10)
             self.assertTrue(any(l.startswith("Group 1 of 2: ") for l in lines))
             self.assertTrue(any(l.startswith("Group 2 of 2: ") for l in lines))
-            self.assertIn("Extra copies: 3", lines)
-            self.assertTrue(any(l.startswith("Room the extra copies take: ") for l in lines))
+            self.assertTrue(any(l.startswith("There are 3 extra copies in the 6 photos I checked. They take ") for l in lines))
             self.assertTrue(any(l.startswith("Skipped: empty.jpg is empty") for l in lines))
             self.assertEqual(lines[-1], calc.NOTE)
+            self.assertEqual(lines[-2], "This tool only lists exact copies. It never deletes, moves or sends photos.")
             self.assertIn("Nothing was deleted or moved.", lines[-1])
             self.assertNotIn("{", out)
 
@@ -174,8 +174,7 @@ class TextOutput(unittest.TestCase):
                 f.write(b"two")
             _, out = run_cli("--folder", d, "--text")
             lines = out.strip().split("\n")
-            self.assertEqual(lines[:2], ["Photos checked: 2", "Exact copy groups: 0"])
-            self.assertIn("Extra copies: 0", lines)
+            self.assertEqual(lines[:3], ["I checked 2 photos.", "I found no exact copies.", "There are no extra copies in the 2 photos I checked."])
 
 
 if __name__ == "__main__":

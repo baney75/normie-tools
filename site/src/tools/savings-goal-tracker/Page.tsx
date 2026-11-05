@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, PercentField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -62,6 +62,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-save">
         <p className="nt-save-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && blank ? (
           <div className="nt-save-status">
@@ -78,7 +79,6 @@ export function Page() {
           </div>
         ) : null}
 
-        <StepLabel n={1} of={2}>{COPY.step1}</StepLabel>
         <form className="nt-save-form" onSubmit={(e) => e.preventDefault()} noValidate>
           <fieldset className="nt-save-units">
             <legend>{COPY.mode.legend}</legend>
@@ -155,7 +155,6 @@ export function Page() {
 
         <Answer result={result} mode={v.mode} />
 
-        {!result.ok && blank ? <p className="nt-save-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
           <p className="nt-save-status" role="status">
             {COPY.stillNeeded} {missing.join(", ")}.
@@ -164,22 +163,6 @@ export function Page() {
         {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
 
         <p className="nt-save-note">{COPY.notes.estimate}</p>
-        <p className="nt-save-note">{COPY.notes.rule}</p>
-        <PrivacyNote />
-
-        <details className="nt-save-details">
-          <summary>{COPY.key.summary}</summary>
-          <div className="nt-save-details-body">
-            <dl className="nt-save-key">
-              {COPY.key.items.map((k) => (
-                <div key={k.term}>
-                  <dt>{k.term}</dt>
-                  <dd>{k.means}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </details>
       </div>
     </ScreenFrame>
   );
@@ -191,8 +174,8 @@ function Answer({ result: whole, mode }: { result: ReturnType<typeof explainSavi
   if (!whole.ok) {
     return (
       <>
-        <ResultCard label={mode === "by" ? COPY.by.label : COPY.when.label} step={COPY.step2} waiting={COPY.waiting} />
-        <SavePrintSheet title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
+        <ResultCard label={mode === "by" ? COPY.by.label : COPY.when.label} waiting={COPY.waiting} />
+        <SavePrintSheet quiet title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
       </>
     );
   }
@@ -261,12 +244,20 @@ function Done({ result }: { result: Good }) {
     }
   }
 
+  const noRate = result.status === "will-reach" || result.status === "needs";
+  const note =
+    noRate && result.interestEarnedCents === 0
+      ? COPY.when.noInterest
+      : noRate && result.finalBalanceCents > result.goalCents
+        ? COPY.when.overGoal
+        : null;
   const byYear = result.mode === "when" && result.status === "will-reach" ? result.byYear : [];
 
   return (
     <>
-      <ResultCard label={label} step={COPY.step2} answer={answer}>
+      <ResultCard label={label} answer={answer}>
         {help ? <p className="nt-save-help">{help}</p> : null}
+        {note ? <p className="nt-save-help">{note}</p> : null}
         {lines.length > 0 ? (
           <dl className="nt-save-lines">
             {lines.map(([k, val]) => (
@@ -283,6 +274,7 @@ function Done({ result }: { result: Good }) {
         <details className="nt-save-details">
           <summary>{COPY.more.summary}</summary>
           <div className="nt-save-details-body">
+            <p className="nt-save-help">{COPY.notes.rule}</p>
             <div className="nt-save-table-wrap">
               <table className="nt-save-table">
                 <caption>{COPY.more.tableHeading}</caption>
@@ -310,7 +302,7 @@ function Done({ result }: { result: Good }) {
         </details>
       ) : null}
 
-      <SavePrintSheet title={COPY.save.title} onSave={save}>
+      <SavePrintSheet quiet title={COPY.save.title} onSave={save}>
         <p>{COPY.save.preview}</p>
       </SavePrintSheet>
     </>

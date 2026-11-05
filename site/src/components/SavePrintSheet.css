@@ -76,3 +76,6 @@
   }
 }
 .nt-sheet-note { margin: var(--nt-space-2) 0 0; font-size: 1rem; color: var(--nt-text); }
+.nt-sheet-ask { margin-top: var(--nt-space-3); padding: var(--nt-space-3); border: 1px dashed var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-paper); }
+.nt-sheet-ask p { margin: 0; }
+.nt-sheet-ask-preview { margin: var(--nt-space-2) 0; padding: var(--nt-space-2); background: var(--nt-white); border-radius: var(--nt-radius); }

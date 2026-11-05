@@ -53,7 +53,8 @@ export function Field({
           autoCorrect="off"
           spellCheck={false}
           value={value}
-          placeholder={placeholder}
+          // A number in a number box can be mistaken for something typed. Examples go in the hint instead.
+          placeholder={inputMode === "text" ? placeholder : undefined}
           aria-invalid={error ? true : undefined}
           aria-describedby={described}
           onChange={(e) => onChange(e.target.value)}

@@ -28,13 +28,13 @@ describe("Monthly Budget page", () => {
   it("shows the empty state, prefilled labels and no answer", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Monthly Budget" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.empty)).toBeInTheDocument();
+    expect(screen.getByText(COPY.intro)).toBeInTheDocument();
     for (const n of ["Pay", "Rent or mortgage", "Food", "Bills", "Transport", "Other"]) {
       expect(screen.getByLabelText(`${n}, per month`)).toHaveValue("");
     }
     expect(screen.getByLabelText("Left over")).toHaveTextContent(COPY.waiting);
-    expect(screen.getByLabelText("Left over")).toHaveTextContent("Step 2 of 2: Read your answer");
-    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
+    expect(screen.queryByText(/Step \d of \d/)).toBeNull();
+    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/Nothing is sent/);
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -43,17 +43,22 @@ describe("Monthly Budget page", () => {
     expect(screen.getByLabelText("Pay, per month")).toHaveFocus();
   });
 
-  it("says what Remove does, next to the lines", () => {
+  it("shows each bar percent once", async () => {
     render(<Page />);
-    expect(screen.getAllByText(COPY.removeHint)).toHaveLength(2);
+    await fill("Pay, per month", "1000");
+    await fill("Food, per month", "250");
+    expect(screen.getAllByText(/25% of income/)).toHaveLength(1);
+    expect(screen.queryByText(/Each bar is as wide/)).toBeNull();
   });
 
   it("has one filled button: Print", async () => {
     const { container } = render(<Page />);
-    expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    expect(screen.getByRole("button", { name: "Show my answer" })).toHaveClass("primary");
     expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
     await fillPlain();
     expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
+    expect(container.querySelectorAll(".primary")).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "Done. Back to home." })).toHaveClass("primary");
   });
 
   it("has decimal keypads and no autofill on amounts", () => {
@@ -71,11 +76,18 @@ describe("Monthly Budget page", () => {
     expect(card).toHaveTextContent("Total income$3,000.00");
     expect(card).toHaveTextContent("Total spending$2,300.00");
     const where = screen.getByRole("region", { name: "Where it goes" });
-    expect(where).toHaveTextContent("Rent or mortgage$1,200.0040% of income");
-    expect(where).toHaveTextContent("Food$450.0015% of income");
-    expect(where).toHaveTextContent("Bills$300.0010% of income");
-    expect(where).toHaveTextContent("Transport$250.009% of income");
-    expect(where).toHaveTextContent("Other$100.003% of income");
+    expect(where).toHaveTextContent("Rent or mortgage$1,200.00, 40% of income");
+    expect(where).toHaveTextContent("Food$450.00, 15% of income");
+    expect(where).toHaveTextContent("Bills$300.00, 10% of income");
+    expect(where).toHaveTextContent("Transport$250.00, 9% of income");
+    expect(where).toHaveTextContent("Other$100.00, 3% of income");
+  });
+
+  it("says percents are rounded", async () => {
+    render(<Page />);
+    await fill("Pay, per month", "3000");
+    await fill("Transport, per month", "250");
+    expect(screen.getByText(COPY.where.roundedIncome)).toBeInTheDocument();
   });
 
   it("draws a bar as wide as the percent", async () => {
@@ -96,11 +108,11 @@ describe("Monthly Budget page", () => {
 
   it("adds a line, names it, and removes it", async () => {
     render(<Page />);
-    await userEvent.click(screen.getByRole("button", { name: "Add a spending line" }));
-    await fill("Name of spending line 6", "Phone");
+    await userEvent.click(screen.getByRole("button", { name: "Add a spending item" }));
+    await fill("Name of spending item 6", "Phone");
     await fill("Phone, per month", "$40.50");
     await fill("Pay, per month", "1000");
-    expect(screen.getByRole("region", { name: "Where it goes" })).toHaveTextContent("Phone$40.504% of income");
+    expect(screen.getByRole("region", { name: "Where it goes" })).toHaveTextContent("Phone$40.50, 4% of income");
     await userEvent.click(screen.getByRole("button", { name: "Remove Phone" }));
     expect(screen.queryByLabelText("Phone, per month")).toBeNull();
     expect(screen.queryByRole("region", { name: "Where it goes" })).toBeNull();
@@ -120,7 +132,7 @@ describe("Monthly Budget page", () => {
   it("says nothing is sent and links to the page code", () => {
     render(<Page />);
     expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 
   it("with no income, shows the totals and shares of spending", async () => {
@@ -137,7 +149,7 @@ describe("Monthly Budget page", () => {
   it("lists every line with both percents under Show more", async () => {
     render(<Page />);
     await fillPlain();
-    await userEvent.click(screen.getByText("Show more"));
+    await userEvent.click(screen.getByText("Show the numbers in a table"));
     const table = screen.getByRole("table");
     expect(within(table).getAllByRole("row")).toHaveLength(1 + 5);
     expect(within(table).getAllByRole("row")[1]).toHaveTextContent("Rent or mortgage$1,200.0040%52%");
@@ -180,7 +192,7 @@ describe("Monthly Budget page", () => {
     render(<Page />);
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.yes }));
     expect(screen.queryByText(/NaN|undefined/)).toBeNull();
-    expect(screen.getByRole("button", { name: "Add a spending line" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Add a spending item" })).toBeInTheDocument();
   });
 
   it("always shows Save or print, and turns it on once there is an answer", async () => {

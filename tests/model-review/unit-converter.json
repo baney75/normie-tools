@@ -1,6 +1,6 @@
 {
   "tool": "unit-converter",
-  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "screen": ",  at 390px wide (text saved beside this file in screens/)",
   "at": "2026-11-05",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
@@ -8,13 +8,21 @@
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 3,
-    "output": "**1. What the screen wants:** It wants me to read my answer (5000 inches is 127,000 millimeters) and then, if I like, print it or save a copy.\n\n**2. Next tap:** \"Print\". It's the only orange button. I'm not sure I need it, since the screen says I can stop here.\n\n**3. Words or phrases I didn't understand or that felt like tech talk:**\n- \"Shown to 6 digits\"\n- \"Swap the two\" (the two what?)\n- \"Save a copy\" (a copy where?)\n- \"Step 1 of 2\" and \"You are here\"\n- \"menu\" and the boxes that open a list\n- \"the 1959 agreement between countries\"\n- \"NIST Handbook 44\"\n- \"The kelvin\" and \"the international units brochure\"\n- \"Nothing is sent\" (sent where?)\n- \"our public page\"\n- \"Show more\" (more of what?)\n\n**4. Worries:**\n- \"Print\": will it print right away? I don't know if my phone is hooked to a printer.\n- \"Save a copy\": I don't know where it goes on my phone or how I'd find it again. It says I can delete it, but not how.\n- \"Start over\": will it wipe my answer? It says it asks first, but I'd still be nervous.\n- \"Nothing is sent\": I have to take their word for it. The link to check might take me somewhere unfamiliar.\n- I'm not sure I'd know if I changed a number by accident.\n\n**5. What I'd skip:**\n- The \"Where the facts come from\" paragraph\n- \"Show more\"\n- The \"Step 1 of 2 / Step 2 of 2\" lines\n- \"Shown to 6 digits\"\n- Probably \"Swap the two\"\n\n**6. Score:** 3. I can see the answer, but I don't know whether I'm supposed to tap anything.\n\nRESULT: {\"next_tap\": \"Print\", \"confusing_terms\": [\"Shown to 6 digits\", \"Swap the two\", \"Save a copy\", \"Step 1 of 2 / You are here\", \"menu\", \"1959 agreement between countries\", \"NIST Handbook 44\", \"kelvin\", \"international units brochure\", \"Nothing is sent\", \"our public page\", \"Show more\"], \"worries\": [\"Print may start printing right away or need a printer I may not have\", \"Don't know where a saved copy goes or how to delete it\", \"Start over might wipe my answer\", \"Have to trust that nothing is sent\", \"Link to public page might take me somewhere unfamiliar\"], \"skippable\": [\"Where the facts come from paragraph\", \"Show more\", \"Step 1 of 2 / Step 2 of 2 lines\", \"Shown to 6 digits\", \"Swap the two\"], \"score\": 3}"
+    "score": 4,
+    "runs": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to see that 5000 inches is 127,000 millimeters, and then tap the orange button to finish and go back home.\n\n2. \"Done. Back to home.\"\n\n3. Words that felt like tech talk or unclear:\n- \"menu\" (I only see it is a box with a list)\n- \"Source: how this page is made\"\n- \"rounded to 6 digits\"\n- \"Show the facts used\"\n- \"Save a copy\" and \"a file\" (where does it go?)\n- \"preview\"\n- \"Swap 'from' and 'to'\" (a little confusing at first)\n\n4. Worries:\n- \"Start over asks first, and you can undo it\" made me a bit nervous that I might lose my numbers.\n- \"Save a copy... makes the file on this phone\" made me wonder where the file goes and whether it takes up space.\n- \"Nothing is sent\" is reassuring, but I wasn't sure I fully believed it.\n- I was not sure whether tapping \"Done. Back to home.\" would wipe my answer. It says \"You can stop here,\" which helped, but I'd still want to be sure.\n\n5. I would skip:\n- The \"how this page is made\" link.\n- \"Show the facts used.\"\n- The \"Print\" and \"Save a copy\" part, unless I wanted to keep the answer.\n- \"Swap 'from' and 'to'.\"\n- The second \"Back to home\" link at the bottom, which repeats the orange button.\n\n6. Score: 4. The orange button is clear, but I wasn't sure whether leaving would lose my answer.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"menu\", \"Source: how this page is made\", \"rounded to 6 digits\", \"Show the facts used\", \"Save a copy\", \"file\", \"preview\", \"Swap 'from' and 'to'\"], \"worries\": [\"Start over might lose my numbers\", \"Save a copy makes a file on my phone, unsure where it goes or space used\", \"Unsure whether 'Nothing is sent' is fully true\", \"Unsure if Done. Back to home. erases my answer\"], \"skippable\": [\"how this page is made link\", \"Show the facts used\", \"Print\", \"Save a copy\", \"Swap 'from' and 'to'\", \"second Back to home link\"], \"score\": 4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -26,11 +34,79 @@
         "PASS"
       ],
       "passes": 8,
-      "fails": []
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
     },
     {
       "model": "sonnet",
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -42,8 +118,263 @@
         "PASS"
       ],
       "passes": 8,
-      "fails": []
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
     }
   ],
-  "otherScreens": []
+  "otherScreens": [
+    {
+      "screen": "empty",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type a number, pick what I'm changing from and to, and then tap the orange button to see my answer.\n\n2. I would tap the box labeled \"Number\" and type a number. After that I would tap \"Show my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"Source: how this page is made\" (why would I care how a page is made?)\n- \"Show the facts used\" (what facts? facts about what?)\n- \"Swap 'from' and 'to'\" (I get it after a moment, but \"swap\" is a little odd)\n- \"menu\" and \"Tap a box with a list\" (the boxes don't say they are lists until I read the hint)\n- \"Save a copy\" (a copy of what? where does it go?)\n- \"file\" (what kind of file, and where do I find it later?)\n- \"preview\" (I think it means a look before printing)\n- \"on this phone or computer\" (I only have a phone, so the \"or computer\" part is noise)\n\n4. Worries:\n- \"Nothing is sent. Numbers stay on this phone\" calms me, but then I wonder why they feel the need to say it.\n- \"Save a copy... makes the file on this phone.\" I worry about putting something on my phone that I can't find or that takes up room.\n- \"You can delete a saved copy any time\" is comforting, but it doesn't say how.\n- The link \"how this page is made\" might take me away from this page and I could lose my place.\n- Print: I don't know if my phone is connected to a printer, and I don't want to print by accident. (Both buttons are greyed out, so I can't tap them yet, which is fine.)\n\n5. I would skip:\n- \"Source: how this page is made\" link\n- \"Show the facts used\"\n- The \"Keep your answer if you want\" section, including Print and Save a copy, until I have an answer\n- The long paragraph about Print and Save a copy\n- \"Back to home\" (until I'm done)\n\n6. Score: 4. I know to type in the number box, and the orange button is clear. I'm a little unsure whether the first box (\"What are you measuring?\") needs attention, since it already says \"Length\" and the cursor is on the number box.\n\nRESULT: {\"next_tap\": \"Number\", \"confusing_terms\": [\"Source: how this page is made\", \"Show the facts used\", \"Swap 'from' and 'to'\", \"menu\", \"Save a copy\", \"file\", \"preview\", \"on this phone or computer\"], \"worries\": [\"Save a copy puts a file on my phone and I may not find it or know how to delete it\", \"Link 'how this page is made' might take me away and lose my place\", \"Not sure if Print will start printing by accident\", \"Why it says nothing is sent makes me wonder\"], \"skippable\": [\"Source: how this page is made\", \"Show the facts used\", \"Keep your answer if you want section (Print, Save a copy)\", \"long paragraph about Print and Save a copy\", \"Back to home\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
 }

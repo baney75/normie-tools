@@ -1,3 +1,4 @@
+import { isShipped } from "./shipped";
 import { expect, test } from "@playwright/test";
 import { PHONE } from "./viewports";
 
@@ -36,6 +37,7 @@ test("the right file type is accepted and no problem shows", async ({ page }) =>
 });
 
 test("Photo Duplicate Finder: a PDF says what it is, what is needed, what that is, and how to get it", async ({ page }) => {
+  test.skip(!isShipped("photo-duplicate-finder"), "coming soon");
   await page.goto("/#/tools/photo-duplicate-finder");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
@@ -52,10 +54,11 @@ test("Photo Duplicate Finder: a PDF says what it is, what is needed, what that i
 
 // Form Filler takes a saved answer file. A wrong type gets the same four-part message.
 test("form-filler: a wrong file type says what was given, what is needed, what it is, and how to get it", async ({ page }) => {
+  test.skip(!isShipped("form-filler"), "coming soon");
   await page.goto("/#/tools/form-filler");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.getByText("Have saved answers?").click();
+  await page.getByRole("button", { name: "Have saved answers?" }).click();
   const pdf = Buffer.from("%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\ntrailer\n<< /Root 1 0 R >>\n%%EOF\n");
   await page.getByLabel("Open my saved answers").setInputFiles({ name: "return.pdf", mimeType: "application/pdf", buffer: pdf });
 

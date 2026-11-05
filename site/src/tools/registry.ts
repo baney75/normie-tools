@@ -11,11 +11,6 @@ export const REGISTRY: Record<string, LazyExoticComponent<ComponentType>> = {
   "monthly-budget": lazy(() => import("./monthly-budget/Page")),
   "savings-goal-tracker": lazy(() => import("./savings-goal-tracker/Page")),
   "unit-converter": lazy(() => import("./unit-converter/Page")),
-  "form-filler": lazy(() => import("./form-filler/Page")),
-  "morning-briefing": lazy(() => import("./morning-briefing/Page")),
-  "photo-duplicate-finder": lazy(() => import("./photo-duplicate-finder/Page")),
-  "save-me-money": lazy(() => import("./save-me-money/Page")),
-  "tax-filing-helper": lazy(() => import("./tax-filing-helper/Page")),
 };
 
 export function pageFor(id: string): LazyExoticComponent<ComponentType> | undefined {

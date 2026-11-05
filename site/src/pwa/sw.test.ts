@@ -53,4 +53,33 @@ describe("sw.js", () => {
     expect(sw).toContain("clients.claim");
     expect(sw).toContain("caches.delete");
   });
+  it("saves the lazy tool pages through the build asset list", () => {
+    expect(sw).toContain("./asset-manifest.json");
+    expect(sw).toContain("e.css");
+    expect(sw).toContain("e.assets");
+    const cfg = fs.readFileSync(path.resolve(__dirname, "../../vite.config.ts"), "utf8");
+    expect(cfg).toContain('manifest: "asset-manifest.json"');
+  });
+  it("ignores Vary when it looks up a saved file (the preview server sends Vary: Origin)", () => {
+    expect(sw.match(/ignoreVary: true/g)?.length).toBeGreaterThanOrEqual(2);
+  });
+  it("does not let one missing build file stop the install", () => {
+    expect(sw).toMatch(/c\.add\(f\)\.catch/);
+  });
+  it("lists only files that exist in public/", () => {
+    const list = /const PRECACHE = \[([\s\S]*?)\];/.exec(sw)![1];
+    const files = [...list.matchAll(/"\.\/([^"]*)"/g)].map((m) => m[1]).filter((f) => f && f !== "index.html"); // index.html is the Vite entry, not in public/
+    expect(files.length).toBeGreaterThan(5);
+    for (const f of files) expect(fs.existsSync(path.join(pub, f)), f).toBe(true);
+  });
+  it("saves every splash file named in index.html", () => {
+    const html = fs.readFileSync(path.resolve(__dirname, "../../index.html"), "utf8");
+    const hrefs = [...html.matchAll(/rel="apple-touch-startup-image" href="([^"]+)"/g)].map((m) => m[1]);
+    expect(hrefs.length).toBeGreaterThanOrEqual(7);
+    for (const h of hrefs) expect(sw).toContain(`"${h}"`);
+  });
+  it("answers any page request offline with the saved shell", () => {
+    expect(sw).toContain('req.mode === "navigate"');
+    expect(sw).toContain('caches.match("./index.html"');
+  });
 });

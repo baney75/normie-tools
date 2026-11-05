@@ -27,6 +27,7 @@ MAX_BYTES = 25_000_000
 EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".heic")
 HEX64 = re.compile(r"^[0-9a-fA-F]{64}$")
 HEX16 = re.compile(r"^[0-9a-fA-F]{16}$")
+NEVER_LINE = "This tool only lists exact copies. It never deletes, moves or sends photos."
 NOTE = (
     "Note: this finds exact copies only. Photos that only look alike need the Photo Duplicate Finder website. "
     "Nothing was deleted or moved."
@@ -177,22 +178,31 @@ def to_text(result):
         return "\n".join(lines)
     by_id = {p["id"]: p for p in result.get("photos", [])}
     c = result["counts"]
-    lines = ["Photos checked: %d" % c["photos"], "Exact copy groups: %d" % c["exactGroups"]]
+    n = len(result["groups"])
+    lines = ["I checked %d photo%s." % (c["photos"], "" if c["photos"] == 1 else "s"),
+             "I found %s." % ("no exact copies" if n == 0 else "%d group%s of exact copies" % (n, "" if n == 1 else "s"))]
     total = 0
     for i, g in enumerate(result["groups"], 1):
         keep = by_id.get(g["keepId"], {"name": g["keepId"], "size": 0})
         extras = [by_id.get(m, {"name": m, "size": 0}) for m in g["members"] if m != g["keepId"]]
         total += sum(e["size"] for e in extras)
         lines.append(
-            "Group %d of %d: %s (%s) is listed first. Same file: %s." % (i, len(result["groups"]), keep["name"], format_bytes(keep["size"]),
+            "Group %d of %d: %s (%s) is listed first. Same file: %s." % (i, n, keep["name"], format_bytes(keep["size"]),
                                                        ", ".join("%s (%s)" % (e["name"], format_bytes(e["size"])) for e in extras))
         )
-    lines.append("Extra copies: %d" % c["extras"])
-    lines.append("Room the extra copies take: %s" % format_bytes(total))
+    if c["extras"] == 0:
+        lines.append("There are no extra copies in the %d photo%s I checked." % (c["photos"], "" if c["photos"] == 1 else "s"))
+    else:
+        one = c["extras"] == 1
+        lines.append("There %s %d extra cop%s in the %d photo%s I checked. %s %s %s." % (
+            "is" if one else "are", c["extras"], "y" if one else "ies", c["photos"], "" if c["photos"] == 1 else "s",
+            "It" if one else "They", "takes" if one else "take", format_bytes(total)))
     for s in result.get("skipped", []):
         lines.append("Skipped: " + s["message"])
     if result.get("ignored"):
-        lines.append("Empty files left out: %d" % len(result["ignored"]))
+        k = len(result["ignored"])
+        lines.append("%d empty file%s left out." % (k, " was" if k == 1 else "s were"))
+    lines.append(NEVER_LINE)
     lines.append(NOTE)
     return "\n".join(lines)
 

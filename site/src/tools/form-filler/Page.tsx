@@ -97,7 +97,8 @@ export function Page() {
   const screen = Math.min(Math.max(Math.trunc(flow.step) || 0, 0), LAST);
   const [tried, setTried] = useState(false);
   const [notice, setNotice] = useState<Notice | null>(null);
-  const [saveNote, setSaveNote] = useState("");
+  const [saveNote, setSaveNote] = useState<{ name: string; kind: "sheet" | "later" } | null>(null);
+  const [showOpen, setShowOpen] = useState(false);
   const [backToReview, setBackToReview] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   useKeyboardSpace(rootRef);
@@ -109,7 +110,7 @@ export function Page() {
     writeSaved(FLOW, n, d);
     setTried(false);
     setNotice(null);
-    setSaveNote("");
+    setSaveNote(null);
   };
   const setAnswer = (q: string, c: Choice) => flow.setValue({ ...v, answers: { ...v.answers, [q]: c } });
   const setInfo = (f: string, t: string) => flow.setValue({ ...v, info: { ...v.info, [f]: t } });
@@ -185,6 +186,12 @@ export function Page() {
         <StepLabel n={topStep(screen) + 1} of={COPY.steps.length}>{COPY.steps[topStep(screen)]}</StepLabel>
         <progress className="nt-ff-bar" aria-label="Progress" value={screen + 1} max={LAST + 1} />
         {screen === 0 ? <p className="nt-ff-intro">{COPY.intro}</p> : null}
+        <PrivacyNote />
+        {screen === 0 ? (
+          <p className="nt-ff-line">
+            {COPY.opensLine} {COPY.sources.label} <a href={LINKS.freeFilePage} rel="noreferrer">{COPY.sources.freeFile}</a>
+          </p>
+        ) : null}
 
         {notice ? <NoticeView notice={notice} onUse={(d) => { const before = v; go(REVIEW, d); setNotice({ kind: "used", before }); }} onKeep={() => setNotice(null)} onUndo={(before) => { go(screen, before); setNotice({ kind: "undone" }); }} /> : null}
 
@@ -200,7 +207,7 @@ export function Page() {
 
         {screen === RESULT ? (
           <section className="nt-ff-screen" aria-label={COPY.result.title}>
-            <ResultCard label={COPY.result.label} answer={way.name}>
+            <ResultCard label={COPY.result.label} answer={way.name} closing={false}>
               {way.lines.map((l) => <p key={l} className="nt-ff-line">{l}</p>)}
             </ResultCard>
             {way.way !== "past" ? (
@@ -225,14 +232,28 @@ export function Page() {
               <legend className="nt-ff-legend">{COPY.papers.legend}</legend>
               {(PAPERS as { id: string; label: string }[]).map((p, i) => {
                 const hint = COPY.papers.hints[p.id];
+                const hintLines = hint === undefined ? [] : Array.isArray(hint) ? hint : [hint];
                 return (
-                  <label key={p.id} className="nt-ff-check">
-                    <input type="checkbox" autoFocus={i === 0} checked={v.papers.includes(p.id)} onChange={() => togglePaper(p.id)} />
-                    <span>
-                      {p.label}
-                      {hint ? <span className="nt-ff-sub">{hint}</span> : null}
-                    </span>
-                  </label>
+                  <div key={p.id}>
+                    <label className="nt-ff-check">
+                      <input type="checkbox" autoFocus={i === 0} checked={v.papers.includes(p.id)} onChange={() => togglePaper(p.id)} />
+                      <span>
+                        {p.label}
+                        {hintLines.map((h) => <span key={h} className="nt-ff-sub">{h}</span>)}
+                      </span>
+                    </label>
+                    {p.id === "1099" ? (
+                      <details className="nt-ff-open">
+                        <summary>{COPY.papers.moreFormsSummary}</summary>
+                        <ul className="nt-ff-list">
+                          {COPY.papers.moreForms.map((f) => <li key={f}>{f}</li>)}
+                        </ul>
+                        <p className="nt-ff-source">
+                          {COPY.sources.label} <a href={LINKS.freeFilePage} rel="noreferrer">{COPY.sources.freeFile}</a>
+                        </p>
+                      </details>
+                    ) : null}
+                  </div>
                 );
               })}
             </fieldset>
@@ -267,10 +288,10 @@ export function Page() {
             onSaveSheet={async () => {
               const r = buildSheet(v) as { ok: boolean; text?: string };
               if (!r.ok || !r.text) return;
-              if (await saveFile(COPY.review.sheetName, r.text, "text/plain")) setSaveNote(COPY.review.saved(COPY.review.sheetName));
+              if (await saveFile(COPY.review.sheetName, r.text, "text/plain")) setSaveNote({ name: COPY.review.sheetName, kind: "sheet" });
             }}
             onSaveLater={async () => {
-              if (await saveFile(COPY.review.laterName, savedText(v), "application/json")) setSaveNote(COPY.review.saved(COPY.review.laterName));
+              if (await saveFile(COPY.review.laterName, savedText(v), "application/json")) setSaveNote({ name: COPY.review.laterName, kind: "later" });
             }}
           />
         ) : null}
@@ -283,12 +304,15 @@ export function Page() {
             <button type="button" onClick={back}>{COPY.back}</button>
           ) : null}
         </div>
+        {screen < RESULT ? <p className="nt-ff-line">{COPY.nextHelp}</p> : null}
 
         {screen === 0 ? (
-          <details className="nt-ff-open">
-            <summary>{COPY.open.summary}</summary>
-            <UploadField needed="text" label={COPY.open.label} maxBytes={1_000_000} onAccepted={(file) => void useFile(file)} />
-          </details>
+          <div className="nt-ff-open-box">
+            <button type="button" aria-expanded={showOpen} onClick={() => setShowOpen(!showOpen)}>{COPY.open.summary}</button>
+            {showOpen ? (
+              <UploadField needed="text" label={COPY.open.label} maxBytes={1_000_000} onAccepted={(file) => void useFile(file)} />
+            ) : null}
+          </div>
         ) : null}
 
         {screen === REVIEW ? (
@@ -300,7 +324,6 @@ export function Page() {
           />
         ) : null}
 
-        <PrivacyNote />
       </div>
     </ScreenFrame>
   );
@@ -350,12 +373,13 @@ function NoticeView({ notice, onUse, onKeep, onUndo }: {
 
 function Question({ id, n, value, onPick }: { id: string; n: number; value: Choice; onPick: (c: Choice) => void }) {
   const q = (COPY.questions as Record<string, { title: string; hint: string }>)[id];
+  const hid = `nt-ff-q-${id}`;
   return (
     <section className="nt-ff-screen">
       <p className="nt-ff-count">{COPY.questionOf(n, QUESTION_IDS.length)}</p>
-      <fieldset className="nt-ff-fieldset">
-        <legend className="nt-ff-legend">{q.title}</legend>
-        <p className="nt-ff-line">{q.hint}</p>
+      <h2 className="nt-ff-legend" id={hid}>{q.title}</h2>
+      <p className="nt-ff-line">{q.hint}</p>
+      <fieldset className="nt-ff-fieldset" aria-labelledby={hid}>
         {(CHOICES as string[]).map((c, i) => (
           <label key={c} className="nt-ff-choice">
             <input
@@ -419,13 +443,14 @@ function InfoBox({ id, value, error, onChange, onEnter }: { id: string; value: s
 
 function Review({ v, way, saveNote, onEdit, onSaveSheet, onSaveLater }: {
   v: Data;
-  way: { name: string };
-  saveNote: string;
+  way: { name: string; lines: string[] };
+  saveNote: { name: string; kind: "sheet" | "later" } | null;
   onEdit: (to: number) => void;
   onSaveSheet: () => void;
   onSaveLater: () => void;
 }) {
   const r = COPY.review;
+  const [showLater, setShowLater] = useState(false);
   const sheet = buildSheet(v) as { ok: boolean; text?: string; problems?: { field: string; message: string }[] };
   const problems = sheet.ok ? [] : sheet.problems ?? [];
   const infoAt = (id: string) => INFO_AT + (INFO_FIELDS as { id: string }[]).findIndex((f) => f.id === id);
@@ -443,6 +468,7 @@ function Review({ v, way, saveNote, onEdit, onSaveSheet, onSaveLater }: {
     <section className="nt-ff-screen" aria-label={r.title}>
       <h2 className="nt-ff-h">{r.title}</h2>
       <p className="nt-ff-line">{r.intro}</p>
+      <p className="nt-ff-line">{r.sheetFor}</p>
 
       {problems.length > 0 ? (
         <div className="nt-ff-problems">
@@ -458,6 +484,9 @@ function Review({ v, way, saveNote, onEdit, onSaveSheet, onSaveLater }: {
           <dd>{way.name}</dd>
         </div>
       </dl>
+      <p className="nt-ff-line">
+        {way.lines[0]} {COPY.sources.label} <a href={LINKS.freeFilePage} rel="noreferrer">{COPY.sources.freeFile}</a>
+      </p>
 
       <h3 className="nt-ff-h3">{r.yourAnswers}</h3>
       <dl className="nt-ff-rows">
@@ -466,7 +495,7 @@ function Review({ v, way, saveNote, onEdit, onSaveSheet, onSaveLater }: {
           return (
             <div className="nt-ff-row" key={q}>
               <dt>{short}</dt>
-              <dd>{(CHOICE_WORDS as Record<string, string>)[v.answers[q]]}</dd>
+              <dd>{q === "open" && v.answers[q] === "no" ? r.openNo : (CHOICE_WORDS as Record<string, string>)[v.answers[q]]}</dd>
               {edit(i, short)}
             </div>
           );
@@ -511,12 +540,35 @@ function Review({ v, way, saveNote, onEdit, onSaveSheet, onSaveLater }: {
         </details>
       ) : null}
 
-      <p className="nt-ff-line">{r.sheetHelp}</p>
       <div className="nt-ff-save">
         <button type="button" className="primary" disabled={!sheet.ok} onClick={onSaveSheet}>{r.saveSheet}</button>
-        <button type="button" disabled={!sheet.ok} onClick={onSaveLater}>{r.saveLater}</button>
       </div>
-      <p className="nt-ff-line" role="status">{saveNote}</p>
+      <p className="nt-ff-line">{r.previewLine}</p>
+      <div className="nt-ff-open-box">
+        <button type="button" aria-expanded={showLater} onClick={() => setShowLater(!showLater)}>{r.laterSummary}</button>
+        {showLater ? (
+          <>
+            <p className="nt-ff-line">{r.laterHelp}</p>
+            <p className="nt-ff-line">{r.fileStays}</p>
+            <div className="nt-ff-save">
+              <button type="button" disabled={!sheet.ok} onClick={onSaveLater}>{r.saveLater}</button>
+            </div>
+          </>
+        ) : null}
+      </div>
+      <div role="status">
+        {saveNote ? (
+          <p className="nt-ff-line">
+            {r.saved(saveNote.name)} {saveNote.kind === "sheet" ? r.nextAfterSheet : r.nextAfterLater}
+            {saveNote.kind === "sheet" ? (
+              <>
+                {" "}
+                <a href={LINKS.freeFile} rel="noreferrer">{r.openIrs}</a>
+              </>
+            ) : null}
+          </p>
+        ) : null}
+      </div>
     </section>
   );
 }

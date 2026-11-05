@@ -19,13 +19,15 @@ describe("Loan Explainer page", () => {
   it("shows the empty state and no answer", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Loan Explainer" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.empty)).toBeInTheDocument();
+    expect(screen.getByText("Type the numbers from your loan. Your answer shows below.")).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
     expect(screen.getByLabelText("Monthly payment")).toHaveTextContent(COPY.waiting);
-    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
-    expect(screen.getByText("Step 2 of 2: Read your answer")).toBeInTheDocument();
     expect(screen.getByLabelText("Amount borrowed")).toHaveFocus();
-    expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /our public page/ })).toBeInTheDocument();
+    const intro = screen.getByText(COPY.intro);
+    const privacy = screen.getByText(/Nothing is sent\./);
+    expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(privacy.compareDocumentPosition(screen.getByLabelText("Amount borrowed")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.getByRole("link", { name: /how this page is made/ })).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -90,10 +92,11 @@ describe("Loan Explainer page", () => {
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
-  it("says it is an estimate, says the lender shows the yearly cost, and explains the words", () => {
+  it("says it is an estimate, keeps the yearly cost line in the closed words list only, and explains the words", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
-    expect(screen.getByText(/The yearly cost of a loan, with some fees/)).toBeInTheDocument();
+    expect(screen.getByText("This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
+    expect(screen.getAllByText(/The yearly cost of the loan, with some fees/)).toHaveLength(1);
+    expect(screen.getByText(/The yearly cost of the loan, with some fees/).closest("details")).not.toBeNull();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 
@@ -125,7 +128,7 @@ describe("Loan Explainer page", () => {
     await fill("How long", "10");
     expect(screen.getByText(COPY.save.title)).toBeInTheDocument();
     expect(screen.getByText(COPY.save.title).closest("details")).toBeNull();
-    expect(document.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
     expect(screen.getByLabelText("Monthly payment")).toHaveTextContent("$1,000.00");
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
   });
@@ -182,14 +185,14 @@ describe("loan-explainer Start over can be called off", () => {
 });
 
 describe("loan-explainer filled screen", () => {
-  it("shows the estimate sentence once, no APR, one step 2 label, and a short save preview", async () => {
+  it("shows the estimate sentence once, no APR, one answer line, and a short save preview", async () => {
     render(<Page />);
     await fill("Amount borrowed", "$10,000");
     await fill("Yearly interest rate", "6");
     await fill("How long", "36");
     const body = document.body.textContent ?? "";
     expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
-    expect(screen.getAllByText(/^Step 2 of 2: Read your answer/)).toHaveLength(1);
+    expect(body.split("That is your answer").length - 1).toBe(1);
     expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
     expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
     const open = body.replace(/What the words mean[\s\S]*$/, "");

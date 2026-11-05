@@ -46,7 +46,7 @@ test("answer-sheet-exact: three golden sheets match line for line", () => {
 test("no-social-security-number: no such box, and the sheet says where to type it", () => {
   assert.equal(INFO_FIELDS.some((f) => /social|ssn|security/i.test(f.id + f.label)), false);
   const sheet = buildSheet({}).text;
-  assert.match(sheet, /You type your Social Security number yourself on the IRS partner site\./);
+  assert.match(sheet, /You type your Social Security number yourself on the free filing site you pick on IRS.gov\./);
   const r = buildSheet({ info: { ssn: "123-45-6789", socialSecurityNumber: "123456789" } });
   assert.equal(r.ok, true);
   assert.ok(!r.text.includes("123-45-6789"));
@@ -106,8 +106,8 @@ test("saved-file-never-runs: code-like text stays plain text, and prototype keys
 test("never-submits: the sheet lists what the person does and what NT never does", () => {
   const sheet = buildSheet({}).text;
   for (const l of YOU_DO) assert.ok(sheet.includes(l), l);
-  assert.match(sheet, /Press Submit\./);
-  assert.match(sheet, /NT never presses Submit, signs for you, pays anything/);
+  assert.match(sheet, /Press Submit, the button that sends your tax return\./);
+  assert.match(sheet, /This tool never presses Submit, signs for you, pays anything/);
   assert.match(sheet, /Nothing was sent\./);
 });
 

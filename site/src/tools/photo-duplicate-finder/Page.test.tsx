@@ -69,18 +69,37 @@ describe("Photo Duplicate Finder page", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Photo Duplicate Finder" })).toBeInTheDocument();
     expect(screen.getByText("Step 1 of 3: Pick your photos")).toBeInTheDocument();
-    expect(screen.getByLabelText("Photos picked")).toHaveTextContent(COPY.pick.waiting);
-    expect(screen.getByRole("button", { name: COPY.pick.next })).toBeDisabled();
+    expect(screen.getByLabelText("Photos picked")).toHaveTextContent(COPY.pick.waiting(0));
+    expect(screen.getByRole("button", { name: COPY.pick.choose })).toBeEnabled();
+    expect(screen.getByText("You picked 0 photos. Pick 2 or more.")).toBeInTheDocument();
+    expect(screen.queryByText(/at least 2/)).toBeNull();
+    expect(screen.queryByText(/That is your answer/)).toBeNull();
+    expect(screen.getAllByRole("link", { name: /how this page is made/i })).toHaveLength(1);
+    expect(screen.getByText(/Photos stay on this phone or computer/)).toBeInTheDocument();
     expect(primaries()).toHaveLength(1);
     expect(picker().multiple).toBe(true);
     expect(picker()).toHaveFocus();
     expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
   });
 
+  it("with fewer than 2 photos the one filled button is Choose photos and opens the chooser", async () => {
+    render(<Page />);
+    const click = vi.spyOn(picker(), "click");
+    const button = screen.getByRole("button", { name: COPY.pick.choose });
+    expect(button).toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: COPY.pick.next })).toBeNull();
+    await userEvent.click(button);
+    expect(click).toHaveBeenCalled();
+    expect(screen.getByText("Step 1 of 3: Pick your photos")).toBeInTheDocument();
+  });
+
   it("groups exact copies, keeps the largest by default, and walks to the list", async () => {
     render(<Page />);
     await pickFiles([jpeg("ALPHA", "one.jpg"), jpeg("ALPHA", "one copy.jpg", 2), jpeg("ALT lone photo", "lone.jpg", 3)]);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("3"));
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked3$/));
+    const picked = screen.getByRole("region", { name: COPY.pick.picked });
+    expect(within(picked).getByText(/^one\.jpg$/)).toBeInTheDocument();
+    expect(within(picked).getByText(/^lone\.jpg/)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.pick.next }));
 
     expect(screen.getByText("Step 2 of 3: Look at the groups")).toBeInTheDocument();
@@ -94,11 +113,15 @@ describe("Photo Duplicate Finder page", () => {
     expect(screen.getByLabelText(COPY.review.label)).toHaveTextContent("1 file");
     const list = screen.getByRole("region", { name: COPY.review.listHeading });
     expect(within(list).getByText(/^one\.jpg/)).toBeInTheDocument();
-    expect(screen.getByText(COPY.review.promise)).toBeInTheDocument();
+    expect(screen.getByText(COPY.review.what)).toBeInTheDocument();
+    expect(screen.getByText(`${COPY.review.saveHelp} ${COPY.review.undo}`)).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/\bKB\b|\bMB\b|bytes/);
+    expect(screen.queryByText(/That is your answer/)).toBeNull();
     expect(primaries()).toHaveLength(1);
 
     await userEvent.click(screen.getByRole("button", { name: COPY.review.save }));
     expect(screen.getByText(COPY.review.saved)).toBeInTheDocument();
+    expect(screen.getByText(/Look in Downloads or the Files app/)).toBeInTheDocument();
     const saved = await textOf(blobs[blobs.length - 1]);
     expect(saved).toMatch(/^one\.jpg \(\d+ bytes\) - exact copy of one copy\.jpg$/m);
     expect(saved).toMatch(/Nothing was deleted\. Your photos are untouched\./);
@@ -108,7 +131,7 @@ describe("Photo Duplicate Finder page", () => {
   it("changes the one to keep, and Put it back marks nothing", async () => {
     render(<Page />);
     await pickFiles([jpeg("ALPHA", "one.jpg"), jpeg("ALPHA", "one copy.jpg", 2)]);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("2"));
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked2$/));
     await userEvent.click(screen.getByRole("button", { name: COPY.pick.next }));
     await userEvent.click(screen.getByRole("radio", { name: /Keep one\.jpg/ }));
     await userEvent.click(screen.getByRole("button", { name: COPY.groups.next }));
@@ -120,7 +143,8 @@ describe("Photo Duplicate Finder page", () => {
     expect(screen.getByText(COPY.groups.putBackHelp)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: COPY.groups.next }));
     expect(screen.getByLabelText(COPY.review.label)).toHaveTextContent(COPY.review.empty);
-    expect(screen.getByRole("button", { name: COPY.review.save })).toBeDisabled();
+    expect(screen.queryByRole("button", { name: COPY.review.save })).toBeNull();
+    expect(primaries()).toHaveLength(1);
 
     await userEvent.click(screen.getByRole("button", { name: COPY.review.back }));
     await userEvent.click(screen.getByRole("button", { name: COPY.groups.markAgain }));
@@ -131,20 +155,22 @@ describe("Photo Duplicate Finder page", () => {
   it("names look-alike groups apart and says to check", async () => {
     render(<Page />);
     await pickFiles([jpeg("ALPHA", "a.jpg"), jpeg("ALPHA NEAR bigger", "b.jpg", 2), jpeg("ALT lone photo", "c.jpg", 3)]);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("3"));
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked3$/));
     await userEvent.click(screen.getByRole("button", { name: COPY.pick.next }));
     expect(screen.getByRole("heading", { level: 2, name: "Group 1 of 1: Look alike, check yourself" })).toBeInTheDocument();
     expect(screen.getByText(COPY.groups.estimate)).toBeInTheDocument();
+    expect(screen.getByText(COPY.groups.alikeHelp)).toBeInTheDocument();
     expect(screen.getByRole("radio", { name: /Keep b\.jpg/ })).toBeChecked();
   });
 
   it("says plainly when no copies are found", async () => {
     render(<Page />);
     await pickFiles([jpeg("ALPHA", "a.jpg"), jpeg("ALT other photo", "c.jpg", 3)]);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("2"));
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked2$/));
     await userEvent.click(screen.getByRole("button", { name: COPY.pick.next }));
     expect(screen.getByText(COPY.groups.none)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: COPY.groups.next })).toBeDisabled();
+    expect(screen.getByRole("button", { name: COPY.groups.pickMore })).toBeEnabled();
+    expect(primaries()).toHaveLength(1);
   });
 
   it("messy: a PDF, an empty file and a broken photo each get a calm plain message", async () => {
@@ -159,8 +185,8 @@ describe("Photo Duplicate Finder page", () => {
     expect(within(box).getByText(COPY.cantOpen.damaged("broken.jpg"))).toBeInTheDocument();
     expect(within(box).getAllByRole("link").length).toBeGreaterThan(0);
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("1"));
-    expect(screen.getByRole("button", { name: COPY.pick.next })).toBeDisabled();
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/You picked 1 photo\./));
+    expect(screen.getByRole("button", { name: COPY.pick.choose })).toBeInTheDocument();
   });
 
   it("messy: an iPhone photo this page cannot open gets a clear message", async () => {
@@ -175,23 +201,23 @@ describe("Photo Duplicate Finder page", () => {
     render(<Page />);
     const files = Array.from({ length: 302 }, (_, i) => jpeg(`P${i} ALT`, `p${i}.jpg`, i + 1));
     await pickFiles(files);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("300"), { timeout: 20000 });
-    expect(screen.getAllByText(/left out\. NT looks at up to 300 photos at a time\./)).toHaveLength(2);
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked300$/), { timeout: 20000 });
+    expect(screen.getAllByText(/left out\. Up to 300 photos are checked at a time\./)).toHaveLength(2);
   }, 30000);
 
   it("messy: the same photo picked twice is added once", async () => {
     render(<Page />);
     await pickFiles([jpeg("ALPHA", "a.jpg", 7)]);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("1"));
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/You picked 1 photo\./));
     await pickFiles([jpeg("ALPHA", "a.jpg", 7), jpeg("ALT x", "b.jpg", 8)]);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("2"));
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked2$/));
     expect(screen.getByText(COPY.already(1))).toBeInTheDocument();
   });
 
   it("lets go of photo links when the page closes", async () => {
     const { unmount } = render(<Page />);
     await pickFiles([jpeg("ALPHA", "a.jpg"), jpeg("ALPHA", "a2.jpg", 2)]);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("2"));
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked2$/));
     unmount();
     expect(revoked.sort()).toEqual(["blob:made-up-1", "blob:made-up-2"]);
   });
@@ -199,12 +225,12 @@ describe("Photo Duplicate Finder page", () => {
   it("Start over clears the photos and can put them back", async () => {
     render(<Page />);
     await pickFiles([jpeg("ALPHA", "a.jpg"), jpeg("ALPHA", "a2.jpg", 2)]);
-    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent("2"));
+    await waitFor(() => expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked2$/));
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
     await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
-    expect(screen.getByLabelText("Photos picked")).toHaveTextContent(COPY.pick.waiting);
+    expect(screen.getByLabelText("Photos picked")).toHaveTextContent(COPY.pick.waiting(0));
     await userEvent.click(screen.getByRole("button", { name: "Put it back" }));
-    expect(screen.getByLabelText("Photos picked")).toHaveTextContent("2");
+    expect(screen.getByLabelText("Photos picked")).toHaveTextContent(/^Photos picked2$/);
   });
 });
 
@@ -233,10 +259,15 @@ describe("Photo Duplicate Finder copy", () => {
   it("reads at grade 7 or lower", () => {
     expect(gradeOf(strings.join("\n\n"))!.grade).toBeLessThanOrEqual(7);
   });
+  it("does not say NT or use byte counts", () => {
+    for (const s of strings) expect(s).not.toMatch(/\bNT\b|\bbytes?\b/);
+  });
   it("never gives advice and has no pressure words", () => {
     expect(strings.join(" ")).not.toMatch(/\byou should\b|\bwe recommend\b|\bhurry\b|\burgent\b|\blast chance\b|\bnow or\b/i);
   });
-  it("says nothing is deleted", () => {
-    expect(COPY.review.promise).toMatch(/Nothing was deleted\. Your photos are untouched\./);
+  it("says it never deletes once, and only once", () => {
+    expect(COPY.intro).toMatch(/never deletes, moves or sends a photo/);
+    const others = strings.filter((s) => s !== COPY.intro && !/delete the list file/.test(s));
+    for (const s of others) expect(s).not.toMatch(/delete|untouched/i);
   });
 });

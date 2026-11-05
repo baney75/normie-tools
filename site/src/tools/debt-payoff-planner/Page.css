@@ -42,3 +42,6 @@
 .nt-dpp-key dt { font-weight: 700; color: var(--nt-ink); margin-top: var(--nt-space-3); }
 .nt-dpp-key dd { margin: 0; }
 .nt-dpp-note { font-size: 1rem; color: var(--nt-text); }
+.nt-dpp-pair { display: flex; flex-direction: column; align-items: flex-start; gap: var(--nt-space-2); }
+.nt-dpp-pair .nt-dpp-help { margin: 0; }
+.nt-dpp-subhead { margin: var(--nt-space-3) 0 var(--nt-space-2); font-weight: 700; color: var(--nt-ink); }

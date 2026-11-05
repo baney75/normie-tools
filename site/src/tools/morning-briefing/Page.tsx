@@ -96,6 +96,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-mb">
         <p className="nt-mb-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && pristine ? (
           <div className="nt-mb-status">
@@ -131,6 +132,7 @@ export function Page() {
                 {COPY.next}
               </button>
             </div>
+            <p className="nt-mb-help">{COPY.pick.preview}</p>
           </>
         ) : null}
 
@@ -215,7 +217,7 @@ export function Page() {
             ) : null}
 
             <div className="nt-mb-nav">
-              <button type="button" onClick={() => flow.setStep(0)}>{COPY.back}</button>
+              <button type="button" onClick={() => flow.setStep(0)}>{COPY.back1}</button>
               <button type="button" className="primary" onClick={() => flow.setStep(2)}>{COPY.next}</button>
             </div>
           </>
@@ -225,8 +227,7 @@ export function Page() {
 
         <StartOver flowId="morning-briefing" value={flow.value} empty={EMPTY} onChange={onStartOver} />
 
-        <p className="nt-mb-note">{COPY.note}</p>
-        <PrivacyNote />
+        {step === 2 ? <p className="nt-mb-note">{COPY.note}</p> : null}
       </div>
     </ScreenFrame>
   );
@@ -257,13 +258,14 @@ function Briefing({ v, onBack }: { v: Inputs; onBack: () => void }) {
   return (
     <>
       <StepLabel n={3} of={3}>{COPY.steps.see}</StepLabel>
+      <p className="nt-mb-help">{COPY.see.intro}</p>
       <div className="nt-mb-nav">
-        <button type="button" onClick={onBack}>{COPY.back}</button>
+        <button type="button" onClick={onBack}>{COPY.back2}</button>
       </div>
       {!result.ok ? (
         <ErrorNote>{COPY.see.nothingFixed}</ErrorNote>
       ) : (
-        <SavePrintSheet title={COPY.save.title} onSave={save}>
+        <SavePrintSheet title={COPY.save.title} onSave={save} savePrimary>
           <article className="nt-mb-paper" aria-label="Your briefing">
             <h3>{COPY.see.paperTitle}</h3>
             {result.dateLine ? <p className="nt-mb-date">{result.dateLine}</p> : null}
@@ -283,6 +285,7 @@ function Briefing({ v, onBack }: { v: Inputs; onBack: () => void }) {
             ))}
             {result.offlineNote ? <p className="nt-mb-note">{result.offlineNote}</p> : null}
             {result.offlineNote ? <p className="nt-mb-note">{COPY.see.sourceNote}</p> : null}
+            <p className="nt-mb-note">{COPY.see.madeHere}</p>
             {result.notes.map((n) => <p key={n} className="nt-mb-note">{n}</p>)}
           </article>
         </SavePrintSheet>

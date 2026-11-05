@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -45,6 +45,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-mort">
         <p className="nt-mort-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && blank ? (
           <div className="nt-mort-status">
@@ -61,7 +62,6 @@ export function Page() {
           </div>
         ) : null}
 
-        <StepLabel n={1} of={2}>{COPY.stepOne}</StepLabel>
         <form className="nt-mort-form" onSubmit={(e) => e.preventDefault()} noValidate>
           <MoneyField autoFocus label={COPY.price.label} hint={COPY.price.hint} placeholder={COPY.price.placeholder}
             value={v.price} onChange={(t) => set({ price: t })} error={bad("price")} />
@@ -94,7 +94,6 @@ export function Page() {
 
         <Answer result={result.ok ? result : null} />
 
-        {!result.ok && blank ? <p className="nt-mort-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
           <p className="nt-mort-status" role="status">
             {COPY.stillNeeded} {missing.join(", ")}.
@@ -105,8 +104,6 @@ export function Page() {
         <StartOver flowId="mortgage-payment-explainer" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
         <p className="nt-mort-note">{COPY.notes.estimate}</p>
-        <p className="nt-mort-note">{COPY.notes.changes}</p>
-        <PrivacyNote />
 
         <details className="nt-mort-details">
           <summary>{COPY.key.summary}</summary>
@@ -182,7 +179,6 @@ function Answer({ result }: { result: Good | null }) {
         label={r.totalLabel}
         answer={result ? formatMoney(result.totalMonthlyCents) : undefined}
         waiting={COPY.waiting}
-        step={COPY.stepTwo}
       >
         <p className="nt-mort-help">{r.totalLine}</p>
         <dl className="nt-mort-lines">
@@ -218,7 +214,7 @@ function Answer({ result }: { result: Good | null }) {
         </section>
       ) : null}
 
-      <SavePrintSheet title={COPY.save.title} onSave={save}>
+      <SavePrintSheet quiet title={COPY.save.title} onSave={save}>
         {result ? (
           <p>{COPY.save.preview}</p>
         ) : null}

@@ -340,24 +340,21 @@ def student_text(result):
         return problem_lines(result)
     r = result
     lines = [
-        "Loan balance: %s" % money_text(r["principalCents"]),
-        "Yearly interest rate: %s" % percent_text(r["rateBps"]),
-        "Months with no payments so far: %s" % count_text(r["waitMonths"], "month"),
-        "Add the unpaid interest to my balance: %s" % ("yes" if r["capitalize"] else "no"),
-        "Balance when payments start: %s" % money_text(r["balanceAtStartCents"]),
-        "Interest that grew while you waited: %s" % money_text(r["unpaidInterestCents"]),
+        "Your balance when payments start is %s." % money_text(r["balanceAtStartCents"]),
+        "Interest that grew while you waited is %s." % money_text(r["unpaidInterestCents"]),
+        "The unpaid interest was %s your balance." % ("added to" if r["capitalize"] else "not added to"),
     ]
     if r["paymentCents"] is not None:
-        lines.append("Monthly payment: %s" % money_text(r["paymentCents"]))
+        lines.append("Your monthly payment is %s." % money_text(r["paymentCents"]))
     p = r["payoff"]
     if p:
-        lines.append("Months to pay off: %s" % months_text(p["months"]))
-        lines.append("Total interest: %s" % money_text(p["totalInterestCents"]))
+        lines.append("You pay it off in %s." % months_text(p["months"]))
         if p["payoffDate"]:
-            lines.append("Payoff month: %s" % p["payoffDate"]["label"])
+            lines.append("Your last payment is in %s." % p["payoffDate"]["label"])
+        lines.append("Total interest is %s." % money_text(p["totalInterestCents"]))
     m = r["minPayment"]
     if m:
-        lines.append("Smallest payment to finish in %s: %s" % (count_text(m["years"], "year"), money_text(m["paymentCents"])))
+        lines.append("The smallest payment to finish in %s is %s." % (count_text(m["years"], "year"), money_text(m["paymentCents"])))
     lines.append(END_LINE)
     return lines
 

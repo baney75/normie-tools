@@ -25,41 +25,39 @@ def run_json(data):
 
 
 class Text(unittest.TestCase):
-    def check(self, data, first, answer_line):
+    def check(self, data, first):
         code, lines = run_text(data)
         self.assertEqual(code, 0)
-        self.assertEqual(lines[0], first)
-        self.assertEqual(lines[1], answer_line)
-        self.assertEqual(lines[2:], ["Shown to 6 digits.", "Conversions use exact standard factors."])
+        self.assertEqual(lines, [first, "The answer is shown to 6 digits.", "Conversions use exact standard factors."])
 
     def test_inches_to_millimeters(self):
         self.check({"category": "length", "from": "inch", "to": "millimeter", "value": "12"},
-                   "12 inches is 304.8 millimeters.", "Your answer: 304.8 millimeters")
+                   "12 inches is 304.8 millimeters.")
 
     def test_body_temperature(self):
         self.check({"category": "temperature", "from": "fahrenheit", "to": "celsius", "value": "98.6"},
-                   "98.6 degrees Fahrenheit is 37 degrees Celsius.", "Your answer: 37 degrees Celsius")
+                   "98.6 degrees Fahrenheit is 37 degrees Celsius.")
 
     def test_cups_to_milliliters(self):
         self.check({"category": "volume", "from": "cup", "to": "milliliter", "value": "1.5"},
-                   "1.5 US cups is 354.882 milliliters.", "Your answer: 354.882 milliliters")
+                   "1.5 US cups is 354.882 milliliters.")
 
     def test_typed_commas_and_spaces_are_kept(self):
         self.check({"category": "weight", "from": "pound", "to": "kilogram", "value": " 1,250.5 "},
-                   "1,250.5 pounds is 567.217 kilograms.", "Your answer: 567.217 kilograms")
+                   "1,250.5 pounds is 567.217 kilograms.")
 
     def test_one_is_singular(self):
         self.check({"category": "length", "from": "mile", "to": "meter", "value": "1"},
-                   "1 mile is 1,609.34 meters.", "Your answer: 1,609.34 meters")
+                   "1 mile is 1,609.34 meters.")
 
     def test_negative_temperature(self):
         self.check({"category": "temperature", "from": "celsius", "to": "fahrenheit", "value": "-40"},
-                   "-40 degrees Celsius is -40 degrees Fahrenheit.", "Your answer: -40 degrees Fahrenheit")
+                   "-40 degrees Celsius is -40 degrees Fahrenheit.")
 
     def test_every_golden_answer_is_in_the_text(self):
         for c in GOLDEN["conversions"]:
             _code, lines = run_text(c["input"])
-            self.assertIn("Your answer: %s " % c["expect"]["answer"], lines[1], c["id"])
+            self.assertIn(" is %s " % c["expect"]["answer"], lines[0], c["id"])
 
     def test_problem_text(self):
         code, lines = run_text({"category": "length", "from": "pound", "to": "meter", "value": "5"})

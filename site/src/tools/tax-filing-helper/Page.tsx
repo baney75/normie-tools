@@ -6,7 +6,7 @@ import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
 import { checkAnswers, formatMoney, PRACTICE_SHEET, screensOf } from "../../../../tools/tax-filing-helper/calc.mjs";
 import { parseMoney } from "../../../../tools/_shared/money.mjs";
-import { COPY, SOURCE_URL, START_URL } from "./copy";
+import { COPY, SOURCE_URL } from "./copy";
 import "./Page.css";
 
 type Way = "" | "guided" | "fillable";
@@ -63,6 +63,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-tfh">
         <p className="nt-tfh-banner" role="note">{COPY.banner}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && pristine ? (
           <div className="nt-tfh-status">
@@ -90,7 +91,6 @@ export function Page() {
 
         {v.step >= 3 || (cleared && pristine) ? <StartOver flowId="tax-filing-helper" value={flow.value} empty={EMPTY} onChange={reset} /> : null}
         <p className="nt-tfh-note">{COPY.note}</p>
-        <PrivacyNote />
       </div>
     </ScreenFrame>
   );
@@ -118,19 +118,21 @@ function Pick({ v, set, next }: { v: Inputs; set: (p: Partial<Inputs>) => void; 
       <p className="nt-tfh-help">{c.start}</p>
       <Source label={c.sourceLabel} />
 
+
       <section className="nt-tfh-who" aria-label={COPY.who.heading}>
-        <h2>{COPY.who.heading}</h2>
-        <p className="nt-tfh-help">{COPY.who.note}</p>
-        <table className="nt-tfh-table">
-          <thead>
-            <tr><th scope="col">{COPY.who.helperHead}</th><th scope="col">{COPY.who.youHead}</th></tr>
-          </thead>
-          <tbody>
-            {COPY.who.rows.map(([a, b]) => <tr key={a}><td>{a}</td><td>{b}</td></tr>)}
-          </tbody>
-        </table>
-        <p className="nt-tfh-help">{COPY.who.never}</p>
-        <Source label={COPY.who.sourceLabel} />
+        <details>
+          <summary>{COPY.who.heading}</summary>
+          <p className="nt-tfh-help">{COPY.who.note}</p>
+          <table className="nt-tfh-table">
+            <thead>
+              <tr><th scope="col">{COPY.who.helperHead}</th><th scope="col">{COPY.who.youHead}</th></tr>
+            </thead>
+            <tbody>
+              {COPY.who.rows.map(([a, b]) => <tr key={a}><td>{a}</td><td>{b}</td></tr>)}
+            </tbody>
+          </table>
+          <p className="nt-tfh-help">{COPY.who.never}</p>
+        </details>
       </section>
 
       <div className="nt-tfh-actions">
@@ -216,6 +218,8 @@ function Review({ v, result, back }: { v: Inputs; result: ReturnType<typeof chec
       ...good.rows.map((x: Good["rows"][number]) => x.message),
       "",
       r.stop,
+      r.submit,
+      r.submit,
       COPY.note,
       "",
     ].join("\n");
@@ -234,16 +238,13 @@ function Review({ v, result, back }: { v: Inputs; result: ReturnType<typeof chec
   return (
     <>
       <h2 className="nt-tfh-h2">{r.heading}</h2>
-      <ResultCard label={r.resultLabel} answer={good ? good.summary : undefined} waiting="The check shows here">
+      <ResultCard label={r.resultLabel} closing={false} answer={good ? good.summary : undefined} waiting="The check shows here">
         <p className="nt-tfh-help">{wayName ? `${r.youPicked}: ${wayName}.` : r.notPicked}</p>
       </ResultCard>
 
       <section className="nt-tfh-stop" aria-label="Stop">
         <p className="nt-tfh-stop-text">{r.stop}</p>
-        <p>
-          <a className="nt-tfh-link" href={START_URL} rel="noreferrer">{r.openReal}</a>
-        </p>
-        <p className="nt-tfh-help">{r.openRealHelp}</p>
+        <p>{r.submit}</p>
       </section>
 
       {good ? (
@@ -252,12 +253,12 @@ function Review({ v, result, back }: { v: Inputs; result: ReturnType<typeof chec
           <ul className="nt-tfh-rows">
             {good.rows.map((x: Good["rows"][number]) => (
               <li key={x.id} className={`nt-tfh-row nt-tfh-${x.status}`}>
-                <p className="nt-tfh-row-head">
+                <span className="nt-tfh-row-head">
                   <span>{x.label}</span>
                   <strong>{word(x.status)}</strong>
-                </p>
-                <p className="nt-tfh-row-line">{`${r.sheetHead}: ${x.expected}`}</p>
-                <p className="nt-tfh-row-line">{`${r.typedHead}: ${x.typed || r.nothingTyped}`}</p>
+                </span>
+                <span className="nt-tfh-row-line">{`${r.sheetHead}: ${x.expected}`}</span>
+                <span className="nt-tfh-row-line">{`${r.typedHead}: ${x.typed || r.nothingTyped}`}</span>
               </li>
             ))}
           </ul>
@@ -266,6 +267,11 @@ function Review({ v, result, back }: { v: Inputs; result: ReturnType<typeof chec
 
       <section className="nt-tfh-watch" aria-label={r.watch.heading}>
         <h3>{r.watch.heading}</h3>
+        <p>{r.watch.extras}</p>
+        <ul>
+          {r.watch.extraItems.map((t) => <li key={t}>{t}</li>)}
+        </ul>
+        <p>{r.watch.extrasEnd}</p>
         <ul>
           {r.watch.items.map((t) => <li key={t}>{t}</li>)}
         </ul>
@@ -276,11 +282,10 @@ function Review({ v, result, back }: { v: Inputs; result: ReturnType<typeof chec
         <button type="button" className="nt-tfh-btn nt-tfh-outline" onClick={back}>{COPY.back}</button>
       </div>
 
-      <SavePrintSheet title={COPY.save.title} onSave={save}>
+      <SavePrintSheet savePrimary title={COPY.save.title} onSave={save}>
         {good ? (
           <>
             <p>{good.summary}</p>
-            {good.rows.map((x: Good["rows"][number]) => <p key={x.id}>{x.message}</p>)}
           </>
         ) : null}
       </SavePrintSheet>

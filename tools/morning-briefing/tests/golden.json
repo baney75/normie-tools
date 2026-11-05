@@ -54,7 +54,7 @@
         ],
         "reminders": ["Water plants", { "text": "Call the pharmacy" }]
       },
-      "text": "Morning briefing\nThursday, November 5, 2026\n\nWeather (Example)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\n\nNews headlines (Example)\n- Example headline: The town pool opens for the summer.\n- Example headline: A bake sale is on Saturday.\n- Example headline: The library has a new sign.\nExample. Not today's news.\n\nMy day\n7:30 am: Pills\n1:00 pm: Lunch\nTime not clear\n- later: Call Sam\n- Mail\n\nMy reminders\n- Water plants\n- Call the pharmacy\n\nLive weather and news need the NT app or your AI helper. This page does not go online.\n",
+      "text": "Morning briefing\nThursday, November 5, 2026\n\nExample weather (not real)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\n\nExample news (not real)\n- Example headline: The town pool opens for the summer.\n- Example headline: A bake sale is on Saturday.\n- Example headline: The library has a new sign.\nExample. Not today's news.\n\nMy day\n7:30 am: Pills\n1:00 pm: Lunch\nTime not clear\n- later: Call Sam\n- Mail\n\nMy reminders\n- Water plants\n- Call the pharmacy\n\nLive weather and news are not on this page yet.\n",
       "dayOrder": ["Pills", "Lunch"],
       "unclear": ["later: Call Sam", "Mail"]
     },
@@ -76,7 +76,7 @@
     {
       "id": "weather-only",
       "input": { "include": { "weather": true } },
-      "text": "Morning briefing\n\nWeather (Example)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\n\nLive weather and news need the NT app or your AI helper. This page does not go online.\n"
+      "text": "Morning briefing\n\nExample weather (not real)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\n\nLive weather and news are not on this page yet.\n"
     },
     {
       "id": "ties-and-midnight",

@@ -24,6 +24,7 @@ function sampleFor(label, i = 0) {
   if (/price|cost of the home|home/.test(l) && !/down/.test(l)) return bump(300000);
   if (/down/.test(l)) return bump(60000);
   if (/rate|apr|percent|interest|return/.test(l)) return String(5 + (i % 3) * 0.5);
+  if (/years to pay|pay it back/.test(l)) return "30";
   if (/payment|each month|per month|a month|monthly/.test(l)) return bump(200);
   if (/year|month|term|length|how long|months/.test(l)) return String(24 + (i % 3) * 12);
   if (/date|when|start/.test(l)) return "";
@@ -43,8 +44,7 @@ const CAPTURE = () => {
     if (!m) return false;
     const [r, g, b, a = "1"] = m[1].split(",").map((x) => parseFloat(x));
     if (parseFloat(a) === 0) return false;
-    const light = r > 235 && g > 235 && b > 225; // white, paper, mint
-    return !light;
+    return r >= 150 && g <= 110 && b <= 90; // the dark orange of the main button
   };
   const name = (el) => (el.getAttribute("aria-label") || el.innerText || el.value || "").trim().replace(/\s+/g, " ");
   const main = document.querySelector("main") || document.body;
@@ -69,8 +69,13 @@ const CAPTURE = () => {
       else if (tag === "BUTTON") {
         const f = filled(el);
         lines.push(`[${f ? "MAIN BUTTON, filled dark orange" : "plain button, outline only"}${el.disabled ? ", disabled" : ""}] ${name(el)}`);
-      } else if (tag === "A") lines.push(`[link, plain] ${name(el)}`);
+      } else if (tag === "A") lines.push(`[${filled(el) ? "MAIN LINK, filled dark orange" : "link, plain"}] ${name(el)}`);
       else if ((tag === "TH" || tag === "TD") && name(el)) lines.push(`[cell] ${name(el)}`);
+      else if (tag === "SPAN" || tag === "DIV") {
+        // Hints and notes are often plain spans or divs. Read their own text, unless a parent line already holds it.
+        const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).filter(Boolean).join(" ");
+        if (own && !el.closest("p, li, dt, dd, button, label, h1, h2, h3, h4, h5, h6, summary, a, caption, th, td, [aria-hidden=true]")) lines.push(own);
+      }
     }
     // next element in document order, skipping hidden subtrees
     let next = vis(el) || el === main ? el.firstElementChild : null;
@@ -84,9 +89,10 @@ const CAPTURE = () => {
   // collapse paragraphs that repeat a child's text (P inside LI etc.)
   const out = [];
   for (const l of lines) if (out[out.length - 1] !== l) out.push(l);
-  const filledButtons = [...main.querySelectorAll("button")].filter((b) => vis(b) && filled(b) && !b.disabled).length;
+  const filledButtons = [...main.querySelectorAll("button, a")].filter((b) => vis(b) && filled(b) && !b.disabled).length;
+  const startBox = main.querySelector("input:focus, select:focus");
   const disabledFilled = [...main.querySelectorAll("button")].some((b) => vis(b) && filled(b) && b.disabled);
-  return { lines: out, filledButtons, disabledFilled };
+  return { lines: out, filledButtons, disabledFilled, startBox: Boolean(startBox) };
 };
 
 async function defaultScenes(page, capture) {
@@ -128,7 +134,9 @@ function screenText(id, state, cap) {
     : cap.filledButtons === 0
       ? "Layout notes: no button is filled. All buttons are outlines."
       : `Layout notes: ${cap.filledButtons} buttons are filled dark orange.`;
-  return [`Screen: ${id}, ${state} state, phone 390px wide. Order is top to bottom.`, note, "", ...cap.lines, ""].join("\n");
+  const focusNote = cap.startBox ? "The first box has the cursor in it and a bright outline: that is where to start typing." : "";
+  const who = state === "empty" ? "Nothing is typed yet." : "The person has just typed their own numbers in the boxes, so the boxes hold their numbers.";
+  return [`Screen: ${id}, ${state} state, phone 390px wide. Order is top to bottom. ${who}`, note, focusNote, "", ...cap.lines, ""].filter((l, i) => l !== "" || i > 1).join("\n");
 }
 
 const promptOf = (name) => fs.readFileSync(path.join(promptsDir, `${name}.md`), "utf8");
@@ -148,19 +156,33 @@ async function review(id, opts) {
   const scenes = await scenesFor(page, opts.url, id);
   await browser.close();
   fs.mkdirSync(screensDir, { recursive: true });
-  for (const sc of scenes) fs.writeFileSync(path.join(screensDir, `${id}-${sc.name}.txt`), screenText(id, sc.name, sc.cap));
+  for (const sc of scenes) fs.writeFileSync(path.join(screensDir, `${id}-${sc.name}.txt`), screenText(id, sc.name, sc.cap).replace(/[\u2013\u2014]/g, "-"));
   if (opts.onlyCapture) return null;
   const reviewed = scenes.filter((sc) => sc.only !== "save");
   const models = opts.noSonnetRubric ? ["haiku"] : ["haiku", "sonnet"];
   const results = reviewed.map((sc) => {
     const text = screenText(id, sc.name, sc.cap);
-    const ftuText = askClaude("sonnet", withScreen("first-time-user", text));
-    const ftuJson = jsonIn(ftuText.split("RESULT:").pop() || "");
-    const rubric = models.map((m) => {
-      const result = askClaude(m, withScreen("design-rubric", text));
-      return { model: m, result, ...(ruleScore(result) ?? { rules: [], passes: 0, fails: ["unparseable"] }) };
+    // A single reader is noisy by a point or so. Ask three times and keep the middle score, with all three on record.
+    const runs = Array.from({ length: opts.ftuRuns }, () => {
+      const out = askClaude("sonnet", withScreen("first-time-user", text));
+      return { out, score: jsonIn(out.split("RESULT:").pop() || "")?.score ?? 0 };
     });
-    return { screen: sc.name, firstTimeUser: { model: "sonnet", score: ftuJson?.score ?? null, output: ftuText }, designRubric: rubric };
+    const sorted = [...runs].sort((a, b) => a.score - b.score);
+    const mid = sorted[Math.floor((sorted.length - 1) / 2)];
+    const ftuText = mid.out;
+    const ftuJson = { score: mid.score };
+    const allScores = runs.map((r) => r.score);
+    // The grader is noisy too. Grade three times per model; a rule passes when it passes in most runs.
+    const rubric = models.map((m) => {
+      const runs = Array.from({ length: opts.rubricRuns }, () => {
+        const result = askClaude(m, withScreen("design-rubric", text));
+        return { result, ...(ruleScore(result) ?? { rules: [], passes: 0, fails: ["unparseable"] }) };
+      });
+      const rules = Array.from({ length: 8 }, (_, i) => (runs.filter((r) => r.rules[i] === "PASS").length > runs.length / 2 ? "PASS" : "FAIL"));
+      const fails = rules.flatMap((v, i) => (v === "PASS" ? [] : runs.flatMap((r) => (r.rules[i] === "PASS" ? [] : r.fails.filter((f) => new RegExp(`rule\\s?${i + 1}\\b`, "i").test(f)))).slice(0, 2)));
+      return { model: m, rule: `a rule passes when it passes in most of ${runs.length} runs`, rules, passes: rules.filter((v) => v === "PASS").length, fails, runs: runs.map((r) => ({ passes: r.passes, rules: r.rules })), result: runs[0].result };
+    });
+    return { screen: sc.name, firstTimeUser: { model: "sonnet", score: ftuJson.score, runs: allScores, rule: "middle score of the runs", output: ftuText }, designRubric: rubric };
   });
   const main = results[results.length - 1];
   const record = {
@@ -172,7 +194,7 @@ async function review(id, opts) {
     designRubric: main.designRubric,
     otherScreens: results.slice(0, -1),
   };
-  fs.writeFileSync(path.join(here, `${id}.json`), `${JSON.stringify(record, null, 2)}\n`);
+  fs.writeFileSync(path.join(here, `${id}.json`), `${JSON.stringify(record, null, 2).replace(/[\u2013\u2014]/g, "-")}\n`);
   return record;
 }
 
@@ -180,8 +202,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   const argv = process.argv.slice(2);
   const ui = argv.indexOf("--url");
   const url = ui !== -1 ? argv[ui + 1] : "http://127.0.0.1:4173";
-  const ids = argv.filter((a, i) => !a.startsWith("--") && argv[i - 1] !== "--url");
-  const opts = { url, onlyCapture: argv.includes("--only-capture"), noSonnetRubric: argv.includes("--no-sonnet-rubric") };
+  const ids = argv.filter((a, i) => !a.startsWith("--") && argv[i - 1] !== "--url" && argv[i - 1] !== "--ftu-runs" && argv[i - 1] !== "--rubric-runs");
+  const opts = { url, onlyCapture: argv.includes("--only-capture"), ftuRuns: Number(argv[argv.indexOf("--ftu-runs") + 1]) || 3, rubricRuns: Number(argv[argv.indexOf("--rubric-runs") + 1]) || 3, noSonnetRubric: argv.includes("--no-sonnet-rubric") };
   let bad = 0;
   const queue = [...ids];
   await Promise.all(Array.from({ length: 2 }, async () => { while (queue.length) {

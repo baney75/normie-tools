@@ -1,5 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { shotPath } from "./paths";
+import { isShipped } from "./shipped";
+
+// This tool is coming soon until its review clears, so its page is not on the site. The spec runs again when it ships.
+test.beforeEach(() => {
+  test.skip(!isShipped("save-me-money"), "coming soon");
+});
 
 // The golden answers come from tools/save-me-money/tests/golden.json (worked out apart from the code).
 test.use({ viewport: { width: 390, height: 844 } });
@@ -26,10 +32,12 @@ test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Save Me Money" })).toBeVisible();
   await expect(page.getByText("Type an amount on any line")).toBeVisible();
   await expect(page.getByLabel("Total for a year", { exact: true })).toContainText("Your total shows here");
-  await expect(page.getByText("Step 1 of 3: Type your costs")).toBeVisible();
-  await expect(page.getByText("Remove takes out a line. You can put it back.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Your costs" })).toBeVisible();
+  await expect(page.getByText("Remove takes out one cost. A Put it back button shows right after.").first()).toBeVisible();
+  await expect(page.getByText("X Finder, Bill Negotiation Prep and Cheaper Plan Finder")).toBeHidden();
+  await page.getByText("What comes next").click();
   await expect(page.getByText("Subscription Finder, Bill Negotiation Prep and Cheaper Plan Finder")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Print" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Save a copy" })).toBeDisabled();
 });
 
 test("gives exact totals, a biggest-first list and no sideways scroll", async ({ page }) => {
@@ -37,7 +45,8 @@ test("gives exact totals, a biggest-first list and no sideways scroll", async ({
   const card = page.getByLabel("Total for a year", { exact: true });
   await expect(card).toContainText("$3,951.88");
   await expect(card).toContainText("$329.32");
-  await expect(page.getByText("Step 3 of 3: Pick what to look at first")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Your list", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Keep your list if you want" })).toBeVisible();
   await expect(page.getByRole("checkbox")).toHaveCount(6);
   await expect(page.getByRole("checkbox").first()).toHaveAccessibleName("Insurance: $1,200.00 a year, $100.00 a month");
   await expect(page.getByRole("region", { name: "Your costs, biggest first" }).getByText("Gym: $520.00 a year, $43.33 a month")).toBeVisible();
@@ -49,7 +58,7 @@ test("gives exact totals, a biggest-first list and no sideways scroll", async ({
 test("ticking a cost shows the questions to ask before a call", async ({ page }) => {
   await fillPlain(page);
   const q = page.getByRole("region", { name: "Questions to ask before you call" });
-  await expect(q).toContainText("Tick a cost above");
+  await expect(q).toContainText("Questions appear here");
   await page.getByRole("checkbox", { name: /^Gym:/ }).check();
   await expect(q).toContainText("For: Gym");
   await expect(q).toContainText("What is the price today?");

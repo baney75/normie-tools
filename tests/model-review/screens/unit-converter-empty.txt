@@ -1,33 +1,32 @@
-Screen: unit-converter, empty state, phone 390px wide. Order is top to bottom.
-Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+Screen: unit-converter, empty state, phone 390px wide. Order is top to bottom. Nothing is typed yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Unit Converter
-Pick what you are measuring. Type a number. See it in another measure.
-Step 1 of 2: Pick units and type a number
+Pick what you are measuring and type a number. Your answer shows below.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 [label] What are you measuring?
+Tap a box with a list to see your choices.
 [menu] Length Weight Volume Temperature Speed = "Length"
 [label] Number
+Like 12 or 3.5. Commas are fine.
 [box] Number = "" (cursor is here)
 [label] Change from
 [menu] Inches (in) Feet (ft) Yards (yd) Miles (mi) Millimeters (mm) Centimeters (cm) Meters (m) Kilometers (km) = "Inches (in)"
-[plain button, outline only] Swap the two
+[plain button, outline only] Swap 'from' and 'to'
+Tap it again to swap back.
 [label] Change to
 [menu] Inches (in) Feet (ft) Yards (yd) Miles (mi) Millimeters (mm) Centimeters (cm) Meters (m) Kilometers (km) = "Millimeters (mm)"
-[plain button, outline only, disabled] Start over
-Start over asks first, and you can undo it right after.
-Step 2 of 2: Read your answer
 Your answer
 Your answer shows here
+[MAIN BUTTON, filled dark orange] Show my answer
 [heading 2] Keep your answer if you want
-[MAIN BUTTON, filled dark orange, disabled] Print
+[plain button, outline only, disabled] Print
 [plain button, outline only, disabled] Save a copy
-Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
 
-Type a number in the box. Your answer shows up below.
-[closed section, tap to open] Show more
+[closed section, tap to open] Show the facts used
 
-Where the facts come from: the inch and pound use the 1959 agreement between countries. The US gallon uses a US government weights and measures book (NIST Handbook 44). The kelvin uses the international units brochure.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 Back to home
 [link, plain] Back to home

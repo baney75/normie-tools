@@ -71,7 +71,7 @@ class Golden(unittest.TestCase):
         r = fill.build_sheet({"info": {"ssn": "123-45-6789"}})
         self.assertTrue(r["ok"])
         self.assertNotIn("123-45-6789", r["text"])
-        self.assertIn("You type your Social Security number yourself on the IRS partner site.", r["text"])
+        self.assertIn("You type your Social Security number yourself on the free filing site you pick on IRS.gov.", r["text"])
 
 
 class Messy(unittest.TestCase):
@@ -102,10 +102,14 @@ class Text(unittest.TestCase):
         code, out = run_cli("--file", os.path.join(EXAMPLES, "guided.json"), "--text")
         self.assertEqual(code, 0)
         lines = out.strip().split("\n")
-        self.assertEqual(lines[0], "Free way that may fit: Guided Free File.")
-        self.assertIn("First name: Ana.", lines)
-        self.assertIn("Birth date: 02/29/1960.", lines)
-        self.assertIn("Papers ticked: 3 of 9.", lines)
+        self.assertEqual(lines[0], "The free way that may fit you is Guided Free File.")
+        self.assertLessEqual(len(lines), 10)
+        mine = [l for l in lines if l.startswith("Your answers so far.")]
+        self.assertEqual(len(mine), 1)
+        self.assertIn("First name: Ana.", mine[0])
+        self.assertIn("Birth date: 02/29/1960.", mine[0])
+        self.assertIn("Papers ticked: 3 of 9.", mine[0])
+        self.assertIn("Free help from a VITA volunteer: 800-906-9887.", lines)
         self.assertTrue(lines[-1].startswith("Note:"))
         self.assertFalse(any(l.startswith("{") or l.startswith('"') for l in lines))
         self.assertNotIn("Fix this first:", out)
@@ -145,7 +149,7 @@ class Text(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertIn("Phone number: 555-010-9876.", out)
         self.assertIn("State: TX.", out)
-        self.assertIn("Start at IRS.gov/freefile.", out)
+        self.assertIn("Always start at IRS.gov/freefile: https://www.irs.gov/freefile", out)
         self.assertIn("a VITA volunteer can help for free", out)
 
 

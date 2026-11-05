@@ -30,10 +30,10 @@ export const PRACTICE_SHEET = [
   { id: "last-name", screen: "About you", label: "Last name", kind: "text", value: "Person" },
   { id: "email", screen: "About you", label: "Email", kind: "text", value: "sample.person@example.com" },
   { id: "employer", screen: "Pay from your job", label: "Employer name", kind: "text", value: "Example Bakery" },
-  { id: "wages", screen: "Pay from your job", label: "Pay from your W-2", kind: "money", value: "32,450.00" },
+  { id: "wages", screen: "Pay from your job", label: "Pay for the year", kind: "money", value: "32,450.00" },
   { id: "withheld", screen: "Pay from your job", label: "Tax already taken out of your pay", kind: "money", value: "2,810.50" },
   { id: "bank-name", screen: "Bank interest", label: "Bank name", kind: "text", value: "Example Credit Union" },
-  { id: "interest", screen: "Bank interest", label: "Interest from your bank (1099-INT)", kind: "money", value: "12.34" },
+  { id: "interest", screen: "Bank interest", label: "Interest from your bank", kind: "money", value: "12.34" },
 ];
 
 /** Screens in order, each with its items. */

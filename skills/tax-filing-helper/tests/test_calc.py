@@ -99,8 +99,12 @@ class CommandLine(unittest.TestCase):
         out = run(["--text", json.dumps(self.typed)])
         self.assertEqual(out.returncode, 0, out.stderr)
         lines = out.stdout.strip().split("\n")
-        self.assertEqual(lines[0], "2 of 8 answers match. 6 need a look.")
-        self.assertIn("First name: matches.", lines)
+        self.assertEqual(lines[0], "Last name: nothing typed yet. The sheet says Person.")
+        self.assertIn("2 of 8 answers match. 6 need a look.", lines)
+        self.assertLess(lines.index("Last name: nothing typed yet. The sheet says Person."), lines.index("2 of 8 answers match. 6 need a look."))
+        self.assertFalse([l for l in lines if l.startswith("These match")])
+        self.assertNotIn("First name: matches.", lines)
+        self.assertLessEqual(len(lines), 10)
         self.assertIn("Last name: nothing typed yet. The sheet says Person.", lines)
         self.assertTrue(lines[-1].startswith("Note: "))
         self.assertNotIn("{", out.stdout)
@@ -108,7 +112,7 @@ class CommandLine(unittest.TestCase):
     def test_text_output_all_match(self):
         data = {"typed": {k: v for k, v in [(i["id"], i["value"]) for i in calc.PRACTICE_SHEET]}}
         out = run(["--text", json.dumps(data)])
-        self.assertTrue(out.stdout.startswith("All 8 answers match.\n"))
+        self.assertTrue(out.stdout.startswith("All 8 answers match.\nThey are: First name, Last name, "))
 
     def test_text_output_for_problems(self):
         bad = {"sheet": [{"id": "a", "screen": "S", "label": "Pay", "kind": "money", "value": "lots"}], "typed": {}}

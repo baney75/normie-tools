@@ -3,7 +3,7 @@
     { "id": "free-way-from-plan", "text": "The free way that may fit comes only from the four answers and the rules in the IRS Free File plan." },
     { "id": "no-invented-numbers", "text": "The only numbers shown are the ones in the plan, and this year's limit says Check IRS.gov." },
     { "id": "answer-sheet-exact", "text": "The answer sheet lists every answer exactly as typed, in the same order, with blanks marked Not filled in." },
-    { "id": "no-social-security-number", "text": "There is no Social Security number box. The sheet says you type it yourself on the IRS partner site." },
+    { "id": "no-social-security-number", "text": "There is no Social Security number box. The sheet says you type it yourself on the free filing site you pick on IRS.gov." },
     { "id": "info-boxes-checked", "text": "Names, state, ZIP, birth date and phone are checked and tidied, and a bad entry is named in plain words." },
     { "id": "saved-file-round-trips", "text": "A saved answer file opens again and gives back the same answers." },
     { "id": "saved-file-shape-checked", "text": "A saved answer file with the wrong format, version or boxes is refused with a plain message." },

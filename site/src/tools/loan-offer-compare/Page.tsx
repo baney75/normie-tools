@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -41,6 +41,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-offers">
         <p className="nt-offers-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && blank ? (
           <div className="nt-offers-status">
@@ -57,7 +58,6 @@ export function Page() {
           </div>
         ) : null}
 
-        <StepLabel n={1} of={2}>{COPY.stepOne}</StepLabel>
         <form className="nt-offers-form" onSubmit={(e) => e.preventDefault()} noValidate>
           {offers.map((o, i) => (
             <fieldset className="nt-offer" key={i}>
@@ -121,6 +121,7 @@ export function Page() {
               <button type="button" className="nt-offers-action" onClick={() => flow.setValue({ offers: [...offers, { ...BLANK_OFFER }] })}>
                 {COPY.addThird}
               </button>
+              <p className="nt-offers-hint">{COPY.addHint}</p>
               {canPutBack ? (
                 <p className="nt-offers-hint" role="status">
                   {COPY.removedDone}{" "}
@@ -156,7 +157,6 @@ export function Page() {
 
         <Answer result={result.ok ? result : null} />
 
-        {!result.ok && blank ? <p className="nt-offers-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
           <p className="nt-offers-status" role="status">
             {COPY.stillNeeded} {missing.join(", ")}.
@@ -167,8 +167,6 @@ export function Page() {
         <StartOver flowId="loan-offer-compare" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
         <p className="nt-offers-note">{COPY.notes.estimate}</p>
-        <p className="nt-offers-note">{COPY.notes.apr}</p>
-        <PrivacyNote />
 
         <details className="nt-offers-details">
           <summary>{COPY.key.summary}</summary>
@@ -209,7 +207,7 @@ function Answer({ result }: { result: Good | null }) {
     result.offers.forEach((o, i) => {
       lines.push(name(i), `${r.paymentLabel}: ${formatMoney(o.monthlyPaymentCents)}`, ...rows.map(([k, get]) => `${k}: ${get(o)}`), "");
     });
-    lines.push(COPY.notes.estimate, COPY.notes.apr, COPY.notes.facts, "");
+    lines.push(COPY.notes.estimate, COPY.notes.facts, "");
     try {
       const url = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/plain" }));
       const a = document.createElement("a");
@@ -227,19 +225,15 @@ function Answer({ result }: { result: Good | null }) {
 
   return (
     <div className="nt-offers-results">
-      <ResultCard label={f.lowestCost} answer={result ? costNames : undefined} waiting={COPY.waiting} step={COPY.stepTwo}>
+      <ResultCard label={f.lowestCost} answer={result ? costNames : undefined} waiting={COPY.waiting}>
         {result ? <p className="nt-offers-help">{result.lowestCost.tie ? f.tieCost : f.oneCost}</p> : null}
       </ResultCard>
       {result ? (
         <>
-          <ResultCard label={f.lowestPayment} answer={payNames}>
-            <p className="nt-offers-help">{result.lowestPayment.tie ? f.tiePayment : f.onePayment}</p>
-          </ResultCard>
           {!result.sameAmountAndLength ? <p className="nt-offers-status">{f.differ}</p> : null}
 
           {result.offers.map((o, i) => (
-            <ResultCard key={i} label={`${name(i)}, ${r.paymentLabel}`} answer={formatMoney(o.monthlyPaymentCents)}>
-              <p className="nt-offers-help">{r.paymentLine}</p>
+            <ResultCard key={i} label={`${name(i)}, ${r.paymentLabel}`} answer={formatMoney(o.monthlyPaymentCents)} closing={false}>
               <dl className="nt-offers-lines">
                 {rows.map(([k, get]) => (
                   <div key={k}>
@@ -248,14 +242,13 @@ function Answer({ result }: { result: Good | null }) {
                   </div>
                 ))}
               </dl>
-              <p className="nt-offers-help">{r.cost}: {r.costHelp}</p>
             </ResultCard>
           ))}
-          <p className="nt-offers-note">{COPY.notes.facts}</p>
+          <p className="nt-offers-help">{r.costHelp}</p>
         </>
       ) : null}
 
-      <SavePrintSheet title={COPY.save.title} onSave={save}>
+      <SavePrintSheet quiet title={COPY.save.title} onSave={save}>
         {result ? (
           <p>{COPY.save.preview}</p>
         ) : null}
@@ -265,6 +258,8 @@ function Answer({ result }: { result: Good | null }) {
         <details className="nt-offers-details">
           <summary>{COPY.more.summary}</summary>
           <div className="nt-offers-details-body">
+            <p className="nt-offers-help">{result.lowestPayment.tie ? f.tiePayment : `${f.payLine} ${payNames}`}</p>
+            {costNames !== payNames ? <p className="nt-offers-help">{f.split}</p> : null}
             <div className="nt-offers-table-wrap">
               <table className="nt-offers-table">
                 <caption>{COPY.more.tableHeading}</caption>

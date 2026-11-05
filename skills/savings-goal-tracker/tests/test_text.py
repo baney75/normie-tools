@@ -23,18 +23,18 @@ def lines(data):
 
 CASES = [
     ("when", {"mode": "when", "goal": "$5,000", "saved": "500", "monthly": "250", "rate": "0", "start": "2026-12"},
-     ["Months to your goal: 18 months", "You reach your goal in May 2028.", "That is 1 year 6 months.",
-      "Total you add: $4,500.00", "Interest earned: $0.00", "Saved at the end: $5,000.00"]),
+     ["Your goal takes 18 months (1 year 6 months).", "You reach your goal in May 2028.",
+      "The total you add is $4,500.00.", "The interest earned is $0.00.", "The amount saved at the end is $5,000.00."]),
     ("by", {"mode": "by", "goal": "10,000", "saved": "500", "rate": "5", "start": "2026-01", "target": "2027-12"},
-     ["Save each month: $375.12", "Months counted: 24 months", "Goal month: December 2027",
-      "Interest earned: $497.33", "Yearly interest rate: 5%"]),
+     ["The smallest amount to save each month is $375.12.", "That is 24 months, from January 2026 to December 2027.",
+      "The interest earned is $497.33."]),
     ("messy", {"mode": "when", "goal": "12,000", "saved": "1,250.50", "monthly": "300", "rate": "4.5%", "start": "2026-12"},
-     ["Months to your goal: 34 months", "You reach your goal in September 2029.",
-      "Saved at the end: $12,277.36", "Interest earned: $826.86", "Yearly interest rate: 4.5%"]),
+     ["Your goal takes 34 months (2 years 10 months).", "You reach your goal in September 2029.",
+      "The amount saved at the end is $12,277.36.", "The interest earned is $826.86."]),
     ("never", {"mode": "when", "goal": "2,000", "saved": "300", "monthly": "0", "rate": "0"},
      ["Your savings stay at $300.00."]),
     ("reached", {"mode": "when", "goal": "1,500", "saved": "1,800", "monthly": "100", "start": "2026-12"},
-     ["Months to your goal: 0 months", "You have saved $1,800.00. The goal is $1,500.00."]),
+     ["Your goal takes 0 months.", "You have saved $1,800.00. The goal is $1,500.00."]),
 ]
 
 BAD = {"mode": "when", "goal": "3,000", "saved": "200", "monthly": "150", "start": "Dec 2026"}

@@ -22,16 +22,16 @@ test.beforeEach(async ({ page }) => {
 
 test("shows an empty state that says what to type, with two offers", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Loan Offer Compare" })).toBeVisible();
-  await expect(page.getByText("Start with the amount")).toBeVisible();
+  await expect(page.getByText("Type the numbers from two loan offers")).toBeVisible();
   await expect(page.getByLabel("Offer 2: Amount borrowed")).toBeVisible();
   await expect(page.getByLabel("Offer 3: Amount borrowed")).toHaveCount(0);
   await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Your answer shows here");
-  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
-  await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Step 2 of 2: Read your answer");
+  await expect(page.getByText("Your answer shows below.")).toBeVisible();
+  await expect(page.getByText("Nothing is sent.")).toBeVisible();
   await expect(page.getByLabel("Offer 1: Amount borrowed")).toBeFocused();
   await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
-  await expect(page.locator(".nt-sheet-primary")).toHaveCount(1);
-  await expect(page.getByRole("link", { name: "our public page" })).toBeVisible();
+  await expect(page.locator(".primary")).toHaveCount(1);
+  await expect(page.getByRole("link", { name: "how this page is made" })).toBeVisible();
 });
 
 test("gives the exact numbers for two offers and names the lowest, with no sideways scroll", async ({ page }) => {
@@ -45,7 +45,7 @@ test("gives the exact numbers for two offers and names the lowest, with no sidew
   await expect(two).toContainText("$230.29");
   await expect(two).toContainText("$1,254.11");
   await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Offer 1");
-  await expect(page.getByLabel("Lowest monthly payment")).toContainText("Offer 2");
+  await expect(page.locator("details", { hasText: "More about the offers" })).toContainText("Lowest monthly payment: Offer 2");
   await expect(page.locator("body")).not.toContainText(/\bbest\b/i);
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(wide).toBe(false);
@@ -61,8 +61,8 @@ test("a third offer can be added, and a tie names every offer", async ({ page })
   await expect(page.getByLabel("Lowest cost of borrowing")).toContainText("Your answer shows here");
   await fillOffer(page, 3, { amount: "5000", rate: "3", term: "24", fees: "50" });
   await expect(page.getByLabel("Offer 3, monthly payment")).toBeVisible();
-  await expect(page.getByLabel("Lowest monthly payment")).toContainText("Offer 3");
-  await expect(page.getByText("Remove takes out a line. You can put it back.")).toBeVisible();
+  await expect(page.locator("details", { hasText: "More about the offers" })).toContainText("Lowest monthly payment: Offer 3");
+  await expect(page.getByText("Remove takes out one line. A Put it back button shows right after.")).toBeVisible();
   await page.getByRole("button", { name: "Remove the third offer" }).click();
   await expect(page.getByLabel("Offer 3: Amount borrowed")).toHaveCount(0);
   await page.getByRole("button", { name: "Put it back" }).click();

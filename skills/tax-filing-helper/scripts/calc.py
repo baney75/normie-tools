@@ -25,17 +25,17 @@ MAX_ITEMS = 60
 MAX_SHOWN = 60
 NUMBER_RE = re.compile(r"^([0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)?(?:\.([0-9]*))?$")
 
-NOTE = "This is a practice match check with made-up answers. Nothing is filed or sent. You press Submit yourself, on the real IRS partner site."
+NOTE = "This is a practice match check with made-up answers. Nothing is filed or sent. You press Submit yourself, on the free filing site you pick on IRS.gov."
 
 PRACTICE_SHEET = [
     {"id": "first-name", "screen": "About you", "label": "First name", "kind": "text", "value": "Sample"},
     {"id": "last-name", "screen": "About you", "label": "Last name", "kind": "text", "value": "Person"},
     {"id": "email", "screen": "About you", "label": "Email", "kind": "text", "value": "sample.person@example.com"},
     {"id": "employer", "screen": "Pay from your job", "label": "Employer name", "kind": "text", "value": "Example Bakery"},
-    {"id": "wages", "screen": "Pay from your job", "label": "Pay from your W-2", "kind": "money", "value": "32,450.00"},
+    {"id": "wages", "screen": "Pay from your job", "label": "Pay for the year", "kind": "money", "value": "32,450.00"},
     {"id": "withheld", "screen": "Pay from your job", "label": "Tax already taken out of your pay", "kind": "money", "value": "2,810.50"},
     {"id": "bank-name", "screen": "Bank interest", "label": "Bank name", "kind": "text", "value": "Example Credit Union"},
-    {"id": "interest", "screen": "Bank interest", "label": "Interest from your bank (1099-INT)", "kind": "money", "value": "12.34"},
+    {"id": "interest", "screen": "Bank interest", "label": "Interest from your bank", "kind": "money", "value": "12.34"},
 ]
 
 
@@ -162,15 +162,18 @@ def check_input(data):
 
 
 def to_text(result):
-    """Plain words, one fact per line, then a note line. Problems start with 'Fix this first:'."""
+    """Plain words, one fact per line: the lines that need a look first, then the count, then a note line. The list of matches shows only when all match. Problems start with 'Fix this first:'."""
     lines = []
     if not result.get("ok"):
         for p in result.get("problems", []):
             lines.append(f"Fix this first: {p['message']}")
     else:
-        lines.append(result["summary"])
         for r in result["rows"]:
-            lines.append(r["message"])
+            if r["status"] != "match":
+                lines.append(r["message"])
+        lines.append(result["summary"])
+        if result["allMatch"]:
+            lines.append("They are: " + ", ".join(r["label"] for r in result["rows"]) + ".")
     lines.append(f"Note: {NOTE}")
     return "\n".join(lines)
 

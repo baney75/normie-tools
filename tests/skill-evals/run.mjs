@@ -61,7 +61,7 @@ function skillContext(c) {
 }
 
 function answerPrompt(c) {
-  return `${skillContext(c)}\n# The person's message\n${c.task}\n\nAnswer the person in plain words, the way the skill says. Use only the numbers above. If the script output is given, trust it and do not redo the math.`;
+  return `${skillContext(c)}\n# The person's message\n${c.task}\n\nReply to the person the way the skill says. When the script output is given, trust it, do not redo the math, and show the person every fact it printed, in plain words, before anything else. Then follow the skill's safety rules.`;
 }
 
 async function answer(model, c) {
@@ -74,10 +74,12 @@ export function judgePrompt(reply, expect) {
 }
 
 async function grade(reply, expect) {
-  const text = askClaude("sonnet", judgePrompt(reply, expect));
-  const j = jsonIn(text);
-  if (!j || !Array.isArray(j.checks) || j.checks.length !== expect.length) return expect.map(() => false);
-  return j.checks.map((c) => Boolean(c.met));
+  // A reply that cannot be read as a grade is a broken judge call, not a wrong answer: ask again.
+  for (let i = 0; i < 3; i++) {
+    const j = jsonIn(askClaude("sonnet", judgePrompt(reply, expect)));
+    if (j && Array.isArray(j.checks) && j.checks.length === expect.length) return j.checks.map((c) => Boolean(c.met));
+  }
+  return expect.map(() => false);
 }
 
 async function runOne(model, c) {
@@ -144,13 +146,17 @@ async function main(argv) {
   for (const skill of skills) {
     const mine = cases.filter((c) => c.skill === skill);
     for (const model of models) {
-      const use = model === "tiny" ? mine.filter((c) => c.level === 1) : mine;
+      const only = flag(argv, "--levels");
+      const levels = only ? only.split(",") : null;
+      const wanted = levels ? mine.filter((c) => levels.includes(String(c.level))) : mine;
+      const use = model === "tiny" ? wanted.filter((c) => c.level === 1) : wanted;
       const results = await pool(use, model === "tiny" ? 1 : 4, (c) => runOne(model, c));
       const by = summarise(results);
+      if (levels) { console.log(`${skill} ${model}: partial run (levels ${levels.join(",")}), not written`); console.log(JSON.stringify(by)); continue; }
       const v = verdict(model, by);
       const dir = path.join(outDir, skill);
       fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(path.join(dir, `${model}.json`), `${JSON.stringify({ skill, model: model === "tiny" ? TINY : model, at: new Date().toISOString().slice(0, 10), judge: "sonnet", by, verdict: v, results }, null, 2)}\n`);
+      fs.writeFileSync(path.join(dir, `${model}.json`), `${JSON.stringify({ skill, model: model === "tiny" ? TINY : model, at: new Date().toISOString().slice(0, 10), judge: "sonnet", by, verdict: v, results }, null, 2).replace(/[\u2013\u2014]/g, "-")}\n`);
       console.log(`${skill} ${model}: ${v.ok ? "PASS" : "FAIL"} ${Object.entries(by).map(([l, x]) => `L${l}=${(x.score * 100).toFixed(0)}%`).join(" ")} ${v.fails.join("; ")}`);
       if (!v.ok) bad++;
     }

@@ -11,10 +11,10 @@ Every answer on the sheet is made up. No real person, number or account is used.
 | About you | Last name | Person |
 | About you | Email | sample.person@example.com |
 | Pay from your job | Employer name | Example Bakery |
-| Pay from your job | Pay from your W-2 | $32,450.00 |
+| Pay from your job | Pay for the year | $32,450.00 |
 | Pay from your job | Tax already taken out of your pay | $2,810.50 |
 | Bank interest | Bank name | Example Credit Union |
-| Bank interest | Interest from your bank (1099-INT) | $12.34 |
+| Bank interest | Interest from your bank | $12.34 |
 
 ## How answers are compared
 
@@ -28,4 +28,4 @@ Every answer on the sheet is made up. No real person, number or account is used.
 
 It does not file, send or sign anything. It does not give tax advice. It does not decide what a person can claim.
 The real IRS Free File site is closed now and opens again in January 2027. Check IRS.gov for the income limit and the list of companies.
-The person presses Submit themselves, on the real IRS partner site.
+The person presses Submit themselves, on the free filing site you pick on IRS.gov.

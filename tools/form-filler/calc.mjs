@@ -26,14 +26,14 @@ export const QUESTION_IDS = ["filing", "income", "fillable", "open"];
 export const CHOICES = ["yes", "no", "unsure"];
 
 export const PAPERS = [
-  { id: "ssn", label: "Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children" },
-  { id: "w2", label: "W-2 from each job (your employer sends it in January or February)" },
-  { id: "1099", label: "1099 forms for other money you got" },
-  { id: "1095a", label: "1095-A if you had health insurance from the Marketplace" },
+  { id: "ssn", label: "Social Security number or ITIN, for each person on your return" },
+  { id: "w2", label: "W-2, the pay form from each job" },
+  { id: "1099", label: "1099 forms, for other money you got" },
+  { id: "1095a", label: "1095-A, if you had health insurance from the Marketplace" },
   { id: "lastreturn", label: "Last year's tax return, if you filed one" },
-  { id: "ippin", label: "Your IP code (an Identity Protection code), only if the IRS sent you one" },
-  { id: "bank", label: "Your bank account and routing numbers, if you want your refund sent straight to your bank" },
-  { id: "credits", label: "Papers for credits, if you have them" },
+  { id: "ippin", label: "IP code the IRS sent you, if any" },
+  { id: "bank", label: "Bank account details, if you want your refund sent to your bank" },
+  { id: "credits", label: "Papers for credits (if you have them)" },
   { id: "sidejob", label: "For side jobs: what you were paid, and receipts for what you spent" },
 ];
 export const PAPER_IDS = PAPERS.map((p) => p.id);
@@ -55,14 +55,14 @@ export const STATES = [
   "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "AS", "GU", "MP", "PR", "VI", "AA", "AE", "AP",
 ];
 
-export const SSN_LINE = "You type your Social Security number yourself on the IRS partner site.";
+export const SSN_LINE = "You type your Social Security number yourself on the free filing site you pick on IRS.gov.";
 
 export const YOU_DO = [
   "Make your Free File account.",
   "Check every number on the review page.",
-  "Sign with last year's income number or your 5-digit code.",
-  "Press Submit.",
-  "Pay any tax you owe, yourself.",
+  "Sign with the income number from last year's return, or a 5-digit code you pick.",
+  "Press Submit, the button that sends your tax return.",
+  "If you owe tax, you pay it yourself.",
 ];
 
 export const CHOICE_WORDS = { yes: "Yes", no: "No", unsure: "Not sure", "": "Not answered" };
@@ -276,7 +276,7 @@ export function pickWay(answers) {
   return { way, name, lines };
 }
 
-export const NEVER_LINE = "NT never presses Submit, signs for you, pays anything, or picks a paid add-on. It never asks for your Free File password.";
+export const NEVER_LINE = "This tool never presses Submit, signs for you, pays anything, or picks an extra that costs money. It never asks for your Free File password.";
 export const START_LINE = "Always start at IRS.gov/freefile. If you go straight to a tax company's website, you won't get the free deal.";
 export const CARD_LINE = "If any screen asks for a card number, stop.";
 

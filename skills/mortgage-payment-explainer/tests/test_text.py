@@ -30,41 +30,36 @@ class Text(unittest.TestCase):
         code, lines = run_text(case["input"])
         self.assertEqual(code, 0)
         for want in (
-            "Total monthly payment: $1,888.92",
-            "Loan amount: $240,000.00",
-            "Yearly interest rate: 6%",
-            "Loan length: 360 months (30 years)",
-            "Principal and interest: $1,438.92",
-            "Property tax each month: $300.00",
-            "Home insurance each month: $100.00",
-            "HOA each month: $50.00",
-            "Mortgage insurance each month: $0.00",
-            "Total interest over the loan: $278,012.58",
-            "Your first payment goes to interest: $1,200.00",
-            "Your first payment lowers what you owe: $238.92",
+            "Your monthly payment is $1,888.92.",
+            "Principal and interest is $1,438.92 each month.",
+            "Property tax is $300.00 each month.",
+            "Home insurance is $100.00 each month.",
+            "HOA is $50.00 each month.",
+            "Mortgage insurance is $0.00 each month.",
+            "The loan amount is $240,000.00.",
+            "Interest over the whole loan is $278,012.58.",
+            "Your first payment pays $1,200.00 of interest and lowers what you owe by $238.92.",
         ):
             self.assertIn(want, lines)
-        self.assertEqual(lines[0], "Total monthly payment: $1,888.92")
+        self.assertEqual(lines[0], "Your monthly payment is $1,888.92.")
         self.assertEqual(lines[-1], END)
 
     def test_mortgage_insurance_and_odd_rate(self):
         case = next(c for c in GOLDEN["mortgages"] if c["id"] == "with-mortgage-insurance")
         _code, lines = run_text(case["input"])
-        self.assertIn("Yearly interest rate: 7.25%", lines)
-        self.assertIn("Mortgage insurance each month: $95.10", lines)
-        self.assertIn("Total monthly payment: $2,737.38", lines)
+        self.assertIn("The loan amount is $237,500.00.", lines)
+        self.assertIn("Mortgage insurance is $95.10 each month.", lines)
+        self.assertIn("Your monthly payment is $2,737.38.", lines)
 
     def test_zero_rate_and_one_year(self):
         case = next(c for c in GOLDEN["mortgages"] if c["id"] == "zero-rate-20y")
         r = calc.explain_mortgage(case["input"])
         _code, lines = run_text(case["input"])
-        self.assertIn("Yearly interest rate: 0%", lines)
-        self.assertIn("Total interest over the loan: $0.00", lines)
-        self.assertIn("Loan length: 240 months (20 years)", lines)
-        self.assertIn("Total monthly payment: " + calc.money_text(r["totalMonthlyCents"]), lines)
+        self.assertIn("Interest over the whole loan is $0.00.", lines)
+        self.assertIn("Your monthly payment is " + calc.money_text(r["totalMonthlyCents"]) + ".", lines)
         case = next(c for c in GOLDEN["mortgages"] if c["id"] == "one-year")
         _code, lines = run_text(case["input"])
-        self.assertIn("Loan length: 12 months (1 year)", lines)
+        self.assertEqual(len(lines), 10)
 
     def test_problem_text(self):
         code, lines = run_text({"price": "300,000", "down": "60,000", "rate": "6.555", "term": "30"})

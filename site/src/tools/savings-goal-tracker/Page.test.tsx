@@ -19,10 +19,10 @@ describe("Savings Goal Tracker page", () => {
   it("shows the empty state and no answer", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Savings Goal Tracker" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.empty)).toBeInTheDocument();
+    expect(screen.getByText(COPY.intro)).toBeInTheDocument();
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.waiting);
-    expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("Step 2 of 2: Read your answer");
-    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
+    expect(screen.queryByText(/Step \d of \d/)).toBeNull();
+    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/Nothing is sent/);
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -32,20 +32,20 @@ describe("Savings Goal Tracker page", () => {
   });
 
   it("has one filled button: Print", async () => {
-    const { container } = render(<Page />);
-    expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    render(<Page />);
+    expect(screen.getByRole("button", { name: "Show my answer" })).toHaveClass("primary");
     expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
   });
 
   it("says nothing is sent and links to the page code", () => {
     render(<Page />);
     expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 
   it("has labels above inputs, decimal keypads, no autofill", () => {
     render(<Page />);
-    for (const name of ["Goal amount", "Already saved", "Saved each month", "Yearly interest rate"]) {
+    for (const name of ["Goal amount", "Already saved", "Amount you save each month", "Yearly interest rate"]) {
       const box = screen.getByLabelText(name, { exact: false });
       expect(box).toHaveAttribute("inputmode", "decimal");
       expect(box).toHaveAttribute("autocomplete", "off");
@@ -57,7 +57,7 @@ describe("Savings Goal Tracker page", () => {
     render(<Page />);
     await fill("Goal amount", "$5,000");
     await fill("Already saved", "500");
-    await fill("Saved each month", "250");
+    await fill("Amount you save each month", "250");
     await fill("Start month", "2026-12");
     const card = screen.getByLabelText("Months to your goal");
     expect(card).toHaveTextContent("18 months");
@@ -72,7 +72,7 @@ describe("Savings Goal Tracker page", () => {
     render(<Page />);
     await fill("Goal amount", "10000");
     await fill("Already saved", "1000");
-    await fill("Saved each month", "300");
+    await fill("Amount you save each month", "300");
     await fill("Yearly interest rate", "4.5");
     await fill("Start month", "2026-01");
     const card = screen.getByLabelText("Months to your goal");
@@ -87,7 +87,7 @@ describe("Savings Goal Tracker page", () => {
   it("works out the monthly amount for a chosen month", async () => {
     render(<Page />);
     await userEvent.click(screen.getByLabelText(COPY.mode.by));
-    expect(screen.queryByLabelText("Saved each month", { exact: false })).toBeNull();
+    expect(screen.queryByLabelText("Amount you save each month", { exact: false })).toBeNull();
     await fill("Goal amount", "10,000");
     await fill("Already saved", "1,000");
     await fill("Start month", "2026-12");
@@ -102,27 +102,27 @@ describe("Savings Goal Tracker page", () => {
     render(<Page />);
     await fill("Goal amount", "5000");
     await fill("Already saved", "6000");
-    await fill("Saved each month", "0");
+    await fill("Amount you save each month", "0");
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("Already there");
     await fill("Already saved", "500");
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("Not reached");
     await fill("Goal amount", "1201");
     await fill("Already saved", "0");
-    await fill("Saved each month", "1");
+    await fill("Amount you save each month", "1");
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("Over 1,200 months");
   });
 
   it("asks only for what is still needed", async () => {
     render(<Page />);
     await fill("Goal amount", "5000");
-    expect(screen.getByText("Still needed: Saved each month.")).toBeInTheDocument();
+    expect(screen.getByText("Still needed: Amount you save each month.")).toBeInTheDocument();
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.waiting);
   });
 
   it("shows a calm error that names the field on junk, never NaN", async () => {
     render(<Page />);
     await fill("Goal amount", "lots");
-    await fill("Saved each month", "100");
+    await fill("Amount you save each month", "100");
     expect(screen.getByText(/Goal amount: use a number above zero/)).toBeInTheDocument();
     expect(screen.getByLabelText("Goal amount")).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
@@ -133,10 +133,18 @@ describe("Savings Goal Tracker page", () => {
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
   });
 
+  it("says why interest is $0.00 when no rate is typed", async () => {
+    render(<Page />);
+    await fill("Goal amount", "5000");
+    await fill("Amount you save each month", "240");
+    expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.when.noInterest);
+    expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("That is your answer. You can stop here. Or change a number to try again. Your numbers stay.");
+  });
+
   it("says it is an estimate and explains the words", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate from the numbers you typed. Your bank statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
-    for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
+    expect(screen.getByText(COPY.notes.estimate)).toBeInTheDocument();
+    expect(screen.queryByText("What the words mean")).toBeNull();
   });
 
   it("offers to use saved numbers and brings them back", async () => {
@@ -164,7 +172,7 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByText("Keep your answer if you want")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Save a copy" })).toBeDisabled();
     await fill("Goal amount", "1000");
-    await fill("Saved each month", "100");
+    await fill("Amount you save each month", "100");
     expect(screen.getByRole("button", { name: "Save a copy" })).toBeEnabled();
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("10 months");
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();

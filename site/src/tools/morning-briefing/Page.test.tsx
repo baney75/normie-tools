@@ -49,6 +49,14 @@ describe("Morning Briefing page", () => {
     expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(0);
   });
 
+  it("tells what Next does and how to undo, and the privacy line comes under the intro", () => {
+    render(<Page />);
+    expect(screen.getByText(COPY.pick.preview)).toBeInTheDocument();
+    const intro = screen.getByText(COPY.intro);
+    expect(intro.nextElementSibling).toHaveTextContent("Nothing is sent.");
+    expect(screen.getByRole("link", { name: "how this page is made" })).toBeInTheDocument();
+  });
+
   it("asks for at least one part and turns Next off", async () => {
     render(<Page />);
     for (const n of ["Weather (Example only)", "News headlines (Example only)", "My day", "My reminders"]) await userEvent.click(screen.getByLabelText(n));
@@ -91,14 +99,19 @@ describe("Morning Briefing page", () => {
     expect(screen.getByText("Step 3 of 3: Your briefing")).toBeInTheDocument();
     const paper = screen.getByLabelText("Your briefing");
     expect(paper).toHaveTextContent("Thursday, November 5, 2026");
-    expect(within(paper).getByLabelText("Weather (Example)")).toHaveTextContent("Example town: 58 degrees, clear.");
-    expect(within(paper).getByLabelText("Weather (Example)")).toHaveTextContent("Example. Not today's weather.");
-    expect(within(paper).getByLabelText("News headlines (Example)")).toHaveTextContent("Example. Not today's news.");
+    expect(within(paper).getByLabelText("Example weather (not real)")).toHaveTextContent("Example town: 58 degrees, clear.");
+    expect(within(paper).getByLabelText("Example weather (not real)")).toHaveTextContent("Example. Not today's weather.");
+    expect(within(paper).getByLabelText("Example news (not real)")).toHaveTextContent("Example. Not today's news.");
     const day = within(paper).getByLabelText("My day");
     expect(day.textContent).toMatch(/7:30 am: Pills.*1:00 pm: Lunch.*Time not clear.*later: Call Sam/);
     expect(within(paper).getByLabelText("My reminders")).toHaveTextContent("Water the plants");
-    expect(paper).toHaveTextContent("Live weather and news need the NT app or your AI helper. This page does not go online.");
+    expect(paper).toHaveTextContent("Live weather and news are not on this page yet.");
+    expect(paper).toHaveTextContent("Your briefing is made on this phone or computer.");
+    expect(paper.textContent).not.toMatch(/page code/);
+    expect(paper.textContent).not.toMatch(/NT app|AI helper|go online|No source/);
     expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    expect(screen.getByRole("button", { name: "Save a copy" })).toHaveClass("nt-sheet-primary");
+    expect(screen.getByRole("button", { name: "Print" })).toHaveClass("nt-sheet-secondary");
     expect(container.querySelectorAll("button.primary")).toHaveLength(0);
     expect(screen.getByText("Save or print my briefing")).toBeInTheDocument();
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
@@ -123,9 +136,9 @@ describe("Morning Briefing page", () => {
     render(<Page />);
     await toStep2();
     await click("Next");
-    await click("Back");
+    await click("Back to step 2");
     expect(screen.getByText("Step 2 of 3: Type your own things")).toBeInTheDocument();
-    await click("Back");
+    await click("Back to step 1");
     expect(screen.getByText("Step 1 of 3: Pick what to include")).toBeInTheDocument();
   });
 
@@ -143,7 +156,7 @@ describe("Morning Briefing page", () => {
   it("says nothing is sent and links to the page code", () => {
     render(<Page />);
     expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 
   it("offers to use saved choices and brings them back", async () => {

@@ -1,10 +1,12 @@
-Screen: save-me-money, start state, phone 390px wide. Order is top to bottom.
+Screen: save-me-money, start state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
 Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Save Me Money
 Type the costs you pay again and again. See what each one adds up to in a year.
-Step 1 of 3: Type your costs
-Remove takes out a line. You can put it back.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+[heading 2] Your costs
 [label] Name of cost 1
 [box] Name of cost 1 = "Phone"
 [label] Phone, amount
@@ -12,6 +14,7 @@ Remove takes out a line. You can put it back.
 [label] Phone, how often
 [menu] Every week Every month Every year = "Every month"
 [plain button, outline only] Remove Phone
+Remove takes out one cost. A Put it back button shows right after.
 [label] Name of cost 2
 [box] Name of cost 2 = "Internet"
 [label] Internet, amount
@@ -19,6 +22,7 @@ Remove takes out a line. You can put it back.
 [label] Internet, how often
 [menu] Every week Every month Every year = "Every month"
 [plain button, outline only] Remove Internet
+Remove takes out one cost. A Put it back button shows right after.
 [label] Name of cost 3
 [box] Name of cost 3 = "Streaming"
 [label] Streaming, amount
@@ -26,6 +30,7 @@ Remove takes out a line. You can put it back.
 [label] Streaming, how often
 [menu] Every week Every month Every year = "Every month"
 [plain button, outline only] Remove Streaming
+Remove takes out one cost. A Put it back button shows right after.
 [label] Name of cost 4
 [box] Name of cost 4 = "Insurance"
 [label] Insurance, amount
@@ -33,6 +38,7 @@ Remove takes out a line. You can put it back.
 [label] Insurance, how often
 [menu] Every week Every month Every year = "Every month"
 [plain button, outline only] Remove Insurance
+Remove takes out one cost. A Put it back button shows right after.
 [label] Name of cost 5
 [box] Name of cost 5 = "Gym"
 [label] Gym, amount
@@ -40,6 +46,7 @@ Remove takes out a line. You can put it back.
 [label] Gym, how often
 [menu] Every week Every month Every year = "Every month"
 [plain button, outline only] Remove Gym
+Remove takes out one cost. A Put it back button shows right after.
 [label] Name of cost 6
 [box] Name of cost 6 = "Other"
 [label] Other, amount
@@ -47,22 +54,22 @@ Remove takes out a line. You can put it back.
 [label] Other, how often
 [menu] Every week Every month Every year = "Every month"
 [plain button, outline only] Remove Other
+Remove takes out one cost. A Put it back button shows right after.
 [plain button, outline only] Add a cost
 Type an amount on any line. Your list shows up below.
-Step 2 of 3
+[heading 2] Your list
 Total for a year
 Your total shows here
-[heading 2] Coming soon
-These helpers are coming soon: Subscription Finder, Bill Negotiation Prep and Cheaper Plan Finder. They are not ready yet.
-This page never calls, cancels or pays anything. You do that yourself.
+[closed section, tap to open] What comes next
+
+[heading 2] Keep your list if you want
 [heading 2] Save or print my list
-[MAIN BUTTON, filled dark orange, disabled] Print
-[plain button, outline only, disabled] Save a copy
-Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+[plain button, outline only, disabled] Print
+[MAIN BUTTON, filled dark orange, disabled] Save a copy
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
 
 This adds up the numbers you typed. It does not tell you what to do.
+This page never calls, cancels or pays anything. You do that yourself.
 Source: only the numbers you type. A week cost uses 52 weeks in a year. That is an estimate.
-Free to use. Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 Back to home
 [link, plain] Back to home

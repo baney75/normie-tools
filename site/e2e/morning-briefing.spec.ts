@@ -1,5 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { shotPath } from "./paths";
+import { isShipped } from "./shipped";
+
+// This tool is coming soon until its review clears, so its page is not on the site. The spec runs again when it ships.
+test.beforeEach(() => {
+  test.skip(!isShipped("morning-briefing"), "coming soon");
+});
 
 // Weather and news are made-up Example lines. The golden text is in tools/morning-briefing/tests/golden.json.
 test.use({ viewport: { width: 390, height: 844 } });
@@ -44,7 +50,7 @@ test("builds a briefing in time order with Example parts marked, no sideways scr
   const paper = page.getByLabel("Your briefing");
   await expect(paper).toContainText("Example town: 58 degrees, clear.");
   await expect(paper).toContainText("Example. Not today's weather.");
-  await expect(paper).toContainText("Live weather and news need the NT app or your AI helper. This page does not go online.");
+  await expect(paper).toContainText("Live weather and news are not on this page yet.");
   await expect(paper.getByLabel("My day")).toContainText(/7:30 am: Pills\s*1:00 pm: Lunch\s*Time not clear\s*later: Call Sam/);
   await expect(page.getByText("Save or print my briefing")).toBeVisible();
   await expect(page.locator(".nt-sheet-primary")).toHaveCount(1);

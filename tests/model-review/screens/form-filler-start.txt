@@ -1,11 +1,17 @@
-Screen: form-filler, start state, phone 390px wide. Order is top to bottom.
+Screen: form-filler, start state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Form Filler
 Step 1 of 4: Is this for you?
 This gets your answers ready for IRS Free File. You make the account, sign, and press Submit yourself. This page never files for you.
-Question 1 of 4
-Free File only does this year's taxes. It can't do taxes from past years.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+Free File opens again in January 2027. You can fill this in now and use it then. Source: IRS Free File page
+[link, plain] IRS Free File page
+Question 1 of 4. Pick one answer, then tap Next.
+[heading 2] Are you filing this year's taxes?
+Pick Yes if you are doing this year's taxes now. Free File can't do past years.
 [label] Yes
 [choice] Yes (not chosen)
 [label] No
@@ -15,11 +21,7 @@ Free File only does this year's taxes. It can't do taxes from past years.
 Source: IRS Free File page
 [link, plain] IRS Free File page
 [MAIN BUTTON, filled dark orange] Next
-[closed section, tap to open] Have saved answers?
-[label] 
-[box]  = ""
-
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
+Next saves your answer. You can go Back and change it.
+[plain button, outline only] Have saved answers?
 Back to home
 [link, plain] Back to home

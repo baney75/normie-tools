@@ -12,14 +12,14 @@ export const MAX_TITLE = 80;
 
 export const SECTION_IDS = ["weather", "news", "day", "reminders"];
 
-export const OFFLINE_NOTE = "Live weather and news need the NT app or your AI helper. This page does not go online.";
+export const OFFLINE_NOTE = "Live weather and news are not on this page yet.";
 
 /** Made-up content. It is always shown with the word Example. */
 export const EXAMPLE = {
-  weatherHeading: "Weather (Example)",
+  weatherHeading: "Example weather (not real)",
   weatherLines: ["Example town: 58 degrees, clear."],
   weatherLabel: "Example. Not today's weather.",
-  newsHeading: "News headlines (Example)",
+  newsHeading: "Example news (not real)",
   newsLines: [
     "Example headline: The town pool opens for the summer.",
     "Example headline: A bake sale is on Saturday.",

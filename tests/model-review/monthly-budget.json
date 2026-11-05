@@ -1,6 +1,6 @@
 {
   "tool": "monthly-budget",
-  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "screen": ",  at 390px wide (text saved beside this file in screens/)",
   "at": "2026-11-05",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
@@ -8,31 +8,21 @@
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 3,
-    "output": "1. This screen wants me to look at my money in and out, see that I'm $880 short, and then print or save the result if I want it.\n\n2. I would tap **Print**, because it's the one button that stands out. I'm not sure I want paper, though. I might tap **Show more** first to see what's hidden.\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n   - \"income line\" and \"spending line\". I would just say \"item\".\n   - \"Remove takes out a line. You can put it back.\" I'm not sure how I put it back.\n   - \"Step 1 of 2... You are here.\" The numbers are already filled in, so it felt odd to be at \"Step 2\".\n   - \"Show more\". It doesn't say more of what.\n   - \"Save a copy\". I don't know where on the phone it goes or how I'd find it again.\n   - \"saved on this phone or computer\"\n   - \"Nothing is sent\"\n   - \"our public page\". I don't know what is on it or why I would check it.\n   - \"91% of income\". It's a lot of percentages to take in.\n   - \"Each bar is as wide as the percent\". I'm not sure I see any bars.\n\n4. Things that made me worry:\n   - The big \"-$880.00\" looks alarming, like I'm in trouble.\n   - I didn't type these numbers, and I'm not sure whether they are mine or an example. Pay of 220 looks very small.\n   - The many **Remove** buttons and **Start over** make me afraid of wiping something out. It says it asks first and I can undo, but I'd still be nervous.\n   - **Save a copy** makes me wonder where my money numbers end up.\n   - \"Nothing is sent\" is reassuring, but I can't tell if I should believe it.\n   - **Print** might start something I don't know how to stop if I have no printer.\n\n5. I would skip the long list of repeated percentages under \"Where it goes\". Each one is written twice. I would also skip \"our public page\" and the \"Back to home\" link.\n\n6. Score: **3**. The big orange **Print** button tells me where to tap, but I'm not sure that's what I should do.\n\nRESULT: {\"next_tap\": \"Print\", \"confusing_terms\": [\"income line\", \"spending line\", \"Remove takes out a line. You can put it back\", \"Step 1 of 2 / You are here\", \"Show more\", \"Save a copy\", \"saved on this phone or computer\", \"Nothing is sent\", \"our public page\", \"% of income\", \"Each bar is as wide as the percent\"], \"worries\": [\"-$880.00 looks alarming\", \"unsure whether the pre-filled numbers are mine\", \"Remove and Start over might erase things\", \"Save a copy: where it goes and privacy\", \"Nothing is sent: unsure whether to believe it\", \"Print might start something with no printer\"], \"skippable\": [\"repeated percentage lines under Where it goes\", \"our public page\", \"Back to home\"], \"score\": 3}"
+    "score": 4,
+    "runs": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to look at my budget answer, which shows $700.00 left over, and then go back to the home page when I'm finished.\n\n2. \"Done. Back to home.\"\n\n3. Words or phrases I didn't understand or that felt like tech talk:\n- \"Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.\" I don't know what \"source\" means here.\n- \"how this page is made\"\n- \"Put it back button\". It's not clear what that is or where it shows up.\n- \"Start over asks first, and you can undo it right after.\"\n- \"Left over\" with \"money in that is not spent\". It's okay, but a bit wordy.\n- \"Each percent is a whole number. One may be 1 higher than its exact value, so that they add up to the percent of income spent.\" I didn't follow that at all.\n- \"Show the numbers in a table\". I'm not sure what table it means.\n- \"Save a copy\", \"saved on this phone or computer\", \"makes the file\". I don't know where the file goes or how I'd find it later.\n- \"Print opens a preview first.\"\n- \"Remove Pay\", \"Remove Other\". I'm not sure whether that deletes the number or the whole line.\n- \"Your numbers stay.\"\n\n4. Things that made me worry:\n- \"Remove\" buttons sit right under each line. I might tap one by accident and lose something. The note says a \"Put it back\" button shows up, but I can't see one yet.\n- \"Start over\" is close to the answer. I'm not sure it wouldn't wipe everything.\n- \"Done. Back to home.\" might throw away my numbers. It says \"Your numbers stay,\" but I'm not sure that applies after I leave.\n- \"Save a copy\" makes a file on my phone. I don't know where it goes or whether it takes up space.\n- \"Nothing is sent\" is reassuring, but I only half believe it. I can't check.\n- Some of my bank-type numbers are on screen, and I wonder who can see them.\n\n5. What I would skip:\n- The \"how this page is made\" link.\n- \"Show the numbers in a table\".\n- The small print about percents adding up.\n- The \"Keep your answer if you want\" section with Print and Save a copy, unless I wanted paper.\n- \"Add an income item\" and \"Add a spending item\", since I'm already done.\n\n6. Score: 4. The orange button is easy to spot and the answer is clear. I'm a little unsure what happens to my numbers when I leave.\n\nRESULT: {\"next_tap\":\"Done. Back to home.\",\"confusing_terms\":[\"Source: how this page is made\",\"Put it back button\",\"Start over asks first, and you can undo it right after\",\"Left over\",\"Each percent is a whole number. One may be 1 higher than its exact value\",\"Show the numbers in a table\",\"Save a copy\",\"makes the file\",\"Print opens a preview first\",\"Remove Pay\",\"Your numbers stay\"],\"worries\":[\"Accidentally tapping a Remove button and losing a line\",\"Start over wiping everything\",\"Whether numbers are lost after Done. Back to home\",\"Save a copy makes a file and I don't know where it goes\",\"Not sure Nothing is sent is really true\"],\"skippable\":[\"how this page is made link\",\"Show the numbers in a table\",\"percent rounding note\",\"Keep your answer if you want section\",\"Add an income item\",\"Add a spending item\"],\"score\":4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"FAIL\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule2: each bar row repeats the percent, e.g. \\\"Rent or mortgage $200.00 91% of income\\\" followed by \\\"91% of income\\\"\"],\"score\":7}",
-      "rules": [
-        "PASS",
-        "FAIL",
-        "PASS",
-        "PASS",
-        "PASS",
-        "PASS",
-        "PASS",
-        "PASS"
-      ],
-      "passes": 7,
-      "fails": [
-        "rule2: each bar row repeats the percent, e.g. \"Rent or mortgage $200.00 91% of income\" followed by \"91% of income\""
-      ]
-    },
-    {
-      "model": "sonnet",
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -44,8 +34,347 @@
         "PASS"
       ],
       "passes": 8,
-      "fails": []
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 6,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
     }
   ],
-  "otherScreens": []
+  "otherScreens": [
+    {
+      "screen": "empty",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to fill in what money I get and spend each month, then press a button to see what's left over.\n\n2. **Show my answer**. First, I'd type my pay in the box that's already waiting for me.\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Source: how this page is made\" (why would I care?)\n- \"Put it back button\" (I don't see one yet, so it's confusing)\n- \"Remove takes out one line\"\n- \"Add an income item\" / \"Add a spending item\" (\"item\" is vague)\n- \"Print opens a preview first\"\n- \"Save a copy ... makes the file\"\n- \"Left over\" (I get it, but it's just a heading with nothing under it)\n- \"disabled\" (the notes say it, though I'd just see grayed-out buttons)\n- \"Numbers stay on this phone or computer\" (what computer?)\n\n4. Worries:\n- The \"Remove\" buttons. I might tap one by mistake and lose a line. The \"Put it back\" promise helps, but I can't see it yet.\n- Typing my real money numbers. \"Nothing is sent\" calms me, but I'd still wonder whether that's true.\n- \"Save a copy\" makes a file on my phone. I don't know where it goes or whether it costs anything.\n- The link \"how this page is made\" might take me somewhere else and I'd lose my place.\n- I don't know whether to type dollar signs or commas.\n\n5. I'd skip:\n- The \"how this page is made\" link.\n- The \"Keep your answer if you want\" section with Print and Save a copy. They're grayed out and I can't use them yet.\n- The explanation text under each section heading about Remove and Put it back.\n- \"Back to home,\" unless I got lost.\n\n6. Score: 4. I know to type in the glowing box and then press the orange button. I'm only unsure whether I have to fill in every box.\n\nRESULT: {\"next_tap\": \"Show my answer\", \"confusing_terms\": [\"Source: how this page is made\", \"Put it back button\", \"Remove takes out one line\", \"income item / spending item\", \"Print opens a preview\", \"Save a copy makes the file\", \"Left over\", \"disabled\", \"this phone or computer\"], \"worries\": [\"accidentally tapping Remove\", \"typing private money numbers\", \"Save a copy creating a file and where it goes or cost\", \"link leading away and losing my place\", \"unsure about dollar signs or commas\"], \"skippable\": [\"how this page is made link\", \"Keep your answer if you want section (Print, Save a copy)\", \"Remove/Put it back explanation text\", \"Back to home\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
 }

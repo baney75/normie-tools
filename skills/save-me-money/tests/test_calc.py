@@ -98,14 +98,15 @@ class PlainText(unittest.TestCase):
     def test_good_text(self):
         r = calc.list_costs(GOLDEN["plans"][0]["input"])
         lines = calc.to_text(r).split("\n")
-        self.assertEqual(lines[0], "Total per year: $3,951.88")
-        self.assertEqual(lines[1], "Total per month: $329.32")
-        self.assertEqual(lines[2], "Number of costs: 6")
-        self.assertEqual(lines[3], "1. Insurance: $1,200.00 a year, $100.00 a month")
-        self.assertEqual(lines[6], "4. Gym: $520.00 a year, $43.33 a month")
+        self.assertEqual(lines[0], "Your 6 costs come to $3,951.88 a year.")
+        self.assertEqual(lines[1], "That is $329.32 a month.")
+        self.assertEqual(lines[2], "Insurance is the biggest: $1,200.00 a year, $100.00 a month.")
+        self.assertEqual(lines[5], "Gym: $520.00 a year, $43.33 a month.")
+        self.assertLessEqual(len(lines), 10)
         self.assertTrue(lines[-1].startswith("Note:"))
         self.assertIn("52 weeks", lines[-1])
-        self.assertIn("What is the price today?", lines)
+        self.assertTrue(lines[-2].startswith("Questions to ask before you call"))
+        self.assertIn("What is the price today?", lines[-2])
 
     def test_no_raw_codes(self):
         for c in GOLDEN["plans"]:
@@ -131,7 +132,7 @@ class PlainText(unittest.TestCase):
         data = json.dumps({"items": [{"name": "Phone", "amount": "65", "every": "month"}]})
         out = subprocess.run([sys.executable, script, "--text", data], capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, out.stderr)
-        self.assertTrue(out.stdout.startswith("Total per year: $780.00"))
+        self.assertTrue(out.stdout.startswith("Your 1 cost comes to $780.00 a year."))
         bad = subprocess.run([sys.executable, script, "--text", '{"items":[{"name":"A","amount":"x","every":"week"}]}'],
                              capture_output=True, text=True)
         self.assertEqual(bad.returncode, 1)

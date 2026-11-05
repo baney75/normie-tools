@@ -13,6 +13,8 @@ description: Put two or three loan offers side by side from the numbers a person
 
 ## Steps (Level 2)
 
+Reply shape: after the script runs, copy every printed line for every offer into your answer, then the two lowest facts, then the estimate sentence from step 5.
+
 1. Run `python3 scripts/env_check.py`. If it says something is missing, tell the person in plain words and stop.
 2. Ask for two offers. For each one ask for the amount borrowed, the yearly interest rate (a percent), and how long the loan lasts (months or years). Ask for upfront fees only if the offer has them. Offer a third only if the person has one. Ask only for what the next step needs.
 3. Put the numbers in a JSON file like `examples/two-offers.json`. Keep the person's own words for each number. Do not fill in a number the person did not give.

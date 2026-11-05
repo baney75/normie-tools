@@ -75,3 +75,5 @@
 .nt-ff-list li { margin: 0 0 var(--nt-space-1); }
 .nt-ff-problems { margin: 0 0 var(--nt-space-3); }
 .nt-ff .nt-calm { margin: 0 0 var(--nt-space-4); }
+.nt-ff-open-box { margin: 0 0 var(--nt-space-4); }
+.nt-ff-open-box button { min-height: var(--nt-tap); }

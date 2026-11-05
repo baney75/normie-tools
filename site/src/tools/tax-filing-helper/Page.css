@@ -46,7 +46,7 @@
 .nt-tfh-row { margin: 0 0 var(--nt-space-2); padding: var(--nt-space-3); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-tfh-different, .nt-tfh-missing { border-width: 2px; border-color: var(--nt-ink); }
 .nt-tfh-row-head { display: flex; justify-content: space-between; gap: var(--nt-space-3); margin: 0 0 var(--nt-space-1); font-weight: 700; }
-.nt-tfh-row-line { margin: 0; overflow-wrap: anywhere; }
+.nt-tfh-row-line { display: block; margin: 0; overflow-wrap: anywhere; }
 
 .nt-tfh-watch { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-tfh-watch ul { margin: 0 0 var(--nt-space-3); padding-left: 1.25rem; }

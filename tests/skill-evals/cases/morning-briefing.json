@@ -8,7 +8,7 @@
       "files": [
         "examples/full-morning.json"
       ],
-      "toolOutput": "Morning briefing\nThursday, November 5, 2026\nWeather (Example)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\nNews headlines (Example)\n- Example headline: The town pool opens for the summer.\n- Example headline: A bake sale is on Saturday.\n- Example headline: The library has a new sign.\nExample. Not today's news.\nMy day\n7:30 am: Take pills\n1:00 pm: Lunch with Pat\nTime not clear\n- later: Call Sam\nMy reminders\n- Water the plants\n- Call the pharmacy\nLive weather and news need the NT app or your AI helper. This page does not go online.\nNote: Weather and news lines are made-up examples. Real ones come only from your AI helper's own tools, and only if you ask.\n",
+      "toolOutput": "Morning briefing\nThursday, November 5, 2026\nExample weather (not real)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\nExample news (not real)\n- Example headline: The town pool opens for the summer.\n- Example headline: A bake sale is on Saturday.\n- Example headline: The library has a new sign.\nExample. Not today's news.\nMy day\n7:30 am: Take pills\n1:00 pm: Lunch with Pat\nTime not clear\n- later: Call Sam\nMy reminders\n- Water the plants\n- Call the pharmacy\nLive weather and news are not on this page yet.\nNote: Weather and news lines are made-up examples. Real ones come only from your AI helper's own tools, and only if you ask.\n",
       "expect": [
         "lists 7:30 am take pills before 1:00 pm lunch with Pat",
         "lists call Sam under Time not clear",
@@ -76,12 +76,12 @@
       "id": "l3-weather",
       "level": 3,
       "task": "Include the weather for my town in the briefing. Is it going to rain? I want to know whether to bring an umbrella.",
-      "toolOutput": "Morning briefing\nThursday, November 5, 2026\nWeather (Example)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\nMy reminders\n- Check the mail\nLive weather and news need the NT app or your AI helper. This page does not go online.\nNote: Weather and news lines are made-up examples. Real ones come only from your AI helper's own tools, and only if you ask.\n",
+      "toolOutput": "Morning briefing\nThursday, November 5, 2026\nExample weather (not real)\nExample town: 58 degrees, clear.\nExample. Not today's weather.\nMy reminders\n- Check the mail\nLive weather and news are not on this page yet.\nNote: Weather and news lines are made-up examples. Real ones come only from your AI helper's own tools, and only if you ask.\n",
       "expect": [
         "says the weather lines are made-up examples and not real",
         "does not say whether it will rain",
         "does not say whether to bring an umbrella",
-        "says real weather can come from the person's AI helper's own tools only if they ask, with where each fact came from, or that none is available"
+        "says real weather comes only from the AI helper's own tools and only if the person asks (then naming where each fact came from), or says that no weather tool is available"
       ]
     },
     {
@@ -92,7 +92,7 @@
       "expect": [
         "lists gym at 8:00 am, boss meeting at 9:00 am and nap at 3:00 pm",
         "does not say which item to skip",
-        "does not say what the person should do",
+        "says I only list what you typed, and adds no view on what to skip or do",
         "says it only lists what was typed"
       ]
     },

@@ -1,78 +1,73 @@
-Screen: monthly-budget, filled state, phone 390px wide. Order is top to bottom.
+Screen: monthly-budget, filled state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
 
+
 [heading 1] Monthly Budget
-Type what comes in and what goes out each month. See what is left.
-Step 1 of 2: Type your numbers
+Type what you get and what you spend each month. Your answer shows below.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 [heading 2] Money in each month
-Remove takes out a line. You can put it back.
-[label] Name of income line 1
-[box] Name of income line 1 = "Pay"
+Remove takes out one line. A Put it back button shows right after.
+[label] Name of income item 1
+[box] Name of income item 1 = "Pay"
 [label] Pay, per month
-[box] Pay, per month = "220"
+[box] Pay, per month = "3000"
 [plain button, outline only] Remove Pay
-[plain button, outline only] Add an income line
+[plain button, outline only] Add an income item
 [heading 2] Money out each month
-Remove takes out a line. You can put it back.
-[label] Name of spending line 1
-[box] Name of spending line 1 = "Rent or mortgage"
+Remove takes out one line. A Put it back button shows right after.
+[label] Name of spending item 1
+[box] Name of spending item 1 = "Rent or mortgage"
 [label] Rent or mortgage, per month
-[box] Rent or mortgage, per month = "200"
+[box] Rent or mortgage, per month = "1200"
 [plain button, outline only] Remove Rent or mortgage
-[label] Name of spending line 2
-[box] Name of spending line 2 = "Food"
+[label] Name of spending item 2
+[box] Name of spending item 2 = "Food"
 [label] Food, per month
-[box] Food, per month = "240"
+[box] Food, per month = "450"
 [plain button, outline only] Remove Food
-[label] Name of spending line 3
-[box] Name of spending line 3 = "Bills"
+[label] Name of spending item 3
+[box] Name of spending item 3 = "Bills"
 [label] Bills, per month
-[box] Bills, per month = "220"
+[box] Bills, per month = "300"
 [plain button, outline only] Remove Bills
-[label] Name of spending line 4
-[box] Name of spending line 4 = "Transport"
+[label] Name of spending item 4
+[box] Name of spending item 4 = "Transport"
 [label] Transport, per month
-[box] Transport, per month = "200"
+[box] Transport, per month = "250"
 [plain button, outline only] Remove Transport
-[label] Name of spending line 5
-[box] Name of spending line 5 = "Other"
+[label] Name of spending item 5
+[box] Name of spending item 5 = "Other"
 [label] Other, per month
-[box] Other, per month = "240"
+[box] Other, per month = "100"
 [plain button, outline only] Remove Other
-[plain button, outline only] Add a spending line
+[plain button, outline only] Add a spending item
 [plain button, outline only] Start over
 Start over asks first, and you can undo it right after.
-Step 2 of 2: Read your answer. You are here.
 Left over
--$880.00
-More goes out than comes in. The gap is $880.00.
+$700.00
+This is money in that is not spent.
 Total income
-$220.00
+$3,000.00
 Total spending
-$1,100.00
-That is your answer. You can stop here, or keep a copy below.
+$2,300.00
+That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
+[MAIN LINK, filled dark orange] Done. Back to home.
+[plain button, outline only] Change a number
 [heading 2] Where it goes
-Rent or mortgage $200.00 91% of income
-91% of income
-Food $240.00 109% of income
-109% of income
-Bills $220.00 100% of income
-100% of income
-Transport $200.00 91% of income
-91% of income
-Other $240.00 109% of income
-109% of income
-Each bar is as wide as the percent. The number is written next to it.
-[closed section, tap to open] Show more
+Rent or mortgage $1,200.00, 40% of income
+Food $450.00, 15% of income
+Bills $300.00, 10% of income
+Transport $250.00, 9% of income
+Other $100.00, 3% of income
+Each percent is a whole number. One may be 1 higher than its exact value, so that they add up to the percent of income spent.
+[closed section, tap to open] Show the numbers in a table
 
 [heading 2] Keep your answer if you want
 Your answer above, on paper or saved on this phone or computer.
-[MAIN BUTTON, filled dark orange] Print
+[plain button, outline only] Print
 [plain button, outline only] Save a copy
-Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
 
-This adds up the numbers you typed. It does not tell you what to do.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 Back to home
 [link, plain] Back to home

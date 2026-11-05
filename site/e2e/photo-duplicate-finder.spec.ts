@@ -2,6 +2,12 @@ import { expect, test, type Page } from "@playwright/test";
 import fs from "node:fs";
 import zlib from "node:zlib";
 import { shotPath } from "./paths";
+import { isShipped } from "./shipped";
+
+// This tool is coming soon until its review clears, so its page is not on the site. The spec runs again when it ships.
+test.beforeEach(() => {
+  test.skip(!isShipped("photo-duplicate-finder"), "coming soon");
+});
 
 // Made-up pictures drawn here: no real photos. Two files hold the same bytes, one is different.
 test.use({ viewport: { width: 390, height: 844 } });
@@ -53,6 +59,7 @@ async function pick(page: Page) {
     { name: "other.png", mimeType: "image/png", buffer: OTHER },
   ]);
   await expect(page.getByLabel("Photos picked", { exact: true })).toContainText("3");
+  await expect(page.getByRole("region", { name: "Picked:" })).toContainText("sunset copy.png");
 }
 
 test.beforeEach(async ({ page }) => {
@@ -65,8 +72,8 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state with one next step", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Photo Duplicate Finder" })).toBeVisible();
   await expect(page.getByText("Step 1 of 3: Pick your photos")).toBeVisible();
-  await expect(page.getByLabel("Photos picked", { exact: true })).toContainText("Pick two or more photos");
-  await expect(page.getByRole("button", { name: "Look for copies" })).toBeDisabled();
+  await expect(page.getByLabel("Photos picked", { exact: true })).toContainText("You picked 0 photos. Pick 2 or more.");
+  await expect(page.getByRole("button", { name: "Choose photos" })).toBeEnabled();
   await expect(page.getByText("Nothing is sent.")).toBeVisible();
 });
 
@@ -82,13 +89,13 @@ test("finds exact copies, lets the person choose, and saves a list of names", as
 
   await page.getByRole("button", { name: "Review my list" }).click();
   await expect(page.getByText("Step 3 of 3: Check your list")).toBeVisible();
-  await expect(page.getByLabel("Marked to remove", { exact: true })).toContainText("1 file");
-  await expect(page.getByText("Nothing was deleted. Your photos are untouched.")).toBeVisible();
+  await expect(page.getByLabel("Extra copies to remove yourself", { exact: true })).toContainText("1 file");
+  await expect(page.getByText("What this does: it makes a list of file names.")).toBeVisible();
   const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Save my list of extras" }).click()]);
   const text = fs.readFileSync((await download.path())!, "utf8");
   expect(text).toContain("sunset.png");
   expect(text).not.toContain("other.png");
-  await expect(page.getByText("Your list was saved.")).toBeVisible();
+  await expect(page.getByText(/Look in Downloads or the Files app/)).toBeVisible();
 });
 
 test("Put it back marks nothing in that group", async ({ page }) => {
@@ -97,8 +104,8 @@ test("Put it back marks nothing in that group", async ({ page }) => {
   await page.getByRole("button", { name: "Put it back" }).click();
   await expect(page.getByText("Nothing is marked in this group.")).toBeVisible();
   await page.getByRole("button", { name: "Review my list" }).click();
-  await expect(page.getByLabel("Marked to remove", { exact: true })).toContainText("Nothing is marked");
-  await expect(page.getByRole("button", { name: "Save my list of extras" })).toBeDisabled();
+  await expect(page.getByLabel("Extra copies to remove yourself", { exact: true })).toContainText("Nothing is marked");
+  await expect(page.getByRole("button", { name: "Save my list of extras" })).toHaveCount(0);
 });
 
 test("a PDF gets a calm message that says what it is, what is needed and where to learn more", async ({ page }) => {

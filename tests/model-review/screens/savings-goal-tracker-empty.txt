@@ -1,39 +1,38 @@
-Screen: savings-goal-tracker, empty state, phone 390px wide. Order is top to bottom.
-Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+Screen: savings-goal-tracker, empty state, phone 390px wide. Order is top to bottom. Nothing is typed yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Savings Goal Tracker
-Type your goal and what you have saved. See when you get there.
-Step 1 of 2: Type your numbers
+Type your goal and what you have saved. Your answer shows below.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 [label] How long will it take?
 [choice] How long will it take? (chosen)
-[label] How much each month?
-[choice] How much each month? (not chosen)
+[label] How much to save each month?
+[choice] How much to save each month? (not chosen)
 [label] Goal amount
+The amount you want to have saved.
 [box] Goal amount = "" (cursor is here)
 [label] Already saved (optional)
+What you have now. Leave it empty if none.
 [box] Already saved (optional) = ""
-[label] Saved each month
-[box] Saved each month = ""
+[label] Amount you save each month
+What you add every month. Type 0 if none.
+[box] Amount you save each month = ""
 [label] Yearly interest rate (optional)
+Find it on your bank statement. Type just the number, like 4.5. Leave it empty if none or if you do not know.
 [box] Yearly interest rate (optional) = ""
 [label] Start month (optional)
+Type the year, a dash, then the month, like 2026-12, to see the month and year you reach your goal.
 [box] Start month (optional) = ""
-[plain button, outline only, disabled] Start over
-Start over asks first, and you can undo it right after.
-Step 2 of 2: Read your answer
 Months to your goal
 Your answer shows here
+[MAIN BUTTON, filled dark orange] Show my answer
 [heading 2] Keep your answer if you want
-[MAIN BUTTON, filled dark orange, disabled] Print
+[plain button, outline only, disabled] Print
 [plain button, outline only, disabled] Save a copy
-Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
 
-Start with your goal amount and how much you have saved. Then type how much you save each month. Your answer shows up below.
-This is an estimate from the numbers you typed. Your bank statement is the final word. This page helps you understand the numbers.
-Each month, interest is added first. Then your monthly amount is added.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
-[closed section, tap to open] What the words mean
-
+Your bank statement is the final word. This page helps you understand the numbers you typed.
 Back to home
 [link, plain] Back to home

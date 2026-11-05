@@ -22,10 +22,8 @@ test.beforeEach(async ({ page }) => {
 
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Monthly Budget" })).toBeVisible();
-  await expect(page.getByText("Type an amount on any line")).toBeVisible();
+  await expect(page.getByText("Type what you get and what you spend each month")).toBeVisible();
   await expect(page.getByLabel("Left over", { exact: true })).toContainText("Your answer shows here");
-  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
-  await expect(page.getByText("Remove takes out a line. You can put it back.").first()).toBeVisible();
   await expect(page.getByRole("button", { name: "Print" })).toBeDisabled();
 });
 
@@ -49,11 +47,11 @@ test("gives exact totals, left over and percents, with no sideways scroll", asyn
 test("a negative left over shows a minus sign, and a new line can be added", async ({ page }) => {
   await page.getByLabel("Pay, per month").fill("1,000");
   await page.getByLabel("Rent or mortgage, per month").fill("1,100");
-  await page.getByRole("button", { name: "Add a spending line" }).click();
-  await page.getByLabel("Name of spending line 6").fill("Phone");
+  await page.getByRole("button", { name: "Add a spending item" }).click();
+  await page.getByLabel("Name of spending item 6").fill("Phone");
   await page.getByLabel("Phone, per month").fill("40.50");
   await expect(page.getByLabel("Left over", { exact: true })).toContainText("-$140.50");
-  await page.getByText("Show more").click();
+  await page.getByText("Show the numbers in a table").click();
   await expect(page.getByRole("table")).toBeVisible();
   await expect(page.getByRole("row")).toHaveCount(3);
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);

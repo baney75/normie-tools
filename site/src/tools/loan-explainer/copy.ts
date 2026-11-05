@@ -2,25 +2,22 @@
 // It never gives advice. It never works out an APR. Page.test.tsx checks this file.
 export const COPY = {
   title: "Loan Explainer",
-  intro: "Type the numbers from your loan. See what it costs.",
-  empty: "Start with the amount you borrow, the yearly interest rate, and how long the loan lasts. Your answer shows up below.",
-  stepOne: "Type your numbers",
-  stepTwo: "Step 2 of 2: Read your answer",
+  intro: "Type the numbers from your loan. Your answer shows below.",
   waiting: "Your answer shows here",
-  amount: { label: "Amount borrowed", hint: "The money you get, before any interest.", placeholder: "12,000" },
-  rate: { label: "Yearly interest rate", hint: "A percent, like 6.5. Type 0 if there is none.", placeholder: "6.5" },
+  amount: { label: "Amount borrowed", hint: "On your loan paper. Look for the words 'amount borrowed' or 'loan amount'.", placeholder: "12,000" },
+  rate: { label: "Yearly interest rate", hint: "On your loan paper. Look for the words 'interest rate'. It is a percent, like 6.5. Type 0 if there is none.", placeholder: "6.5" },
   term: {
     label: "How long is the loan?",
-    hint: "A whole number.",
+    hint: "On your loan paper. Look for 'term' or 'number of payments'. Use a whole number.",
     placeholder: "36",
     unitLegend: "Count in",
     months: "Months",
     years: "Years",
   },
-  fees: { label: "Upfront fees", hint: "Fees you pay at the start. Leave it empty if none.", placeholder: "0" },
-  extra: { label: "Extra each month", hint: "Money you add to every payment. Leave it empty if none.", placeholder: "0" },
+  fees: { label: "Upfront fees", hint: "Fees you pay once, at the start, like a setup fee. Leave it empty if none.", placeholder: "0" },
+  extra: { label: "Extra each month", hint: "Extra money you choose to add to your payment each month. Leave it empty if none.", placeholder: "0" },
   stillNeeded: "Still needed:",
-  fixFirst: "Fix the note above to see your answer.",
+  fixFirst: "Change the box that has a red note. Then your answer shows.",
   resume: {
     title: "Use your last numbers?",
     body: "You typed numbers here before. They were saved on your phone or computer.",
@@ -34,7 +31,7 @@ export const COPY = {
     totalInterest: "Total interest",
     fees: "Upfront fees",
     cost: "Cost of borrowing",
-    costHelp: "Interest plus upfront fees.",
+    costHelp: "It is the interest plus the upfront fees. It is what the loan costs you.",
     lengthLabel: "Loan length",
   },
   extraBox: {
@@ -46,7 +43,7 @@ export const COPY = {
     none: "Your extra payment is too small to finish the loan sooner.",
   },
   more: {
-    summary: "Show more",
+    summary: "Show the year by year table",
     tableHeading: "Year by year",
     tableNote: "This table includes your extra payment, if you typed one.",
     year: "Year",
@@ -58,6 +55,8 @@ export const COPY = {
   key: {
     summary: "What the words mean",
     items: [
+      { term: "Total interest", means: "The extra money you pay the lender for the loan." },
+      { term: "Upfront fees", means: "Fees you pay once, at the start of the loan." },
       { term: "APR", means: "The yearly cost of the loan, with some fees. Your lender statement shows it. This tool does not work it out." },
       { term: "Amount borrowed", means: "The money you get from the lender, before any interest." },
       { term: "Interest rate", means: "The yearly price of the loan, as a percent of what you owe." },
@@ -67,12 +66,11 @@ export const COPY = {
   save: {
     summary: "Save or print",
     title: "Keep your answer if you want",
-    preview: "Your answer above, on paper or saved on this phone or computer.",
+    preview: "Your answer above, on paper or saved as a file on this phone or computer.",
     fileName: "loan-numbers.txt",
   },
   notes: {
-    estimate: "This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.",
-    apr: "The yearly cost of a loan, with some fees, is on your lender statement. This tool does not work it out.",
+    estimate: "This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.",
   },
   back: "Back to home",
 } as const;

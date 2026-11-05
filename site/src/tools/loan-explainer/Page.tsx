@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -39,6 +39,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-loan">
         <p className="nt-loan-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && blank ? (
           <div className="nt-loan-status">
@@ -55,7 +56,6 @@ export function Page() {
           </div>
         ) : null}
 
-        <StepLabel n={1} of={2}>{COPY.stepOne}</StepLabel>
         <form className="nt-loan-form" onSubmit={(e) => e.preventDefault()} noValidate>
           <MoneyField
             autoFocus
@@ -124,10 +124,9 @@ export function Page() {
         {result.ok ? (
           <Answer result={result} />
         ) : (
-          <ResultCard label={COPY.result.paymentLabel} step={COPY.stepTwo} waiting={COPY.waiting} />
+          <ResultCard label={COPY.result.paymentLabel} waiting={COPY.waiting} />
         )}
 
-        {!result.ok && blank ? <p className="nt-loan-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
           <p className="nt-loan-status" role="status">
             {COPY.stillNeeded} {missing.join(", ")}.
@@ -138,8 +137,6 @@ export function Page() {
         ) : null}
 
         <p className="nt-loan-note">{COPY.notes.estimate}</p>
-        <p className="nt-loan-note">{COPY.notes.apr}</p>
-        <PrivacyNote />
 
         <details className="nt-loan-details">
           <summary>{COPY.key.summary}</summary>
@@ -173,7 +170,7 @@ function Answer({ result }: { result: Good }) {
   ];
 
   function save() {
-    const text = [COPY.save.title, "", `${r.paymentLabel}: ${formatMoney(result.monthlyPaymentCents)}`, ...lines.map(([k, val]) => `${k}: ${val}`), ...(e ? [`${COPY.extraBox.heading}`, `${COPY.extraBox.monthsSaved}: ${e.monthsSaved}`, `${COPY.extraBox.interestSaved}: ${formatMoney(e.interestSaved)}`] : []), "", COPY.notes.estimate, COPY.notes.apr, ""].join("\n");
+    const text = [COPY.save.title, "", `${r.paymentLabel}: ${formatMoney(result.monthlyPaymentCents)}`, ...lines.map(([k, val]) => `${k}: ${val}`), ...(e ? [`${COPY.extraBox.heading}`, `${COPY.extraBox.monthsSaved}: ${e.monthsSaved}`, `${COPY.extraBox.interestSaved}: ${formatMoney(e.interestSaved)}`] : []), "", COPY.notes.estimate, ""].join("\n");
     try {
       const url = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
       const a = document.createElement("a");
@@ -188,7 +185,7 @@ function Answer({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={r.paymentLabel} step={COPY.stepTwo} answer={formatMoney(result.monthlyPaymentCents)}>
+      <ResultCard label={r.paymentLabel} answer={formatMoney(result.monthlyPaymentCents)}>
         <p className="nt-loan-help">{r.paymentLine}</p>
         <dl className="nt-loan-lines">
           {lines.map(([k, val]) => (
@@ -249,7 +246,7 @@ function Answer({ result }: { result: Good }) {
         </div>
       </details>
 
-      <SavePrintSheet title={COPY.save.title} onSave={save}>
+      <SavePrintSheet quiet title={COPY.save.title} onSave={save}>
         <p>{COPY.save.preview}</p>
       </SavePrintSheet>
     </>

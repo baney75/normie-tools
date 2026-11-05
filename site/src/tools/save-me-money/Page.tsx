@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -71,6 +71,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-smm">
         <p className="nt-smm-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && pristine ? (
           <div className="nt-smm-status">
@@ -87,10 +88,9 @@ export function Page() {
           </div>
         ) : null}
 
-        <StepLabel n={1} of={3}>{COPY.step1}</StepLabel>
+        <h2 className="nt-smm-h">{COPY.step1}</h2>
         <form className="nt-smm-form" onSubmit={(e) => e.preventDefault()} noValidate>
           <section className="nt-smm-list" aria-label={COPY.step1}>
-            <p className="nt-smm-help">{COPY.removeHint}</p>
             {v.items.map((l, i) => {
               const label = shown(l, i);
               return (
@@ -114,6 +114,7 @@ export function Page() {
                   <button type="button" className="nt-smm-remove" aria-label={`${COPY.remove} ${label}`} onClick={() => remove(l.id)}>
                     {COPY.remove}
                   </button>
+                  <span className="nt-smm-help nt-smm-removehint">{COPY.removeHint}</span>
                 </div>
               );
             })}
@@ -144,15 +145,17 @@ export function Page() {
           <Done result={result} items={v.items} picked={v.picked} toggle={toggle} />
         ) : (
           <>
-            <ResultCard label={COPY.result.label} step={COPY.step2} waiting={COPY.waiting} />
+            <h2 className="nt-smm-h">{COPY.step2}</h2>
+            <ResultCard label={COPY.result.label} waiting={COPY.waiting} closing={false} />
             <Soon />
-            <SavePrintSheet title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
+            <h2 className="nt-smm-h">{COPY.step3}</h2>
+            <SavePrintSheet savePrimary title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
           </>
         )}
 
         <p className="nt-smm-note">{COPY.notes.count}</p>
+        <p className="nt-smm-note">{COPY.never}</p>
         <p className="nt-smm-note">{COPY.source}</p>
-        <PrivacyNote />
       </div>
     </ScreenFrame>
   );
@@ -174,11 +177,12 @@ function EverySelect({ label, value, onChange }: { label: string; value: Every; 
 
 function Soon() {
   return (
-    <section className="nt-smm-soon" aria-label={COPY.soon.heading}>
-      <h2>{COPY.soon.heading}</h2>
-      <p>{COPY.soon.body}</p>
-      <p>{COPY.never}</p>
-    </section>
+    <details className="nt-smm-details">
+      <summary>{COPY.soon.heading}</summary>
+      <div className="nt-smm-details-body">
+        <p>{COPY.soon.body}</p>
+      </div>
+    </details>
   );
 }
 
@@ -220,7 +224,8 @@ function Done({ result, items, picked, toggle }: { result: Good; items: Line[]; 
 
   return (
     <>
-      <ResultCard label={r.label} step={COPY.step2} answer={formatMoney(result.yearlyCents)}>
+      <h2 className="nt-smm-h">{COPY.step2}</h2>
+      <ResultCard label={r.label} answer={formatMoney(result.yearlyCents)} closing={false}>
         <dl className="nt-smm-lines">
           <div>
             <dt>{r.perMonth}</dt>
@@ -231,10 +236,11 @@ function Done({ result, items, picked, toggle }: { result: Good; items: Line[]; 
             <dd>{result.count}</dd>
           </div>
         </dl>
+        <p className="nt-smm-help">{r.leftOut}</p>
+        <p className="nt-smm-help">{r.done}</p>
       </ResultCard>
 
       <section className="nt-smm-picks" aria-label={COPY.list.heading}>
-        <StepLabel n={3} of={3}>{COPY.step3}</StepLabel>
         <h2>{COPY.list.heading}</h2>
         <p className="nt-smm-help">{COPY.list.help}</p>
         <ul className="nt-smm-picklist">
@@ -254,7 +260,7 @@ function Done({ result, items, picked, toggle }: { result: Good; items: Line[]; 
       <section className="nt-smm-questions" aria-label={COPY.questions.heading}>
         <h2>{COPY.questions.heading}</h2>
         {chosen.length === 0 ? (
-          <p className="nt-smm-help">{COPY.questions.none}</p>
+          <p className="nt-smm-help nt-smm-grey">{COPY.questions.none}</p>
         ) : (
           <>
             <p>{COPY.questions.forThese}: {chosen.map((x) => x.name).join(", ")}</p>
@@ -298,19 +304,9 @@ function Done({ result, items, picked, toggle }: { result: Good; items: Line[]; 
         </div>
       </details>
 
-      <SavePrintSheet title={COPY.save.title} onSave={save}>
-        <p>{r.label}: {formatMoney(result.yearlyCents)}</p>
-        <p>{r.perMonth}: {formatMoney(result.monthlyCents)}</p>
-        {rows.map((x) => (
-          <p key={x.index}>{x.name}: {say(x)}{picked.includes(idOf(x)) ? ` (${COPY.save.first})` : ""}</p>
-        ))}
-        {chosen.length > 0 ? (
-          <>
-            <p>{COPY.questions.heading}:</p>
-            {QUESTIONS.map((q: string) => <p key={q}>{q}</p>)}
-          </>
-        ) : null}
-        <p>{COPY.never}</p>
+      <h2 className="nt-smm-h">{COPY.step3}</h2>
+      <SavePrintSheet savePrimary title={COPY.save.title} onSave={save}>
+        <p>{COPY.save.preview}</p>
       </SavePrintSheet>
     </>
   );

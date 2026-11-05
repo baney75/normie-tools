@@ -5,8 +5,8 @@ The person picks parts: weather, news headlines, my day, my reminders. They alwa
 - **Date.** The person gives it as `2026-11-05`. The script prints `Thursday, November 5, 2026`. It never reads the clock. With no date, the date line is left out.
 - **My day.** Up to 5 items, each with a time text and a title. Items with a clear time are sorted by time. Items with the same time keep the order typed. Items with no clear time go under "Time not clear", in the order typed.
 - **My reminders.** Up to 5. Blank ones are dropped.
-- **Weather and news.** These are made-up Example lines from a fixed set. They say "Example. Not today's weather." and "Example. Not today's news." They are not real. The script does not go online.
-- **The offline line.** When weather or news is picked, the briefing ends with: "Live weather and news need the NT app or your AI helper. This page does not go online."
+- **Weather and news.** These are made-up Example lines from a fixed set. They say "Example. Not today's weather." and "Example. Not today's news." They are not real. The script does not use the internet.
+- **The offline line.** When weather or news is picked, the briefing ends with: "Live weather and news are not on this page yet."
 
 ## Clear times
 

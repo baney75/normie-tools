@@ -37,8 +37,8 @@ describe("Save Me Money page", () => {
       expect(screen.getByLabelText(`${n}, amount`)).toHaveValue("");
     }
     expect(screen.getByLabelText("Total for a year")).toHaveTextContent(COPY.waiting);
-    expect(screen.getByLabelText("Total for a year")).toHaveTextContent("Step 2 of 3");
-    expect(screen.getByText("Step 1 of 3: Type your costs")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your costs" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your list" })).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -49,14 +49,15 @@ describe("Save Me Money page", () => {
 
   it("says what Remove does, next to the lines", () => {
     render(<Page />);
-    expect(screen.getByText(COPY.removeHint)).toBeInTheDocument();
+    expect(screen.getAllByText(COPY.removeHint)).toHaveLength(6);
   });
 
-  it("has one filled button, Print, and the sheet is titled Save or print my list", async () => {
+  it("has one filled button, Save a copy, and the sheet is titled Save or print my list", async () => {
     const { container } = render(<Page />);
     expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
     expect(container.querySelectorAll("button.primary")).toHaveLength(0);
     expect(screen.getByText("Save or print my list")).toBeInTheDocument();
+    expect(container.querySelector(".nt-sheet-primary")).toHaveTextContent("Save a copy");
     expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
     await fillPlain();
     expect(screen.getByRole("button", { name: "Print" })).toBeEnabled();
@@ -138,7 +139,7 @@ describe("Save Me Money page", () => {
   it("says nothing is sent and links to the page code", () => {
     render(<Page />);
     expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 
   it("says where the numbers come from and that weeks are an estimate", () => {
@@ -194,6 +195,50 @@ describe("Save Me Money page", () => {
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.yes }));
     expect(screen.queryByText(/NaN|undefined/)).toBeNull();
     expect(screen.getByRole("button", { name: "Add a cost" })).toBeInTheDocument();
+  });
+});
+
+describe("Save Me Money review fixes", () => {
+  it("keeps the coming-soon note inside a closed What comes next section", async () => {
+    const { container } = render(<Page />);
+    await fillPlain();
+    const d = Array.from(container.querySelectorAll("details")).find((x) => x.querySelector("summary")?.textContent === "What comes next")!;
+    expect(d).toBeTruthy();
+    expect(d.open).toBe(false);
+    expect(d).toHaveTextContent("coming soon");
+    expect(d.querySelector("a")).toBeNull();
+  });
+
+  it("uses headings in order and no Step N of M labels", async () => {
+    render(<Page />);
+    await fillPlain();
+    const heads = screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent);
+    expect(heads.indexOf("Your costs")).toBeLessThan(heads.indexOf("Your list"));
+    expect(heads.indexOf("Your list")).toBeLessThan(heads.indexOf("Keep your list if you want"));
+    expect(document.body.textContent).not.toMatch(/Step \d of \d|That is your answer/);
+  });
+
+  it("says costs with no amount are left out, and tells what to tap before ticking", async () => {
+    render(<Page />);
+    await fill("Phone, amount", "65");
+    expect(screen.getByText("Costs with no amount are left out.")).toBeInTheDocument();
+    expect(screen.getByText("Tap a cost to see questions to ask before you call.")).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: COPY.questions.heading })).toHaveTextContent("Questions appear here");
+    await fill("Gym, amount", "10");
+    expect(screen.getByText("That is your list. You can stop here, or keep a copy below.")).toBeInTheDocument();
+  });
+
+  it("previews the save sheet in one sentence without repeating the totals", async () => {
+    render(<Page />);
+    await fillPlain();
+    const sheet = screen.getByRole("group", { name: "Preview" });
+    expect(sheet).toHaveTextContent(COPY.save.preview);
+    expect(sheet.textContent).not.toMatch(/\$/);
+  });
+
+  it("says what Remove does with Put it back", () => {
+    render(<Page />);
+    expect(screen.getAllByText("Remove takes out one cost. A Put it back button shows right after.").length).toBeGreaterThan(0);
   });
 });
 

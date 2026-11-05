@@ -10,7 +10,8 @@ export const COPY = {
     news: "News headlines (Example only)",
     day: "My day",
     reminders: "My reminders",
-    exampleHelp: "Weather and news show made-up Example lines. This page does not go online.",
+    exampleHelp: "Weather and news show made-up Example lines. Live weather and news are not on this page yet.",
+    preview: "Next only moves on. You can come back and change these.",
     none: "Pick at least one part to go on.",
   },
   type: {
@@ -30,13 +31,14 @@ export const COPY = {
     reminderPlaceholder: "Water the plants",
     addReminder: "Add a reminder",
   },
-  removeHint: "Remove takes out a line. You can put it back.",
+  removeHint: "Remove takes out a line. Put it back shows right after you remove one.",
   remove: "Remove",
   undo: "Put it back",
   undoHelp: "You took out a line. This puts it back.",
   full: "This list is full. Remove a line to add another.",
   next: "Next",
-  back: "Back",
+  back1: "Back to step 1",
+  back2: "Back to step 2",
   resume: {
     title: "Use your last choices?",
     body: "You typed here before. It was saved on your phone or computer.",
@@ -46,8 +48,9 @@ export const COPY = {
   see: {
     paperTitle: "Morning briefing",
     exampleWord: "Example",
-    sourceNote: "Everything marked Example is made up. It is not real news or weather. No source is claimed.",
-    offline: "Live weather and news need the NT app or your AI helper. This page does not go online.",
+    sourceNote: "Everything marked Example is made up. It is not real news or weather.",
+    intro: "This is your finished page. Use Back to step 2 to change it.",
+    madeHere: "Your briefing is made on this phone or computer.",
     nothingFixed: "Pick at least one part to see a briefing.",
   },
   save: {

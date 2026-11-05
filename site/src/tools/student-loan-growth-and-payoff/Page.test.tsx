@@ -28,10 +28,10 @@ describe("Student Loan Growth and Payoff page", () => {
   it("shows the empty state and no answer", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Student Loan Growth and Payoff" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.empty)).toBeInTheDocument();
+    expect(screen.getByText(COPY.intro)).toBeInTheDocument();
     expect(screen.getByLabelText("Balance when payments start")).toHaveTextContent("Your answer shows here");
-    expect(screen.getByText("Step 2 of 2: Read your answer")).toBeInTheDocument();
-    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
+    expect(screen.queryByText(/Step \d of \d/)).toBeNull();
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
     expect(screen.getByLabelText("Loan balance", { exact: false })).toHaveFocus();
     expect(screen.getByText(/Nothing is sent/)).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
@@ -54,7 +54,7 @@ describe("Student Loan Growth and Payoff page", () => {
     await fillGolden();
     const card = screen.getByLabelText("Balance when payments start");
     expect(card).toHaveTextContent("$20,499.98");
-    expect(card).toHaveTextContent("Interest that grew while you waited$499.98");
+    expect(card).toHaveTextContent("Interest that grew before your first payment$499.98");
     expect(card).toHaveTextContent("Months to pay off81");
     expect(card).toHaveTextContent("Total interest$4,171.44");
     expect(card).toHaveTextContent("Payoff monthMay 2033");
@@ -83,11 +83,29 @@ describe("Student Loan Growth and Payoff page", () => {
   it("opens the year-by-year sections", async () => {
     render(<Page />);
     await fillGolden();
-    await userEvent.click(screen.getByText("Show more"));
-    const years = document.querySelectorAll("details.nt-slg-year");
+    await userEvent.click(screen.getByText("Show year by year"));
+    const years = document.querySelectorAll(".nt-slg-year");
     expect(years).toHaveLength(7);
-    await userEvent.click(within(years[6] as HTMLElement).getByText(/Year 7/));
-    expect(years[6]).toHaveTextContent("$0.00 still owe");
+    expect(within(years[6] as HTMLElement).getByText(/Year 7/)).toBeInTheDocument();
+    expect(years[6]).toHaveTextContent("Still owe$0.00");
+  });
+
+  it("puts the privacy line right under the intro", () => {
+    render(<Page />);
+    const intro = screen.getByText(COPY.intro);
+    expect(intro.nextElementSibling).toHaveTextContent(/Nothing is sent/);
+  });
+
+  it("says why no interest grew when no months passed", async () => {
+    render(<Page />);
+    await fill("Loan balance", "5000");
+    await fill("Yearly interest rate", "5.5");
+    const card = screen.getByLabelText("Balance when payments start");
+    expect(card).toHaveTextContent("$5,000.00");
+    expect(card).toHaveTextContent(COPY.result.noGrowth);
+    expect(card).toHaveTextContent("That is your answer. You can stop here. Or change a number to try again. Your numbers stay.");
+    await fill("Months with no payments", "6");
+    expect(card).not.toHaveTextContent(COPY.result.noGrowth);
   });
 
   it("asks only for what is still needed", async () => {

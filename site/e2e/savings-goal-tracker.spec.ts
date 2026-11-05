@@ -7,7 +7,7 @@ test.use({ viewport: { width: 390, height: 844 } });
 async function fillWhen(page: import("@playwright/test").Page, v: { goal: string; saved: string; monthly: string; start?: string; rate?: string }) {
   await page.getByLabel("Goal amount").fill(v.goal);
   await page.getByLabel("Already saved").fill(v.saved);
-  await page.getByLabel("Saved each month").fill(v.monthly);
+  await page.getByLabel("Amount you save each month").fill(v.monthly);
   if (v.rate) await page.getByLabel("Yearly interest rate").fill(v.rate);
   if (v.start) await page.getByLabel("Start month").fill(v.start);
 }
@@ -21,9 +21,8 @@ test.beforeEach(async ({ page }) => {
 
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Savings Goal Tracker" })).toBeVisible();
-  await expect(page.getByText("Start with your goal amount")).toBeVisible();
+  await expect(page.getByText("Type your goal and what you have saved")).toBeVisible();
   await expect(page.getByLabel("Months to your goal")).toContainText("Your answer shows here");
-  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
   await expect(page.getByRole("button", { name: "Print" })).toBeDisabled();
 });
 
@@ -44,18 +43,18 @@ test("interest is added each month and the year table opens", async ({ page }) =
   await expect(card).toContainText("29 months");
   await expect(card).toContainText("$587.21");
   await expect(card).toContainText("$10,287.21");
-  await page.getByText("Show more").click();
+  await page.getByText("Show year by year").click();
   await expect(page.getByRole("table")).toBeVisible();
   await expect(page.getByRole("row")).toHaveCount(4);
 });
 
 test("how much each month for a chosen month", async ({ page }) => {
-  await page.getByLabel("How much each month?").check();
+  await page.getByLabel("How much to save each month?").check();
   await page.getByLabel("Goal amount").fill("10,000");
   await page.getByLabel("Already saved").fill("1,000");
   await page.getByLabel("Start month").fill("2026-12");
   await page.getByLabel("Goal month").fill("2027-11");
-  const card = page.getByLabel("Save each month");
+  const card = page.getByLabel("Save each month", { exact: true });
   await expect(card).toContainText("$750.00");
   await expect(card).toContainText("12 months");
   await expect(card).toContainText("November 2027");

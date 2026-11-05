@@ -347,45 +347,38 @@ def result_text(r):
     """The same answer as explain_savings, as plain words in dollars. One short fact per line."""
     if not r["ok"]:
         return problem_text(r)
-    out = ["Goal amount: %s" % _dollars(r["goalCents"]),
-           "Already saved: %s" % _dollars(r["savedCents"])]
-    if r["mode"] == "when":
-        out.append("Saved each month: %s" % _dollars(r["monthlyCents"]))
-    out.append("Yearly interest rate: %s" % _percent(r["rateBps"]))
+    out = []
     if r["mode"] == "when":
         st = r["status"]
         if st == "reached":
-            out.append("Months to your goal: 0 months")
-            out.append("Already there. You have already saved your goal. No more months are needed.")
+            out.append("Your goal takes 0 months.")
+            out.append("You have already saved your goal. No more months are needed.")
             out.append("You have saved %s. The goal is %s." % (_dollars(r["savedCents"]), _dollars(r["goalCents"])))
         elif st == "no-savings":
-            out.append("Not reached. You add nothing each month and there is no interest, so your savings stay the same.")
+            out.append("You do not reach your goal this way. You add nothing each month and there is no interest, so your savings stay the same.")
             out.append("Your savings stay at %s." % _dollars(r["savedCents"]))
         elif st == "too-long":
-            out.append("Over 1,200 months. At this pace the goal takes more than 100 years.")
+            out.append("Your goal takes more than 1,200 months. At this pace it takes more than 100 years.")
         else:
-            out.append("Months to your goal: %s" % _count(r["months"], "month"))
+            long = " (%s)" % _length(r["months"]) if r["months"] >= 12 else ""
+            out.append("Your goal takes %s%s." % (_count(r["months"], "month"), long))
             if r["landing"]:
                 out.append("You reach your goal in %s." % _month_name(r["landing"]))
             else:
                 out.append("Add a start month to see the month and year.")
-            if r["months"] >= 12:
-                out.append("That is %s." % _length(r["months"]))
-            out.append("Total you add: %s" % _dollars(r["depositsCents"]))
-            out.append("Interest earned: %s" % _dollars(r["interestEarnedCents"]))
-            out.append("Saved at the end: %s" % _dollars(r["finalBalanceCents"]))
+            out.append("The total you add is %s." % _dollars(r["depositsCents"]))
+            out.append("The interest earned is %s." % _dollars(r["interestEarnedCents"]))
+            out.append("The amount saved at the end is %s." % _dollars(r["finalBalanceCents"]))
     else:
-        out.append("Save each month: %s" % _dollars(r["monthlyNeededCents"]))
+        out.append("The smallest amount to save each month is %s." % _dollars(r["monthlyNeededCents"]))
         if r["status"] == "reached":
             out.append("You have already saved your goal. You do not need to add more.")
         else:
-            out.append("This is the smallest amount that reaches your goal by the goal month.")
-        out.append("Months counted: %s" % _count(r["months"], "month"))
-        out.append("Start month: %s" % _month_name(r["start"]))
-        out.append("Goal month: %s" % _month_name(r["target"]))
-        out.append("Total you add: %s" % _dollars(r["depositsCents"]))
-        out.append("Interest earned: %s" % _dollars(r["interestEarnedCents"]))
-        out.append("Saved in the goal month: %s" % _dollars(r["finalBalanceCents"]))
+            out.append("That reaches your goal by the goal month.")
+        out.append("That is %s, from %s to %s." % (_count(r["months"], "month"), _month_name(r["start"]), _month_name(r["target"])))
+        out.append("The total you add is %s." % _dollars(r["depositsCents"]))
+        out.append("The interest earned is %s." % _dollars(r["interestEarnedCents"]))
+        out.append("The amount saved in the goal month is %s." % _dollars(r["finalBalanceCents"]))
     out.append("Each month, interest is added first. Then your monthly amount is added.")
     out.append("This is an estimate from the numbers you typed. The paper from your bank or lender has the final word.")
     return "\n".join(out)

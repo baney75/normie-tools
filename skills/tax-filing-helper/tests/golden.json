@@ -127,7 +127,7 @@
      "interest": "different"
     },
     "messages": {
-     "interest": "Interest from your bank (1099-INT): you typed $12.30. The sheet says $12.34."
+     "interest": "Interest from your bank: you typed $12.30. The sheet says $12.34."
     }
    }
   },
@@ -152,7 +152,7 @@
      "interest": "missing"
     },
     "messages": {
-     "wages": "Pay from your W-2: nothing typed yet. The sheet says $32,450.00."
+     "wages": "Pay for the year: nothing typed yet. The sheet says $32,450.00."
     }
    }
   },
@@ -222,7 +222,7 @@
      "interest": "match"
     },
     "messages": {
-     "wages": "Pay from your W-2: you typed -$32,450.00. The sheet says $32,450.00."
+     "wages": "Pay for the year: you typed -$32,450.00. The sheet says $32,450.00."
     }
    }
   }

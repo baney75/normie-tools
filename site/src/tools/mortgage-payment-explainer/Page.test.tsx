@@ -35,7 +35,7 @@ describe("Mortgage Payment Explainer page", () => {
   it("shows the empty state and no answer", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Mortgage Payment Explainer" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.empty)).toBeInTheDocument();
+    expect(screen.getByText("Type the numbers for a home loan. Your answer shows below.")).toBeInTheDocument();
     expectWaiting();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
@@ -127,7 +127,7 @@ describe("Mortgage Payment Explainer page", () => {
 
   it("says it is an estimate and explains every word", () => {
     render(<Page />);
-    expect(screen.getByText("This is an estimate from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
+    expect(screen.getByText("This is an estimate, a close guess from the numbers you typed. Your lender statement is the final word. This page helps you understand the numbers.")).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 
@@ -166,10 +166,13 @@ describe("Mortgage Payment Explainer page", () => {
 });
 
 describe("Mortgage Payment Explainer first-time help", () => {
-  it("shows Step 1 of 2, Step 2 of 2 and a waiting answer from the start", () => {
+  it("shows a waiting answer, no step labels, and the privacy line under the intro", () => {
     render(<Page />);
-    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
-    expect(screen.getByLabelText("Total monthly payment")).toHaveTextContent("Step 2 of 2");
+    expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
+    const intro = screen.getByText(COPY.intro);
+    const privacy = screen.getByText(/Nothing is sent\./);
+    expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(privacy.compareDocumentPosition(screen.getByLabelText("Home price", { exact: false })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expectWaiting();
   });
 
@@ -179,15 +182,16 @@ describe("Mortgage Payment Explainer first-time help", () => {
   });
 
   it("has one primary button, always in view, outside any fold", () => {
-    const { container } = render(<Page />);
-    expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    render(<Page />);
+    // Nothing typed yet: the one filled button sends the person to the first box.
+    expect(screen.getByRole("button", { name: "Show my answer" })).toHaveClass("primary");
     expect(screen.getByRole("heading", { name: "Keep your answer if you want" }).closest("details")).toBeNull();
   });
 
   it("uses the shared privacy note with a place to check it", () => {
     render(<Page />);
     expect(screen.getByText(/Nothing is sent\. Numbers stay on this phone or computer\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 });
 
@@ -244,7 +248,7 @@ describe("mortgage-payment-explainer filled screen", () => {
     await fillBasic();
     const body = document.body.textContent ?? "";
     expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
-    expect(screen.getAllByText(/^Step 2 of 2: Read your answer/)).toHaveLength(1);
+    expect(document.body.textContent!.split("That is your answer").length - 1).toBe(1);
     expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
     expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
     const open = body.replace(/What the words mean[\s\S]*$/, "");

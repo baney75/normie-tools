@@ -1,8 +1,11 @@
-Screen: morning-briefing, pick state, phone 390px wide. Order is top to bottom.
+Screen: morning-briefing, pick state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Morning Briefing
 Make a one page list for your morning. Pick the parts you want. Type your own things. Then save or print it.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 Step 1 of 3: Pick what to include
 [label] Weather (Example only)
 [tick box] Weather (Example only) (chosen)
@@ -12,12 +15,8 @@ Step 1 of 3: Pick what to include
 [tick box] My day (chosen)
 [label] My reminders
 [tick box] My reminders (chosen)
-Weather and news show made-up Example lines. This page does not go online.
+Weather and news show made-up Example lines. Live weather and news are not on this page yet.
 [MAIN BUTTON, filled dark orange] Next
-[plain button, outline only, disabled] Start over
-Start over asks first, and you can undo it right after.
-This lists what you typed. It does not tell you what to do.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
+Next only moves on. You can come back and change these.
 Back to home
 [link, plain] Back to home

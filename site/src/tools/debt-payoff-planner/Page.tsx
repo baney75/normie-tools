@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, PercentField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -55,6 +55,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-dpp">
         <p className="nt-dpp-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && blank ? (
           <div className="nt-dpp-status">
@@ -71,7 +72,6 @@ export function Page() {
           </div>
         ) : null}
 
-        <StepLabel n={1} of={2}>{COPY.stepOne}</StepLabel>
         <form className="nt-dpp-form" onSubmit={(e) => e.preventDefault()} noValidate>
           {shown.map((d, i) => {
             const r = i + 1;
@@ -81,6 +81,7 @@ export function Page() {
                 <legend>{label}</legend>
                 <Field
                   label={`${label} ${COPY.name.label}`}
+                  hint={COPY.name.hint}
                   placeholder={COPY.name.placeholder}
                   optional
                   autoFocus={i === 0}
@@ -90,6 +91,7 @@ export function Page() {
                 />
                 <MoneyField
                   label={`${label} ${COPY.balance.label}`}
+                  hint={COPY.balance.hint}
                   placeholder={COPY.balance.placeholder}
                   value={d.balance}
                   onChange={(t) => setDebt(i, { balance: t })}
@@ -97,6 +99,7 @@ export function Page() {
                 />
                 <PercentField
                   label={`${label} ${COPY.rate.label}`}
+                  hint={COPY.rate.hint}
                   placeholder={COPY.rate.placeholder}
                   value={d.rate}
                   onChange={(t) => setDebt(i, { rate: t })}
@@ -104,6 +107,7 @@ export function Page() {
                 />
                 <MoneyField
                   label={`${label} ${COPY.minimum.label}`}
+                  hint={COPY.minimum.hint}
                   placeholder={COPY.minimum.placeholder}
                   value={d.minimum}
                   onChange={(t) => setDebt(i, { minimum: t })}
@@ -117,20 +121,20 @@ export function Page() {
               {COPY.addDebt}
             </button>
             {shown.length > 1 ? (
-              <>
+              <div className="nt-dpp-pair">
                 <button type="button" className="nt-dpp-button" onClick={removeDebt}>
                   {COPY.removeDebt}
                 </button>
                 <span className="nt-dpp-help">{COPY.removeHint}</span>
-              </>
+              </div>
             ) : null}
             {undo && shown.length < MAX ? (
-              <>
+              <div className="nt-dpp-pair">
                 <button type="button" className="nt-dpp-button" onClick={putBack}>
                   {COPY.undo}
                 </button>
                 <span className="nt-dpp-help">{COPY.undoHelp}</span>
-              </>
+              </div>
             ) : null}
             {shown.length >= MAX ? <span className="nt-dpp-help">{COPY.upTo}</span> : null}
           </div>
@@ -151,10 +155,9 @@ export function Page() {
         {result.ok ? (
           <Answer result={result} />
         ) : (
-          <ResultCard label={COPY.result.label} step={COPY.stepTwo} waiting={COPY.waiting} />
+          <ResultCard label={COPY.result.label} waiting={COPY.waiting} />
         )}
 
-        {!result.ok && blank ? <p className="nt-dpp-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
           <div className="nt-dpp-status" role="status">
             <p>{COPY.stillNeeded}</p>
@@ -168,8 +171,6 @@ export function Page() {
         {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
 
         <p className="nt-dpp-note">{COPY.notes.estimate}</p>
-        <p className="nt-dpp-note">{COPY.notes.facts}</p>
-        <PrivacyNote />
 
         <details className="nt-dpp-details">
           <summary>{COPY.key.summary}</summary>
@@ -211,6 +212,12 @@ function differenceLines(result: Good): string[] {
 function Answer({ result }: { result: Good }) {
   const r = COPY.result;
   const lines = differenceLines(result);
+  const orderOf = (k: PlanKey) => JSON.stringify(result[k].order);
+  const same =
+    result.difference.lessInterest === "same" &&
+    result.difference.fewerMonths === "same" &&
+    result.snowball.totalPaidCents === result.avalanche.totalPaidCents &&
+    orderOf("snowball") === orderOf("avalanche");
 
   function save() {
     const text = [
@@ -248,7 +255,7 @@ function Answer({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={r.label} step={COPY.stepTwo} answer={formatMoney(result.difference.interestApartCents)}>
+      <ResultCard label={r.label} answer={formatMoney(result.difference.interestApartCents)}>
         {lines.map((l) => (
           <p className="nt-dpp-help" key={l}>
             {l}
@@ -256,7 +263,36 @@ function Answer({ result }: { result: Good }) {
         ))}
       </ResultCard>
 
-      {PLAN_KEYS.map((k) => {
+      {same ? (
+        <section className="nt-dpp-plan" aria-label={r.bothHeading}>
+          <h2>{r.bothHeading}</h2>
+          <p className="nt-dpp-help">{r.bothLine}</p>
+          <dl className="nt-dpp-lines">
+            <div>
+              <dt>{r.monthsFinal}</dt>
+              <dd>{months(result.snowball.months)}</dd>
+            </div>
+            <div>
+              <dt>{r.totalInterest}</dt>
+              <dd>{formatMoney(result.snowball.totalInterestCents)}</dd>
+            </div>
+            <div>
+              <dt>{r.totalPaid}</dt>
+              <dd>{formatMoney(result.snowball.totalPaidCents)}</dd>
+            </div>
+          </dl>
+          <h3>{r.orderHeading}</h3>
+          <ol className="nt-dpp-order">
+            {result.snowball.order.map((s: { name: string; month: number }, i: number) => (
+              <li key={i}>
+                {s.name}: {r.orderMonth} {s.month}
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
+
+      {(same ? [] : PLAN_KEYS).map((k) => {
         const p = result[k];
         return (
           <section className="nt-dpp-plan" key={k} aria-label={`${COPY.plans[k].name} plan`}>
@@ -317,7 +353,7 @@ function Answer({ result }: { result: Good }) {
           <p className="nt-dpp-help">
             {COPY.more.moneyEachMonth}: {formatMoney(result.monthlyMoneyCents)}
           </p>
-          <h3>{COPY.more.howHeading}</h3>
+          <p className="nt-dpp-subhead">{COPY.more.howHeading}</p>
           <ol>
             {COPY.more.how.map((h) => (
               <li key={h}>{h}</li>
@@ -326,7 +362,7 @@ function Answer({ result }: { result: Good }) {
         </div>
       </details>
 
-      <SavePrintSheet title={COPY.save.title} onSave={save}>
+      <SavePrintSheet quiet title={COPY.save.title} onSave={save}>
         <p>{COPY.save.preview}</p>
       </SavePrintSheet>
     </>

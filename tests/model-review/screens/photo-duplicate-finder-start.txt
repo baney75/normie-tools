@@ -1,21 +1,20 @@
-Screen: photo-duplicate-finder, start state, phone 390px wide. Order is top to bottom.
-Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+Screen: photo-duplicate-finder, start state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Photo Duplicate Finder
-Find photos that are the same. NT only looks. It never deletes, moves or sends a photo.
+Find photos that are the same. This tool never deletes, moves or sends a photo.
+Nothing is sent. Photos stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 Step 1 of 3: Pick your photos
 [label] Pick photos
 [box] Pick photos = "" (cursor is here)
 Or drop a file here.
-Pick up to 300 photos at once. Photos stay on this phone or computer.
+Pick up to 300 photos at once.
 Photos picked
-Pick two or more photos
-[MAIN BUTTON, filled dark orange, disabled] Look for copies
-[closed section, tap to open] Show more
+You picked 0 photos. Pick 2 or more.
+[MAIN BUTTON, filled dark orange] Choose photos
+[closed section, tap to open] Show more about how this works
 
-[plain button, outline only, disabled] Start over
-Start over asks first, and you can undo it right after.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 Back to home
 [link, plain] Back to home

@@ -191,6 +191,8 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm run check:ship-gate
       - run: node --test scripts/tests/ship-gate.test.mjs
+      - run: npm run check:evidence
+      - run: node --test scripts/tests/evidence.test.mjs
 
   skills:
     name: skills tests

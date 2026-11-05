@@ -1,5 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
 import { shotPath } from "./paths";
+import { isShipped } from "./shipped";
+
+// This tool is coming soon until its review clears, so its page is not on the site. The spec runs again when it ships.
+test.beforeEach(() => {
+  test.skip(!isShipped("form-filler"), "coming soon");
+});
 
 // Answers worked out apart from the code: tools/form-filler/tests/golden.json (sheet "guided-full").
 test.use({ viewport: { width: 390, height: 844 } });
@@ -41,7 +47,7 @@ test.beforeEach(async ({ page }) => {
 test("the first screen asks one question with one main button", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Form Filler" })).toBeVisible();
   await expect(page.getByText("Step 1 of 4: Is this for you?")).toBeVisible();
-  await expect(page.getByText("Question 1 of 4")).toBeVisible();
+  await expect(page.getByText(/^Question 1 of 4\./)).toBeVisible();
   await expect(page.getByLabel("Yes", { exact: true })).toBeFocused();
   await expect(page.locator("button.primary")).toHaveCount(1);
   await expect(page.getByText("Nothing is sent.")).toBeVisible();
@@ -62,13 +68,13 @@ test("the papers list ticks off and the info boxes come one per screen", async (
   await questions(page);
   await next(page);
   await expect(page.getByText("Step 2 of 4: Gather your papers")).toBeVisible();
-  await page.getByLabel(/^W-2 from each job/).check();
+  await page.getByLabel(/^W-2, the pay form from each job/).check();
   await noSideScroll(page);
   await next(page);
   await expect(page.getByText("Step 3 of 4: My info")).toBeVisible();
   await expect(page.getByText("Box 1 of 8")).toBeVisible();
   await expect(page.getByLabel("First name")).toBeFocused();
-  await expect(page.getByText(/You type your Social Security number yourself on the IRS partner site/)).toBeVisible();
+  await expect(page.getByText(/You type your Social Security number yourself on the free filing site you pick on IRS.gov/)).toBeVisible();
   await expect(page.getByLabel(/social security/i)).toHaveCount(0);
   const info1 = await page.getByLabel("First name").evaluate((el) => ({ h: el.getBoundingClientRect().height, f: parseFloat(getComputedStyle(el).fontSize) }));
   expect(info1.h).toBeGreaterThanOrEqual(44);
@@ -96,7 +102,7 @@ test("the review shows every answer, saves the sheet as a download, and never su
   for (const t of ["Ana", "Rivera", "12 Example Street", "Springfield", "IL", "62701", "02/29/1960", "555-010-1234"]) {
     await expect(page.getByText(t, { exact: true })).toBeVisible();
   }
-  await expect(page.getByText("Press Submit.", { exact: true })).toBeVisible();
+  await expect(page.getByText("Press Submit, the button that sends your tax return.", { exact: true })).toBeVisible();
   await expect(page.locator("button.primary")).toHaveCount(1);
   await expect(page.getByRole("button", { name: "Save my answer sheet" })).toHaveClass(/primary/);
   await noSideScroll(page);
@@ -108,7 +114,7 @@ test("the review shows every answer, saves the sheet as a download, and never su
   expect(text).toContain("Birth date: 02/29/1960");
   expect(text).toContain("Phone number: 555-010-1234");
   expect(text).toContain("Guided Free File");
-  expect(text).toContain("You type your Social Security number yourself on the IRS partner site.");
+  expect(text).toContain("You type your Social Security number yourself on the free filing site you pick on IRS.gov.");
   await expect(page.getByText(/Saved as form-filler-answer-sheet\.txt\. To undo, delete that file/)).toBeVisible();
 });
 
@@ -145,7 +151,7 @@ test("the screen and answers stay when the phone turns, and come back after leav
 });
 
 test("saved answers open after a look, and the old answers can be put back", async ({ page }) => {
-  await page.getByText("Have saved answers?").click();
+  await page.getByRole("button", { name: "Have saved answers?" }).click();
   const saved = {
     format: "nt-form-filler", version: 1,
     answers: { filing: "yes", income: "no", fillable: "yes", open: "yes" },
@@ -153,7 +159,7 @@ test("saved answers open after a look, and the old answers can be put back", asy
   };
   await page.getByLabel("Open my saved answers").setInputFiles({ name: "mine.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(saved)) });
   await expect(page.getByText(/Found saved answers/)).toBeVisible();
-  await expect(page.getByText("Question 1 of 4")).toBeVisible();
+  await expect(page.getByText(/^Question 1 of 4\./)).toBeVisible();
   await page.getByRole("button", { name: "Use these answers" }).click();
   await expect(page.getByRole("heading", { name: "Look it over" })).toBeVisible();
   await expect(page.getByText("Sam", { exact: true })).toBeVisible();

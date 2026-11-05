@@ -8,7 +8,7 @@ It reads JSON with json.loads and never runs anything it reads.
   python3 fill.py --file answers.json --text     plain words out (one fact per line)
   python3 fill.py --file answers.json --sheet    the answer sheet only
 
-There is no Social Security number box. The person types it on the IRS partner site.
+There is no Social Security number box. The person types it on the free filing site you pick on IRS.gov.
 """
 import argparse
 import json
@@ -31,14 +31,14 @@ QUESTION_IDS = ["filing", "income", "fillable", "open"]
 CHOICES = ["yes", "no", "unsure"]
 
 PAPERS = [
-    ("ssn", "Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children"),
-    ("w2", "W-2 from each job (your employer sends it in January or February)"),
-    ("1099", "1099 forms for other money you got"),
-    ("1095a", "1095-A if you had health insurance from the Marketplace"),
+    ("ssn", "Social Security number or ITIN, for each person on your return"),
+    ("w2", "W-2, the pay form from each job"),
+    ("1099", "1099 forms, for other money you got"),
+    ("1095a", "1095-A, if you had health insurance from the Marketplace"),
     ("lastreturn", "Last year's tax return, if you filed one"),
-    ("ippin", "Your IP code (an Identity Protection code), only if the IRS sent you one"),
-    ("bank", "Your bank account and routing numbers, if you want your refund sent straight to your bank"),
-    ("credits", "Papers for credits, if you have them"),
+    ("ippin", "IP code the IRS sent you, if any"),
+    ("bank", "Bank account details, if you want your refund sent to your bank"),
+    ("credits", "Papers for credits (if you have them)"),
     ("sidejob", "For side jobs: what you were paid, and receipts for what you spent"),
 ]
 PAPER_IDS = [p[0] for p in PAPERS]
@@ -60,13 +60,13 @@ STATES = (
     "PA RI SC SD TN TX UT VT VA WA WV WI WY AS GU MP PR VI AA AE AP"
 ).split()
 
-SSN_LINE = "You type your Social Security number yourself on the IRS partner site."
+SSN_LINE = "You type your Social Security number yourself on the free filing site you pick on IRS.gov."
 YOU_DO = [
     "Make your Free File account.",
     "Check every number on the review page.",
-    "Sign with last year's income number or your 5-digit code.",
-    "Press Submit.",
-    "Pay any tax you owe, yourself.",
+    "Sign with the income number from last year's return, or a 5-digit code you pick.",
+    "Press Submit, the button that sends your tax return.",
+    "If you owe tax, you pay it yourself.",
 ]
 CHOICE_WORDS = {"yes": "Yes", "no": "No", "unsure": "Not sure", "": "Not answered"}
 QUESTION_TEXT = {
@@ -76,7 +76,7 @@ QUESTION_TEXT = {
     "open": "Is Free File open on IRS.gov yet?",
 }
 NEVER_LINE = (
-    "NT never presses Submit, signs for you, pays anything, or picks a paid add-on. "
+    "This tool never presses Submit, signs for you, pays anything, or picks an extra that costs money. "
     "It never asks for your Free File password."
 )
 START_LINE = (
@@ -323,17 +323,30 @@ def to_plain(result, data=None):
         out = [f"Fix this first: {p['message']}" for p in result["problems"]]
         out.append("Note: Nothing was saved or sent. Fix the lines above and run it again.")
         return "\n".join(out) + "\n"
-    out = [f"Free way that may fit: {result['name']}."]
-    out += result["lines"]
+    way = result["way"]
+    if way == "check":
+        out = ["First, find your income number."]
+    elif way == "past":
+        out = ["Free File is not the way for this."]
+    else:
+        out = [f"The free way that may fit you is {result['name']}."]
+    lines = [l for l in result["lines"] if l != "Start at IRS.gov/freefile."]
+    if way == "guided" and len(lines) >= 4:
+        lines = lines[:2] + [lines[2] + " " + lines[3]] + lines[4:]
+    out += lines
+    out.append(f"Free help from a VITA volunteer: {VITA_PHONE}.")
+    if way == "past":
+        out.append(f"Official link: {LINKS['freeFile']}")
+    else:
+        out.append(f"Always start at IRS.gov/freefile: {LINKS['freeFile']}")
+    out.append(SSN_LINE)
     if data is not None:
+        bits = []
         for f, label in INFO_FIELDS:
             v = data["info"][f]
-            out.append(f"{label}: {'not filled in' if v == '' else show_date(v) if f == 'birthDate' else v}.")
-        have = [label for pid, label in PAPERS if pid in data["papers"]]
-        out.append(f"Papers ticked: {len(have)} of {len(PAPERS)}.")
-    out.append(SSN_LINE)
-    out.append(f"Official link: {LINKS['freeFile']}")
-    out.append(f"Free help from a VITA volunteer: {VITA_PHONE}.")
+            bits.append(f"{label}: {'not filled in' if v == '' else show_date(v) if f == 'birthDate' else v}.")
+        bits.append(f"Papers ticked: {len(data['papers'])} of {len(PAPERS)}.")
+        out.append("Your answers so far. " + " ".join(bits))
     out.append(NOTE_LINE)
     return "\n".join(out) + "\n"
 

@@ -192,14 +192,13 @@ def to_text(result):
         lines.append("Nothing to add up yet. Type an amount on at least one line.")
         lines.append(NOTE)
         return "\n".join(lines)
-    lines.append(f"Total per year: {dollars(result['yearlyCents'])}")
-    lines.append(f"Total per month: {dollars(result['monthlyCents'])}")
-    lines.append(f"Number of costs: {result['count']}")
-    for n, r in enumerate(result["rows"], 1):
-        lines.append(f"{n}. {r['name']}: {dollars(r['yearlyCents'])} a year, {dollars(r['monthlyCents'])} a month")
-    lines.append("Questions to ask before you call:")
-    for q in QUESTIONS:
-        lines.append(q)
+    n = result["count"]
+    lines.append(f"Your {n} cost{'s come' if n != 1 else ' comes'} to {dollars(result['yearlyCents'])} a year.")
+    lines.append(f"That is {dollars(result['monthlyCents'])} a month.")
+    for i, r in enumerate(result["rows"]):
+        lead = f"{r['name']} is the biggest" if i == 0 and n > 1 else r["name"]
+        lines.append(f"{lead}: {dollars(r['yearlyCents'])} a year, {dollars(r['monthlyCents'])} a month.")
+    lines.append("Questions to ask before you call, the same for every cost: " + " ".join(QUESTIONS))
     lines.append(NOTE)
     return "\n".join(lines)
 

@@ -40,10 +40,12 @@ Run one test file: `npx vitest run src/pages/pages.test.tsx`.
 
 Playwright runs from `site/e2e/` in three projects: Chromium, WebKit, Firefox. Install once with `npx playwright install --with-deps chromium webkit firefox` (system libraries need `sudo`). Run one project: `npx playwright test --project=chromium`.
 
-- `viewport-matrix.spec.ts`: home, `/agents` and `/install` across iPhone SE, 15, 15 Pro Max, iPad mini, iPad Air portrait and landscape, Split View 1/3, 1280 and 1920. No sideways scroll. Chromium also writes home screenshots to `site/screenshots/` (gitignored) and two committed shots to `../shots/` (`home-390.png`, `home-1280.png`).
+- `viewport-matrix.spec.ts`: home, `/agents`, `/install` and every shipped tool (from `tools.json`) across iPhone SE, 15, 15 Pro Max, iPad mini, iPad Air portrait and landscape, Split View 1/3, 1280 and 1920. No sideways scroll, visible first heading and first input or button, tap targets at least 44px. WebKit writes every clipped screenshot to `../shots/matrix/`; Chromium writes home only. Chromium also writes home screenshots to `site/screenshots/` (gitignored) and two committed shots to `../shots/` (`home-390.png`, `home-1280.png`).
 - `accessibility.spec.ts`: axe (WCAG 2.2 AA tags) at 390px on home, agents, install and the demo flow.
 - `reduced-motion.spec.ts`, `stepper-intro.spec.ts`, `autosave-resume.spec.ts`, `upload-error-contract.spec.ts`: use the demo flow at `#/harness`. It is a test page, not a tool, and is not in `tools.json`.
 - `coming-soon.spec.ts`: a Coming soon tile is not a link.
-- `offline.spec.ts`: the shell loads offline after the service worker installs (Chromium only).
+- `offline.spec.ts`: after one online visit, home, agents, install and every shipped tool load and take typing offline (Chromium only). The worker saves the build's `asset-manifest.json` file list, so lazy tool pages are cached too.
+
+WebKit on a host without those libraries (no sudo): extract the Ubuntu noble `.deb` files for `libicu74`, `libxml2` and `libflite1` (`ar x` then `tar -xf data.tar.zst`) into `~/.local/share/pw-ubuntu-libs`, then run `scripts/e2e-webkit-local.sh [playwright args]` from the repo root. It sets `LD_LIBRARY_PATH` and `LD_PRELOAD` only if that folder exists (Playwright's WebKit wrapper overwrites `LD_LIBRARY_PATH`, so the preload is needed). CI does not use it.
 
 Host limits: WebKit needs system libraries (`libicu`, `libxml2`, `libflite1` on Debian family) that a plain user install cannot add. On a host without them, set `NT_E2E_SKIP=webkit,firefox` to skip those projects. They stay configured and are not run locally. CI installs them with `--with-deps`.

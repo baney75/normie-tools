@@ -1,6 +1,6 @@
 // Tax Filing Helper: pick a way, read the sheet, copy answers in, end on the review page.
 export default async (page, capture) => {
-  await page.getByText("Which free way do you want to practice?").waitFor();
+  await page.getByText("Pick one way to practice, then press Next.").waitFor();
   const start = await capture();
   await page.getByLabel(/Guided Free File/).check();
   await page.getByRole("button", { name: "Next", exact: true }).click();

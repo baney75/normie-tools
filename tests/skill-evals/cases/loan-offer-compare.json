@@ -66,7 +66,7 @@
       "expect": [
         "offer 1 monthly payment is 250.00 and offer 2 is 257.89",
         "offer 1 has no interest and a cost of borrowing of 0",
-        "offer 2 cost of borrowing is 339.27",
+        "offer 2 cost of borrowing (interest plus fees) is 339.27",
         "states offer 1 has the lowest cost of borrowing and the lowest monthly payment as facts",
         "says it is an estimate and the lender's paper wins"
       ]

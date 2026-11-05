@@ -1,29 +1,36 @@
-Screen: savings-goal-tracker, filled state, phone 390px wide. Order is top to bottom.
+Screen: savings-goal-tracker, filled state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
 
+
 [heading 1] Savings Goal Tracker
-Type your goal and what you have saved. See when you get there.
-Step 1 of 2: Type your numbers
+Type your goal and what you have saved. Your answer shows below.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 [label] How long will it take?
 [choice] How long will it take? (chosen)
-[label] How much each month?
-[choice] How much each month? (not chosen)
+[label] How much to save each month?
+[choice] How much to save each month? (not chosen)
 [label] Goal amount
+The amount you want to have saved.
 [box] Goal amount = "5000"
 [label] Already saved (optional)
+What you have now. Leave it empty if none.
 [box] Already saved (optional) = ""
-[label] Saved each month
-[box] Saved each month = "240"
+[label] Amount you save each month
+What you add every month. Type 0 if none.
+[box] Amount you save each month = "240"
 [label] Yearly interest rate (optional)
+Find it on your bank statement. Type just the number, like 4.5. Leave it empty if none or if you do not know.
 [box] Yearly interest rate (optional) = ""
 [label] Start month (optional)
+Type the year, a dash, then the month, like 2026-12, to see the month and year you reach your goal.
 [box] Start month (optional) = ""
 [plain button, outline only] Start over
 Start over asks first, and you can undo it right after.
-Step 2 of 2: Read your answer. You are here.
 Months to your goal
 21 months
 Add a start month to see the month and year.
+Interest is $0.00 because the yearly rate is empty or 0.
 That is
 1 year 9 months
 Total you add
@@ -32,20 +39,17 @@ Interest earned
 $0.00
 Saved at the end
 $5,040.00
-That is your answer. You can stop here, or keep a copy below.
-[closed section, tap to open] Show more
+That is your answer. You can stop here. Or change a number to try again. Your numbers stay.
+[MAIN LINK, filled dark orange] Done. Back to home.
+[plain button, outline only] Change a number
+[closed section, tap to open] Show year by year
 
 [heading 2] Keep your answer if you want
 Your answer above, on paper or saved on this phone or computer.
-[MAIN BUTTON, filled dark orange] Print
+[plain button, outline only] Print
 [plain button, outline only] Save a copy
-Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
 
-This is an estimate from the numbers you typed. Your bank statement is the final word. This page helps you understand the numbers.
-Each month, interest is added first. Then your monthly amount is added.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
-[closed section, tap to open] What the words mean
-
+Your bank statement is the final word. This page helps you understand the numbers you typed.
 Back to home
 [link, plain] Back to home

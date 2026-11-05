@@ -1,0 +1,50 @@
+{
+  "skill": "save-me-money",
+  "model": "qwen2.5:1.5b",
+  "at": "2026-11-05",
+  "judge": "sonnet",
+  "by": {
+    "1": {
+      "passed": 10,
+      "total": 10,
+      "cases": 2,
+      "score": 1
+    }
+  },
+  "verdict": {
+    "ok": true,
+    "fails": []
+  },
+  "results": [
+    {
+      "id": "l1-starter",
+      "level": 1,
+      "task": "My regular costs: phone 65 a month, internet 80 a month, streaming 15.99 a month, insurance 1,200 a year, gym 10 a week, other 25 a month. What do they add up to?",
+      "reply": "Your 6 costs come to $3,951.88 a year.\nThat is $329.32 a month.\nInsurance is the biggest: $1,200.00 a year, $100.00 a month.\nInternet: $960.00 a year, $80.00 a month.\nPhone: $780.00 a year, $65.00 a month.\nGym: $520.00 a year, $43.33 a month.\nOther: $300.00 a year, $25.00 a month.\nStreaming: $191.88 a year, $15.99 a month.\nQuestions to ask before you call, the same for every cost: What is the price today? What did it cost a year ago? Is there a cheaper plan with the same things in it? Can I stop this with no fee? When does my current deal end?\nNote: this only adds up what was typed. Weekly costs use 52 weeks, so they are estimates. It never calls, cancels or pays anything.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    },
+    {
+      "id": "l1-few",
+      "level": 1,
+      "task": "I pay $42.50 a month for my phone and $30 a year for a magazine. Add them up.",
+      "reply": "Your 2 costs come to $540.00 a year.\nThat is $45.00 a month.\nPhone is the biggest: $510.00 a year, $42.50 a month.\nMagazine: $30.00 a year, $2.50 a month.\nQuestions to ask before you call, the same for every cost: What is the price today? What did it cost a year ago? Is there a cheaper plan with the same things in it? Can I stop this with no fee? When does my current deal end?\nNote: this only adds up what was typed. Weekly costs use 52 weeks, so they are estimates. It never calls, cancels or pays anything.",
+      "met": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passed": 5,
+      "total": 5
+    }
+  ]
+}

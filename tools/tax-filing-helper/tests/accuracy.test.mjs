@@ -60,7 +60,7 @@ test("stops-at-review-page: the page source has no submit button and no submitti
   assert.doesNotMatch(page, /type=["']submit["']/);
   assert.doesNotMatch(page, /<input[^>]*type=["']submit["']/);
   const copy = fs.readFileSync(path.join(dir, "copy.ts"), "utf8");
-  assert.ok(copy.includes("This is where you stop. You press Submit yourself, on the real IRS partner site."));
+  assert.ok(copy.includes("You press Submit yourself, on the free filing site you pick on IRS.gov.") && copy.includes("You stop here."));
 });
 
 test("messy-input-never-nan: golden bad sheets give plain-words problems", () => {

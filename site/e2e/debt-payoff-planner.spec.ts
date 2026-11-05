@@ -23,16 +23,16 @@ test.beforeEach(async ({ page }) => {
 
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Debt Payoff Planner" })).toBeVisible();
-  await expect(page.getByText("Start with one debt")).toBeVisible();
-  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
+  await expect(page.getByText("Type the amount you owe on each debt")).toBeVisible();
+  await expect(page.getByText("Nothing is sent.")).toBeVisible();
   await expect(page.getByText("Nothing is sent.")).toBeVisible();
   await expect(page.getByLabel("Debt 1 name")).toBeFocused();
-  await expect(page.getByLabel("Interest difference between the two plans")).toContainText("Your answer shows here");
+  await expect(page.getByLabel("How the two payoff orders compare")).toContainText("Your answer shows here");
 });
 
 test("gives the exact months, interest and order for both plans, with no sideways scroll", async ({ page }) => {
   await fillTwo(page);
-  await expect(page.getByLabel("Interest difference between the two plans")).toContainText("$361.25");
+  await expect(page.getByLabel("How the two payoff orders compare")).toContainText("$361.25");
   const snow = page.getByRole("region", { name: "Snowball plan" });
   await expect(snow).toContainText("36 months");
   await expect(snow).toContainText("$6,162.19");
@@ -50,9 +50,9 @@ test("adds a third debt and opens the details", async ({ page }) => {
   await fillTwo(page);
   await page.getByRole("button", { name: "Add another debt" }).click();
   await expect(page.getByLabel("Debt 3 balance")).toBeVisible();
-  await page.getByText("Show more").click();
+  await page.getByText("Show your debts and how each month works").click();
   await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
-  await expect(page.locator(".nt-sheet-primary")).toHaveCount(1);
+  await expect(page.locator(".primary")).toHaveCount(1);
   await expect(page.getByRole("table")).toBeVisible();
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(wide).toBe(false);
@@ -63,7 +63,7 @@ test("a smallest payment that does not cover the interest is said plainly", asyn
   await page.getByLabel("Debt 1 yearly interest rate").fill("24");
   await page.getByLabel("Debt 1 smallest monthly payment").fill("200");
   await expect(page.getByText("does not cover the first month's interest")).toBeVisible();
-  await expect(page.getByLabel("Interest difference between the two plans")).toContainText("Your answer shows here");
+  await expect(page.getByLabel("How the two payoff orders compare")).toContainText("Your answer shows here");
 });
 
 test("messy typing shows a calm error that names the debt and field", async ({ page }) => {
@@ -71,12 +71,12 @@ test("messy typing shows a calm error that names the debt and field", async ({ p
   await page.getByLabel("Debt 1 yearly interest rate").fill("6");
   await page.getByLabel("Debt 1 smallest monthly payment").fill("50");
   await expect(page.getByText("Debt 1 balance: use a number above zero")).toBeVisible();
-  await expect(page.getByLabel("Interest difference between the two plans")).toContainText("Your answer shows here");
+  await expect(page.getByLabel("How the two payoff orders compare")).toContainText("Your answer shows here");
   await expect(page.locator("body")).not.toContainText(/NaN|Infinity|undefined/);
   await page.getByLabel("Debt 1 balance").fill("1e3");
   await expect(page.getByText("Debt 1 balance: use a number above zero")).toBeVisible();
   await page.getByLabel("Debt 1 balance").fill(" 1,000.50 ");
-  await expect(page.getByLabel("Interest difference between the two plans")).toBeVisible();
+  await expect(page.getByLabel("How the two payoff orders compare")).toBeVisible();
 });
 
 test("tap targets are 44px or more and text is 16px or more", async ({ page }) => {
@@ -96,24 +96,24 @@ test("numbers come back after leaving", async ({ page }) => {
   await page.getByLabel("Debt 1 balance").fill("1200");
   await page.getByLabel("Debt 1 yearly interest rate").fill("0");
   await page.getByLabel("Debt 1 smallest monthly payment").fill("100");
-  await expect(page.getByRole("region", { name: "Snowball plan" })).toContainText("12 months");
+  await expect(page.getByRole("region", { name: "Both plans" })).toContainText("12 months");
   await page.goto("about:blank");
   await page.goto("/#/tools/debt-payoff-planner");
   await page.getByRole("button", { name: "Use them" }).click();
   await expect(page.getByLabel("Debt 1 balance")).toHaveValue("1200");
-  await expect(page.getByRole("region", { name: "Snowball plan" })).toContainText("12 months");
+  await expect(page.getByRole("region", { name: "Both plans" })).toContainText("12 months");
 });
 
 test("a desktop screenshot", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await fillTwo(page);
-  await expect(page.getByLabel("Interest difference between the two plans")).toContainText("$361.25");
+  await expect(page.getByLabel("How the two payoff orders compare")).toContainText("$361.25");
   await page.screenshot({ path: shotPath("debt-payoff-planner-desktop.png"), fullPage: true });
 });
 
 test("remove can be undone and Start over asks first", async ({ page }) => {
   await fillTwo(page);
-  await expect(page.getByText("Remove takes out a line. You can put it back.")).toBeVisible();
+  await expect(page.getByText("Remove takes out one line. A Put it back button shows right after.")).toBeVisible();
   await page.getByRole("button", { name: "Remove the last debt" }).click();
   await expect(page.getByLabel("Debt 2 balance")).toHaveCount(0);
   await page.getByRole("button", { name: "Put it back" }).click();

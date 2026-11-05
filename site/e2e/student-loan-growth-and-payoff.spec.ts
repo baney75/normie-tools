@@ -23,9 +23,8 @@ test.beforeEach(async ({ page }) => {
 
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Student Loan Growth and Payoff" })).toBeVisible();
-  await expect(page.getByText("Start with your loan balance")).toBeVisible();
+  await expect(page.getByText("Type what you owe and the yearly interest rate")).toBeVisible();
   await expect(page.getByRole("region", { name: "Balance when payments start", exact: true })).toContainText("Your answer shows here");
-  await expect(page.getByText("Step 2 of 2: Read your answer")).toBeVisible();
   await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
 });
 
@@ -53,10 +52,9 @@ test("the toggle adds the unpaid interest to the balance", async ({ page }) => {
 
 test("year sections open", async ({ page }) => {
   await fillGolden(page);
-  await page.getByText("Show more").click();
-  await expect(page.locator("details.nt-slg-year")).toHaveCount(7);
-  await page.getByText("Year 7").click();
-  await expect(page.locator("details.nt-slg-year").nth(6)).toContainText("$0.00");
+  await page.getByText("Show year by year").click();
+  await expect(page.locator(".nt-slg-year")).toHaveCount(7);
+  await expect(page.locator(".nt-slg-year").nth(6)).toContainText("$0.00");
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(wide).toBe(false);
 });

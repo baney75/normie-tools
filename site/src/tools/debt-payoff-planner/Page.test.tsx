@@ -30,13 +30,16 @@ describe("Debt Payoff Planner page", () => {
   it("shows the empty state and no answer", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Debt Payoff Planner" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.empty)).toBeInTheDocument();
+    expect(screen.getByText(/^Type the amount you owe on each debt\. Your answer shows below\./)).toBeInTheDocument();
     expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.waiting);
-    expect(screen.getByText("Step 1 of 2: Type your numbers")).toBeInTheDocument();
-    expect(screen.getByText("Step 2 of 2: Read your answer")).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/Step \d of \d|You are here/);
+    const intro = screen.getByText(COPY.intro);
+    const privacy = screen.getByText(/Nothing is sent\./);
+    expect(intro.compareDocumentPosition(privacy) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(privacy.compareDocumentPosition(screen.getByLabelText("Debt 1 name", { exact: false })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.getByLabelText("Debt 1 name", { exact: false })).toHaveFocus();
     expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /our public page/ })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /how this page is made/ })).toBeInTheDocument();
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -103,9 +106,9 @@ describe("Debt Payoff Planner page", () => {
     await fill("Debt 1 balance", "12");
     await fill("Debt 1 yearly interest rate", "0.5");
     await fill("Debt 1 smallest monthly payment", "5");
-    expect(screen.getByRole("region", { name: "Snowball plan" })).toHaveTextContent("Months to debt-free3 months");
-    expect(screen.getByRole("region", { name: "Snowball plan" })).toHaveTextContent("Total interest$0.01");
-    expect(screen.getByRole("region", { name: "Snowball plan" })).toHaveTextContent("Tiny: paid off in month 3");
+    expect(screen.getByRole("region", { name: "Both plans" })).toHaveTextContent("Months to debt-free3 months");
+    expect(screen.getByRole("region", { name: "Both plans" })).toHaveTextContent("Total interest$0.01");
+    expect(screen.getByRole("region", { name: "Both plans" })).toHaveTextContent("Tiny: paid off in month 3");
     expect(screen.getByLabelText(COPY.result.label)).toHaveTextContent(COPY.result.same);
   });
 
@@ -142,7 +145,7 @@ describe("Debt Payoff Planner page", () => {
   it("says it is an estimate and explains the words", () => {
     render(<Page />);
     expect(screen.getByText(COPY.notes.estimate)).toBeInTheDocument();
-    expect(screen.getByText(COPY.notes.facts)).toBeInTheDocument();
+    expect(screen.getByText(COPY.notes.facts, { selector: "dd" })).toBeInTheDocument();
     for (const k of COPY.key.items) expect(screen.getByText(k.term, { selector: "dt" })).toBeInTheDocument();
   });
 
@@ -173,7 +176,7 @@ describe("Debt Payoff Planner page", () => {
     expect(screen.getByText(COPY.save.title)).toBeInTheDocument();
     expect(screen.getByText(COPY.save.title).closest("details")).toBeNull();
     expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
-    expect(document.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
+    expect(document.querySelectorAll(".primary")).toHaveLength(1);
   });
 });
 
@@ -228,12 +231,13 @@ describe("debt-payoff-planner Start over can be called off", () => {
 });
 
 describe("debt-payoff-planner filled screen", () => {
-  it("shows the estimate sentence once, no APR, one step 2 label, and a short save preview", async () => {
+  it("shows the estimate sentence once, no APR, one answer line, no empty heading, and a short save preview", async () => {
     render(<Page />);
     await typeTwoDebts();
     const body = document.body.textContent ?? "";
     expect(body.split("Your lender statement is the final word").length - 1).toBe(1);
-    expect(screen.getAllByText(/^Step 2 of 2: Read your answer/)).toHaveLength(1);
+    expect(body.split("That is your answer").length - 1).toBe(1);
+    for (const h of screen.getAllByRole("heading")) expect(h.textContent?.trim()).not.toBe("");
     expect(screen.getByRole("group", { name: "Preview" })).toHaveTextContent(COPY.save.preview);
     expect(screen.getByRole("group", { name: "Preview" })).not.toHaveTextContent("$");
     const open = body.replace(/What the words mean[\s\S]*$/, "");

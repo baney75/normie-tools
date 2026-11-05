@@ -2,24 +2,21 @@
 // It never gives advice. Page.test.tsx checks this file.
 export const COPY = {
   title: "Savings Goal Tracker",
-  intro: "Type your goal and what you have saved. See when you get there.",
-  step1: "Type your numbers",
-  step2: "Step 2 of 2: Read your answer",
+  intro: "Type your goal and what you have saved. Your answer shows below.",
   waiting: "Your answer shows here",
-  empty: "Start with your goal amount and how much you have saved. Then type how much you save each month. Your answer shows up below.",
   mode: {
-    legend: "What do you want to know?",
+    legend: "Pick what you want to know",
     when: "How long will it take?",
-    by: "How much each month?",
+    by: "How much to save each month?",
   },
   goal: { label: "Goal amount", hint: "The amount you want to have saved.", placeholder: "5,000" },
   saved: { label: "Already saved", hint: "What you have now. Leave it empty if none.", placeholder: "500" },
-  monthly: { label: "Saved each month", hint: "What you add every month. Type 0 if none.", placeholder: "250" },
-  rate: { label: "Yearly interest rate", hint: "A percent, like 4.5. Leave it empty if none.", placeholder: "0" },
+  monthly: { label: "Amount you save each month", hint: "What you add every month. Type 0 if none.", placeholder: "250" },
+  rate: { label: "Yearly interest rate", hint: "Find it on your bank statement. Type just the number, like 4.5. Leave it empty if none or if you do not know.", placeholder: "0" },
   start: {
     label: "Start month",
-    hint: "The month you begin saving. Type the year, a dash, then the month, like 2026-12.",
-    hintOptional: "Add it to see the month and year you reach your goal.",
+    hint: "The month you begin saving. Type numbers: the year, a dash, then the month, like 2026-12.",
+    hintOptional: "Type the year, a dash, then the month, like 2026-12, to see the month and year you reach your goal.",
     placeholder: "2026-12",
   },
   target: {
@@ -49,6 +46,8 @@ export const COPY = {
     deposits: "Total you add",
     interest: "Interest earned",
     balance: "Saved at the end",
+    noInterest: "Interest is $0.00 because the yearly rate is empty or 0.",
+    overGoal: "The last month adds a little past your goal, so the total is a bit higher.",
   },
   by: {
     label: "Save each month",
@@ -63,20 +62,12 @@ export const COPY = {
     balance: "Saved in the goal month",
   },
   more: {
-    summary: "Show more",
+    summary: "Show year by year",
     tableHeading: "Year by year",
     year: "Year",
     added: "You add",
     interest: "Interest",
     balance: "Saved at year end",
-  },
-  key: {
-    summary: "What the words mean",
-    items: [
-      { term: "Goal amount", means: "The amount you want to have saved." },
-      { term: "Interest rate", means: "What your savings earn in a year, as a percent. It is added each month." },
-      { term: "Start month", means: "The month of your first monthly saving." },
-    ],
   },
   save: {
     title: "Keep your answer if you want",
@@ -85,7 +76,7 @@ export const COPY = {
     preview: "Your answer above, on paper or saved on this phone or computer.",
   },
   notes: {
-    estimate: "This is an estimate from the numbers you typed. Your bank statement is the final word. This page helps you understand the numbers.",
+    estimate: "Your bank statement is the final word. This page helps you understand the numbers you typed.",
     rule: "Each month, interest is added first. Then your monthly amount is added.",
   },
   monthNames: [

@@ -6,7 +6,7 @@
     { "id": "missing-answer-named", "text": "An answer that was not typed yet is named, and the sheet value is shown." },
     { "id": "all-match-reported", "text": "The summary says all answers match only when every answer matches." },
     { "id": "practice-data-is-made-up", "text": "The practice sheet holds made-up answers only: no Social Security number, no bank number, and only example.com emails." },
-    { "id": "stops-at-review-page", "text": "The page has no Submit button and no form that submits. It tells the person to press Submit on the real IRS partner site." },
+    { "id": "stops-at-review-page", "text": "The page has no Submit button and no form that submits. It tells the person to press Submit on the free filing site you pick on IRS.gov." },
     { "id": "messy-input-never-nan", "text": "Messy typing never throws and never gives NaN, and a bad sheet gets a plain-words problem." }
   ]
 }

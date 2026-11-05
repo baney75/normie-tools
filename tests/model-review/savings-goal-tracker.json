@@ -1,6 +1,6 @@
 {
   "tool": "savings-goal-tracker",
-  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "screen": ",  at 390px wide (text saved beside this file in screens/)",
   "at": "2026-11-05",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
@@ -8,13 +8,21 @@
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 3,
-    "output": "**1. What the screen wants me to do:** It wants me to look at the answer (21 months to reach $5,000 saving $240 a month) and then, if I like, print it or save a copy.\n\n**2. Next tap:** \"Print\". It's the only button that's filled in with color, so it looks like the one I'm meant to press. I'm not sure I want paper, though, and I might not tap anything at all because the answer is already on the screen.\n\n**3. Words or phrases I didn't understand or that felt like tech talk:**\n- \"How long will it take?\" and \"How much each month?\" shown as two choices. I can't tell if I'm supposed to pick one or if they're tabs.\n- \"(chosen)\" and \"(not chosen)\"\n- \"Yearly interest rate (optional)\". I don't know what number to put, and I left it blank.\n- \"Start month (optional)\". I don't know what format to type.\n- \"Interest earned $0.00\". I don't know if that means something is wrong or just that I left the rate blank.\n- \"Show more\". I don't know what more it would show.\n- \"What the words mean\". It tells me there are words I may not know, which makes me feel I'm missing something.\n- \"Each month, interest is added first. Then your monthly amount is added.\"\n- \"Nothing is sent. Numbers stay on this phone or computer.\"\n- \"our public page\"\n- \"estimate\"\n- \"Saved a copy... on this phone or computer\". I don't know where on my phone it goes.\n\n**4. Things that made me worry:**\n- Print. Will it start a printer, or cost me something? I don't have a printer on my phone.\n- \"Save a copy\". Where does it go, and will it clutter my phone? It does say I can delete it.\n- \"Start over\". It says it asks first and I can undo, which helps, but I'd still be nervous about wiping my numbers.\n- \"Nothing is sent.\" I'm glad to read it, but it makes me wonder why they bring it up. \"You can check this on our public page\" sounds like homework.\n- \"Your bank statement is the final word.\" I'm not sure how much to trust the 21 months.\n- The total of $5,040 is more than my $5,000 goal. That's a little odd to me.\n- Two similar labels, \"How much each month?\" and \"Saved each month\". I wondered if I'd entered something twice.\n\n**5. What I'd skip:**\n- The top part with the typing boxes, since it's already filled in.\n- \"Each month, interest is added first...\"\n- \"Nothing is sent...\" and \"our public page\".\n- \"Show more\" and \"What the words mean\".\n- \"Back to home\".\n\n**6. Score:** 3. I can read my answer clearly, but I'm not sure whether I need to press anything after that.\n\nRESULT: {\"next_tap\": \"Print\", \"confusing_terms\": [\"How long will it take? / How much each month? (chosen / not chosen)\", \"Yearly interest rate (optional)\", \"Start month (optional)\", \"Interest earned $0.00\", \"Show more\", \"What the words mean\", \"Each month, interest is added first\", \"Nothing is sent\", \"our public page\", \"estimate\", \"Save a copy (where it goes)\"], \"worries\": [\"Print might need a printer or cost something\", \"Where Save a copy goes on my phone\", \"Start over might erase my numbers\", \"Why it says Nothing is sent / checking the public page\", \"Bank statement is the final word, so can I trust the answer\", \"Total $5,040 is higher than my $5,000 goal\", \"Two similar labels: How much each month? and Saved each month\"], \"skippable\": [\"Step 1 typing boxes once filled in\", \"Each month, interest is added first...\", \"Nothing is sent... / our public page\", \"Show more\", \"What the words mean\", \"Back to home\"], \"score\": 3}"
+    "score": 4,
+    "runs": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. This screen wants me to look at how many months it will take to save $5,000 at $240 a month, and then either finish or change a number.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words that felt like tech talk or confusing:\n- \"Source: how this page is made\" (I don't know why I'd care how a page is made)\n- \"Nothing is sent\" (sent where?)\n- The two \"choices\" at the top, \"How long will it take?\" and \"How much to save each month?\" I couldn't tell they were switches, and the screen doesn't say what choosing one does.\n- \"Interest\" and \"Yearly interest rate\" (I only half know this)\n- \"Start month\" with \"2026-12\" (a dash between year and month is an odd way to write a date)\n- \"Save a copy\" and \"a file\" (where does it go on my phone?)\n- \"Print opens a preview\"\n- \"Show year by year\" (year by year of what?)\n- \"Total you add\" and \"Saved at the end\" (I'd have to think about the difference)\n\n4. Worries:\n- \"Start over\" might erase my numbers. It says it asks first and I can undo, which helps, but I'd still be careful.\n- \"Save a copy\" makes a file on my phone and I don't know where it goes or whether it's safe.\n- \"Your bank statement is the final word\" makes me think these numbers might not be right.\n- I'm not sure \"Nothing is sent\" is true. It's reassuring, but I can't check.\n- Tapping \"Done. Back to home\" might throw away my answer. It says \"Your numbers stay,\" but that line sits near \"Change a number,\" so I'm not sure it covers the Done button.\n\n5. I would skip:\n- \"Source: how this page is made\" and its link\n- The \"Interest is $0.00 because the yearly rate is empty or 0\" line\n- \"Interest earned $0.00\"\n- The second \"Back to home\" link at the bottom, since it's a repeat\n- \"Show year by year\"\n- The whole \"Keep your answer if you want\" section, including Print and Save a copy\n\n6. Score: 4. The answer (21 months, 1 year 9 months) is clear, and the orange button stands out. I'm a bit unsure whether Done wipes my answer.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Source: how this page is made\", \"Nothing is sent\", \"the two choices at the top (How long will it take? / How much to save each month?)\", \"Yearly interest rate\", \"Interest earned\", \"Start month (2026-12 format)\", \"Save a copy / file\", \"Print opens a preview\", \"Show year by year\", \"Total you add vs Saved at the end\"], \"worries\": [\"Start over might erase my numbers\", \"Save a copy makes a file and I don't know where it goes\", \"Bank statement is the final word, so maybe the numbers are wrong\", \"Not sure Nothing is sent is true\", \"Done. Back to home might lose my answer\"], \"skippable\": [\"how this page is made link\", \"Interest is $0.00 explanation\", \"Interest earned $0.00\", \"second Back to home link\", \"Show year by year\", \"Keep your answer if you want section (Print, Save a copy)\"], \"score\": 4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -26,11 +34,79 @@
         "PASS"
       ],
       "passes": 8,
-      "fails": []
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
     },
     {
       "model": "sonnet",
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -42,8 +118,263 @@
         "PASS"
       ],
       "passes": 8,
-      "fails": []
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
     }
   ],
-  "otherScreens": []
+  "otherScreens": [
+    {
+      "screen": "empty",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          3,
+          4,
+          4,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to fill in my savings goal and some numbers, then get an answer about how long it will take.\n\n2. I would tap the first box, \"Goal amount\". It already seems ready for typing. After I fill in the boxes, I would tap \"Show my answer\".\n\n3. Words that felt like tech talk or were unclear:\n- \"Yearly interest rate\". I don't know what mine is.\n- \"Source: how this page is made\". It's odd on a savings page.\n- \"Start month (optional)\" with \"2026-12\". The year-dash-month format is strange to me.\n- \"Save a copy\". I'm not sure where the copy goes.\n- \"Print opens a preview first\". \"Preview\" is a bit techy.\n- \"Numbers stay on this phone or computer\".\n- \"How long will it take?\" and \"How much to save each month?\". They look like two choices, but I don't know what choosing one does.\n- \"Disabled\". I didn't see that word, but Print and Save a copy look grayed out, and I don't know why.\n\n4. Worries:\n- Privacy: it says nothing is sent, which helps. But I'm asked about money, and I wonder if I can trust that.\n- \"Find it on your bank statement\". I don't want to dig out my bank papers.\n- \"Save a copy\" makes a file on my phone. I worry about where it goes and whether I can find it again.\n- The choice between \"How long will it take?\" and \"How much to save each month?\" might mean I pick the wrong one. \"How long will it take?\" is already chosen, which is reassuring.\n- \"Type 0 if none\". If I leave it empty, I might break something.\n\n5. I would skip:\n- The \"Source: how this page is made\" link.\n- The \"Keep your answer if you want\" section with Print and Save a copy, until I have an answer.\n- The \"Yearly interest rate\" and \"Start month\" boxes, since both are optional.\n\n6. Score: 4. I know to start at the top box and finish with \"Show my answer\". I'm unsure about the optional boxes and the two choices.\n\nRESULT: {\"next_tap\": \"Goal amount\", \"confusing_terms\": [\"Yearly interest rate\", \"Source: how this page is made\", \"Start month format 2026-12\", \"Save a copy\", \"preview\", \"How long will it take? / How much to save each month? choice\", \"grayed-out Print and Save a copy\"], \"worries\": [\"privacy of money numbers\", \"digging out bank statement for interest rate\", \"where saved copy goes\", \"picking the wrong choice\", \"whether empty boxes break things\"], \"skippable\": [\"Source: how this page is made link\", \"Keep your answer if you want section (Print, Save a copy)\", \"Yearly interest rate box\", \"Start month box\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
 }

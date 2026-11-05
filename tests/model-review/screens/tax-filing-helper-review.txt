@@ -1,76 +1,47 @@
-Screen: tax-filing-helper, review state, phone 390px wide. Order is top to bottom.
+Screen: tax-filing-helper, review state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
 
+
 [heading 1] Tax Filing Helper
-Practice site. Nothing here is real. Nothing is filed.
+Practice only. Use the made-up answers shown. Nothing is filed.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 Step 4 of 4: Check your answers
 [heading 2] The practice review page
 Practice check
 All 8 answers match.
 You picked: Guided Free File.
-That is your answer. You can stop here, or keep a copy below.
-This is where you stop. You press Submit yourself, on the real IRS partner site.
-Go to IRS.gov/freefile
-[link, plain] Go to IRS.gov/freefile
-That is the real site. It is closed now. Check IRS.gov for when it opens.
+You stop here. The real filing is on IRS.gov when Free File opens. You can keep a copy of this check.
+You press Submit yourself, on the free filing site you pick on IRS.gov.
 [heading 3] Your answers next to what you typed
 First name Matches Answer sheet: Sample You typed: Sample
-First name Matches
-Answer sheet: Sample
-You typed: Sample
 Last name Matches Answer sheet: Person You typed: Person
-Last name Matches
-Answer sheet: Person
-You typed: Person
 Email Matches Answer sheet: sample.person@example.com You typed: sample.person@example.com
-Email Matches
-Answer sheet: sample.person@example.com
-You typed: sample.person@example.com
 Employer name Matches Answer sheet: Example Bakery You typed: Example Bakery
-Employer name Matches
-Answer sheet: Example Bakery
-You typed: Example Bakery
-Pay from your W-2 Matches Answer sheet: $32,450.00 You typed: $32,450.00
-Pay from your W-2 Matches
-Answer sheet: $32,450.00
-You typed: $32,450.00
+Pay for the year Matches Answer sheet: $32,450.00 You typed: $32,450.00
 Tax already taken out of your pay Matches Answer sheet: $2,810.50 You typed: $2,810.50
-Tax already taken out of your pay Matches
-Answer sheet: $2,810.50
-You typed: $2,810.50
 Bank name Matches Answer sheet: Example Credit Union You typed: Example Credit Union
-Bank name Matches
-Answer sheet: Example Credit Union
-You typed: Example Credit Union
-Interest from your bank (1099-INT) Matches Answer sheet: $12.34 You typed: $12.34
-Interest from your bank (1099-INT) Matches
-Answer sheet: $12.34
-You typed: $12.34
+Interest from your bank Matches Answer sheet: $12.34 You typed: $12.34
 [heading 3] Watch out for these
-Extra charges. Free File companies can't sell you extras on a free return. That includes add-on services, hidden fees, refund loans and audit protection. A company may still charge for a state return. If any screen asks for a card number, stop.
+Extra charges. Free File companies can't sell you extras on a free return, such as:
+add-on services
+hidden fees
+refund loans (money lent against your refund)
+audit protection (paid help if the IRS checks you)
+A company may still charge for a state return. If any screen asks for a card number, stop.
 Fake or look-alike sites. Only use the IRS.gov link. Don't click tax links in texts, emails or ads.
 Anyone asking for money to get your refund faster. That is not part of Free File.
-Source: IRS Free File, on IRS.gov
-[link, plain] Source: IRS Free File, on IRS.gov
+Source: IRS Free File page
+[link, plain] Source: IRS Free File page
 [plain button, outline only] Back
 [heading 2] Save or print your check
 All 8 answers match.
-First name: matches.
-Last name: matches.
-Email: matches.
-Employer name: matches.
-Pay from your W-2: matches.
-Tax already taken out of your pay: matches.
-Bank name: matches.
-Interest from your bank (1099-INT): matches.
-[MAIN BUTTON, filled dark orange] Print
-[plain button, outline only] Save a copy
-Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+[plain button, outline only] Print
+[MAIN BUTTON, filled dark orange] Save a copy
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
 
 [plain button, outline only] Start over
 Start over asks first, and you can undo it right after.
 This is a practice with made-up answers. It is not tax advice.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 Back to home
 [link, plain] Back to home

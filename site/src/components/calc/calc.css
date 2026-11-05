@@ -80,3 +80,26 @@
 .nt-startover-ask { margin: 0 0 var(--nt-space-2); font-size: 1rem; color: var(--nt-text); }
 .nt-startover-row { display: flex; flex-wrap: wrap; gap: var(--nt-space-2); }
 .nt-result-done { margin: var(--nt-space-3) 0 0; font-size: 1rem; font-weight: 700; color: var(--nt-ink); }
+.nt-result-again { margin-top: var(--nt-space-3); }
+.nt-result-row { display: flex; flex-wrap: wrap; gap: var(--nt-space-2); align-items: center; margin-top: var(--nt-space-3); }
+.nt-result-done-link {
+  display: inline-flex; align-items: center; justify-content: center; min-height: var(--nt-tap); padding: 0 var(--nt-space-4);
+  background: var(--nt-tdeep); color: var(--nt-white); border: 2px solid var(--nt-tdeep); border-radius: var(--nt-radius);
+  font-weight: 700; text-decoration: none; margin-top: 0;
+}
+.nt-result-done-link:hover { color: var(--nt-white); }
+.nt-result-change { min-height: var(--nt-tap); padding: 0 var(--nt-space-4); background: transparent; border: 2px solid var(--nt-ink); border-radius: var(--nt-radius); color: var(--nt-ink); font: inherit; cursor: pointer; }
+
+/* A number never breaks across lines. The label next to it wraps instead. */
+[class$="-lines"] > div { gap: var(--nt-space-3); }
+[class$="-lines"] dt { min-width: 0; overflow-wrap: anywhere; }
+[class$="-lines"] dd,
+.nt-result-answer,
+table td {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: normal;
+  word-break: normal;
+  flex-shrink: 0;
+}
+.nt-result-answer { white-space: normal; overflow-wrap: normal; }

@@ -21,13 +21,13 @@ import sys
 MAX_ITEMS = 5
 MAX_TITLE = 80
 SECTION_IDS = ["weather", "news", "day", "reminders"]
-OFFLINE_NOTE = "Live weather and news need the NT app or your AI helper. This page does not go online."
+OFFLINE_NOTE = "Live weather and news are not on this page yet."
 
 EXAMPLE = {
-    "weatherHeading": "Weather (Example)",
+    "weatherHeading": "Example weather (not real)",
     "weatherLines": ["Example town: 58 degrees, clear."],
     "weatherLabel": "Example. Not today's weather.",
-    "newsHeading": "News headlines (Example)",
+    "newsHeading": "Example news (not real)",
     "newsLines": [
         "Example headline: The town pool opens for the summer.",
         "Example headline: A bake sale is on Saturday.",

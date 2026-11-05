@@ -1,5 +1,5 @@
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -40,6 +40,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-slg">
         <p className="nt-slg-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && blank ? (
           <div className="nt-slg-status">
@@ -56,18 +57,17 @@ export function Page() {
           </div>
         ) : null}
 
-        <StepLabel n={1} of={2}>{COPY.step1}</StepLabel>
         <form className="nt-slg-form" onSubmit={(e) => e.preventDefault()} noValidate>
           <MoneyField label={COPY.balance.label} hint={COPY.balance.hint} placeholder={COPY.balance.placeholder} autoFocus value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />
           <PercentField label={COPY.rate.label} hint={COPY.rate.hint} placeholder={COPY.rate.placeholder} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />
           <NumberField label={COPY.wait.label} hint={COPY.wait.hint} placeholder={COPY.wait.placeholder} unit={COPY.wait.unit} optional value={v.waitMonths} onChange={(t) => set({ waitMonths: t })} error={bad("waitMonths")} />
-          <label className="nt-slg-toggle">
-            <input type="checkbox" checked={v.capitalize} onChange={(e) => set({ capitalize: e.target.checked })} />
+          <div className="nt-slg-toggle">
+            <input id="nt-slg-capitalize" type="checkbox" aria-describedby="nt-slg-capitalize-hint" checked={v.capitalize} onChange={(e) => set({ capitalize: e.target.checked })} />
             <span className="nt-slg-toggle-text">
-              {COPY.toggle.label}
-              <span className="nt-slg-toggle-hint">{COPY.toggle.hint}</span>
+              <label htmlFor="nt-slg-capitalize">{COPY.toggle.label}</label>
+              <span id="nt-slg-capitalize-hint" className="nt-slg-toggle-hint">{COPY.toggle.hint}</span>
             </span>
-          </label>
+          </div>
           <MoneyField label={COPY.payment.label} hint={COPY.payment.hint} placeholder={COPY.payment.placeholder} optional value={v.payment} onChange={(t) => set({ payment: t })} error={bad("payment")} />
           <Field label={COPY.start.label} hint={COPY.start.hint} placeholder={COPY.start.placeholder} optional inputMode="text" value={v.start} onChange={(t) => set({ start: t })} error={bad("start")} />
           <NumberField label={COPY.years.label} hint={COPY.years.hint} placeholder={COPY.years.placeholder} optional value={v.years} onChange={(t) => set({ years: t })} error={bad("years")} />
@@ -75,9 +75,8 @@ export function Page() {
 
         <StartOver flowId="student-loan-growth-and-payoff" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
-        <Answer result={result.ok ? result : null} />
+        <Answer result={result.ok ? result : null} rateZero={Number.parseFloat(v.rate) === 0} />
 
-        {!result.ok && blank ? <p className="nt-slg-status">{COPY.empty}</p> : null}
         {!result.ok && !blank && missing.length > 0 && !hasBad ? (
           <p className="nt-slg-status" role="status">
             {COPY.stillNeeded} {missing.join(", ")}.
@@ -86,8 +85,6 @@ export function Page() {
         {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
 
         <p className="nt-slg-note">{COPY.notes.estimate}</p>
-        <p className="nt-slg-note">{COPY.notes.noAdvice}</p>
-        <PrivacyNote />
 
         <details className="nt-slg-details">
           <summary>{COPY.how.summary}</summary>
@@ -106,7 +103,7 @@ export function Page() {
 
 type Good = Extract<ReturnType<typeof explainStudentLoan>, { ok: true }>;
 
-function Answer({ result }: { result: Good | null }) {
+function Answer({ result, rateZero }: { result: Good | null; rateZero: boolean }) {
   const r = COPY.result;
   const pay = result?.payoff;
   const min = result?.minPayment;
@@ -134,10 +131,19 @@ function Answer({ result }: { result: Good | null }) {
 
   return (
     <>
-      <ResultCard label={r.balanceLabel} step={COPY.step2} answer={result ? formatMoney(result.balanceAtStartCents) : undefined} waiting={COPY.waiting}>
-        <p className="nt-slg-help">{r.balanceLine}</p>
+      <ResultCard label={r.balanceLabel} answer={result ? formatMoney(result.balanceAtStartCents) : undefined} waiting={COPY.waiting}>
+        <p className="nt-slg-help">{pay?.payoffDate ? `${r.leadPayoff} ${pay.payoffDate.label}.` : r.balanceLine}</p>
         <dl className="nt-slg-lines">
-          {lines.map(([k, val]) => (
+          {lines.slice(0, 1).map(([k, val]) => (
+            <div key={k}>
+              <dt>{k}</dt>
+              <dd>{val}</dd>
+            </div>
+          ))}
+        </dl>
+        {result && result.unpaidInterestCents === 0 ? <p className="nt-slg-help">{rateZero ? r.noRate : r.noGrowth}</p> : null}
+        <dl className="nt-slg-lines">
+          {lines.slice(1).map(([k, val]) => (
             <div key={k}>
               <dt>{k}</dt>
               <dd>{val}</dd>
@@ -151,27 +157,23 @@ function Answer({ result }: { result: Good | null }) {
         <details className="nt-slg-details">
           <summary>{COPY.more.summary}</summary>
           <div className="nt-slg-details-body">
-            <h2>{COPY.more.tableHeading}</h2>
             <p className="nt-slg-help">{COPY.more.tableNote}</p>
             {pay.byYear.map((y: { year: number; paidCents: number; interestCents: number; principalCents: number; balanceCents: number }) => (
-              <details key={y.year} className="nt-slg-year">
-                <summary>
-                  <span>{COPY.more.yearSummary} {y.year}</span>
-                  <span>{formatMoney(y.balanceCents)} {COPY.more.stillOwe}</span>
-                </summary>
+              <section key={y.year} className="nt-slg-year" aria-label={`${COPY.more.yearSummary} ${y.year}`}>
+                <p className="nt-slg-year-title">{COPY.more.yearSummary} {y.year}</p>
                 <dl className="nt-slg-lines">
                   <div><dt>{COPY.more.paid}</dt><dd>{formatMoney(y.paidCents)}</dd></div>
                   <div><dt>{COPY.more.interest}</dt><dd>{formatMoney(y.interestCents)}</dd></div>
                   <div><dt>{COPY.more.down}</dt><dd>{formatMoney(y.principalCents)}</dd></div>
                   <div><dt>{COPY.more.owe}</dt><dd>{formatMoney(y.balanceCents)}</dd></div>
                 </dl>
-              </details>
+              </section>
             ))}
           </div>
         </details>
       ) : null}
 
-      <SavePrintSheet title={COPY.save.summary} onSave={save}>
+      <SavePrintSheet quiet title={COPY.save.summary} onSave={save}>
         {result ? <p>{COPY.save.preview}</p> : null}
       </SavePrintSheet>
     </>

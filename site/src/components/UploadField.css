@@ -6,6 +6,7 @@
 }
 .nt-upload-zone {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--nt-space-2);
   padding: var(--nt-space-4);
   border: 2px dashed var(--nt-line);
@@ -19,6 +20,8 @@
 }
 .nt-upload-input {
   min-height: var(--nt-tap);
+  max-width: 100%;
+  box-sizing: border-box;
   font: inherit;
 }
 .nt-upload-hint {

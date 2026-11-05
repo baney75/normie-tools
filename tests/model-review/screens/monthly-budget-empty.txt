@@ -1,58 +1,54 @@
-Screen: monthly-budget, empty state, phone 390px wide. Order is top to bottom.
-Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+Screen: monthly-budget, empty state, phone 390px wide. Order is top to bottom. Nothing is typed yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Monthly Budget
-Type what comes in and what goes out each month. See what is left.
-Step 1 of 2: Type your numbers
+Type what you get and what you spend each month. Your answer shows below.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 [heading 2] Money in each month
-Remove takes out a line. You can put it back.
-[label] Name of income line 1
-[box] Name of income line 1 = "Pay"
+Remove takes out one line. A Put it back button shows right after.
+[label] Name of income item 1
+[box] Name of income item 1 = "Pay"
 [label] Pay, per month
 [box] Pay, per month = "" (cursor is here)
 [plain button, outline only] Remove Pay
-[plain button, outline only] Add an income line
+[plain button, outline only] Add an income item
 [heading 2] Money out each month
-Remove takes out a line. You can put it back.
-[label] Name of spending line 1
-[box] Name of spending line 1 = "Rent or mortgage"
+Remove takes out one line. A Put it back button shows right after.
+[label] Name of spending item 1
+[box] Name of spending item 1 = "Rent or mortgage"
 [label] Rent or mortgage, per month
 [box] Rent or mortgage, per month = ""
 [plain button, outline only] Remove Rent or mortgage
-[label] Name of spending line 2
-[box] Name of spending line 2 = "Food"
+[label] Name of spending item 2
+[box] Name of spending item 2 = "Food"
 [label] Food, per month
 [box] Food, per month = ""
 [plain button, outline only] Remove Food
-[label] Name of spending line 3
-[box] Name of spending line 3 = "Bills"
+[label] Name of spending item 3
+[box] Name of spending item 3 = "Bills"
 [label] Bills, per month
 [box] Bills, per month = ""
 [plain button, outline only] Remove Bills
-[label] Name of spending line 4
-[box] Name of spending line 4 = "Transport"
+[label] Name of spending item 4
+[box] Name of spending item 4 = "Transport"
 [label] Transport, per month
 [box] Transport, per month = ""
 [plain button, outline only] Remove Transport
-[label] Name of spending line 5
-[box] Name of spending line 5 = "Other"
+[label] Name of spending item 5
+[box] Name of spending item 5 = "Other"
 [label] Other, per month
 [box] Other, per month = ""
 [plain button, outline only] Remove Other
-[plain button, outline only] Add a spending line
-[plain button, outline only, disabled] Start over
-Start over asks first, and you can undo it right after.
-Type an amount on any line. Your totals show up below.
-Step 2 of 2: Read your answer
+[plain button, outline only] Add a spending item
 Left over
 Your answer shows here
+[MAIN BUTTON, filled dark orange] Show my answer
 [heading 2] Keep your answer if you want
-[MAIN BUTTON, filled dark orange, disabled] Print
+[plain button, outline only, disabled] Print
 [plain button, outline only, disabled] Save a copy
-Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
 
-This adds up the numbers you typed. It does not tell you what to do.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 Back to home
 [link, plain] Back to home

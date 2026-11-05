@@ -19,10 +19,11 @@ describe("Unit Converter page", () => {
   it("shows the empty state and no answer", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Unit Converter" })).toBeInTheDocument();
-    expect(screen.getByText(COPY.empty)).toBeInTheDocument();
+    expect(screen.getByText(COPY.intro)).toBeInTheDocument();
     expect(screen.getByLabelText("Your answer")).toHaveTextContent("Your answer shows here");
-    expect(screen.getByText("Step 2 of 2: Read your answer")).toBeInTheDocument();
-    expect(screen.getByText("Step 1 of 2: Pick units and type a number")).toBeInTheDocument();
+    expect(screen.queryByText(/Step \d of \d/)).toBeNull();
+    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/Nothing is sent/);
+    expect(screen.getByRole("button", { name: "Swap 'from' and 'to'" })).toBeInTheDocument();
     expect(screen.getByLabelText("Number", { exact: false })).toHaveFocus();
     expect(screen.getByText(/Nothing is sent/)).toBeInTheDocument();
     expect(screen.getByText(COPY.more.sources)).toBeInTheDocument();
@@ -44,7 +45,7 @@ describe("Unit Converter page", () => {
     await fill("Number", "12");
     const card = screen.getByLabelText("Your answer");
     expect(card).toHaveTextContent("304.8 millimeters");
-    expect(card).toHaveTextContent("Shown to 6 digits.");
+    expect(card).toHaveTextContent(COPY.result.shown);
   });
 
   it("changes kind, swaps the two units and counts commas", async () => {

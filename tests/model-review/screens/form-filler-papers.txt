@@ -1,32 +1,36 @@
-Screen: form-filler, papers state, phone 390px wide. Order is top to bottom.
+Screen: form-filler, papers state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Form Filler
 Step 2 of 4: Gather your papers
-[label] Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children
-[tick box] Social Security number (or ITIN) for you and for everyone on your return, like a spouse or children (chosen)
-[label] W-2 from each job (your employer sends it in January or February)
-[tick box] W-2 from each job (your employer sends it in January or February) (chosen)
-[label] 1099 forms for other money you got For example: 1099-NEC for gig or freelance work, 1099-K from payment apps or online selling, 1099-G for unemployment, 1099-INT for bank interest, 1099-R for a pension or retirement money, SSA-1099 for Social Security.
-[tick box] 1099 forms for other money you got For example: 1099-NEC for gig or freelance work, 1099-K from payment apps or online selling, 1099-G for unemployment, 1099-INT for bank interest, 1099-R for a pension or retirement money, SSA-1099 for Social Security. (not chosen)
-[label] 1095-A if you had health insurance from the Marketplace
-[tick box] 1095-A if you had health insurance from the Marketplace (not chosen)
-[label] Last year's tax return, if you filed one You need last year's income number (AGI) or the 5-digit code you picked last year.
-[tick box] Last year's tax return, if you filed one You need last year's income number (AGI) or the 5-digit code you picked last year. (chosen)
-[label] Your IP code (an Identity Protection code), only if the IRS sent you one
-[tick box] Your IP code (an Identity Protection code), only if the IRS sent you one (not chosen)
-[label] Your bank account and routing numbers, if you want your refund sent straight to your bank
-[tick box] Your bank account and routing numbers, if you want your refund sent straight to your bank (not chosen)
-[label] Papers for credits, if you have them For example: child care costs, school costs (Form 1098-T from the school), money you put into a retirement account.
-[tick box] Papers for credits, if you have them For example: child care costs, school costs (Form 1098-T from the school), money you put into a retirement account. (not chosen)
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
+[label] Social Security number or ITIN, for each person on your return An ITIN is a tax ID number some people get instead of a Social Security number.
+[tick box] Social Security number or ITIN, for each person on your return An ITIN is a tax ID number some people get instead of a Social Security number. (chosen)
+[label] W-2, the pay form from each job
+[tick box] W-2, the pay form from each job (chosen)
+[label] 1099 forms, for other money you got
+[tick box] 1099 forms, for other money you got (not chosen)
+[closed section, tap to open] More forms
+
+[link, plain] 
+[label] 1095-A, if you had health insurance from the Marketplace
+[tick box] 1095-A, if you had health insurance from the Marketplace (not chosen)
+[label] Last year's tax return, if you filed one You need the income number on last year's return, or the 5-digit code you picked last year.
+[tick box] Last year's tax return, if you filed one You need the income number on last year's return, or the 5-digit code you picked last year. (chosen)
+[label] IP code the IRS sent you, if any
+[tick box] IP code the IRS sent you, if any (not chosen)
+[label] Bank account details, if you want your refund sent to your bank Your account number and your bank's routing number. Your bank can tell you both.
+[tick box] Bank account details, if you want your refund sent to your bank Your account number and your bank's routing number. Your bank can tell you both. (not chosen)
+[label] Papers for credits (if you have them) A credit lowers your tax. Child care costs. School costs: the school tax paper (Form 1098-T). Money you put into a retirement account.
+[tick box] Papers for credits (if you have them) A credit lowers your tax. Child care costs. School costs: the school tax paper (Form 1098-T). Money you put into a retirement account. (not chosen)
 [label] For side jobs: what you were paid, and receipts for what you spent
 [tick box] For side jobs: what you were paid, and receipts for what you spent (not chosen)
-No last year's income number? You can see it by signing in to your IRS online account, under Tax Records. You can also ask the IRS to mail you a copy of last year's return.
+No income number from last year's return? You can see it by signing in to your IRS online account, under Tax Records. You can also ask the IRS to mail you a copy of last year's return.
 Source: IRS Free File page
 [link, plain] IRS Free File page
 [MAIN BUTTON, filled dark orange] Next
 [plain button, outline only] Back
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 Back to home
 [link, plain] Back to home

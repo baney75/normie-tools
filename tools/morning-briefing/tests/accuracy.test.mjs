@@ -69,7 +69,7 @@ test("plain-text-exact: the text matches the hand-written briefing for each gold
 });
 
 test("offline-statement: shown when weather or news is ticked, left out otherwise", () => {
-  assert.equal(OFFLINE_NOTE, "Live weather and news need the NT app or your AI helper. This page does not go online.");
+  assert.equal(OFFLINE_NOTE, "Live weather and news are not on this page yet.");
   assert.ok(run("full").text.includes(OFFLINE_NOTE));
   assert.ok(run("weather-only").text.includes(OFFLINE_NOTE));
   assert.ok(!run("reminders-only").text.includes(OFFLINE_NOTE));

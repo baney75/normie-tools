@@ -1,0 +1,572 @@
+{
+  "tool": "save-me-money",
+  "screen": ", ,  at 390px wide (text saved beside this file in screens/)",
+  "at": "2026-11-05",
+  "promptHashes": {
+    "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
+    "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
+  },
+  "firstTimeUser": {
+    "model": "sonnet",
+    "score": 3,
+    "runs": [
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "rule": "middle score of the runs",
+    "output": "**1. What this screen wants me to do:** It shows what my regular bills add up to in a year, and it offers to save or print that list if I want a copy.\n\n**2. What I would tap:** \"Save a copy\"\n\n**3. Words or phrases I did not understand or that felt like tech talk:**\n- \"Source: how this page is made\". I don't know why I would care.\n- \"Tick box\". I'm not sure what ticking does.\n- \"Menu\" for the Every week / Every month / Every year choice. It looks like a box, and I'm not sure I can change it.\n- \"Save a copy shows you what goes in the file first\". What file? Where does it go on my phone?\n- \"Print opens a preview first\". I don't know what a preview is.\n- \"Put it back button\". I don't see one now, so I'm unsure what it means.\n- \"Start over asks first, and you can undo it right after\". I'm not sure what gets wiped.\n- \"A week cost uses 52 weeks in a year. That is an estimate.\" I don't know why that matters to me.\n- \"What comes next\" and \"Show more\". They are closed and don't say what is inside.\n- \"Costs with no amount are left out\". I had to think about which ones that means.\n\n**4. What made me worry:**\n- \"Save a copy\" makes a file. I don't know where it lands on my phone or whether it clutters it.\n- \"Remove\" and \"Start over\" sit near my numbers. I'm afraid I'll wipe them by accident.\n- \"Nothing is sent\" is comforting, but I'd still wonder a little whether it's true.\n- Internet and Insurance already have ticks, and I didn't put them there. I don't know why those two were picked.\n- \"Questions to ask before you call\". Call who? I'm worried I'm supposed to phone someone.\n- Gym and Other are blank, and I'm not sure that's okay.\n\n**5. What I would skip:**\n- The small print at the bottom: \"Source: only the numbers you type...\" and the \"how this page is made\" link.\n- The closed \"What comes next\" and \"Show more\" sections.\n- The list of questions to ask before you call, unless I decide I want to call someone.\n\n**6. Score:** 3. I can see my total, and the orange button stands out. But \"You can stop here\" makes me unsure whether I need to save at all.\n\nRESULT: {\"next_tap\":\"Save a copy\",\"confusing_terms\":[\"Source: how this page is made\",\"tick box\",\"menu\",\"file\",\"preview\",\"Put it back\",\"Start over\",\"52 weeks / estimate\",\"What comes next\",\"Show more\",\"Costs with no amount are left out\"],\"worries\":[\"Save a copy makes a file and I don't know where it goes\",\"Remove and Start over might erase my numbers\",\"Not fully sure nothing is sent\",\"Internet and Insurance were ticked and I did not tick them\",\"Questions to ask before you call: unclear who I would call\",\"Gym and Other left blank\"],\"skippable\":[\"Source and how-this-page-is-made small print\",\"What comes next (closed)\",\"Show more (closed)\",\"Questions to ask before you call (unless I plan to call)\"],\"score\":3}"
+  },
+  "designRubric": [
+    {
+      "model": "haiku",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 6,
+          "rules": [
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 7,
+      "fails": [
+        "Rule 2: The same note, \"Remove takes out one cost. A Put it back button shows right after.\", repeats under all 6 costs. Two empty closed sections (\"What comes next\", \"Show more\") and two similar headings (\"Keep your list if you want\" and \"Save or print my list\") add more clutter.",
+        "Rule 2: The same note, \"Remove takes out one cost. A Put it back button shows right after.\", appears six times. Also, the heading \"Keep your list if you want\" is followed right away by another heading, \"Save or print my list\"."
+      ],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+    }
+  ],
+  "otherScreens": [
+    {
+      "screen": "start",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          4,
+          4,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type what I pay for things like my phone and internet, and see what they come to in a year.\n\n2. I would tap the box called \"Phone, amount\".\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Source: how this page is made\" (I don't know what that means or why it matters)\n- \"Remove\" and \"Put it back\" (fine, but I don't know whether Remove deletes it for good)\n- \"disabled\" feeling buttons: Print and Save a copy are greyed out, and I don't know why until I read the small line\n- \"Save a copy\" (a copy of what? where does it go?)\n- \"Print opens a preview first\" (preview)\n- \"file\" (what kind of file, and where will I find it?)\n- \"What comes next\" (it's closed, and I don't know what's in it)\n- \"estimate\" and \"52 weeks in a year\"\n- \"Add a cost\"\n\n4. What worried me:\n- \"Save a copy\" makes a file on my phone, and I'm not sure what it does.\n- \"Remove\" buttons sit close to the boxes, and I might tap one by accident. The note says there's a \"Put it back\", which helps a little.\n- \"Nothing is sent\" is reassuring, but I only half believe it.\n- The grey buttons made me think I did something wrong.\n- I wasn't sure whether to type a dollar sign.\n- The \"Other\" line and the \"Every month\" setting are already filled in, and I wasn't sure I could change them.\n\n5. I would skip:\n- The \"Source: how this page is made\" link.\n- The bottom lines about \"Source: only the numbers you type\" and the 52 weeks.\n- \"Back to home\" unless I wanted to leave.\n- The whole \"Keep your list\" part until I have a total.\n- The \"Remove\" buttons for lines I'm not using.\n\n6. Score: 4. The cursor in the first box showed me where to start, but there are a lot of boxes, and I wasn't sure whether I have to fill in all of them.\n\nRESULT: {\"next_tap\":\"Phone, amount\",\"confusing_terms\":[\"Source: how this page is made\",\"Remove / Put it back\",\"Save a copy\",\"file\",\"preview\",\"What comes next\",\"estimate / 52 weeks\",\"Add a cost\",\"disabled grey buttons\"],\"worries\":[\"Save a copy makes a file on my phone\",\"Remove tapped by accident\",\"Nothing is sent - only half believe it\",\"grey buttons made me think I did something wrong\",\"unsure about typing a dollar sign\",\"unsure if I must fill every line\"],\"skippable\":[\"how this page is made link\",\"Source and 52 weeks lines\",\"Back to home\",\"Keep your list section until there is a total\",\"Remove buttons for unused lines\"],\"score\":4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 7,
+          "fails": [
+            "Rule 2: The same note, \"Remove takes out one cost. A Put it back button shows right after.\", appears six times, once under every cost row. This repeated text adds clutter.",
+            "Rule 2: The same note, \"Remove takes out one cost. A Put it back button shows right after.\", appears six times, once for each cost. The two headings \"Keep your list if you want\" and \"Save or print my list\" also sit back to back, and the first adds nothing."
+          ],
+          "runs": [
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"FAIL\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"Rule 2: The same note, \\\"Remove takes out one cost. A Put it back button shows right after.\\\", appears six times, once under every cost row. This repeated text adds clutter.\"],\"score\":7}"
+        }
+      ]
+    },
+    {
+      "screen": "typed",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 3,
+        "runs": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to look over my yearly costs, see the totals, and then save or print a copy of my list.\n\n2. I would tap **Save a copy**.\n\n3. Words that felt like tech talk or unclear:\n- \"Remove takes out one cost. A Put it back button shows right after.\" (I don't see a Put it back button, which is confusing.)\n- \"Source: how this page is made\" and \"A week cost uses 52 weeks in a year\"\n- \"tick box\" and \"not chosen\"\n- \"Tap a cost to see questions to ask before you call.\" (Call who? It's not clear.)\n- \"Questions appear here\" (nothing is there yet)\n- \"What comes next\" and \"Show more\" (closed sections with no hint of what's inside)\n- \"Start over asks first, and you can undo it right after.\"\n- \"file\" (what file, and where does it go?)\n- \"preview\"\n\n4. Worries:\n- \"Save a copy\" makes a file on my phone, and I'm not sure where it goes or whether I could find it again.\n- The Remove buttons are right next to my numbers, and I might tap one by accident.\n- \"Start over\" sounds like it could wipe everything.\n- It says the numbers stay on my phone. I'd like to believe that, but I can't check it.\n- Streaming and Gym have no amounts, and the page says they are left out. I wasn't sure if I did something wrong.\n- \"Total for a year $1,740\" is a lot to see. It adds up to what I spend, and that is a little upsetting.\n\n5. I would skip:\n- The \"Source\" lines and \"how this page is made.\"\n- The closed \"What comes next\" and \"Show more\" sections.\n- The \"Questions to ask before you call\" box, since it was empty.\n- The row of Remove buttons.\n\n6. Score: 3. The orange button is clear. But the page says \"You can stop here,\" so I'm not sure if I even need to save.\n\nRESULT: {\"next_tap\": \"Save a copy\", \"confusing_terms\": [\"Put it back\", \"tick box\", \"not chosen\", \"Source: how this page is made\", \"52 weeks in a year\", \"Questions to ask before you call\", \"Questions appear here\", \"What comes next\", \"Show more\", \"preview\", \"file\", \"Start over\"], \"worries\": [\"Save a copy makes a file and I don't know where it goes\", \"Remove buttons could be tapped by accident\", \"Start over might erase everything\", \"Costs with no amount are left out and I'm unsure if I made a mistake\", \"Can't verify numbers stay on my phone\"], \"skippable\": [\"Source lines\", \"how this page is made\", \"What comes next\", \"Show more\", \"empty Questions to ask before you call box\", \"Remove buttons\"], \"score\": 3}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
+}

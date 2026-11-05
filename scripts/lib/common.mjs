@@ -4,7 +4,7 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 
-const SKIP_DIRS = new Set([".git", "node_modules", "dist", "build", "coverage"]);
+const SKIP_DIRS = new Set([".git", "node_modules", "dist", "build", "coverage", "test-results", "playwright-report"]);
 
 // Binary or generated files that text checks skip.
 const BINARY_EXT = new Set([

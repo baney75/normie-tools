@@ -53,14 +53,78 @@ describe("Form Filler first screen", () => {
     render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Form Filler" })).toBeInTheDocument();
     expect(screen.getByText("Step 1 of 4: Is this for you?")).toBeInTheDocument();
-    expect(screen.getByText("Question 1 of 4")).toBeInTheDocument();
+    expect(screen.getByText(/^Question 1 of 4\./)).toBeInTheDocument();
     expect(screen.getByText("Are you filing this year's taxes?")).toBeInTheDocument();
     expect(screen.getByLabelText("Yes")).toHaveFocus();
     expect(primaries()).toBe(1);
     expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /public page/ })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: COPY.sources.freeFile })).toHaveAttribute("href", "https://www.irs.gov/filing/irs-free-file-do-your-taxes-for-free");
+    expect(screen.getByRole("link", { name: /how this page is made/ })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: COPY.sources.freeFile })[0]).toHaveAttribute("href", "https://www.irs.gov/filing/irs-free-file-do-your-taxes-for-free");
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
+  });
+});
+
+describe("Form Filler reader fixes", () => {
+  it("shows no file box on the first screen until asked, and puts the privacy line under the intro", async () => {
+    render(<Page />);
+    expect(document.querySelector('input[type="file"]')).toBeNull();
+    const intro = screen.getByText(/This page never files for you\./);
+    expect(intro.nextElementSibling).toHaveTextContent("Nothing is sent.");
+    expect(document.querySelectorAll(".nt-privacy")).toHaveLength(1);
+    await userEvent.click(screen.getByRole("button", { name: "Have saved answers?" }));
+    expect(screen.getByLabelText("Open my saved answers")).toBeInTheDocument();
+  });
+
+  it("says Free File opens again in January 2027 with a source, and shows privacy on every screen", async () => {
+    render(<Page />);
+    expect(screen.getByText(/Free File opens again in January 2027\. You can fill this in now and use it then\./)).toBeInTheDocument();
+    for (let i = 0; i < 14; i++) {
+      expect(screen.getByRole("link", { name: /how this page is made/ }), `screen ${i + 1}`).toBeInTheDocument();
+      await next();
+    }
+    expect(screen.getByRole("link", { name: /how this page is made/ })).toBeInTheDocument();
+  });
+
+  it("says info stays on the phone or computer on the info screens", async () => {
+    await toInfo();
+    expect(screen.getByText(/These stay on this phone or computer\./)).toBeInTheDocument();
+  });
+
+  it("shows 'Next saves your answer' directly under the Next button", () => {
+    render(<Page />);
+    const actions = document.querySelector(".nt-ff-actions")!;
+    expect(actions.nextElementSibling).toHaveTextContent("Next saves your answer. You can go Back and change it.");
+  });
+
+  it("makes the question a heading with a plain hint and a pick-one line", () => {
+    render(<Page />);
+    expect(screen.getByRole("heading", { level: 2, name: "Are you filing this year's taxes?" })).toBeInTheDocument();
+    expect(screen.getByText(/Pick one answer, then tap Next\./)).toBeInTheDocument();
+    expect(screen.getByText(/Pick Yes if you are doing this year's taxes now\./)).toBeInTheDocument();
+    expect(screen.getByText("Next saves your answer. You can go Back and change it.")).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: "Are you filing this year's taxes?" })).toBeInTheDocument();
+  });
+
+  it("does not say 'That is your answer' on the result card", async () => {
+    render(<Page />);
+    await answer(["Yes", "Yes", "Yes", "Yes"]);
+    expect(screen.queryByText(/That is your answer/)).toBeNull();
+  });
+
+  it("keeps the papers list short, spells out the long names, and hides the other 1099 forms", async () => {
+    render(<Page />);
+    await answer(["Yes", "Yes", "Yes", "Yes"]);
+    await next();
+    expect(screen.getByLabelText(/^Social Security number or ITIN, for each person on your return/)).toBeInTheDocument();
+    expect(screen.queryByText(/AGI/)).toBeNull();
+    expect(screen.getByText("Papers for credits (if you have them)", { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("School costs: the school tax paper (Form 1098-T).")).toBeInTheDocument();
+    expect(screen.getByText(/your bank.s routing number/)).toBeInTheDocument();
+    expect(screen.getByText(/the income number on last year's return/)).toBeInTheDocument();
+    const more = screen.getByText("More forms").closest("details")!;
+    expect(more.open).toBe(false);
+    expect(within(more).getByText(/1099-NEC, for gig or freelance work/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Source:/).length).toBeGreaterThanOrEqual(2);
   });
 });
 
@@ -111,8 +175,8 @@ describe("Form Filler papers", () => {
     const boxes = screen.getAllByRole("checkbox");
     expect(boxes).toHaveLength(9);
     expect(boxes[0]).toHaveFocus();
-    await userEvent.click(screen.getByLabelText(/^W-2 from each job/));
-    expect(screen.getByLabelText(/^W-2 from each job/)).toBeChecked();
+    await userEvent.click(screen.getByLabelText(/^W-2, the pay form from each job/));
+    expect(screen.getByLabelText(/^W-2, the pay form from each job/)).toBeChecked();
     expect(screen.getByText(/Tax Records/)).toBeInTheDocument();
     expect(primaries()).toBe(1);
   });
@@ -125,7 +189,7 @@ describe("Form Filler info boxes", () => {
     expect(screen.getByText("Box 1 of 8")).toBeInTheDocument();
     expect(screen.getAllByRole("textbox")).toHaveLength(1);
     expect(screen.getByLabelText("First name")).toHaveFocus();
-    expect(screen.getByText(/You type your Social Security number yourself on the IRS partner site\./)).toBeInTheDocument();
+    expect(screen.getByText(/You type your Social Security number yourself on the free filing site you pick on IRS.gov\./)).toBeInTheDocument();
     expect(primaries()).toBe(1);
 
     const want: [string, string, string, string?][] = [
@@ -187,16 +251,33 @@ describe("Form Filler review", () => {
     expect(screen.getByRole("heading", { name: "Look it over" })).toBeInTheDocument();
     expect(primaries()).toBe(1);
     expect(screen.getByRole("button", { name: "Save my answer sheet" })).toHaveClass("primary");
+    expect(screen.getByText("Stop now and finish later")).toHaveAttribute("aria-expanded", "false");
+    expect(screen.getByText("This saves one text file with your answers. To undo, delete the file.")).toBeInTheDocument();
+    await userEvent.click(screen.getByText("Stop now and finish later"));
     expect(screen.getByRole("button", { name: "Save my answers to use later" })).not.toHaveClass("primary");
     for (const t of ["Ana", "Rivera", "12 Example Street", "Springfield", "IL", "62701", "02/29/1960", "555-010-1234", "Guided Free File"]) {
       expect(screen.getByText(t)).toBeInTheDocument();
     }
     expect(screen.getAllByRole("link", { name: /^Edit / }).length).toBe(4 + 8 + 1);
-    for (const l of ["Make your Free File account.", "Press Submit.", "Sign with last year's income number or your 5-digit code."]) {
+    for (const l of ["Make your Free File account.", "Press Submit, the button that sends your tax return.", "Sign with the income number from last year's return, or a 5-digit code you pick."]) {
       expect(screen.getByText(l)).toBeInTheDocument();
     }
     expect(screen.getAllByText(/Social Security number yourself/).length).toBeGreaterThan(0);
     expect(screen.queryByRole("button", { name: /submit|file my|pay/i })).toBeNull();
+    expect(screen.getAllByText(/Guided Free File asks simple questions, one at a time/).length).toBeGreaterThan(0);
+    expect(screen.getByText("No. The IRS says it opens in January 2027.")).toBeInTheDocument();
+    expect(screen.getByText("0 of 9 (tap Edit to see which)")).toBeInTheDocument();
+    expect(screen.getByText(/The file stays where you save it\./)).toBeInTheDocument();
+  });
+
+  it("says Nothing is sent once, has no unnamed button, and says what the sheet is for", async () => {
+    await toReview();
+    expect(screen.getAllByText(/Nothing is sent/)).toHaveLength(1);
+    for (const b of screen.getAllByRole("button")) expect(b.textContent!.trim().length, b.outerHTML).toBeGreaterThan(0);
+    expect(screen.getByText("Your answer sheet is a list to read from when you type your answers in at IRS.gov/freefile.")).toBeInTheDocument();
+    const way = screen.getByText(/Guided Free File asks simple questions, one at a time\. The software does the math\./, { selector: "p" });
+    expect(way).toHaveTextContent("Source: IRS Free File page");
+    expect(within(way).getByRole("link", { name: "IRS Free File page" })).toBeInTheDocument();
   });
 
   it("Edit goes to that box and Next comes straight back", async () => {
@@ -225,6 +306,10 @@ describe("Form Filler review", () => {
     }) as { text: string }).text;
     expect(await file.text()).toBe(expected);
     expect(await screen.findByText(/Saved as form-filler-answer-sheet\.txt\. To undo, delete that file/)).toBeInTheDocument();
+    expect(screen.getByText(/Next: open the IRS link and type these answers in\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Open IRS.gov/freefile" })).toHaveAttribute("href", "https://www.irs.gov/freefile");
+    expect(screen.getByText("This saves one text file with your answers. To undo, delete the file.")).toBeInTheDocument();
+        expect(screen.getByText(/Look in Downloads or the Files app\./, { exact: false })).toBeInTheDocument();
   });
 
   it("falls back to a download when sharing files is not possible", async () => {
@@ -234,6 +319,7 @@ describe("Form Filler review", () => {
     URL.createObjectURL = vi.fn((b: Blob) => { blob = b; return "blob:x"; });
     URL.revokeObjectURL = vi.fn();
     const click = vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(() => {});
+    await userEvent.click(screen.getByText("Stop now and finish later"));
     await userEvent.click(screen.getByRole("button", { name: "Save my answers to use later" }));
     expect(click).toHaveBeenCalled();
     const saved = JSON.parse(await blob!.text());
@@ -265,7 +351,7 @@ describe("Form Filler review", () => {
 });
 
 describe("Form Filler saved answers file", () => {
-  const openPanel = () => userEvent.click(screen.getByText("Have saved answers?"));
+  const openPanel = () => userEvent.click(screen.getByRole("button", { name: "Have saved answers?" }));
   const pick = async (file: File) => {
     await openPanel();
     await userEvent.upload(screen.getByLabelText("Open my saved answers"), file);
@@ -305,7 +391,7 @@ describe("Form Filler saved answers file", () => {
     expect(await screen.findByText(/Found saved answers/)).toBeInTheDocument();
     expect(screen.getByText(/Ana Rivera\. 4 of 4 questions answered\./)).toBeInTheDocument();
     // nothing changed yet
-    expect(screen.getByText("Question 1 of 4")).toBeInTheDocument();
+    expect(screen.getByText(/^Question 1 of 4\./)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Use these answers" }));
     expect(screen.getByRole("heading", { name: "Look it over" })).toBeInTheDocument();
     expect(screen.getByText("Rivera")).toBeInTheDocument();
@@ -321,7 +407,7 @@ describe("Form Filler saved answers file", () => {
     await pick(new File([savedText({ info: { firstName: "Zed" } })], "mine.json", { type: "application/json" }));
     await userEvent.click(await screen.findByRole("button", { name: "Keep what I have" }));
     expect(screen.queryByText(/Found saved answers/)).toBeNull();
-    expect(screen.getByText("Question 1 of 4")).toBeInTheDocument();
+    expect(screen.getByText(/^Question 1 of 4\./)).toBeInTheDocument();
   });
 
   it("refuses a file with bad boxes and changes nothing", async () => {
@@ -337,14 +423,14 @@ describe("Form Filler autosave", () => {
     const first = render(<Page />);
     await answer(["Yes", "Yes", "Yes", "Yes"]);
     await next();
-    await userEvent.click(screen.getByLabelText(/^W-2 from each job/));
+    await userEvent.click(screen.getByLabelText(/^W-2, the pay form from each job/));
     first.unmount();
     render(<Page />);
     expect(screen.getByText("Pick up where you left off?")).toBeInTheDocument();
     expect(screen.getByText(/You were on Step 2 of 4: Gather your papers\./)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Pick up" }));
     expect(screen.getByText("Step 2 of 4: Gather your papers")).toBeInTheDocument();
-    expect(screen.getByLabelText(/^W-2 from each job/)).toBeChecked();
+    expect(screen.getByLabelText(/^W-2, the pay form from each job/)).toBeChecked();
   });
 
   it("starts fresh when asked", async () => {
@@ -354,7 +440,7 @@ describe("Form Filler autosave", () => {
     render(<Page />);
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
     await userEvent.click(screen.getByRole("button", { name: "Yes, start over" }));
-    expect(screen.getByText("Question 1 of 4")).toBeInTheDocument();
+    expect(screen.getByText(/^Question 1 of 4\./)).toBeInTheDocument();
     expect(screen.getByLabelText("Yes")).not.toBeChecked();
   });
 
@@ -363,7 +449,7 @@ describe("Form Filler autosave", () => {
     await answer(["Yes", "Yes"]);
     fireEvent(window, new Event("orientationchange"));
     fireEvent(window, new Event("resize"));
-    expect(screen.getByText("Question 3 of 4")).toBeInTheDocument();
+    expect(screen.getByText(/^Question 3 of 4\./)).toBeInTheDocument();
   });
 });
 

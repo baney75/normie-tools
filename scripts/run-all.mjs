@@ -14,6 +14,7 @@ const STEPS = [
   "check:licenses",
   "check:required-tests",
   "check:ship-gate",
+  "check:evidence",
   "check:markdown",
   "check:jargon",
   "check:reading-level",

@@ -11,6 +11,10 @@ export type SavePrintSheetProps = {
   onPrint?: () => void;
   canUndo?: boolean;
   onUndo?: () => void;
+  /** Set when another button on the page is the main one: Print then looks like Save a copy. */
+  quiet?: boolean;
+  /** Makes "Save a copy" the one filled button and Print an outline. For phones, where Print is rarely what the person wants. */
+  savePrimary?: boolean;
 };
 
 export function SavePrintSheet({
@@ -21,8 +25,11 @@ export function SavePrintSheet({
   onPrint = () => window.print(),
   canUndo = false,
   onUndo,
+  quiet = false,
+  savePrimary = false,
 }: SavePrintSheetProps) {
   const [saved, setSaved] = useState(false);
+  const [asking, setAsking] = useState(false);
   const titleId = useId();
   const hasPreview = children !== null && children !== undefined && children !== false;
 
@@ -35,16 +42,16 @@ export function SavePrintSheet({
         {children}
       </div>
       <div className="nt-sheet-actions">
-        <button type="button" className="nt-sheet-primary" disabled={!hasPreview} onClick={() => onPrint()}>
+        <button type="button" className={quiet || savePrimary ? "nt-sheet-secondary" : "nt-sheet-primary"} disabled={!hasPreview} onClick={() => onPrint()}>
           Print
         </button>
         <button
           type="button"
-          className="nt-sheet-secondary"
+          className={savePrimary ? "nt-sheet-primary" : "nt-sheet-secondary"}
           disabled={!hasPreview}
           onClick={() => {
-            onSave(blob);
-            setSaved(true);
+            setAsking(true);
+            setSaved(false);
           }}
         >
           Save a copy
@@ -62,7 +69,29 @@ export function SavePrintSheet({
           </button>
         )}
       </div>
-      <p className="nt-sheet-note">Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.</p>
+      {asking ? (
+        <div className="nt-sheet-ask" role="group" aria-label="Before you save">
+          <p>This saves a file on this phone or computer. The file will hold:</p>
+          <div className="nt-sheet-ask-preview">{children}</div>
+          <div className="nt-sheet-actions">
+            <button
+              type="button"
+              className="nt-sheet-secondary"
+              onClick={() => {
+                onSave(blob);
+                setSaved(true);
+                setAsking(false);
+              }}
+            >
+              Save the file
+            </button>
+            <button type="button" className="nt-sheet-undo" onClick={() => setAsking(false)}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : null}
+      <p className="nt-sheet-note">Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.</p>
       <p role="status" className="nt-sheet-status">
         {saved ? "Saved" : ""}
       </p>

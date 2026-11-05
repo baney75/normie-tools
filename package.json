@@ -16,6 +16,7 @@
     "check:licenses": "node scripts/check-licenses.mjs",
     "check:required-tests": "node scripts/check-required-tests.mjs",
     "check:ship-gate": "node scripts/ship-gate.mjs",
+    "check:evidence": "node scripts/check-evidence.mjs",
     "check:markdown": "markdownlint-cli2",
     "check:jargon": "node scripts/check-banned-jargon.mjs",
     "check:reading-level": "node scripts/check-reading-level.mjs",

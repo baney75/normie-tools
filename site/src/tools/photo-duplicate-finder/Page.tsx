@@ -4,7 +4,7 @@ import { ScreenFrame } from "../../components/ScreenFrame";
 import { UploadField } from "../../components/UploadField";
 import { damaged, genericMessage, messageFor } from "../../copy/upload-messages";
 import { detectFileType, type FileKind } from "../../lib/detectFileType";
-import { findDuplicates, formatBytes, listText, planList, screenFiles } from "../../../../tools/photo-duplicate-finder/calc.mjs";
+import { findDuplicates, listText, planList, screenFiles } from "../../../../tools/photo-duplicate-finder/calc.mjs";
 import { COPY } from "./copy";
 import { readPhoto } from "./decode";
 import "./Page.css";
@@ -25,6 +25,7 @@ const EMPTY: Data = { photos: [], notes: [], troubles: [], keep: {}, putBack: []
 const PHOTO_KINDS = new Set<FileKind>(["jpeg", "png", "webp", "heic"]);
 const ACCEPT = ".jpg,.jpeg,.png,.webp,.heic,image/jpeg,image/png,image/webp,image/heic";
 const SHOW_TROUBLES = 3;
+
 
 type Group = { id: string; kind: "exact" | "lookalike"; members: string[]; keepId: string };
 
@@ -163,6 +164,8 @@ export function Page() {
     };
   }, [pick, data.view]);
 
+  const chooseFiles = () => zone.current?.querySelector<HTMLInputElement>('input[type="file"]')?.click();
+
   const infos = useMemo(() => data.photos.map(({ id, name, size, sha256, dhash }) => ({ id, name, size, sha256, dhash })), [data.photos]);
   const found = useMemo(() => findDuplicates(infos), [infos]);
   const groups: Group[] = found.ok ? found.groups : [];
@@ -196,6 +199,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-pdf">
         <p className="nt-pdf-intro">{COPY.intro}</p>
+        <PrivacyNote what="Photos" />
 
         {data.view === 1 ? (
           <>
@@ -204,18 +208,29 @@ export function Page() {
               <UploadField needed="jpeg" label={COPY.pick.label} onAccepted={() => undefined} />
             </div>
             <p className="nt-pdf-help">{COPY.pick.hint}</p>
+            {data.photos.length > 0 ? (
+              <section className="nt-pdf-picked" aria-label={COPY.pick.picked}>
+                <p className="nt-pdf-trouble-head">{COPY.pick.picked}</p>
+                <ul>
+                  {data.photos.slice(0, 10).map((p) => (
+                    <li key={p.id}>{p.name}</li>
+                  ))}
+                </ul>
+                {data.photos.length > 10 ? <p className="nt-pdf-help">{COPY.pick.andMore(data.photos.length - 10)}</p> : null}
+              </section>
+            ) : null}
             {left > 0 ? <p role="status" className="nt-pdf-status">{`${COPY.pick.wait}: ${left} ${COPY.pick.left}`}</p> : null}
             <Troubles notes={data.notes} troubles={data.troubles} />
             <ResultCard
               label={COPY.pick.count}
-              waiting={COPY.pick.waiting}
-              answer={data.photos.length > 0 ? String(data.photos.length) : undefined}
+              waiting={COPY.pick.waiting(data.photos.length)}
+              closing={false}
+              answer={data.photos.length > 1 ? String(data.photos.length) : undefined}
             >
-              {data.photos.length < 2 ? <p className="nt-pdf-help">{COPY.pick.help}</p> : null}
             </ResultCard>
             <div className="nt-pdf-actions">
-              <button type="button" className="primary nt-pdf-primary" disabled={data.photos.length < 2 || left > 0} onClick={() => go(2)}>
-                {COPY.pick.next}
+              <button type="button" className="primary nt-pdf-primary" onClick={() => (data.photos.length < 2 ? chooseFiles() : left > 0 ? undefined : go(2))}>
+                {data.photos.length < 2 ? COPY.pick.choose : COPY.pick.next}
               </button>
             </div>
           </>
@@ -227,6 +242,7 @@ export function Page() {
             <ResultCard
               label={COPY.groups.label}
               waiting={COPY.groups.waiting}
+              closing={false}
               answer={groups.length > 0 ? String(groups.length) : undefined}
             >
               <p className="nt-pdf-help">{COPY.groups.summary(exactCount, alikeCount)}</p>
@@ -258,7 +274,6 @@ export function Page() {
                             {p.url ? <img className="nt-pdf-thumb" src={p.url} alt="" /> : null}
                             <span className="nt-pdf-name">
                               <span>{`${COPY.groups.keepOne} ${p.name}`}</span>
-                              <span className="nt-pdf-size">{formatBytes(p.size)}</span>
                               {back ? null : <span className={mine ? "nt-pdf-tag" : "nt-pdf-tag nt-pdf-tag-mark"}>{mine ? COPY.groups.kept : COPY.groups.marked}</span>}
                             </span>
                           </label>
@@ -285,12 +300,20 @@ export function Page() {
             {alikeCount > 0 ? <p className="nt-pdf-help">{COPY.groups.estimate}</p> : null}
             {found.ok && found.ignored.length > 0 ? <p className="nt-pdf-help">{COPY.groups.ignored}</p> : null}
             <div className="nt-pdf-actions">
-              <button type="button" className="primary nt-pdf-primary" disabled={groups.length === 0} onClick={() => go(3)}>
-                {COPY.groups.next}
-              </button>
-              <button type="button" className="nt-pdf-btn" onClick={() => go(1)}>
-                {COPY.groups.back}
-              </button>
+              {groups.length === 0 ? (
+                <button type="button" className="primary nt-pdf-primary" onClick={() => go(1)}>
+                  {COPY.groups.pickMore}
+                </button>
+              ) : (
+                <>
+                  <button type="button" className="primary nt-pdf-primary" onClick={() => go(3)}>
+                    {COPY.groups.next}
+                  </button>
+                  <button type="button" className="nt-pdf-btn" onClick={() => go(1)}>
+                    {COPY.groups.back}
+                  </button>
+                </>
+              )}
             </div>
           </>
         ) : null}
@@ -298,32 +321,42 @@ export function Page() {
         {data.view === 3 ? (
           <>
             <StepLabel n={3} of={3}>{COPY.steps.three}</StepLabel>
+            <p className="nt-pdf-what">{COPY.review.what}</p>
             <ResultCard
               label={COPY.review.label}
               waiting={COPY.review.empty}
+              closing={false}
               answer={plan.count > 0 ? COPY.review.count(plan.count) : undefined}
             >
-              <p className="nt-pdf-size-line">{`${COPY.review.size}: ${formatBytes(plan.totalBytes)}`}</p>
             </ResultCard>
             {plan.count > 0 ? (
               <section className="nt-pdf-list" aria-labelledby="nt-pdf-list-h">
                 <h2 id="nt-pdf-list-h">{COPY.review.listHeading}</h2>
+                <p className="nt-pdf-help">{COPY.review.preview}</p>
                 <ul>
                   {plan.rows.map((r: { id: string; name: string; size: number }) => (
-                    <li key={r.id}>{`${r.name} (${formatBytes(r.size)})`}</li>
+                    <li key={r.id}>{r.name}</li>
                   ))}
                 </ul>
               </section>
             ) : null}
-            <p className="nt-pdf-promise">{COPY.review.promise}</p>
+            {plan.count > 0 ? <p className="nt-pdf-help">{`${COPY.review.saveHelp} ${COPY.review.undo}`}</p> : null}
             {saved ? <p role="status" className="nt-pdf-status">{COPY.review.saved}</p> : null}
             <div className="nt-pdf-actions">
-              <button type="button" className="primary nt-pdf-primary" disabled={plan.count === 0} onClick={save}>
-                {COPY.review.save}
-              </button>
-              <button type="button" className="nt-pdf-btn" onClick={() => go(2)}>
-                {COPY.review.back}
-              </button>
+              {plan.count === 0 ? (
+                <button type="button" className="primary nt-pdf-primary" onClick={() => go(2)}>
+                  {COPY.review.back}
+                </button>
+              ) : (
+                <>
+                  <button type="button" className="primary nt-pdf-primary" onClick={save}>
+                    {COPY.review.save}
+                  </button>
+                  <button type="button" className="nt-pdf-btn" onClick={() => go(2)}>
+                    {COPY.review.back}
+                  </button>
+                </>
+              )}
             </div>
           </>
         ) : null}
@@ -337,7 +370,6 @@ export function Page() {
         </details>
 
         <StartOver flowId="photo-duplicate-finder" value={data} empty={EMPTY} onChange={replace} />
-        <PrivacyNote />
       </div>
     </ScreenFrame>
   );

@@ -18,8 +18,8 @@ test.beforeEach(async ({ page }) => {
 
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Loan Explainer" })).toBeVisible();
-  await expect(page.getByText("Start with the amount you borrow")).toBeVisible();
-  await expect(page.getByText("Step 1 of 2: Type your numbers")).toBeVisible();
+  await expect(page.getByText("Type the numbers from your loan")).toBeVisible();
+  await expect(page.getByText("Your answer shows below.")).toBeVisible();
   await expect(page.getByText("Nothing is sent.")).toBeVisible();
   await expect(page.getByLabel("Amount borrowed")).toBeFocused();
   await expect(page.getByLabel("Monthly payment")).toContainText("Your answer shows here");
@@ -30,12 +30,25 @@ test("gives the exact monthly payment, total paid and interest, with no sideways
   const card = page.getByLabel("Monthly payment");
   await expect(card).toContainText("$304.22");
   await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
-  await expect(page.locator(".nt-sheet-primary")).toHaveCount(1);
+  await expect(page.locator(".primary")).toHaveCount(1);
   await expect(card).toContainText("$10,951.88");
   await expect(card).toContainText("$951.88");
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(wide).toBe(false);
   await page.screenshot({ path: shotPath("loan-explainer-phone.png"), fullPage: true });
+});
+
+// Both answers are worked out apart from the page: a payment rounded to the cent, then a month by month
+// schedule where the last payment clears what is left (Python Decimal, round half up).
+test("changing the numbers changes the answer to the right new answer", async ({ page }) => {
+  await fillLoan(page, { amount: "10000", rate: "6", term: "36" });
+  const card = page.getByLabel("Monthly payment");
+  await expect(card).toContainText("$304.22");
+  await expect(card).toContainText("$10,951.88");
+  await fillLoan(page, { amount: "12000", rate: "6.5", term: "36" });
+  await expect(card).toContainText("$367.79");
+  await expect(card).toContainText("$13,240.36");
+  await expect(card).not.toContainText("$304.22");
 });
 
 test("extra payment shows months and interest saved, and the by-year table opens", async ({ page }) => {
@@ -48,7 +61,7 @@ test("extra payment shows months and interest saved, and the by-year table opens
   const extra = page.getByRole("region", { name: "With your extra payment" });
   await expect(extra).toContainText("47 months");
   await expect(extra).toContainText("13");
-  await page.getByText("Show more").click();
+  await page.getByText("Show the year by year table").click();
   await expect(page.getByRole("table")).toBeVisible();
   await expect(page.getByRole("row")).toHaveCount(5);
   const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);

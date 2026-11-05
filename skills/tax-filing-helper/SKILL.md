@@ -17,8 +17,8 @@ description: Practice filing taxes on a made-up Free File style site. Checks tha
 2. Say first: this is a practice. The answers are made up. Nothing is filed. Do not ask for a Social Security number, a bank number, or a password.
 3. Show the made-up answer sheet from `references/how-it-works.md`. Ask the person to type each answer the way they would on the practice screens. An answer they leave out stays empty.
 4. Put the typed answers in a JSON file like `examples/some-different.json`. Keep the person's own words. Do not fix a typo for them.
-5. Run `python3 scripts/calc.py --text --file <input.json>`. Read the output to the person as it is, one line at a time. A line that starts with "Fix this first:" is a problem to solve before anything else.
-6. This is the review page. Say plainly: "This is where you stop. You press Submit yourself, on the real IRS partner site." Point to IRS.gov/freefile for the real thing. Say the IRS site is closed now and opens again in January 2027. For the income limit and the list of companies, say: Check IRS.gov.
+5. Run `python3 scripts/calc.py --text --file <input.json>`. Read the script output to the person line by line, in order. Do not leave a line out. A line that starts with "Fix this first:" is a problem to solve before anything else.
+6. This is the review page. After the script lines, tell the person to stop here and press Submit themselves, on the free filing site they pick on IRS.gov. Point to IRS.gov/freefile for the real thing. Say the IRS site is closed now and opens again in January 2027. For the income limit and the list of companies, say: Check IRS.gov.
 7. Warn about extra charges, fake or look-alike sites, and anyone asking for money to get a refund faster. If any screen asks for a card number, they should stop.
 
 ## Safety

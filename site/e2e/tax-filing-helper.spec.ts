@@ -1,13 +1,19 @@
 import { expect, test, type Page } from "@playwright/test";
 import { shotPath } from "./paths";
+import { isShipped } from "./shipped";
+
+// This tool is coming soon until its review clears, so its page is not on the site. The spec runs again when it ships.
+test.beforeEach(() => {
+  test.skip(!isShipped("tax-filing-helper"), "coming soon");
+});
 
 // The answers come from tools/tax-filing-helper/tests/golden.json (worked out apart from the code).
 test.use({ viewport: { width: 390, height: 844 } });
 
 const ANSWERS: [string, string][][] = [
   [["First name", "Sample"], ["Last name", "Person"], ["Email", "sample.person@example.com"]],
-  [["Employer name", "Example Bakery"], ["Pay from your W-2", "$32,450"], ["Tax already taken out of your pay", "2810.5"]],
-  [["Bank name", "example credit union"], ["Interest from your bank (1099-INT)", "12.34"]],
+  [["Employer name", "Example Bakery"], ["Pay for the year", "$32,450"], ["Tax already taken out of your pay", "2810.5"]],
+  [["Bank name", "example credit union"], ["Interest from your bank", "12.34"]],
 ];
 
 async function toReview(page: Page, overrides: Record<string, string> = {}) {
@@ -31,7 +37,7 @@ test.beforeEach(async ({ page }) => {
 
 test("step 1 shows the practice banner, both ways and who does what", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Tax Filing Helper" })).toBeVisible();
-  await expect(page.getByText("Practice site. Nothing here is real. Nothing is filed.")).toBeVisible();
+  await expect(page.getByText("Practice only. Use the made-up answers shown. Nothing is filed.")).toBeVisible();
   await expect(page.getByRole("radio", { name: /Guided Free File/ })).toBeFocused();
   await expect(page.getByRole("region", { name: "Who does what" })).toContainText("Press Submit");
   await noSideScroll(page);
@@ -51,7 +57,7 @@ test("copy the answers in one screen at a time, then stop on the review page", a
   }
   await expect(page.getByText("Step 4 of 4: Check your answers")).toBeVisible();
   await expect(page.getByLabel("Practice check")).toContainText("All 8 answers match.");
-  await expect(page.getByText("This is where you stop. You press Submit yourself, on the real IRS partner site.")).toBeVisible();
+  await expect(page.getByText("You stop here. The real filing is on IRS.gov when Free File opens. You can keep a copy of this check.")).toBeVisible();
   // The helper stops: nothing on this page can submit.
   expect(await page.locator("form").count()).toBe(0);
   expect(await page.locator('input[type="submit"], button[type="submit"]').count()).toBe(0);
@@ -62,7 +68,7 @@ test("copy the answers in one screen at a time, then stop on the review page", a
 });
 
 test("a different answer is named on the review page", async ({ page }) => {
-  await toReview(page, { "Interest from your bank (1099-INT)": "12.3", "Last name": "" });
+  await toReview(page, { "Interest from your bank": "12.3", "Last name": "" });
   await expect(page.getByLabel("Practice check")).toContainText("6 of 8 answers match. 2 need a look.");
   const rows = page.getByRole("region", { name: "Your answers next to what you typed" });
   await expect(rows).toContainText("Answer sheet: $12.34");

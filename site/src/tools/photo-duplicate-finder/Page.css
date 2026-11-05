@@ -45,3 +45,6 @@
 .nt-pdf-details { margin: 0 0 var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-pdf-details > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-3); font-weight: 700; color: var(--nt-ink); cursor: pointer; }
 .nt-pdf-details-body { padding: 0 var(--nt-space-3) var(--nt-space-3); }
+.nt-pdf-picked { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); overflow-wrap: anywhere; }
+.nt-pdf-picked ul { margin: 0; padding-left: var(--nt-space-4); }
+.nt-pdf-what { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border-left: 4px solid var(--nt-ink); background: var(--nt-white); font-size: 1.125rem; }

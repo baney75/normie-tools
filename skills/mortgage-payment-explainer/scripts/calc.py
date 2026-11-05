@@ -305,20 +305,15 @@ def mortgage_text(result):
         return problem_lines(result)
     r = result
     return [
-        "Total monthly payment: %s" % money_text(r["totalMonthlyCents"]),
-        "Home price: %s" % money_text(r["priceCents"]),
-        "Down payment: %s" % money_text(r["downCents"]),
-        "Loan amount: %s" % money_text(r["loanCents"]),
-        "Yearly interest rate: %s" % percent_text(r["rateBps"]),
-        "Loan length: %s" % months_text(r["months"]),
-        "Principal and interest: %s" % money_text(r["piCents"]),
-        "Property tax each month: %s" % money_text(r["taxMonthCents"]),
-        "Home insurance each month: %s" % money_text(r["insuranceMonthCents"]),
-        "HOA each month: %s" % money_text(r["hoaCents"]),
-        "Mortgage insurance each month: %s" % money_text(r["pmiCents"]),
-        "Total interest over the loan: %s" % money_text(r["totalInterestCents"]),
-        "Your first payment goes to interest: %s" % money_text(r["firstInterestCents"]),
-        "Your first payment lowers what you owe: %s" % money_text(r["firstPrincipalCents"]),
+        "Your monthly payment is %s." % money_text(r["totalMonthlyCents"]),
+        "Principal and interest is %s each month." % money_text(r["piCents"]),
+        "Property tax is %s each month." % money_text(r["taxMonthCents"]),
+        "Home insurance is %s each month." % money_text(r["insuranceMonthCents"]),
+        "HOA is %s each month." % money_text(r["hoaCents"]),
+        "Mortgage insurance is %s each month." % money_text(r["pmiCents"]),
+        "The loan amount is %s." % money_text(r["loanCents"]),
+        "Interest over the whole loan is %s." % money_text(r["totalInterestCents"]),
+        "Your first payment pays %s of interest and lowers what you owe by %s." % (money_text(r["firstInterestCents"]), money_text(r["firstPrincipalCents"])),
         END_LINE,
     ]
 

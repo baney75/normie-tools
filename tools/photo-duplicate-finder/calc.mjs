@@ -126,7 +126,7 @@ export function screenFiles(files, alreadyHave = 0) {
     } else if (size > MAX_BYTES) {
       skipped.push({ index, name, reason: "too-big", message: `${name} is ${formatBytes(size)}. That is over ${formatBytes(MAX_BYTES)}, so it was skipped.` });
     } else if (have >= MAX_PHOTOS) {
-      skipped.push({ index, name, reason: "over-cap", message: `${name} was left out. NT looks at up to ${MAX_PHOTOS} photos at a time.` });
+      skipped.push({ index, name, reason: "over-cap", message: `${name} was left out. Up to ${MAX_PHOTOS} photos are checked at a time.` });
     } else {
       accepted.push(index);
       have++;

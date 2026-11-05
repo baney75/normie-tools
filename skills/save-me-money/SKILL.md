@@ -16,7 +16,7 @@ description: List a person's repeating costs (phone, internet, streaming, insura
 1. Run `python3 scripts/env_check.py`. If it says something is missing, tell the person in plain words and stop.
 2. Ask for their repeating costs: phone, internet, streaming, insurance, gym, and anything else. For each, ask the amount and how often it is paid: every week, month or year. Ask only for costs the person has. Do not guess an amount.
 3. Put the costs in a JSON file like `examples/starter-costs.json`. Keep the person's own words for each name and amount.
-4. Run `python3 scripts/calc.py --text --file <input.json>`. Read that text to the person as it is. Do not change a number. If it has "Fix this first:" lines, read them and ask for the fix.
+4. Run `python3 scripts/calc.py --text --file <input.json>`. Say every line of the script output to the person, in order, in your own plain words. Do not leave a line out. Do not change a number. If it has "Fix this first:" lines, read them and ask for the fix.
 5. The text lists costs biggest first, with a total per year and a total per month. Weekly costs use 52 weeks, so they are estimates.
 6. Ask which costs the person wants to look at first. For only those costs, read the questions to ask before a call. Do not add prices, offers or names of companies.
 7. Say plainly: Subscription Finder, Bill Negotiation Prep and Cheaper Plan Finder are coming soon and are not ready. This skill never calls, cancels or pays anything. The person does that.

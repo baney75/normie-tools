@@ -2,7 +2,7 @@
   "skill": "monthly-budget",
   "model": "qwen2.5:1.5b",
   "at": "2026-11-05",
-  "judge": "haiku",
+  "judge": "sonnet",
   "by": {
     "1": {
       "passed": 10,
@@ -35,7 +35,7 @@
       "id": "l1-short",
       "level": 1,
       "task": "I bring in $1,000 pay and $250.50 from a side job. Rent is $1,100 and food is $400.25. How does my month look?",
-      "reply": "Your total income for the month is $1,250.50. Your total spending is $1,500.25. There is a $249.75 gap between what you bring in and what you spend. The percentages of your income spent on rent and food are 88% and 32%, respectively.",
+      "reply": "Your month looks like this:\n\n- Total income: $1,250.50\n- Total spending: $1,500.25\n- More goes out than comes in. The gap is $249.75.\n- Percent of income spent: 120%\n\nIncome, Pay: $1,000.00\nIncome, Side job: $250.50\nSpending, Rent: $1,100.00, 88% of income, 73% of spending\nSpending, Food: $400.25, 32% of income, 27% of spending\nPercents are whole numbers. They are rounded and split so the percents of spending add up to 100.",
       "met": [
         true,
         true,

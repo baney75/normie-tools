@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -74,6 +74,7 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-budget">
         <p className="nt-budget-intro">{COPY.intro}</p>
+        <PrivacyNote />
 
         {flow.hasSaved && pristine ? (
           <div className="nt-budget-status">
@@ -90,7 +91,6 @@ export function Page() {
           </div>
         ) : null}
 
-        <StepLabel n={1} of={2}>{COPY.step1}</StepLabel>
         <form className="nt-budget-form" onSubmit={(e) => e.preventDefault()} noValidate>
           {(["income", "expenses"] as const).map((kind) => {
             const c = kind === "income" ? COPY.income : COPY.spending;
@@ -145,13 +145,10 @@ export function Page() {
 
         <StartOver flowId="monthly-budget" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
 
-        {result.ok && !result.hasAmounts ? <p className="nt-budget-status">{COPY.empty}</p> : null}
         {!result.ok ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
 
         <Answer result={result} />
 
-        <p className="nt-budget-note">{COPY.notes.count}</p>
-        <PrivacyNote />
       </div>
     </ScreenFrame>
   );
@@ -164,8 +161,8 @@ function Answer({ result: whole }: { result: ReturnType<typeof planBudget> }) {
   if (!whole.ok || !whole.hasAmounts) {
     return (
       <>
-        <ResultCard label={r.leftLabel} step={COPY.step2} waiting={COPY.waiting} />
-        <SavePrintSheet title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
+        <ResultCard label={r.leftLabel} waiting={COPY.waiting} />
+        <SavePrintSheet quiet title={COPY.save.title} onSave={() => {}}>{null}</SavePrintSheet>
       </>
     );
   }
@@ -195,8 +192,6 @@ function Done({ result }: { result: Good }) {
       "",
       ...rows.map((x) => `${x.name}: ${formatMoney(x.cents)} (${sayPct(x)})`),
       "",
-      COPY.notes.count,
-      "",
     ].join("\n");
     try {
       const url = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
@@ -212,7 +207,7 @@ function Done({ result }: { result: Good }) {
 
   return (
     <>
-      <ResultCard label={r.leftLabel} step={COPY.step2} answer={formatMoney(result.leftCents)}>
+      <ResultCard label={r.leftLabel} answer={formatMoney(result.leftCents)}>
         <p className="nt-budget-help">{leftHelp}</p>
         <dl className="nt-budget-lines">
           {totals.map(([k, val]) => (
@@ -233,16 +228,15 @@ function Done({ result }: { result: Good }) {
               <li key={`${x.name}-${i}`}>
                 <div className="nt-budget-bar-head">
                   <span>{x.name}</span>
-                  <span className="nt-budget-bar-num">{formatMoney(x.cents)}</span>
+                  <span className="nt-budget-bar-num">{formatMoney(x.cents)}, {sayPct(x)}</span>
                 </div>
                 <div className="nt-budget-bar" aria-hidden="true">
                   <div className="nt-budget-bar-fill" style={{ width: `${width(x)}%` }} />
                 </div>
-                <p className="nt-budget-bar-pct">{sayPct(x)}</p>
               </li>
             ))}
           </ul>
-          <p className="nt-budget-help">{COPY.where.barNote}</p>
+          <p className="nt-budget-help">{hasIncome ? COPY.where.roundedIncome : COPY.where.rounded}</p>
         </section>
       ) : null}
 
@@ -281,7 +275,7 @@ function Done({ result }: { result: Good }) {
         </div>
       </details>
 
-      <SavePrintSheet title={COPY.save.title} onSave={save}>
+      <SavePrintSheet quiet title={COPY.save.title} onSave={save}>
         <p>{COPY.save.preview}</p>
       </SavePrintSheet>
     </>

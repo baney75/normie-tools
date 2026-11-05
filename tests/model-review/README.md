@@ -19,3 +19,18 @@ Two pinned prompts that ask a model to react to one screen.
 The harness runs the `claude` command in print mode and needs you to be signed in. It is never run by `npm test`, or CI.
 
 Model output varies. Treat a run as advice. The deterministic checks in `npm test` are the hard gate.
+
+## Review a whole tool (the evidence gate)
+
+`review.mjs` captures the page at 390px wide in a real browser, writes what a reader sees to `screens/`, runs the two pinned prompts, and writes `tests/model-review/<tool>.json`.
+
+```bash
+cd site && npx vite build --outDir /tmp/nt-dist && npx vite preview --outDir /tmp/nt-dist --port 4180 &
+node tests/model-review/review.mjs monthly-budget --url http://127.0.0.1:4180
+```
+
+- Calculators are read twice: empty, and with the person's numbers typed. A tool with steps has a scene file in `scenes/<tool>.mjs` that walks the screens and captures each one.
+- The screen text lists every visible heading, label, hint, box with its value, and button, and says whether a button is filled in the main-button colour. Hints in plain spans are included.
+- The first-time-user prompt runs three times on each screen. The middle score is kept and all three are on record.
+- The design rubric runs three times for Haiku and three for Sonnet. A rule passes when it passes in most runs.
+- `node scripts/check-evidence.mjs` is the gate: every screen needs a reader score of 4 or more and every rule passing for both graders, and the skill-eval results must meet their bars. No record means the tool cannot stay shipped.

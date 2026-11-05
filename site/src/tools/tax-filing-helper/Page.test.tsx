@@ -20,8 +20,8 @@ async function typeInto(label: string, text: string) {
 
 const SCREEN_ITEMS: [string, string][][] = [
   [["First name", "Sample"], ["Last name", "Person"], ["Email", "sample.person@example.com"]],
-  [["Employer name", "Example Bakery"], ["Pay from your W-2", "32450"], ["Tax already taken out of your pay", "2810.5"]],
-  [["Bank name", "Example Credit Union"], ["Interest from your bank (1099-INT)", "12.34"]],
+  [["Employer name", "Example Bakery"], ["Pay for the year", "32450"], ["Tax already taken out of your pay", "2810.5"]],
+  [["Bank name", "Example Credit Union"], ["Interest from your bank", "12.34"]],
 ];
 
 async function toStep3() {
@@ -41,7 +41,7 @@ describe("Tax Filing Helper page", () => {
   it("opens on step 1 with the practice banner and one filled button", () => {
     const { container } = render(<Page />);
     expect(screen.getByRole("heading", { level: 1, name: "Tax Filing Helper" })).toBeInTheDocument();
-    expect(screen.getByText("Practice site. Nothing here is real. Nothing is filed.")).toBeInTheDocument();
+    expect(screen.getByText("Practice only. Use the made-up answers shown. Nothing is filed.")).toBeInTheDocument();
     expect(screen.getByText("Step 1 of 4: Pick your way")).toBeInTheDocument();
     expect(container.querySelectorAll("button.primary")).toHaveLength(1);
     expect(screen.getByRole("button", { name: COPY.next })).toHaveClass("primary");
@@ -52,7 +52,8 @@ describe("Tax Filing Helper page", () => {
     render(<Page />);
     expect(screen.getByRole("radio", { name: /Free File Fillable Forms/ })).toBeInTheDocument();
     expect(screen.getByText(/\$95,000 or less last season/)).toBeInTheDocument();
-    expect(screen.getByText(/January 2027/)).toBeInTheDocument();
+    expect(screen.getByText("Free File opens again in January 2027. This practice works now.")).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/Most people pick/);
     expect(screen.getAllByRole("link", { name: /Source: IRS Free File/ })[0]).toHaveAttribute("href", expect.stringContaining("irs.gov"));
     const who = screen.getByRole("region", { name: "Who does what" });
     expect(within(who).getAllByRole("row")).toHaveLength(1 + COPY.who.rows.length);
@@ -92,7 +93,8 @@ describe("Tax Filing Helper page", () => {
     await fillAll();
     expect(screen.getByText("Step 4 of 4: Check your answers")).toBeInTheDocument();
     expect(screen.getByLabelText(COPY.review.resultLabel)).toHaveTextContent("All 8 answers match.");
-    expect(screen.getByText("This is where you stop. You press Submit yourself, on the real IRS partner site.")).toBeInTheDocument();
+    expect(screen.getByText(COPY.review.stop)).toBeInTheDocument();
+    expect(screen.getByText("You press Submit yourself, on the free filing site you pick on IRS.gov.")).toBeInTheDocument();
     // No way to submit: no form, no submit input, no button that files, sends, pays or submits.
     expect(container.querySelector("form")).toBeNull();
     expect(container.querySelector('input[type="submit"], button[type="submit"]')).toBeNull();
@@ -102,12 +104,13 @@ describe("Tax Filing Helper page", () => {
     }
     expect(container.querySelectorAll("button.primary")).toHaveLength(0);
     expect(container.querySelectorAll(".nt-sheet-primary")).toHaveLength(1);
-    expect(screen.getByRole("link", { name: COPY.review.openReal })).toHaveAttribute("href", "https://www.irs.gov/freefile");
+    expect(screen.getAllByText(COPY.review.stop)).toHaveLength(1);
+    expect(screen.queryByText("That is your answer", { exact: false })).toBeNull();
   });
 
   it("step 4 puts the sheet next to what was typed and names each mix-up", async () => {
     render(<Page />);
-    await fillAll({ "First name": "Sampel", "Interest from your bank (1099-INT)": "12.3", "Last name": "" });
+    await fillAll({ "First name": "Sampel", "Interest from your bank": "12.3", "Last name": "" });
     expect(screen.getByLabelText(COPY.review.resultLabel)).toHaveTextContent("5 of 8 answers match. 3 need a look.");
     const rows = within(screen.getByRole("region", { name: COPY.review.tableCaption })).getAllByRole("listitem");
     expect(rows).toHaveLength(8);
@@ -127,6 +130,54 @@ describe("Tax Filing Helper page", () => {
     expect(within(watch).getByRole("link")).toHaveAttribute("href", expect.stringContaining("irs.gov"));
   });
 
+  it("keeps the eight answers once: the save sheet shows one sentence", async () => {
+    render(<Page />);
+    await fillAll();
+    const sheet = screen.getByRole("group", { name: "Preview" });
+    expect(sheet).toHaveTextContent("All 8 answers match.");
+    expect(within(sheet).queryAllByText(/: matches\./)).toHaveLength(0);
+  });
+
+  it("review page: Save a copy is the one filled button, Print is outline, and the source shows once", async () => {
+    const { container } = render(<Page />);
+    await fillAll();
+    expect(screen.getByRole("button", { name: "Save a copy" })).toHaveClass("nt-sheet-primary");
+    expect(screen.getByRole("button", { name: "Print" })).toHaveClass("nt-sheet-secondary");
+    expect(screen.getAllByRole("link", { name: COPY.review.watch.sourceLabel })).toHaveLength(1);
+    const watch = screen.getByRole("region", { name: "Watch out for these" });
+    expect(within(watch).getAllByRole("listitem").length).toBeGreaterThanOrEqual(6);
+    expect(within(watch).getByText(/audit protection \(paid help/)).toBeInTheDocument();
+    expect(container.querySelectorAll(".nt-tfh-row p")).toHaveLength(0);
+  });
+
+  it("start page keeps Who does what in a closed section and cites the advice line", () => {
+    const { container } = render(<Page />);
+    const d = container.querySelector("details");
+    expect(d).not.toBeNull();
+    expect(d).not.toHaveAttribute("open");
+    expect(screen.getAllByRole("link", { name: COPY.pick.sourceLabel })[0]).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/IRS partner site|signing number/);
+  });
+
+  it("copy-in page says the boxes start empty", async () => {
+    render(<Page />);
+    await toStep3();
+    expect(screen.getByText(/The boxes start empty\. Type the sample answers shown\./)).toBeInTheDocument();
+  });
+
+  it("the practice banner shows on every step and no link is empty", async () => {
+    render(<Page />);
+    const banner = "Practice only. Use the made-up answers shown. Nothing is filed.";
+    for (let i = 0; i < 3; i++) {
+      expect(screen.getByText(banner)).toBeInTheDocument();
+      for (const a of document.querySelectorAll("a")) expect((a.textContent ?? "").trim()).not.toBe("");
+      if (i < 2) await click(COPY.next);
+    }
+    for (let i = 0; i < 3; i++) await click(i < 2 ? COPY.nextScreen : COPY.toReview);
+    expect(screen.getByText(banner)).toBeInTheDocument();
+    for (const a of document.querySelectorAll("a")) expect((a.textContent ?? "").trim()).not.toBe("");
+  });
+
   it("shows Save or print on the review page", async () => {
     render(<Page />);
     await fillAll();
@@ -136,7 +187,7 @@ describe("Tax Filing Helper page", () => {
 
   it("junk typing gives a plain different, never NaN", async () => {
     render(<Page />);
-    await fillAll({ "Pay from your W-2": "lots", "Bank name": "\u{1F600}" });
+    await fillAll({ "Pay for the year": "lots", "Bank name": "\u{1F600}" });
     expect(document.body.textContent).not.toMatch(/NaN|undefined|Infinity/);
     expect(screen.getByLabelText(COPY.review.resultLabel)).toHaveTextContent("6 of 8 answers match. 2 need a look.");
   });
@@ -185,7 +236,7 @@ describe("Tax Filing Helper page", () => {
   it("says nothing is sent and links to the page code", () => {
     render(<Page />);
     expect(screen.getByText(/Nothing is sent\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "our public page" })).toHaveAttribute("href", expect.stringContaining("github.com"));
+    expect(screen.getByRole("link", { name: "how this page is made" })).toHaveAttribute("href", expect.stringContaining("github.com"));
   });
 });
 

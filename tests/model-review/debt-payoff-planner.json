@@ -1,6 +1,6 @@
 {
   "tool": "debt-payoff-planner",
-  "screen": " at 390px wide (text saved beside this file in screens/)",
+  "screen": ",  at 390px wide (text saved beside this file in screens/)",
   "at": "2026-11-05",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
@@ -8,32 +8,21 @@
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 3,
-    "output": "1. This screen wants me to look at the answer it already worked out for my two debts, and maybe print or save it.\n\n2. I would tap **Print**.\n\n3. Words I didn't understand or that felt like tech talk:\n- Snowball\n- Avalanche\n- Months to debt-free (clear enough, but I'm not sure how they get it)\n- Total interest\n- Order of payoff\n- Yearly interest rate\n- Smallest monthly payment\n- Interest difference between the two plans\n- \"Show more\" (I don't know what's inside)\n- \"What the words mean\" (a closed section, so I wasn't sure it would help)\n- \"Step 1 of 2 / Step 2 of 2\"\n- \"Save a copy\" (where does it go?)\n- \"Nothing is sent. Numbers stay on this phone or computer.\" (I wasn't sure how I'd know)\n- \"public page\"\n\n4. Worries:\n- I'm not sure that \"Save a copy\" won't put my money numbers somewhere others can see.\n- I worried that tapping \"Start over\" would erase my numbers. It says it asks first, which helps a little.\n- \"Nothing is sent\" is something I have to take on trust.\n- I worried that the numbers are wrong. It says it's an estimate, and the lender statement is the final word.\n- I wondered whether Print would use my paper and ink, or whether it would start something I can't stop.\n- I'm not sure why both plans came out identical. I'm unsure whether I typed something wrong, or whether the \"Extra each month\" box being empty caused it.\n\n5. Things I would skip:\n- The two big Snowball and Avalanche blocks, because they say the same thing.\n- \"Order of payoff\", since both debts end in month 30.\n- The small print about estimates and \"facts about two plans\".\n- \"Back to home\".\n\n6. Score: 3. I can see the answer, but I'm unsure whether I'm done and whether printing is what I need.\n\nRESULT: {\"next_tap\":\"Print\",\"confusing_terms\":[\"Snowball\",\"Avalanche\",\"Total interest\",\"Order of payoff\",\"Yearly interest rate\",\"Smallest monthly payment\",\"Interest difference between the two plans\",\"Show more\",\"What the words mean\",\"Step 1 of 2 / Step 2 of 2\",\"Save a copy\",\"Nothing is sent\",\"public page\"],\"worries\":[\"Save a copy might put my money numbers somewhere others can see\",\"Start over might erase my numbers\",\"Nothing is sent has to be taken on trust\",\"Numbers might be wrong, since it is only an estimate\",\"Unsure what Print will do\",\"Both plans are identical and I don't know if I typed something wrong or left Extra each month empty\"],\"skippable\":[\"Snowball and Avalanche blocks since they match\",\"Order of payoff\",\"small print about estimates and facts about two plans\",\"Back to home\"],\"score\":3}"
+    "score": 4,
+    "runs": [
+      3,
+      3,
+      4,
+      4,
+      4
+    ],
+    "rule": "middle score of the runs",
+    "output": "1. The screen wants me to look at the answer it worked out from my numbers, which says one way of paying off debts costs less than the other, and then finish.\n\n2. \"Done. Back to home.\"\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"Snowball\" and \"Avalanche\". They're explained a little, but the names are odd.\n- \"Yearly interest rate\".\n- \"Smallest monthly payment\". It's also called \"minimum payment\" elsewhere, which made me wonder if they're the same thing.\n- \"Months to debt-free\".\n- \"Total interest\" and \"Total paid\".\n- \"Order of payoff\".\n- \"Show your debts and how each month works\".\n- \"What the words mean\".\n- \"Source: how this page is made\".\n- \"Nothing is sent\".\n- \"Put it back\".\n- \"Save a copy\" and \"a file\". I'm not sure where it goes on my phone.\n- \"Print opens a preview\".\n\n4. What worried me:\n- \"Start over\" might wipe my numbers. It says it asks first, which helps a bit.\n- \"Remove the last debt\" might delete something I typed.\n- \"Save a copy\" puts a file on my phone. I don't know where it goes or if it's safe.\n- I wonder if \"Done. Back to home\" erases my numbers. It says \"Your numbers stay,\" but that was about changing a number.\n- It says \"Nothing is sent.\" I'd like to believe that, but I can't check it.\n- I'm not sure how much to trust the answer. It says \"estimate.\"\n- Nothing mentioned money to pay, which is good.\n\n5. What I would skip:\n- The \"Snowball\" and \"Avalanche\" detail blocks with their month and interest figures, once I've seen the big $125.14 answer.\n- \"Print\" and \"Save a copy\".\n- \"Add another debt\" and \"Remove the last debt\".\n- The \"Source: how this page is made\" link.\n- The closed sections.\n\n6. Score: 4. The orange button is clear. But \"Done. Back to home\" feels like it might throw my answer away, and I'm not sure what I'm supposed to do with the result.\n\nRESULT: {\"next_tap\":\"Done. Back to home.\",\"confusing_terms\":[\"Snowball\",\"Avalanche\",\"yearly interest rate\",\"smallest monthly payment\",\"Months to debt-free\",\"Total interest\",\"Total paid\",\"Order of payoff\",\"Show your debts and how each month works\",\"What the words mean\",\"Source: how this page is made\",\"Nothing is sent\",\"Put it back\",\"Save a copy\",\"Print opens a preview\"],\"worries\":[\"Start over might erase my numbers\",\"Remove the last debt might delete what I typed\",\"Save a copy puts a file on my phone and I don't know where\",\"Done. Back to home might lose my answer\",\"Can't check that nothing is sent\",\"It's only an estimate\"],\"skippable\":[\"Snowball and Avalanche detail blocks\",\"Print\",\"Save a copy\",\"Add another debt\",\"Remove the last debt\",\"Source: how this page is made link\",\"closed sections\"],\"score\":4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"FAIL\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"FAIL\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule2: empty [heading 3] with no text\", \"rule6: \\\"Remove the last debt\\\" changes the entered numbers with no preview and no note on how to undo\"], \"score\": 6}",
-      "rules": [
-        "PASS",
-        "FAIL",
-        "PASS",
-        "PASS",
-        "PASS",
-        "FAIL",
-        "PASS",
-        "PASS"
-      ],
-      "passes": 6,
-      "fails": [
-        "rule2: empty [heading 3] with no text",
-        "rule6: \"Remove the last debt\" changes the entered numbers with no preview and no note on how to undo"
-      ]
-    },
-    {
-      "model": "sonnet",
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -45,8 +34,347 @@
         "PASS"
       ],
       "passes": 8,
-      "fails": []
+      "fails": [],
+      "runs": [
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"FAIL\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [\"rule6: \\\"Remove takes out one line. A Put it back button shows right after.\\\" The line is removed with no preview shown before the change, only an undo afterward.\"], \"score\": 7}"
+    },
+    {
+      "model": "sonnet",
+      "rule": "a rule passes when it passes in most of 5 runs",
+      "rules": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "passes": 8,
+      "fails": [],
+      "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      ],
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
     }
   ],
-  "otherScreens": []
+  "otherScreens": [
+    {
+      "screen": "empty",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          3,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type in what I owe on my debts, then press a button to see which way of paying them off is better.\n\n2. I would tap the first box, \"Debt 1 name (optional)\", and start typing. After I fill things in, I would tap \"Show my answer\".\n\n3. Words that felt like tech talk or confusing:\n- \"Snowball\" and \"Avalanche\" (they sound like weather, and the screen only explains them in one short line)\n- \"yearly interest rate\" (I know it is on my bill, but I might not know which number it is)\n- \"smallest monthly payment\" (is that the same as \"minimum payment\"? I think so, but the words differ)\n- \"how this page is made\" (an odd link name, and I am not sure what it leads to)\n- \"Remove takes out one line. A Put it back button shows right after.\" (confusing, and I don't see a \"Put it back\" button now)\n- \"What the words mean\" (I'm glad it is there, but it is closed)\n- \"estimate\" and \"lender statement\" (the second one I can guess, but it is a formal term)\n\n4. Worries:\n- It asks about my debts, which is private. The line \"Nothing is sent. Numbers stay on this phone or computer\" helps, but I would still wonder if it is true.\n- \"Remove the last debt\" sounds like it could delete something, and I'm not sure whether I could undo it.\n- I don't know if I need to fill in both Debt 1 and Debt 2, or if I can leave Debt 2 empty.\n- I don't know if I need to type a dollar sign or a percent sign.\n- \"Show my answer\" makes me wonder if I will be asked to pay or sign up. It doesn't say so, though.\n\n5. I would skip:\n- The \"Source: how this page is made\" line and its link.\n- The \"How the two payoff orders compare / Your answer shows here\" part, since nothing is there yet.\n- \"Back to home,\" unless I got stuck.\n- \"Extra each month (optional)\" on my first try, since it is optional.\n\n6. Score: 4. The first box is highlighted and the orange button is clear, but I'm unsure about Debt 2 and the typing format.\n\nRESULT: {\"next_tap\": \"Debt 1 name (optional)\", \"confusing_terms\": [\"Snowball\", \"Avalanche\", \"yearly interest rate\", \"smallest monthly payment\", \"how this page is made\", \"Put it back button\", \"What the words mean\", \"lender statement\", \"estimate\"], \"worries\": [\"Privacy of debt information, even with the 'Nothing is sent' note\", \"Remove the last debt might delete my entries and I'm not sure I can undo it\", \"Unsure whether Debt 2 must be filled in\", \"Unsure whether to type $ or %\", \"Unsure if Show my answer leads to a cost or sign-up\"], \"skippable\": [\"Source: how this page is made link\", \"How the two payoff orders compare / Your answer shows here\", \"Back to home\", \"Extra each month (optional)\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 5 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 # Messy inputs
 
-- A folder with no photos gives "Photos checked: 0" and no groups. Say so plainly.
+- A folder with no photos gives "I checked 0 photos." and "I found no exact copies.". Say so plainly.
 - Empty files are skipped with a note: "NAME is empty, so it was skipped."
 - A file over 25 MB is skipped with a note that gives its size.
 - After 300 photos, the rest are left out with a note for each. Suggest running again on a smaller folder.

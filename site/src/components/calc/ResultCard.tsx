@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { href } from "../../lib/hashRouter";
 import "./calc.css";
 
 export type ResultCardProps = {
@@ -16,16 +17,43 @@ export type ResultCardProps = {
   children?: ReactNode;
 };
 
+function firstBox(emptyOnly: boolean): HTMLElement | null {
+  const all = Array.from(document.querySelectorAll<HTMLInputElement>("input.nt-field-input"));
+  return (emptyOnly ? all.find((el) => !el.value) : all[0]) ?? document.querySelector<HTMLElement>("select");
+}
+
+function goTo(el: HTMLElement | null) {
+  el?.scrollIntoView?.({ block: "center" });
+  el?.focus();
+}
+
 /** The main card with the big answer in Fraunces. It is a polite live region, so a screen reader hears updates. */
 export function ResultCard({ label, answer, waiting = "Your answer shows here", step, closing = true, children }: ResultCardProps) {
   const has = answer !== undefined && answer !== "";
   return (
     <section className={`nt-result${has ? "" : " nt-result-waiting"}`} aria-live="polite" aria-label={label}>
-      {step ? <p className="nt-step">{has ? `${step}. You are here.` : step}</p> : null}
+      {step ? <p className="nt-step">{step}</p> : null}
       <p className="nt-result-label">{label}</p>
       {has ? <p className="nt-result-answer">{answer}</p> : <p className="nt-result-waiting-text">{waiting}</p>}
       {has && children ? <div className="nt-result-body">{children}</div> : null}
-      {has && closing ? <p className="nt-result-done">That is your answer. You can stop here, or keep a copy below.</p> : null}
+      {!has && closing ? (
+        <button type="button" className="primary nt-result-again" onClick={() => goTo(firstBox(true))}>
+          Show my answer
+        </button>
+      ) : null}
+      {has && closing ? (
+        <>
+          <p className="nt-result-done">That is your answer. You can stop here. Or change a number to try again. Your numbers stay.</p>
+          <div className="nt-result-row">
+            <a className="primary nt-result-again nt-result-done-link" href={href("/")}>
+              Done. Back to home.
+            </a>
+            <button type="button" className="nt-result-change" onClick={() => goTo(firstBox(false))}>
+              Change a number
+            </button>
+          </div>
+        </>
+      ) : null}
     </section>
   );
 }

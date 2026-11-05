@@ -13,9 +13,8 @@ test.beforeEach(async ({ page }) => {
 
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Unit Converter" })).toBeVisible();
-  await expect(page.getByText("Type a number in the box")).toBeVisible();
+  await expect(page.getByText("Pick what you are measuring and type a number")).toBeVisible();
   await expect(page.getByLabel("Your answer", { exact: true })).toContainText("Your answer shows here");
-  await expect(page.getByText("Step 2 of 2: Read your answer")).toBeVisible();
   await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
 });
 
@@ -35,7 +34,7 @@ test("temperature, swap and a minus sign", async ({ page }) => {
   await page.getByLabel("What are you measuring?").selectOption("temperature");
   await page.getByLabel("Number").fill("98.6");
   await expect(page.getByLabel("Your answer", { exact: true })).toContainText("37");
-  await page.getByRole("button", { name: "Swap the two" }).click();
+  await page.getByRole("button", { name: "Swap 'from' and 'to'" }).click();
   await expect(page.getByLabel("Your answer", { exact: true })).toContainText("209.48");
   await page.getByLabel("Number").fill("-40");
   await expect(page.getByLabel("Your answer", { exact: true })).toContainText("-40");

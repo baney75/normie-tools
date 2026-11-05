@@ -1,25 +1,31 @@
-Screen: form-filler, review state, phone 390px wide. Order is top to bottom.
+Screen: form-filler, review state, phone 390px wide. Order is top to bottom. The person has just typed their own numbers in the boxes, so the boxes hold their numbers.
 Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
 
 [heading 1] Form Filler
 Step 4 of 4: Review
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 [heading 2] Look it over
-Check each answer. Tap Edit to change one. Nothing is sent.
+Check each answer. Tap Edit to change one.
+Your answer sheet is a list to read from when you type your answers in at IRS.gov/freefile.
 Which free way may fit
 Guided Free File
+Guided Free File asks simple questions, one at a time. The software does the math. Source: IRS Free File page
+[link, plain] IRS Free File page
 [heading 3] Your answers
-Filing this year's taxes
+Filing this year's taxes?
 Yes
-[link, plain] Edit Filing this year's taxes
-Income $95,000 or less
+[link, plain] Edit Filing this year's taxes?
+Income $95,000 or less?
 Yes
-[link, plain] Edit Income $95,000 or less
-Willing to type into the forms
+[link, plain] Edit Income $95,000 or less?
+Willing to type into the forms?
 Yes
-[link, plain] Edit Willing to type into the forms
-Free File is open
-No
-[link, plain] Edit Free File is open
+[link, plain] Edit Willing to type into the forms?
+Free File open yet?
+No. The IRS says it opens in January 2027.
+[link, plain] Edit Free File open yet?
 [heading 3] My info
 First name
 Sample
@@ -45,27 +51,25 @@ Birth date
 Phone number
 555-555-0123
 [link, plain] Edit Phone number
-Papers ticked
-3 of 9
-[link, plain] Edit Papers ticked
-You type your Social Security number yourself on the IRS partner site.
+Papers you have
+3 of 9 (tap Edit to see which)
+[link, plain] Edit Papers you have
+You type your Social Security number yourself on the free filing site you pick on IRS.gov.
 [heading 3] What you do yourself
 Make your Free File account.
 Check every number on the review page.
-Sign with last year's income number or your 5-digit code.
-Press Submit.
-Pay any tax you owe, yourself.
-NT never presses Submit, signs for you, pays anything, or picks a paid add-on. It never asks for your Free File password.
+Sign with the income number from last year's return, or a 5-digit code you pick.
+Press Submit, the button that sends your tax return.
+If you owe tax, you pay it yourself.
+This tool never presses Submit, signs for you, pays anything, or picks an extra that costs money. It never asks for your Free File password.
 Source: IRS Free File page
 [link, plain] IRS Free File page
 [closed section, tap to open] See the answer sheet
-This makes a text file on your phone or computer. To undo, delete the file.
 [MAIN BUTTON, filled dark orange] Save my answer sheet
-[plain button, outline only] Save my answers to use later
+This saves one text file with your answers. To undo, delete the file.
+[plain button, outline only] Stop now and finish later
 [plain button, outline only] Back
 [plain button, outline only] Start over
 Start over asks first, and you can undo it right after.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 Back to home
 [link, plain] Back to home

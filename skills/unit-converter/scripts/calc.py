@@ -300,8 +300,7 @@ def unit_text(result, inp):
     from_name = ONE_NAMES[result["from"]] if one else result["fromName"]
     return [
         "%s %s is %s %s." % (typed, from_name, result["answer"], result["toName"]),
-        "Your answer: %s %s" % (result["answer"], result["toName"]),
-        "Shown to 6 digits.",
+        "The answer is shown to 6 digits.",
         "Conversions use exact standard factors.",
     ]
 

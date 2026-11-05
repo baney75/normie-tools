@@ -1,38 +1,41 @@
-Screen: student-loan-growth-and-payoff, empty state, phone 390px wide. Order is top to bottom.
-Layout notes: the one filled dark orange button is the main action. It is greyed out until there is an answer.
+Screen: student-loan-growth-and-payoff, empty state, phone 390px wide. Order is top to bottom. Nothing is typed yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+The first box has the cursor in it and a bright outline: that is where to start typing.
 
 [heading 1] Student Loan Growth and Payoff
-Type the numbers for one student loan. See how it grows and when it is paid off.
-Step 1 of 2: Type your numbers
+Type what you owe and the yearly interest rate. Your answer shows below.
+Nothing is sent. Numbers stay on this phone or computer. Source: how this page is made.
+[link, plain] how this page is made
 [label] Loan balance
+Find it on your loan statement. Type the amount you owe now.
 [box] Loan balance = "" (cursor is here)
 [label] Yearly interest rate
+Find it on your loan statement. Type just the number, like 5.5, with no percent sign. Type 0 if there is none.
 [box] Yearly interest rate = ""
 [label] Months with no payments so far (optional)
+Months before your first payment, like time in school. Leave it empty if none.
 [box] Months with no payments so far (optional) = ""
-[label] Add the unpaid interest to my balance Check this box if your loan works that way. The company that collects your payments can tell you.
-[tick box] Add the unpaid interest to my balance Check this box if your loan works that way. The company that collects your payments can tell you. (not chosen)
+[tick box] Add the unpaid interest to my balance (not chosen)
+[label] Add the unpaid interest to my balance
+Check this if your loan statement says unpaid interest is added to what you owe.
 [label] Monthly payment (optional)
+What you pay each month. Leave it empty to see only the balance.
 [box] Monthly payment (optional) = ""
 [label] First payment month (optional)
+Type numbers, not a name. Year, a dash, then the month, like 2026-09. Leave it empty to skip.
 [box] First payment month (optional) = ""
 [label] Years you want to pay it off in (optional)
+A whole number. Leave it empty to skip.
 [box] Years you want to pay it off in (optional) = ""
-[plain button, outline only, disabled] Start over
-Start over asks first, and you can undo it right after.
-Step 2 of 2: Read your answer
 Balance when payments start
 Your answer shows here
+[MAIN BUTTON, filled dark orange] Show my answer
 [heading 2] Keep your answer if you want
-[MAIN BUTTON, filled dark orange, disabled] Print
+[plain button, outline only, disabled] Print
 [plain button, outline only, disabled] Save a copy
-Print and Save a copy only make a copy. Your numbers on this page stay as they are. You can delete a saved copy any time.
+Print opens a preview first. Save a copy shows you what goes in the file first. Then it makes the file on this phone or computer. Your numbers on this page stay as they are. You can delete a saved copy any time.
 
-Start with your loan balance and the yearly interest rate. Your answer shows up below.
 Your loan statement is the final word. This page helps you understand it.
-These are facts about the numbers, not advice.
-Nothing is sent. Numbers stay on this phone or computer. You can check this on our public page.
-[link, plain] our public page
 [closed section, tap to open] How this is figured
 
 Back to home
