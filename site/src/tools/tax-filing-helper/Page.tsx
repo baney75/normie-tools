@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { Field, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { Field, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -63,7 +63,6 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-tfh">
         <p className="nt-tfh-banner" role="note">{COPY.banner}</p>
-        <PrivacyNote />
 
         {flow.hasSaved && pristine ? (
           <div className="nt-tfh-status">
@@ -238,7 +237,7 @@ function Review({ v, result, back }: { v: Inputs; result: ReturnType<typeof chec
   return (
     <>
       <h2 className="nt-tfh-h2">{r.heading}</h2>
-      <ResultCard label={r.resultLabel} closing={false} answer={good ? good.summary : undefined} waiting="The check shows here">
+      <ResultCard label={r.resultLabel} answer={good ? good.summary : undefined} waiting="The check shows here">
         <p className="nt-tfh-help">{wayName ? `${r.youPicked}: ${wayName}.` : r.notPicked}</p>
       </ResultCard>
 

@@ -3,7 +3,7 @@ import { CalmMessage } from "../../components/CalmMessage";
 import { ResumePrompt } from "../../components/ResumePrompt";
 import { UploadField } from "../../components/UploadField";
 import { ScreenFrame } from "../../components/ScreenFrame";
-import { ErrorNote, PrivacyNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, ResultCard, StartOver, StepLabel } from "../../components/calc";
 import { useAutosave, writeSaved } from "../../lib/useAutosave";
 import {
   CHOICES, CHOICE_WORDS, INFO_FIELDS, LINKS, NEVER_LINE, PAPERS, QUESTION_IDS, SSN_LINE, STATES, VITA_PHONE, YOU_DO,
@@ -186,7 +186,6 @@ export function Page() {
         <StepLabel n={topStep(screen) + 1} of={COPY.steps.length}>{COPY.steps[topStep(screen)]}</StepLabel>
         <progress className="nt-ff-bar" aria-label="Progress" value={screen + 1} max={LAST + 1} />
         {screen === 0 ? <p className="nt-ff-intro">{COPY.intro}</p> : null}
-        <PrivacyNote />
         {screen === 0 ? (
           <p className="nt-ff-line">
             {COPY.opensLine} {COPY.sources.label} <a href={LINKS.freeFilePage} rel="noreferrer">{COPY.sources.freeFile}</a>
@@ -207,7 +206,7 @@ export function Page() {
 
         {screen === RESULT ? (
           <section className="nt-ff-screen" aria-label={COPY.result.title}>
-            <ResultCard label={COPY.result.label} answer={way.name} closing={false}>
+            <ResultCard label={COPY.result.label} answer={way.name}>
               {way.lines.map((l) => <p key={l} className="nt-ff-line">{l}</p>)}
             </ResultCard>
             {way.way !== "past" ? (

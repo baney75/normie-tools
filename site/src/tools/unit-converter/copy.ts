@@ -2,22 +2,21 @@
 // It never gives advice. Page.test.tsx checks this file.
 export const COPY = {
   title: "Unit Converter",
-  intro: "Pick what you are measuring and type a number. Your answer shows below.",
-  waiting: "Your answer shows here",
-  kind: { label: "What are you measuring?", hint: "Tap a box with a list to see your choices." },
+  question: "Change cups, inches, pounds and more",
+  see: "See my answer",
+  waiting: "Type a number to see your answer.",
+  kind: { label: "What are you measuring?" },
   from: { label: "Change from" },
   to: { label: "Change to" },
-  value: { label: "Number", hint: "Commas are fine. For example: 12 or 3.5." },
-  swap: "Swap 'from' and 'to'",
-  swapHint: "Tap it again to swap back.",
-  swapped: "Swapped.",
+  value: { label: "Number" },
+  swap: "Swap",
   stillNeeded: "Still needed:",
   fixFirst: "Fix the note above to see your answer.",
   resume: {
     title: "Use your last numbers?",
-    body: "You typed numbers here before. They were saved on your phone or computer.",
+    body: "You typed numbers here before. They are saved on this phone or computer.",
     yes: "Use them",
-    no: "Start fresh",
+    no: "No thanks",
   },
   result: {
     label: "Your answer",
@@ -39,10 +38,9 @@ export const COPY = {
     rounding: "The math keeps every digit. Only the answer is rounded to 6 digits, with 5 going up.",
   },
   save: {
-    summary: "Keep your answer if you want",
     title: "Answer to keep",
     fileName: "unit-answer.txt",
-    preview: "Your answer above, on paper or saved on this phone or computer.",
+    preview: "Your answer, in one line.",
   },
   notes: {
     estimate: "The answer is rounded to 6 digits. Check the exact facts above if you need more.",

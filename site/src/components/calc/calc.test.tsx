@@ -59,6 +59,61 @@ describe("ResultCard and ErrorNote", () => {
     expect(card).toHaveTextContent("Estimate.");
     expect(card.querySelector(".nt-result-answer")).not.toBeNull();
   });
+  it("shows a short unit after the big answer", () => {
+    render(<ResultCard label="Each month" answer="$304.22" unit="a month" />);
+    const card = screen.getByLabelText("Each month");
+    expect(card.querySelector(".nt-result-answer")).toHaveTextContent("$304.22 a month");
+    expect(card.querySelector(".nt-result-unit")).toHaveTextContent("a month");
+  });
+  it("waits with plain words, not a fake button, until there is an answer", () => {
+    const { rerender } = render(<ResultCard label="Each month" />);
+    const card = screen.getByLabelText("Each month");
+    expect(card).toHaveTextContent("Type your numbers to see your answer.");
+    expect(card.querySelector(".nt-result-answer")).toBeNull();
+    expect(screen.queryAllByRole("button")).toHaveLength(0);
+    rerender(<ResultCard label="Each month" waiting="Type your pay to start." />);
+    expect(screen.getByLabelText("Each month")).toHaveTextContent("Type your pay to start.");
+    rerender(<ResultCard label="Each month" answer="$1.00" waiting="Type your pay to start." />);
+    expect(screen.getByLabelText("Each month")).not.toHaveTextContent("Type your pay to start.");
+  });
+  it("shows no Show my answer, closing line, Done link or Change a number", () => {
+    const { rerender } = render(<ResultCard label="Each month" />);
+    rerender(<ResultCard label="Each month" answer="$304.22"><p>Estimate.</p></ResultCard>);
+    expect(screen.queryByText(/Show my answer|That is your answer|Done\. Back to home|Change a number/)).toBeNull();
+    expect(screen.queryAllByRole("button")).toHaveLength(0);
+    expect(screen.queryAllByRole("link")).toHaveLength(0);
+  });
+  it("while waiting, shows only the waiting words and not the label line, but keeps the name for screen readers", () => {
+    const { container } = render(<ResultCard label="Each month" waiting="Type your pay to start." />);
+    const card = screen.getByLabelText("Each month");
+    expect(card).toHaveTextContent(/^Type your pay to start\.$/);
+    expect(container.querySelector(".nt-result-label")).toBeNull();
+    expect(card).toHaveAttribute("aria-label", "Each month");
+  });
+  it("is the target the See button jumps to: id nt-answer and focusable by script only", () => {
+    const { rerender } = render(<ResultCard label="Each month" />);
+    for (const answer of [undefined, "$1.00"]) {
+      rerender(<ResultCard label="Each month" answer={answer} />);
+      const card = screen.getByLabelText("Each month");
+      expect(card).toHaveAttribute("id", "nt-answer");
+      expect(card).toHaveAttribute("tabindex", "-1");
+      card.focus();
+      expect(card).toHaveFocus();
+    }
+  });
+  it("shows the label line once there is an answer, and the answer", () => {
+    const { container, rerender } = render(<ResultCard label="Each month" />);
+    expect(container.querySelector(".nt-result-label")).toBeNull();
+    rerender(<ResultCard label="Each month" answer="$1.00" />);
+    expect(container.querySelector(".nt-result-label")).toHaveTextContent("Each month");
+    expect(container.querySelector(".nt-result-tag")).toBeNull();
+  });
+  it("puts the step label above the label and shows text answers in the text style", () => {
+    render(<ResultCard label="Best way" answer="Free File" step="Step 2 of 2" />);
+    const card = screen.getByLabelText("Best way");
+    expect(card).toHaveTextContent("Step 2 of 2");
+    expect(card.querySelector(".nt-result-answer-text")).toHaveTextContent("Free File");
+  });
   it("ErrorNote starts with a word, not only a color", () => {
     render(<ErrorNote id="e1">Use a number.</ErrorNote>);
     expect(screen.getByText("Use a number.", { exact: false })).toHaveTextContent("Check this. Use a number.");

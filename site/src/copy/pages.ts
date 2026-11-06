@@ -19,11 +19,11 @@ export const PAGES = {
   home: {
     tagline: "Small tools for everyday things.",
     subline: "Use them yourself, or ask your AI app.",
-    countNone: "tools are on the way. None is ready yet.",
-    countAll: "tools in all.",
-    readyOne: "is ready now. The rest are on the way.",
-    readyMany: "are ready now. The rest are on the way.",
-    gridHeading: "All tools",
+    promise: "Free. No sign up. Your numbers stay on your phone or computer.",
+    readyHeading: "Ready to use",
+    noneReady: "No tool is ready yet. They are on the way.",
+    more: "More tools are on the way.",
+    moreLink: "See what is coming",
     agentsLink: "Point your agent here",
   },
   agents: {
@@ -89,7 +89,25 @@ export const PAGES = {
     ],
     back: "Back to home",
   },
+  private: {
+    title: "Your numbers stay with you",
+    lines: [
+      "NT works inside this page, on your phone or computer.",
+      "Nothing you type is sent to us or to anyone else. There is no account to make.",
+      "Your numbers can be kept on this phone or computer for next time. Start over clears them.",
+    ],
+    checkBefore: "Anyone can read how NT is built. A friend who knows computers can check it for you:",
+    checkLink: "how NT is built",
+    back: "Back to home",
+  },
+  coming: {
+    title: "Tools on the way",
+    intro: "These are not ready yet. We add them one at a time, and only when they work well.",
+    back: "Back to home",
+  },
   tool: {
+    trust: "Your numbers stay on this phone or computer.",
+    how: "How we know",
     notFound: "We could not find that tool.",
     notReady: "This tool is not ready yet.",
     shippedPlaceholder: "Tool page",

@@ -1,6 +1,4 @@
-.nt-slg { max-width: var(--nt-measure); }
-.nt-slg-intro { font-size: 1.125rem; margin: 0 0 var(--nt-space-4); }
-.nt-slg-form { margin: 0 0 var(--nt-space-4); }
+.nt-slg-form { margin: 0 0 var(--nt-space-3); }
 .nt-slg-toggle {
   display: flex;
   align-items: flex-start;
@@ -19,7 +17,7 @@
 .nt-slg-toggle input { width: 1.75rem; height: 1.75rem; margin: 0.5rem 0; flex: none; accent-color: var(--nt-ink); }
 .nt-slg-toggle label { display: flex; align-items: center; min-height: var(--nt-tap); cursor: pointer; }
 .nt-slg-toggle:has(input:checked) { background: var(--nt-mint); }
-.nt-slg-toggle:has(input:focus-visible) { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-slg-toggle:has(input:focus-visible) { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 .nt-slg-toggle-text { display: block; }
 .nt-slg-toggle-hint { display: block; font-weight: 400; font-size: 1rem; color: var(--nt-muted); }
 
@@ -30,9 +28,6 @@
 .nt-slg-lines dd { margin: 0; font-weight: 700; text-align: right; }
 .nt-slg-help { margin: 0 0 var(--nt-space-3); font-size: 1rem; color: var(--nt-muted); }
 
-.nt-slg-details { margin: 0 0 var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
-.nt-slg-details > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-3); font-weight: 700; color: var(--nt-ink); cursor: pointer; }
-.nt-slg-details > summary:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
 .nt-slg-details-body { padding: 0 var(--nt-space-3) var(--nt-space-3); }
 .nt-slg-details-body h2 { font-size: 1.25rem; margin: 0 0 var(--nt-space-2); }
 .nt-slg-year { margin: 0 0 var(--nt-space-2); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); }
@@ -40,4 +35,3 @@
 .nt-slg-year > .nt-slg-lines { padding: 0 var(--nt-space-3); margin: 0; }
 .nt-slg-how { margin: 0; padding-left: 1.25rem; }
 .nt-slg-how li { margin: 0 0 var(--nt-space-2); }
-.nt-slg-note { font-size: 1rem; color: var(--nt-text); }

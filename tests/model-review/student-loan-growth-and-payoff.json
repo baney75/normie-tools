@@ -8,19 +8,25 @@
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 4,
+    "score": 3,
     "runs": [
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
       4,
       4,
-      4
+      3
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to type what I owe and the interest rate, and then it shows me how long it will take to pay off and how much interest I'd pay.\n\n2. I would tap \"Done. Back to home.\" It's the big orange one, and it looks like what you press when you're finished reading the answer.\n\n3. Words that felt like tech talk or were unclear:\n- \"Balance when payments start\"\n- \"Interest that grew before your first payment\"\n- \"Add the unpaid interest to my balance\" (I don't know if I should check this box. It sounds like a loan-office phrase.)\n- \"Months with no payments so far\"\n- \"First payment month,\" and the \"2026-09\" style of writing a date\n- \"Show year by year\"\n- \"How this is figured\"\n- \"Yearly interest rate\"\n- \"Save a copy\" (copy of what, and where does it go?)\n- \"Print opens a preview\"\n- \"Total interest\"\n\n4. Worries:\n- \"Save a copy\" makes me wonder what gets put on my phone, and whether it has my loan numbers in it.\n- \"Start over\" makes me worry I could lose what I typed, even though it says it asks first.\n- The tick box is in the middle of the form and I can't tell if I should have checked it. I worry I got my answer wrong.\n- I'm not sure the answer is right, because the screen says the loan statement is \"the final word.\"\n- \"Done. Back to home.\" might wipe my numbers, though it says \"Your numbers stay.\"\n- It's not clear whether my loan numbers are kept by someone or sent anywhere. It says there is no Send button, which helps a little.\n\n5. Things I would skip:\n- The empty optional boxes (\"Months with no payments so far,\" \"First payment month,\" \"Years you want to pay it off in\"), since I left them empty.\n- \"Show year by year\" and \"How this is figured.\"\n- \"Print\" and \"Save a copy.\"\n- The \"Interest that grew before your first payment\" line, since it just says $0.00.\n\n6. Score: 4. I see the answer (79 months, $3,479.30 in interest) and I know I can stop. I'm only a little unsure whether the \"Done\" button is the right thing to tap, and whether I should have checked the box.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Balance when payments start\", \"Interest that grew before your first payment\", \"Add the unpaid interest to my balance\", \"Months with no payments so far\", \"First payment month / 2026-09 format\", \"Show year by year\", \"How this is figured\", \"Yearly interest rate\", \"Save a copy\", \"Print opens a preview\", \"Total interest\"], \"worries\": [\"Save a copy: unsure what goes on my phone\", \"Start over might lose my numbers\", \"Unsure whether to check the unpaid interest box\", \"Unsure the answer is right since the statement is the final word\", \"Done. Back to home might erase my numbers\", \"Unsure whether my numbers are kept or sent anywhere\"], \"skippable\": [\"empty optional boxes\", \"Show year by year\", \"How this is figured\", \"Print\", \"Save a copy\", \"Interest that grew before your first payment ($0.00)\"], \"score\": 4}"
+    "output": "1. This screen wants me to see how long my loan will take to pay off with my $300 payment, and then either finish or change a number to try again.\n\n2. \"I'm done\"\n\n3. Words that felt like tech talk or unclear:\n- \"How we know\" (a link; I'm not sure what it will show me or where it goes)\n- \"Total interest\" (I know it's extra money, but not exactly how it's counted)\n- \"Yearly interest rate\" (okay, but I'd have to look it up)\n- \"Add school months and other details\" (what are \"school months\"? Why would I add them?)\n- \"More options\" (more of what?)\n- \"See year by year\" (year by year of what?)\n- \"How this is figured\"\n- \"Print or save\" (save where? Print to what?)\n- \"MAIN LINK\" and \"I'm done\" (does \"done\" close it, erase my numbers, or send them somewhere?)\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" is comforting, but I'm not sure I fully believe it.\n- I don't know what \"I'm done\" does. I worry it might erase my work or submit something.\n- \"Save\" makes me wonder where it saves and whether it costs anything.\n- \"Your loan statement is the final word\" makes me worry my numbers could be wrong and I'd get the wrong idea.\n- The word \"estimate\" tells me the answer isn't exact, so I'm not sure how much to trust it.\n\n5. Skippable:\n- \"How we know\" and \"How this is figured\" at the bottom, because I just want my answer.\n- \"More options\" and \"Add school months and other details,\" since I don't know what they are and my answer is already showing.\n- \"Print or save,\" unless I want a copy.\n\n6. Score: 3. The answer is clear and the message says I can stop here, but I'm not sure what \"I'm done\" actually does.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"How we know\", \"Total interest\", \"Add school months and other details\", \"More options\", \"See year by year\", \"How this is figured\", \"Print or save\", \"I'm done (what it does)\", \"MAIN LINK\"], \"worries\": [\"Not sure what 'I'm done' does, might erase or submit my numbers\", \"Where 'Print or save' saves and whether it costs anything\", \"Unsure whether to believe numbers stay on my device\", \"Result is only an estimate; statement is the final word\"], \"skippable\": [\"How we know\", \"How this is figured\", \"More options\", \"Add school months and other details\", \"Print or save\"], \"score\": 3}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "rule": "a rule passes when it passes in most of 3 runs",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -34,6 +40,32 @@
       "passes": 8,
       "fails": [],
       "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
         {
           "passes": 8,
           "rules": [
@@ -78,7 +110,7 @@
     },
     {
       "model": "sonnet",
-      "rule": "a rule passes when it passes in most of 3 runs",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -92,6 +124,32 @@
       "passes": 8,
       "fails": [],
       "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
         {
           "passes": 8,
           "rules": [
@@ -144,15 +202,21 @@
         "runs": [
           4,
           4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in what I owe and my interest rate, and then see how my loan will grow or get paid off.\n\n2. I would tap into the box called \"Loan balance\" and start typing. After filling in the numbers, I would tap \"Show my answer\".\n\n3. Words or phrases I did not understand or that felt like tech talk:\n- \"Empty state\" is not on the screen for me, but \"Balance when payments start\" was a bit unclear. Is that what I owe later, or now?\n- \"Add the unpaid interest to my balance\" with a tick box. I'm not sure what it means for interest to be \"added\" or whether I should tick it.\n- \"Yearly interest rate\" is fine, but \"Type just the number, with no percent sign\" made me stop for a second.\n- \"Months with no payments so far\" is a bit confusing. \"So far\" made me wonder whether it means months already passed or months coming up.\n- \"First payment month\" and the \"2026-09\" format felt like computer talk.\n- \"Save a copy shows what goes in the file\" made me wonder what file and where it goes.\n- \"How this is figured\" is vague.\n- \"Disabled\" is not shown to me, but the Print and Save a copy buttons look faded, and I wasn't sure why.\n\n4. What made me worry:\n- \"Save a copy\" puts a file on my phone, and I don't know where. It does say I can delete it.\n- Typing my loan numbers makes me wonder if they are kept or shared. The screen doesn't say.\n- Not knowing whether to tick the box about unpaid interest. I might get a wrong answer.\n- \"Your loan statement is the final word\" makes me worry the answer here might not be right.\n- \"There is no Send button on this page\" is comforting, but it also made me wonder what \"Send\" would have done.\n\n5. What I would skip:\n- The \"Keep your answer if you want\" section with Print and Save a copy, until I have an answer.\n- \"How this is figured\" closed section.\n- The optional boxes (months with no payments, monthly payment, first payment month, years to pay off) on a first try.\n\n6. Score: 4. I know to start with the first box and then tap the orange button. I am less sure about the optional boxes and the tick box.\n\nRESULT: {\"next_tap\": \"Loan balance\", \"confusing_terms\": [\"Balance when payments start\", \"Add the unpaid interest to my balance\", \"Months with no payments so far\", \"First payment month (2026-09 format)\", \"Save a copy / file\", \"How this is figured\"], \"worries\": [\"Where a saved file goes on my phone\", \"Whether my loan numbers are kept or shared\", \"Not knowing whether to tick the unpaid interest box\", \"Answer may not match my loan statement\", \"Why Print and Save a copy look faded\"], \"skippable\": [\"Keep your answer if you want (Print, Save a copy)\", \"How this is figured\", \"Optional boxes on first try\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in how much I owe, my interest rate, and maybe what I pay each month, so it can tell me when my student loan will be paid off.\n\n2. I would tap into the box under \"Loan balance\" first, to type my number. After filling things in, I would tap \"See my answer.\"\n\n3. Words that felt like tech talk or unclear:\n- \"Yearly interest rate\" (I sort of know it, but I'd have to look at my statement to find it)\n- \"How we know\" (know what? It's a link, and I don't know where it goes)\n- \"Add school months and other details\" (what are \"school months\"? what other details?)\n- \"How this is figured\" (a little vague)\n- \"Leave it empty to see only the balance\" (what balance? I already typed that. It's unclear what I'd see)\n- \"phone or computer\" line about numbers staying put (I don't really know what that means in practice)\n\n4. Worries:\n- I'm being asked for my loan details, so I worry about privacy. The line \"Your numbers stay on this phone or computer\" helps, but I'm not sure I fully trust it.\n- I'm not sure whether tapping \"See my answer\" will cost anything or sign me up for something.\n- I worry that if I leave the monthly payment empty, I'll get the wrong or a useless answer.\n- I worry that the answer might not match my real loan, though the last line (\"Your loan statement is the final word\") eased that a bit.\n\n5. I would skip \"How this is figured\" (closed section), and probably \"How we know,\" since I just want my answer. I'd also skip \"Add school months and other details\" the first time, since I don't know what it is and it seems optional.\n\n6. Score: 4. The boxes and the orange \"See my answer\" button are clear, but I'm unsure about the optional payment and the \"details\" button.\n\nRESULT: {\"next_tap\": \"Loan balance box (then \\\"See my answer\\\")\", \"confusing_terms\": [\"Yearly interest rate\", \"How we know\", \"Add school months and other details\", \"How this is figured\", \"Leave it empty to see only the balance\", \"stay on this phone or computer\"], \"worries\": [\"privacy of loan details\", \"unsure if See my answer costs anything or signs me up\", \"leaving monthly payment empty may give a useless answer\", \"answer may not match real loan\"], \"skippable\": [\"How this is figured\", \"How we know\", \"Add school months and other details\"], \"score\": 4}"
       },
       "designRubric": [
         {
           "model": "haiku",
-          "rule": "a rule passes when it passes in most of 3 runs",
+          "rule": "a rule passes when it passes in most of 5 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -190,6 +254,32 @@
                 "PASS",
                 "PASS",
                 "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
               ]
             },
             {
@@ -210,7 +300,7 @@
         },
         {
           "model": "sonnet",
-          "rule": "a rule passes when it passes in most of 3 runs",
+          "rule": "a rule passes when it passes in most of 5 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -224,6 +314,32 @@
           "passes": 8,
           "fails": [],
           "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
             {
               "passes": 8,
               "rules": [

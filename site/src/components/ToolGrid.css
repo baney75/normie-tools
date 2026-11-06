@@ -1,55 +1,22 @@
-.nt-grid-wrap {
-  container-type: inline-size;
-  font-family: var(--nt-font-text);
-  color: var(--nt-text);
-}
-.nt-grid-heading {
-  font-family: var(--nt-font-display);
-  color: var(--nt-ink);
-  margin: var(--nt-space-5) 0 var(--nt-space-3);
-}
-.nt-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.nt-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--nt-line); font-family: var(--nt-font-text); }
+.nt-rows > li { border-bottom: 1px solid var(--nt-line); }
+.nt-row {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--nt-space-3);
-}
-@container (min-width: 36rem) {
-  .nt-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@container (min-width: 56rem) {
-  .nt-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.nt-card {
-  display: flex;
-  flex-wrap: wrap;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: var(--nt-space-2);
-  min-height: var(--nt-tap);
-  height: 100%;
-  box-sizing: border-box;
-  padding: var(--nt-space-3);
-  border: 1px solid var(--nt-line);
-  border-radius: var(--nt-radius);
-  background: var(--nt-white);
+  gap: var(--nt-space-3);
+  min-height: 4.5rem;
+  padding: var(--nt-space-3) var(--nt-space-1);
   color: var(--nt-text);
   text-decoration: none;
 }
-.nt-card-name {
-  font-weight: 600;
-  color: var(--nt-ink);
-}
-.nt-card-off {
-  background: var(--nt-paper);
-  color: var(--nt-muted);
-}
-.nt-card-on:focus-visible {
-  outline: 3px solid var(--nt-tomato);
-  outline-offset: 2px;
-}
+.nt-row-off { grid-template-columns: minmax(0, 1fr); min-height: var(--nt-tap); }
+.nt-row-icon { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: var(--nt-radius); background: var(--nt-mint); color: var(--nt-ink); }
+.nt-row-text { display: flex; flex-direction: column; min-width: 0; }
+.nt-row-title { font-size: 1.1875rem; font-weight: 700; line-height: 1.3; color: var(--nt-ink); }
+.nt-row-off .nt-row-title { font-size: 1.0625rem; font-weight: 600; color: var(--nt-text); }
+.nt-row-sub { font-size: 0.9375rem; color: var(--nt-muted); }
+.nt-row-arrow { color: var(--nt-muted); }
+.nt-row-on:hover .nt-row-title { text-decoration: underline; text-underline-offset: 0.2em; }
+.nt-row-on:hover .nt-row-arrow { color: var(--nt-ink); }
+.nt-row:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; border-radius: var(--nt-radius); }

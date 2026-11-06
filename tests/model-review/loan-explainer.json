@@ -10,17 +10,23 @@
     "model": "sonnet",
     "score": 4,
     "runs": [
+      3,
+      3,
       4,
       4,
-      4
+      4,
+      4,
+      4,
+      4,
+      3
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to type in my loan numbers and read what the loan costs, and then I can stop.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words that felt like tech talk or were unclear:\n- \"Cost of borrowing\" (it is explained, but the name is odd to me)\n- \"Yearly interest rate\" and \"Term\" (I'd need to check my paper)\n- \"Upfront fees\"\n- \"Show the year by year table\" (I don't know what table it means or why I'd want it)\n- \"Save a copy ... what goes in the file\" (what kind of file, and where does it go?)\n- \"Print opens a preview\" and \"Close the print box\"\n- \"Estimate\" (how close is close?)\n- \"Total paid\" versus \"Cost of borrowing\" (they look like two similar things)\n- \"MAIN LINK\" is not something I'd see, but the idea of a \"link\" that leaves the page made me unsure.\n\n4. Worries:\n- \"Done. Back to home.\" might wipe my numbers. It says \"Your numbers stay,\" but that is about changing a number, so I'm not sure.\n- I worry that \"Start over\" could erase everything, though it says it asks first and I can undo it.\n- \"Save a copy\" puts a file on my phone, and I don't know where it goes or whether it shares my loan details with anyone.\n- I was a bit unsure whether anything I typed is sent somewhere. It says there is no Send button, which helps, but I can't tell if the numbers are kept.\n- I worry the answer is wrong, since it says it's only an estimate and the lender has the final word.\n\n5. I would skip:\n- \"Start over\" (I don't need it right now)\n- The whole \"Keep your answer if you want\" section with Print and Save a copy\n- \"Show the year by year table\"\n- \"What the words mean\" (though I might open it if I got stuck)\n- The \"Upfront fees\" and \"Extra each month\" boxes, since they're optional and empty\n\n6. Score: 4. The orange button stands out and the screen says I can stop, but I'm not sure \"Done\" saves anything or clears my numbers.\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"Cost of borrowing\", \"Total paid vs Cost of borrowing\", \"Upfront fees\", \"Term\", \"Show the year by year table\", \"Save a copy / file\", \"Print preview\", \"Estimate\", \"link\"], \"worries\": [\"Done. Back to home. might erase my numbers\", \"Start over might erase everything\", \"Save a copy puts a file on my device and I don't know where or who sees it\", \"Unsure whether my numbers are kept or sent anywhere\", \"Answer is only an estimate\"], \"skippable\": [\"Start over\", \"Keep your answer if you want section (Print, Save a copy)\", \"Show the year by year table\", \"What the words mean\", \"optional fee and extra boxes\"], \"score\": 4}"
+    "output": "1. This screen wants me to look at what my loan will cost, and then either stop or change a number to try again.\n\n2. \"I'm done\"\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Total interest\" (I have a rough idea, but not exactly)\n- \"Yearly interest rate\" (I know it is a percent, but the \"yearly\" part is a bit unclear)\n- \"How we know\" (a link, and I'm not sure what it will tell me)\n- \"Print or save\" (save where?)\n- \"Add fees or extra payments\" (what kind of fees?)\n- \"More options\"\n- \"See all the numbers\"\n- \"What the words mean\" (I'm glad it's there, but it's closed)\n- \"Estimate\" (I get it, but wonder how close it is)\n- \"Other\" under the loan length (other what?)\n\n4. Worries:\n- \"Your numbers stay on this phone or computer.\" That helps, but I still wonder if it's really true.\n- \"I'm done\" might close things and lose my numbers. I can't tell if it will erase them or send them somewhere.\n- \"Print or save\" makes me wonder where it saves and whether anything gets shared.\n- I don't know if tapping a choice like \"4 years\" will change anything I can't undo.\n- \"This is an estimate\" makes me unsure whether I can trust the amount for a real decision.\n- The bank-style numbers made me a bit nervous about whether I typed them right.\n\n5. Skippable:\n- \"How we know\" link, since I don't need to know how it works.\n- \"More options\" and \"See all the numbers,\" which sound like extra stuff for other people.\n- \"Add fees or extra payments, if you have them,\" since I don't think I have any.\n\n6. Score: 4. The orange \"I'm done\" button stands out, but the screen offers both stopping and changing numbers, and I'm not sure what \"I'm done\" does.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"Total interest\", \"Yearly interest rate\", \"How we know\", \"Print or save\", \"Add fees or extra payments\", \"More options\", \"See all the numbers\", \"What the words mean\", \"Other\", \"estimate\"], \"worries\": [\"Not sure if 'I'm done' erases or sends my numbers\", \"Unsure where 'Print or save' saves or whether it shares anything\", \"Unsure if 'Your numbers stay on this phone' is really true\", \"Unsure if tapping a loan length changes things I can't undo\", \"Estimate may not be reliable for a real decision\"], \"skippable\": [\"How we know\", \"More options\", \"See all the numbers\", \"Add fees or extra payments, if you have them\"], \"score\": 4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "rule": "a rule passes when it passes in most of 3 runs",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -34,6 +40,32 @@
       "passes": 8,
       "fails": [],
       "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
         {
           "passes": 8,
           "rules": [
@@ -78,7 +110,7 @@
     },
     {
       "model": "sonnet",
-      "rule": "a rule passes when it passes in most of 3 runs",
+      "rule": "a rule passes when it passes in most of 5 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -92,6 +124,32 @@
       "passes": 8,
       "fails": [],
       "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
         {
           "passes": 8,
           "rules": [
@@ -144,15 +202,21 @@
         "runs": [
           4,
           4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in the numbers from my loan paper and then get an estimate of my monthly payment.\n\n2. I would tap the first box, \"Amount borrowed,\" and start typing. After filling the boxes, I would tap \"Show my answer.\"\n\n3. Words I did not understand or that felt like tech talk:\n- \"Yearly interest rate\" (I know interest, but not sure if it's the same as APR on my paper)\n- \"Term\" (I'd have to trust the hint)\n- \"Upfront fees\"\n- \"Estimate\"\n- \"Lender statement\"\n- \"Months / Years\" choice: it's not clear this goes with the \"How long is the loan?\" box\n- \"Extra each month\"\n- \"Empty state\"-style wording like \"Your answer shows here\" was fine, but \"What the words mean\" made me think there are more words I might not know\n\n4. Worries:\n- I don't have my loan paper in front of me, so I might get stuck or guess wrong.\n- I'm not sure whether typing a dollar sign or comma would break it (the example shows 12000 with no comma).\n- Nothing says whether my numbers are saved or sent anywhere, so I wonder about privacy.\n- \"There is no Send button on this page\" is a little odd. It reassures me, but it also makes me wonder what \"Send\" would have done.\n- I might pick Months when my loan is in Years and get a wrong answer without knowing.\n- It says it's only a close guess, so I'm not sure how much to trust it.\n\n5. What I would skip:\n- \"There is no Send button on this page.\" It doesn't help me.\n- The two optional boxes (\"Upfront fees\" and \"Extra each month\") unless I know I have them.\n- The \"What the words mean\" section, unless I got stuck.\n\n6. Score: 4. The orange button and the highlighted first box are clear, but I'm unsure about the Months/Years choice and having the right numbers.\n\nRESULT: {\"next_tap\": \"Amount borrowed\", \"confusing_terms\": [\"Yearly interest rate\", \"term\", \"Upfront fees\", \"estimate\", \"lender statement\", \"Months/Years choice\", \"Extra each month\", \"What the words mean\"], \"worries\": [\"don't have loan paper handy\", \"unsure if dollar signs or commas are allowed\", \"no word on whether numbers are saved or sent\", \"odd 'no Send button' note\", \"could pick Months vs Years wrong\", \"answer is only an estimate\"], \"skippable\": [\"There is no Send button on this page\", \"Upfront fees (optional)\", \"Extra each month (optional)\", \"What the words mean\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in my loan amount, interest rate, and length, then see what my monthly payment would be.\n\n2. I would tap the box under \"Amount borrowed\" and start typing. After filling everything in, I'd tap \"See my payment\".\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Yearly interest rate\" (I sort of know it, but I'd have to find it on my papers)\n- \"How we know\" (know what? It's a link, and I'm not sure where it goes)\n- \"Other\" (other than what? Would it ask me something more?)\n- \"Add fees or extra payments\" (what kind of fees? it's not clear if I need this)\n- \"What the words mean\" (which words? I'm not sure it would help)\n- \"estimate\" (how close is it?)\n- \"on this phone or computer\" (a little vague about what happens to my numbers)\n\n4. Worries:\n- \"Your numbers stay on this phone or computer.\" That's comforting, but I wonder if it's true. \"How we know\" makes me a little suspicious.\n- I'm not sure whether tapping \"See my payment\" commits me to something or sends my information somewhere.\n- I might not have my loan papers handy, and I'm afraid of typing a wrong number.\n- Nothing mentions a price, which is good, but I can't tell for sure it's free.\n\n5. I'd skip \"Add fees or extra payments, if you have them\", because I'm not sure I have any. I'd also skip \"What the words mean\" unless I got stuck.\n\n6. Score: 4. I know what to do, but I'm a bit unsure about the privacy line and the \"Other\" choice.\n\nRESULT: {\"next_tap\":\"Amount borrowed\",\"confusing_terms\":[\"Yearly interest rate\",\"How we know\",\"Other\",\"Add fees or extra payments\",\"What the words mean\",\"estimate\",\"on this phone or computer\"],\"worries\":[\"Not sure the numbers really stay private\",\"Unsure whether See my payment commits me to anything or sends data\",\"Might type a wrong number without loan papers handy\",\"Not clearly stated to be free\"],\"skippable\":[\"Add fees or extra payments, if you have them\",\"What the words mean\"],\"score\":4}"
       },
       "designRubric": [
         {
           "model": "haiku",
-          "rule": "a rule passes when it passes in most of 3 runs",
+          "rule": "a rule passes when it passes in most of 5 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -203,6 +267,32 @@
                 "PASS",
                 "PASS",
                 "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
               ]
             }
           ],
@@ -210,7 +300,7 @@
         },
         {
           "model": "sonnet",
-          "rule": "a rule passes when it passes in most of 3 runs",
+          "rule": "a rule passes when it passes in most of 5 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -224,6 +314,32 @@
           "passes": 8,
           "fails": [],
           "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
             {
               "passes": 8,
               "rules": [

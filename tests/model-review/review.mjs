@@ -36,6 +36,8 @@ const CAPTURE = () => {
   const vis = (el) => {
     const r = el.getBoundingClientRect();
     const s = getComputedStyle(el);
+    // A display: contents box has no size of its own, but its children show. Walk into it.
+    if (s.display === "contents") return true;
     return r.width > 0 && r.height > 0 && s.visibility !== "hidden" && s.display !== "none";
   };
   const filled = (el) => {
@@ -46,39 +48,65 @@ const CAPTURE = () => {
     if (parseFloat(a) === 0) return false;
     return r >= 150 && g <= 110 && b <= 90; // the dark orange of the main button
   };
-  const name = (el) => (el.getAttribute("aria-label") || el.innerText || el.value || "").trim().replace(/\s+/g, " ");
+  // What a sighted person reads: text in visible boxes only. Screen-reader-only text (1px clipped boxes) is left out.
+  const seen = (n) => { const p = n.parentElement; if (!p || p.closest("svg")) return false; const r = p.getBoundingClientRect(); return r.width > 1 && r.height > 1; };
+  const visibleText = (el) => {
+    const parts = [];
+    const tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    for (let n = tw.nextNode(); n; n = tw.nextNode()) if (n.textContent.trim() && seen(n)) parts.push(n.textContent.trim());
+    return parts.join(" ").replace(/\s+/g, " ").replace(/\s+([.,;:!?])/g, "$1").trim();
+  };
+  const iconOf = (el) => { const svg = el.querySelector("svg"); const c = svg ? [...svg.classList].find((k) => k.startsWith("lucide-") && k !== "lucide") : null; return c ? `an ${c.slice(7)} icon` : svg ? "an icon" : ""; };
+  const name = (el) => visibleText(el) || el.value || iconOf(el) || "";
   const main = document.querySelector("main") || document.body;
   const lines = [];
   const walker = document.createTreeWalker(main, NodeFilter.SHOW_ELEMENT);
-  const seen = new Set();
+  const done = new Set();
   let el = main;
   while (el) {
     if (vis(el)) {
       const tag = el.tagName;
       if (/^H[1-6]$/.test(tag)) lines.push(`[heading ${tag[1]}] ${name(el)}`);
       else if (tag === "P" || tag === "LI" || tag === "DT" || tag === "DD" || tag === "SUMMARY" || tag === "CAPTION") {
-        if (!el.closest("button") && !seen.has(el)) lines.push(`${tag === "SUMMARY" ? "[closed section, tap to open] " : ""}${name(el)}`);
-      } else if (tag === "LABEL") lines.push(`[label] ${name(el)}`);
+        const links = [...el.querySelectorAll("a")].map((a) => name(a)).filter(Boolean);
+        const linkNote = links.length ? ` (${links.map((l) => `"${l}" is a link`).join(", ")})` : "";
+        if (!el.closest("button") && !done.has(el)) lines.push(`${tag === "SUMMARY" ? "[closed section, tap to open] " : ""}${name(el)}${linkNote}`);
+      } else if (tag === "LEGEND") lines.push(`[question] ${name(el)}`);
+      // A label that wraps a choice is read once, on the choice line.
+      // Labels hidden from sight (screen reader only) are not on the screen; the box line still carries the name.
+      else if (tag === "LABEL") { if (!el.querySelector("input[type=radio], input[type=checkbox]") && el.getBoundingClientRect().width > 1) lines.push(`[label] ${name(el)}`); }
       else if (tag === "INPUT" && (el.type === "radio" || el.type === "checkbox")) {
         const lab = el.id ? document.querySelector(`label[for="${el.id}"]`) : el.closest("label");
         lines.push(`[${el.type === "radio" ? "choice" : "tick box"}] ${lab ? name(lab) : name(el)} ${el.checked ? "(selected)" : ""}`);
       } else if (tag === "INPUT") {
         const lab = el.id ? document.querySelector(`label[for="${el.id}"]`) : null;
-        lines.push(`[box${el.disabled ? ", disabled" : ""}] ${lab ? name(lab) : name(el)} = "${el.value}"${el === document.activeElement ? " (cursor is here)" : ""}`);
-      } else if (tag === "SELECT") lines.push(`[menu] ${name(el)} = "${el.options[el.selectedIndex]?.text ?? ""}"`);
+        const shown = lab ? name(lab) : "";
+        lines.push(`[box${el.disabled ? ", disabled" : ""}]${shown ? ` ${shown}` : " (no label shown)"} = "${el.value}"${el === document.activeElement ? " (cursor is here)" : ""}`);
+      } else if (tag === "SELECT") {
+        // A menu shows its label, the picked choice, and the list a person can open.
+        const lab = el.id ? document.querySelector(`label[for="${el.id}"]`) : null;
+        const choices = [...el.options].map((o) => o.text).join(", ");
+        lines.push(`[menu] ${lab ? name(lab) : ""} = "${el.options[el.selectedIndex]?.text ?? ""}" (choices: ${choices})`);
+      }
       else if (tag === "BUTTON") {
         const f = filled(el);
         lines.push(`[${f ? "MAIN BUTTON, filled dark orange" : "plain button, outline only"}${el.disabled ? ", disabled" : ""}] ${name(el)}`);
-      } else if (tag === "A") lines.push(`[${filled(el) ? "MAIN LINK, filled dark orange" : "link, plain"}] ${name(el)}`);
+      } else if (tag === "A") { if (!el.closest("p, li, dt, dd, caption")) lines.push(`[${filled(el) ? "MAIN LINK, filled dark orange" : "link, plain"}] ${name(el)}`); }
       else if ((tag === "TH" || tag === "TD") && name(el)) lines.push(`[cell] ${name(el)}`);
       else if (tag === "SPAN" || tag === "DIV") {
         // Hints and notes are often plain spans or divs. Read their own text, unless a parent line already holds it.
         const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).filter(Boolean).join(" ");
-        if (own && !el.closest("p, li, dt, dd, button, label, h1, h2, h3, h4, h5, h6, summary, a, caption, th, td, [aria-hidden=true]")) lines.push(own);
+        // Decorative text hidden from screen readers is still on the screen, so it is read here too.
+        if (own && seen(el.firstChild) && !el.closest("p, li, dt, dd, button, label, h1, h2, h3, h4, h5, h6, summary, a, caption, th, td, svg")) lines.push(own);
       }
     }
-    // next element in document order, skipping hidden subtrees
-    let next = vis(el) || el === main ? el.firstElementChild : null;
+    // next element in document order, skipping hidden subtrees. A closed <details> shows only its summary.
+    const closed = el.tagName === "DETAILS" && !el.open;
+    if (closed && vis(el)) {
+      const sum = el.querySelector(":scope > summary");
+      if (sum) lines.push(`[closed section, tap to open] ${name(sum)}`);
+    }
+    let next = (vis(el) || el === main) && !closed ? el.firstElementChild : null;
     if (!next) {
       let n = el;
       while (n && n !== main && !n.nextElementSibling) n = n.parentElement;

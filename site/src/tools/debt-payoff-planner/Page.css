@@ -17,7 +17,7 @@
   cursor: pointer;
 }
 .nt-dpp-button:disabled { opacity: 0.5; cursor: default; }
-.nt-dpp-button:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-dpp-button:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 .nt-dpp-status { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-dpp-status ul { margin: var(--nt-space-2) 0 0; padding-left: var(--nt-space-4); }
 .nt-dpp-help { margin: 0 0 var(--nt-space-3); font-size: 1rem; color: var(--nt-muted); }
@@ -32,7 +32,7 @@
 .nt-dpp-order li { padding: var(--nt-space-1) 0; overflow-wrap: anywhere; }
 .nt-dpp-details { margin: 0 0 var(--nt-space-4); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-dpp-details > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-3); font-weight: 700; color: var(--nt-ink); cursor: pointer; }
-.nt-dpp-details > summary:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-dpp-details > summary:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 .nt-dpp-details-body { padding: 0 var(--nt-space-3) var(--nt-space-3); }
 .nt-dpp-table-wrap { overflow-x: auto; }
 .nt-dpp-table { width: 100%; border-collapse: collapse; font-size: 1rem; font-variant-numeric: tabular-nums; }

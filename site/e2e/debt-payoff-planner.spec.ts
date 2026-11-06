@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { openMoreOptions } from "./answer-first";
 import { shotPath } from "./paths";
 import { isShipped } from "./shipped";
 
@@ -30,8 +31,8 @@ test.beforeEach(async ({ page }) => {
 test("shows an empty state that says what to type", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Debt Payoff Planner" })).toBeVisible();
   await expect(page.getByText("Type the amount you owe on each debt")).toBeVisible();
-  await expect(page.getByText(/no Send button/)).toBeVisible();
-  await expect(page.getByText(/no Send button/)).toBeVisible();
+  await expect(page.getByText(/no Send button/)).toHaveCount(0);
+  await expect(page.getByText(/no Send button/)).toHaveCount(0);
   await expect(page.getByLabel("Debt 1 name")).toBeFocused();
   await expect(page.getByLabel("How the two payoff orders compare")).toContainText("Your answer shows here");
 });
@@ -129,9 +130,11 @@ test("remove can be undone and Start over asks first", async ({ page }) => {
   await expect(page.getByLabel("Debt 2 balance")).toHaveCount(0);
   await page.getByRole("button", { name: "Put it back" }).click();
   await expect(page.getByLabel("Debt 2 balance")).toHaveValue("$12,000");
+  await openMoreOptions(page);
   await page.getByRole("button", { name: "Start over" }).click();
   await page.getByRole("button", { name: "Keep my numbers" }).click();
   await expect(page.getByLabel("Debt 1 balance")).toHaveValue("800");
+  await openMoreOptions(page);
   await page.getByRole("button", { name: "Start over" }).click();
   await page.getByRole("button", { name: "Clear the boxes" }).click();
   await expect(page.getByLabel("Debt 1 balance")).toHaveValue("");

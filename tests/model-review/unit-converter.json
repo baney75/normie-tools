@@ -1,7 +1,7 @@
 {
   "tool": "unit-converter",
   "screen": ",  at 390px wide (text saved beside this file in screens/)",
-  "at": "2026-11-05",
+  "at": "2026-11-06",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
     "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
@@ -12,12 +12,16 @@
     "runs": [
       4,
       4,
+      3,
       4,
       4,
+      4,
+      4,
+      3,
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to read my answer, 5000 inches is 127,000 millimeters, and then either finish or change a number.\n\n2. I would tap \"Done. Back to home.\"\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"menu\" (I only know it from restaurants)\n- \"Tap a box with a list\"\n- \"Swap 'from' and 'to'\"\n- \"rounded to 6 digits\"\n- \"Save a copy\" and \"the file\"\n- \"what goes in the file\"\n- \"Print opens a preview\"\n- \"Close the print box\"\n- \"Show the facts used\" (which facts?)\n- \"There is no Send button on this page\" (I never thought there would be one, so now I wonder if I missed something)\n- \"Back to home\" (which home?)\n\n4. Things that made me worry:\n- \"Done. Back to home\" might wipe my answer. It says \"Your numbers stay,\" but I'm not sure that covers leaving the page.\n- \"Start over\" sounds like it could erase everything. It says it asks first, but I'd still be nervous.\n- \"Save a copy\" puts a file on my phone, and I don't know where it goes or whether I could find it again.\n- \"Print\" might start printing or cost paper. It says I can cancel, but \"preview\" and \"print box\" are unfamiliar.\n- \"Show the facts used\" is closed, and I don't know what it will reveal.\n- Nothing mentions money, but nothing says it's free either.\n\n5. I would skip:\n- \"There is no Send button on this page.\"\n- \"Swap 'from' and 'to'\" and its note\n- The \"Keep your answer if you want\" section with Print and Save a copy\n- \"Show the facts used\"\n- \"A long answer is rounded to 6 digits.\" My answer isn't long.\n\n6. Score: 4\n\nRESULT: {\"next_tap\": \"Done. Back to home.\", \"confusing_terms\": [\"menu\", \"Tap a box with a list\", \"Swap 'from' and 'to'\", \"rounded to 6 digits\", \"Save a copy\", \"file\", \"Print opens a preview\", \"Close the print box\", \"Show the facts used\", \"There is no Send button on this page\", \"Back to home\"], \"worries\": [\"Done. Back to home might lose my answer\", \"Start over might erase everything\", \"Save a copy puts a file on my phone and I don't know where\", \"Print might start printing or cost paper\", \"Show the facts used is unknown\", \"No mention of whether it is free\"], \"skippable\": [\"There is no Send button on this page\", \"Swap 'from' and 'to'\", \"Keep your answer if you want section (Print, Save a copy)\", \"Show the facts used\", \"A long answer is rounded to 6 digits\"], \"score\": 4}"
+    "output": "1. This screen wants me to see that 5000 inches is 127,000 millimeters, and then tap \"I'm done\" when I'm finished.\n\n2. I would tap \"I'm done\".\n\n3. Words that felt like tech talk or that I did not understand:\n- \"rounded to 6 digits\" (I'm not sure what that means for my answer)\n- \"How we know\" (know what? It's a link and I don't know where it goes)\n- \"Swap\" (swap what? I can guess, but it's not clear)\n- \"More options\" (more of what?)\n- \"Show the facts used\" (which facts? used for what?)\n- \"Change from\" and \"Change to\" (a little odd, but I could work it out)\n- \"Print or save\" (save where?)\n- \"MAIN LINK\" and \"menu\" are labels for the layout, not things I'd see, so I'd ignore those.\n\n4. Worries:\n- \"I'm done\" made me wonder whether it closes things, erases my numbers, or sends something somewhere.\n- \"Print or save\" made me wonder where it saves and whether it costs anything.\n- \"Your numbers stay on this phone or computer\" is reassuring, but I'm not sure I believe it, and \"How we know\" makes me wonder what I'd be agreeing to if I tap it.\n- I'm unsure whether tapping the choices (Length, Weight) will wipe the number I typed.\n\n5. Things I would skip:\n- \"More options\" and \"Show the facts used\" because I don't need them to get my answer.\n- \"How we know\".\n- \"Swap\" unless I got the direction backward.\n- \"Print or save\".\n\n6. Score: 4. The answer is at the top and \"I'm done\" is the bright button, but I'm not sure what happens after I tap it.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"rounded to 6 digits\", \"How we know\", \"Swap\", \"More options\", \"Show the facts used\", \"Change from\", \"Change to\", \"Print or save\"], \"worries\": [\"I'm done might close or erase things or send something\", \"Print or save: where it saves and whether it costs\", \"Whether 'your numbers stay on this phone' is true and what How we know opens\", \"Whether changing the type (Weight, Volume) wipes my number\"], \"skippable\": [\"More options\", \"Show the facts used\", \"How we know\", \"Swap\", \"Print or save\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -50,14 +54,14 @@
           ]
         },
         {
-          "passes": 7,
+          "passes": 8,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "FAIL",
+            "PASS",
             "PASS",
             "PASS"
           ]
@@ -198,12 +202,16 @@
         "runs": [
           4,
           4,
+          3,
           4,
+          4,
+          4,
+          3,
           4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to pick what I'm measuring, type a number, and then tap the button to see the converted answer.\n\n2. I would tap the box labeled \"Number\" and type a number. After that I'd tap \"Show my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"menu\" (I'd just think of it as a box with a list)\n- \"Swap 'from' and 'to'\" (I can guess it flips the two units, but it's a little odd)\n- \"Save a copy\" (a copy of what, and where does it go?)\n- \"the file\" (what file?)\n- \"Show the facts used\" (which facts?)\n- \"disabled\" isn't written, but the Print and Save a copy buttons look greyed out and I wouldn't know why until I read the small print\n- \"Print opens a preview\" and \"Close the print box\" (what is a print box?)\n- \"Commas are fine\" (a bit confusing at first)\n- \"There is no Send button on this page.\" (odd to say, since I wasn't looking for one)\n\n4. Worries:\n- \"Save a copy\" makes a file. I'm not sure where it goes on my phone, and I worry about clutter or something I can't find.\n- \"Show the facts used\": I'm not sure whether it asks for anything or shares anything.\n- \"There is no Send button\" makes me wonder whether something gets sent somewhere.\n- The Print and Save buttons are greyed out, so I worry I did something wrong until I read that they work after I type.\n- Nothing mentions cost, which is a relief, but it also doesn't say outright that this is free.\n\n5. I would skip:\n- \"There is no Send button on this page.\"\n- The whole \"Keep your answer if you want\" part (Print and Save a copy) until I have an answer.\n- \"Show the facts used.\"\n- The \"Swap 'from' and 'to'\" button, at first.\n\n6. Score: 4. The cursor is already in the Number box, and there is one bright orange button. I'm only a little unsure whether to pick from the lists first.\n\nRESULT: {\"next_tap\": \"Number\", \"confusing_terms\": [\"menu\", \"Swap 'from' and 'to'\", \"Save a copy\", \"the file\", \"Show the facts used\", \"print box\", \"preview\", \"There is no Send button\"], \"worries\": [\"Save a copy makes a file and I don't know where it goes\", \"Show the facts used might share something\", \"No Send button line makes me wonder if something is sent\", \"Print and Save buttons look greyed out so I think I did something wrong\", \"Cost is never mentioned\"], \"skippable\": [\"There is no Send button on this page.\", \"Keep your answer if you want section\", \"Show the facts used\", \"Swap 'from' and 'to'\"], \"score\": 4}"
+        "output": "1. This screen wants me to type a number and pick what to change it from and to, so it can tell me the answer.\n\n2. I would tap the \"Number\" box first, since nothing works until I type something. After that, \"See my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"Swap\" (I guess it flips the two choices, but I'm not certain)\n- \"Show the facts used\" (facts about what?)\n- \"How we know\" (know what?)\n- \"stay on this phone or computer\" (what does that mean for me?)\n- The short codes like \"(in)\", \"(ft)\", \"(mm)\", \"(km)\"\n- \"Millimeters\" (I don't know how big that is)\n- \"Change from\" and \"Change to\" (I'd have said \"convert\", but I get it)\n- The heading says \"cups\" but I see no Cups option under Length, only under Volume I assume.\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" made me wonder why privacy is even mentioned, and whether something is being collected.\n- I'm not sure whether \"See my answer\" costs anything, though nothing mentions money.\n- I worry I'll pick the wrong \"Change from\" or \"Change to\" and get a wrong answer without noticing.\n- It says \"Type a number to see your answer,\" but there's also a \"See my answer\" button, so I'm unsure whether I need to tap it or the answer appears by itself.\n\n5. I would skip \"How we know\" and \"Show the facts used\". I would also probably skip \"Swap\" on a first try.\n\n6. Score: 4. I know to type a number, but I'm a bit unsure whether the answer shows up by itself or only after I tap the button.\n\nRESULT: {\"next_tap\":\"Number\",\"confusing_terms\":[\"Swap\",\"Show the facts used\",\"How we know\",\"stay on this phone or computer\",\"(in), (ft), (mm), (km) codes\",\"Millimeters\",\"Change from / Change to\",\"heading mentions cups but Length has no cups\"],\"worries\":[\"Why privacy is mentioned and whether anything is collected\",\"Unsure if anything costs money\",\"Might pick wrong from/to units and not notice\",\"Unclear whether answer appears automatically or only after tapping See my answer\"],\"skippable\":[\"How we know\",\"Show the facts used\",\"Swap\"],\"score\":4}"
       },
       "designRubric": [
         {
@@ -288,7 +296,7 @@
               ]
             }
           ],
-          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
         },
         {
           "model": "sonnet",

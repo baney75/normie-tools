@@ -21,13 +21,29 @@ function Demo() {
 beforeEach(() => window.localStorage.clear());
 
 describe("StartOver", () => {
-  it("shows nothing while nothing is typed, then says what it does in plain words", async () => {
+  it("shows nothing while nothing is typed, then offers Start over with a short undo note", async () => {
     render(<Demo />);
     expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    expect(screen.queryByText("You can put your numbers back.")).toBeNull();
+    expect(document.querySelector("details.nt-more")).toBeNull();
     await userEvent.type(screen.getByLabelText("A"), "1");
-    const hint = screen.getByText("Start over asks first, and you can undo it right after.");
-    expect(hint.textContent).not.toMatch(/\u2013|\u2014/);
-    expect(gradeOf(hint.textContent ?? "")!.grade).toBeLessThanOrEqual(7);
+    const more = document.querySelector("details.nt-more") as HTMLDetailsElement;
+    expect(more).not.toBeNull();
+    expect(more.open).toBe(false);
+    expect(more.querySelector("summary")).toHaveTextContent("More options");
+    await userEvent.click(screen.getByText("More options"));
+    expect(more.open).toBe(true);
+    const button = screen.getByRole("button", { name: "Start over" });
+    expect(more).toContainElement(button);
+    expect(button).toBeEnabled();
+    const note = screen.getByText("You can put your numbers back.");
+    expect(note.tagName).toBe("SPAN");
+    expect(note).toHaveClass("nt-startover-note");
+    expect(button.compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(note.textContent).not.toMatch(/\u2013|\u2014/);
+    expect(gradeOf(note.textContent ?? "")!.grade).toBeLessThanOrEqual(7);
+    // The old long hint stays gone.
+    expect(screen.queryByText(/Start over asks first/)).toBeNull();
   });
 
   it("clears the boxes and the saved copy, then puts everything back exactly", async () => {
@@ -41,11 +57,29 @@ describe("StartOver", () => {
     expect(screen.getByLabelText("B")).toHaveValue("");
     expect(readSaved("demo")).toBeNull();
     expect(screen.getByText(/Your numbers are cleared\./)).toBeInTheDocument();
+    // The cleared message sits outside More options, which is gone while it shows.
+    expect(document.querySelector("details.nt-more")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
     await userEvent.click(screen.getByRole("button", { name: "Put it back" }));
     expect(screen.getByLabelText("A")).toHaveValue("12.5");
     expect(screen.getByLabelText("B")).toHaveValue("7");
     expect(screen.queryByText(/Your numbers are cleared\./)).toBeNull();
     expect(screen.getByRole("button", { name: "Start over" })).toBeEnabled();
+    expect(document.querySelector("details.nt-more")).toContainElement(screen.getByRole("button", { name: "Start over" }));
+  });
+
+  it("asks inside More options, and Keep my numbers leaves the boxes alone", async () => {
+    render(<Demo />);
+    await userEvent.type(screen.getByLabelText("A"), "4");
+    await userEvent.click(screen.getByText("More options"));
+    await userEvent.click(screen.getByRole("button", { name: "Start over" }));
+    const more = document.querySelector("details.nt-more") as HTMLDetailsElement;
+    expect(more).toContainElement(screen.getByRole("button", { name: "Clear the boxes" }));
+    expect(more).toContainElement(screen.getByRole("button", { name: "Keep my numbers" }));
+    await userEvent.click(screen.getByRole("button", { name: "Keep my numbers" }));
+    expect(screen.getByLabelText("A")).toHaveValue("4");
+    expect(screen.getByRole("button", { name: "Start over" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Clear the boxes" })).toBeNull();
   });
 
   it("stops offering the old numbers once the person types again", async () => {

@@ -11,6 +11,9 @@ describe("hashRouter", () => {
     expect(parseHash("#/install")).toEqual({ name: "install" });
     expect(parseHash("#/research")).toEqual({ name: "research" });
     expect(parseHash("#/harness")).toEqual({ name: "harness" });
+    expect(parseHash("#/coming")).toEqual({ name: "coming" });
+    expect(parseHash("#/coming/")).toEqual({ name: "coming" });
+    expect(parseHash("#/private")).toEqual({ name: "private" });
     expect(parseHash("#/tools/big-print")).toEqual({ name: "tool", id: "big-print" });
     expect(parseHash("#/agents/")).toEqual({ name: "agents" });
   });
@@ -21,6 +24,7 @@ describe("hashRouter", () => {
   });
   it("builds hrefs", () => {
     expect(href("/agents")).toBe("#/agents");
+    expect(href("/coming")).toBe("#/coming");
   });
   it("follows hashchange", () => {
     window.location.hash = "";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, PrivacyNote, StartOver, StepLabel } from "../../components/calc";
+import { ErrorNote, Field, StartOver, StepLabel } from "../../components/calc";
 import { SavePrintSheet } from "../../components/SavePrintSheet";
 import { ScreenFrame } from "../../components/ScreenFrame";
 import { useAutosave } from "../../lib/useAutosave";
@@ -96,7 +96,6 @@ export function Page() {
     <ScreenFrame title={COPY.title} as="div" reserve="0">
       <div className="nt-mb">
         <p className="nt-mb-intro">{COPY.intro}</p>
-        <PrivacyNote />
 
         {flow.hasSaved && pristine ? (
           <div className="nt-mb-status">

@@ -12,7 +12,7 @@
 .nt-tfh-choice { display: flex; gap: var(--nt-space-3); align-items: flex-start; min-height: var(--nt-tap); margin: 0 0 var(--nt-space-3); padding: var(--nt-space-3); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); cursor: pointer; }
 .nt-tfh-choice-on { border-color: var(--nt-ink); }
 .nt-tfh-choice input { width: 1.5rem; height: 1.5rem; margin: 0.15rem 0 0; flex: none; }
-.nt-tfh-choice input:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-tfh-choice input:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 .nt-tfh-line { display: block; margin-top: var(--nt-space-1); }
 
 .nt-tfh-who { margin: 0 0 var(--nt-space-4); }
@@ -35,7 +35,7 @@
 .nt-tfh-actions { display: flex; flex-wrap: wrap; gap: var(--nt-space-3); margin: var(--nt-space-4) 0; }
 .nt-tfh-btn { min-height: var(--nt-tap); padding: 0 var(--nt-space-4); font: inherit; font-size: 1.125rem; font-weight: 700; border-radius: var(--nt-radius); cursor: pointer; }
 .nt-tfh-outline { color: var(--nt-ink); background: var(--nt-white); border: 2px solid var(--nt-ink); }
-.nt-tfh-btn:focus-visible, .nt-tfh-link:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-tfh-btn:focus-visible, .nt-tfh-link:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
 
 .nt-tfh-stop { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-4); border: 3px solid var(--nt-ink); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-tfh-stop-text { margin: 0 0 var(--nt-space-3); font-size: 1.25rem; font-weight: 700; }

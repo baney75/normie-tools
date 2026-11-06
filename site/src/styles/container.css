@@ -42,15 +42,19 @@
 
 .nt-layout { display: block; min-width: 0; }
 .nt-content { max-width: var(--nt-measure); margin-inline: auto; min-width: 0; }
+.nt-content-wide { max-width: 68rem; }
 .nt-aside { display: none; }
 
 @container (min-width: 60rem) {
   .nt-layout { display: grid; grid-template-columns: minmax(0, var(--nt-measure)) 16rem; gap: var(--nt-space-5); justify-content: center; }
   .nt-layout .nt-content { margin-inline: 0; }
   .nt-aside { display: block; }
+  .nt-layout.nt-layout-wide { display: block; }
+  .nt-layout-wide .nt-content { margin-inline: auto; }
 }
 
 .nt-list { padding-left: 1.25rem; }
 .nt-list li { margin-bottom: var(--nt-space-2); }
 .nt-muted { color: var(--nt-muted); }
+.nt-back { display: inline-flex; align-items: center; min-height: var(--nt-tap); }
 .nt-instruction { background: var(--nt-mint); border-radius: var(--nt-radius); padding: var(--nt-space-3); user-select: all; }

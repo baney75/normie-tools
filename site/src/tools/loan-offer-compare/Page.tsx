@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, MoneyField, NumberField, PercentField, PrivacyNote, ResultCard, StartOver } from "../../components/calc";
-import { SavePrintSheet } from "../../components/SavePrintSheet";
-import { ScreenFrame } from "../../components/ScreenFrame";
+import { Chips, ErrorNote, MoneyField, NumberField, PercentField, ResultCard, Finish, SeeAnswer, StartOver, ToolLayout } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { compareOffers, formatMoney } from "../../../../tools/loan-offer-compare/calc.mjs";
 import { COPY } from "./copy";
@@ -36,172 +34,170 @@ export function Page() {
   const missing = problems.filter((p) => p.kind === "missing" && p.offer !== null).map((p) => `${name(p.offer as number)}: ${FIELD_NAMES[p.field]}`);
   const blank = offers.every(offerBlank);
   const hasBad = problems.some((p) => p.kind === "bad");
+  const good = result.ok ? result : null;
 
   return (
-    <ScreenFrame title={COPY.title} as="div" reserve="0">
-      <div className="nt-offers">
-        <p className="nt-offers-intro">{COPY.intro}</p>
-        <PrivacyNote />
+    <ToolLayout
+      name={COPY.title}
+      question={COPY.question}
+      answer={<Answer result={good} />}
+      actions={good ? <Save result={good} /> : null}
+      below={<Details result={good} />}
+    >
+      {flow.hasSaved && blank ? (
+        <div className="nt-offers-status">
+          <CalmMessage
+            tone="info"
+            title={COPY.resume.title}
+            actions={[
+              { label: COPY.resume.yes, onClick: flow.restore },
+              { label: COPY.resume.no, onClick: flow.clear },
+            ]}
+          >
+            {COPY.resume.body}
+          </CalmMessage>
+        </div>
+      ) : null}
 
-        {flow.hasSaved && blank ? (
-          <div className="nt-offers-status">
-            <CalmMessage
-              tone="info"
-              title={COPY.resume.title}
-              actions={[
-                { label: COPY.resume.yes, onClick: flow.restore },
-                { label: COPY.resume.no, onClick: flow.clear },
-              ]}
-            >
-              {COPY.resume.body}
-            </CalmMessage>
-          </div>
-        ) : null}
-
-        <form className="nt-offers-form" onSubmit={(e) => e.preventDefault()} noValidate>
+      <form className="nt-offers-form" onSubmit={(e) => e.preventDefault()} noValidate>
+        <div className="nt-offers-grid">
           {offers.map((o, i) => (
             <fieldset className="nt-offer" key={i}>
               <legend>{name(i)}</legend>
-              <MoneyField
-                autoFocus={i === 0}
-                label={`${name(i)}: ${COPY.amount.label}`}
-                hint={COPY.amount.hint}
-                value={o.amount}
-                onChange={(t) => setOffer(i, { amount: t })}
-                error={bad(i, "amount")}
+              <MoneyField hiddenPrefix={`${name(i)}:`} label={COPY.amount.label}
+                value={o.amount} onChange={(t) => setOffer(i, { amount: t })} error={bad(i, "amount")} />
+              <PercentField hiddenPrefix={`${name(i)}:`} label={COPY.rate.label}
+                value={o.rate} onChange={(t) => setOffer(i, { rate: t })} error={bad(i, "rate")} />
+              <NumberField hiddenPrefix={`${name(i)}:`} label={COPY.term.label}
+                value={o.term} onChange={(t) => setOffer(i, { term: t })} error={bad(i, "term")} />
+              <Chips
+                legend={COPY.term.unitLegend}
+                options={[
+                  { value: "months", label: COPY.term.months },
+                  { value: "years", label: COPY.term.years },
+                ]}
+                value={o.termUnit}
+                onChange={(u) => setOffer(i, { termUnit: u as Offer["termUnit"] })}
               />
-              <PercentField
-                label={`${name(i)}: ${COPY.rate.label}`}
-                hint={COPY.rate.hint}
-                value={o.rate}
-                onChange={(t) => setOffer(i, { rate: t })}
-                error={bad(i, "rate")}
-              />
-              <NumberField
-                label={`${name(i)}: ${COPY.term.label}`}
-                hint={COPY.term.hint}
-                value={o.term}
-                onChange={(t) => setOffer(i, { term: t })}
-                error={bad(i, "term")}
-              />
-              <fieldset className="nt-offers-units">
-                <legend>{COPY.term.unitLegend}</legend>
-                <div className="nt-offers-unit-row">
-                  {(["months", "years"] as const).map((u) => (
-                    <label key={u} className="nt-offers-unit">
-                      <input
-                        type="radio"
-                        name={`offer-${i}-term-unit`}
-                        value={u}
-                        aria-label={`${name(i)}: ${COPY.term[u]}`}
-                        checked={o.termUnit === u}
-                        onChange={() => setOffer(i, { termUnit: u })}
-                      />
-                      {COPY.term[u]}
-                    </label>
-                  ))}
-                </div>
-              </fieldset>
-              <MoneyField
-                label={`${name(i)}: ${COPY.fees.label}`}
-                hint={COPY.fees.hint}
-                optional
-                value={o.fees}
-                onChange={(t) => setOffer(i, { fees: t })}
-                error={bad(i, "fees")}
-              />
+              <MoneyField hiddenPrefix={`${name(i)}:`} label={COPY.fees.label} optional
+                value={o.fees} onChange={(t) => setOffer(i, { fees: t })} error={bad(i, "fees")} />
             </fieldset>
           ))}
-          {offers.length < 3 ? (
-            <div className="nt-offers-add">
-              <button type="button" className="nt-offers-action" onClick={() => flow.setValue({ offers: [...offers, { ...BLANK_OFFER }] })}>
-                {COPY.addThird}
-              </button>
-              <p className="nt-offers-hint">{COPY.addHint}</p>
-              {canPutBack ? (
-                <p className="nt-offers-hint" role="status">
-                  {COPY.removedDone}{" "}
-                  <button
-                    type="button"
-                    className="nt-offers-action"
-                    onClick={() => {
-                      flow.setValue({ offers: [...offers, removed as Offer] });
-                      setRemoved(null);
-                    }}
-                  >
-                    {COPY.putBack}
-                  </button>
-                </p>
-              ) : null}
-            </div>
-          ) : (
-            <div className="nt-offers-add">
-              <button
-                type="button"
-                className="nt-offers-action"
-                onClick={() => {
-                  setRemoved(offers[2]);
-                  flow.setValue({ offers: offers.slice(0, 2) });
-                }}
-              >
-                {COPY.removeThird}
-              </button>
-              <p className="nt-offers-hint">{COPY.removeHint}</p>
-            </div>
-          )}
-        </form>
-
-        <Answer result={result.ok ? result : null} />
-
-        {!result.ok && !blank && missing.length > 0 && !hasBad ? (
-          <p className="nt-offers-status" role="status">
-            {COPY.stillNeeded} {missing.join(", ")}.
-          </p>
-        ) : null}
-        {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-
-        <StartOver flowId="loan-offer-compare" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
-
-        <p className="nt-offers-note">{COPY.notes.estimate}</p>
-
-        <details className="nt-offers-details">
-          <summary>{COPY.key.summary}</summary>
-          <div className="nt-offers-details-body">
-            <dl className="nt-offers-key">
-              {COPY.key.items.map((k) => (
-                <div key={k.term}>
-                  <dt>{k.term}</dt>
-                  <dd>{k.means}</dd>
-                </div>
-              ))}
-            </dl>
+        </div>
+        {offers.length < 3 ? (
+          <div className="nt-offers-add">
+            <button type="button" className="nt-more-btn" onClick={() => flow.setValue({ offers: [...offers, { ...BLANK_OFFER }] })}>
+              {COPY.addThird}
+            </button>
+            {canPutBack ? (
+              <p className="nt-offers-hint" role="status">
+                {COPY.removedDone}{" "}
+                <button
+                  type="button"
+                  className="nt-more-btn"
+                  onClick={() => {
+                    flow.setValue({ offers: [...offers, removed as Offer] });
+                    setRemoved(null);
+                  }}
+                >
+                  {COPY.putBack}
+                </button>
+              </p>
+            ) : null}
           </div>
-        </details>
-      </div>
-    </ScreenFrame>
+        ) : (
+          <div className="nt-offers-add">
+            <button
+              type="button"
+              className="nt-more-btn"
+              onClick={() => {
+                setRemoved(offers[2]);
+                flow.setValue({ offers: offers.slice(0, 2) });
+              }}
+            >
+              {COPY.removeThird}
+            </button>
+          </div>
+        )}
+      </form>
+
+      {!result.ok && !blank && missing.length > 0 && !hasBad ? (
+        <p className="nt-offers-status" role="status">
+          {COPY.stillNeeded} {missing.join(", ")}.
+        </p>
+      ) : null}
+      {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
+
+      <SeeAnswer label={COPY.see} main={!good} />
+      <StartOver flowId="loan-offer-compare" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
+    </ToolLayout>
   );
 }
 
 type Good = Extract<ReturnType<typeof compareOffers>, { ok: true }>;
+type OfferResult = Good["offers"][number];
+
+const ROWS: [string, (o: OfferResult) => string][] = [
+  [COPY.result.lengthLabel, (o) => months(o.months)],
+  [COPY.result.totalPaid, (o) => formatMoney(o.totalPaidCents)],
+  [COPY.result.totalInterest, (o) => formatMoney(o.totalInterestCents)],
+  [COPY.result.fees, (o) => formatMoney(o.feesCents)],
+  [COPY.result.cost, (o) => formatMoney(o.costOfBorrowingCents)],
+];
+
+/** The facts in plain money: how much less the cheaper offer costs in all, and, when another offer is lower each month, by how much. */
+function savedLine(result: Good): string {
+  const f = COPY.facts;
+  if (result.lowestCost.tie) return f.tieCost;
+  const best = result.lowestCost.offers[0];
+  const others = result.offers.map((o, i) => ({ i, cost: o.costOfBorrowingCents })).filter((x) => x.i !== best);
+  const next = others.reduce((a, b) => (b.cost < a.cost ? b : a));
+  const gap = formatMoney(next.cost - result.offers[best].costOfBorrowingCents);
+  const inAll =
+    result.offers.length === 2
+      ? `${name(best)} ${f.lessThan} ${gap} ${f.lessInAll}`
+      : `${name(best)} ${f.lessThan} ${gap} ${f.lessInAllThan} ${f.nextLowest}.`;
+  const cheapMonth = result.lowestPayment.offers[0];
+  if (result.lowestPayment.tie || result.lowestPayment.offers.includes(best)) return inAll;
+  const monthGap = formatMoney(result.offers[best].monthlyPaymentCents - result.offers[cheapMonth].monthlyPaymentCents);
+  return `${inAll} ${name(cheapMonth)} ${f.lessThan} ${monthGap} ${f.lessEachMonth}`;
+}
 
 function Answer({ result }: { result: Good | null }) {
-  const r = COPY.result;
   const f = COPY.facts;
-  const rows: [string, (o: Good["offers"][number]) => string][] = [
-    [r.lengthLabel, (o) => months(o.months)],
-    [r.totalPaid, (o) => formatMoney(o.totalPaidCents)],
-    [r.totalInterest, (o) => formatMoney(o.totalInterestCents)],
-    [r.fees, (o) => formatMoney(o.feesCents)],
-    [r.cost, (o) => formatMoney(o.costOfBorrowingCents)],
-  ];
+  return (
+    <ResultCard label={f.lowestCost} answer={result ? nameList(result.lowestCost.offers) : undefined} waiting={COPY.waiting}>
+      {result ? (
+        <>
+          <p>{savedLine(result)}</p>
+          {!result.sameAmountAndLength ? <p>{f.differ}</p> : null}
+          <dl>
+            {result.offers.map((o, i) => (
+              <div key={`all-${i}`}>
+                <dt>{name(i)}, {f.inAll}</dt>
+                <dd>{formatMoney(o.costOfBorrowingCents)}</dd>
+              </div>
+            ))}
+            {result.offers.map((o, i) => (
+              <div key={`month-${i}`}>
+                <dt>{name(i)}, {f.eachMonth}</dt>
+                <dd>{formatMoney(o.monthlyPaymentCents)}</dd>
+              </div>
+            ))}
+          </dl>
+        </>
+      ) : null}
+    </ResultCard>
+  );
+}
 
+function Save({ result }: { result: Good }) {
+  const f = COPY.facts;
+  const r = COPY.result;
   function save() {
-    if (!result) return;
-    const costNames = nameList(result.lowestCost.offers);
-    const payNames = nameList(result.lowestPayment.offers);
-    const lines = [COPY.save.fileTitle, "", `${f.lowestCost}: ${costNames}`, `${f.lowestPayment}: ${payNames}`, ""];
+    const lines = [COPY.save.fileTitle, "", `${f.lowestCost}: ${nameList(result.lowestCost.offers)}`, `${f.lowestPayment}: ${nameList(result.lowestPayment.offers)}`, ""];
     result.offers.forEach((o, i) => {
-      lines.push(name(i), `${r.paymentLabel}: ${formatMoney(o.monthlyPaymentCents)}`, ...rows.map(([k, get]) => `${k}: ${get(o)}`), "");
+      lines.push(name(i), `${r.paymentLabel}: ${formatMoney(o.monthlyPaymentCents)}`, ...ROWS.map(([k, get]) => `${k}: ${get(o)}`), "");
     });
     lines.push(COPY.notes.estimate, COPY.notes.facts, "");
     try {
@@ -215,43 +211,22 @@ function Answer({ result }: { result: Good | null }) {
       /* Print still works. */
     }
   }
+  return (
+    <Finish onSave={save}>
+      <p>{COPY.save.preview}</p>
+    </Finish>
+  );
+}
 
+function Details({ result }: { result: Good | null }) {
+  const f = COPY.facts;
+  const r = COPY.result;
   const costNames = result ? nameList(result.lowestCost.offers) : "";
   const payNames = result ? nameList(result.lowestPayment.offers) : "";
-
   return (
-    <div className="nt-offers-results">
-      <ResultCard label={f.lowestCost} answer={result ? costNames : undefined} waiting={COPY.waiting}>
-        {result ? <p className="nt-offers-help">{result.lowestCost.tie ? f.tieCost : f.oneCost}</p> : null}
-      </ResultCard>
+    <>
       {result ? (
-        <>
-          {!result.sameAmountAndLength ? <p className="nt-offers-status">{f.differ}</p> : null}
-
-          {result.offers.map((o, i) => (
-            <ResultCard key={i} label={`${name(i)}, ${r.paymentLabel}`} answer={formatMoney(o.monthlyPaymentCents)} closing={false}>
-              <dl className="nt-offers-lines">
-                {rows.map(([k, get]) => (
-                  <div key={k}>
-                    <dt>{k}</dt>
-                    <dd>{get(o)}</dd>
-                  </div>
-                ))}
-              </dl>
-            </ResultCard>
-          ))}
-          <p className="nt-offers-help">{r.costHelp}</p>
-        </>
-      ) : null}
-
-      <SavePrintSheet quiet title={COPY.save.title} onSave={save}>
-        {result ? (
-          <p>{COPY.save.preview}</p>
-        ) : null}
-      </SavePrintSheet>
-
-      {result ? (
-        <details className="nt-offers-details">
+        <details>
           <summary>{COPY.more.summary}</summary>
           <div className="nt-offers-details-body">
             <p className="nt-offers-help">{result.lowestPayment.tie ? f.tiePayment : `${f.payLine} ${payNames}`}</p>
@@ -274,7 +249,7 @@ function Answer({ result }: { result: Good | null }) {
                       <td key={i}>{formatMoney(o.monthlyPaymentCents)}</td>
                     ))}
                   </tr>
-                  {rows.map(([k, get]) => (
+                  {ROWS.map(([k, get]) => (
                     <tr key={k}>
                       <th scope="row">{k}</th>
                       {result.offers.map((o, i) => (
@@ -285,10 +260,25 @@ function Answer({ result }: { result: Good | null }) {
                 </tbody>
               </table>
             </div>
+            <p className="nt-offers-help">{r.costHelp}</p>
           </div>
         </details>
       ) : null}
-    </div>
+      <details>
+        <summary>{COPY.key.summary}</summary>
+        <div className="nt-offers-details-body">
+          <dl className="nt-offers-key">
+            {COPY.key.items.map((k) => (
+              <div key={k.term}>
+                <dt>{k.term}</dt>
+                <dd>{k.means}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </details>
+      <p className="nt-note">{COPY.notes.estimate}</p>
+    </>
   );
 }
 

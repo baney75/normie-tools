@@ -2,4 +2,4 @@
 .nt-more > summary { min-height: var(--nt-tap); display: flex; align-items: center; padding: 0 var(--nt-space-4); border: 2px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-paper); color: var(--nt-ink); cursor: pointer; }
 .nt-more-list { list-style: none; margin: var(--nt-space-2) 0 0; padding: 0; border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
 .nt-more-list a, .nt-more-list button { display: flex; align-items: center; width: 100%; min-height: var(--nt-tap); padding: 0 var(--nt-space-4); background: none; border: 0; color: var(--nt-ink); font: inherit; text-align: left; text-decoration: underline; cursor: pointer; box-sizing: border-box; }
-.nt-more > summary:focus-visible, .nt-more-list a:focus-visible, .nt-more-list button:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+.nt-more > summary:focus-visible, .nt-more-list a:focus-visible, .nt-more-list button:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }

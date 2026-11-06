@@ -74,7 +74,7 @@ test("shows an empty state with one next step", async ({ page }) => {
   await expect(page.getByText("Step 1 of 3: Pick your photos")).toBeVisible();
   await expect(page.getByLabel("Photos picked", { exact: true })).toContainText("You picked 0 photos. Pick 2 or more.");
   await expect(page.getByRole("button", { name: "Choose photos" })).toBeEnabled();
-  await expect(page.getByText(/no Send button/)).toBeVisible();
+  await expect(page.getByText(/no Send button/)).toHaveCount(0);
 });
 
 test("finds exact copies, lets the person choose, and saves a list of names", async ({ page }) => {

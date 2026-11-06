@@ -1,0 +1,8 @@
+.nt-home-title { font-size: 2.25rem; line-height: 1.1; margin: var(--nt-space-2) 0 var(--nt-space-3); }
+.nt-home-sub { margin: 0 0 var(--nt-space-1); font-size: 1.1875rem; }
+.nt-home-promise { margin: 0 0 var(--nt-space-4); color: var(--nt-muted); }
+.nt-home-heading { font-size: 1.375rem; margin: var(--nt-space-5) 0 var(--nt-space-2); }
+.nt-home-more { margin: var(--nt-space-4) 0 0; color: var(--nt-muted); }
+@media (min-width: 48rem) {
+  .nt-home-title { font-size: 3rem; }
+}

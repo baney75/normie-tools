@@ -80,9 +80,9 @@ describe("SavePrintSheet", () => {
     rerender(<SavePrintSheet title="T" onSave={() => {}}><p>x</p></SavePrintSheet>);
     expect(screen.queryByText("They work after you type your numbers.")).toBeNull();
   });
-  it("tells how to cancel a print and how to undo a saved file", () => {
+  it("no longer shows the long note under the buttons", () => {
     render(<SavePrintSheet title="T" onSave={() => {}}><p>x</p></SavePrintSheet>);
-    expect(screen.getByText(/Print opens a preview\. Close the print box without printing to cancel\./)).toBeInTheDocument();
-    expect(screen.getByText(/delete the file any time to undo/)).toBeInTheDocument();
+    expect(screen.queryByText(/Print opens a preview/)).toBeNull();
+    expect(screen.queryByText(/delete the file any time to undo/)).toBeNull();
   });
 });

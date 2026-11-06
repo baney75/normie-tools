@@ -60,7 +60,7 @@
   opacity: 0.6;
 }
 .nt-sheet button:focus-visible {
-  outline: 3px solid var(--nt-tomato);
+  outline: 3px solid var(--nt-ink);
   outline-offset: 2px;
 }
 .nt-sheet-status {

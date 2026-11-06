@@ -136,9 +136,9 @@ describe("Save Me Money page", () => {
     expect(screen.queryByRole("button", { name: COPY.undo })).toBeNull();
   });
 
-  it("keeps the privacy note", () => {
+  it("no longer shows the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
+    expect(screen.queryByText(/no Send button/)).toBeNull();
   });
 
   it("says where the numbers come from and that weeks are an estimate", () => {

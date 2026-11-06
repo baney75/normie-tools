@@ -45,4 +45,4 @@ button.primary { background: var(--nt-tdeep); border-color: var(--nt-tdeep); col
 
 code { font-family: var(--nt-font-code); font-size: 0.95em; }
 
-:focus-visible { outline: 3px solid var(--nt-tomato); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; }

@@ -233,9 +233,9 @@ describe("Tax Filing Helper page", () => {
     expect(screen.getByLabelText("First name")).toHaveValue("Sample");
   });
 
-  it("keeps the privacy note", () => {
+  it("no longer shows the privacy note", () => {
     render(<Page />);
-    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
+    expect(screen.queryByText(/no Send button/)).toBeNull();
   });
 });
 

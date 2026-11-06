@@ -1,0 +1,52 @@
+{
+  "waivers": [
+    {
+      "tool": "loan-offer-compare",
+      "checks": [
+        "first-time-user"
+      ],
+      "minScore": 3,
+      "screens": [
+        "main"
+      ],
+      "by": "Donovan Baney (owner)",
+      "date": "2026-11-05",
+      "expires": "2027-01-05",
+      "asked": "Correcting my last question: Loan Explainer now passes. On their filled screen the first-time reader bot scored Mortgage 3 on all 9 runs, Loan Offer Compare 4 on 1 of 9, and Student Loan 4 on 3 of 9. The bar is 4. Their empty screens and every design-rule check pass. Ship those three anyway? (Recommended choice: keep the owner waiver for those three: reader score on the filled screen only, a floor of 3, expires 2027-01-05.)",
+      "said": "Ship all six (Recommended)",
+      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 3, 3, 4, 3, 3, 3, 3] (middle score 3; 1 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
+    },
+    {
+      "tool": "mortgage-payment-explainer",
+      "checks": [
+        "first-time-user"
+      ],
+      "minScore": 3,
+      "screens": [
+        "main"
+      ],
+      "by": "Donovan Baney (owner)",
+      "date": "2026-11-05",
+      "expires": "2027-01-05",
+      "asked": "Correcting my last question: Loan Explainer now passes. On their filled screen the first-time reader bot scored Mortgage 3 on all 9 runs, Loan Offer Compare 4 on 1 of 9, and Student Loan 4 on 3 of 9. The bar is 4. Their empty screens and every design-rule check pass. Ship those three anyway? (Recommended choice: keep the owner waiver for those three: reader score on the filled screen only, a floor of 3, expires 2027-01-05.)",
+      "said": "Ship all six (Recommended)",
+      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 3, 3, 3, 3, 3, 3, 3] (middle score 3; 0 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
+    },
+    {
+      "tool": "student-loan-growth-and-payoff",
+      "checks": [
+        "first-time-user"
+      ],
+      "minScore": 3,
+      "screens": [
+        "main"
+      ],
+      "by": "Donovan Baney (owner)",
+      "date": "2026-11-05",
+      "expires": "2027-01-05",
+      "asked": "Correcting my last question: Loan Explainer now passes. On their filled screen the first-time reader bot scored Mortgage 3 on all 9 runs, Loan Offer Compare 4 on 1 of 9, and Student Loan 4 on 3 of 9. The bar is 4. Their empty screens and every design-rule check pass. Ship those three anyway? (Recommended choice: keep the owner waiver for those three: reader score on the filled screen only, a floor of 3, expires 2027-01-05.)",
+      "said": "Ship all six (Recommended)",
+      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 4, 3, 3, 3, 4, 4, 3] (middle score 3; 3 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
+    }
+  ]
+}

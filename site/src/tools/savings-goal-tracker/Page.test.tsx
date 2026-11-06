@@ -22,7 +22,7 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByText(COPY.intro)).toBeInTheDocument();
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.waiting);
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
-    expect(screen.getByText(COPY.intro).nextElementSibling).toHaveTextContent(/no Send button/);
+    expect(screen.getByText(COPY.intro).nextElementSibling).not.toHaveTextContent(/no Send button/);
     expect(screen.queryByText(/NaN|undefined|Infinity/)).toBeNull();
   });
 
@@ -31,9 +31,9 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByLabelText("Goal amount")).toHaveFocus();
   });
 
-  it("has one filled button: Print", async () => {
+  it("has no fake Show my answer button, and Print stays off until there is an answer", async () => {
     render(<Page />);
-    expect(screen.getByRole("button", { name: "Show my answer" })).toHaveClass("primary");
+    expect(screen.queryByRole("button", { name: "Show my answer" })).toBeNull();
     expect(screen.getByRole("button", { name: "Print" })).toBeDisabled();
   });
 
@@ -47,14 +47,10 @@ describe("Savings Goal Tracker page", () => {
     expect(screen.getByText("They work after you type your numbers.")).toBeInTheDocument();
   });
 
-  it("keeps the privacy note", () => {
+  it("no longer shows the privacy note or its reason", () => {
     render(<Page />);
-    expect(screen.getByText(/no Send button/)).toBeInTheDocument();
-  });
-
-  it("gives a plain reason for the privacy promise", () => {
-    render(<Page />);
-    expect(screen.getByText(/There is no Send button on this page\./)).toBeInTheDocument();
+    expect(screen.queryByText(/no Send button/)).toBeNull();
+    expect(screen.queryByText(/There is no Send button on this page\./)).toBeNull();
   });
 
   it("has labels above inputs, decimal keypads, no autofill", () => {
@@ -152,7 +148,7 @@ describe("Savings Goal Tracker page", () => {
     await fill("Goal amount", "5000");
     await fill("Amount you save each month", "240");
     expect(screen.getByLabelText("Months to your goal")).toHaveTextContent(COPY.when.noInterest);
-    expect(screen.getByLabelText("Months to your goal")).toHaveTextContent("That is your answer. You can stop here. Or change a number to try again. Your numbers stay.");
+    expect(screen.getByLabelText("Months to your goal")).not.toHaveTextContent("That is your answer");
   });
 
   it("says it is an estimate and explains the words", () => {

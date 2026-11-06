@@ -75,6 +75,6 @@
 .nt-upload button:focus-visible,
 .nt-upload a:focus-visible,
 .nt-upload input:focus-visible {
-  outline: 3px solid var(--nt-tomato);
+  outline: 3px solid var(--nt-ink);
   outline-offset: 2px;
 }
