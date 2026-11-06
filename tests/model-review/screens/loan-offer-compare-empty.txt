@@ -3,7 +3,7 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 
 Loan Offer Compare
-[heading 1] Which loan offer is cheaper?
+[heading 1] Which loan offer costs less to borrow?
 Your numbers stay on this phone or computer. How we know ("How we know" is a link)
 Type both offers to see which costs less.
 [question] Offer 1

@@ -3,7 +3,7 @@
 // It never works out the yearly cost with fees (APR). Page.test.tsx checks this file.
 export const COPY = {
   title: "Loan Offer Compare",
-  question: "Which loan offer is cheaper?",
+  question: "Which loan offer costs less to borrow?",
   see: "See which costs less",
   waiting: "Type both offers to see which costs less.",
   removedDone: "The third offer is removed.",

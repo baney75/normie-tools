@@ -82,7 +82,12 @@ const CAPTURE = () => {
         const lab = el.id ? document.querySelector(`label[for="${el.id}"]`) : null;
         const shown = lab ? name(lab) : "";
         lines.push(`[box${el.disabled ? ", disabled" : ""}]${shown ? ` ${shown}` : " (no label shown)"} = "${el.value}"${el === document.activeElement ? " (cursor is here)" : ""}`);
-      } else if (tag === "SELECT") lines.push(`[menu] ${name(el)} = "${el.options[el.selectedIndex]?.text ?? ""}"`);
+      } else if (tag === "SELECT") {
+        // A menu shows its label, the picked choice, and the list a person can open.
+        const lab = el.id ? document.querySelector(`label[for="${el.id}"]`) : null;
+        const choices = [...el.options].map((o) => o.text).join(", ");
+        lines.push(`[menu] ${lab ? name(lab) : ""} = "${el.options[el.selectedIndex]?.text ?? ""}" (choices: ${choices})`);
+      }
       else if (tag === "BUTTON") {
         const f = filled(el);
         lines.push(`[${f ? "MAIN BUTTON, filled dark orange" : "plain button, outline only"}${el.disabled ? ", disabled" : ""}] ${name(el)}`);

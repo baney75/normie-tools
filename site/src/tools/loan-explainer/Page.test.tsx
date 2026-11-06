@@ -157,14 +157,17 @@ describe("Loan Explainer page", () => {
     await fill("Upfront fees", "$500");
     await fill("Extra each month", "$100");
     const card = screen.getByLabelText("Monthly payment");
-    expect(card).toHaveTextContent("$398.39");
+    // One schedule everywhere: the card shows the payment with the extra, and the details agree with it.
+    expect(card).toHaveTextContent("$498.39");
     // The card follows the extra payment, so it agrees with the section below, and it names the fees.
     expect(card).toHaveTextContent("Paid off in47 months");
     expect(card).toHaveTextContent("You pay back $22,974.16 in all, plus $500.00 in upfront fees. That counts your extra payment.");
     expect(card).toHaveTextContent("Total interest$2,974.16");
-    expect(lines()).toHaveTextContent("Loan length60 months");
+    expect(lines()).toHaveTextContent("Payment without the extra$398.39");
+    expect(lines()).toHaveTextContent("Loan length47 months");
+    expect(lines()).toHaveTextContent("Total interest$2,974.16");
     expect(lines()).toHaveTextContent("Upfront fees$500.00");
-    expect(lines()).toHaveTextContent("Cost of borrowing$4,403.20");
+    expect(lines()).toHaveTextContent("Cost of borrowing$3,474.16");
     const extra = screen.getByRole("region", { name: "With your extra payment" });
     expect(extra).toHaveTextContent("Paid off after47 months");
     expect(extra).toHaveTextContent("Months saved13");
@@ -345,6 +348,14 @@ describe("Loan Explainer length chips", () => {
     await userEvent.click(screen.getByLabelText("Years"));
     await userEvent.click(screen.getByLabelText("Other"));
     expect(screen.getByLabelText("Length of the loan")).toHaveValue("3");
+  });
+
+  it("sends See my payment to the length chips when no length is picked", async () => {
+    render(<Page />);
+    await fill("Amount borrowed", "12000");
+    await fill("Yearly interest rate", "6.5");
+    await userEvent.click(screen.getByRole("button", { name: COPY.see }));
+    expect(screen.getByLabelText("2 years")).toHaveFocus();
   });
 });
 

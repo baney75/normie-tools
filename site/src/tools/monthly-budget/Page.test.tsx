@@ -102,9 +102,10 @@ describe("Monthly Budget page", () => {
     expect(see).toHaveClass("primary");
     await userEvent.click(see);
     expect(screen.getByLabelText("Pay, per month")).toHaveFocus();
+    // A box with a red note comes first: the See button goes back to it.
     await fill("Pay, per month", "lots");
     await userEvent.click(see);
-    expect(screen.getByLabelText("Rent or mortgage, per month")).toHaveFocus();
+    expect(screen.getByLabelText("Pay, per month")).toHaveFocus();
     expect(screen.queryByRole("link", { name: "I'm done" })).toBeNull();
   });
 

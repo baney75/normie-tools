@@ -130,29 +130,39 @@ export function Page() {
 
 type Good = Extract<ReturnType<typeof explainLoan>, { ok: true }>;
 
+/**
+ * The one schedule the page shows. With an extra payment that finishes the loan sooner, the card,
+ * "See all the numbers" and the saved file all use the extra-payment schedule, so no two places disagree.
+ */
+function schedule(result: Good) {
+  const e = result.extra && (result.extra.monthsSaved > 0 || result.extra.interestSaved > 0) ? result.extra : null;
+  return {
+    withExtra: e !== null,
+    paymentCents: e ? e.monthlyPaymentCents : result.monthlyPaymentCents,
+    months: e ? e.months : result.months,
+    paidCents: e ? e.totalPaidCents : result.totalPaidCents,
+    interestCents: e ? e.totalInterestCents : result.totalInterestCents,
+  };
+}
+
 function Answer({ result }: { result: Good }) {
   const r = COPY.result;
-  // With an extra payment that finishes the loan sooner, the card shows that schedule, so it never
-  // disagrees with the extra-payment section below.
-  const e = result.extra && (result.extra.monthsSaved > 0 || result.extra.interestSaved > 0) ? result.extra : null;
-  const paid = e ? e.totalPaidCents : result.totalPaidCents;
-  const interest = e ? e.totalInterestCents : result.totalInterestCents;
-  const months = e ? e.months : result.months;
+  const s = schedule(result);
   const fees = result.feesCents > 0 ? `, ${r.plus} ${formatMoney(result.feesCents)} ${r.inFees}` : "";
   return (
-    <ResultCard label={r.paymentLabel} answer={formatMoney(result.monthlyPaymentCents)}>
+    <ResultCard label={r.paymentLabel} answer={formatMoney(s.paymentCents)}>
       <p>
-        {r.payBack} {formatMoney(paid)} {r.inAll}
-        {fees}.{e ? ` ${r.withExtra}` : ""}
+        {r.payBack} {formatMoney(s.paidCents)} {r.inAll}
+        {fees}.{s.withExtra ? ` ${r.withExtra}` : ""}
       </p>
       <dl>
         <div>
           <dt>{r.totalInterest}</dt>
-          <dd>{formatMoney(interest)}</dd>
+          <dd>{formatMoney(s.interestCents)}</dd>
         </div>
         <div>
           <dt>{r.paidOff}</dt>
-          <dd>{span(months)}</dd>
+          <dd>{span(s.months)}</dd>
         </div>
       </dl>
     </ResultCard>
@@ -161,12 +171,14 @@ function Answer({ result }: { result: Good }) {
 
 function lines(result: Good): [string, string][] {
   const r = COPY.result;
+  const s = schedule(result);
   return [
-    [r.lengthLabel, months(result.months)],
-    [r.totalPaid, formatMoney(result.totalPaidCents)],
-    [r.totalInterest, formatMoney(result.totalInterestCents)],
+    ...(s.withExtra ? ([[r.basePayment, formatMoney(result.monthlyPaymentCents)]] as [string, string][]) : []),
+    [r.lengthLabel, months(s.months)],
+    [r.totalPaid, formatMoney(s.paidCents)],
+    [r.totalInterest, formatMoney(s.interestCents)],
     [r.fees, formatMoney(result.feesCents)],
-    [r.cost, formatMoney(result.costOfBorrowingCents)],
+    [r.cost, formatMoney(s.interestCents + result.feesCents)],
   ];
 }
 
@@ -174,7 +186,7 @@ function Save({ result }: { result: Good }) {
   const r = COPY.result;
   const e = result.extra;
   function save() {
-    const text = [COPY.save.title, "", `${r.paymentLabel}: ${formatMoney(result.monthlyPaymentCents)}`, ...lines(result).map(([k, val]) => `${k}: ${val}`), ...(e ? [`${COPY.extraBox.heading}`, `${COPY.extraBox.monthsSaved}: ${e.monthsSaved}`, `${COPY.extraBox.interestSaved}: ${formatMoney(e.interestSaved)}`] : []), "", COPY.notes.estimate, ""].join("\n");
+    const text = [COPY.save.title, "", `${r.paymentLabel}: ${formatMoney(schedule(result).paymentCents)}`, ...lines(result).map(([k, val]) => `${k}: ${val}`), ...(e ? [`${COPY.extraBox.heading}`, `${COPY.extraBox.monthsSaved}: ${e.monthsSaved}`, `${COPY.extraBox.interestSaved}: ${formatMoney(e.interestSaved)}`] : []), "", COPY.notes.estimate, ""].join("\n");
     try {
       const url = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
       const a = document.createElement("a");

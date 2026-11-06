@@ -94,7 +94,7 @@ export const PAGES = {
     lines: [
       "NT works inside this page, on your phone or computer.",
       "Nothing you type is sent to us or to anyone else. There is no account to make.",
-      "Your numbers are kept on this phone or computer for next time. Start over clears them.",
+      "Your numbers can be kept on this phone or computer for next time. Start over clears them.",
     ],
     checkBefore: "Anyone can read how NT is built. A friend who knows computers can check it for you:",
     checkLink: "how NT is built",

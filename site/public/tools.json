@@ -121,7 +121,7 @@
       ],
       "claimsPath": "tools/loan-offer-compare/claims.json",
       "takesFiles": false,
-      "question": "Which loan offer is cheaper?",
+      "question": "Which loan offer costs less to borrow?",
       "icon": "scale"
     },
     {

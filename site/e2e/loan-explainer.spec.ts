@@ -102,11 +102,14 @@ test("extra payment shows months and interest saved, and the by-year table opens
   await openMore(page);
   await page.getByLabel("Upfront fees").fill("$500");
   await page.getByLabel("Extra each month").fill("$100");
-  await expect(page.getByLabel("Monthly payment")).toContainText("$398.39");
-  // Cost of borrowing (interest plus the $500 fee) now lives in "See all the numbers".
+  // One schedule everywhere: the card and "See all the numbers" both follow the extra payment.
+  await expect(page.getByLabel("Monthly payment")).toContainText("$498.39");
+  await expect(page.getByLabel("Monthly payment")).toContainText("Paid off in47 months");
   await page.getByText("See all the numbers").click();
-  await expect(page.getByLabel("See all the numbers")).toContainText("Cost of borrowing");
-  await expect(page.getByLabel("See all the numbers")).toContainText("$4,403.20");
+  const all = page.getByLabel("See all the numbers");
+  await expect(all).toContainText("Payment without the extra$398.39");
+  await expect(all).toContainText("Loan length47 months");
+  await expect(all).toContainText("Cost of borrowing$3,474.16");
   const extra = page.getByRole("region", { name: "With your extra payment" });
   await expect(extra).toContainText("47 months");
   await expect(extra).toContainText("13");

@@ -118,6 +118,7 @@ export function Page() {
                   <div key={l.id} className="nt-budget-row">
                     <Field
                       hideLabel
+                      needed={false}
                       label={`${c.nameLabel} ${i + 1}`}
                       inputMode="text"
                       value={l.name}

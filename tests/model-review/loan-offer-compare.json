@@ -1,27 +1,27 @@
 {
   "tool": "loan-offer-compare",
   "screen": ",  at 390px wide (text saved beside this file in screens/)",
-  "at": "2026-11-05",
+  "at": "2026-11-06",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
     "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 3,
+    "score": 4,
     "runs": [
       3,
       3,
-      3,
-      3,
+      4,
+      4,
+      4,
+      4,
       4,
       3,
-      3,
-      3,
-      3
+      4
     ],
     "rule": "middle score of the runs",
-    "output": "**1.** This screen wants me to look at which of two loans costs less and then tap \"I'm done\" when I've seen the answer, or change my numbers to try again.\n\n**2.** I would tap **I'm done**.\n\n**3. Words or phrases I didn't understand or that felt like tech talk:**\n- \"Interest and fees\". I know interest is extra money, but I'm not sure what counts as a fee.\n- \"Yearly interest rate\". I'm not sure where to find this on my paperwork.\n- \"Upfront fees (optional)\". I'm not sure whether I have any.\n- \"Costs less to borrow\" above \"Offer 1\". It reads like a title, and I wasn't sure at first whether it was a button.\n- \"How we know\". It's a link, but I don't know what it will tell me.\n- \"More options\". I can't tell what's inside.\n- \"See all the numbers\". It sounds like too much.\n- \"What the words mean\". I'm glad it's there, but it's closed.\n- \"Estimate\". I understand it, but it makes me unsure how much to trust the answer.\n- \"Print or save\". I don't know where it would save to.\n\n**4. Worries about cost, privacy, or doing the wrong thing:**\n- \"I'm done\" is a big orange button. I don't know whether it sends my numbers somewhere, closes the page, or erases what I typed.\n- The line \"Your numbers stay on this phone or computer\" helps, but I would still wonder if it's true.\n- I'm not sure whether I typed the right numbers. I can't tell if the 7.5 and 6.9 are correct without my paperwork in front of me.\n- The answer says Offer 1 is cheaper overall but Offer 2 is cheaper each month. I'm worried about picking the wrong loan, because the screen doesn't say which one to choose.\n- \"Offer 1\" and \"Offer 2\" appear twice, once in the answer and once in the boxes. That's a little mixed up.\n- \"Add a third offer\" makes me wonder if I've done something that costs money.\n\n**5. What I would skip:**\n- \"Add a third offer\"\n- \"More options\"\n- \"See all the numbers\"\n- \"Print or save\"\n- \"How we know\"\n- All the boxes below the answer, since I already typed those.\n\n**6. Score: 3.** The answer is easy to read. But \"I'm done\" feels odd to tap, and I'm not sure what happens next or which loan I should pick.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"interest and fees\", \"Yearly interest rate\", \"Upfront fees (optional)\", \"Costs less to borrow\", \"How we know\", \"More options\", \"See all the numbers\", \"What the words mean\", \"estimate\", \"Print or save\"], \"worries\": [\"Not sure what 'I'm done' does (send, close, or erase)\", \"Unsure my typed numbers are right\", \"Offer 1 is cheaper overall but Offer 2 is cheaper monthly, and the screen does not say which to pick\", \"Doubt that numbers really stay on the device\", \"Offer 1 and Offer 2 appear twice, which is mixed up\", \"Unsure whether 'Add a third offer' costs anything\"], \"skippable\": [\"Add a third offer\", \"More options\", \"See all the numbers\", \"Print or save\", \"How we know\", \"the input boxes below the answer\"], \"score\": 3}"
+    "output": "1. This screen wants me to see which of the two loans costs less, and then tap \"I'm done\" when I've looked.\n\n2. I would tap **I'm done**.\n\n3. Words and phrases I did not understand or that felt like tech talk:\n- \"interest and fees\" (I'm not sure what is added together to get that number)\n- \"Yearly interest rate\"\n- \"Upfront fees (optional)\"\n- \"Costs less to borrow\" (it reads oddly to me)\n- \"How we know\"\n- \"Print or save\" (save where?)\n- \"More options\"\n- \"See all the numbers\"\n- \"What the words mean\"\n- \"estimate\" and \"Your lender statement\"\n- \"Months or years?\" (it shows up as a question after I already typed 36)\n\n4. Things that made me worry:\n- I don't know what \"I'm done\" does. Will it erase my numbers, send them somewhere, or just close the page?\n- It says my numbers stay on this phone, but I can't tell if that's true. \"How we know\" doesn't tell me anything until I tap it.\n- \"Print or save\" makes me wonder where the numbers would be saved and who could see them.\n- The screen says Offer 1 costs less overall, but Offer 2 costs less each month. That left me unsure which one is really better for me.\n- The $400 fee on Offer 2 is easy to mistype, and I'm not sure I did it right.\n- \"This is an estimate\" makes me wonder how far off it could be.\n\n5. I would skip \"Add a third offer\", \"More options\", and \"See all the numbers.\" I only have two loans. I would probably skip \"Print or save\" too. I would also skip the two sets of boxes below the answer, since I already filled them in.\n\n6. Score: 4. The answer is at the top and the orange button is easy to spot. But I'm not sure what \"I'm done\" will do, and the two answers point in different directions.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"interest and fees\", \"Yearly interest rate\", \"Upfront fees (optional)\", \"Costs less to borrow\", \"How we know\", \"Print or save\", \"More options\", \"See all the numbers\", \"What the words mean\", \"estimate\", \"lender statement\", \"Months or years?\"], \"worries\": [\"Unsure what 'I'm done' does or if numbers get erased or sent\", \"Unsure the claim that numbers stay on this device is true\", \"Where 'Print or save' saves and who can see it\", \"Offer 1 cheaper overall but Offer 2 cheaper monthly, unclear which is better\", \"Might have mistyped the $400 fee\", \"How far off the estimate could be\"], \"skippable\": [\"Add a third offer\", \"More options\", \"See all the numbers\", \"Print or save\", \"the input boxes below the answer\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -40,19 +40,6 @@
       "passes": 8,
       "fails": [],
       "runs": [
-        {
-          "passes": 8,
-          "rules": [
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS",
-            "PASS"
-          ]
-        },
         {
           "passes": 7,
           "rules": [
@@ -104,9 +91,22 @@
             "PASS",
             "PASS"
           ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
         }
       ],
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"FAIL\",\"fails\":[\"rule8: \\\"Your numbers stay on this phone or computer.\\\" has no source on the page. The only support is a \\\"How we know\\\" link, and its content is not shown.\"],\"score\":7}"
     },
     {
       "model": "sonnet",
@@ -190,7 +190,7 @@
           ]
         }
       ],
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+      "result": "All eight rules pass. The \"Offer 1 costs $281.26 less\" result and the monthly figures check out against the numbers typed in the boxes.\n\n1. **One main action:** PASS. Only \"I'm done\" is filled. \"Print or save\" and \"Add a third offer\" are outlines.\n2. **No clutter:** PASS. The sentences are short, and the extra sections are closed.\n3. **Plain language:** PASS. The wording is everyday, such as \"Yearly interest rate\" and \"Upfront fees (optional)\".\n4. **Place in the task:** PASS. The screen has no steps, so no \"Step N of M\" is needed.\n5. **Calm:** PASS. There are no timers or pressure words.\n6. **Safe:** PASS. The screen does not send, pay, sign, or file anything. \"Print or save\" does not change anything for the person.\n7. **Upload errors:** PASS. The screen has no upload.\n8. **Honest:** PASS. The privacy claim has a \"How we know\" link. The screen also says \"That is your estimate\" and \"This is an estimate. Your lender statement has the final numbers.\"\n\nRESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
     }
   ],
   "otherScreens": [
@@ -205,13 +205,13 @@
           4,
           4,
           3,
-          4,
+          3,
           4,
           4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in the details of two loans so it can tell me which one costs less.\n\n2. I would tap the first box under Offer 1, the one labeled \"Amount borrowed.\" The orange button is the main one, but there is nothing typed yet, so I would not tap it first.\n\n3. Words that felt like tech talk or were unclear:\n- \"Yearly interest rate\" (I sort of know it, but I would need to find it on my paperwork)\n- \"Upfront fees (optional)\" (not sure what counts as a fee)\n- \"Amount borrowed\" (probably fine, but is it the loan before or after fees?)\n- \"How we know\" (a link, and it doesn't say what it explains)\n- \"What the words mean\" (closed, so I don't know which words it covers)\n- \"Months (selected)\" and \"Years\" (not sure what \"selected\" means for me)\n- \"Add a third offer\" (fine, but I don't know what happens to the page)\n- \"Estimate\" (how rough is it?)\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" is reassuring, but I'm not sure I believe it, and \"How we know\" is a link I'd be nervous to tap.\n- I might type the wrong number or pick months when I mean years and get a wrong answer.\n- I'm not sure I have all the numbers on hand (rate, length, fees).\n- \"This is an estimate\" makes me wonder if I could make a bad money decision based on it.\n- It doesn't say whether the tool costs anything, though nothing asks for payment or personal info.\n\n5. Skippable:\n- \"Add a third offer,\" since I only have two.\n- \"How we know\" and the closed \"What the words mean\" I'd skip unless I got stuck.\n- The \"Upfront fees (optional)\" boxes, if I didn't know the fees.\n\n6. Score: 4. I know I fill in the boxes top to bottom, but I'm unsure about a few terms and the \"Months or years?\" part.\n\nRESULT: {\"next_tap\": \"Amount borrowed (first box under Offer 1)\", \"confusing_terms\": [\"Yearly interest rate\", \"Upfront fees (optional)\", \"Amount borrowed\", \"How we know\", \"What the words mean\", \"Months (selected)\", \"Add a third offer\", \"estimate\"], \"worries\": [\"Not sure I can trust that numbers stay on the device\", \"Could pick months vs years wrongly\", \"May not have all the numbers handy\", \"Estimate might mislead a money decision\", \"Unclear whether the tool costs anything\"], \"skippable\": [\"Add a third offer\", \"How we know\", \"What the words mean\", \"Upfront fees (optional)\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in the details of two loans so it can tell me which one costs less.\n\n2. I would tap the first box under Offer 1, \"Amount borrowed\". When all the boxes are filled in, I would tap \"See which costs less\".\n\n3. Words I did not understand or that felt like tech talk:\n- \"Yearly interest rate\". I sort of know it, but I'm not sure which number on my paperwork it is.\n- \"Upfront fees (optional)\". I'm not sure what counts as a fee.\n- \"How we know\". It's a link, and I don't know what it will show me.\n- \"What the words mean\". It's a closed section, so I can't tell what it covers.\n- \"Offer 1\" and \"Offer 2\". I guess they're two loans I've been quoted.\n- \"Estimate\". I don't know how rough it is.\n- \"This phone or computer\". It's a little odd.\n\n4. Things that worried me:\n- Money: nothing on the screen says it costs anything. I'd still wonder.\n- Privacy: it says my numbers stay on this phone. I want to believe that, but I'm a bit unsure. I'd be nervous about typing in money details.\n- Doing the wrong thing: I might type the wrong number in the wrong box. Months or years could trip me up if I forget to switch it. The \"$\" and \"%\" signs are outside the boxes, so I don't know if I should type them.\n- \"This is an estimate\" makes me wonder if I can trust the answer for a real decision.\n\n5. I would skip \"Add a third offer\", because I only have two. I would also skip \"What the words mean\" unless I got stuck, and I'd ignore the small print at the bottom until the end.\n\n6. Score: 4. I know what to do, which is to fill in the boxes and tap the orange button. I'm just not sure about a few of the numbers.\n\nRESULT: {\"next_tap\": \"Amount borrowed (Offer 1 box)\", \"confusing_terms\": [\"Yearly interest rate\", \"Upfront fees (optional)\", \"How we know\", \"What the words mean\", \"estimate\", \"Months or years?\"], \"worries\": [\"whether it costs money\", \"privacy of my loan numbers\", \"typing a number in the wrong box\", \"forgetting to switch months/years\", \"whether to type $ and % signs\", \"whether the estimate can be trusted\"], \"skippable\": [\"Add a third offer\", \"What the words mean (unless stuck)\", \"small print at bottom\"], \"score\": 4}"
       },
       "designRubric": [
         {
@@ -257,7 +257,7 @@
               ]
             },
             {
-              "passes": 7,
+              "passes": 8,
               "rules": [
                 "PASS",
                 "PASS",
@@ -266,7 +266,7 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "FAIL"
+                "PASS"
               ]
             },
             {

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { checkTool, checkToolDetailed, waiverProblem } from "../check-evidence.mjs";
+import { checkTool, checkToolDetailed, waiverFileProblems, waiverProblem } from "../check-evidence.mjs";
 
 function repo(files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "nt-evidence-"));
@@ -81,13 +81,12 @@ test("evidence: an owner waiver excuses only the named check for the named tool"
   assert.ok(checkTool(root, { id: "other" }).some((m) => /no model review record/.test(m)));
 });
 
-test("evidence: a rule waiver excuses that rule only, so another failed rule still fails", () => {
-  const rules = [...pass8.slice(0, 1), "FAIL", ...pass8.slice(2, 7), "FAIL"];
+test("evidence: a rubric rule cannot be waived, so a failed rule8 still fails", () => {
+  const rules = [...pass8.slice(0, 7), "FAIL"];
   const review = { ...goodReview, designRubric: [{ model: "haiku", rules }, goodReview.designRubric[1]] };
   const root = repo(files({ "tests/model-review/t.json": review, "tests/model-review/waivers.json": waiver(["rule8"]) }));
-  const r = checkToolDetailed(root, { id: "t" });
-  assert.ok(r.failures.some((m) => /not 8 of 8: rule2\./.test(m)));
-  assert.ok(r.waived.some((m) => /failed rule8/.test(m)));
+  assert.ok(checkTool(root, { id: "t" }).some((m) => /not 8 of 8: rule8\./.test(m)));
+  assert.match(waiverProblem(entry(["rule8"]), "2026-11-05"), /cannot waive rule8/);
 });
 
 test("evidence: a waiver without who, when and their words does nothing", () => {
@@ -104,10 +103,13 @@ test("evidence: a waiver never excuses a missing score or a skill eval", () => {
   assert.ok(out.some((m) => /tiny is below the bar/.test(m)));
 });
 
-test("evidence: a waiver may name only first-time-user and rule8, and a bad entry fails the gate", () => {
+test("evidence: a waiver may name only first-time-user, and a bad entry is reported for any tool", () => {
   assert.match(waiverProblem(entry(["rule2"]), "2026-11-05"), /cannot waive rule2/);
-  const root = repo(files({ "tests/model-review/waivers.json": waiver(["rule2"]) }));
-  assert.ok(checkTool(root, { id: "t" }).some((m) => /waiver .* is not valid: cannot waive rule2/.test(m)));
+  const root = repo({ "tests/model-review/waivers.json": { waivers: [entry(["rule2"]), { checks: ["first-time-user"] }] } });
+  const probs = waiverFileProblems(root, "2026-11-05");
+  assert.equal(probs.length, 2);
+  assert.ok(probs.some((m) => /cannot waive rule2/.test(m)));
+  assert.ok(probs.some((m) => /missing tool/.test(m)));
 });
 
 test("evidence: a reader score below the waiver floor still fails", () => {
@@ -123,7 +125,9 @@ test("evidence: a waiver limited to some screens does not excuse another screen"
 });
 
 test("evidence: an expired waiver, or one with a bad date, fails the gate", () => {
-  assert.match(waiverProblem(entry(["rule8"], { expires: "2020-01-01" }), "2026-11-05"), /expired/);
-  assert.match(waiverProblem(entry(["rule8"], { date: "today" }), "2026-11-05"), /date must be/);
+  assert.match(waiverProblem(entry(["first-time-user"], { expires: "2020-01-01", date: "2019-01-01" }), "2026-11-05"), /expired/);
+  assert.match(waiverProblem(entry(["first-time-user"], { date: "today" }), "2026-11-05"), /date must be/);
   assert.match(waiverProblem(entry(["first-time-user"], { minScore: 0 }), "2026-11-05"), /minScore/);
+  assert.match(waiverProblem(entry(["first-time-user"], { expires: "2027-99-99" }), "2026-11-05"), /expires must be a real day/);
+  assert.match(waiverProblem(entry(["first-time-user"], { expires: "2026-11-01" }), "2026-10-01"), /after date/);
 });

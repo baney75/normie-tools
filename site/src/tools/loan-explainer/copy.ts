@@ -35,6 +35,7 @@ export const COPY = {
     plus: "plus",
     inFees: "in upfront fees",
     withExtra: "That counts your extra payment.",
+    basePayment: "Payment without the extra",
     totalInterest: "Total interest",
     paidOff: "Paid off in",
     totalPaid: "Total paid",

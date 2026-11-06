@@ -80,5 +80,39 @@ describe("SeeAnswer", () => {
     await userEvent.click(screen.getByRole("button", { name: "See my answer" }));
     expect(screen.getByLabelText("Rate")).toHaveFocus();
   });
+
+  it("when main, goes to a row of choices with nothing picked, before the answer card", async () => {
+    render(
+      <div>
+        <section id="nt-answer" tabIndex={-1} aria-label="Answer">The answer</section>
+        <div className="nt-tool-inputs">
+          <input className="nt-field-input" aria-label="Amount" defaultValue="12000" />
+          <fieldset className="nt-chips">
+            <legend>How long?</legend>
+            <label><input type="radio" name="len" value="2" />2 years</label>
+            <label><input type="radio" name="len" value="3" />3 years</label>
+          </fieldset>
+          <SeeAnswer label="See my answer" main />
+        </div>
+      </div>,
+    );
+    await userEvent.click(screen.getByRole("button", { name: "See my answer" }));
+    expect(screen.getByLabelText("2 years")).toHaveFocus();
+  });
+
+  it("when main, goes to a box with a red note even if it is filled", async () => {
+    render(
+      <div>
+        <section id="nt-answer" tabIndex={-1} aria-label="Answer">The answer</section>
+        <div className="nt-tool-inputs">
+          <input className="nt-field-input" aria-label="Amount" defaultValue="lots" aria-invalid="true" />
+          <input className="nt-field-input" aria-label="Rate" defaultValue="" />
+          <SeeAnswer label="See my answer" main />
+        </div>
+      </div>,
+    );
+    await userEvent.click(screen.getByRole("button", { name: "See my answer" }));
+    expect(screen.getByLabelText("Amount")).toHaveFocus();
+  });
 });
 

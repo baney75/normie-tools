@@ -34,7 +34,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("opens with empty offers, the waiting text and one main button that leads to the first box", async ({ page }) => {
-  await expect(page.getByRole("heading", { level: 1, name: "Which loan offer is cheaper?" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Which loan offer costs less to borrow?" })).toBeVisible();
   await expect(page.getByText("Loan Offer Compare", { exact: true })).toBeVisible();
   await expectTrustLine(page);
   for (const n of [1, 2]) {

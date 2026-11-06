@@ -20,9 +20,9 @@ That is your answer. You can stop here, or change a number to try again.
 [label] Number
 [box] Number = "5000"
 [label] Change from
-[menu] inch = "Inches (in)"
+[menu] Change from = "Inches (in)" (choices: Inches (in), Feet (ft), Yards (yd), Miles (mi), Millimeters (mm), Centimeters (cm), Meters (m), Kilometers (km))
 [plain button, outline only] Swap
 [label] Change to
-[menu] millimeter = "Millimeters (mm)"
+[menu] Change to = "Millimeters (mm)" (choices: Inches (in), Feet (ft), Yards (yd), Miles (mi), Millimeters (mm), Centimeters (cm), Meters (m), Kilometers (km))
 [closed section, tap to open] More options
 [closed section, tap to open] Show the facts used

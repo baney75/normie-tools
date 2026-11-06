@@ -27,11 +27,13 @@ export type FieldProps = {
   hiddenPrefix?: string;
   /** Keeps the label for screen readers but does not show it. For rows under shown column names. */
   hideLabel?: boolean;
+  /** False when the page works without this box (it has a fallback), so "See my ..." skips it. */
+  needed?: boolean;
 };
 
 /** The base field the others wrap: label above, one text box, hint and error below. */
 export function Field({
-  label, value, onChange, hint, error, optional, placeholder, prefix, suffix, inputMode = "decimal", id, extra, autoFocus, hiddenPrefix, hideLabel,
+  label, value, onChange, hint, error, optional, placeholder, prefix, suffix, inputMode = "decimal", id, extra, autoFocus, hiddenPrefix, hideLabel, needed = true,
 }: FieldProps) {
   const auto = useId();
   const inputId = id ?? auto;
@@ -61,7 +63,7 @@ export function Field({
           // A number in a number box can be mistaken for something typed. Examples go in the hint instead.
           placeholder={inputMode === "text" ? placeholder : undefined}
           aria-invalid={error ? true : undefined}
-          data-optional={optional ? "" : undefined}
+          data-optional={optional || !needed ? "" : undefined}
           aria-describedby={described}
           onChange={(e) => onChange(e.target.value)}
         />
