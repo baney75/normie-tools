@@ -1,3 +1,21 @@
 {
-  "waivers": []
+  "waivers": [
+    {
+      "tool": "loan-offer-compare",
+      "checks": [
+        "first-time-user"
+      ],
+      "minScore": 3,
+      "screens": [
+        "empty",
+        "main"
+      ],
+      "by": "Donovan Baney (owner)",
+      "date": "2026-11-06",
+      "expires": "2027-01-05",
+      "asked": "Loan Offer Compare is the last tool short of the bot bar. The first-time reader bot scores its step 1 at 3 in 3 runs (only 3 or 4 of 9 runs reach the bar of 4). Its answer screen scored 4 on 9 of 9 runs twice, then 3 on the latest run with no change. Every design-rule check on all 24 screens passes, and the other five tools pass everything. Waive Offer Compare's reader score (step 1 and the answer screen only, floor of 3, expires 2027-01-05)?",
+      "said": "Waive it, ship (Recommended)",
+      "why": "Step 1 is the only first step with two boxes. Across three 9-run records its reader middle score was 3, with 3 or 4 of 9 runs at 4; the readers' worries were generic (privacy, cost, who runs the page). The answer screen scored 4 on 9 of 9 runs in two records and 3 (3 of 9 at 4) in the latest, unchanged. Every design-rubric rule passes on every screen; only the reader score is waived, and a score under 3 still fails."
+    }
+  ]
 }
