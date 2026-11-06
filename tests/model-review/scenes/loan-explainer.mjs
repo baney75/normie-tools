@@ -1,11 +1,7 @@
-// loan-explainer: real-looking numbers, so the reader sees a sensible answer. Empty screen first, then filled.
+// loan-explainer: step 1 is the screen a person first sees; the answer screen is reviewed after walking the steps.
+import { walk, fill, pick } from "./_steps.mjs";
 export default async (page, capture) => {
   const empty = await capture();
-  const set = async (label, value) => page.getByLabel(label, { exact: true }).fill(value);
-  await set("Amount borrowed", "12000");
-  await set("Yearly interest rate", "6.5");
-  await page.getByLabel("3 years", { exact: true }).check();
-  await page.waitForTimeout(150);
-  await page.evaluate(() => document.activeElement instanceof HTMLElement && document.activeElement.blur());
-  return [{ name: "empty", cap: empty }, { name: "filled", cap: await capture() }];
+  await walk(page, [[fill("Amount borrowed", "12000")], [fill("Yearly interest rate", "6.5")], [pick("3 years")]]);
+  return [{ name: "empty", cap: empty }, { name: "answer", cap: await capture() }];
 };

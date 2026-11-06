@@ -3,40 +3,16 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 
 Loan Offer Compare
-[heading 1] Which loan offer costs less to borrow?
+Step 1 of 5
+[heading 1] Offer 1: how much, at what rate?
 Your numbers stay on this phone or computer. How we know ("How we know" is a link)
-Type both offers to see which costs less.
-[question] Offer 1
+[question] 
 [label] Amount borrowed
 $
 [box] Amount borrowed = ""
 [label] Yearly interest rate
 [box] Yearly interest rate = ""
 %
-[label] How long is the loan?
-[box] How long is the loan? = ""
-[question] Months or years?
-[choice] Months (selected)
-[choice] Years 
-[label] Upfront fees (optional)
-$
-[box] Upfront fees (optional) = ""
-[question] Offer 2
-[label] Amount borrowed
-$
-[box] Amount borrowed = ""
-[label] Yearly interest rate
-[box] Yearly interest rate = ""
-%
-[label] How long is the loan?
-[box] How long is the loan? = ""
-[question] Months or years?
-[choice] Months (selected)
-[choice] Years 
-[label] Upfront fees (optional)
-$
-[box] Upfront fees (optional) = ""
-[plain button, outline only] Add a third offer
-[MAIN BUTTON, filled dark orange] See which costs less
-[closed section, tap to open] What the words mean
-This is an estimate. Your lender statement has the final numbers.
+You can go back and change any number.
+[MAIN BUTTON, filled dark orange] Continue
+[link, plain] Back to tools

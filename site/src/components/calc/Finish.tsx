@@ -20,7 +20,7 @@ export function Finish({ onSave, children, exact = false }: FinishProps) {
   const [open, setOpen] = useState(false);
   return (
     <div className="nt-finish">
-      <p className="nt-finish-line">That is your {exact ? "answer" : "estimate"}. You can stop here, or change a number to try again.</p>
+      <p className="nt-finish-line">That is your {exact ? "answer" : "estimate"}. You can stop here.</p>
       <a className="primary nt-finish-done" href={href("/")}>
         I&apos;m done
       </a>

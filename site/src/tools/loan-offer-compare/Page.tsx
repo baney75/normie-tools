@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { CalmMessage } from "../../components/CalmMessage";
-import { Chips, ErrorNote, MoneyField, NumberField, PercentField, ResultCard, Finish, SeeAnswer, StartOver, ToolLayout } from "../../components/calc";
+import { Chips, ErrorNote, MoneyField, NumberField, PercentField, ResultCard, Finish, StartOver, StepFlow } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { compareOffers, formatMoney } from "../../../../tools/loan-offer-compare/calc.mjs";
 import { COPY } from "./copy";
@@ -12,7 +11,6 @@ type Problem = { offer: number | null; field: string; kind: string; message: str
 
 const BLANK_OFFER: Offer = { amount: "", rate: "", term: "", termUnit: "months", fees: "" };
 const EMPTY: Inputs = { offers: [{ ...BLANK_OFFER }, { ...BLANK_OFFER }] };
-const FIELD_NAMES: Record<string, string> = { amount: COPY.amount.label, rate: COPY.rate.label, term: COPY.term.label, fees: COPY.fees.label };
 
 const name = (i: number) => `${COPY.offerName} ${i + 1}`;
 const months = (n: number) => `${n} ${n === 1 ? "month" : "months"}`;
@@ -31,106 +29,113 @@ export function Page() {
   const result = compareOffers({ offers });
   const problems: Problem[] = result.ok ? [] : result.problems;
   const bad = (i: number, field: string) => problems.find((p) => p.offer === i && p.field === field && p.kind === "bad")?.message;
-  const missing = problems.filter((p) => p.kind === "missing" && p.offer !== null).map((p) => `${name(p.offer as number)}: ${FIELD_NAMES[p.field]}`);
   const blank = offers.every(offerBlank);
   const hasBad = problems.some((p) => p.kind === "bad");
   const good = result.ok ? result : null;
 
+  const fieldOk = (i: number, fields: string[]) => !problems.some((p) => p.offer === i && fields.includes(p.field));
+  const amountRate = (o: Offer, i: number) => (
+    <fieldset className="nt-offer-step">
+      <legend className="nt-sr-only">{name(i)}</legend>
+      <MoneyField hiddenPrefix={`${name(i)}:`} label={COPY.amount.label}
+        value={o.amount} onChange={(t) => setOffer(i, { amount: t })} error={bad(i, "amount")} />
+      <PercentField hiddenPrefix={`${name(i)}:`} label={COPY.rate.label}
+        value={o.rate} onChange={(t) => setOffer(i, { rate: t })} error={bad(i, "rate")} />
+    </fieldset>
+  );
+  const lengthFees = (o: Offer, i: number) => (
+    <fieldset className="nt-offer-step">
+      <legend className="nt-sr-only">{name(i)}</legend>
+      <NumberField hiddenPrefix={`${name(i)}:`} label={COPY.term.label}
+        value={o.term} onChange={(t) => setOffer(i, { term: t })} error={bad(i, "term")} />
+      <Chips
+        legend={`${name(i)}: ${COPY.term.unitLegend}`}
+        hideLegend
+        options={[
+          { value: "months", label: COPY.term.months },
+          { value: "years", label: COPY.term.years },
+        ]}
+        value={o.termUnit}
+        onChange={(u) => setOffer(i, { termUnit: u as Offer["termUnit"] })}
+      />
+      <MoneyField hiddenPrefix={`${name(i)}:`} label={COPY.fees.label} optional
+        value={o.fees} onChange={(t) => setOffer(i, { fees: t })} error={bad(i, "fees")} />
+    </fieldset>
+  );
+
   return (
-    <ToolLayout
+    <StepFlow
       name={COPY.title}
       question={COPY.question}
+      step={flow.step}
+      onStep={flow.setStep}
+      finishLabel={COPY.see}
+      resume={
+        flow.hasSaved && blank
+          ? { ...COPY.resume, onYes: flow.restore, onNo: flow.clear }
+          : null
+      }
+      steps={offers.flatMap((o, i) => [
+        { question: COPY.steps.amountRate[i], ready: fieldOk(i, ["amount", "rate"]), missing: COPY.steps.amountRateMissing, content: amountRate(o, i) },
+        { question: COPY.steps.lengthFees[i], ready: fieldOk(i, ["term", "fees"]), missing: COPY.steps.lengthFeesMissing, content: lengthFees(o, i) },
+      ])}
       answer={<Answer result={good} />}
       actions={good ? <Save result={good} /> : null}
+      extras={
+        <>
+          {!result.ok && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
+          {offers.length < 3 ? (
+            <div className="nt-offers-add">
+              <button
+                type="button"
+                className="nt-more-btn"
+                onClick={() => {
+                  flow.setValue({ offers: [...offers, { ...BLANK_OFFER }] });
+                  flow.setStep(4);
+                }}
+              >
+                {COPY.addThird}
+              </button>
+              {canPutBack ? (
+                <p className="nt-offers-hint" role="status">
+                  {COPY.removedDone}{" "}
+                  <button
+                    type="button"
+                    className="nt-more-btn"
+                    onClick={() => {
+                      flow.setValue({ offers: [...offers, removed as Offer] });
+                      setRemoved(null);
+                    }}
+                  >
+                    {COPY.putBack}
+                  </button>
+                </p>
+              ) : null}
+            </div>
+          ) : (
+            <div className="nt-offers-add">
+              <button
+                type="button"
+                className="nt-more-btn"
+                onClick={() => {
+                  setRemoved(offers[2]);
+                  flow.setValue({ offers: offers.slice(0, 2) });
+                }}
+              >
+                {COPY.removeThird}
+              </button>
+            </div>
+          )}
+          <StartOver
+            flowId="loan-offer-compare"
+            value={flow.value}
+            empty={EMPTY}
+            onChange={flow.setValue}
+          />
+        </>
+      }
       below={<Details result={good} />}
-    >
-      {flow.hasSaved && blank ? (
-        <div className="nt-offers-status">
-          <CalmMessage
-            tone="info"
-            title={COPY.resume.title}
-            actions={[
-              { label: COPY.resume.yes, onClick: flow.restore },
-              { label: COPY.resume.no, onClick: flow.clear },
-            ]}
-          >
-            {COPY.resume.body}
-          </CalmMessage>
-        </div>
-      ) : null}
-
-      <form className="nt-offers-form" onSubmit={(e) => e.preventDefault()} noValidate>
-        <div className="nt-offers-grid">
-          {offers.map((o, i) => (
-            <fieldset className="nt-offer" key={i}>
-              <legend>{name(i)}</legend>
-              <MoneyField hiddenPrefix={`${name(i)}:`} label={COPY.amount.label}
-                value={o.amount} onChange={(t) => setOffer(i, { amount: t })} error={bad(i, "amount")} />
-              <PercentField hiddenPrefix={`${name(i)}:`} label={COPY.rate.label}
-                value={o.rate} onChange={(t) => setOffer(i, { rate: t })} error={bad(i, "rate")} />
-              <NumberField hiddenPrefix={`${name(i)}:`} label={COPY.term.label}
-                value={o.term} onChange={(t) => setOffer(i, { term: t })} error={bad(i, "term")} />
-              <Chips
-                legend={COPY.term.unitLegend}
-                options={[
-                  { value: "months", label: COPY.term.months },
-                  { value: "years", label: COPY.term.years },
-                ]}
-                value={o.termUnit}
-                onChange={(u) => setOffer(i, { termUnit: u as Offer["termUnit"] })}
-              />
-              <MoneyField hiddenPrefix={`${name(i)}:`} label={COPY.fees.label} optional
-                value={o.fees} onChange={(t) => setOffer(i, { fees: t })} error={bad(i, "fees")} />
-            </fieldset>
-          ))}
-        </div>
-        {offers.length < 3 ? (
-          <div className="nt-offers-add">
-            <button type="button" className="nt-more-btn" onClick={() => flow.setValue({ offers: [...offers, { ...BLANK_OFFER }] })}>
-              {COPY.addThird}
-            </button>
-            {canPutBack ? (
-              <p className="nt-offers-hint" role="status">
-                {COPY.removedDone}{" "}
-                <button
-                  type="button"
-                  className="nt-more-btn"
-                  onClick={() => {
-                    flow.setValue({ offers: [...offers, removed as Offer] });
-                    setRemoved(null);
-                  }}
-                >
-                  {COPY.putBack}
-                </button>
-              </p>
-            ) : null}
-          </div>
-        ) : (
-          <div className="nt-offers-add">
-            <button
-              type="button"
-              className="nt-more-btn"
-              onClick={() => {
-                setRemoved(offers[2]);
-                flow.setValue({ offers: offers.slice(0, 2) });
-              }}
-            >
-              {COPY.removeThird}
-            </button>
-          </div>
-        )}
-      </form>
-
-      {!result.ok && !blank && missing.length > 0 && !hasBad ? (
-        <p className="nt-offers-status" role="status">
-          {COPY.stillNeeded} {missing.join(", ")}.
-        </p>
-      ) : null}
-      {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-
-      <SeeAnswer label={COPY.see} main={!good} />
-      <StartOver flowId="loan-offer-compare" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
-    </ToolLayout>
+    />
   );
 }
 
@@ -175,13 +180,12 @@ function Answer({ result }: { result: Good | null }) {
             {result.offers.map((o, i) => (
               <div key={`all-${i}`}>
                 <dt>{name(i)}, {f.inAll}</dt>
-                <dd>{formatMoney(o.costOfBorrowingCents)}</dd>
-              </div>
-            ))}
-            {result.offers.map((o, i) => (
-              <div key={`month-${i}`}>
-                <dt>{name(i)}, {f.eachMonth}</dt>
-                <dd>{formatMoney(o.monthlyPaymentCents)}</dd>
+                <dd>
+                  {formatMoney(o.costOfBorrowingCents)}{" "}
+                  <span className="nt-offers-month">
+                    {formatMoney(o.monthlyPaymentCents)} {f.aMonth}
+                  </span>
+                </dd>
               </div>
             ))}
           </dl>

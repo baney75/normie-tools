@@ -1,12 +1,7 @@
-// mortgage-payment-explainer: real-looking numbers, so the reader sees a sensible answer. Empty screen first, then filled.
+// mortgage-payment-explainer: step 1, then the answer screen after walking the steps.
+import { walk, fill, pick } from "./_steps.mjs";
 export default async (page, capture) => {
   const empty = await capture();
-  const set = async (label, value) => page.getByLabel(label, { exact: true }).fill(value);
-  await set("Home price", "300000");
-  await set("Down payment", "60000");
-  await set("Yearly interest rate", "6.5");
-  await page.getByLabel("30 years", { exact: true }).check();
-  await page.waitForTimeout(150);
-  await page.evaluate(() => document.activeElement instanceof HTMLElement && document.activeElement.blur());
-  return [{ name: "empty", cap: empty }, { name: "filled", cap: await capture() }];
+  await walk(page, [[fill("Home price", "300000")], [fill("Down payment", "60000")], [fill("Yearly interest rate", "6.5")], [pick("30 years")]]);
+  return [{ name: "empty", cap: empty }, { name: "answer", cap: await capture() }];
 };

@@ -1,0 +1,16 @@
+Screen: unit-converter, answer state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps, then tapped the last button. This is the answer screen.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Unit Converter
+Step 3 of 3: your answer
+[heading 1] Change cups, inches, pounds and more
+Your answer
+304.8 millimeters
+A long answer is rounded to 6 digits.
+That is your answer. You can stop here.
+[MAIN LINK, filled dark orange] I'm done
+[plain button, outline only] Print or save
+[plain button, outline only] Change my numbers
+[closed section, tap to open] More options
+[closed section, tap to open] Show the facts used

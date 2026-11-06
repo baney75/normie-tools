@@ -163,7 +163,12 @@ function screenText(id, state, cap) {
       ? "Layout notes: no button is filled. All buttons are outlines."
       : `Layout notes: ${cap.filledButtons} buttons are filled dark orange.`;
   const focusNote = cap.startBox ? "The first box has the cursor in it and a bright outline: that is where to start typing." : "";
-  const who = state === "empty" ? "Nothing is typed yet." : "The person has just typed their own numbers in the boxes, so the boxes hold their numbers.";
+  const who =
+    state === "empty"
+      ? "Nothing is typed yet."
+      : state === "answer"
+        ? "The person typed their own numbers on the earlier steps, then tapped the last button. This is the answer screen."
+        : "The person has just typed their own numbers in the boxes, so the boxes hold their numbers.";
   return [`Screen: ${id}, ${state} state, phone 390px wide. Order is top to bottom. ${who}`, note, focusNote, "", ...cap.lines, ""].filter((l, i) => l !== "" || i > 1).join("\n");
 }
 

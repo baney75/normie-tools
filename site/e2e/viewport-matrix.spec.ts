@@ -3,10 +3,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { PHONE, VIEWPORTS } from "./viewports";
 import { shippedTools } from "./shipped";
+import { TOURS } from "./walk";
 
 // Every size in viewports.ts x home, agents, install and every shipped tool (read from public/tools.json).
 // Each page must have: no sideways scroll, a visible first heading, (tools) a visible first input or button,
 // and every visible button and input at least 44px high (tap targets).
+// Every tool is also walked step by step with real values (walk.ts TOURS): each question screen and the answer screen
+// get the same two checks, no sideways scroll and no short tap target.
 // Runs in all three projects (chromium, webkit, firefox).
 //
 // Screenshots (clipped to the viewport, not full page, to keep files small) go to shots/matrix/<project>-<size>-<route-id>.png.
@@ -89,6 +92,22 @@ for (const vp of VIEWPORTS) {
           fs.mkdirSync(MATRIX_DIR, { recursive: true });
           await page.screenshot({ path: path.join(MATRIX_DIR, `${project}-${vp.name}-${r.id}.png`) });
         }
+      });
+    }
+
+    for (const tour of TOURS) {
+      test(`${tour.id} steps and answer fit the screen`, async ({ page }) => {
+        await page.goto(`#/tools/${tour.id}`);
+        await page.evaluate(() => localStorage.clear());
+        await page.reload();
+        await expect(page.getByLabel(tour.firstBox).first()).toBeVisible();
+        await tour.run(page, async (screen) => {
+          const o = await overflow(page);
+          expect(o.scroll, `${tour.id} ${screen} is wider than the screen (${o.scroll} > ${o.inner})`).toBeLessThanOrEqual(o.inner);
+          expect(o.body, `${tour.id} ${screen} body is wider than the screen`).toBeLessThanOrEqual(o.inner);
+          const small = await shortTargets(page);
+          expect(small, `tap targets under ${MIN_TAP}px on ${tour.id} ${screen}`).toEqual([]);
+        });
       });
     }
   });

@@ -1,0 +1,23 @@
+Screen: mortgage-payment-explainer, answer state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps, then tapped the last button. This is the answer screen.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Mortgage Payment Explainer
+Step 5 of 5: your answer
+[heading 1] What will my house payment be?
+Total monthly payment
+$1,516.96
+For a $300,000 home, $60,000 down, at 6.5 % for 30 years.
+This is the loan payment only. Tax and insurance are not in it yet.
+Loan amount
+$240,000.00
+Loan length
+30 years
+That is your estimate. You can stop here.
+[MAIN LINK, filled dark orange] I'm done
+[plain button, outline only] Print or save
+[plain button, outline only] Change my numbers
+[closed section, tap to open] More options
+[closed section, tap to open] See all the numbers
+[closed section, tap to open] What the words mean
+This is an estimate. Your lender statement has the final numbers.

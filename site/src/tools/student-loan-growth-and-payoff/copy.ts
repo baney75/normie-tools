@@ -4,6 +4,14 @@ export const COPY = {
   title: "Student Loan Growth and Payoff",
   question: "When will my student loan be paid off?",
   see: "See my answer",
+  steps: {
+    balance: "How much do you owe?",
+    balanceMissing: "Type what you owe first.",
+    rate: "What is the yearly interest rate?",
+    rateMissing: "Type the rate first. Type 0 if there is none.",
+    payment: "How much do you pay each month?",
+    paymentMissing: "Fix the amount, or leave it empty.",
+  },
   waiting: "Type your numbers to see your answer.",
   balance: { label: "Loan balance", hint: "What you owe now. It is on your loan statement." },
   rate: { label: "Yearly interest rate", hint: "On your loan statement." },
@@ -19,8 +27,6 @@ export const COPY = {
   payment: { label: "Monthly payment", hint: "Leave it empty to see only the balance." },
   start: { label: "First payment month", hint: "Year, a dash, then the month, like 2026-09." },
   years: { label: "Years you want to pay it off in", hint: "A whole number." },
-  moreButton: "Add school months and other details",
-  lessButton: "Hide the other details",
   stillNeeded: "Still needed:",
   fixFirst: "Fix the note above to see your answer.",
   resume: {
@@ -31,6 +37,8 @@ export const COPY = {
   },
   result: {
     paidOffLabel: "Paid off in",
+    basisFor: "For",
+    basisAt: "at",
     balanceLabel: "Balance when payments start",
     balanceLine: "Your loan balance plus the interest that grew before your first payment.",
     noGrowth: "No months passed, so no interest grew.",

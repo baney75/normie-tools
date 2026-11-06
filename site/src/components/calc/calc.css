@@ -47,25 +47,38 @@
 .nt-field-label { display: block; margin: 0 0 var(--nt-space-2); padding: 0; font-size: 1.0625rem; font-weight: 700; color: var(--nt-ink); }
 .nt-field-optional { font-weight: 400; color: var(--nt-muted); }
 .nt-field-hint { display: block; margin: calc(-1 * var(--nt-space-1)) 0 var(--nt-space-2); font-size: 1rem; color: var(--nt-muted); }
-.nt-field-box { display: flex; align-items: center; gap: var(--nt-space-2); }
-.nt-field-mark { font-size: 1.125rem; color: var(--nt-muted); min-width: 1rem; }
+/* The "$" or "%" sits inside the box's frame, so the box reads as one money or percent box, not a blank. */
+.nt-field-box {
+  display: flex;
+  align-items: center;
+  gap: var(--nt-space-2);
+  min-height: 3.5rem;
+  padding: 0 var(--nt-space-3);
+  background: var(--nt-white);
+  border: 2px solid var(--nt-muted);
+  border-radius: var(--nt-radius);
+  cursor: text;
+}
+.nt-field-box:focus-within { border-color: var(--nt-ink); outline: 3px solid var(--nt-ink); outline-offset: 2px; }
+.nt-field-box:has(.nt-field-input[aria-invalid="true"]) { border-color: var(--nt-tdeep); }
+.nt-field-mark { font-size: 1.375rem; font-weight: 600; color: var(--nt-muted); flex-shrink: 0; }
 .nt-field-input {
   flex: 1;
   min-width: 0;
   min-height: 3.25rem;
-  padding: var(--nt-space-2) var(--nt-space-3);
+  padding: 0;
   font: inherit;
-  font-size: 1.25rem; /* 16px or more stops the iPhone zoom */
+  font-size: 1.375rem; /* 16px or more stops the iPhone zoom */
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: var(--nt-text);
-  background: var(--nt-white);
-  border: 1.5px solid var(--nt-muted);
-  border-radius: var(--nt-radius);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
 }
-.nt-field-input:focus-visible { outline: 3px solid var(--nt-ink); outline-offset: 2px; border-color: var(--nt-ink); }
-.nt-field-input[aria-invalid="true"] { border-color: var(--nt-tdeep); }
+.nt-field-input:focus, .nt-field-input:focus-visible { outline: none; }
 
-/* Chips: big tap choices on a radio group */
+/* Chips: big tap choices on a radio group. Each has a ring that fills when picked, so the pick shows by shape, not only color. */
 .nt-chips { border: 0; margin: 0 0 var(--nt-space-4); padding: 0; min-width: 0; }
 .nt-chips-row { display: flex; flex-wrap: wrap; gap: var(--nt-space-2); }
 .nt-chip { position: relative; display: inline-flex; }
@@ -73,9 +86,11 @@
 .nt-chip span {
   display: inline-flex;
   align-items: center;
+  gap: var(--nt-space-2);
+  width: 100%;
   min-height: var(--nt-tap);
   padding: 0 var(--nt-space-3);
-  border: 1.5px solid var(--nt-muted);
+  border: 2px solid var(--nt-muted);
   border-radius: 999px;
   background: var(--nt-white);
   color: var(--nt-ink);
@@ -83,8 +98,21 @@
   font-weight: 600;
   cursor: pointer;
 }
+.nt-chip span::before {
+  content: "";
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
 .nt-chip input:checked + span { background: var(--nt-ink); border-color: var(--nt-ink); color: var(--nt-white); }
+.nt-chip input:checked + span::before { background: var(--nt-white); box-shadow: inset 0 0 0 3px var(--nt-ink); border-color: var(--nt-white); }
 .nt-chip input:focus-visible + span { outline: 3px solid var(--nt-ink); outline-offset: 2px; }
+/* In a step, choices are equal tiles two to a row: bigger to hit, and nothing to read twice. */
+.nt-flow .nt-chips-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.nt-flow .nt-chip span { min-height: 3.5rem; border-radius: var(--nt-radius); font-size: 1.125rem; }
 
 /* A quiet text button that opens more boxes in place */
 .nt-more-btn {
@@ -130,10 +158,11 @@
   font-weight: 650;
   color: var(--nt-white);
 }
+.nt-result .nt-result-body .nt-result-basis { margin: 0 0 var(--nt-space-2); font-size: 1rem; color: var(--nt-mint); }
 .nt-result-unit { font-family: var(--nt-font-text); font-size: 1.125rem; font-weight: 500; color: var(--nt-mint); }
 .nt-result-body { margin-top: var(--nt-space-3); }
 .nt-result .nt-result-body p { margin: 0 0 var(--nt-space-3); font-size: 1.0625rem; color: var(--nt-white); }
-.nt-result .nt-result-body dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--nt-space-3); margin: var(--nt-space-4) 0 0; }
+.nt-result .nt-result-body dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--nt-space-3); margin: var(--nt-space-3) 0 0; }
 .nt-result .nt-result-body dl > div { display: block; padding: 0; border: 0; }
 .nt-result .nt-result-body dt { margin: 0; font-size: 0.9375rem; color: var(--nt-mint); }
 .nt-result .nt-result-body dd { margin: 0; font-size: 1.1875rem; font-weight: 700; color: var(--nt-white); text-align: left; }
@@ -214,3 +243,74 @@ main .nt-tfh-table td { white-space: normal; }
 @media (max-width: 380px) {
   .nt-result-answer { font-size: 2.5rem; }
 }
+
+/* Step flow: one question per phone screen. The buttons sit at the bottom of the screen, in the same place on every step. */
+.nt-flow { width: 100%; max-width: 36rem; margin-inline: auto; font-family: var(--nt-font-text); color: var(--nt-text); }
+/* A question screen fills the phone from the logo down, so its buttons land at the bottom, within thumb reach. */
+.nt-shell:has(.nt-flow-ask) { padding-bottom: 0; }
+.nt-main:has(.nt-flow-ask),
+.nt-main:has(.nt-flow-ask) > .nt-layout,
+.nt-main:has(.nt-flow-ask) .nt-content { display: flex; flex-direction: column; flex: 1; width: 100%; }
+.nt-flow-ask, .nt-flow-ask .nt-flow-form { display: flex; flex-direction: column; flex: 1; }
+.nt-flow-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; column-gap: var(--nt-space-3); margin: 0 0 var(--nt-space-2); }
+.nt-flow-top .nt-tool-name { margin: 0; }
+.nt-flow-count { margin: 0; font-size: 1rem; font-weight: 700; color: var(--nt-ink); }
+.nt-flow-bar { margin: 0 0 var(--nt-space-4); }
+.nt-flow-segs { display: flex; gap: var(--nt-space-2); }
+.nt-flow-seg { flex: 1; height: 0.5rem; border-radius: 999px; background: var(--nt-line); }
+.nt-flow-seg.is-done { background: var(--nt-ink); }
+.nt-flow-seg.is-now { background: var(--nt-tomato); }
+.nt-flow-answer .nt-flow-seg { background: var(--nt-ink); }
+.nt-flow-question { margin: 0 0 var(--nt-space-3); font-size: 1.875rem; line-height: 1.15; text-wrap: balance; }
+.nt-flow .nt-field { margin-bottom: var(--nt-space-3); }
+.nt-flow .nt-chips { margin-bottom: var(--nt-space-4); }
+.nt-flow .nt-field-hint { margin: 0 0 var(--nt-space-2); font-size: 1.0625rem; color: var(--nt-text); }
+.nt-flow-question:focus { outline: none; }
+.nt-flow-intro { margin: 0 0 var(--nt-space-4); }
+.nt-flow-resume { margin: 0 0 var(--nt-space-2); font-size: 1.125rem; }
+.nt-flow-intro p { margin: 0 0 var(--nt-space-2); color: var(--nt-muted); font-size: 1rem; }
+.nt-flow-body > :last-child { margin-bottom: 0; }
+.nt-flow-missing { margin: var(--nt-space-3) 0 0; padding: var(--nt-space-2) var(--nt-space-3); border-left: 4px solid var(--nt-tdeep); background: var(--nt-white); border-radius: 0 var(--nt-radius) var(--nt-radius) 0; font-weight: 600; color: var(--nt-text); }
+.nt-flow-nav {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  gap: var(--nt-space-1);
+  justify-items: center;
+  margin-top: auto;
+  padding: var(--nt-space-3) 0 calc(var(--nt-space-2) + env(safe-area-inset-bottom));
+  background: var(--nt-paper);
+}
+.nt-flow .nt-tool-trust { display: flex; align-items: flex-start; gap: var(--nt-space-2); margin: calc(-1 * var(--nt-space-1)) 0 var(--nt-space-3); font-size: 0.9375rem; line-height: 1.4; color: var(--nt-muted); }
+.nt-flow-change { width: 100%; margin: 0 0 var(--nt-space-2); text-align: center; font-size: 0.9375rem; color: var(--nt-muted); }
+.nt-more > .nt-more-extras { padding: 0 var(--nt-space-3) var(--nt-space-2); }
+.nt-more-extras > :last-child { margin-bottom: 0; }
+.nt-lock { flex-shrink: 0; margin-top: 0.125rem; color: var(--nt-ink); }
+.nt-flow-next { width: 100%; min-height: 3.5rem; font-size: 1.125rem; font-weight: 700; }
+.nt-flow-back { font-size: 1rem; }
+.nt-flow-answer .nt-result { margin: 0 0 var(--nt-space-3); }
+.nt-flow-answer .nt-flow-top { margin-bottom: var(--nt-space-1); }
+.nt-flow-answer .nt-flow-bar { margin-bottom: var(--nt-space-3); }
+.nt-flow-answer .nt-flow-question { margin-bottom: var(--nt-space-2); font-size: 1.5rem; }
+.nt-flow-actions { margin: 0 0 var(--nt-space-2); }
+.nt-flow-extras { margin: var(--nt-space-4) 0 0; }
+.nt-flow-answer .nt-tool-below { margin-top: var(--nt-space-4); }
+
+/* A closed section shows a chevron, so it reads as something that opens, not a plain label. It points down once open. */
+.nt-more > summary,
+.nt-tool-below details > summary { list-style: none; gap: var(--nt-space-3); }
+.nt-more > summary::-webkit-details-marker,
+.nt-tool-below details > summary::-webkit-details-marker { display: none; }
+.nt-more > summary::after,
+.nt-tool-below details > summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+}
+.nt-more[open] > summary::after,
+.nt-tool-below details[open] > summary::after { transform: rotate(45deg); }

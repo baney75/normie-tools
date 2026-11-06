@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { CalmMessage } from "../../components/CalmMessage";
-import { ErrorNote, Field, MoneyField, NumberField, PercentField, ResultCard, Finish, SeeAnswer, StartOver, ToolLayout } from "../../components/calc";
+import { ErrorNote, Field, MoneyField, NumberField, PercentField, ResultCard, Finish, StartOver, StepFlow } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { explainStudentLoan, formatMoney } from "../../../../tools/student-loan-growth-and-payoff/calc.mjs";
 import { COPY } from "./copy";
@@ -16,6 +15,8 @@ type Inputs = {
   years: string;
 };
 
+/** Money for a sentence: whole dollars drop the cents, like $12,000. */
+const dollars = (cents: number) => formatMoney(cents).replace(/\.00$/, "");
 const EMPTY: Inputs = { balance: "", rate: "", waitMonths: "", capitalize: false, payment: "", start: "", years: "" };
 
 const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
@@ -28,7 +29,6 @@ const span = (n: number) => {
   return m === 0 ? years(y) : `${years(y)}, ${plural(m, "month", "months")}`;
 };
 const isBlank = (v: Inputs) => !v.balance.trim() && !v.rate.trim() && !v.waitMonths.trim() && !v.payment.trim() && !v.start.trim() && !v.years.trim();
-const hasDetails = (v: Inputs) => v.waitMonths.trim() !== "" || v.capitalize || v.start.trim() !== "" || v.years.trim() !== "";
 
 export function Page() {
   const flow = useAutosave<Inputs>("student-loan-growth-and-payoff", EMPTY);
@@ -40,41 +40,59 @@ export function Page() {
   const result = explainStudentLoan(v);
   const problems = result.ok ? [] : result.problems;
   const bad = (field: string) => problems.find((p) => p.field === field && p.kind === "bad")?.message;
-  const missing = problems.filter((p) => p.kind === "missing").map((p) => (p.field === "balance" ? COPY.balance.label : COPY.rate.label));
   const blank = isBlank(v);
   const hasBad = problems.some((p) => p.kind === "bad");
-  const showMore = moreOpen || hasDetails(v);
+  // "More options" opens when the person opens it, or when one of its boxes has a red note.
+  const showMore = moreOpen || Boolean(bad("waitMonths") || bad("start") || bad("years"));
   const good = result.ok ? result : null;
 
+  const has = (field: string) => problems.some((p) => p.field === field);
+
   return (
-    <ToolLayout
+    <StepFlow
       name={COPY.title}
       question={COPY.question}
+      step={flow.step}
+      onStep={flow.setStep}
+      finishLabel={COPY.see}
+      resume={
+        flow.hasSaved && blank
+          ? { ...COPY.resume, onYes: flow.restore, onNo: flow.clear }
+          : null
+      }
+      steps={[
+        {
+          question: COPY.steps.balance,
+          ready: !has("balance"),
+          missing: COPY.steps.balanceMissing,
+          content: <MoneyField hideLabel label={COPY.balance.label} hint={COPY.balance.hint} value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />,
+        },
+        {
+          question: COPY.steps.rate,
+          ready: !has("rate"),
+          missing: COPY.steps.rateMissing,
+          content: <PercentField hideLabel label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
+        },
+        {
+          question: COPY.steps.payment,
+          ready: !has("payment"),
+          missing: COPY.steps.paymentMissing,
+          content: <MoneyField hideLabel label={COPY.payment.label} hint={COPY.payment.hint} optional value={v.payment} onChange={(t) => set({ payment: t })} error={bad("payment")} />,
+        },
+      ]}
       answer={<Answer result={good} rateZero={Number.parseFloat(v.rate) === 0} />}
       actions={good ? <Save result={good} /> : null}
-      below={<Details result={good} />}
-    >
-      {flow.hasSaved && blank ? (
-        <div className="nt-slg-status">
-          <CalmMessage
-            tone="info"
-            title={COPY.resume.title}
-            actions={[
-              { label: COPY.resume.yes, onClick: flow.restore },
-              { label: COPY.resume.no, onClick: flow.clear },
-            ]}
+      extras={
+        <>
+          {!result.ok && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
+          <StartOver
+            flowId="student-loan-growth-and-payoff"
+            value={flow.value}
+            empty={EMPTY}
+            onChange={flow.setValue}
+            open={showMore}
+            onOpen={setMoreOpen}
           >
-            {COPY.resume.body}
-          </CalmMessage>
-        </div>
-      ) : null}
-
-      <form className="nt-slg-form" onSubmit={(e) => e.preventDefault()} noValidate>
-        <MoneyField label={COPY.balance.label} hint={COPY.balance.hint} value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />
-        <PercentField label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />
-        <MoneyField label={COPY.payment.label} hint={COPY.payment.hint} optional value={v.payment} onChange={(t) => set({ payment: t })} error={bad("payment")} />
-        {showMore ? (
-          <>
             <NumberField label={COPY.wait.label} hint={COPY.wait.hint} unit={COPY.wait.unit} optional value={v.waitMonths} onChange={(t) => { setMoreOpen(true); set({ waitMonths: t }); }} error={bad("waitMonths")} />
             <div className="nt-slg-toggle">
               <input id="nt-slg-capitalize" type="checkbox" aria-describedby="nt-slg-capitalize-hint" checked={v.capitalize} onChange={(e) => { setMoreOpen(true); set({ capitalize: e.target.checked }); }} />
@@ -85,25 +103,11 @@ export function Page() {
             </div>
             <Field label={COPY.start.label} hint={COPY.start.hint} optional inputMode="text" value={v.start} onChange={(t) => { setMoreOpen(true); set({ start: t }); }} error={bad("start")} />
             <NumberField label={COPY.years.label} hint={COPY.years.hint} optional value={v.years} onChange={(t) => { setMoreOpen(true); set({ years: t }); }} error={bad("years")} />
-          </>
-        ) : null}
-        {hasDetails(v) ? null : (
-          <button type="button" className="nt-more-btn" aria-expanded={showMore} onClick={() => setMoreOpen(!showMore)}>
-            {showMore ? COPY.lessButton : COPY.moreButton}
-          </button>
-        )}
-      </form>
-
-      {!result.ok && !blank && missing.length > 0 && !hasBad ? (
-        <p className="nt-slg-status" role="status">
-          {COPY.stillNeeded} {missing.join(", ")}.
-        </p>
-      ) : null}
-      {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-
-      <SeeAnswer label={COPY.see} main={!good} />
-      <StartOver flowId="student-loan-growth-and-payoff" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
-    </ToolLayout>
+          </StartOver>
+        </>
+      }
+      below={<Details result={good} />}
+    />
   );
 }
 
@@ -129,6 +133,7 @@ function Answer({ result, rateZero }: { result: Good | null; rateZero: boolean }
   if (result && pay) {
     return (
       <ResultCard label={r.paidOffLabel} answer={span(pay.months)}>
+        <p className="nt-result-basis">{r.basisFor} {dollars(result.principalCents)} {r.basisAt} {result.rateBps / 100}%.</p>
         <p>
           {r.paying} {formatMoney(result.paymentCents ?? 0)} {r.aMonth}
           {pay.payoffDate ? ` ${r.leadPayoff} ${pay.payoffDate.label}.` : ""}
@@ -157,6 +162,7 @@ function Answer({ result, rateZero }: { result: Good | null; rateZero: boolean }
     <ResultCard label={r.balanceLabel} answer={result ? formatMoney(result.balanceAtStartCents) : undefined} waiting={COPY.waiting}>
       {result ? (
         <>
+          <p className="nt-result-basis">{r.basisFor} {dollars(result.principalCents)} {r.basisAt} {result.rateBps / 100}%.</p>
           <p>{result.unpaidInterestCents === 0 ? (rateZero ? r.noRate : r.noGrowth) : r.balanceLine}</p>
           <dl>
             <div>

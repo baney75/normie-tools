@@ -20,7 +20,9 @@ afterAll(() => {
 
 describe("built site under /nt/", () => {
   it("points every file URL in index.html at /nt/", () => {
-    const urls = [...html.matchAll(/(?:href|src)="([^"#]+)"/g)].map((m) => m[1]);
+    // The canonical link is a page address on the live site, not a file, so it is absolute.
+    expect(html).toContain('<link rel="canonical" href="https://dbaney.com/nt/" />');
+    const urls = [...html.matchAll(/(?:href|src)="([^"#]+)"/g)].map((m) => m[1]).filter((u) => u !== "https://dbaney.com/nt/");
     expect(urls.length).toBeGreaterThan(10);
     for (const u of urls) expect(u.startsWith("/nt/"), u).toBe(true);
     expect(html).toContain('href="/nt/manifest.webmanifest"');

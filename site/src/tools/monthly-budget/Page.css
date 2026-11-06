@@ -5,9 +5,12 @@
 .nt-budget-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 7.5rem) var(--nt-tap); gap: var(--nt-space-2); align-items: start; }
 .nt-budget-cols { margin: 0 0 var(--nt-space-1); font-size: 0.9375rem; color: var(--nt-muted); }
 .nt-budget-cols > :last-child { grid-column: 2; }
-.nt-budget-row { margin: 0 0 var(--nt-space-2); }
+.nt-budget-row { margin: 0 0 var(--nt-space-1); }
 .nt-budget-row .nt-field { margin: 0; }
-.nt-budget-row .nt-field-input { min-height: var(--nt-tap); font-size: 1.125rem; }
+.nt-budget-row .nt-field-box { min-height: var(--nt-tap); padding-inline: var(--nt-space-2); }
+.nt-budget-row .nt-field-mark { font-size: 1.125rem; }
+/* The input runs over the frame's top and bottom border, so the whole 44px row is the tap target and the row stays 44px high. */
+.nt-budget-row .nt-field-input { min-height: var(--nt-tap); margin-block: -2px; font-size: 1.125rem; font-weight: 500; }
 .nt-budget-remove { display: inline-flex; align-items: center; justify-content: center; width: var(--nt-tap); height: var(--nt-tap); padding: 0; border: 0; background: transparent; color: var(--nt-muted); border-radius: var(--nt-radius); }
 .nt-budget-remove:hover { color: var(--nt-tdeep); }
 @media (max-width: 360px) {
@@ -40,3 +43,5 @@
 .nt-budget-table caption { text-align: left; font-weight: 700; padding-bottom: var(--nt-space-2); color: var(--nt-ink); }
 .nt-budget-table th, .nt-budget-table td { padding: var(--nt-space-2); border-top: 1px solid var(--nt-line); text-align: right; }
 .nt-budget-table th:first-child, .nt-budget-table td:first-child { text-align: left; }
+.nt-flow .nt-budget-list { margin-bottom: 0; }
+.nt-flow .nt-budget-list + .nt-budget-help { margin: var(--nt-space-1) 0 0; }

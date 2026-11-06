@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { clearSaved } from "../../lib/useAutosave";
 
 export type StartOverProps<T> = {
@@ -12,12 +12,17 @@ export type StartOverProps<T> = {
   onChange: (next: T) => void;
   /** The short line beside the button that says the person can get their numbers back. */
   note?: string;
+  /** The page's optional boxes (fees, tax, school months). They wait in the same "More options" as Start over. */
+  children?: ReactNode;
+  /** Set by a page with extras, so "More options" opens when one of its boxes has a red note. */
+  open?: boolean;
+  onOpen?: (open: boolean) => void;
 };
 
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
 /** A quiet "Start over". It asks first, then clears, and offers a way back. The old numbers live in memory only. */
-export function StartOver<T>({ flowId, value, empty, onChange, note = "You can put your numbers back." }: StartOverProps<T>) {
+export function StartOver<T>({ flowId, value, empty, onChange, note = "You can put your numbers back.", children, open, onOpen }: StartOverProps<T>) {
   const [kept, setKept] = useState<{ value: T } | null>(null);
   const [asking, setAsking] = useState(false);
   const isEmpty = same(value, empty);
@@ -56,8 +61,9 @@ export function StartOver<T>({ flowId, value, empty, onChange, note = "You can p
 
   // Start over is rarely needed, so it waits behind "More options" with the other extras.
   return (
-    <details className="nt-more">
+    <details className="nt-more" open={open} onToggle={(e) => onOpen?.(e.currentTarget.open)}>
       <summary>More options</summary>
+      {children ? <div className="nt-more-extras">{children}</div> : null}
       <div className="nt-startover">
         {asking ? (
           <>

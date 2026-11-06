@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { CalmMessage } from "../../components/CalmMessage";
-import { amountText, ErrorNote, Field, MoneyField, RemoveAsk, ResultCard, Finish, SeeAnswer, StartOver, ToolLayout } from "../../components/calc";
+import { amountText, ErrorNote, Field, MoneyField, RemoveAsk, ResultCard, Finish, StartOver, StepFlow } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { formatMoney, MAX_ROWS, planBudget } from "../../../../tools/monthly-budget/calc.mjs";
 import { COPY } from "./copy";
@@ -78,99 +77,142 @@ export function Page() {
 
   const good = result.ok && result.hasAmounts ? result : null;
 
+  // One income and nothing waiting to be put back: one money box, no list, no remove button.
+  const oneIncome = v.income.length === 1 && !(undo && undo.kind === "income") && !(asking && asking.kind === "income");
+  const singleIncome = () => {
+    const l = v.income[0];
+    return (
+      <>
+        <MoneyField
+          hideLabel
+          label={`${shown(l, COPY.income.fallback, 0)}, ${COPY.amount.suffix}`}
+          hint={COPY.oneIncome.hint}
+          value={l.amount}
+          onChange={(t) => change("income", l.id, { amount: t })}
+          error={bad("income.0")}
+        />
+        <button type="button" className="nt-more-btn" onClick={() => add("income")}>
+          {COPY.oneIncome.add}
+        </button>
+      </>
+    );
+  };
+
+  const listFor = (kind: Kind) => {
+      const c = kind === "income" ? COPY.income : COPY.spending;
+      const askIndex = asking && asking.kind === kind ? v[kind].findIndex((l) => l.id === asking.id) : -1;
+      return (
+        <section key={kind} className="nt-budget-list" aria-label={c.heading}>
+          <div className="nt-budget-cols" aria-hidden="true">
+            <span>{COPY.columns.name}</span>
+            <span>{COPY.columns.amount}</span>
+          </div>
+          {v[kind].map((l, i) => {
+            const label = shown(l, c.fallback, i);
+            return (
+              <div key={l.id} className="nt-budget-row">
+                <Field
+                  hideLabel
+                  needed={false}
+                  label={`${c.nameLabel} ${i + 1}`}
+                  inputMode="text"
+                  value={l.name}
+                  placeholder={c.fallback}
+                  onChange={(t) => change(kind, l.id, { name: t })}
+                />
+                <MoneyField
+                  hideLabel
+                  label={`${label}, ${COPY.amount.suffix}`}
+                  value={l.amount}
+                  onChange={(t) => change(kind, l.id, { amount: t })}
+                  error={bad(`${kind}.${i}`)}
+                />
+                <button type="button" className="nt-budget-remove" aria-label={`${COPY.remove} ${label}`} onClick={() => setAsking({ kind, id: l.id })}>
+                  <X aria-hidden="true" focusable="false" size={20} />
+                </button>
+              </div>
+            );
+          })}
+          {askIndex >= 0 ? (
+            <RemoveAsk
+              what={`${shown(v[kind][askIndex], c.fallback, askIndex)}, ${amountText(v[kind][askIndex].amount)}`}
+              onRemove={() => remove(kind, v[kind][askIndex].id)}
+              onKeep={() => setAsking(null)}
+            />
+          ) : null}
+          {undo && undo.kind === kind ? (
+            <p className="nt-budget-help">
+              {COPY.undoHelp}{" "}
+              <button type="button" className="nt-more-btn" onClick={putBack}>
+                {COPY.undo}
+              </button>
+            </p>
+          ) : null}
+          {v[kind].length < MAX_ROWS ? (
+            <button type="button" className="nt-more-btn" onClick={() => add(kind)}>
+              {c.add}
+            </button>
+          ) : (
+            <p className="nt-budget-help">{COPY.full}</p>
+          )}
+        </section>
+      );
+  };
+  const has = (kind: Kind) => problems.some((p: { field: string }) => p.field.startsWith(`${kind}.`));
+
   return (
-    <ToolLayout
+    <StepFlow
       name={COPY.title}
       question={COPY.question}
+      step={flow.step}
+      onStep={flow.setStep}
+      finishLabel={COPY.see}
+      resume={
+        flow.hasSaved && pristine
+          ? { ...COPY.resume, onYes: flow.restore, onNo: flow.clear }
+          : null
+      }
+      steps={[
+        {
+          question: COPY.steps.income,
+          ready: !has("income"),
+          missing: COPY.steps.fixMissing,
+          content: oneIncome ? (
+            singleIncome()
+          ) : (
+            <>
+              {listFor("income")}
+              <p className="nt-budget-help">{COPY.removeNote}</p>
+            </>
+          ),
+        },
+        {
+          question: COPY.steps.spending,
+          ready: !has("expenses"),
+          missing: COPY.steps.fixMissing,
+          content: (
+            <>
+              {listFor("expenses")}
+              <p className="nt-budget-help">{COPY.removeNote}</p>
+            </>
+          ),
+        },
+      ]}
       answer={<Answer result={good} />}
       actions={good ? <Save result={good} /> : null}
+      extras={
+        <>
+          {!result.ok ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
+          <StartOver
+            flowId="monthly-budget"
+            value={flow.value}
+            empty={EMPTY}
+            onChange={flow.setValue}
+          />
+        </>
+      }
       below={good ? <Details result={good} /> : null}
-    >
-      {flow.hasSaved && pristine ? (
-        <div className="nt-budget-status">
-          <CalmMessage
-            tone="info"
-            title={COPY.resume.title}
-            actions={[
-              { label: COPY.resume.yes, onClick: flow.restore },
-              { label: COPY.resume.no, onClick: flow.clear },
-            ]}
-          >
-            {COPY.resume.body}
-          </CalmMessage>
-        </div>
-      ) : null}
-
-      <form className="nt-budget-form" onSubmit={(e) => e.preventDefault()} noValidate>
-        {(["income", "expenses"] as const).map((kind) => {
-          const c = kind === "income" ? COPY.income : COPY.spending;
-          const askIndex = asking && asking.kind === kind ? v[kind].findIndex((l) => l.id === asking.id) : -1;
-          return (
-            <section key={kind} className="nt-budget-list" aria-label={c.heading}>
-              <h2>{c.heading}</h2>
-              <div className="nt-budget-cols" aria-hidden="true">
-                <span>{COPY.columns.name}</span>
-                <span>{COPY.columns.amount}</span>
-              </div>
-              {v[kind].map((l, i) => {
-                const label = shown(l, c.fallback, i);
-                return (
-                  <div key={l.id} className="nt-budget-row">
-                    <Field
-                      hideLabel
-                      needed={false}
-                      label={`${c.nameLabel} ${i + 1}`}
-                      inputMode="text"
-                      value={l.name}
-                      placeholder={c.fallback}
-                      onChange={(t) => change(kind, l.id, { name: t })}
-                    />
-                    <MoneyField
-                      hideLabel
-                      label={`${label}, ${COPY.amount.suffix}`}
-                      value={l.amount}
-                      onChange={(t) => change(kind, l.id, { amount: t })}
-                      error={bad(`${kind}.${i}`)}
-                    />
-                    <button type="button" className="nt-budget-remove" aria-label={`${COPY.remove} ${label}`} onClick={() => setAsking({ kind, id: l.id })}>
-                      <X aria-hidden="true" focusable="false" size={20} />
-                    </button>
-                  </div>
-                );
-              })}
-              {askIndex >= 0 ? (
-                <RemoveAsk
-                  what={`${shown(v[kind][askIndex], c.fallback, askIndex)}, ${amountText(v[kind][askIndex].amount)}`}
-                  onRemove={() => remove(kind, v[kind][askIndex].id)}
-                  onKeep={() => setAsking(null)}
-                />
-              ) : null}
-              {undo && undo.kind === kind ? (
-                <p className="nt-budget-help">
-                  {COPY.undoHelp}{" "}
-                  <button type="button" className="nt-more-btn" onClick={putBack}>
-                    {COPY.undo}
-                  </button>
-                </p>
-              ) : null}
-              {v[kind].length < MAX_ROWS ? (
-                <button type="button" className="nt-more-btn" onClick={() => add(kind)}>
-                  {c.add}
-                </button>
-              ) : (
-                <p className="nt-budget-help">{COPY.full}</p>
-              )}
-            </section>
-          );
-        })}
-        <p className="nt-budget-help">{COPY.removeNote}</p>
-      </form>
-
-      {!result.ok ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-
-      <SeeAnswer label={COPY.see} main={!good} />
-      <StartOver flowId="monthly-budget" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
-    </ToolLayout>
+    />
   );
 }
 

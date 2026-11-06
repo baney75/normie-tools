@@ -10,4 +10,5 @@ export { StepLabel } from "./StepLabel";
 export { Chips, type ChipOption, type ChipsProps } from "./Chips";
 export { Finish, type FinishProps } from "./Finish";
 export { ToolLayout, type ToolLayoutProps } from "./ToolLayout";
+export { StepFlow, type FlowStep, type StepFlowProps } from "./StepFlow";
 export { SeeAnswer } from "./SeeAnswer";

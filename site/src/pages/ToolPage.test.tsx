@@ -39,12 +39,14 @@ describe("ToolPage shipped tools", () => {
   it("shows a calm loading line, then the registered page", async () => {
     render(<ToolPage id="loan-explainer" />);
     expect(screen.getByRole("status")).toHaveTextContent("Getting your tool ready.");
-    expect(await screen.findByRole("heading", { level: 1, name: "What will my loan cost?" })).toBeInTheDocument();
+    // Step 1's question is the h1 on load, and its one box is there.
+    expect(await screen.findByRole("heading", { level: 1, name: "How much did you borrow?" })).toBeInTheDocument();
+    expect(screen.getByText("Step 1 of 4")).toBeInTheDocument();
     expect(screen.getByLabelText("Amount borrowed")).toBeInTheDocument();
   });
   it("shows no Back to home link or Done button inside the answer card", async () => {
     render(<ToolPage id="monthly-budget" />);
-    await screen.findByRole("heading", { level: 1, name: "Where does my money go each month?" });
+    await screen.findByRole("heading", { level: 1, name: "How much money comes in each month?" });
     expect(screen.queryAllByRole("link", { name: /Back to home/ })).toHaveLength(0);
     expect(screen.queryByText("Done. Back to home.")).toBeNull();
   });

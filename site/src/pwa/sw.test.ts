@@ -14,9 +14,10 @@ function pngSize(file: string) {
 describe("manifest", () => {
   it("has the required fields", () => {
     expect(manifest).toMatchObject({
-      name: "NT",
+      id: "/nt/",
+      name: "NT: small tools for everyday things",
       short_name: "NT",
-      description: "Small tools for everyday things.",
+      description: "Free, private tools for everyday money questions: loan and mortgage payments, loan offers, student loans, a monthly budget and a unit converter. No sign up. Your numbers stay on your phone.",
       start_url: "/nt/",
       scope: "/nt/",
       display: "standalone",

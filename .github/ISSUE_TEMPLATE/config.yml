@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/baney75/normie-tools/security/advisories/new
+    about: Please report security problems privately, not as a public issue.
+  - name: Try NT
+    url: https://dbaney.com/nt/
+    about: The live site, with every shipped tool.

@@ -12,16 +12,16 @@
     "runs": [
       4,
       4,
-      3,
       4,
       4,
       4,
       4,
-      3,
+      4,
+      4,
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to see that 5000 inches is 127,000 millimeters, and then tap \"I'm done\" when I'm finished.\n\n2. I would tap \"I'm done\".\n\n3. Words that felt like tech talk or that I did not understand:\n- \"rounded to 6 digits\" (I'm not sure what that means for my answer)\n- \"How we know\" (know what? It's a link and I don't know where it goes)\n- \"Swap\" (swap what? I can guess, but it's not clear)\n- \"More options\" (more of what?)\n- \"Show the facts used\" (which facts? used for what?)\n- \"Change from\" and \"Change to\" (a little odd, but I could work it out)\n- \"Print or save\" (save where?)\n- \"MAIN LINK\" and \"menu\" are labels for the layout, not things I'd see, so I'd ignore those.\n\n4. Worries:\n- \"I'm done\" made me wonder whether it closes things, erases my numbers, or sends something somewhere.\n- \"Print or save\" made me wonder where it saves and whether it costs anything.\n- \"Your numbers stay on this phone or computer\" is reassuring, but I'm not sure I believe it, and \"How we know\" makes me wonder what I'd be agreeing to if I tap it.\n- I'm unsure whether tapping the choices (Length, Weight) will wipe the number I typed.\n\n5. Things I would skip:\n- \"More options\" and \"Show the facts used\" because I don't need them to get my answer.\n- \"How we know\".\n- \"Swap\" unless I got the direction backward.\n- \"Print or save\".\n\n6. Score: 4. The answer is at the top and \"I'm done\" is the bright button, but I'm not sure what happens after I tap it.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"rounded to 6 digits\", \"How we know\", \"Swap\", \"More options\", \"Show the facts used\", \"Change from\", \"Change to\", \"Print or save\"], \"worries\": [\"I'm done might close or erase things or send something\", \"Print or save: where it saves and whether it costs\", \"Whether 'your numbers stay on this phone' is true and what How we know opens\", \"Whether changing the type (Weight, Volume) wipes my number\"], \"skippable\": [\"More options\", \"Show the facts used\", \"How we know\", \"Swap\", \"Print or save\"], \"score\": 4}"
+    "output": "1. This screen wants me to read my answer, 304.8 millimeters, and then tell it I'm finished.\n\n2. I would tap \"I'm done\".\n\n3. Words that felt like tech talk or were unclear:\n- \"millimeters\". I know inches and feet, not this one, so I can't tell if 304.8 is big or small.\n- \"rounded to 6 digits\". I don't know what that means or whether it changed my answer.\n- \"Step 3 of 3\". I don't remember steps 1 and 2 by those names.\n- \"Show the facts used\". Which facts? Used for what?\n- \"More options\". More options for what?\n- \"Print or save\". I don't know where it would save, or whether it's saving to my phone or somewhere online.\n- \"MAIN LINK\". That might be a note for the builders, not for me.\n\n4. Things that worried me:\n- \"Print or save\" made me wonder if it would send something or keep my numbers somewhere.\n- \"I'm done\" made me wonder if it erases my answer. I haven't written it down.\n- \"Change my numbers\" made me wonder if I'd lose what I already typed.\n- \"More options\" and \"Show the facts used\" felt like they could lead somewhere I can't get back from.\n- Nothing mentions cost, but I never saw a line saying it's free either.\n\n5. I would skip \"More options\" and \"Show the facts used\". \"A long answer is rounded to 6 digits\" is also a line I'd skip. My answer is short, so it doesn't seem to apply to me.\n\n6. Score: 4. \"That is your answer. You can stop here.\" and the one orange button tell me what to do. I'm only unsure whether the answer disappears when I tap \"I'm done\".\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"millimeters\", \"rounded to 6 digits\", \"Step 3 of 3\", \"Show the facts used\", \"More options\", \"Print or save\", \"MAIN LINK\"], \"worries\": [\"Print or save might send or keep my numbers somewhere\", \"I'm done might erase my answer before I write it down\", \"Change my numbers might lose what I typed\", \"More options and Show the facts used might lead somewhere I can't get back from\", \"No line says it is free\"], \"skippable\": [\"More options\", \"Show the facts used\", \"A long answer is rounded to 6 digits\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -67,14 +67,14 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "PASS",
+            "FAIL",
             "PASS",
             "PASS"
           ]
@@ -202,16 +202,16 @@
         "runs": [
           4,
           4,
-          3,
           4,
           4,
           4,
-          3,
+          4,
+          4,
           4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type a number and pick what to change it from and to, so it can tell me the answer.\n\n2. I would tap the \"Number\" box first, since nothing works until I type something. After that, \"See my answer\".\n\n3. Words that felt like tech talk or unclear:\n- \"Swap\" (I guess it flips the two choices, but I'm not certain)\n- \"Show the facts used\" (facts about what?)\n- \"How we know\" (know what?)\n- \"stay on this phone or computer\" (what does that mean for me?)\n- The short codes like \"(in)\", \"(ft)\", \"(mm)\", \"(km)\"\n- \"Millimeters\" (I don't know how big that is)\n- \"Change from\" and \"Change to\" (I'd have said \"convert\", but I get it)\n- The heading says \"cups\" but I see no Cups option under Length, only under Volume I assume.\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" made me wonder why privacy is even mentioned, and whether something is being collected.\n- I'm not sure whether \"See my answer\" costs anything, though nothing mentions money.\n- I worry I'll pick the wrong \"Change from\" or \"Change to\" and get a wrong answer without noticing.\n- It says \"Type a number to see your answer,\" but there's also a \"See my answer\" button, so I'm unsure whether I need to tap it or the answer appears by itself.\n\n5. I would skip \"How we know\" and \"Show the facts used\". I would also probably skip \"Swap\" on a first try.\n\n6. Score: 4. I know to type a number, but I'm a bit unsure whether the answer shows up by itself or only after I tap the button.\n\nRESULT: {\"next_tap\":\"Number\",\"confusing_terms\":[\"Swap\",\"Show the facts used\",\"How we know\",\"stay on this phone or computer\",\"(in), (ft), (mm), (km) codes\",\"Millimeters\",\"Change from / Change to\",\"heading mentions cups but Length has no cups\"],\"worries\":[\"Why privacy is mentioned and whether anything is collected\",\"Unsure if anything costs money\",\"Might pick wrong from/to units and not notice\",\"Unclear whether answer appears automatically or only after tapping See my answer\"],\"skippable\":[\"How we know\",\"Show the facts used\",\"Swap\"],\"score\":4}"
+        "output": "1. I think this screen wants me to pick what kind of thing I want to measure, like length or weight, and then move on.\n\n2. I would tap \"Continue\". Length is already picked, so I would leave it.\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"Step 1 of 3\". I don't know what the other two steps are.\n- \"Unit Converter\". I can guess, but the name alone doesn't tell me much.\n- \"stay on this phone or computer\". I'm not sure what that means for me.\n- \"How we know\". Know what? It doesn't say.\n- \"Back to tools\". I don't know what \"tools\" means here or where it goes.\n- There is a gap under the heading where it looks like a line of words should be. It made me wonder if something didn't load.\n\n4. Things that made me worry:\n- \"Your numbers stay on this phone or computer\" made me think numbers are being saved somewhere. It's meant to calm me, but it made me wonder what numbers and why.\n- \"How we know\" sounds like I'm being asked to trust a claim, which made me a bit wary.\n- Nothing mentions money, which is good, but it doesn't say it's free either. I'd like to know that before going further.\n- \"You can go back and change any number\" helped a little, but I haven't typed any numbers yet, so it was a bit puzzling.\n\n5. I would skip the \"How we know\" link, and the \"Your numbers stay...\" line too, since I'm not sure it affects me. I'd also skip \"Back to tools\" because I'm not trying to leave.\n\n6. Score: 4. The orange \"Continue\" button stands out and I'm fairly sure it's the one to tap. The blank spot and the unclear lines keep me from being completely sure.\n\nRESULT: {\"next_tap\":\"Continue\",\"confusing_terms\":[\"Step 1 of 3\",\"How we know\",\"Your numbers stay on this phone or computer\",\"Back to tools\",\"blank gap under the heading\"],\"worries\":[\"Not sure why numbers would be stored or what 'stay on this phone' means\",\"'How we know' sounds like a claim I'm asked to trust\",\"Doesn't say whether it is free\",\"Blank space under the heading looks like something didn't load\"],\"skippable\":[\"How we know\",\"Your numbers stay on this phone or computer\",\"Back to tools\"],\"score\":4}"
       },
       "designRubric": [
         {
@@ -257,7 +257,7 @@
               ]
             },
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -266,7 +266,7 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             },
             {
@@ -296,7 +296,7 @@
               ]
             }
           ],
-          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
         },
         {
           "model": "sonnet",
@@ -328,7 +328,7 @@
               ]
             },
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -337,7 +337,7 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             },
             {

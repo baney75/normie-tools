@@ -9,14 +9,16 @@ export type ChipsProps = {
   /** The picked value, or "" when none is picked. */
   value: string;
   onChange: (value: string) => void;
+  /** Keeps the question for screen readers only, when the page heading already asks it. */
+  hideLegend?: boolean;
 };
 
 /** A row of big tap choices. Under the hood it is a radio group, so keyboards and screen readers work. */
-export function Chips({ legend, options, value, onChange }: ChipsProps) {
+export function Chips({ legend, options, value, onChange, hideLegend = false }: ChipsProps) {
   const name = useId();
   return (
     <fieldset className="nt-chips">
-      <legend className="nt-field-label">{legend}</legend>
+      <legend className={hideLegend ? "nt-field-label nt-sr-only" : "nt-field-label"}>{legend}</legend>
       <div className="nt-chips-row">
         {options.map((o) => (
           <label key={o.value} className="nt-chip">

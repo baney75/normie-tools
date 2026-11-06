@@ -3,22 +3,12 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 
 Student Loan Growth and Payoff
-[heading 1] When will my student loan be paid off?
+Step 1 of 4
+[heading 1] How much do you owe?
 Your numbers stay on this phone or computer. How we know ("How we know" is a link)
-Type your numbers to see your answer.
-[label] Loan balance
 What you owe now. It is on your loan statement.
 $
-[box] Loan balance = ""
-[label] Yearly interest rate
-On your loan statement.
-[box] Yearly interest rate = ""
-%
-[label] Monthly payment (optional)
-Leave it empty to see only the balance.
-$
-[box] Monthly payment (optional) = ""
-[plain button, outline only] Add school months and other details
-[MAIN BUTTON, filled dark orange] See my answer
-[closed section, tap to open] How this is figured
-Your loan statement is the final word. This page helps you understand it.
+[box] (no label shown) = ""
+You can go back and change any number.
+[MAIN BUTTON, filled dark orange] Continue
+[link, plain] Back to tools

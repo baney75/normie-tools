@@ -1,0 +1,23 @@
+Screen: loan-explainer, answer state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps, then tapped the last button. This is the answer screen.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Loan Explainer
+Step 4 of 4: your answer
+[heading 1] What will my loan cost?
+Monthly payment
+$367.79
+For $12,000 at 6.5% for 3 years.
+You pay back $13,240.36 in all.
+Total interest
+$1,240.36
+Paid off in
+3 years
+That is your estimate. You can stop here.
+[MAIN LINK, filled dark orange] I'm done
+[plain button, outline only] Print or save
+[plain button, outline only] Change my numbers
+[closed section, tap to open] More options
+[closed section, tap to open] See all the numbers
+[closed section, tap to open] What the words mean
+This is an estimate. Your lender statement has the final numbers.

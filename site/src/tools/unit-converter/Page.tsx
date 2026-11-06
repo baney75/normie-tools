@@ -1,6 +1,5 @@
 import { useId, type ReactNode } from "react";
-import { CalmMessage } from "../../components/CalmMessage";
-import { Chips, ErrorNote, Field, ResultCard, Finish, SeeAnswer, StartOver, ToolLayout } from "../../components/calc";
+import { Chips, Field, ResultCard, Finish, StartOver, StepFlow } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { CATEGORIES, CATEGORY_IDS, DEFAULT_UNITS, convertUnit } from "../../../../tools/unit-converter/calc.mjs";
 import { COPY } from "./copy";
@@ -44,54 +43,65 @@ export function Page() {
   }
 
   return (
-    <ToolLayout
+    <StepFlow
       name={COPY.title}
       question={COPY.question}
+      step={flow.step}
+      onStep={flow.setStep}
+      finishLabel={COPY.see}
+      resume={
+        flow.hasSaved && blank
+          ? { ...COPY.resume, onYes: flow.restore, onNo: flow.clear }
+          : null
+      }
+      steps={[
+        {
+          question: COPY.kind.label,
+          ready: true,
+          content: (
+            <Chips
+              legend={COPY.kind.label}
+              hideLegend
+              options={CATEGORY_IDS.map((id: string) => ({ value: id, label: (CATEGORIES as Record<string, { label: string }>)[id].label }))}
+              value={v.category}
+              onChange={pickCategory}
+            />
+          ),
+        },
+        {
+          question: COPY.steps.number,
+          ready: result.ok,
+          missing: valueBad ? COPY.fixFirst : COPY.steps.numberMissing,
+          content: (
+            <>
+              <div className="nt-unit-pair">
+                <Field label={COPY.value.label} value={v.value} onChange={(t) => set({ value: t })} error={valueBad} />
+                <Pick label={COPY.from.label} value={v.from} onChange={(from) => set({ from })}>
+                  {units.map((u) => <option key={u.id} value={u.id}>{upper(u.name)} ({u.short})</option>)}
+                </Pick>
+                <button type="button" className="nt-unit-swap" onClick={() => set({ from: v.to, to: v.from })}>
+                  {COPY.swap}
+                </button>
+                <Pick label={COPY.to.label} value={v.to} onChange={(to) => set({ to })}>
+                  {units.map((u) => <option key={u.id} value={u.id}>{upper(u.name)} ({u.short})</option>)}
+                </Pick>
+              </div>
+            </>
+          ),
+        },
+      ]}
       answer={<Answer result={result.ok ? result : null} />}
       actions={result.ok ? <Save result={result} typed={v.value.trim()} /> : null}
-      below={<Facts />}
-    >
-      {flow.hasSaved && blank ? (
-        <div className="nt-unit-status">
-          <CalmMessage
-            tone="info"
-            title={COPY.resume.title}
-            actions={[
-              { label: COPY.resume.yes, onClick: flow.restore },
-              { label: COPY.resume.no, onClick: flow.clear },
-            ]}
-          >
-            {COPY.resume.body}
-          </CalmMessage>
-        </div>
-      ) : null}
-
-      <form className="nt-unit-form" onSubmit={(e) => e.preventDefault()} noValidate>
-        <Chips
-          legend={COPY.kind.label}
-          options={CATEGORY_IDS.map((id: string) => ({ value: id, label: (CATEGORIES as Record<string, { label: string }>)[id].label }))}
-          value={v.category}
-          onChange={pickCategory}
+      extras={
+        <StartOver
+          flowId="unit-converter"
+          value={flow.value}
+          empty={START}
+          onChange={flow.setValue}
         />
-        <Field label={COPY.value.label} value={v.value} onChange={(t) => set({ value: t })} error={valueBad} />
-        <div className="nt-unit-pair">
-          <Pick label={COPY.from.label} value={v.from} onChange={(from) => set({ from })}>
-            {units.map((u) => <option key={u.id} value={u.id}>{upper(u.name)} ({u.short})</option>)}
-          </Pick>
-          <button type="button" className="nt-unit-swap" onClick={() => set({ from: v.to, to: v.from })}>
-            {COPY.swap}
-          </button>
-          <Pick label={COPY.to.label} value={v.to} onChange={(to) => set({ to })}>
-            {units.map((u) => <option key={u.id} value={u.id}>{upper(u.name)} ({u.short})</option>)}
-          </Pick>
-        </div>
-      </form>
-
-      {!result.ok && !blank && valueBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-
-      <SeeAnswer label={COPY.see} main={!result.ok} />
-      <StartOver flowId="unit-converter" value={flow.value} empty={START} onChange={flow.setValue} />
-    </ToolLayout>
+      }
+      below={<Facts />}
+    />
   );
 }
 

@@ -2,6 +2,30 @@
 
 Log of choices made while scaffolding NT. Newest first.
 
+## 2026-11-05 - Round 6: link previews, search and install details
+
+- Owner, 2026-11-05: "It needs a good opengraph preview seo and aso and the repo needs to be professional".
+- Each shipped tool has its own page at `/nt/tools/<id>/`, written by the build (`site/share-head.ts`): the same app with the tool's own title, description, canonical address, Open Graph and Twitter tags, structured data (schema.org WebApplication, free) and share picture. It opens the tool by setting the hash before the app starts. Before this, every shared link previewed as the home page, because the app routes by hash and link previews never see the hash. `sitemap.xml` lists the home page and the six tool pages. The tab title follows the page too.
+- Share pictures (1200 by 630) show the tool's question beside the real answer screen in a phone, drawn by `scripts/gen-share.mjs` from a built site. The words, including the sample answers, live in `site/src/copy/share.ts`, and `e2e/share.spec.ts` walks each tool with the sample numbers and fails if the card shows something else (it caught "Total monthly payment" on Mortgage).
+- Install details: the manifest has an id, a longer description, categories, five phone screenshots and one wide one, and shortcuts to four tools. iPhone gets a 180 by 180 full-bleed icon, because the old 192 icon had clear corners that iOS fills with black.
+- The repo got a current README (it said "Plan stage. Nothing is built"), SECURITY.md with private reporting turned on, an issue form config, and a GitHub description, homepage and topics.
+
+## 2026-11-05 - Round 5: one question per phone screen
+
+- Owner, 2026-11-05: "Each tool needs to be one page and extremely easy to use." Asked what "one page" means: "One phone screen with continue buttons".
+- Every shipped tool is a short flow (`StepFlow`): one question per screen, "Step N of M" with a progress bar, Continue pinned at the bottom, a quiet Back. Every question screen fits 390 by 664 (an iPhone 15 in Safari with its bars showing) with no scrolling, and `e2e/one-screen.spec.ts` fails if one does not. The full step list is in `docs/design/answer-first/STEPS.md`.
+- The answer is the last step ("Step 4 of 4: your answer"). The rubric failed rule 4 on every answer screen while it had no step label.
+- Loan answer cards start with what the answer is based on ("For $12,000 at 6.5% for 3 years."). Haiku failed rule 8 on Mortgage when the inputs were no longer on the answer screen, and it lets a person check their typing.
+- A saved copy gets its own screen ("Use your last numbers?", "Use them", "No thanks") instead of sitting above step 1, which pushed step 1 past one screen.
+- Start over stays on the answer screen, so "Put it back" can be reached; "Change my numbers" goes back to step 1.
+- Optional boxes (fees, extra payments, tax and insurance, school months) and a third offer moved to the answer screen. The site footer is hidden on tool pages.
+- Owner, 2026-11-05: "make this look good", thinking about the person who uses it. The step screens were changed for someone anxious, often older, often with ADHD, on an iPhone: the buttons sit at the bottom in the same place on every step; "$" and "%" sit inside the box (the reader called the old box unlabeled); choices are big two-column tiles with a ring that fills; the progress bar is one segment per screen; closed sections show a chevron. Step 1 adds "You can go back and change any number." above Continue, because readers on three tools asked whether Continue locks a number in. Mortgage's price hint says which number to type ("The price on the listing, or a close guess."): readers asked "the asking price, or what I paid?". The first-time reader went from 3 to 4 on Mortgage's first step, and every answer screen now scores 4 on all 9 runs.
+- Tried and dropped in this round: "Free. No sign up." in front of the trust line (Haiku and Sonnet failed it under rule 8, as Round 4 found for "Free."), and the trust line by the button or under the box (Haiku failed it under rule 8 on 4 of 6 tools; under the question it passed 5 of 5).
+- The answer screen keeps one quiet extra: the optional boxes moved inside "More options" with Start over (the no-clutter rule: extra options live behind one More). Sonnet failed rule 2 when the answer had both an "Add fees..." button and "More options".
+- Monthly Budget's first step is one money box while there is one income, like every other tool. The list with names, columns and Remove buttons scored 3 on all 9 reader runs; the one box scored 4.
+- Loan Offer Compare's card shows each offer's monthly payment under its interest and fees. The card says "Offer 2 costs $3.29 less each month", and Haiku failed rule 8 while no monthly payment was on screen.
+- Bugs the test rewrite found and fixed: Continue focused the first box instead of the one with a red note; focus did not move after "Add a third offer"; the saved copy kept the old step or value when both changed in one tap (`useAutosave` now saves the latest of both).
+
 ## 2026-11-05 - Round 4: answer first, and the screens people actually see
 
 - Owner, 2026-11-05: "NT tools currently sucks", "the whole thing is crap", "This needs to be actually easy to use".

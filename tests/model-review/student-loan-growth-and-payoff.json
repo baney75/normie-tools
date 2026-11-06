@@ -1,27 +1,27 @@
 {
   "tool": "student-loan-growth-and-payoff",
   "screen": ",  at 390px wide (text saved beside this file in screens/)",
-  "at": "2026-11-05",
+  "at": "2026-11-06",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
     "first-time-user.md": "cbc802a7ab0e54c25020a06cc7f703fd6cecb0c341c5add1269f0963b611a58a"
   },
   "firstTimeUser": {
     "model": "sonnet",
-    "score": 3,
+    "score": 4,
     "runs": [
-      3,
-      3,
-      4,
-      3,
-      3,
-      3,
       4,
       4,
-      3
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to see how long my loan will take to pay off with my $300 payment, and then either finish or change a number to try again.\n\n2. \"I'm done\"\n\n3. Words that felt like tech talk or unclear:\n- \"How we know\" (a link; I'm not sure what it will show me or where it goes)\n- \"Total interest\" (I know it's extra money, but not exactly how it's counted)\n- \"Yearly interest rate\" (okay, but I'd have to look it up)\n- \"Add school months and other details\" (what are \"school months\"? Why would I add them?)\n- \"More options\" (more of what?)\n- \"See year by year\" (year by year of what?)\n- \"How this is figured\"\n- \"Print or save\" (save where? Print to what?)\n- \"MAIN LINK\" and \"I'm done\" (does \"done\" close it, erase my numbers, or send them somewhere?)\n\n4. Worries:\n- \"Your numbers stay on this phone or computer\" is comforting, but I'm not sure I fully believe it.\n- I don't know what \"I'm done\" does. I worry it might erase my work or submit something.\n- \"Save\" makes me wonder where it saves and whether it costs anything.\n- \"Your loan statement is the final word\" makes me worry my numbers could be wrong and I'd get the wrong idea.\n- The word \"estimate\" tells me the answer isn't exact, so I'm not sure how much to trust it.\n\n5. Skippable:\n- \"How we know\" and \"How this is figured\" at the bottom, because I just want my answer.\n- \"More options\" and \"Add school months and other details,\" since I don't know what they are and my answer is already showing.\n- \"Print or save,\" unless I want a copy.\n\n6. Score: 3. The answer is clear and the message says I can stop here, but I'm not sure what \"I'm done\" actually does.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"How we know\", \"Total interest\", \"Add school months and other details\", \"More options\", \"See year by year\", \"How this is figured\", \"Print or save\", \"I'm done (what it does)\", \"MAIN LINK\"], \"worries\": [\"Not sure what 'I'm done' does, might erase or submit my numbers\", \"Where 'Print or save' saves and whether it costs anything\", \"Unsure whether to believe numbers stay on my device\", \"Result is only an estimate; statement is the final word\"], \"skippable\": [\"How we know\", \"How this is figured\", \"More options\", \"Add school months and other details\", \"Print or save\"], \"score\": 3}"
+    "output": "1. This screen wants me to read how long my loan will take to pay off, and then tap \"I'm done\" when I'm finished looking.\n\n2. \"I'm done\"\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Total interest.\" I think it's the extra money I pay on top, but I'm not sure.\n- \"5 %.\" I know it's a rate, but it doesn't say per year or per month.\n- \"Step 4 of 4.\" It's fine, but I wondered if I had missed steps.\n- \"More options.\" I have no idea what's in there.\n- \"How this is figured.\" It sounds like math I won't follow.\n- \"Print or save.\" Save where? On my phone? I'm not sure what it will do.\n- \"MAIN LINK.\" That's probably a note to the designers, but it confused me.\n\n4. What made me worry:\n- \"I'm done\" might close everything or erase my numbers. I wasn't sure whether I'd lose my answer.\n- \"Print or save\" made me wonder if my loan numbers go somewhere else, or if it asks for my email.\n- \"More options\" is vague, and I worried it might lead to something I'd be charged for.\n- \"Change my numbers\" might wipe what I typed and make me start over.\n- The line \"Your loan statement is the final word\" made me feel I shouldn't trust this number fully. That's honest, but a little unsettling.\n\n5. What I'd skip:\n- \"More options,\" because I can't tell what it's for.\n- \"How this is figured.\"\n- Probably \"See year by year\" too, though I might peek if I were curious.\n\n6. Score: 4. The answer is easy to find, and \"I'm done\" is clearly the big orange button. I'm only unsure what happens after I tap it.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"Total interest\", \"5 % (per year or month?)\", \"More options\", \"How this is figured\", \"Print or save (save where?)\", \"MAIN LINK\", \"Step 4 of 4\"], \"worries\": [\"I'm done might close the page and lose my answer\", \"Print or save might send my loan info somewhere or ask for my email\", \"More options might lead to something that costs money\", \"Change my numbers might erase what I typed\", \"Loan statement is the final word makes the number feel less trustworthy\"], \"skippable\": [\"More options\", \"How this is figured\", \"See year by year\"], \"score\": 4}"
   },
   "designRubric": [
     {
@@ -67,14 +67,14 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
             "PASS",
             "PASS",
             "PASS",
-            "PASS",
+            "FAIL",
             "PASS",
             "PASS"
           ]
@@ -106,7 +106,7 @@
           ]
         }
       ],
-      "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+      "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
     },
     {
       "model": "sonnet",
@@ -202,16 +202,16 @@
         "runs": [
           4,
           4,
+          3,
           4,
           4,
-          4,
-          4,
+          3,
           4,
           4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in how much I owe, my interest rate, and maybe what I pay each month, so it can tell me when my student loan will be paid off.\n\n2. I would tap into the box under \"Loan balance\" first, to type my number. After filling things in, I would tap \"See my answer.\"\n\n3. Words that felt like tech talk or unclear:\n- \"Yearly interest rate\" (I sort of know it, but I'd have to look at my statement to find it)\n- \"How we know\" (know what? It's a link, and I don't know where it goes)\n- \"Add school months and other details\" (what are \"school months\"? what other details?)\n- \"How this is figured\" (a little vague)\n- \"Leave it empty to see only the balance\" (what balance? I already typed that. It's unclear what I'd see)\n- \"phone or computer\" line about numbers staying put (I don't really know what that means in practice)\n\n4. Worries:\n- I'm being asked for my loan details, so I worry about privacy. The line \"Your numbers stay on this phone or computer\" helps, but I'm not sure I fully trust it.\n- I'm not sure whether tapping \"See my answer\" will cost anything or sign me up for something.\n- I worry that if I leave the monthly payment empty, I'll get the wrong or a useless answer.\n- I worry that the answer might not match my real loan, though the last line (\"Your loan statement is the final word\") eased that a bit.\n\n5. I would skip \"How this is figured\" (closed section), and probably \"How we know,\" since I just want my answer. I'd also skip \"Add school months and other details\" the first time, since I don't know what it is and it seems optional.\n\n6. Score: 4. The boxes and the orange \"See my answer\" button are clear, but I'm unsure about the optional payment and the \"details\" button.\n\nRESULT: {\"next_tap\": \"Loan balance box (then \\\"See my answer\\\")\", \"confusing_terms\": [\"Yearly interest rate\", \"How we know\", \"Add school months and other details\", \"How this is figured\", \"Leave it empty to see only the balance\", \"stay on this phone or computer\"], \"worries\": [\"privacy of loan details\", \"unsure if See my answer costs anything or signs me up\", \"leaving monthly payment empty may give a useless answer\", \"answer may not match real loan\"], \"skippable\": [\"How this is figured\", \"How we know\", \"Add school months and other details\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in how much I owe on my student loan, then go on.\n\n2. \"Continue\"\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Growth and Payoff\" (growth of what?)\n- \"Step 1 of 4\" (four steps of what? How long will this take?)\n- \"How we know\" (know what? It sounds like a link to an explanation, but it's vague)\n- \"Back to tools\" (what tools? I thought I was already using one)\n- \"phone or computer\" (fine, but \"stay on this phone\" made me wonder how it could be anywhere else)\n\n4. What made me worry:\n- \"Your numbers stay on this phone or computer.\" I'm glad it says that, but I'm not sure I believe it. \"How we know\" might be proof, or it might be a trick.\n- I'm not sure whether typing my balance means I'm signing up for something, or whether someone will call me.\n- The empty box has no label, so I'm not sure it's where the dollar amount goes. I'd be nervous about typing in the wrong place.\n- I don't know whether I should include interest or only the original loan amount. \"What you owe now\" helps, but I'd worry about getting it wrong.\n- \"You can go back and change any number\" calms me down a bit.\n\n5. What I'd skip: \"How we know\" and \"Back to tools.\" Neither helps me enter my number. I'd probably read the \"How we know\" link only if I got nervous.\n\n6. Score: 4. I know I'm meant to type the amount and press Continue. The unlabeled box and the privacy line keep me from feeling certain.\n\nRESULT: {\"next_tap\": \"Continue\", \"confusing_terms\": [\"Growth and Payoff\", \"Step 1 of 4\", \"How we know\", \"Back to tools\"], \"worries\": [\"Not sure whether the privacy claim is true\", \"Unlabeled box, unsure the $ amount goes there\", \"Unsure whether to include interest\", \"Unsure whether I'm signing up for something\"], \"skippable\": [\"How we know\", \"Back to tools\"], \"score\": 4}"
       },
       "designRubric": [
         {
@@ -283,7 +283,7 @@
               ]
             },
             {
-              "passes": 8,
+              "passes": 7,
               "rules": [
                 "PASS",
                 "PASS",
@@ -292,7 +292,7 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "PASS"
+                "FAIL"
               ]
             }
           ],

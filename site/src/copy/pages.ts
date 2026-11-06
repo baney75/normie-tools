@@ -107,6 +107,8 @@ export const PAGES = {
   },
   tool: {
     trust: "Your numbers stay on this phone or computer.",
+    /** On a tool's first step, above the trust line. Readers asked whether Continue locks a number in. */
+    change: "You can go back and change any number.",
     how: "How we know",
     notFound: "We could not find that tool.",
     notReady: "This tool is not ready yet.",
