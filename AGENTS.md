@@ -47,4 +47,6 @@ A change is done when:
 
 ## Coding route
 
-Do not hand-write code, configs, or CI in a chat session. Generate them with `codex exec` (preferred) or `claude -p` in the repo, non-interactively. Prose docs may be written directly.
+Do not hand-write code, configs, or CI in a chat session. Generate them with `claude -p --permission-mode auto` (preferred) or `codex exec` in the repo, non-interactively. Prose docs may be written directly.
+
+Design and visual work goes to Opus: an Opus Claude Code session does it itself, and any other agent runs `claude -p --model opus --permission-mode auto` (Donovan, 2026-11-05: "The designer should be opus not sol").
