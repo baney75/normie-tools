@@ -51,7 +51,8 @@ test("step 2 opens with an empty number and the usual From and To, and Continue 
 });
 
 test("a saved copy that has no number yet shows the waiting text on the answer screen", async ({ page }) => {
-  await seedSaved(page, ID, 2, { category: "length", from: "inch", to: "millimeter", value: "" });
+  // Weight with no number: something was chosen, so it is kept. (A copy with nothing chosen is not kept at all.)
+  await seedSaved(page, ID, 2, { category: "weight", from: "pound", to: "kilogram", value: "" });
   await page.reload();
   await expectResumeScreen(page, "Unit Converter");
   await page.getByRole("button", { name: "Use them" }).click();
@@ -71,19 +72,20 @@ test("with an answer, Done is the one filled button, Continue is gone, and Print
   await expectAnsweredButtons(page, UNIT_SEE, "answer");
 });
 
-test("Start over, Clear the boxes empties the number, stays on the answer screen, and Change my numbers opens step 1 blank", async ({ page }) => {
+test("Start over, Clear the boxes empties the number, stays on the answer screen, and Change my numbers opens the blank number step", async ({ page }) => {
   await walkUnit(page, { kind: "Length", value: "2" });
   await openMoreOptions(page);
   await page.getByRole("button", { name: "Start over" }).click();
   await page.getByRole("button", { name: "Clear the boxes" }).click();
-  // Clearing stays on the answer screen, so Put it back is right here. Change my numbers goes to step 1.
+  // Clearing stays on the answer screen, so Put it back is right here. Change my numbers goes to the number step, the
+  // first one that needs something; Back from there shows Length still picked.
   await expect(page.getByText(/Your numbers are cleared\./)).toBeVisible();
   await expect(card(page)).toContainText("Type a number to see your answer.");
   await expect(page.getByRole("link", { name: "I'm done" })).toHaveCount(0);
-  await changeNumbers(page, 2);
-  await expect(page.getByLabel("Length", { exact: true })).toBeChecked();
-  await next(page);
+  await changeNumbers(page, 2, 2);
   await expect(page.getByLabel("Number")).toHaveValue("");
+  await page.getByRole("button", { name: "Back", exact: true }).click();
+  await expect(page.getByLabel("Length", { exact: true })).toBeChecked();
 });
 
 test("gives the exact answer, with no sideways scroll", async ({ page }) => {

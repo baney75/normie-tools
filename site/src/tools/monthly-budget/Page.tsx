@@ -84,7 +84,6 @@ export function Page() {
     return (
       <>
         <MoneyField
-          hideLabel
           label={`${shown(l, COPY.income.fallback, 0)}, ${COPY.amount.suffix}`}
           hint={COPY.oneIncome.hint}
           value={l.amount}

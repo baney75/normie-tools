@@ -5,10 +5,11 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 Mortgage Payment Explainer
 Step 1 of 5
 [heading 1] What does the home cost?
-Your numbers stay on this phone or computer. How we know ("How we know" is a link)
+How this page handles your numbers ("How this page handles your numbers" is a link)
+[label] Home price
 The price on the listing, or a close guess.
 $
-[box] (no label shown) = ""
+[box] Home price = ""
 You can go back and change any number.
 [MAIN BUTTON, filled dark orange] Continue
 [link, plain] Back to tools

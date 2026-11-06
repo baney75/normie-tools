@@ -30,7 +30,7 @@ export type StepFlowProps = {
    * "Use them" is the main button, "No thanks" is quiet.
    */
   resume?: { title: string; body: string; yes: string; no: string; onYes: () => void; onNo: () => void } | null;
-  /** The words on the last Continue, like "See my payment". */
+  /** The words on the last Continue, like "See my answer". */
   finishLabel: string;
   /** The answer screen: the card, then its buttons, then extras and detail. */
   answer: ReactNode;
@@ -91,6 +91,9 @@ export function StepFlow({ name, question, steps, step, onStep, intro, resume, f
   }
 
   if (index >= total) {
+    // A change made here (an optional box, or a saved copy) can leave an earlier step needing a fix. "Change my numbers"
+    // goes straight to it, so the red note is on the screen the person lands on.
+    const fix = steps.findIndex((st) => !st.ready);
     return (
       <div className="nt-flow nt-flow-answer">
         <div className="nt-flow-top">
@@ -101,7 +104,7 @@ export function StepFlow({ name, question, steps, step, onStep, intro, resume, f
         <h1 className="nt-flow-question" ref={heading} tabIndex={-1}>{question}</h1>
         {answer}
         {actions ? <div className="nt-flow-actions">{actions}</div> : null}
-        <button type="button" className="nt-more-btn" onClick={() => go(0)}>
+        <button type="button" className="nt-more-btn" onClick={() => go(Math.max(fix, 0))}>
           Change my numbers
         </button>
         {extras ? <div className="nt-flow-extras">{extras}</div> : null}
@@ -116,7 +119,10 @@ export function StepFlow({ name, question, steps, step, onStep, intro, resume, f
   const next = () => {
     if (!s.ready) {
       setTried(true);
-      const box = body.current?.querySelector<HTMLElement>("[aria-invalid=true]") ?? body.current?.querySelector<HTMLElement>("input:not([data-optional])");
+      // The box with a red note first, then the first needed box that is still empty, then the first needed box.
+      const b = body.current;
+      const empty = Array.from(b?.querySelectorAll<HTMLInputElement>("input:not([data-optional]):not([type=radio]):not([type=checkbox])") ?? []).find((i) => i.value.trim() === "");
+      const box = b?.querySelector<HTMLElement>("[aria-invalid=true]") ?? empty ?? b?.querySelector<HTMLElement>("input:not([data-optional])");
       box?.focus();
       return;
     }
@@ -131,12 +137,12 @@ export function StepFlow({ name, question, steps, step, onStep, intro, resume, f
       </div>
       <Progress now={index + 1} of={total + 1} label={`${label} progress`} />
       <h1 className="nt-flow-question" ref={heading} tabIndex={-1}>{s.question}</h1>
-      {/* Under the question on step 1 only. Placed by the button or under the box, Haiku failed it as an unsourced claim (rule 8) on 4 of 6 tools; here it passed. */}
+      {/* Under the question on step 1 only: a lock and one link to the page that explains it. A sentence here ("Your numbers stay on this phone or computer.") failed Haiku's rule 8 as an unsourced claim; the link alone passed. */}
       {index === 0 ? (
             <p className="nt-tool-trust">
               <Lock />
               <span>
-                {PAGES.tool.trust} <a href={href("/private")}>{PAGES.tool.how}</a>
+                <a href={href("/private")}>{PAGES.tool.private}</a>
               </span>
             </p>
       ) : null}

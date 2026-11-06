@@ -5,6 +5,7 @@ export const COPY = {
   title: "Loan Offer Compare",
   question: "Which loan offer costs less to borrow?",
   see: "See which costs less",
+  amountRateHint: "Both are on the lender's offer.",
   steps: {
     amountRate: ["Offer 1: how much, at what rate?", "Offer 2: how much, at what rate?", "Offer 3: how much, at what rate?"],
     amountRateMissing: "Type the amount and the rate first.",

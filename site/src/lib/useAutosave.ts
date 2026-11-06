@@ -36,7 +36,17 @@ export function clearSaved(flowId: string): void {
 }
 
 export function useAutosave<T>(flowId: string, initial: T) {
-  const [saved, setSaved] = useState<SavedFlow<T> | null>(() => readSaved<T>(flowId));
+  // Nothing typed is nothing to keep: a blank copy would bring back "Use your last numbers?" with no numbers behind it.
+  const blank = JSON.stringify(initial);
+  const isBlank = (v: T) => JSON.stringify(v) === blank;
+  const [saved, setSaved] = useState<SavedFlow<T> | null>(() => {
+    const s = readSaved<T>(flowId);
+    if (s && isBlank(s.value)) {
+      clearSaved(flowId);
+      return null;
+    }
+    return s;
+  });
   const [value, setValueState] = useState<T>(initial);
   const [step, setStepState] = useState(0);
   const [savedAt, setSavedAt] = useState<string | undefined>(undefined);
@@ -47,18 +57,20 @@ export function useAutosave<T>(flowId: string, initial: T) {
     (next: T) => {
       latest.current = { ...latest.current, value: next };
       setValueState(next);
-      if (writeSaved(flowId, latest.current.step, next)) setSavedAt(new Date().toISOString());
+      if (isBlank(next)) clearSaved(flowId);
+      else if (writeSaved(flowId, latest.current.step, next)) setSavedAt(new Date().toISOString());
     },
-    [flowId],
+    [flowId, blank],
   );
 
   const setStep = useCallback(
     (next: number) => {
       latest.current = { ...latest.current, step: next };
       setStepState(next);
-      if (writeSaved(flowId, next, latest.current.value)) setSavedAt(new Date().toISOString());
+      if (isBlank(latest.current.value)) clearSaved(flowId);
+      else if (writeSaved(flowId, next, latest.current.value)) setSavedAt(new Date().toISOString());
     },
-    [flowId],
+    [flowId, blank],
   );
 
   const restore = useCallback(() => {

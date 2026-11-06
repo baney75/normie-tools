@@ -28,7 +28,7 @@ export const COPY = {
   start: { label: "First payment month", hint: "Year, a dash, then the month, like 2026-09." },
   years: { label: "Years you want to pay it off in", hint: "A whole number." },
   stillNeeded: "Still needed:",
-  fixFirst: "Fix the note above to see your answer.",
+  fixFirst: "Change the box that has a red note. Then your answer shows.",
   resume: {
     title: "Use your last numbers?",
     body: "You typed numbers here before. They are saved on this phone or computer.",

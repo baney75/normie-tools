@@ -1,6 +1,11 @@
 {
   "tool": "unit-converter",
-  "screen": ",  at 390px wide (text saved beside this file in screens/)",
+  "screens": [
+    "empty",
+    "step2",
+    "answer"
+  ],
+  "screen": "empty, step2, answer at 390px wide (text saved beside this file in screens/)",
   "at": "2026-11-06",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
@@ -21,12 +26,12 @@
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to read my answer, 304.8 millimeters, and then tell it I'm finished.\n\n2. I would tap \"I'm done\".\n\n3. Words that felt like tech talk or were unclear:\n- \"millimeters\". I know inches and feet, not this one, so I can't tell if 304.8 is big or small.\n- \"rounded to 6 digits\". I don't know what that means or whether it changed my answer.\n- \"Step 3 of 3\". I don't remember steps 1 and 2 by those names.\n- \"Show the facts used\". Which facts? Used for what?\n- \"More options\". More options for what?\n- \"Print or save\". I don't know where it would save, or whether it's saving to my phone or somewhere online.\n- \"MAIN LINK\". That might be a note for the builders, not for me.\n\n4. Things that worried me:\n- \"Print or save\" made me wonder if it would send something or keep my numbers somewhere.\n- \"I'm done\" made me wonder if it erases my answer. I haven't written it down.\n- \"Change my numbers\" made me wonder if I'd lose what I already typed.\n- \"More options\" and \"Show the facts used\" felt like they could lead somewhere I can't get back from.\n- Nothing mentions cost, but I never saw a line saying it's free either.\n\n5. I would skip \"More options\" and \"Show the facts used\". \"A long answer is rounded to 6 digits\" is also a line I'd skip. My answer is short, so it doesn't seem to apply to me.\n\n6. Score: 4. \"That is your answer. You can stop here.\" and the one orange button tell me what to do. I'm only unsure whether the answer disappears when I tap \"I'm done\".\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"millimeters\", \"rounded to 6 digits\", \"Step 3 of 3\", \"Show the facts used\", \"More options\", \"Print or save\", \"MAIN LINK\"], \"worries\": [\"Print or save might send or keep my numbers somewhere\", \"I'm done might erase my answer before I write it down\", \"Change my numbers might lose what I typed\", \"More options and Show the facts used might lead somewhere I can't get back from\", \"No line says it is free\"], \"skippable\": [\"More options\", \"Show the facts used\", \"A long answer is rounded to 6 digits\"], \"score\": 4}"
+    "output": "1. This screen wants me to read my answer, 304.8 millimeters, and then tap \"I'm done\" when I'm finished.\n\n2. \"I'm done\"\n\n3. Words that felt like tech talk or unclear:\n- \"Step 3 of 3\" (fine, but \"Unit Converter\" and \"heading\" labels aren't things I'd say)\n- \"rounded to 6 digits\" (I don't know what that means for me, or whether my answer is exact)\n- \"Show the facts used\" (what facts? Used for what?)\n- \"More options\" (options for what?)\n- \"Print or save\" (save where? On my phone? Somewhere online?)\n- \"Change my numbers\" (I wasn't sure if this wipes the answer or lets me edit)\n\n4. Worries:\n- \"Print or save\" made me wonder whether it would save my numbers somewhere I can't see, or need a printer.\n- \"I'm done\" might close everything and lose my answer. I don't know if I can get it back.\n- \"More options\" is vague, and I would worry that opening it might change something.\n- \"Show the facts used\" sounds like it could collect or reveal something about me, though I suspect it is just the math.\n- I don't know if my numbers are kept after I leave.\n\n5. Skippable:\n- \"A long answer is rounded to 6 digits.\" It doesn't help me, and my answer is short.\n- \"Show the facts used\" and \"More options\": I would skip both because I already have my answer.\n\n6. Score: 4. The orange button and the line \"That is your answer. You can stop here.\" tell me clearly what to do. I'm not fully sure what happens to my answer after I tap \"I'm done\".\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"rounded to 6 digits\", \"Show the facts used\", \"More options\", \"Print or save\", \"Change my numbers\"], \"worries\": [\"Print or save might save my numbers somewhere unseen or need a printer\", \"I'm done might erase my answer with no way to get it back\", \"More options is vague and might change something\", \"Show the facts used might share something about me\", \"Unsure whether my numbers are kept after I leave\"], \"skippable\": [\"A long answer is rounded to 6 digits.\", \"More options\", \"Show the facts used\"], \"score\": 4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "rule": "a rule passes when it passes in most of 5 runs",
+      "rule": "a rule passes when it passes in most of 9 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -49,6 +54,58 @@
             "PASS",
             "PASS",
             "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL",
             "PASS",
             "PASS"
           ]
@@ -110,7 +167,7 @@
     },
     {
       "model": "sonnet",
-      "rule": "a rule passes when it passes in most of 5 runs",
+      "rule": "a rule passes when it passes in most of 9 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -135,6 +192,58 @@
             "PASS",
             "PASS",
             "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
           ]
         },
         {
@@ -200,23 +309,23 @@
         "model": "sonnet",
         "score": 4,
         "runs": [
+          3,
+          3,
           4,
           4,
           4,
           4,
-          4,
-          4,
-          4,
+          3,
           4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. I think this screen wants me to pick what kind of thing I want to measure, like length or weight, and then move on.\n\n2. I would tap \"Continue\". Length is already picked, so I would leave it.\n\n3. Words and phrases I didn't understand or that felt like tech talk:\n- \"Step 1 of 3\". I don't know what the other two steps are.\n- \"Unit Converter\". I can guess, but the name alone doesn't tell me much.\n- \"stay on this phone or computer\". I'm not sure what that means for me.\n- \"How we know\". Know what? It doesn't say.\n- \"Back to tools\". I don't know what \"tools\" means here or where it goes.\n- There is a gap under the heading where it looks like a line of words should be. It made me wonder if something didn't load.\n\n4. Things that made me worry:\n- \"Your numbers stay on this phone or computer\" made me think numbers are being saved somewhere. It's meant to calm me, but it made me wonder what numbers and why.\n- \"How we know\" sounds like I'm being asked to trust a claim, which made me a bit wary.\n- Nothing mentions money, which is good, but it doesn't say it's free either. I'd like to know that before going further.\n- \"You can go back and change any number\" helped a little, but I haven't typed any numbers yet, so it was a bit puzzling.\n\n5. I would skip the \"How we know\" link, and the \"Your numbers stay...\" line too, since I'm not sure it affects me. I'd also skip \"Back to tools\" because I'm not trying to leave.\n\n6. Score: 4. The orange \"Continue\" button stands out and I'm fairly sure it's the one to tap. The blank spot and the unclear lines keep me from being completely sure.\n\nRESULT: {\"next_tap\":\"Continue\",\"confusing_terms\":[\"Step 1 of 3\",\"How we know\",\"Your numbers stay on this phone or computer\",\"Back to tools\",\"blank gap under the heading\"],\"worries\":[\"Not sure why numbers would be stored or what 'stay on this phone' means\",\"'How we know' sounds like a claim I'm asked to trust\",\"Doesn't say whether it is free\",\"Blank space under the heading looks like something didn't load\"],\"skippable\":[\"How we know\",\"Your numbers stay on this phone or computer\",\"Back to tools\"],\"score\":4}"
+        "output": "1. It wants me to pick what kind of thing I'm measuring, like length or weight, and then move on.\n\n2. \"Continue\"\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Step 1 of 3\". I don't know what the other two steps are.\n- \"How this page handles your numbers\". It sounds like legal or computer talk.\n- \"[choice]\" items like \"Volume\". I know the word, but I wasn't sure whether I could pick more than one.\n- \"Back to tools\". I don't know what \"tools\" means here or where it would take me.\n\n4. Worries:\n- \"How this page handles your numbers\" made me wonder whether my numbers are being saved or collected, and by whom.\n- \"Step 1 of 3\" made me wonder whether I'm signing up for something or whether it gets long.\n- I couldn't tell if \"Continue\" would cost anything or ask for personal information.\n- \"You can go back and change any number\" was a little reassuring, but I haven't typed any number yet, so it was odd.\n\n5. I would skip the \"How this page handles your numbers\" link and probably \"Back to tools\". Neither helps me do what I came for.\n\n6. Score: 4. \"Length\" is already selected and \"Continue\" stands out, so I'd probably tap it. I'm not sure what happens after that.\n\nRESULT: {\"next_tap\": \"Continue\", \"confusing_terms\": [\"Step 1 of 3\", \"How this page handles your numbers\", \"Back to tools\", \"[choice] / whether I can pick more than one\"], \"worries\": [\"Are my numbers saved or collected?\", \"Does Continue cost anything or ask for personal info?\", \"How long is 3 steps?\", \"'Change any number' when no number has been entered yet\"], \"skippable\": [\"How this page handles your numbers\", \"Back to tools\"], \"score\": 4}"
       },
       "designRubric": [
         {
           "model": "haiku",
-          "rule": "a rule passes when it passes in most of 5 runs",
+          "rule": "a rule passes when it passes in most of 9 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -257,6 +366,19 @@
               ]
             },
             {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
               "passes": 7,
               "rules": [
                 "PASS",
@@ -267,6 +389,181 @@
                 "PASS",
                 "PASS",
                 "FAIL"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 9 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
               ]
             },
             {
@@ -297,10 +594,168 @@
             }
           ],
           "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    },
+    {
+      "screen": "step2",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          4,
+          4,
+          3,
+          4,
+          4,
+          3,
+          3
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type a number and pick what to change it from and to, then get my answer.\n\n2. I would tap the box under \"Number\" to type my number first. After that, I'd tap \"See my answer\".\n\n3. Words I didn't understand or that felt techy:\n- \"Step 2 of 3\" (I get it's a count, but 3 of what?)\n- \"Swap\" (swap what? I'd guess it flips From and To, but I'm not sure)\n- \"Inches (in)\", \"Millimeters (mm)\" and the other short codes in the brackets\n- \"From\" and \"To\" menus (I'm not sure they're dropdowns until I tap them)\n- \"Continue\" was mentioned earlier, but it isn't on this screen.\n\n4. Worries:\n- I don't see anything about cost.\n- Nothing asks for private information, so I'm not worried about privacy.\n- I'm a little worried that tapping \"Swap\" might erase my number or change something I can't undo.\n- I'm a little worried that \"Back\" might wipe what I typed before.\n- \"See my answer\" sounds like it might lead somewhere unexpected, but it's probably fine.\n\n5. I'd skip \"Swap\" because I don't need it. I'd also skip \"Step 2 of 3\" because it doesn't help me do anything.\n\n6. Score: 4. The orange button and the empty box make it fairly clear, but I'm not sure whether I should start with the box or the menus.\n\nRESULT: {\"next_tap\": \"Number\", \"confusing_terms\": [\"Step 2 of 3\", \"Swap\", \"Inches (in) and the short codes in brackets\", \"From/To menus\", \"3 of what\"], \"worries\": [\"Swap might erase my number or change something permanently\", \"Back might wipe what I typed earlier\", \"See my answer might lead somewhere unexpected\"], \"skippable\": [\"Swap\", \"Step 2 of 3\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 9 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"FAIL\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[\"rule6: Swap changes the From and To units, and the screen never says how to undo it.\"],\"score\":7}"
         },
         {
           "model": "sonnet",
-          "rule": "a rule passes when it passes in most of 5 runs",
+          "rule": "a rule passes when it passes in most of 9 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -328,7 +783,7 @@
               ]
             },
             {
-              "passes": 7,
+              "passes": 8,
               "rules": [
                 "PASS",
                 "PASS",
@@ -337,7 +792,59 @@
                 "PASS",
                 "PASS",
                 "PASS",
-                "FAIL"
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
               ]
             },
             {

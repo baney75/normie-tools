@@ -57,7 +57,7 @@ test("steps 2 and 3 open empty and wait for a rate and a length", async ({ page 
 });
 
 test("a saved copy that has no answer yet shows the waiting text on the answer screen", async ({ page }) => {
-  await seedSaved(page, ID, 3, { amount: "", rate: "", term: "", termUnit: "months", fees: "", extra: "" });
+  await seedSaved(page, ID, 3, { amount: "5000", rate: "", term: "", termUnit: "months", fees: "", extra: "" });
   await page.reload();
   await expectResumeScreen(page, "Loan Explainer");
   await page.getByRole("button", { name: "Use them" }).click();

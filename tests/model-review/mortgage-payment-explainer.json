@@ -1,6 +1,13 @@
 {
   "tool": "mortgage-payment-explainer",
-  "screen": ",  at 390px wide (text saved beside this file in screens/)",
+  "screens": [
+    "empty",
+    "step2",
+    "step3",
+    "step4",
+    "answer"
+  ],
+  "screen": "empty, step2, step3, step4, answer at 390px wide (text saved beside this file in screens/)",
   "at": "2026-11-06",
   "promptHashes": {
     "design-rubric.md": "db249724810ecab497ea69d63f90dc7091dfe173935df74bf74be285b9b91341",
@@ -12,7 +19,7 @@
     "runs": [
       4,
       4,
-      4,
+      3,
       4,
       4,
       4,
@@ -21,12 +28,12 @@
       4
     ],
     "rule": "middle score of the runs",
-    "output": "1. This screen wants me to read my monthly house payment estimate and then tap the button to finish.\n\n2. \"I'm done\"\n\n3. Words that felt like tech talk or jargon:\n- \"Loan amount\" (I get it, but \"Loan length\" is fine too)\n- \"6.5 %\" with the space, a little odd, but I understand\n- \"Tax and insurance are not in it yet\" (what does \"yet\" mean? Will they be added?)\n- \"More options\" (options for what?)\n- \"See all the numbers\" (which numbers?)\n- \"What the words mean\" (fine, but it tells me there are hard words somewhere)\n- \"Print or save\" (save where?)\n- \"Change my numbers\" (does it erase what I did?)\n- \"estimate\"\n- \"lender statement\"\n\n4. Worries:\n- The payment doesn't include tax and insurance, so the real bill will be higher. I'm not sure by how much, and that worried me.\n- \"I'm done\" made me wonder if I'd lose my answer. I don't know if it saves anything or closes everything.\n- \"Print or save\" made me wonder where it saves and whether it asks for my information.\n- Nothing asked for money or personal details, which was a relief.\n\n5. Skippable: the three closed sections (\"More options,\" \"See all the numbers,\" \"What the words mean\"). I got my answer and don't need them. I'd also skip the fine print at the bottom, though it did tell me the number isn't final.\n\n6. Score: 4. I know the answer and I know \"I'm done\" is the main button. I'm only unsure what it does to my answer, and about the missing tax and insurance.\n\nRESULT: {\"next_tap\": \"I'm done\", \"confusing_terms\": [\"Tax and insurance are not in it yet\", \"More options\", \"See all the numbers\", \"Print or save\", \"Change my numbers\", \"estimate\", \"lender statement\", \"Loan amount\"], \"worries\": [\"Real payment will be higher because tax and insurance are left out\", \"Unsure whether 'I'm done' erases or loses my answer\", \"Unsure where 'Print or save' saves and whether it needs my information\"], \"skippable\": [\"More options\", \"See all the numbers\", \"What the words mean\", \"fine print about lender statement\"], \"score\": 4}"
+    "output": "1. This screen wants me to read what my monthly house payment would be, and then tell it I'm finished.\n\n2. I would tap \"I'm done\".\n\n3. Words and phrases I did not understand or that felt like tech talk:\n- \"Loan payment only. Tax and insurance are not in it yet.\" I don't know what \"not in it yet\" means. Will they be added later? By whom?\n- \"Loan amount.\" I can guess it, but it isn't the price of the house, and that confused me for a second.\n- \"6.5 %\" with a space before the percent sign looks odd. I don't know whether that rate is good or bad.\n- \"Step 5 of 5: your answer.\" Fine, but \"answer\" sounds like a test.\n- \"More options.\" I have no idea what options.\n- \"See all the numbers.\" Which numbers?\n- \"Lender statement.\" I think it's the paper from the bank, but I'm not sure.\n- \"Estimate.\" I understand it, but it makes me wonder how far off it could be.\n\n4. Things that made me worry:\n- \"Tax and insurance are not in it yet.\" I worry my real payment is much higher than $1,516.96 and I'd be caught off guard.\n- \"Print or save.\" I wonder where it saves and whether my numbers go somewhere.\n- \"I'm done.\" I worry that I'd lose my answer, or that it counts as agreeing to something or sends my numbers to someone.\n- \"Change my numbers.\" I'm not sure whether it erases everything and starts over.\n- \"More options\" is closed and vague, and I don't know whether it leads to something I'd have to pay for or sign up for.\n\n5. What I would skip:\n- \"More options,\" because I can't tell what it does for me.\n- \"See all the numbers,\" because I already have the one number I came for.\n- \"What the words mean\" is something I might open once, but I wouldn't start with it.\n- The last line, \"This is an estimate. Your lender statement has the final numbers.\" It repeats the idea in \"That is your estimate.\"\n\n6. Score: 4. I'm fairly sure I should tap \"I'm done\" because it's the orange one and the screen says \"You can stop here,\" but I'm unsure what happens after that.\n\nRESULT: {\"next_tap\":\"I'm done\",\"confusing_terms\":[\"not in it yet (tax and insurance)\",\"Loan amount\",\"6.5 %\",\"More options\",\"See all the numbers\",\"lender statement\",\"estimate\"],\"worries\":[\"real payment may be much higher once tax and insurance are added\",\"does 'I'm done' lose my answer or send my numbers somewhere\",\"where does 'Print or save' save to\",\"does 'Change my numbers' erase everything\",\"'More options' might lead to something with a cost\"],\"skippable\":[\"More options\",\"See all the numbers\",\"final line repeating that it is an estimate\"],\"score\":4}"
   },
   "designRubric": [
     {
       "model": "haiku",
-      "rule": "a rule passes when it passes in most of 5 runs",
+      "rule": "a rule passes when it passes in most of 9 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -67,7 +74,7 @@
           ]
         },
         {
-          "passes": 8,
+          "passes": 7,
           "rules": [
             "PASS",
             "PASS",
@@ -76,7 +83,7 @@
             "PASS",
             "PASS",
             "PASS",
-            "PASS"
+            "FAIL"
           ]
         },
         {
@@ -103,6 +110,58 @@
             "PASS",
             "PASS",
             "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 7,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "FAIL"
           ]
         }
       ],
@@ -110,7 +169,7 @@
     },
     {
       "model": "sonnet",
-      "rule": "a rule passes when it passes in most of 5 runs",
+      "rule": "a rule passes when it passes in most of 9 runs",
       "rules": [
         "PASS",
         "PASS",
@@ -124,6 +183,58 @@
       "passes": 8,
       "fails": [],
       "runs": [
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        {
+          "passes": 8,
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
         {
           "passes": 8,
           "rules": [
@@ -200,23 +311,23 @@
         "model": "sonnet",
         "score": 4,
         "runs": [
+          3,
+          3,
           4,
-          3,
           4,
-          3,
-          3,
-          3,
+          4,
+          4,
           4,
           4,
           4
         ],
         "rule": "middle score of the runs",
-        "output": "1. This screen wants me to type in the price of a home so it can help explain a mortgage payment.\n\n2. I would tap the box with the dollar sign to type the price. After that I'd tap \"Continue\".\n\n3. Words that felt like tech talk or unclear:\n- \"Mortgage Payment Explainer\" (I'm not sure what it will explain)\n- \"Step 1 of 5\" (fine, but five steps feels like a lot)\n- \"[heading 1]\" and \"[box] (no label shown)\" (the box has no label, so I'm not sure it's where I type)\n- \"Your numbers stay on this phone or computer\" (what does \"stay\" mean?)\n- \"How we know\" (know what?)\n- \"Back to tools\" (what tools?)\n\n4. Worries:\n- Privacy: it says my numbers stay on the device, but \"How we know\" makes me wonder whether I should trust that. I'm not sure what happens if I tap the link.\n- Doing the wrong thing: I don't know how exact the price has to be. \"A close guess\" helps, but I'd worry about getting it wrong. The line \"You can go back and change any number\" calms me.\n- Cost: nothing says it's free. I'd wonder if it leads to a sign-up or a sales call.\n- Tapping \"Back to tools\" might throw away what I typed.\n\n5. I would skip \"How we know\" and \"Step 1 of 5\". I'd also ignore \"Back to tools\" unless I got stuck.\n\n6. Score: 4. The box and the \"Continue\" button are fairly clear. The missing label on the box and the lack of any \"free\" message keep it from a 5.\n\nRESULT: {\"next_tap\": \"the empty box next to the $ sign, then Continue\", \"confusing_terms\": [\"Mortgage Payment Explainer\", \"Step 1 of 5\", \"How we know\", \"Back to tools\", \"stay on this phone or computer\", \"box with no label\"], \"worries\": [\"whether my numbers are really private\", \"unsure if it is free or leads to a sales call\", \"not sure how exact the price must be\", \"Back to tools might lose what I typed\"], \"skippable\": [\"How we know\", \"Step 1 of 5\", \"Back to tools\"], \"score\": 4}"
+        "output": "1. This screen wants me to type in the price of a home and then move on to the next step.\n\n2. I would tap **Continue**. But first I would tap in the box next to the \"$\" and type a number, since nothing is filled in yet.\n\n3. Words that felt like tech talk or unclear:\n- \"Mortgage Payment Explainer\" (I think I know \"mortgage,\" but \"explainer\" is a bit odd)\n- \"How this page handles your numbers\" (sounds like it's about data, and I'm not sure what \"handles\" means)\n- \"Home price = \"\"\" in the box. That looks like computer code, not something for me.\n- \"Back to tools\" (what tools? I didn't know I was in a toolbox)\n- \"Step 1 of 5\" is fine, but I don't know what the other four steps will ask.\n\n4. Worries:\n- \"How this page handles your numbers\" makes me wonder if my numbers are being saved or shared with someone.\n- I don't know if I'm supposed to type the exact price, and I worry about getting it wrong. The line \"a close guess\" helps, and so does \"You can go back and change any number.\"\n- I don't know if this leads to someone calling me or selling me a loan.\n\n5. Skippable:\n- The box that reads `Home price = \"\"`. It looks like leftover computer text and doesn't help me.\n- \"Back to tools\" I would skip, since I don't know what tools it means.\n\n6. Score: 4. I know I should type a price and press Continue, but the odd code-looking box and the privacy link leave a little doubt.\n\nRESULT: {\"next_tap\": \"Continue (after typing a price in the box next to $)\", \"confusing_terms\": [\"Mortgage Payment Explainer\", \"How this page handles your numbers\", \"Home price = \\\"\\\"\", \"Back to tools\"], \"worries\": [\"Are my numbers saved or shared?\", \"Might I get contacted or sold a loan?\", \"Typing the wrong price\"], \"skippable\": [\"Home price = \\\"\\\" box\", \"Back to tools\"], \"score\": 4}"
       },
       "designRubric": [
         {
           "model": "haiku",
-          "rule": "a rule passes when it passes in most of 5 runs",
+          "rule": "a rule passes when it passes in most of 9 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -230,6 +341,155 @@
           "passes": 8,
           "fails": [],
           "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 9 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
             {
               "passes": 8,
               "rules": [
@@ -294,13 +554,74 @@
                 "PASS",
                 "FAIL"
               ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
             }
           ],
-          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
-        },
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    },
+    {
+      "screen": "step2",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type how much money I'm paying up front for the house, then move on.\n\n2. I would tap the box next to the \"$\" sign to type my number first. After that, \"Continue\".\n\n3. Words I didn't fully get:\n- \"Down payment\". The note under it helps, but the name itself sounds like bank talk.\n- \"Step 2 of 5\". I get it, but I don't know what the other steps are.\n- \"Mortgage Payment Explainer\". I don't know what it will \"explain\" or to whom.\n\n4. Worries:\n- I don't know if typing a number here commits me to anything or gets sent to a bank.\n- I'm not sure whether \"Type 0 if none\" means leaving it empty is wrong.\n- I can't tell if my numbers from the earlier step are saved if I tap \"Back\".\n- Nothing says whether this is private.\n\n5. Skip: \"Step 2 of 5\" is not something I'd act on, though it does tell me how long this goes. Nothing else is clutter.\n\n6. Score: 4. I know I need to type a number and tap Continue, but the empty box has no example, and I'm unsure about privacy.\n\nRESULT: {\"next_tap\": \"the box next to the $ sign, then Continue\", \"confusing_terms\": [\"Down payment\", \"Mortgage Payment Explainer\", \"Step 2 of 5\"], \"worries\": [\"does typing a number commit me or send it to a bank\", \"unsure if leaving the box empty is wrong versus typing 0\", \"unsure if earlier answers are kept if I tap Back\", \"no word on privacy\"], \"skippable\": [\"Step 2 of 5\"], \"score\": 4}"
+      },
+      "designRubric": [
         {
-          "model": "sonnet",
-          "rule": "a rule passes when it passes in most of 5 runs",
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 9 runs",
           "rules": [
             "PASS",
             "PASS",
@@ -314,6 +635,782 @@
           "passes": 8,
           "fails": [],
           "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 9 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    },
+    {
+      "screen": "step3",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          4,
+          3,
+          4,
+          4,
+          4,
+          4,
+          3,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to type the yearly interest rate from my loan papers into the box, then move on.\n\n2. I would first tap the empty box next to the \"%\" sign to type my number. After that I would tap \"Continue\".\n\n3. Words that felt like tech talk or were unclear:\n   - \"Mortgage Payment Explainer\" (I'm not sure what it will explain to me)\n   - \"Yearly interest rate\" (I know the idea, but I'm not sure which number on my papers it is)\n   - \"loan papers\" (I don't know which paper, or whether I need it in front of me)\n   - \"Step 3 of 5\" (I don't know what steps 4 and 5 ask for)\n\n4. Things that worried me:\n   - I might type the wrong number, like a monthly rate or a different figure from my papers.\n   - If I don't have my papers handy, I don't know what to do.\n   - If I tap \"Back\", I don't know whether the numbers I already typed will be lost.\n   - I don't know where my numbers go or whether they are saved anywhere.\n   - There is no example of what a rate looks like, so I can't check myself.\n   - The box is empty, and I don't know whether \"Continue\" will let me move on without a number.\n\n5. I would skip the big question at the top. It says the same thing as the label right under it, so I only needed one of them.\n\n6. Score: 4. I know I should type a number and tap \"Continue\", but I'm unsure which number on my papers to use.\n\nRESULT: {\"next_tap\": \"the empty box next to the % sign, then Continue\", \"confusing_terms\": [\"Mortgage Payment Explainer\", \"Yearly interest rate\", \"loan papers\", \"Step 3 of 5\"], \"worries\": [\"typing the wrong number from the papers\", \"don't know which number on the papers is the rate\", \"unsure if Back loses what I typed\", \"don't know where my numbers go or if they are saved\", \"no example of a rate\", \"unsure if Continue works with an empty box\"], \"skippable\": \"the big question at the top, since the label below says the same thing\", \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 9 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 9 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\":\"PASS\",\"rule2\":\"PASS\",\"rule3\":\"PASS\",\"rule4\":\"PASS\",\"rule5\":\"PASS\",\"rule6\":\"PASS\",\"rule7\":\"PASS\",\"rule8\":\"PASS\",\"fails\":[],\"score\":8}"
+        }
+      ]
+    },
+    {
+      "screen": "step4",
+      "firstTimeUser": {
+        "model": "sonnet",
+        "score": 4,
+        "runs": [
+          4,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4,
+          4
+        ],
+        "rule": "middle score of the runs",
+        "output": "1. This screen wants me to say how long my loan lasts, then get my answer.\n\n2. I would tap \"30 years\". (That's the common one, and I'd guess it's on my papers. If my papers said something else, I'd tap that one.)\n\n3. Words I didn't understand or that felt like tech talk:\n- \"Step 4 of 5\" - fine, but I'm not sure what step 5 is.\n- \"Mortgage Payment Explainer\" - I know \"mortgage,\" but \"Explainer\" is a bit odd.\n- \"Other\" - I wasn't sure whether it opens a box to type in.\n- \"loan papers\" - I'd have to go find them. I'm not sure which page or line shows the length.\n\n4. Worries:\n- \"See my answer\" - I don't know what the answer is. Is it a payment amount? A price I'm agreeing to? I'd worry it commits me to something.\n- Not sure whether my numbers are saved or sent somewhere, since they're about my money.\n- If I pick the wrong length, I'm not sure I can fix it. \"Back\" helps, but I'd wonder.\n\n5. Skippable: nothing really. \"Step 4 of 5\" is just a little noise.\n\n6. Score: 4. I know what to do. I'm only unsure what \"See my answer\" leads to.\n\nRESULT: {\"next_tap\": \"30 years\", \"confusing_terms\": [\"Explainer\", \"Other\", \"loan papers\", \"Step 4 of 5\"], \"worries\": [\"See my answer: unclear what the answer is and whether it commits me to anything\", \"privacy of the money numbers I typed\", \"picking the wrong length and not being able to fix it\"], \"skippable\": [\"Step 4 of 5\"], \"score\": 4}"
+      },
+      "designRubric": [
+        {
+          "model": "haiku",
+          "rule": "a rule passes when it passes in most of 9 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 7,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "FAIL",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            }
+          ],
+          "result": "RESULT: {\"rule1\": \"PASS\", \"rule2\": \"PASS\", \"rule3\": \"PASS\", \"rule4\": \"PASS\", \"rule5\": \"PASS\", \"rule6\": \"PASS\", \"rule7\": \"PASS\", \"rule8\": \"PASS\", \"fails\": [], \"score\": 8}"
+        },
+        {
+          "model": "sonnet",
+          "rule": "a rule passes when it passes in most of 9 runs",
+          "rules": [
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "passes": 8,
+          "fails": [],
+          "runs": [
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
+            {
+              "passes": 8,
+              "rules": [
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS",
+                "PASS"
+              ]
+            },
             {
               "passes": 8,
               "rules": [

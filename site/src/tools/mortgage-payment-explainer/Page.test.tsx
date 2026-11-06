@@ -100,8 +100,8 @@ describe("Mortgage Payment Explainer step 1", () => {
     expect(screen.getByRole("heading", { level: 1, name: COPY.steps.price })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: COPY.question })).toBeNull();
     expect(screen.getByText(COPY.title)).toBeInTheDocument();
-    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toHaveAttribute("href", "#/private");
     expect(screen.getByRole("link", { name: "Back to tools" })).toHaveAttribute("href", "#/");
     expect(screen.queryByRole("button", { name: "Back" })).toBeNull();
     expect(screen.getByLabelText("Home price")).toHaveValue("");
@@ -181,7 +181,7 @@ describe("Mortgage Payment Explainer steps 2 to 4", () => {
     render(<Page />);
     await fill("Home price", "300000");
     await cont();
-    expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
     expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
     expect(screen.getByRole("button", { name: "Back" })).toBeInTheDocument();
     const box = screen.getByLabelText("Down payment");
@@ -239,7 +239,7 @@ describe("Mortgage Payment Explainer steps 2 to 4", () => {
     expect(stepText(3)).toBeInTheDocument();
   });
 
-  it("step 4 asks how long, with chips and nothing picked, and the last button is See my payment", async () => {
+  it("step 4 asks how long, with chips and nothing picked, and the last button is See my answer", async () => {
     const { container } = render(<Page />);
     await toLength();
     expect(stepText(4)).toBeInTheDocument();
@@ -254,7 +254,7 @@ describe("Mortgage Payment Explainer steps 2 to 4", () => {
     expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
   });
 
-  it("See my payment with no length picked stays on step 4 and sends the cursor to the length chips", async () => {
+  it("See my answer with no length picked stays on step 4 and sends the cursor to the length chips", async () => {
     render(<Page />);
     await toLength();
     await cont();
@@ -393,15 +393,16 @@ describe("Mortgage Payment Explainer answer screen", () => {
     expect(card()).toHaveTextContent("$1,199.10");
   });
 
-  it("an answer screen with nothing typed shows only the waiting words, no money and no buttons for a result", async () => {
-    await resumeAt(4, {});
+  it("an answer screen with numbers missing shows only the waiting words, no money and no buttons for a result", async () => {
+    await resumeAt(4, { price: "300000" });
     expect(screen.getByRole("heading", { level: 1, name: COPY.question })).toBeInTheDocument();
     expectWaiting();
     expect(card().querySelector(".nt-result-label")).toBeNull();
     expect(card().querySelector(".nt-result-tag")).toBeNull();
     expect(card()).toHaveAttribute("id", "nt-answer");
     expect(card()).toHaveAttribute("tabindex", "-1");
-    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    // A number is typed, so Start over is there, waiting inside the closed "More options".
+    expect(screen.getByText("More options").closest("details")).not.toHaveAttribute("open");
     expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
     expect(screen.queryByRole("link", { name: "I'm done" })).toBeNull();
     expect(document.querySelectorAll(".primary")).toHaveLength(0);
@@ -734,8 +735,8 @@ describe("Mortgage Payment Explainer autosave and resume", () => {
     expect(container.querySelectorAll(".primary")).toHaveLength(1);
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
     expect(screen.queryByRole("progressbar")).toBeNull();
-    expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
-    expect(screen.queryByRole("link", { name: "How we know" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
     expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
     expect(screen.queryAllByRole("textbox")).toHaveLength(0);
     expect(screen.queryAllByRole("radio")).toHaveLength(0);
@@ -843,7 +844,7 @@ describe("Mortgage Payment Explainer answer basis and finish line", () => {
   });
 
   it("has no basis line while the card is waiting", async () => {
-    await resumeAt(4, {});
+    await resumeAt(4, { price: "300000" });
     expect(card().querySelector(".nt-result-basis")).toBeNull();
   });
 

@@ -87,6 +87,13 @@ export function checkToolDetailed(root, tool) {
   const mr = readJson(path.join(root, "tests", "model-review", `${tool.id}.json`));
   if (!mr) say("no model review record (tests/model-review/<id>.json).");
   else {
+    // A tool in scenes/screens.json must have every listed screen reviewed: the main screen is the last one listed.
+    const want = readJson(path.join(root, "tests", "model-review", "scenes", "screens.json"))?.[tool.id];
+    if (Array.isArray(want)) {
+      const got = [...(mr.otherScreens || []).map((o) => o.screen), want[want.length - 1]];
+      if (JSON.stringify(mr.screens) !== JSON.stringify(want) || JSON.stringify(got) !== JSON.stringify(want))
+        say(`the review record does not cover every screen in tests/model-review/scenes/screens.json (needs ${want.join(", ")}; has ${(mr.screens || got).join(", ")}).`);
+    }
     const screens = [{ screen: "main", firstTimeUser: mr.firstTimeUser, designRubric: mr.designRubric }, ...(mr.otherScreens || [])];
     for (const sc of screens) {
       const score = sc.firstTimeUser?.score;

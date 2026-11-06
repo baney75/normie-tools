@@ -4,8 +4,8 @@ import { next, openMoreOptions } from "./answer-first";
 // Walk each calculator the way a person does: fill the step, tap Continue, and on the last step tap the tool's own button.
 // Every walker starts on step 1 of a tool with empty boxes and ends on the answer screen.
 
-export const LOAN_SEE = "See my payment";
-export const MORTGAGE_SEE = "See my payment";
+export const LOAN_SEE = "See my answer";
+export const MORTGAGE_SEE = "See my answer";
 export const STUDENT_SEE = "See my answer";
 export const OFFERS_SEE = "See which costs less";
 export const BUDGET_SEE = "See what is left over";
@@ -132,8 +132,9 @@ export async function walkOffers(page: Page, offers: [OfferValues, OfferValues] 
   if (offers[2]) await addThirdOffer(page, offers[2]);
 }
 
-/** On the answer screen: "Add a third offer" opens steps 5 and 6. Walk them. */
+/** On the answer screen: "Add a third offer" waits in "More options" and opens steps 5 and 6. Walk them. */
 export async function addThirdOffer(page: Page, v: OfferValues) {
+  await openMoreOptions(page);
   await page.getByRole("button", { name: "Add a third offer" }).click();
   await expect(page.locator(".nt-flow-count")).toHaveText("Step 5 of 7");
   await walkOffer(page, 3, v, true);

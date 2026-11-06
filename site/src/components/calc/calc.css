@@ -264,6 +264,7 @@ main .nt-tfh-table td { white-space: normal; }
 .nt-flow-question { margin: 0 0 var(--nt-space-3); font-size: 1.875rem; line-height: 1.15; text-wrap: balance; }
 .nt-flow .nt-field { margin-bottom: var(--nt-space-3); }
 .nt-flow .nt-chips { margin-bottom: var(--nt-space-4); }
+.nt-flow .nt-field-label { margin-bottom: var(--nt-space-1); }
 .nt-flow .nt-field-hint { margin: 0 0 var(--nt-space-2); font-size: 1.0625rem; color: var(--nt-text); }
 .nt-flow-question:focus { outline: none; }
 .nt-flow-intro { margin: 0 0 var(--nt-space-4); }
@@ -278,7 +279,7 @@ main .nt-tfh-table td { white-space: normal; }
   gap: var(--nt-space-1);
   justify-items: center;
   margin-top: auto;
-  padding: var(--nt-space-3) 0 calc(var(--nt-space-2) + env(safe-area-inset-bottom));
+  padding: var(--nt-space-2) 0 calc(var(--nt-space-2) + env(safe-area-inset-bottom));
   background: var(--nt-paper);
 }
 .nt-flow .nt-tool-trust { display: flex; align-items: flex-start; gap: var(--nt-space-2); margin: calc(-1 * var(--nt-space-1)) 0 var(--nt-space-3); font-size: 0.9375rem; line-height: 1.4; color: var(--nt-muted); }

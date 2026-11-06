@@ -5,10 +5,11 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 Loan Explainer
 Step 1 of 4
 [heading 1] How much did you borrow?
-Your numbers stay on this phone or computer. How we know ("How we know" is a link)
+How this page handles your numbers ("How this page handles your numbers" is a link)
+[label] Amount borrowed
 The amount on your loan papers.
 $
-[box] (no label shown) = ""
+[box] Amount borrowed = ""
 You can go back and change any number.
 [MAIN BUTTON, filled dark orange] Continue
 [link, plain] Back to tools

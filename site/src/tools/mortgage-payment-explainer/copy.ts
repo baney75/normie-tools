@@ -4,7 +4,8 @@
 export const COPY = {
   title: "Mortgage Payment Explainer",
   question: "What will my house payment be?",
-  see: "See my payment",
+  // Not "See my payment": readers took it for making a payment.
+  see: "See my answer",
   steps: {
     price: "What does the home cost?",
     priceMissing: "Type the home price first.",
@@ -20,6 +21,7 @@ export const COPY = {
   rate: { label: "Yearly interest rate", hint: "On your loan papers, as a percent." },
   term: {
     label: "How long is the loan?",
+    hint: "On your loan papers. Pick Other for a different length.",
     quick: ["15", "20", "30"],
     quickSuffix: "years",
     other: "Other",

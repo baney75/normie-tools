@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Chips, ErrorNote, MoneyField, NumberField, PercentField, ResultCard, Finish, StartOver, StepFlow } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { compareOffers, formatMoney } from "../../../../tools/loan-offer-compare/calc.mjs";
@@ -30,13 +30,14 @@ export function Page() {
   const problems: Problem[] = result.ok ? [] : result.problems;
   const bad = (i: number, field: string) => problems.find((p) => p.offer === i && p.field === field && p.kind === "bad")?.message;
   const blank = offers.every(offerBlank);
-  const hasBad = problems.some((p) => p.kind === "bad");
   const good = result.ok ? result : null;
 
   const fieldOk = (i: number, fields: string[]) => !problems.some((p) => p.offer === i && fields.includes(p.field));
   const amountRate = (o: Offer, i: number) => (
     <fieldset className="nt-offer-step">
       <legend className="nt-sr-only">{name(i)}</legend>
+      {/* Where to find both numbers, like the hints on every other tool's boxes. Readers worried they would guess the rate. */}
+      <p className="nt-field-hint">{COPY.amountRateHint}</p>
       <MoneyField hiddenPrefix={`${name(i)}:`} label={COPY.amount.label}
         value={o.amount} onChange={(t) => setOffer(i, { amount: t })} error={bad(i, "amount")} />
       <PercentField hiddenPrefix={`${name(i)}:`} label={COPY.rate.label}
@@ -63,6 +64,23 @@ export function Page() {
     </fieldset>
   );
 
+  const [moreOpen, setMoreOpen] = useState(false);
+  // The third offer's steps keep a way back to the two-offer answer, so "Add a third offer" tapped by mistake is not a dead end.
+  const dropThird = () => {
+    setRemoved(offers[2]);
+    flow.setValue({ offers: offers.slice(0, 2) });
+    flow.setStep(4);
+  };
+  const withWayOut = (i: number, content: ReactNode) =>
+    i < 2 ? content : (
+      <>
+        {content}
+        <button type="button" className="nt-more-btn" onClick={dropThird}>
+          {COPY.removeThird}
+        </button>
+      </>
+    );
+
   return (
     <StepFlow
       name={COPY.title}
@@ -76,62 +94,67 @@ export function Page() {
           : null
       }
       steps={offers.flatMap((o, i) => [
-        { question: COPY.steps.amountRate[i], ready: fieldOk(i, ["amount", "rate"]), missing: COPY.steps.amountRateMissing, content: amountRate(o, i) },
-        { question: COPY.steps.lengthFees[i], ready: fieldOk(i, ["term", "fees"]), missing: COPY.steps.lengthFeesMissing, content: lengthFees(o, i) },
+        { question: COPY.steps.amountRate[i], ready: fieldOk(i, ["amount", "rate"]), missing: COPY.steps.amountRateMissing, content: withWayOut(i, amountRate(o, i)) },
+        { question: COPY.steps.lengthFees[i], ready: fieldOk(i, ["term", "fees"]), missing: COPY.steps.lengthFeesMissing, content: withWayOut(i, lengthFees(o, i)) },
       ])}
       answer={<Answer result={good} />}
       actions={good ? <Save result={good} /> : null}
       extras={
         <>
-          {!result.ok && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-          {offers.length < 3 ? (
-            <div className="nt-offers-add">
-              <button
-                type="button"
-                className="nt-more-btn"
-                onClick={() => {
-                  flow.setValue({ offers: [...offers, { ...BLANK_OFFER }] });
-                  flow.setStep(4);
-                }}
-              >
-                {COPY.addThird}
-              </button>
-              {canPutBack ? (
-                <p className="nt-offers-hint" role="status">
-                  {COPY.removedDone}{" "}
-                  <button
-                    type="button"
-                    className="nt-more-btn"
-                    onClick={() => {
-                      flow.setValue({ offers: [...offers, removed as Offer] });
-                      setRemoved(null);
-                    }}
-                  >
-                    {COPY.putBack}
-                  </button>
-                </p>
-              ) : null}
-            </div>
-          ) : (
-            <div className="nt-offers-add">
-              <button
-                type="button"
-                className="nt-more-btn"
-                onClick={() => {
-                  setRemoved(offers[2]);
-                  flow.setValue({ offers: offers.slice(0, 2) });
-                }}
-              >
-                {COPY.removeThird}
-              </button>
-            </div>
-          )}
+          {!result.ok && problems.some((p) => p.kind === "bad") ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
+          {/* A third offer is an extra like any other tool's optional boxes, so it waits in "More options". It opens by itself
+              while "Put it back" is on offer. */}
           <StartOver
             flowId="loan-offer-compare"
             value={flow.value}
             empty={EMPTY}
             onChange={flow.setValue}
-          />
+            open={moreOpen || canPutBack}
+            onOpen={setMoreOpen}
+          >
+            {offers.length < 3 ? (
+              <div className="nt-offers-add">
+                <button
+                  type="button"
+                  className="nt-more-btn"
+                  onClick={() => {
+                    flow.setValue({ offers: [...offers, { ...BLANK_OFFER }] });
+                    flow.setStep(4);
+                  }}
+                >
+                  {COPY.addThird}
+                </button>
+                {canPutBack ? (
+                  <p className="nt-offers-hint" role="status">
+                    {COPY.removedDone}{" "}
+                    <button
+                      type="button"
+                      className="nt-more-btn"
+                      onClick={() => {
+                        flow.setValue({ offers: [...offers, removed as Offer] });
+                        setRemoved(null);
+                      }}
+                    >
+                      {COPY.putBack}
+                    </button>
+                  </p>
+                ) : null}
+              </div>
+            ) : (
+              <div className="nt-offers-add">
+                <button
+                  type="button"
+                  className="nt-more-btn"
+                  onClick={() => {
+                    setRemoved(offers[2]);
+                    flow.setValue({ offers: offers.slice(0, 2) });
+                  }}
+                >
+                  {COPY.removeThird}
+                </button>
+              </div>
+            )}
+          </StartOver>
         </>
       }
       below={<Details result={good} />}

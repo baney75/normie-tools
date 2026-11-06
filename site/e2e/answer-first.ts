@@ -3,19 +3,20 @@ import { expect, type Page } from "@playwright/test";
 // Checks every calculator shares. Each tool is a short flow: one question per screen, Continue at the bottom, then the answer.
 // Here: walking the steps, the trust line, Done, Print or save, and which button is filled.
 
-/** The line under the h1 and the link to the page that backs it up. */
+/** The line under the h1 on step 1: a lock and one link to the page that explains how numbers stay private. */
 export async function expectTrustLine(page: Page) {
-  const line = page.locator(".nt-tool-trust");
-  // The trust line sits right under the heading (placed lower, Haiku failed it as an unsourced claim). The change line sits
-  // in the bottom nav above Continue.
-  await expect(page.locator(".nt-flow-question + .nt-tool-trust")).toHaveCount(1);
+  // Under the heading, with no claim sentence (Haiku failed "Your numbers stay on this phone or computer." under rule 8).
+  // The change line sits in the bottom nav above Continue.
+  const line = page.locator(".nt-flow-question + .nt-tool-trust");
+  await expect(line).toHaveCount(1);
+  await expect(line).toHaveText("How this page handles your numbers");
+  await expect(line.locator("svg.nt-lock")).toHaveCount(1);
+  const link = line.getByRole("link", { name: "How this page handles your numbers" });
+  await expect(link).toBeVisible();
+  await expect(link).toHaveAttribute("href", "#/private");
   const nav = page.locator(".nt-flow-nav");
   await expect(nav.getByText("You can go back and change any number.", { exact: true })).toBeVisible();
   await expect(nav.locator(".nt-tool-trust")).toHaveCount(0);
-  await expect(line).toContainText("Your numbers stay on this phone or computer.");
-  const how = line.getByRole("link", { name: "How we know" });
-  await expect(how).toBeVisible();
-  await expect(how).toHaveAttribute("href", "#/private");
 }
 
 /** Start over waits inside a closed "More options" box. Open it so the button can be clicked. */
@@ -30,7 +31,7 @@ export async function openMoreOptions(page: Page) {
 /** The Continue button at the bottom of a question step. On the last step it carries the tool's own words. */
 export const nextButton = (page: Page) => page.locator(".nt-flow-next");
 
-/** Tap Continue (or, on the last step, the tool's own button, like "See my payment"). */
+/** Tap Continue (or, on the last step, the tool's own button, like "See my answer"). */
 export async function next(page: Page, label = "Continue") {
   await page.getByRole("button", { name: label, exact: true }).click();
 }
@@ -67,12 +68,13 @@ export async function expectOnAnswer(page: Page, questions: number) {
 }
 
 /** On the answer screen: "Change my numbers" goes back to step 1 with every box still filled. */
-export async function changeNumbers(page: Page, total: number) {
+/** "Change my numbers" opens the first step that still needs something (step 1 when every step is filled). */
+export async function changeNumbers(page: Page, total: number, landsOn = 1) {
   const change = page.getByRole("button", { name: "Change my numbers", exact: true });
   await expect(change).toBeVisible();
   await expect(change).not.toHaveClass(/primary/);
   await change.click();
-  await expect(page.locator(".nt-flow-count")).toHaveText(`Step 1 of ${total + 1}`);
+  await expect(page.locator(".nt-flow-count")).toHaveText(`Step ${landsOn} of ${total + 1}`);
 }
 
 /** From the answer screen, go back to question number n (1 is the first). */

@@ -2,6 +2,6 @@
 import { walk, fill, pick } from "./_steps.mjs";
 export default async (page, capture) => {
   const empty = await capture();
-  await walk(page, [[fill("Amount borrowed", "12000")], [fill("Yearly interest rate", "6.5")], [pick("3 years")]]);
-  return [{ name: "empty", cap: empty }, { name: "answer", cap: await capture() }];
+  const steps = await walk(page, [[fill("Amount borrowed", "12000")], [fill("Yearly interest rate", "6.5")], [pick("3 years")]], capture);
+  return [{ name: "empty", cap: empty }, ...steps, { name: "answer", cap: await capture() }];
 };

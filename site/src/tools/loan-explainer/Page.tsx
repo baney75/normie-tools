@@ -37,7 +37,6 @@ export function Page() {
   const problems = result.ok ? [] : result.problems;
   const bad = (field: string) => problems.find((p: { field: string; kind: string }) => p.field === field && p.kind === "bad")?.message;
   const blank = isBlank(v);
-  const hasBad = problems.some((p: { kind: string }) => p.kind === "bad");
 
   const quick = v.termUnit === "years" && QUICK_YEARS.includes(v.term.trim()) ? v.term.trim() : "";
   const showOther = otherOpen || (!quick && v.term.trim() !== "");
@@ -53,7 +52,10 @@ export function Page() {
     }
   };
   // "More options" opens when the person opens it, or when one of its boxes has a red note.
-  const showMore = moreOpen || Boolean(bad("fees") || bad("extra"));
+  const hasBad = problems.some((p: { kind: string }) => p.kind === "bad");
+  // A red note in an optional box. Those boxes live on the answer screen, inside "More options".
+  const extraBad = Boolean(bad("fees") || bad("extra"));
+  const showMore = moreOpen || extraBad;
 
   const has = (field: string) => problems.some((p: { field: string }) => p.field === field);
 
@@ -74,13 +76,13 @@ export function Page() {
           question: COPY.steps.amount,
           ready: !has("amount"),
           missing: COPY.steps.amountMissing,
-          content: <MoneyField hideLabel label={COPY.amount.label} hint={COPY.amount.hint} value={v.amount} onChange={(t) => set({ amount: t })} error={bad("amount")} />,
+          content: <MoneyField label={COPY.amount.label} hint={COPY.amount.hint} value={v.amount} onChange={(t) => set({ amount: t })} error={bad("amount")} />,
         },
         {
           question: COPY.steps.rate,
           ready: !has("rate"),
           missing: COPY.steps.rateMissing,
-          content: <PercentField hideLabel label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
+          content: <PercentField label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
         },
         {
           question: COPY.term.label,
@@ -90,6 +92,7 @@ export function Page() {
             <>
               <Chips
                 legend={COPY.term.label}
+                hint={COPY.term.hint}
                 hideLegend
                 options={[...QUICK_YEARS.map((y) => ({ value: y, label: COPY.term.years(Number(y)) })), { value: "other", label: COPY.term.other }]}
                 value={termChoice}

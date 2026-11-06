@@ -226,7 +226,7 @@ test("numbers come back after leaving, on the same screen", async ({ page }) => 
   await expect(page.getByLabel("Pay, per month")).toHaveValue("1200");
 });
 
-test("a saved copy of the starting lines shows the waiting text on the answer screen", async ({ page }) => {
+test("a saved copy of the starting lines is not offered back: nothing was typed, so there is nothing to use", async ({ page }) => {
   const line = (id: string, name: string) => ({ id, name, amount: "" });
   await seedSaved(page, ID, 2, {
     next: 20,
@@ -234,9 +234,9 @@ test("a saved copy of the starting lines shows the waiting text on the answer sc
     expenses: [line("e1", "Rent or mortgage"), line("e2", "Food"), line("e3", "Bills"), line("e4", "Transport"), line("e5", "Other")],
   });
   await page.reload();
-  await expectResumeScreen(page, "Monthly Budget");
-  await page.getByRole("button", { name: "Use them" }).click();
-  await expect(card(page)).toContainText("Type your pay to start.");
+  await expect(page.getByRole("heading", { name: "Use your last numbers?" })).toHaveCount(0);
+  await expect(page.locator(".nt-flow-count")).toHaveText("Step 1 of 3");
+  expect(await page.evaluate(() => localStorage.getItem("nt:flow:monthly-budget"))).toBeNull();
 });
 
 test("a desktop screenshot", async ({ page }) => {

@@ -41,7 +41,6 @@ export function Page() {
   const problems: Problem[] = result.ok ? [] : result.problems;
   const bad = (field: string) => problems.find((p) => p.field === field && p.kind === "bad")?.message;
   const blank = isBlank(v);
-  const hasBad = problems.some((p) => p.kind === "bad");
 
   const quick = QUICK.includes(v.term.trim()) ? v.term.trim() : "";
   const showOther = otherOpen || (!quick && v.term.trim() !== "");
@@ -56,7 +55,10 @@ export function Page() {
     }
   };
   // "More options" opens when the person opens it, or when one of its boxes has a red note.
-  const showMore = moreOpen || Boolean(bad("tax") || bad("insurance") || bad("hoa") || bad("pmi"));
+  const hasBad = problems.some((p: { kind: string }) => p.kind === "bad");
+  // A red note in an optional box. Those boxes live on the answer screen, inside "More options".
+  const extraBad = Boolean(bad("tax") || bad("insurance") || bad("hoa") || bad("pmi"));
+  const showMore = moreOpen || extraBad;
 
   const has = (field: string) => problems.some((p) => p.field === field);
 
@@ -77,19 +79,19 @@ export function Page() {
           question: COPY.steps.price,
           ready: !has("price"),
           missing: COPY.steps.priceMissing,
-          content: <MoneyField hideLabel label={COPY.price.label} hint={COPY.price.hint} value={v.price} onChange={(t) => set({ price: t })} error={bad("price")} />,
+          content: <MoneyField label={COPY.price.label} hint={COPY.price.hint} value={v.price} onChange={(t) => set({ price: t })} error={bad("price")} />,
         },
         {
           question: COPY.steps.down,
           ready: !has("down"),
           missing: COPY.steps.downMissing,
-          content: <MoneyField hideLabel label={COPY.down.label} hint={COPY.down.hint} value={v.down} onChange={(t) => set({ down: t })} error={bad("down")} />,
+          content: <MoneyField label={COPY.down.label} hint={COPY.down.hint} value={v.down} onChange={(t) => set({ down: t })} error={bad("down")} />,
         },
         {
           question: COPY.steps.rate,
           ready: !has("rate"),
           missing: COPY.steps.rateMissing,
-          content: <PercentField hideLabel label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
+          content: <PercentField label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
         },
         {
           question: COPY.term.label,
@@ -99,6 +101,7 @@ export function Page() {
             <>
               <Chips
                 legend={COPY.term.label}
+                hint={COPY.term.hint}
                 hideLegend
                 options={[...QUICK.map((n) => ({ value: n, label: `${n} ${COPY.term.quickSuffix}` })), { value: "other", label: COPY.term.other }]}
                 value={quick || (showOther ? "other" : "")}

@@ -41,9 +41,11 @@ export function Page() {
   const problems = result.ok ? [] : result.problems;
   const bad = (field: string) => problems.find((p) => p.field === field && p.kind === "bad")?.message;
   const blank = isBlank(v);
-  const hasBad = problems.some((p) => p.kind === "bad");
   // "More options" opens when the person opens it, or when one of its boxes has a red note.
-  const showMore = moreOpen || Boolean(bad("waitMonths") || bad("start") || bad("years"));
+  const hasBad = problems.some((p: { kind: string }) => p.kind === "bad");
+  // A red note in an optional box. Those boxes live on the answer screen, inside "More options".
+  const extraBad = Boolean(bad("waitMonths") || bad("start") || bad("years"));
+  const showMore = moreOpen || extraBad;
   const good = result.ok ? result : null;
 
   const has = (field: string) => problems.some((p) => p.field === field);
@@ -65,19 +67,19 @@ export function Page() {
           question: COPY.steps.balance,
           ready: !has("balance"),
           missing: COPY.steps.balanceMissing,
-          content: <MoneyField hideLabel label={COPY.balance.label} hint={COPY.balance.hint} value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />,
+          content: <MoneyField label={COPY.balance.label} hint={COPY.balance.hint} value={v.balance} onChange={(t) => set({ balance: t })} error={bad("balance")} />,
         },
         {
           question: COPY.steps.rate,
           ready: !has("rate"),
           missing: COPY.steps.rateMissing,
-          content: <PercentField hideLabel label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
+          content: <PercentField label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
         },
         {
           question: COPY.steps.payment,
           ready: !has("payment"),
           missing: COPY.steps.paymentMissing,
-          content: <MoneyField hideLabel label={COPY.payment.label} hint={COPY.payment.hint} optional value={v.payment} onChange={(t) => set({ payment: t })} error={bad("payment")} />,
+          content: <MoneyField label={COPY.payment.label} hint={COPY.payment.hint} optional value={v.payment} onChange={(t) => set({ payment: t })} error={bad("payment")} />,
         },
       ]}
       answer={<Answer result={good} rateZero={Number.parseFloat(v.rate) === 0} />}

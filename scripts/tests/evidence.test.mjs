@@ -52,6 +52,26 @@ test("evidence: every extra screen is checked too", () => {
   assert.ok(out.some((m) => /\(empty\) is 2/.test(m)));
 });
 
+const screen = (name) => ({ screen: name, ...goodReview });
+const listed = { "tests/model-review/scenes/screens.json": { t: ["empty", "step2", "answer"] } };
+
+test("evidence: a tool in screens.json passes when every listed screen is reviewed", () => {
+  const review = { ...goodReview, screens: ["empty", "step2", "answer"], otherScreens: [screen("empty"), screen("step2")] };
+  assert.deepEqual(checkTool(repo(files({ ...listed, "tests/model-review/t.json": review })), { id: "t" }), []);
+});
+
+test("evidence: a record that skips a listed screen fails, even when every screen it has is clean", () => {
+  const review = { ...goodReview, screens: ["empty", "answer"], otherScreens: [screen("empty")] };
+  const out = checkTool(repo(files({ ...listed, "tests/model-review/t.json": review })), { id: "t" });
+  assert.ok(out.some((m) => /does not cover every screen/.test(m) && /step2/.test(m)), out.join("\n"));
+});
+
+test("evidence: a record with no screen list fails for a tool in screens.json", () => {
+  const review = { ...goodReview, otherScreens: [screen("empty"), screen("step2")] };
+  const out = checkTool(repo(files({ ...listed, "tests/model-review/t.json": review })), { id: "t" });
+  assert.ok(out.some((m) => /does not cover every screen/.test(m)), out.join("\n"));
+});
+
 test("evidence: a skill-eval below the bar fails", () => {
   const out = checkTool(repo(files({ "tests/skill-evals/results/t/tiny.json": { verdict: { ok: false, fails: ["level 1: 80% < 90%"] } } })), { id: "t" });
   assert.ok(out.some((m) => /tiny is below the bar/.test(m)));

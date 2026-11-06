@@ -7,6 +7,9 @@ import { buildMatchers, loadTerms } from "../../../../scripts/check-banned-jargo
 import { Page } from "./Page";
 import { COPY } from "./copy";
 
+// What the page starts with: Length, inches to millimeters, no number. Key order matches the page, so it saves as blank.
+const START_VALUE = { category: "length", from: "inch", to: "millimeter", value: "" };
+
 beforeEach(() => {
   window.localStorage.clear();
   window.scrollTo = () => {};
@@ -55,7 +58,7 @@ function expectResumeScreen(container: HTMLElement) {
   expect(screen.getByRole("button", { name: COPY.resume.no })).not.toHaveClass("primary");
   expect(screen.queryByText(/Step \d of \d/)).toBeNull();
   expect(screen.queryByRole("progressbar")).toBeNull();
-  expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
+  expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
   expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
   expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
   expect(screen.queryAllByRole("textbox")).toHaveLength(0);
@@ -71,8 +74,8 @@ describe("Unit Converter steps", () => {
     expect(screen.getByText(COPY.title)).toBeInTheDocument();
     expect(screen.getByRole("progressbar", { name: "Step 1 of 3 progress" })).toHaveAttribute("value", "1");
     expect(screen.getByRole("progressbar", { name: "Step 1 of 3 progress" })).toHaveAttribute("max", "3");
-    expect(screen.getByText(/Your numbers stay on this phone or computer\./).closest(".nt-tool-trust")).not.toBeNull();
-    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" }).closest(".nt-tool-trust")).not.toBeNull();
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toHaveAttribute("href", "#/private");
     expect(screen.getByRole("link", { name: "Back to tools" })).toHaveAttribute("href", "#/");
     expect(screen.queryByText(/There is no Send button/)).toBeNull();
     // Only the kind chips are here: no number box, no answer, no extras.
@@ -115,7 +118,7 @@ describe("Unit Converter steps", () => {
     expect(screen.queryByRole("button", { name: "Swap 'from' and 'to'" })).toBeNull();
     expect(screen.queryByText(/swap back/i)).toBeNull();
     // The trust line belongs to step 1 only. Back is now a Back button, not a link home.
-    expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
     expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
     expect(screen.queryByRole("radio")).toBeNull();
     expect(screen.queryByLabelText("Your answer")).toBeNull();
@@ -252,8 +255,16 @@ describe("Unit Converter answers", () => {
     expect(screen.getByRole("status")).toHaveTextContent(COPY.fixFirst);
   });
 
+  it("shows no resume screen for a saved copy with nothing typed, and removes it", async () => {
+    seed(2, START_VALUE);
+    render(<Page />);
+    expect(screen.queryByRole("heading", { name: COPY.resume.title })).toBeNull();
+    expect(screen.getByText("Step 1 of 3")).toBeInTheDocument();
+    expect(localStorage.getItem("nt:flow:unit-converter")).toBeNull();
+  });
+
   it("shows the waiting words, not an answer, when saved numbers have no number", async () => {
-    seed(2, { category: "length", from: "inch", to: "millimeter", value: "" });
+    seed(2, { category: "weight", from: "pound", to: "kilogram", value: "" });
     const { container } = render(<Page />);
     expectResumeScreen(container);
     await userEvent.click(screen.getByRole("button", { name: COPY.resume.yes }));
@@ -353,7 +364,7 @@ describe("Unit Converter saved numbers", () => {
     expect(window.localStorage.getItem("nt:flow:unit-converter")).toBeNull();
     expect(screen.getByText("Step 1 of 3")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1, name: COPY.kind.label })).toBeInTheDocument();
-    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toBeInTheDocument();
     await cont();
     expect(screen.getByLabelText("Number")).toHaveValue("");
   });
@@ -426,16 +437,29 @@ describe("unit-converter Start over", () => {
     expect(screen.getByRole("heading", { level: 1, name: COPY.steps.number })).toBeInTheDocument();
   });
 
-  it("Change my numbers after Clear the boxes goes to step 1 with Length picked and the number empty", async () => {
+  it("Change my numbers after Clear the boxes goes to the number step, the first one that needs filling, with Length picked", async () => {
     render(<Page />);
     await convert({ kind: "Weight", number: "1234" });
     await userEvent.click(screen.getByRole("button", { name: "Start over" }));
     await userEvent.click(screen.getByRole("button", { name: "Clear the boxes" }));
     await changeMine();
-    expect(screen.getByText("Step 1 of 3")).toBeInTheDocument();
+    expect(screen.getByText("Step 2 of 3")).toBeInTheDocument();
+    expect(screen.getByLabelText("Number")).toHaveValue("");
+    await userEvent.click(screen.getByRole("button", { name: "Back" }));
     expect(screen.getByRole("radio", { name: "Length" })).toBeChecked();
     await cont();
-    expect(screen.getByLabelText("Number")).toHaveValue("");
     expect(screen.getByLabelText("From")).toHaveValue("inch");
+  });
+});
+
+describe("Unit Converter review fixes (PR #6, round 1)", () => {
+  it("tapping Continue with nothing typed saves nothing, so coming back shows no resume screen", async () => {
+    const { unmount } = render(<Page />);
+    await cont();
+    expect(screen.getByText("Step 2 of 3")).toBeInTheDocument();
+    expect(localStorage.getItem("nt:flow:unit-converter")).toBeNull();
+    unmount();
+    render(<Page />);
+    expect(screen.queryByRole("heading", { name: COPY.resume.title })).toBeNull();
   });
 });

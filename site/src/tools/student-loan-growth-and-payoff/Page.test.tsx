@@ -80,8 +80,8 @@ describe("Student Loan Growth and Payoff step 1", () => {
     expect(screen.getByRole("heading", { level: 1, name: COPY.steps.balance })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: COPY.question })).toBeNull();
     expect(screen.getByText(COPY.title)).toBeInTheDocument();
-    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toHaveAttribute("href", "#/private");
     expect(screen.getByRole("link", { name: "Back to tools" })).toHaveAttribute("href", "#/");
     expect(screen.queryByRole("button", { name: "Back" })).toBeNull();
     expect(screen.getByLabelText("Loan balance", { exact: false })).toHaveValue("");
@@ -162,7 +162,7 @@ describe("Student Loan Growth and Payoff steps 2 and 3", () => {
     render(<Page />);
     await fill("Loan balance", "5000");
     await cont();
-    expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
     expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
     expect(screen.getByRole("button", { name: "Back" })).toBeInTheDocument();
     const box = screen.getByLabelText("Yearly interest rate");
@@ -298,8 +298,8 @@ describe("Student Loan Growth and Payoff answer screen", () => {
     expect(screen.getByLabelText("Monthly payment", { exact: false })).toHaveValue("300");
   });
 
-  it("an answer screen with nothing typed shows only the waiting words, no money and no buttons for a result", async () => {
-    await resumeAt(3, {});
+  it("an answer screen with numbers missing shows only the waiting words, no money and no buttons for a result", async () => {
+    await resumeAt(3, { balance: "20000" });
     expect(screen.getByRole("heading", { level: 1, name: COPY.question })).toBeInTheDocument();
     expect(balanceCard()).toHaveTextContent(COPY.waiting);
     expect(balanceCard()).not.toHaveTextContent("$");
@@ -307,7 +307,8 @@ describe("Student Loan Growth and Payoff answer screen", () => {
     expect(balanceCard().querySelector(".nt-result-tag")).toBeNull();
     expect(balanceCard()).toHaveAttribute("id", "nt-answer");
     expect(balanceCard()).toHaveAttribute("tabindex", "-1");
-    expect(screen.queryByRole("button", { name: "Start over" })).toBeNull();
+    // A number is typed, so Start over is there, waiting inside the closed "More options".
+    expect(screen.getByText("More options").closest("details")).not.toHaveAttribute("open");
     expect(screen.queryByRole("button", { name: "Print or save" })).toBeNull();
     expect(screen.queryByRole("link", { name: "I'm done" })).toBeNull();
     expect(document.querySelectorAll(".primary")).toHaveLength(0);
@@ -636,8 +637,8 @@ describe("Student Loan Growth and Payoff autosave and resume", () => {
     expect(container.querySelectorAll(".primary")).toHaveLength(1);
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
     expect(screen.queryByRole("progressbar")).toBeNull();
-    expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
-    expect(screen.queryByRole("link", { name: "How we know" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
     expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
     expect(screen.queryAllByRole("textbox")).toHaveLength(0);
     expect(screen.queryAllByRole("radio")).toHaveLength(0);
@@ -737,7 +738,7 @@ describe("Student Loan Growth and Payoff answer basis and finish line", () => {
   });
 
   it("has no basis line while the card is waiting", async () => {
-    await resumeAt(3, {});
+    await resumeAt(3, { balance: "20000" });
     expect(balanceCard().querySelector(".nt-result-basis")).toBeNull();
   });
 
@@ -784,3 +785,17 @@ describe("Student Loan Growth and Payoff copy", () => {
   });
 });
 
+describe("Student Loan review fixes (PR #6, round 1)", () => {
+  it("when school months make the typed payment too small, Change my numbers goes straight to the payment step and its red note", async () => {
+    render(<Page />);
+    await walk("10000", "6", "51");
+    expect(paidOff()).toBeInTheDocument();
+    await showMore();
+    await fill("Months with no payments so far (optional)", "12");
+    await userEvent.click(screen.getByRole("checkbox"));
+    expect(screen.getByText(COPY.fixFirst)).toBeInTheDocument();
+    await change();
+    expect(stepText(3)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Monthly payment/)).toHaveAttribute("aria-invalid", "true");
+  });
+});

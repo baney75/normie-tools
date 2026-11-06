@@ -5,8 +5,8 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 Loan Offer Compare
 Step 1 of 5
 [heading 1] Offer 1: how much, at what rate?
-Your numbers stay on this phone or computer. How we know ("How we know" is a link)
-[question] 
+How this page handles your numbers ("How this page handles your numbers" is a link)
+Both are on the lender's offer.
 [label] Amount borrowed
 $
 [box] Amount borrowed = ""

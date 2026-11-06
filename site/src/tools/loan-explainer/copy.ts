@@ -3,7 +3,8 @@
 export const COPY = {
   title: "Loan Explainer",
   question: "What will my loan cost?",
-  see: "See my payment",
+  // Not "See my payment": readers took it for making a payment.
+  see: "See my answer",
   steps: {
     amount: "How much did you borrow?",
     amountMissing: "Type the amount you borrowed first.",
@@ -16,6 +17,7 @@ export const COPY = {
   rate: { label: "Yearly interest rate", hint: "On your loan papers, as a percent. Type 0 if there is none." },
   term: {
     label: "How long is the loan?",
+    hint: "On your loan papers. Pick Other for a different length.",
     other: "Other",
     years: (n: number) => `${n} years`,
     otherLabel: "Length of the loan",

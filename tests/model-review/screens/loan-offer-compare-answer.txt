@@ -16,7 +16,6 @@ That is your estimate. You can stop here.
 [MAIN LINK, filled dark orange] I'm done
 [plain button, outline only] Print or save
 [plain button, outline only] Change my numbers
-[plain button, outline only] Add a third offer
 [closed section, tap to open] More options
 [closed section, tap to open] See all the numbers
 [closed section, tap to open] What the words mean

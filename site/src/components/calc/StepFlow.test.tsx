@@ -84,12 +84,12 @@ describe("StepFlow question screens", () => {
 
   it("shows the trust line, its link and the intro on step 1 only", () => {
     const { rerender } = render(<StepFlow {...props()} />);
-    expect(screen.getByText(new RegExp(PAGES.tool.trust.replace(".", "\\.")))).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: PAGES.tool.how })).toHaveAttribute("href", "#/private");
+    expect(screen.queryByText(new RegExp(PAGES.tool.trust.replace(".", "\\.")))).toBeNull();
+    expect(screen.getByRole("link", { name: PAGES.tool.private })).toHaveAttribute("href", "#/private");
     expect(screen.getByText("Intro words.")).toBeInTheDocument();
     rerender(<StepFlow {...props({ step: 1 })} />);
     expect(screen.queryByText(new RegExp(PAGES.tool.trust.replace(".", "\\.")))).toBeNull();
-    expect(screen.queryByRole("link", { name: PAGES.tool.how })).toBeNull();
+    expect(screen.queryByRole("link", { name: PAGES.tool.private })).toBeNull();
     expect(screen.queryByText("Intro words.")).toBeNull();
   });
 
@@ -98,9 +98,10 @@ describe("StepFlow question screens", () => {
     // Under the heading, Haiku passed the trust line under rule 8. In the nav or under the box it failed it as unsourced.
     const trust = document.querySelector(".nt-flow-question + .nt-tool-trust") as HTMLElement;
     expect(trust).not.toBeNull();
-    expect(trust).toHaveTextContent(PAGES.tool.trust);
+    // A lock and one link, no claim sentence: the sentence failed Haiku rule 8 as unsourced.
+    expect(trust).toHaveTextContent(new RegExp(`^${PAGES.tool.private}$`));
     expect(trust.querySelector("svg.nt-lock")).not.toBeNull();
-    expect(within(trust).getByRole("link", { name: PAGES.tool.how })).toHaveAttribute("href", "#/private");
+    expect(within(trust).getByRole("link", { name: PAGES.tool.private })).toHaveAttribute("href", "#/private");
     const nav = document.querySelector(".nt-flow-nav") as HTMLElement;
     expect(nav.querySelector(".nt-tool-trust")).toBeNull();
     const change = within(nav).getByText(PAGES.tool.change);
@@ -136,7 +137,7 @@ describe("StepFlow question screens", () => {
 
   it("shows the trust line on step 1 even with no intro", () => {
     render(<StepFlow {...props()} intro={undefined} />);
-    expect(screen.getByRole("link", { name: PAGES.tool.how })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: PAGES.tool.private })).toBeInTheDocument();
   });
 
   it("shows Back to tools on step 1, and Back after", async () => {
@@ -329,7 +330,7 @@ describe("StepFlow answer screen", () => {
     render(<StepFlow {...props({ step: 3 })} />);
     expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
     expect(screen.queryByRole("button", { name: "See my answer" })).toBeNull();
-    expect(screen.queryByRole("link", { name: PAGES.tool.how })).toBeNull();
+    expect(screen.queryByRole("link", { name: PAGES.tool.private })).toBeNull();
     expect(screen.queryByRole("button", { name: "Back" })).toBeNull();
     expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
   });
@@ -541,7 +542,7 @@ describe("StepFlow resume screen", () => {
     render(<StepFlow {...props()} resume={resumeProps()} />);
     expect(screen.queryByText(/Step \d of \d/)).toBeNull();
     expect(screen.queryByRole("progressbar")).toBeNull();
-    expect(screen.queryByRole("link", { name: PAGES.tool.how })).toBeNull();
+    expect(screen.queryByRole("link", { name: PAGES.tool.private })).toBeNull();
     expect(screen.queryByText("Intro words.")).toBeNull();
     expect(screen.queryByRole("heading", { name: "How much?" })).toBeNull();
     expect(screen.queryByLabelText("Amount")).toBeNull();
@@ -584,7 +585,7 @@ describe("StepFlow resume screen", () => {
     rerender(<StepFlow {...props()} resume={null} />);
     expect(screen.getByRole("heading", { level: 1, name: "How much?" })).toBeInTheDocument();
     expect(screen.getByText("Step 1 of 4")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: PAGES.tool.how })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: PAGES.tool.private })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Use them" })).toBeNull();
     expect(document.body).toHaveFocus();
   });

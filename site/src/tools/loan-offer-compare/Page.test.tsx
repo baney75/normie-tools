@@ -86,7 +86,7 @@ function expectResumeScreen(container: HTMLElement) {
   expect(screen.getByRole("button", { name: COPY.resume.no })).not.toHaveClass("primary");
   expect(screen.queryByText(/Step \d of \d/)).toBeNull();
   expect(screen.queryByRole("progressbar")).toBeNull();
-  expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
+  expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
   expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
   expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
   expect(screen.queryAllByRole("textbox")).toHaveLength(0);
@@ -102,8 +102,8 @@ describe("Loan Offer Compare steps", () => {
     expect(screen.getByText(COPY.title)).toBeInTheDocument();
     expect(screen.getByRole("progressbar", { name: "Step 1 of 5 progress" })).toHaveAttribute("value", "1");
     expect(screen.getByRole("progressbar", { name: "Step 1 of 5 progress" })).toHaveAttribute("max", "5");
-    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toHaveAttribute("href", "#/private");
     expect(screen.getByRole("link", { name: "Back to tools" })).toHaveAttribute("href", "#/");
     expect(document.body.textContent).not.toMatch(/There is no Send button/);
     expect(screen.queryByText(/These are example numbers/)).toBeNull();
@@ -136,7 +136,7 @@ describe("Loan Offer Compare steps", () => {
     expect(screen.getByText("Step 2 of 5")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1, name: COPY.steps.lengthFees[0] })).toBeInTheDocument();
     expect(screen.getByLabelText("Offer 1: How long", { exact: false })).toHaveFocus();
-    expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
     expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
     await lengthFees(1, { term: "12" }, false);
     expect(screen.getByText("Step 3 of 5")).toBeInTheDocument();
@@ -592,7 +592,7 @@ describe("Loan Offer Compare saved numbers", () => {
     expect(window.localStorage.getItem("nt:flow:loan-offer-compare")).toBeNull();
     expect(screen.getByText("Step 1 of 5")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1, name: COPY.steps.amountRate[0] })).toBeInTheDocument();
-    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toBeInTheDocument();
     expect(screen.getByLabelText("Offer 1: Amount borrowed")).toHaveValue("");
   });
 
@@ -689,5 +689,25 @@ describe("loan-offer-compare Start over", () => {
     await cont();
     expect(screen.getByText("Step 1 of 5")).toBeInTheDocument();
     expect(screen.getByRole("status")).toHaveTextContent(COPY.steps.amountRateMissing);
+  });
+});
+
+describe("Loan Offer Compare review fixes (PR #6, round 1)", () => {
+  it("Continue with only the amount typed puts the cursor in the empty rate box, not the filled amount", async () => {
+    render(<Page />);
+    await fill("Offer 1: Amount borrowed", "5000");
+    await cont();
+    expect(screen.getByLabelText("Offer 1: Yearly interest rate")).toHaveFocus();
+  });
+
+  it("a third offer added by mistake can be removed from its own steps, back to the two-offer answer", async () => {
+    render(<Page />);
+    await walkOffers(TEN_YEARS, TWENTY_YEARS);
+    await addThird();
+    expect(screen.getByText("Step 5 of 7")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: COPY.removeThird }));
+    expect(screen.getByRole("heading", { level: 1, name: COPY.question })).toBeInTheDocument();
+    expect(screen.getByText("Step 5 of 5: your answer")).toBeInTheDocument();
+    expect(screen.queryByText(/Offer 3/)).toBeNull();
   });
 });

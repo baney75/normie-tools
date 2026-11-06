@@ -64,7 +64,7 @@ function expectResumeScreen(container: HTMLElement) {
   expect(screen.getByRole("button", { name: COPY.resume.no })).not.toHaveClass("primary");
   expect(screen.queryByText(/Step \d of \d/)).toBeNull();
   expect(screen.queryByRole("progressbar")).toBeNull();
-  expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
+  expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
   expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
   expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
   expect(screen.queryAllByRole("textbox")).toHaveLength(0);
@@ -80,8 +80,8 @@ describe("Monthly Budget steps", () => {
     expect(screen.getByText(COPY.title)).toBeInTheDocument();
     expect(screen.getByRole("progressbar", { name: "Step 1 of 3 progress" })).toHaveAttribute("value", "1");
     expect(screen.getByRole("progressbar", { name: "Step 1 of 3 progress" })).toHaveAttribute("max", "3");
-    expect(screen.getByText(/Your numbers stay on this phone or computer\./).closest(".nt-tool-trust")).not.toBeNull();
-    expect(screen.getByRole("link", { name: "How we know" })).toHaveAttribute("href", "#/private");
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" }).closest(".nt-tool-trust")).not.toBeNull();
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toHaveAttribute("href", "#/private");
     expect(screen.getByRole("link", { name: "Back to tools" })).toHaveAttribute("href", "#/");
     expect(screen.queryByText(/There is no Send button/)).toBeNull();
     expect(screen.getByLabelText("Pay, per month")).toHaveValue("");
@@ -143,7 +143,7 @@ describe("Monthly Budget steps", () => {
     expect(screen.getByText("Step 2 of 3")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1, name: COPY.steps.spending })).toBeInTheDocument();
     expect(screen.getByLabelText("Name of spending item 1")).toHaveFocus();
-    expect(screen.queryByText(/Your numbers stay on this phone or computer\./)).toBeNull();
+    expect(screen.queryByRole("link", { name: "How this page handles your numbers" })).toBeNull();
     expect(screen.queryByRole("link", { name: "Back to tools" })).toBeNull();
     expect(screen.queryByLabelText("Pay, per month")).toBeNull();
     for (const n of SPENDING) expect(screen.getByLabelText(`${n}, per month`)).toHaveValue("");
@@ -540,7 +540,7 @@ describe("Monthly Budget saved numbers", () => {
     expect(window.localStorage.getItem("nt:flow:monthly-budget")).toBeNull();
     expect(screen.getByText("Step 1 of 3")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1, name: COPY.steps.income })).toBeInTheDocument();
-    expect(screen.getByText(/Your numbers stay on this phone or computer\./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How this page handles your numbers" })).toBeInTheDocument();
     expect(screen.getByLabelText("Pay, per month")).toHaveValue("");
   });
 

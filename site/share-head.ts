@@ -108,7 +108,9 @@ export function sitemap(): string {
 export function toolPage(builtHome: string, t: ShareTool): string {
   const site = shareTags(siteHead());
   if (!builtHome.includes(site)) throw new Error("share-head: the built index.html has no site share tags to replace");
-  const open = `    <script>if (!location.hash) history.replaceState(null, "", "#/tools/${t.id}");</script>`;
+  // Once loaded, the address becomes the app's own (/nt/#/tools/<id>), so a link copied after moving on to another
+  // page never carries this tool's preview. Link previews and search read this file's tags, not the address bar.
+  const open = `    <script>history.replaceState(null, "", "${new URL(SITE.url).pathname}" + (location.hash || "#/tools/${t.id}"));</script>`;
   return builtHome.replace(site, `${shareTags(toolHead(t))}\n${open}`);
 }
 

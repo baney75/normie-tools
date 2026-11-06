@@ -69,7 +69,7 @@ test("steps 2, 3 and 4 open empty and each waits for its answer", async ({ page 
 });
 
 test("a saved copy that has no answer yet shows the waiting text on the answer screen", async ({ page }) => {
-  await seedSaved(page, ID, 4, { price: "", down: "", rate: "", term: "", tax: "", insurance: "", hoa: "", pmi: "" });
+  await seedSaved(page, ID, 4, { price: "300000", down: "", rate: "", term: "", tax: "", insurance: "", hoa: "", pmi: "" });
   await page.reload();
   await expectResumeScreen(page, "Mortgage Payment Explainer");
   await page.getByRole("button", { name: "Use them" }).click();

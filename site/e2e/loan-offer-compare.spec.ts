@@ -63,7 +63,7 @@ test("steps 2, 3 and 4 open empty and each waits for its answer", async ({ page 
 
 test("a saved copy that has no answer yet shows the waiting text on the answer screen", async ({ page }) => {
   const blank = { amount: "", rate: "", term: "", termUnit: "months", fees: "" };
-  await seedSaved(page, ID, 4, { offers: [blank, blank] });
+  await seedSaved(page, ID, 4, { offers: [{ ...blank, amount: "5000" }, blank] });
   await page.reload();
   await expectResumeScreen(page, "Loan Offer Compare");
   await page.getByRole("button", { name: "Use them" }).click();
@@ -143,6 +143,9 @@ test("a third offer can be added, and a tie names every offer", async ({ page })
     { amount: "5000", rate: "4", term: "24", fees: "50" },
   ]);
   await expect(card(page)).toContainText("Offer 1 and Offer 2");
+  // A third offer is an extra, so it waits in the closed "More options".
+  await expect(page.getByRole("button", { name: "Add a third offer" })).toBeHidden();
+  await openMoreOptions(page);
   await page.getByRole("button", { name: "Add a third offer" }).click();
   // Steps 5 and 6 are the third offer, empty. Continue waits for it.
   await expectOnStep(page, 5, 6, "Offer 3: how much, at what rate?");
@@ -159,6 +162,7 @@ test("a third offer can be added, and a tie names every offer", async ({ page })
   await expect(card(page)).toContainText("Offer 3, interest and fees");
   const all = await openAll(page);
   await expect(all).toContainText("Lowest monthly payment: Offer 3");
+  await openMoreOptions(page);
   await page.getByRole("button", { name: "Remove the third offer" }).click();
   await expect(card(page)).not.toContainText("Offer 3");
   await page.getByRole("button", { name: "Put it back" }).click();
@@ -209,6 +213,7 @@ test("tap targets are 44px or more and text is 16px or more, on every step", asy
   }
   expect(boxes).toBe(8);
   expect(chips).toBe(4);
+  await openMoreOptions(page);
   const add = page.getByRole("button", { name: "Add a third offer" });
   expect((await add.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   await expectNoSidewaysScroll(page);

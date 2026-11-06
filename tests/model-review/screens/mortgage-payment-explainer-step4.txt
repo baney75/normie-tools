@@ -1,0 +1,14 @@
+Screen: mortgage-payment-explainer, step4 state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps and tapped Continue. Nothing is typed on this step yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Mortgage Payment Explainer
+Step 4 of 5
+[heading 1] How long is the loan?
+On your loan papers. Pick Other for a different length.
+[choice] 15 years 
+[choice] 20 years 
+[choice] 30 years 
+[choice] Other 
+[MAIN BUTTON, filled dark orange] See my answer
+[plain button, outline only] Back

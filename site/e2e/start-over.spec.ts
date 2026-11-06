@@ -37,12 +37,13 @@ for (const t of TOOLS) {
     await expect(page.locator("details.nt-more")).toHaveCount(0);
     await expect(page.locator(".nt-flow-answer")).toBeVisible();
     expect(await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith("nt:flow:")))).toEqual([]);
-    // Change my numbers opens step 1 with the box blank.
-    await changeNumbers(page, t.steps);
+    // Change my numbers opens the first step that needs something, with the box blank. On Unit Converter step 1 always
+    // has Length picked, so that is the number step.
     if (t.id === "unit-converter") {
-      await nextButton(page).click();
+      await changeNumbers(page, t.steps, 2);
       await expect(page.getByLabel("Number", { exact: true })).toHaveValue("");
     } else {
+      await changeNumbers(page, t.steps);
       await expect(page.getByLabel(t.firstBox, { exact: true })).toHaveValue("");
     }
   });

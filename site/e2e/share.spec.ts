@@ -47,7 +47,8 @@ for (const t of SHARE_TOOLS) {
     const image = await meta(page, "og:image");
     expect(image).toBe(`${SITE.url}og/${t.id}.png`);
     expect(await pngSize(page, local(image!))).toEqual({ width: 1200, height: 630 });
-    // The page is the app, opened on the tool.
+    // The page is the app, opened on the tool, at the app's own address, so a link copied later never keeps this preview.
+    await expect(page).toHaveURL(new RegExp(`/nt/#/tools/${t.id}$`));
     await expect(page.locator(".nt-flow-count")).toHaveText(/^Step 1 of /);
     await expect(page.locator(".nt-tool-name").first()).toHaveText(t.name);
     await expect(page).toHaveTitle(title);
