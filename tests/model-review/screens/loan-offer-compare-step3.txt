@@ -1,0 +1,16 @@
+Screen: loan-offer-compare, step3 state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps and tapped Continue. Nothing is typed on this step yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Loan Offer Compare
+Step 3 of 5
+[heading 1] Offer 2: how much, at what rate?
+Both are on the lender's offer.
+[label] Amount borrowed
+$
+[box] Amount borrowed = ""
+[label] Yearly interest rate
+[box] Yearly interest rate = ""
+%
+[MAIN BUTTON, filled dark orange] Continue
+[plain button, outline only] Back

@@ -4,6 +4,7 @@
   .nt-offers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .nt-offer { min-width: 0; margin: 0; padding: var(--nt-space-3); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
+.nt-offer-step { min-width: 0; margin: 0; padding: 0; border: 0; }
 .nt-offer > legend { padding: 0 var(--nt-space-2); font-family: var(--nt-font-display); font-size: 1.25rem; font-weight: 650; color: var(--nt-ink); }
 .nt-offer .nt-field:last-child { margin-bottom: 0; }
 .nt-offers-status { margin: 0 0 var(--nt-space-4); padding: var(--nt-space-3); border: 1px solid var(--nt-line); border-radius: var(--nt-radius); background: var(--nt-white); }
@@ -19,3 +20,4 @@
 .nt-offers-key dd { margin: 0; }
 .nt-offers-add { display: flex; flex-direction: column; align-items: flex-start; gap: var(--nt-space-2); margin: 0; }
 .nt-offers-hint { margin: 0; font-size: 1rem; color: var(--nt-text); }
+.nt-result .nt-offers-month { display: block; margin-top: var(--nt-space-1); font-size: 1rem; font-weight: 500; color: var(--nt-mint); }

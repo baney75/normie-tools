@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { Finish } from "./Finish";
 
-const LINE = "That is your estimate. You can stop here, or change a number to try again.";
+const LINE = "That is your estimate. You can stop here.";
 
 describe("Finish", () => {
   it("says the person is done, in plain words", () => {

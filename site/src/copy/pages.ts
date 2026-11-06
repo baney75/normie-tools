@@ -107,7 +107,12 @@ export const PAGES = {
   },
   tool: {
     trust: "Your numbers stay on this phone or computer.",
+    /** On a tool's first step, above the trust line. Readers asked whether Continue locks a number in. */
+    change: "You can go back and change any number.",
     how: "How we know",
+    /** The one line on a tool's first step: a lock and this link to #/private. It makes no claim of its own: Haiku failed
+     *  "Your numbers stay on this phone or computer." and "How this page handles your numbers" under rule 8 as unsourced. */
+    private: "How this page handles your numbers",
     notFound: "We could not find that tool.",
     notReady: "This tool is not ready yet.",
     shippedPlaceholder: "Tool page",

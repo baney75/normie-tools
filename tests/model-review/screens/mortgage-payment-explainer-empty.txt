@@ -3,27 +3,13 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 
 Mortgage Payment Explainer
-[heading 1] What will my house payment be?
-Your numbers stay on this phone or computer. How we know ("How we know" is a link)
-Type your numbers to see your monthly payment.
+Step 1 of 5
+[heading 1] What does the home cost?
+How this page handles your numbers ("How this page handles your numbers" is a link)
 [label] Home price
-What the home costs.
+The price on the listing, or a close guess.
 $
 [box] Home price = ""
-[label] Down payment
-Money you pay at the start. Type 0 if none.
-$
-[box] Down payment = ""
-[label] Yearly interest rate
-On your loan papers, as a percent.
-[box] Yearly interest rate = ""
-%
-[question] How long is the loan?
-[choice] 15 years 
-[choice] 20 years 
-[choice] 30 years 
-[choice] Other 
-[plain button, outline only] Add tax, insurance and fees, if you know them
-[MAIN BUTTON, filled dark orange] See my payment
-[closed section, tap to open] What the words mean
-This is an estimate. Your lender statement has the final numbers.
+You can go back and change any number.
+[MAIN BUTTON, filled dark orange] Continue
+[link, plain] Back to tools

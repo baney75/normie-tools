@@ -1,0 +1,39 @@
+{
+  "_note": "Every screen each shipped tool's scene captures, in order. The last is the main screen. review.mjs refuses a run that captures a different list, and check-evidence fails a record that does not cover all of them.",
+  "loan-explainer": [
+    "empty",
+    "step2",
+    "step3",
+    "answer"
+  ],
+  "loan-offer-compare": [
+    "empty",
+    "step2",
+    "step3",
+    "step4",
+    "answer"
+  ],
+  "mortgage-payment-explainer": [
+    "empty",
+    "step2",
+    "step3",
+    "step4",
+    "answer"
+  ],
+  "student-loan-growth-and-payoff": [
+    "empty",
+    "step2",
+    "step3",
+    "answer"
+  ],
+  "monthly-budget": [
+    "empty",
+    "step2",
+    "answer"
+  ],
+  "unit-converter": [
+    "empty",
+    "step2",
+    "answer"
+  ]
+}

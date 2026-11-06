@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { CalmMessage } from "../../components/CalmMessage";
-import { Chips, ErrorNote, MoneyField, NumberField, PercentField, ResultCard, Finish, SeeAnswer, StartOver, ToolLayout } from "../../components/calc";
+import { Chips, ErrorNote, Finish, MoneyField, NumberField, PercentField, ResultCard, StartOver, StepFlow } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { explainLoan, formatMoney } from "../../../../tools/loan-explainer/calc.mjs";
 import { COPY } from "./copy";
@@ -15,8 +14,9 @@ type Inputs = {
   extra: string;
 };
 
+/** Money for a sentence: whole dollars drop the cents, like $12,000. */
+const dollars = (cents: number) => formatMoney(cents).replace(/\.00$/, "");
 const EMPTY: Inputs = { amount: "", rate: "", term: "", termUnit: "months", fees: "", extra: "" };
-const FIELD_NAMES = { amount: COPY.amount.label, rate: COPY.rate.label, term: COPY.term.label, fees: COPY.fees.label, extra: COPY.extra.label };
 const QUICK_YEARS = ["2", "3", "4", "5"];
 
 const months = (n: number) => `${n} ${n === 1 ? "month" : "months"}`;
@@ -36,9 +36,7 @@ export function Page() {
   const result = explainLoan(v);
   const problems = result.ok ? [] : result.problems;
   const bad = (field: string) => problems.find((p: { field: string; kind: string }) => p.field === field && p.kind === "bad")?.message;
-  const missing = problems.filter((p: { kind: string }) => p.kind === "missing").map((p: { field: keyof typeof FIELD_NAMES }) => FIELD_NAMES[p.field]);
   const blank = isBlank(v);
-  const hasBad = problems.some((p: { kind: string }) => p.kind === "bad");
 
   const quick = v.termUnit === "years" && QUICK_YEARS.includes(v.term.trim()) ? v.term.trim() : "";
   const showOther = otherOpen || (!quick && v.term.trim() !== "");
@@ -53,78 +51,98 @@ export function Page() {
       set({ term: choice, termUnit: "years" });
     }
   };
-  const showMore = moreOpen || v.fees.trim() !== "" || v.extra.trim() !== "";
+  // "More options" opens when the person opens it, or when one of its boxes has a red note.
+  const hasBad = problems.some((p: { kind: string }) => p.kind === "bad");
+  // A red note in an optional box. Those boxes live on the answer screen, inside "More options".
+  const extraBad = Boolean(bad("fees") || bad("extra"));
+  const showMore = moreOpen || extraBad;
+
+  const has = (field: string) => problems.some((p: { field: string }) => p.field === field);
 
   return (
-    <ToolLayout
+    <StepFlow
       name={COPY.title}
       question={COPY.question}
+      step={flow.step}
+      onStep={flow.setStep}
+      finishLabel={COPY.see}
+      resume={
+        flow.hasSaved && blank
+          ? { ...COPY.resume, onYes: flow.restore, onNo: flow.clear }
+          : null
+      }
+      steps={[
+        {
+          question: COPY.steps.amount,
+          ready: !has("amount"),
+          missing: COPY.steps.amountMissing,
+          content: <MoneyField label={COPY.amount.label} hint={COPY.amount.hint} value={v.amount} onChange={(t) => set({ amount: t })} error={bad("amount")} />,
+        },
+        {
+          question: COPY.steps.rate,
+          ready: !has("rate"),
+          missing: COPY.steps.rateMissing,
+          content: <PercentField label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
+        },
+        {
+          question: COPY.term.label,
+          ready: !has("term"),
+          missing: COPY.steps.termMissing,
+          content: (
+            <>
+              <Chips
+                legend={COPY.term.label}
+                hint={COPY.term.hint}
+                hideLegend
+                options={[...QUICK_YEARS.map((y) => ({ value: y, label: COPY.term.years(Number(y)) })), { value: "other", label: COPY.term.other }]}
+                value={termChoice}
+                onChange={pickTerm}
+              />
+              {showOther ? (
+                <>
+                  <NumberField label={COPY.term.otherLabel} value={v.term} onChange={(t) => { setFromChip(false); set({ term: t }); }} error={bad("term")} />
+                  <Chips
+                    legend={COPY.term.unitLegend}
+                    options={[
+                      { value: "months", label: COPY.term.months },
+                      { value: "years", label: COPY.term.yearsWord },
+                    ]}
+                    value={v.termUnit}
+                    onChange={(u) => set({ termUnit: u as Inputs["termUnit"] })}
+                  />
+                </>
+              ) : null}
+            </>
+          ),
+        },
+      ]}
       answer={result.ok ? <Answer result={result} /> : <ResultCard label={COPY.result.paymentLabel} waiting={COPY.waiting} />}
       actions={result.ok ? <Save result={result} /> : null}
-      below={result.ok ? <Details result={result} /> : <Words />}
-    >
-      {flow.hasSaved && blank ? (
-        <div className="nt-loan-status">
-          <CalmMessage
-            tone="info"
-            title={COPY.resume.title}
-            actions={[
-              { label: COPY.resume.yes, onClick: flow.restore },
-              { label: COPY.resume.no, onClick: flow.clear },
-            ]}
+      extras={
+        <>
+          {!result.ok && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
+          <StartOver
+            flowId="loan-explainer"
+            value={flow.value}
+            empty={EMPTY}
+            onChange={(next) => {
+              flow.setValue(next);
+              if (JSON.stringify(next) === JSON.stringify(EMPTY)) {
+                setOtherOpen(false);
+                setMoreOpen(false);
+                setFromChip(false);
+              }
+            }}
+            open={showMore}
+            onOpen={setMoreOpen}
           >
-            {COPY.resume.body}
-          </CalmMessage>
-        </div>
-      ) : null}
-
-      <form className="nt-loan-form" onSubmit={(e) => e.preventDefault()} noValidate>
-        <MoneyField label={COPY.amount.label} hint={COPY.amount.hint} value={v.amount} onChange={(t) => set({ amount: t })} error={bad("amount")} />
-        <PercentField label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />
-        <Chips
-          legend={COPY.term.label}
-          options={[...QUICK_YEARS.map((y) => ({ value: y, label: COPY.term.years(Number(y)) })), { value: "other", label: COPY.term.other }]}
-          value={termChoice}
-          onChange={pickTerm}
-        />
-        {showOther ? (
-          <>
-            <NumberField label={COPY.term.otherLabel} value={v.term} onChange={(t) => { setFromChip(false); set({ term: t }); }} error={bad("term")} />
-            <Chips
-              legend={COPY.term.unitLegend}
-              options={[
-                { value: "months", label: COPY.term.months },
-                { value: "years", label: COPY.term.yearsWord },
-              ]}
-              value={v.termUnit}
-              onChange={(u) => set({ termUnit: u as Inputs["termUnit"] })}
-            />
-          </>
-        ) : null}
-
-        {showMore ? (
-          <>
             <MoneyField label={COPY.fees.label} hint={COPY.fees.hint} optional value={v.fees} onChange={(t) => { setMoreOpen(true); set({ fees: t }); }} error={bad("fees")} />
             <MoneyField label={COPY.extra.label} hint={COPY.extra.hint} optional value={v.extra} onChange={(t) => { setMoreOpen(true); set({ extra: t }); }} error={bad("extra")} />
-          </>
-        ) : null}
-        {showMore && (v.fees.trim() || v.extra.trim()) ? null : (
-          <button type="button" className="nt-more-btn" aria-expanded={showMore} onClick={() => setMoreOpen(!showMore)}>
-            {showMore ? COPY.lessButton : COPY.moreButton}
-          </button>
-        )}
-      </form>
-
-      {!result.ok && !blank && missing.length > 0 && !hasBad ? (
-        <p className="nt-loan-status" role="status">
-          {COPY.stillNeeded} {missing.join(", ")}.
-        </p>
-      ) : null}
-      {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-
-      <SeeAnswer label={COPY.see} main={!result.ok} />
-      <StartOver flowId="loan-explainer" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
-    </ToolLayout>
+          </StartOver>
+        </>
+      }
+      below={result.ok ? <Details result={result} /> : <Words />}
+    />
   );
 }
 
@@ -148,9 +166,11 @@ function schedule(result: Good) {
 function Answer({ result }: { result: Good }) {
   const r = COPY.result;
   const s = schedule(result);
+  const basis = `${r.basisFor} ${dollars(result.principalCents)} ${r.basisAt} ${result.rateBps / 100}% ${r.basisOver} ${span(result.months)}.`;
   const fees = result.feesCents > 0 ? `, ${r.plus} ${formatMoney(result.feesCents)} ${r.inFees}` : "";
   return (
     <ResultCard label={r.paymentLabel} answer={formatMoney(s.paymentCents)}>
+      <p className="nt-result-basis">{basis}</p>
       <p>
         {r.payBack} {formatMoney(s.paidCents)} {r.inAll}
         {fees}.{s.withExtra ? ` ${r.withExtra}` : ""}

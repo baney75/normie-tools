@@ -37,7 +37,8 @@ export function Shell({ children, aside, footer, wide = false }: ShellProps) {
           {aside ? <aside className="nt-aside" aria-label={PAGES.shell.asideLabel}>{aside}</aside> : null}
         </div>
       </main>
-      <footer className="nt-footer">{footer ?? <Footer />}</footer>
+      {/* Tool pages are a focused flow, so the site links stay on the other pages. */}
+      {wide ? null : <footer className="nt-footer">{footer ?? <Footer />}</footer>}
     </div>
   );
 }

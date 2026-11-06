@@ -1,0 +1,22 @@
+Screen: loan-offer-compare, answer state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps, then tapped the last button. This is the answer screen.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Loan Offer Compare
+Step 5 of 5: your answer
+[heading 1] Which loan offer costs less to borrow?
+Costs less to borrow
+Offer 1
+Offer 1 costs $281.26 less in interest and fees. Offer 2 costs $3.29 less each month.
+Offer 1, interest and fees
+$1,437.91 $373.27 a month
+Offer 2, interest and fees
+$1,719.17 $369.98 a month
+That is your estimate. You can stop here.
+[MAIN LINK, filled dark orange] I'm done
+[plain button, outline only] Print or save
+[plain button, outline only] Change my numbers
+[closed section, tap to open] More options
+[closed section, tap to open] See all the numbers
+[closed section, tap to open] What the words mean
+This is an estimate. Your lender statement has the final numbers.

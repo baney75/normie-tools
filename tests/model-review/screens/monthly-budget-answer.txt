@@ -1,0 +1,26 @@
+Screen: monthly-budget, answer state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps, then tapped the last button. This is the answer screen.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Monthly Budget
+Step 3 of 3: your answer
+[heading 1] Where does my money go each month?
+Left over each month
+$700.00
+This is money in that is not spent.
+Total income
+$3,000.00
+Total spending
+$2,300.00
+That is your answer. You can stop here.
+[MAIN LINK, filled dark orange] I'm done
+[plain button, outline only] Print or save
+[plain button, outline only] Change my numbers
+[closed section, tap to open] More options
+[heading 2] Where it goes
+Rent or mortgage $1,200.00, 40.0% of income
+Food $450.00, 15.0% of income
+Bills $300.00, 10.0% of income
+Transport $250.00, 8.3% of income
+Other $100.00, 3.3% of income
+[closed section, tap to open] See all the numbers

@@ -1,15 +1,35 @@
 {
-  "name": "NT",
+  "id": "/nt/",
+  "name": "NT: small tools for everyday things",
   "short_name": "NT",
-  "description": "Small tools for everyday things.",
+  "description": "Free, private tools for everyday money questions: loan and mortgage payments, loan offers, student loans, a monthly budget and a unit converter. No sign up. Your numbers stay on your phone.",
+  "lang": "en-US",
+  "dir": "ltr",
   "start_url": "/nt/",
   "scope": "/nt/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#F7F2E8",
   "theme_color": "#134E3A",
+  "categories": ["finance", "utilities", "productivity"],
+  "prefer_related_applications": false,
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
     { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "screens/loan-explainer-start.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "One question per screen, with Continue at the bottom" },
+    { "src": "screens/loan-explainer.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Loan Explainer: your monthly payment in plain words" },
+    { "src": "screens/mortgage-payment-explainer.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Mortgage Payment Explainer: your house payment" },
+    { "src": "screens/monthly-budget.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Monthly Budget: what is left over each month" },
+    { "src": "screens/loan-offer-compare.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Loan Offer Compare: which offer costs less to borrow" },
+    { "src": "screens/home-wide.png", "sizes": "1280x800", "type": "image/png", "form_factor": "wide", "label": "Every NT tool, each one a question it answers" }
+  ],
+  "shortcuts": [
+    { "name": "Loan Explainer", "short_name": "Loan", "description": "What will my loan cost?", "url": "/nt/#/tools/loan-explainer", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Mortgage Payment Explainer", "short_name": "Mortgage", "description": "What will my house payment be?", "url": "/nt/#/tools/mortgage-payment-explainer", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Monthly Budget", "short_name": "Budget", "description": "Where does my money go each month?", "url": "/nt/#/tools/monthly-budget", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Unit Converter", "short_name": "Convert", "description": "Change cups, inches, pounds and more", "url": "/nt/#/tools/unit-converter", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }] }
   ]
 }

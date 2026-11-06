@@ -3,24 +3,13 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 
 Loan Explainer
-[heading 1] What will my loan cost?
-Your numbers stay on this phone or computer. How we know ("How we know" is a link)
-Type your numbers to see your monthly payment.
+Step 1 of 4
+[heading 1] How much did you borrow?
+How this page handles your numbers ("How this page handles your numbers" is a link)
 [label] Amount borrowed
-On your loan papers.
+The amount on your loan papers.
 $
 [box] Amount borrowed = ""
-[label] Yearly interest rate
-On your loan papers, as a percent. Type 0 if there is none.
-[box] Yearly interest rate = ""
-%
-[question] How long is the loan?
-[choice] 2 years 
-[choice] 3 years 
-[choice] 4 years 
-[choice] 5 years 
-[choice] Other 
-[plain button, outline only] Add fees or extra payments, if you have them
-[MAIN BUTTON, filled dark orange] See my payment
-[closed section, tap to open] What the words mean
-This is an estimate. Your lender statement has the final numbers.
+You can go back and change any number.
+[MAIN BUTTON, filled dark orange] Continue
+[link, plain] Back to tools

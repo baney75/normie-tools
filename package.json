@@ -2,7 +2,7 @@
   "name": "normie-tools",
   "version": "0.0.0",
   "private": true,
-  "description": "NT: everyday tools for people with no tech background. Plan and checks scaffold.",
+  "description": "NT: small tools for everyday things. Free, private calculators in plain words for people with no tech background.",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=22"

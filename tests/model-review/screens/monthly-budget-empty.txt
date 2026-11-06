@@ -3,40 +3,14 @@ Layout notes: exactly one button is filled dark orange (the main action). Every 
 
 
 Monthly Budget
-[heading 1] Where does my money go each month?
-Your numbers stay on this phone or computer. How we know ("How we know" is a link)
-Type your pay to start.
-[heading 2] Money in each month
-Item
-Each month
-[box] (no label shown) = "Pay"
+Step 1 of 3
+[heading 1] How much money comes in each month?
+How this page handles your numbers ("How this page handles your numbers" is a link)
+[label] Pay, per month
+Your pay for one month, after taxes.
 $
-[box] (no label shown) = ""
-[plain button, outline only] an x icon
-[plain button, outline only] Add an income item
-[heading 2] Money out each month
-Item
-Each month
-[box] (no label shown) = "Rent or mortgage"
-$
-[box] (no label shown) = ""
-[plain button, outline only] an x icon
-[box] (no label shown) = "Food"
-$
-[box] (no label shown) = ""
-[plain button, outline only] an x icon
-[box] (no label shown) = "Bills"
-$
-[box] (no label shown) = ""
-[plain button, outline only] an x icon
-[box] (no label shown) = "Transport"
-$
-[box] (no label shown) = ""
-[plain button, outline only] an x icon
-[box] (no label shown) = "Other"
-$
-[box] (no label shown) = ""
-[plain button, outline only] an x icon
-[plain button, outline only] Add a spending item
-Remove asks first, and you can put the line back.
-[MAIN BUTTON, filled dark orange] See what is left over
+[box] Pay, per month = ""
+[plain button, outline only] Add other money that comes in
+You can go back and change any number.
+[MAIN BUTTON, filled dark orange] Continue
+[link, plain] Back to tools

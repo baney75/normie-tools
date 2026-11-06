@@ -3,12 +3,21 @@
 export const COPY = {
   title: "Loan Explainer",
   question: "What will my loan cost?",
-  see: "See my payment",
+  // Not "See my payment": readers took it for making a payment.
+  see: "See my answer",
+  steps: {
+    amount: "How much did you borrow?",
+    amountMissing: "Type the amount you borrowed first.",
+    rate: "What is the yearly interest rate?",
+    rateMissing: "Type the rate first. Type 0 if there is none.",
+    termMissing: "Pick how long the loan is first.",
+  },
   waiting: "Type your numbers to see your monthly payment.",
-  amount: { label: "Amount borrowed", hint: "On your loan papers." },
+  amount: { label: "Amount borrowed", hint: "The amount on your loan papers." },
   rate: { label: "Yearly interest rate", hint: "On your loan papers, as a percent. Type 0 if there is none." },
   term: {
     label: "How long is the loan?",
+    hint: "On your loan papers. Pick Other for a different length.",
     other: "Other",
     years: (n: number) => `${n} years`,
     otherLabel: "Length of the loan",
@@ -16,8 +25,6 @@ export const COPY = {
     months: "Months",
     yearsWord: "Years",
   },
-  moreButton: "Add fees or extra payments, if you have them",
-  lessButton: "Hide fees and extra payments",
   fees: { label: "Upfront fees", hint: "Fees you pay once, at the start." },
   extra: { label: "Extra each month", hint: "Money you add to each payment." },
   stillNeeded: "Still needed:",
@@ -30,6 +37,9 @@ export const COPY = {
   },
   result: {
     paymentLabel: "Monthly payment",
+    basisFor: "For",
+    basisAt: "at",
+    basisOver: "for",
     payBack: "You pay back",
     inAll: "in all",
     plus: "plus",

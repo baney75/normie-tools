@@ -1,0 +1,16 @@
+Screen: unit-converter, step2 state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps and tapped Continue. Nothing is typed on this step yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Unit Converter
+Step 2 of 3
+[heading 1] Type the number
+[label] Number
+[box] Number = ""
+[label] From
+[menu] From = "Inches (in)" (choices: Inches (in), Feet (ft), Yards (yd), Miles (mi), Millimeters (mm), Centimeters (cm), Meters (m), Kilometers (km))
+[plain button, outline only] Swap
+[label] To
+[menu] To = "Millimeters (mm)" (choices: Inches (in), Feet (ft), Yards (yd), Miles (mi), Millimeters (mm), Centimeters (cm), Meters (m), Kilometers (km))
+[MAIN BUTTON, filled dark orange] See my answer
+[plain button, outline only] Back

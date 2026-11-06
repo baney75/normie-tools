@@ -71,7 +71,11 @@ const CAPTURE = () => {
         const links = [...el.querySelectorAll("a")].map((a) => name(a)).filter(Boolean);
         const linkNote = links.length ? ` (${links.map((l) => `"${l}" is a link`).join(", ")})` : "";
         if (!el.closest("button") && !done.has(el)) lines.push(`${tag === "SUMMARY" ? "[closed section, tap to open] " : ""}${name(el)}${linkNote}`);
-      } else if (tag === "LEGEND") lines.push(`[question] ${name(el)}`);
+      } else if (tag === "LEGEND") {
+        // A legend kept for screen readers only (the heading already asks the question) is not on the screen.
+        const q = name(el).trim();
+        if (q) lines.push(`[question] ${q}`);
+      }
       // A label that wraps a choice is read once, on the choice line.
       // Labels hidden from sight (screen reader only) are not on the screen; the box line still carries the name.
       else if (tag === "LABEL") { if (!el.querySelector("input[type=radio], input[type=checkbox]") && el.getBoundingClientRect().width > 1) lines.push(`[label] ${name(el)}`); }
@@ -163,9 +167,19 @@ function screenText(id, state, cap) {
       ? "Layout notes: no button is filled. All buttons are outlines."
       : `Layout notes: ${cap.filledButtons} buttons are filled dark orange.`;
   const focusNote = cap.startBox ? "The first box has the cursor in it and a bright outline: that is where to start typing." : "";
-  const who = state === "empty" ? "Nothing is typed yet." : "The person has just typed their own numbers in the boxes, so the boxes hold their numbers.";
+  const who =
+    state === "empty"
+      ? "Nothing is typed yet."
+      : state === "answer"
+        ? "The person typed their own numbers on the earlier steps, then tapped the last button. This is the answer screen."
+        : /^step\d+$/.test(state)
+          ? "The person typed their own numbers on the earlier steps and tapped Continue. Nothing is typed on this step yet."
+        : "The person has just typed their own numbers in the boxes, so the boxes hold their numbers.";
   return [`Screen: ${id}, ${state} state, phone 390px wide. Order is top to bottom. ${who}`, note, focusNote, "", ...cap.lines, ""].filter((l, i) => l !== "" || i > 1).join("\n");
 }
+
+/** Every screen each shipped tool must have reviewed (scenes/screens.json). */
+export const readScreenList = () => JSON.parse(fs.readFileSync(path.join(here, "scenes", "screens.json"), "utf8"));
 
 const promptOf = (name) => fs.readFileSync(path.join(promptsDir, `${name}.md`), "utf8");
 const withScreen = (name, screen) => `${promptOf(name)}\n\n--- SCREEN ---\n${screen}\n`;
@@ -183,6 +197,10 @@ async function review(id, opts) {
   const page = await browser.newPage();
   const scenes = await scenesFor(page, opts.url, id);
   await browser.close();
+  // A tool listed in scenes/screens.json must capture exactly those screens, so no screen of its flow goes unreviewed.
+  const want = readScreenList()[id];
+  const got = scenes.filter((sc) => sc.only !== "save").map((sc) => sc.name);
+  if (want && JSON.stringify(want) !== JSON.stringify(got)) throw new Error(`${id}: captured screens ${got.join(", ")}, but scenes/screens.json lists ${want.join(", ")}`);
   fs.mkdirSync(screensDir, { recursive: true });
   for (const sc of scenes) fs.writeFileSync(path.join(screensDir, `${id}-${sc.name}.txt`), screenText(id, sc.name, sc.cap).replace(/[\u2013\u2014]/g, "-"));
   if (opts.onlyCapture) return null;
@@ -215,7 +233,8 @@ async function review(id, opts) {
   const main = results[results.length - 1];
   const record = {
     tool: id,
-    screen: `${reviewed.map((r) => r.screen).join(", ")} at 390px wide (text saved beside this file in screens/)`,
+    screens: reviewed.map((r) => r.name),
+    screen: `${reviewed.map((r) => r.name).join(", ")} at 390px wide (text saved beside this file in screens/)`,
     at: new Date().toISOString().slice(0, 10),
     promptHashes: hashPrompts(),
     firstTimeUser: main.firstTimeUser,

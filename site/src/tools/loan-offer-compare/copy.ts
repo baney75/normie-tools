@@ -5,6 +5,13 @@ export const COPY = {
   title: "Loan Offer Compare",
   question: "Which loan offer costs less to borrow?",
   see: "See which costs less",
+  amountRateHint: "Both are on the lender's offer.",
+  steps: {
+    amountRate: ["Offer 1: how much, at what rate?", "Offer 2: how much, at what rate?", "Offer 3: how much, at what rate?"],
+    amountRateMissing: "Type the amount and the rate first.",
+    lengthFees: ["Offer 1: how long, and any fees?", "Offer 2: how long, and any fees?", "Offer 3: how long, and any fees?"],
+    lengthFeesMissing: "Type how long the loan is first. Fees can stay empty.",
+  },
   waiting: "Type both offers to see which costs less.",
   removedDone: "The third offer is removed.",
   putBack: "Put it back",
@@ -20,7 +27,6 @@ export const COPY = {
   fees: { label: "Upfront fees" },
   addThird: "Add a third offer",
   removeThird: "Remove the third offer",
-  stillNeeded: "Still needed:",
   fixFirst: "Change the box that has a red note. Then your answer shows.",
   resume: {
     title: "Use your last numbers?",
@@ -35,6 +41,8 @@ export const COPY = {
     lessInAllThan: "less in interest and fees than",
     nextLowest: "the next lowest offer",
     eachMonth: "each month",
+    /** Under each offer's total in the answer card, so "costs less each month" has numbers to point at. */
+    aMonth: "a month",
     inAll: "interest and fees",
     lessEachMonth: "less each month.",
     lowestPayment: "Lowest monthly payment",

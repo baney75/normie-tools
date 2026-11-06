@@ -1,0 +1,13 @@
+Screen: loan-explainer, step2 state, phone 390px wide. Order is top to bottom. The person typed their own numbers on the earlier steps and tapped Continue. Nothing is typed on this step yet.
+Layout notes: exactly one button is filled dark orange (the main action). Every other button is an outline.
+
+
+Loan Explainer
+Step 2 of 4
+[heading 1] What is the yearly interest rate?
+[label] Yearly interest rate
+On your loan papers, as a percent. Type 0 if there is none.
+[box] Yearly interest rate = ""
+%
+[MAIN BUTTON, filled dark orange] Continue
+[plain button, outline only] Back

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { CalmMessage } from "../../components/CalmMessage";
-import { Chips, ErrorNote, MoneyField, NumberField, PercentField, ResultCard, Finish, SeeAnswer, StartOver, ToolLayout } from "../../components/calc";
+import { Chips, ErrorNote, MoneyField, NumberField, PercentField, ResultCard, Finish, StartOver, StepFlow } from "../../components/calc";
 import { useAutosave } from "../../lib/useAutosave";
 import { explainMortgage, formatMoney } from "../../../../tools/mortgage-payment-explainer/calc.mjs";
 import { COPY } from "./copy";
@@ -17,8 +16,9 @@ type Inputs = {
   pmi: string;
 };
 
+/** Money for a sentence: whole dollars drop the cents, like $12,000. */
+const dollars = (cents: number) => formatMoney(cents).replace(/\.00$/, "");
 const EMPTY: Inputs = { price: "", down: "", rate: "", term: "", tax: "", insurance: "", hoa: "", pmi: "" };
-const FIELD_NAMES = { price: COPY.price.label, down: COPY.down.label, rate: COPY.rate.label, term: COPY.term.label };
 const QUICK: readonly string[] = COPY.term.quick;
 
 const years = (n: number) => `${n} ${n === 1 ? "year" : "years"}`;
@@ -40,11 +40,7 @@ export function Page() {
   const result = explainMortgage(v);
   const problems: Problem[] = result.ok ? [] : result.problems;
   const bad = (field: string) => problems.find((p) => p.field === field && p.kind === "bad")?.message;
-  const missing = problems
-    .filter((p) => p.kind === "missing")
-    .map((p) => FIELD_NAMES[p.field as keyof typeof FIELD_NAMES]);
   const blank = isBlank(v);
-  const hasBad = problems.some((p) => p.kind === "bad");
 
   const quick = QUICK.includes(v.term.trim()) ? v.term.trim() : "";
   const showOther = otherOpen || (!quick && v.term.trim() !== "");
@@ -58,51 +54,86 @@ export function Page() {
       set({ term: choice });
     }
   };
-  const showMore = moreOpen || hasExtras(v);
+  // "More options" opens when the person opens it, or when one of its boxes has a red note.
+  const hasBad = problems.some((p: { kind: string }) => p.kind === "bad");
+  // A red note in an optional box. Those boxes live on the answer screen, inside "More options".
+  const extraBad = Boolean(bad("tax") || bad("insurance") || bad("hoa") || bad("pmi"));
+  const showMore = moreOpen || extraBad;
+
+  const has = (field: string) => problems.some((p) => p.field === field);
 
   return (
-    <ToolLayout
+    <StepFlow
       name={COPY.title}
       question={COPY.question}
+      step={flow.step}
+      onStep={flow.setStep}
+      finishLabel={COPY.see}
+      resume={
+        flow.hasSaved && blank
+          ? { ...COPY.resume, onYes: flow.restore, onNo: flow.clear }
+          : null
+      }
+      steps={[
+        {
+          question: COPY.steps.price,
+          ready: !has("price"),
+          missing: COPY.steps.priceMissing,
+          content: <MoneyField label={COPY.price.label} hint={COPY.price.hint} value={v.price} onChange={(t) => set({ price: t })} error={bad("price")} />,
+        },
+        {
+          question: COPY.steps.down,
+          ready: !has("down"),
+          missing: COPY.steps.downMissing,
+          content: <MoneyField label={COPY.down.label} hint={COPY.down.hint} value={v.down} onChange={(t) => set({ down: t })} error={bad("down")} />,
+        },
+        {
+          question: COPY.steps.rate,
+          ready: !has("rate"),
+          missing: COPY.steps.rateMissing,
+          content: <PercentField label={COPY.rate.label} hint={COPY.rate.hint} value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />,
+        },
+        {
+          question: COPY.term.label,
+          ready: !has("term"),
+          missing: COPY.steps.termMissing,
+          content: (
+            <>
+              <Chips
+                legend={COPY.term.label}
+                hint={COPY.term.hint}
+                hideLegend
+                options={[...QUICK.map((n) => ({ value: n, label: `${n} ${COPY.term.quickSuffix}` })), { value: "other", label: COPY.term.other }]}
+                value={quick || (showOther ? "other" : "")}
+                onChange={pickTerm}
+              />
+              {showOther ? (
+                <NumberField label={COPY.term.otherLabel} value={v.term} onChange={(t) => { setFromChip(false); set({ term: t }); }} error={bad("term")} />
+              ) : null}
+            </>
+          ),
+        },
+      ]}
       answer={<Answer result={result.ok ? result : null} extras={hasExtras(v)} />}
       actions={result.ok ? <Save result={result} /> : null}
-      below={<Details result={result.ok ? result : null} />}
-    >
-      {flow.hasSaved && blank ? (
-        <div className="nt-mort-status">
-          <CalmMessage
-            tone="info"
-            title={COPY.resume.title}
-            actions={[
-              { label: COPY.resume.yes, onClick: flow.restore },
-              { label: COPY.resume.no, onClick: flow.clear },
-            ]}
+      extras={
+        <>
+          {!result.ok && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
+          <StartOver
+            flowId="mortgage-payment-explainer"
+            value={flow.value}
+            empty={EMPTY}
+            onChange={(next) => {
+              flow.setValue(next);
+              if (JSON.stringify(next) === JSON.stringify(EMPTY)) {
+                setOtherOpen(false);
+                setMoreOpen(false);
+                setFromChip(false);
+              }
+            }}
+            open={showMore}
+            onOpen={setMoreOpen}
           >
-            {COPY.resume.body}
-          </CalmMessage>
-        </div>
-      ) : null}
-
-      <form className="nt-mort-form" onSubmit={(e) => e.preventDefault()} noValidate>
-        <MoneyField label={COPY.price.label} hint={COPY.price.hint}
-          value={v.price} onChange={(t) => set({ price: t })} error={bad("price")} />
-        <MoneyField label={COPY.down.label} hint={COPY.down.hint}
-          value={v.down} onChange={(t) => set({ down: t })} error={bad("down")} />
-        <PercentField label={COPY.rate.label} hint={COPY.rate.hint}
-          value={v.rate} onChange={(t) => set({ rate: t })} error={bad("rate")} />
-        <Chips
-          legend={COPY.term.label}
-          options={[...QUICK.map((n) => ({ value: n, label: `${n} ${COPY.term.quickSuffix}` })), { value: "other", label: COPY.term.other }]}
-          value={quick || (showOther ? "other" : "")}
-          onChange={pickTerm}
-        />
-        {showOther ? (
-          <NumberField label={COPY.term.otherLabel}
-            value={v.term} onChange={(t) => { setFromChip(false); set({ term: t }); }} error={bad("term")} />
-        ) : null}
-
-        {showMore ? (
-          <>
             <MoneyField label={COPY.tax.label} hint={COPY.tax.hint} optional
               value={v.tax} onChange={(t) => { setMoreOpen(true); set({ tax: t }); }} error={bad("tax")} />
             <MoneyField label={COPY.insurance.label} hint={COPY.insurance.hint} optional
@@ -111,25 +142,11 @@ export function Page() {
               value={v.hoa} onChange={(t) => { setMoreOpen(true); set({ hoa: t }); }} error={bad("hoa")} />
             <MoneyField label={COPY.pmi.label} hint={COPY.pmi.hint} optional
               value={v.pmi} onChange={(t) => { setMoreOpen(true); set({ pmi: t }); }} error={bad("pmi")} />
-          </>
-        ) : null}
-        {hasExtras(v) ? null : (
-          <button type="button" className="nt-more-btn" aria-expanded={showMore} onClick={() => setMoreOpen(!showMore)}>
-            {showMore ? COPY.lessButton : COPY.moreButton}
-          </button>
-        )}
-      </form>
-
-      {!result.ok && !blank && missing.length > 0 && !hasBad ? (
-        <p className="nt-mort-status" role="status">
-          {COPY.stillNeeded} {missing.join(", ")}.
-        </p>
-      ) : null}
-      {!result.ok && !blank && hasBad ? <ErrorNote>{COPY.fixFirst}</ErrorNote> : null}
-
-      <SeeAnswer label={COPY.see} main={!result.ok} />
-      <StartOver flowId="mortgage-payment-explainer" value={flow.value} empty={EMPTY} onChange={flow.setValue} />
-    </ToolLayout>
+          </StartOver>
+        </>
+      }
+      below={<Details result={result.ok ? result : null} />}
+    />
   );
 }
 
@@ -168,6 +185,9 @@ function Answer({ result, extras }: { result: Good | null; extras: boolean }) {
     <ResultCard label={r.totalLabel} answer={result ? formatMoney(result.totalMonthlyCents) : undefined} waiting={COPY.waiting}>
       {result ? (
         <>
+          <p className="nt-result-basis">
+            {r.basisFor} {dollars(result.priceCents)} {r.basisHome}, {dollars(result.downCents)} {r.basisDown}, {r.basisAt} {result.rateBps / 100}% {r.basisOver} {years(result.months / 12)}.
+          </p>
           <p>{extras ? r.totalLine : r.loanOnly}</p>
           <dl>
             <div>

@@ -7,46 +7,15 @@
       ],
       "minScore": 3,
       "screens": [
+        "empty",
         "main"
       ],
       "by": "Donovan Baney (owner)",
-      "date": "2026-11-05",
+      "date": "2026-11-06",
       "expires": "2027-01-05",
-      "asked": "Correcting my last question: Loan Explainer now passes. On their filled screen the first-time reader bot scored Mortgage 3 on all 9 runs, Loan Offer Compare 4 on 1 of 9, and Student Loan 4 on 3 of 9. The bar is 4. Their empty screens and every design-rule check pass. Ship those three anyway? (Recommended choice: keep the owner waiver for those three: reader score on the filled screen only, a floor of 3, expires 2027-01-05.)",
-      "said": "Ship all six (Recommended)",
-      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 3, 3, 4, 3, 3, 3, 3] (middle score 3; 1 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
-    },
-    {
-      "tool": "mortgage-payment-explainer",
-      "checks": [
-        "first-time-user"
-      ],
-      "minScore": 3,
-      "screens": [
-        "main"
-      ],
-      "by": "Donovan Baney (owner)",
-      "date": "2026-11-05",
-      "expires": "2027-01-05",
-      "asked": "Correcting my last question: Loan Explainer now passes. On their filled screen the first-time reader bot scored Mortgage 3 on all 9 runs, Loan Offer Compare 4 on 1 of 9, and Student Loan 4 on 3 of 9. The bar is 4. Their empty screens and every design-rule check pass. Ship those three anyway? (Recommended choice: keep the owner waiver for those three: reader score on the filled screen only, a floor of 3, expires 2027-01-05.)",
-      "said": "Ship all six (Recommended)",
-      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 3, 3, 3, 3, 3, 3, 3] (middle score 3; 0 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
-    },
-    {
-      "tool": "student-loan-growth-and-payoff",
-      "checks": [
-        "first-time-user"
-      ],
-      "minScore": 3,
-      "screens": [
-        "main"
-      ],
-      "by": "Donovan Baney (owner)",
-      "date": "2026-11-05",
-      "expires": "2027-01-05",
-      "asked": "Correcting my last question: Loan Explainer now passes. On their filled screen the first-time reader bot scored Mortgage 3 on all 9 runs, Loan Offer Compare 4 on 1 of 9, and Student Loan 4 on 3 of 9. The bar is 4. Their empty screens and every design-rule check pass. Ship those three anyway? (Recommended choice: keep the owner waiver for those three: reader score on the filled screen only, a floor of 3, expires 2027-01-05.)",
-      "said": "Ship all six (Recommended)",
-      "why": "On the 2026-11-05 record the first-time reader gave the filled screen [3, 3, 4, 3, 3, 3, 4, 4, 3] (middle score 3; 3 of 9 runs at 4 or more). Copy changes moved this score between 3 and 4 with no trend. The empty screen and the design rubric pass, so only the filled screen is waived, and a score under 3 still fails."
+      "asked": "Loan Offer Compare is the last tool short of the bot bar. The first-time reader bot scores its step 1 at 3 in 3 runs (only 3 or 4 of 9 runs reach the bar of 4). Its answer screen scored 4 on 9 of 9 runs twice, then 3 on the latest run with no change. Every design-rule check on all 24 screens passes, and the other five tools pass everything. Waive Offer Compare's reader score (step 1 and the answer screen only, floor of 3, expires 2027-01-05)?",
+      "said": "Waive it, ship (Recommended)",
+      "why": "Step 1 is the only first step with two boxes. Across three 9-run records its reader middle score was 3, with 3 or 4 of 9 runs at 4; the readers' worries were generic (privacy, cost, who runs the page). The answer screen scored 4 on 9 of 9 runs in two records and 3 (3 of 9 at 4) in the latest, unchanged. Every design-rubric rule passes on every screen; only the reader score is waived, and a score under 3 still fails."
     }
   ]
 }
